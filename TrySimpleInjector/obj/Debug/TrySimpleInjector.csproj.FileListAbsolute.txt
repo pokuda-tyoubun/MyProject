@@ -1,0 +1,8 @@
+C:\Workspace\Repo\Git\MyProject\TrySimpleInjector\bin\Debug\TrySimpleInjector.exe.config
+C:\Workspace\Repo\Git\MyProject\TrySimpleInjector\bin\Debug\TrySimpleInjector.exe
+C:\Workspace\Repo\Git\MyProject\TrySimpleInjector\bin\Debug\TrySimpleInjector.pdb
+C:\Workspace\Repo\Git\MyProject\TrySimpleInjector\bin\Debug\SimpleInjector.dll
+C:\Workspace\Repo\Git\MyProject\TrySimpleInjector\bin\Debug\SimpleInjector.xml
+C:\Workspace\Repo\Git\MyProject\TrySimpleInjector\obj\Debug\TrySimpleInjector.csprojResolveAssemblyReference.cache
+C:\Workspace\Repo\Git\MyProject\TrySimpleInjector\obj\Debug\TrySimpleInjector.exe
+C:\Workspace\Repo\Git\MyProject\TrySimpleInjector\obj\Debug\TrySimpleInjector.pdb
