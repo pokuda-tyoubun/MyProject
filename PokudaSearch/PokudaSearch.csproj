@@ -32,6 +32,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="C1.Win.4, Version=4.0.20173.286, Culture=neutral, PublicKeyToken=944ae1ea0e47ca04, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files (x86)\ComponentOne\Studio for WinForms\Bin\v4\C1.Win.4.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Win.C1Chart.4, Version=4.0.20173.286, Culture=neutral, PublicKeyToken=a22e16972c085838, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.C1FlexGrid.4, Version=4.0.20173.286, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.C1Input.4, Version=4.0.20173.286, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.C1Ribbon.4, Version=4.0.20173.286, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
     <Reference Include="FlexLucene, Version=6.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\FlexLucene.6.3.0.0\lib\net40\FlexLucene.dll</HintPath>
       <Private>True</Private>
@@ -148,6 +156,10 @@
       <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.Runtime.JNI.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -168,6 +180,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppObject.cs" />
+    <Compile Include="Consts.cs" />
+    <Compile Include="IndexBuilder\LuceneIndexBuilder.cs" />
+    <Compile Include="Views\IndexBuildForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\IndexBuildForm.Designer.cs">
+      <DependentUpon>IndexBuildForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainFrameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainFrameForm.Designer.cs">
+      <DependentUpon>MainFrameForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SandBox\IndexTestEx.cs" />
     <Compile Include="SandBox\IndexTest.cs" />
     <Compile Include="SandBox\TestForm.cs">
@@ -178,6 +205,19 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\SimpleSearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SimpleSearchForm.Designer.cs">
+      <DependentUpon>SimpleSearchForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Views\IndexBuildForm.resx">
+      <DependentUpon>IndexBuildForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFrameForm.resx">
+      <DependentUpon>MainFrameForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="SandBox\TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -189,7 +229,14 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\SimpleSearchForm.resx">
+      <DependentUpon>SimpleSearchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -204,6 +251,19 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Search24.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\FxCommon\src\FxCommonLib\FxCommonLib\FxCommonLib.csproj">
+      <Project>{aff59e76-11cf-4170-a307-5a287716ca50}</Project>
+      <Name>FxCommonLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Excel24.bmp" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
