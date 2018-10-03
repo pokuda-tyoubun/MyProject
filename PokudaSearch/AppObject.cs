@@ -1,4 +1,6 @@
-﻿using log4net;
+﻿using FlexLucene.Analysis;
+using FlexLucene.Analysis.Ja;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +19,7 @@ namespace PokudaSearch {
 
         /// <summary>Luceneインデックス群配置パス</summary>
         public static string RootDirPath = @"";
+
+        public static Analyzer AppAnalyzer = null;
     }
 }

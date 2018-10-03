@@ -1,9 +1,11 @@
 ﻿using FlexLucene.Analysis;
 using FlexLucene.Analysis.Ja;
+using FlexLucene.Analysis.Ja.Dict;
 using FlexLucene.Document;
 using FlexLucene.Index;
 using FlexLucene.Store;
 using FxCommonLib.FTSIndexer;
+using FxCommonLib.Utils;
 using java.nio.file;
 using System;
 using System.Collections.Generic;
@@ -16,11 +18,16 @@ using TikaOnDotNet.TextExtraction;
 
 namespace PokudaSearch.IndexBuilder {
     public class LuceneIndexBuilder {
-        //HACK フィージビリティを確認できたらFxCommonLibにこのクラスを移行し、IndexBuilderも再構成すること
-        //HACK アプリ終了後もインデックス作成プロセスが残っている。
         //HACK*FastVectorHilighterに対応させる。(以下のURLを参考に実装)
         //        参考：https://gist.github.com/mocobeta/57a8f61250468180607d
+        //HACK フィージビリティを確認できたらFxCommonLibにこのクラスを移行し、IndexBuilderも再構成すること
+        //HACK アプリ終了後もインデックス作成プロセスが残っている。
+        //HACK ユーザ(流行語)辞書登録機能を実装
+        //        参考：https://ichigo.hopto.org/2017/11/29/userdictionary_flexlucene_lucene_net/
 
+        //DONE インデックスが追記モードになっているっぽい
+        //DONE C\Tempでインデックスを作成してもキーワードが引っ掛からないのは何故か
+        //     →hilightFieldType指定が誤っているようだ
 
         public enum TextExtractMode : int {
             Tika = 0,
@@ -39,9 +46,13 @@ namespace PokudaSearch.IndexBuilder {
 
         private StringBuilder _extractLog = new StringBuilder(""); 
 
+        private FieldType _hilightFieldType = new FieldType();
+
         public LuceneIndexBuilder(TextBox logViewer, TextExtractMode txtExtractMode) {
             _logViewer = logViewer;
             _txtExtractMode = txtExtractMode;
+
+            SetHighlightFieldContentType(_hilightFieldType);
         }
 
         /// <summary>
@@ -51,8 +62,11 @@ namespace PokudaSearch.IndexBuilder {
         /// <param name="indexDir">完成したインデックスファイルの置き場所</param>
         /// <param name="buildDir">ビルド時の中間ファイルの置き場所</param>
         /// <param name="targetDir">検索対象のフォルダ</param>
-        public void CreateIndex(string rootPath, string indexDir, string buildDir, string targetDir) {
-            Analyzer analyzer = new JapaneseAnalyzer();
+        public void CreateIndex(Analyzer analyzer, string rootPath, string indexDir, string buildDir, string targetDir) {
+
+            //インデックスを削除
+            FileUtil.DeleteDirectory(new DirectoryInfo(rootPath + buildDir));
+
             IndexWriterConfig config = new IndexWriterConfig(analyzer);
     		IndexWriter indexWriter = null;
 
@@ -96,7 +110,7 @@ namespace PokudaSearch.IndexBuilder {
                 }
 
 				try {
-					AddTikaDocument(fi.FullName, indexWriter);
+					AddDocument(fi.FullName, indexWriter);
 
 					//インデックス作成ファイル表示
 					_countTotal++;
@@ -124,23 +138,25 @@ namespace PokudaSearch.IndexBuilder {
         }
 
         /// <summary>
-		/// Apache Tika で文字抽出したものをインデックス化
+		/// 指定したテキスト抽出器でテキスト化したものをインデックス化
+		/// テキスト抽出器の種類は以下のとおり
+		/// 　・Apache Tika
+		/// 　・IFilter
         /// </summary>
         /// <param name="path"></param>
         /// <param name="indexWriter"></param>
-        private void AddTikaDocument(string path, IndexWriter indexWriter) {
+        private void AddDocument(string path, IndexWriter indexWriter) {
 			Document doc = new Document();
 			string filename = System.IO.Path.GetFileName(path);
 			string extention = System.IO.Path.GetExtension(path);
 
-            FieldType hilightFieldType = new FieldType();
             if (_txtExtractMode == TextExtractMode.Tika) {
                 var content = _txtExtractor.Extract(path);
     			//doc.Add(new TextField("content", content.Text, FieldStore.NO));
-    			doc.Add(new Field("content", IFilterParser.Parse(path), hilightFieldType));
+    			doc.Add(new Field("content", IFilterParser.Parse(path), _hilightFieldType));
             } else {
     			//doc.Add(new TextField("content", IFilterParser.Parse(path), FieldStore.NO));
-    			doc.Add(new Field("content", IFilterParser.Parse(path), hilightFieldType));
+    			doc.Add(new Field("content", IFilterParser.Parse(path), _hilightFieldType));
             }
 
 			doc.Add(new StringField("path", path, FieldStore.YES));
@@ -158,7 +174,11 @@ namespace PokudaSearch.IndexBuilder {
             //                                              full scoring, フレーズ検索等が可能になる。
             // IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS;ドキュメントと語の出現頻度と出現位置と文字オフセットをインデックスする。
 
-            fieldType.SetIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS);
+            //PostingsHighlighter用
+            //fieldType.SetIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS);
+
+            //FastVectorHighlighterの時は以下を指定
+            fieldType.SetIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS);
             fieldType.SetStored(true);
             fieldType.SetTokenized(true);
             // FastvectorHighlighterを使うための設定

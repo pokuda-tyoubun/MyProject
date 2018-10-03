@@ -2,6 +2,7 @@
 using FlexLucene.Analysis.Ja;
 using FlexLucene.Document;
 using FlexLucene.Index;
+using FlexLucene.Queryparser.Classic;
 using FlexLucene.Search;
 using FlexLucene.Store;
 using FxCommonLib.Utils;
@@ -21,6 +22,10 @@ using System.Windows.Forms;
 namespace PokudaSearch.Views {
     public partial class SimpleSearchForm : Form {
         //HACK 全ての検索条件の実装
+        //HACK title部分の検索の仕方に工夫の余地あり。
+
+        //DONE titleの検索をCaseInsensitiveにする。
+        //DONE Queryにも同じAnalyzerを適用する必要がある。
 
         #region Constants
         private const int RowHeaderCount = 1;
@@ -39,9 +44,6 @@ namespace PokudaSearch.Views {
             Score
         }
         #endregion Constants
-
-        public static Analyzer _analyzer = new JapaneseAnalyzer();
-        public static IndexWriterConfig _config = new IndexWriterConfig(_analyzer);
 
         /// <summary>
         /// コンストラクタ
@@ -92,10 +94,19 @@ namespace PokudaSearch.Views {
             IndexReader idxReader = DirectoryReader.Open(fsDir);
             IndexSearcher idxSearcher = new IndexSearcher(idxReader);
 
-            var term = new Term("content", this.KeywordText.Text);
-            TermQuery termQuery = new TermQuery(term);
+            var bqb = new BooleanQueryBuilder();
+            //QueryParser titleQp = new QueryParser("title", AppObject.AppAnalyzer);
+            //Query titleQuery = titleQp.Parse("*" + this.KeywordText.Text + "*"); //最初の文字にWildCardは適用されないようだ。
+            Query titleUpperQuery = new WildcardQuery(new Term("title", "*" + this.KeywordText.Text.ToUpper() + "*"));
+            bqb.Add(titleUpperQuery, BooleanClauseOccur.SHOULD);
+            Query titleLowerQuery = new WildcardQuery(new Term("title", "*" + this.KeywordText.Text.ToLower() + "*"));
+            bqb.Add(titleLowerQuery, BooleanClauseOccur.SHOULD);
+            QueryParser contentQp = new QueryParser("content", AppObject.AppAnalyzer);
+            Query contentQuery = contentQp.Parse(this.KeywordText.Text);
+            bqb.Add(contentQuery, BooleanClauseOccur.SHOULD);
+
             //HACK 上位1000件の旨を表示
-            TopDocs docs = idxSearcher.Search(termQuery, 1000);
+            TopDocs docs = idxSearcher.Search(bqb.Build(), 1000);
 
             //HACK DataTableに格納してLinqで絞り込む？
 

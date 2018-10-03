@@ -1,4 +1,5 @@
-﻿using PokudaSearch.SandBox;
+﻿using FlexLucene.Analysis.Ja;
+using PokudaSearch.SandBox;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,6 +28,24 @@ namespace PokudaSearch {
         private static void Initialize() {
             AppObject.RootDirPath = Directory.GetParent(Application.ExecutablePath).FullName;
             AppObject.RootDirPath += Consts.StoreDirName;
+
+            //Analyzer
+            //java.io.File f = new java.io.File(AppObject.RootDirPath + @"\..\UserDictionary.txt");
+            //java.io.Reader treader = new java.io.FileReader(f);
+            //UserDictionary userDic = null;
+            //try { 
+            //    //ユーザ辞書
+            //    userDic = UserDictionary.Open(treader); //out of index exceptionがでる。
+            //} finally {
+            //    treader.close();    
+            //}
+
+            //Analyzer analyzer = new JapaneseAnalyzer(userDic, 
+            //    JapaneseTokenizerMode.SEARCH,
+            //    JapaneseAnalyzer.GetDefaultStopSet(), 
+            //    JapaneseAnalyzer.GetDefaultStopTags());
+
+            AppObject.AppAnalyzer = new JapaneseAnalyzer();
         }
     }
 }

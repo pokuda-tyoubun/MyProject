@@ -28,7 +28,9 @@ namespace PokudaSearch.Views {
 
             Cursor.Current = Cursors.WaitCursor;
             try {
-                lib.CreateIndex(AppObject.RootDirPath, Consts.IndexDirName, Consts.BuildDirName, this.TargetDirText.Text);
+                lib.CreateIndex(AppObject.AppAnalyzer, 
+                                AppObject.RootDirPath, 
+                                Consts.IndexDirName, Consts.BuildDirName, this.TargetDirText.Text);
             } finally {
                 this.Activate();
                 Cursor.Current = Cursors.Default;
