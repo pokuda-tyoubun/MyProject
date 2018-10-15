@@ -1,4 +1,6 @@
-﻿using FlexLucene.Analysis.Ja;
+﻿using FlexLucene.Analysis;
+using FlexLucene.Analysis.Ja;
+using FlexLucene.Analysis.Ja.Dict;
 using PokudaSearch.SandBox;
 using System;
 using System.Collections.Generic;
@@ -19,7 +21,9 @@ namespace PokudaSearch {
 
             //起動時に初期処理
             Initialize();
-            Application.Run(new MainFrameForm());
+            AppObject.Frame = new MainFrameForm();
+
+            Application.Run(AppObject.Frame);
         }
 
         /// <summary>
@@ -30,22 +34,21 @@ namespace PokudaSearch {
             AppObject.RootDirPath += Consts.StoreDirName;
 
             //Analyzer
-            //java.io.File f = new java.io.File(AppObject.RootDirPath + @"\..\UserDictionary.txt");
-            //java.io.Reader treader = new java.io.FileReader(f);
-            //UserDictionary userDic = null;
-            //try { 
-            //    //ユーザ辞書
-            //    userDic = UserDictionary.Open(treader); //out of index exceptionがでる。
-            //} finally {
-            //    treader.close();    
-            //}
+            java.io.Reader treader = new java.io.FileReader(AppObject.RootDirPath + @".\..\UserDictionary.txt");
+            UserDictionary userDic = null;
+            try {
+                //ユーザ辞書
+                userDic = UserDictionary.Open(treader);
+            } finally {
+                treader.close();    
+            }
 
-            //Analyzer analyzer = new JapaneseAnalyzer(userDic, 
-            //    JapaneseTokenizerMode.SEARCH,
-            //    JapaneseAnalyzer.GetDefaultStopSet(), 
-            //    JapaneseAnalyzer.GetDefaultStopTags());
+            AppObject.AppAnalyzer = new JapaneseAnalyzer(userDic, 
+                JapaneseTokenizerMode.SEARCH,
+                JapaneseAnalyzer.GetDefaultStopSet(), 
+                JapaneseAnalyzer.GetDefaultStopTags());
 
-            AppObject.AppAnalyzer = new JapaneseAnalyzer();
+            //AppObject.AppAnalyzer = new JapaneseAnalyzer();
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿using FxCommonLib.Utils;
+﻿using FxCommonLib.Consts;
+using FxCommonLib.Utils;
 using PokudaSearch.IndexBuilder;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 
@@ -26,14 +28,18 @@ namespace PokudaSearch.Views {
             Directory.CreateDirectory(AppObject.RootDirPath + Consts.IndexDirName);
             Directory.CreateDirectory(AppObject.RootDirPath + Consts.BuildDirName);
 
-            Cursor.Current = Cursors.WaitCursor;
+            Stopwatch sw = new Stopwatch();
+            AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_SEARCH), true, sw);
             try {
-                lib.CreateIndex(AppObject.AppAnalyzer, 
+                //lib.CreateIndex(AppObject.AppAnalyzer, 
+                //                AppObject.RootDirPath, 
+                //                Consts.IndexDirName, Consts.BuildDirName, this.TargetDirText.Text);
+                lib.CreateMultiFSIndex(AppObject.AppAnalyzer, 
                                 AppObject.RootDirPath, 
                                 Consts.IndexDirName, Consts.BuildDirName, this.TargetDirText.Text);
             } finally {
                 this.Activate();
-                Cursor.Current = Cursors.Default;
+                AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_END), false, sw);
             }
         }
 

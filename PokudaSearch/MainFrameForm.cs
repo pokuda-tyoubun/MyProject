@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using C1.Win.C1Ribbon;
 using PokudaSearch.Views;
+using System.Diagnostics;
 
 namespace PokudaSearch {
     public partial class MainFrameForm : Form {
@@ -28,6 +29,32 @@ namespace PokudaSearch {
 
             //HACK スプラッシュスクリーン表示を考える
             LoadForms();
+        }
+
+
+        public void SetStatusMsg(string msg, bool isStart, Stopwatch sw) {
+            if (isStart) {
+                Cursor.Current = Cursors.WaitCursor;
+                sw.Start();
+            } else {
+                Cursor.Current = Cursors.Default;
+                sw.Stop();
+                msg = " Time:" + sw.Elapsed.ToString().Substring(0, 12);
+            }
+
+            AppObject.Logger.Info(msg);
+            StatusLabel.Text = msg;
+            if (isStart) {
+                this.ProgressBar.Style = ProgressBarStyle.Marquee;
+            } else {
+                try {
+                    this.ProgressBar.Style = ProgressBarStyle.Blocks;
+                    this.ProgressBar.Value = 0;
+                } catch (NullReferenceException ne) {
+                    //強制終了時にNullRefferenceになるので無視する。
+                    AppObject.Logger.Info("Ignore->" + ne.Message);
+                }
+            }
         }
 
         /// <summary>
