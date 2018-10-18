@@ -31,6 +31,7 @@
             this.TikaRadio = new System.Windows.Forms.RadioButton();
             this.IFilterRadio = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ProgressBar = new System.Windows.Forms.ProgressBar();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,12 +69,12 @@
             this.LogViewerText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.LogViewerText.Location = new System.Drawing.Point(5, 79);
+            this.LogViewerText.Location = new System.Drawing.Point(5, 81);
             this.LogViewerText.Multiline = true;
             this.LogViewerText.Name = "LogViewerText";
             this.LogViewerText.ReadOnly = true;
             this.LogViewerText.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.LogViewerText.Size = new System.Drawing.Size(750, 384);
+            this.LogViewerText.Size = new System.Drawing.Size(750, 382);
             this.LogViewerText.TabIndex = 15;
             // 
             // TikaRadio
@@ -109,11 +110,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "テキストコンバータ";
             // 
+            // ProgressBar
+            // 
+            this.ProgressBar.Location = new System.Drawing.Point(226, 51);
+            this.ProgressBar.Name = "ProgressBar";
+            this.ProgressBar.Size = new System.Drawing.Size(241, 22);
+            this.ProgressBar.TabIndex = 19;
+            // 
             // IndexBuildForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(758, 466);
+            this.Controls.Add(this.ProgressBar);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.LogViewerText);
             this.Controls.Add(this.CreateIndexButton);
@@ -139,5 +148,6 @@
         private System.Windows.Forms.RadioButton TikaRadio;
         private System.Windows.Forms.RadioButton IFilterRadio;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ProgressBar ProgressBar;
     }
 }

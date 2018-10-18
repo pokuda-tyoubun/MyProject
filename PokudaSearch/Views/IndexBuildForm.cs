@@ -17,12 +17,15 @@ namespace PokudaSearch.Views {
             InitializeComponent();
         }
 
+        private void SetProgressValue(ProgressReport report) {
+            this.ProgressBar.Value = report.Percent;
+        }
+
         private void CreateIndexButton_Click(object sender, EventArgs e) {
-            LuceneIndexBuilder.TextExtractMode mode = LuceneIndexBuilder.TextExtractMode.Tika;
+            LuceneIndexWorker.TextExtractMode mode = LuceneIndexWorker.TextExtractMode.Tika;
             if (this.IFilterRadio.Checked) {
-                mode = LuceneIndexBuilder.TextExtractMode.IFilter;
+                mode = LuceneIndexWorker.TextExtractMode.IFilter;
             }
-            LuceneIndexBuilder lib = new LuceneIndexBuilder(this.LogViewerText, mode);
 
             Directory.CreateDirectory(AppObject.RootDirPath);
             Directory.CreateDirectory(AppObject.RootDirPath + Consts.IndexDirName);
@@ -31,12 +34,23 @@ namespace PokudaSearch.Views {
             Stopwatch sw = new Stopwatch();
             AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_SEARCH), true, sw);
             try {
+                //LuceneIndexBuilder lib = new LuceneIndexBuilder(this.LogViewerText, mode);
                 //lib.CreateIndex(AppObject.AppAnalyzer, 
                 //                AppObject.RootDirPath, 
                 //                Consts.IndexDirName, Consts.BuildDirName, this.TargetDirText.Text);
-                lib.CreateMultiFSIndex(AppObject.AppAnalyzer, 
-                                AppObject.RootDirPath, 
-                                Consts.IndexDirName, Consts.BuildDirName, this.TargetDirText.Text);
+                //lib.CreateMultiFSIndex(AppObject.AppAnalyzer, 
+                //                AppObject.RootDirPath, 
+                //                Consts.IndexDirName, Consts.BuildDirName, this.TargetDirText.Text);
+
+                var progress = new Progress<ProgressReport>(SetProgressValue);
+                LuceneIndexWorker.CreateIndex(
+                    AppObject.AppAnalyzer, 
+                    AppObject.RootDirPath, 
+                    Consts.IndexDirName, 
+                    Consts.BuildDirName, 
+                    this.TargetDirText.Text,
+                    progress,
+                    mode);
             } finally {
                 this.Activate();
                 AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_END), false, sw);

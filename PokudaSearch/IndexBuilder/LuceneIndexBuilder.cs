@@ -343,7 +343,7 @@ namespace PokudaSearch.IndexBuilder {
             if (allFiles.Count > SingleThreadBorder && 
                 Environment.ProcessorCount > 1) {
                 //２つのリストで処理
-                int border = allFiles.Count / 3;
+                int border = allFiles.Count / 2;
                 var list1 = new List<FileInfo>();
                 for (int i = 0; i < border; i++) {
                     list1.Add(allFiles[i]);
