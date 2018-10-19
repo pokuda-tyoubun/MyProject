@@ -136,6 +136,8 @@
             this.IsMdiContainer = true;
             this.Name = "MainFrameForm";
             this.Text = "PokudaSearch";
+            this.Load += new System.EventHandler(this.MainFrameForm_Load);
+            this.Shown += new System.EventHandler(this.MainFrameForm_Shown);
             this.MainStatusStrip.ResumeLayout(false);
             this.MainStatusStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainRibbon)).EndInit();

@@ -33,10 +33,14 @@ namespace PokudaSearch {
             get { return _mlu; }
         }
 
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         static AppObject() {
             //HACK Settingsファイルに移行
             _mlu.MessageDictionary.Add("ACT_EXTRACT", "抽出中...");
             _mlu.MessageDictionary.Add("ACT_SEARCH", "検索中…");
+            _mlu.MessageDictionary.Add("ACT_PROCESSING", "処理中 ...");
             _mlu.MessageDictionary.Add("ACT_END", "");
             _mlu.MessageDictionary.Add("MSG_EXTRACT_ZERO", "抽出対象データがありません。");
             _mlu.MessageDictionary.Add("TITLE_WARN", "警告");

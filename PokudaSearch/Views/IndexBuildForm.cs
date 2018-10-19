@@ -19,6 +19,7 @@ namespace PokudaSearch.Views {
 
         private void SetProgressValue(ProgressReport report) {
             this.ProgressBar.Value = report.Percent;
+            this.LogViewerText.Text = report.ProgressCount.ToString() + "/" + report.TotalCount.ToString();
         }
 
         private void CreateIndexButton_Click(object sender, EventArgs e) {
@@ -32,7 +33,7 @@ namespace PokudaSearch.Views {
             Directory.CreateDirectory(AppObject.RootDirPath + Consts.BuildDirName);
 
             Stopwatch sw = new Stopwatch();
-            AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_SEARCH), true, sw);
+            AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_PROCESSING), true, sw);
             try {
                 //LuceneIndexBuilder lib = new LuceneIndexBuilder(this.LogViewerText, mode);
                 //lib.CreateIndex(AppObject.AppAnalyzer, 
@@ -52,7 +53,6 @@ namespace PokudaSearch.Views {
                     progress,
                     mode);
             } finally {
-                this.Activate();
                 AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_END), false, sw);
             }
         }
@@ -75,6 +75,21 @@ namespace PokudaSearch.Views {
 
         private void IndexBuildForm_Load(object sender, EventArgs e) {
             this.TargetDirText.Text = Properties.Settings.Default.InitIndexPath;
+        }
+
+        private void MergeIndexButton_Click(object sender, EventArgs e) {
+            Stopwatch sw = new Stopwatch();
+            AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_SEARCH), true, sw);
+            try {
+                LuceneIndexWorker.MergeAndMove(
+                    AppObject.AppAnalyzer, 
+                    AppObject.RootDirPath, 
+                    Consts.IndexDirName, 
+                    Consts.BuildDirName, 
+                    this.TargetDirText.Text);
+            } finally {
+                AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_END), false, sw);
+            }
         }
     }
 }

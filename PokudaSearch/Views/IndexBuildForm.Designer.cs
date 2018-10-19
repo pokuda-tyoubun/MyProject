@@ -24,7 +24,6 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            this.TargetDirText = new FxCommonLib.Controls.FilePathTextBox(this.components);
             this.ReferenceButton = new System.Windows.Forms.Button();
             this.CreateIndexButton = new System.Windows.Forms.Button();
             this.LogViewerText = new System.Windows.Forms.TextBox();
@@ -32,16 +31,10 @@
             this.IFilterRadio = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ProgressBar = new System.Windows.Forms.ProgressBar();
+            this.MergeIndexButton = new System.Windows.Forms.Button();
+            this.TargetDirText = new FxCommonLib.Controls.FilePathTextBox(this.components);
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // TargetDirText
-            // 
-            this.TargetDirText.AllowDrop = true;
-            this.TargetDirText.Location = new System.Drawing.Point(7, 9);
-            this.TargetDirText.Name = "TargetDirText";
-            this.TargetDirText.Size = new System.Drawing.Size(460, 19);
-            this.TargetDirText.TabIndex = 5;
             // 
             // ReferenceButton
             // 
@@ -80,22 +73,22 @@
             // TikaRadio
             // 
             this.TikaRadio.AutoSize = true;
-            this.TikaRadio.Checked = true;
             this.TikaRadio.Location = new System.Drawing.Point(6, 17);
             this.TikaRadio.Name = "TikaRadio";
             this.TikaRadio.Size = new System.Drawing.Size(87, 16);
             this.TikaRadio.TabIndex = 16;
-            this.TikaRadio.TabStop = true;
             this.TikaRadio.Text = "Apache Tika";
             this.TikaRadio.UseVisualStyleBackColor = true;
             // 
             // IFilterRadio
             // 
             this.IFilterRadio.AutoSize = true;
+            this.IFilterRadio.Checked = true;
             this.IFilterRadio.Location = new System.Drawing.Point(110, 17);
             this.IFilterRadio.Name = "IFilterRadio";
             this.IFilterRadio.Size = new System.Drawing.Size(53, 16);
             this.IFilterRadio.TabIndex = 17;
+            this.IFilterRadio.TabStop = true;
             this.IFilterRadio.Text = "IFilter";
             this.IFilterRadio.UseVisualStyleBackColor = true;
             // 
@@ -117,11 +110,30 @@
             this.ProgressBar.Size = new System.Drawing.Size(241, 22);
             this.ProgressBar.TabIndex = 19;
             // 
+            // MergeIndexButton
+            // 
+            this.MergeIndexButton.Location = new System.Drawing.Point(653, 5);
+            this.MergeIndexButton.Name = "MergeIndexButton";
+            this.MergeIndexButton.Size = new System.Drawing.Size(102, 29);
+            this.MergeIndexButton.TabIndex = 20;
+            this.MergeIndexButton.Text = "インデックスマージ";
+            this.MergeIndexButton.UseVisualStyleBackColor = true;
+            this.MergeIndexButton.Click += new System.EventHandler(this.MergeIndexButton_Click);
+            // 
+            // TargetDirText
+            // 
+            this.TargetDirText.AllowDrop = true;
+            this.TargetDirText.Location = new System.Drawing.Point(7, 9);
+            this.TargetDirText.Name = "TargetDirText";
+            this.TargetDirText.Size = new System.Drawing.Size(460, 19);
+            this.TargetDirText.TabIndex = 5;
+            // 
             // IndexBuildForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(758, 466);
+            this.Controls.Add(this.MergeIndexButton);
             this.Controls.Add(this.ProgressBar);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.LogViewerText);
@@ -149,5 +161,6 @@
         private System.Windows.Forms.RadioButton IFilterRadio;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ProgressBar ProgressBar;
+        private System.Windows.Forms.Button MergeIndexButton;
     }
 }

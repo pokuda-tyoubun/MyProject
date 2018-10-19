@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace PokudaSearch.IndexBuilder {
     public class ProgressReport {
+        public int TotalCount;
+        public int ProgressCount;
         public int Percent;
         public TimeSpan EstimateRemain;
     }

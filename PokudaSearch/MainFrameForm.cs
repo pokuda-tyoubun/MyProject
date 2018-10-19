@@ -17,21 +17,44 @@ namespace PokudaSearch {
         //HACK Helpが必要
         //HACK OSSのライセンス明記が必要
         //HACK log4netのワーニングを調査
-        //HACK 右上のChildFormの閉じるボタンが複数でる問題を調査（FxClientでも発生したことがある）
+        //HACK スコア順にソートされているか確認
+
+
+        //-----------------------------------------------------------------------------
+        //DONE 右上のChildFormの閉じるボタンが複数でる問題を調査（FxClientでも発生したことがある）
 
         /// <summary>検索画面</summary>
         public static SimpleSearchForm SimpleSearchForm;
         /// <summary>インデックス作成画面</summary>
         public static IndexBuildForm IndexBuildForm;
 
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public MainFrameForm() {
             InitializeComponent();
+        }
 
-            //HACK スプラッシュスクリーン表示を考える
+        /// <summary>
+        /// フォームロード
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainFrameForm_Load(object sender, EventArgs e) {
+
+        }
+
+        private void MainFrameForm_Shown(object sender, EventArgs e) {
+            //NOTE MainFrameFormの表示後に子フォームを表示しないと、閉じるボタンが複数表示されてしまう。
             LoadForms();
         }
 
-
+        /// <summary>
+        /// ステータスバーのメッセージ表示
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="isStart"></param>
+        /// <param name="sw"></param>
         public void SetStatusMsg(string msg, bool isStart, Stopwatch sw) {
             if (isStart) {
                 Cursor.Current = Cursors.WaitCursor;
@@ -102,5 +125,7 @@ namespace PokudaSearch {
             frm.WindowState = FormWindowState.Maximized;
             frm.Show();
         }
+
+
     }
 }
