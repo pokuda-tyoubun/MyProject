@@ -37,6 +37,8 @@
             this.SearchFormButton = new C1.Win.C1Ribbon.RibbonButton();
             this.IndexBuildFormButton = new C1.Win.C1Ribbon.RibbonButton();
             this.ribbonTopToolBar1 = new C1.Win.C1Ribbon.RibbonTopToolBar();
+            this.SandBoxGroup = new C1.Win.C1Ribbon.RibbonGroup();
+            this.ThumbnailButton = new C1.Win.C1Ribbon.RibbonButton();
             this.MainStatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainRibbon)).BeginInit();
             this.SuspendLayout();
@@ -96,6 +98,7 @@
             // ribbonTab1
             // 
             this.ribbonTab1.Groups.Add(this.ribbonGroup1);
+            this.ribbonTab1.Groups.Add(this.SandBoxGroup);
             this.ribbonTab1.Name = "ribbonTab1";
             this.ribbonTab1.Text = "タブ";
             // 
@@ -125,6 +128,20 @@
             // ribbonTopToolBar1
             // 
             this.ribbonTopToolBar1.Name = "ribbonTopToolBar1";
+            // 
+            // SandBoxGroup
+            // 
+            this.SandBoxGroup.Items.Add(this.ThumbnailButton);
+            this.SandBoxGroup.Name = "SandBoxGroup";
+            this.SandBoxGroup.Text = "SandBox";
+            this.SandBoxGroup.DialogLauncherClick += new System.EventHandler(this.SandBoxGroup_DialogLauncherClick);
+            // 
+            // ThumbnailButton
+            // 
+            this.ThumbnailButton.Name = "ThumbnailButton";
+            this.ThumbnailButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("ThumbnailButton.SmallImage")));
+            this.ThumbnailButton.Text = "サムネイル表示";
+            this.ThumbnailButton.Click += new System.EventHandler(this.ThumbnailButton_Click);
             // 
             // MainFrameForm
             // 
@@ -161,5 +178,7 @@
         private C1.Win.C1Ribbon.RibbonTopToolBar ribbonTopToolBar1;
         private C1.Win.C1Ribbon.RibbonButton SearchFormButton;
         private C1.Win.C1Ribbon.RibbonButton IndexBuildFormButton;
+        private C1.Win.C1Ribbon.RibbonGroup SandBoxGroup;
+        private C1.Win.C1Ribbon.RibbonButton ThumbnailButton;
     }
 }

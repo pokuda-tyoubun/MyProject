@@ -12,6 +12,7 @@ using FxCommonLib.Consts;
 using FxCommonLib.Controls;
 using FxCommonLib.Utils;
 using java.nio.file;
+using PokudaSearch.IndexBuilder;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,17 +27,9 @@ using System.Windows.Forms;
 
 namespace PokudaSearch.Views {
     public partial class SimpleSearchForm : Form {
-        //HACK 全ての検索条件の実装
-        //HACK title部分の検索の仕方に工夫の余地あり。
-        //HACK ディレクトリを絞って検索する機能が欲しい
-        //      KWIC Finder風のＵＩにする
-        //HACK 転置インデックスではなく、その場で抽出して検索する機能も欲しい
-
-        //--------------------------------------------------------------
-        //DONE titleの検索をCaseInsensitiveにする。
-        //DONE Queryにも同じAnalyzerを適用する必要がある。
 
         #region Constants
+        /// <summary>検索結果一覧のヘッダ行数</summary>
         private const int RowHeaderCount = 1;
 
         /// <summary>列定義</summary>
@@ -132,7 +125,7 @@ namespace PokudaSearch.Views {
 
         private void Search() {
 
-            java.nio.file.Path idxPath = FileSystems.getDefault().getPath(AppObject.RootDirPath + Consts.IndexDirName);
+            java.nio.file.Path idxPath = FileSystems.getDefault().getPath(AppObject.RootDirPath + LuceneIndexWorker.IndexDirName);
             var fsDir = FSDirectory.Open(idxPath);
             IndexReader idxReader = DirectoryReader.Open(fsDir);
             IndexSearcher idxSearcher = new IndexSearcher(idxReader);

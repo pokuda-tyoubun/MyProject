@@ -28,10 +28,6 @@ namespace PokudaSearch.Views {
                 mode = LuceneIndexWorker.TextExtractMode.IFilter;
             }
 
-            Directory.CreateDirectory(AppObject.RootDirPath);
-            Directory.CreateDirectory(AppObject.RootDirPath + Consts.IndexDirName);
-            Directory.CreateDirectory(AppObject.RootDirPath + Consts.BuildDirName);
-
             Stopwatch sw = new Stopwatch();
             AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_PROCESSING), true, sw);
             try {
@@ -44,11 +40,15 @@ namespace PokudaSearch.Views {
                 //                Consts.IndexDirName, Consts.BuildDirName, this.TargetDirText.Text);
 
                 var progress = new Progress<ProgressReport>(SetProgressValue);
-                LuceneIndexWorker.CreateIndex(
+                //LuceneIndexWorker.CreateIndex(
+                //    AppObject.AppAnalyzer, 
+                //    AppObject.RootDirPath, 
+                //    this.TargetDirText.Text,
+                //    progress,
+                //    mode);
+                LuceneIndexWorker.CreateIndexByMultiRAM(
                     AppObject.AppAnalyzer, 
                     AppObject.RootDirPath, 
-                    Consts.IndexDirName, 
-                    Consts.BuildDirName, 
                     this.TargetDirText.Text,
                     progress,
                     mode);
@@ -84,8 +84,6 @@ namespace PokudaSearch.Views {
                 LuceneIndexWorker.MergeAndMove(
                     AppObject.AppAnalyzer, 
                     AppObject.RootDirPath, 
-                    Consts.IndexDirName, 
-                    Consts.BuildDirName, 
                     this.TargetDirText.Text);
             } finally {
                 AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_END), false, sw);

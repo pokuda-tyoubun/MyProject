@@ -19,40 +19,16 @@ using TikaOnDotNet.TextExtraction;
 
 namespace PokudaSearch.IndexBuilder {
     public class LuceneIndexBuilder {
+
+        /// <summary>Luceneインデックスディレクトリ</summary>
+        public const string StoreDirName = @"\IndexStore";
+        /// <summary>検索用Luceneインデックスディレクトリ名</summary>
+        public const string IndexDirName = @"\Index";
+        /// <summary>Luceneインデックス構築用ディレクトリ名</summary>
+        public const string BuildDirName = @"\Build";
+
         //TODO
         private const int SingleThreadBorder = 1;
-
-
-        //HACK*RAMDirectoryとマルチスレッドでインデックスを作成を高速化する。
-        //     →マルチコアの本のPart2-10を参考にしてみる。
-        //　　→C\Temp(920件)で実装して、計測してみた。
-        //        ・FSDirectory 3:50秒
-        //        ・RAMDirectory 3:50秒
-        //        ※マルチスレッドで分担すれば早くなる？
-        //        （どちらにしろ、バックグラウンドでインデックス作成させたいので、RAMDirectoryへ）
-        //HACK c:\Workspaceで試みるとハング(0xc0000005 メモリアクセス違反)した
-        //     →定期的にファイルに書き出す or FSDirectoryをマルチにして統合する
-        //     →実装してみたが 3:54秒(Thread1に大きいファイルが固まっていた)
-        //HACK* →データをばらして試す必要あり。
-        //HACK* 　→シングルスレッド 1:53秒
-        //HACK* 　→2スレッド 1:08秒
-        //HACK* 　→3スレッド 1:13秒
-
-        //HACK*FastVectorHilighterに対応させる。(以下のURLを参考に実装)
-        //        参考：https://gist.github.com/mocobeta/57a8f61250468180607d
-        //HACK フィージビリティを確認できたらFxCommonLibにこのクラスを移行し、IndexBuilderも再構成すること
-        //HACK アプリ終了後もインデックス作成プロセスが残っている。
-        //HACK ユーザ(流行語)辞書登録機能を実装
-        //        参考：https://ichigo.hopto.org/2017/11/29/userdictionary_flexlucene_lucene_net/
-
-        //HACK 最大フィールド長1000らしいフィールド長を確認してみる
-        //HACK SaveFSIndexFromRAMIndexに集約
-        //HACK CopyIndexDirに集約
-
-        //-----------------------------------------------------------------------------
-        //DONE インデックスが追記モードになっているっぽい
-        //DONE C\Tempでインデックスを作成してもキーワードが引っ掛からないのは何故か
-        //     →hilightFieldType指定が誤っているようだ
 
         public enum TextExtractMode : int {
             Tika = 0,

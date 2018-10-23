@@ -1,6 +1,7 @@
 ﻿using FlexLucene.Analysis;
 using FlexLucene.Analysis.Ja;
 using FlexLucene.Analysis.Ja.Dict;
+using PokudaSearch.IndexBuilder;
 using PokudaSearch.SandBox;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace PokudaSearch {
         /// </summary>
         private static void Initialize() {
             AppObject.RootDirPath = Directory.GetParent(Application.ExecutablePath).FullName;
-            AppObject.RootDirPath += Consts.StoreDirName;
+            AppObject.RootDirPath += LuceneIndexWorker.StoreDirName;
 
             //Analyzer
             java.io.Reader treader = new java.io.FileReader(AppObject.RootDirPath + @".\..\UserDictionary.txt");

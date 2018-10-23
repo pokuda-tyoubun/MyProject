@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using C1.Win.C1Ribbon;
 using PokudaSearch.Views;
 using System.Diagnostics;
+using PokudaSearch.SandBox;
 
 namespace PokudaSearch {
     public partial class MainFrameForm : Form {
@@ -27,6 +28,8 @@ namespace PokudaSearch {
         public static SimpleSearchForm SimpleSearchForm;
         /// <summary>インデックス作成画面</summary>
         public static IndexBuildForm IndexBuildForm;
+        /// <summary>サムネイルテスト</summary>
+        public static ThumbnailForm ThumbnailForm;
 
         /// <summary>
         /// コンストラクタ
@@ -124,6 +127,19 @@ namespace PokudaSearch {
             frm.MdiParent = this;
             frm.WindowState = FormWindowState.Maximized;
             frm.Show();
+        }
+
+        private void SandBoxGroup_DialogLauncherClick(object sender, EventArgs e) {
+
+        }
+
+        private void ThumbnailButton_Click(object sender, EventArgs e) {
+            if (ThumbnailForm == null) {
+                ThumbnailForm = new ThumbnailForm();
+                LoadForm(ThumbnailForm);
+            } else {
+                ThumbnailForm.Activate();
+            }
         }
 
 
