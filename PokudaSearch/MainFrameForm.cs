@@ -28,8 +28,9 @@ namespace PokudaSearch {
         public static SimpleSearchForm SimpleSearchForm;
         /// <summary>インデックス作成画面</summary>
         public static IndexBuildForm IndexBuildForm;
-        /// <summary>サムネイルテスト</summary>
-        public static ThumbnailForm ThumbnailForm;
+
+        /// <summary>インデックス作成画面</summary>
+        public static TestForm TestForm;
 
         /// <summary>
         /// コンストラクタ
@@ -129,16 +130,12 @@ namespace PokudaSearch {
             frm.Show();
         }
 
-        private void SandBoxGroup_DialogLauncherClick(object sender, EventArgs e) {
-
-        }
-
-        private void ThumbnailButton_Click(object sender, EventArgs e) {
-            if (ThumbnailForm == null) {
-                ThumbnailForm = new ThumbnailForm();
-                LoadForm(ThumbnailForm);
+        private void TestFormButton_Click(object sender, EventArgs e) {
+            if (TestForm == null) {
+                TestForm = new TestForm();
+                LoadForm(TestForm);
             } else {
-                ThumbnailForm.Activate();
+                TestForm.Activate();
             }
         }
 

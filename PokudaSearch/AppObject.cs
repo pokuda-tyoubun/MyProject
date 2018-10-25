@@ -10,9 +10,12 @@ using System.Threading.Tasks;
 
 namespace PokudaSearch {
     public static class AppObject {
-        //HACKUI高度化----------------------------------------------
+        
+        //HACK UI高度化----------------------------------------------
         //HACK*サムネイル表示
-        //HACKUI高度化----------------------------------------------
+        //     アイコン画像を取得することはできるが、ファイルの中身までは表示できない。別のAPIか？
+
+        //HACK UI高度化----------------------------------------------
         //HACKインデックス作成高速化----------------------------------------------
         //HACK*大量ファイルでインデックスを作成した場合に、segmentsファイルが作成されない。
         //     →最後にCommit()を追記
@@ -58,6 +61,14 @@ namespace PokudaSearch {
         //HACK 転置インデックスではなく、その場で抽出して検索する機能も欲しい
 
         //DONE List--------------------------------------------------------------------------
+        //DONE NOTE:NuGetパッケージ管理画面から、Microsoft.WindowsAPICodePack.Shellをインストールしようとすると失敗する。
+        //DONE NOTE:→対象のフレームワークを4.5.2に変更するとインストールできるが、
+        //DONE NOTE:　インデックス作成時に以下のエラーになり復旧できなくなる。
+        //DONE NOTE:　Could not initialize class FlexLucene.Analysis.Ja.Dict.TokenInfoDictionarySingletonHolder
+        //DONE NOTE:パッケージマネージャコンソールからだと4.5のままインストール出来て解決した。
+        //DONE NOTE:「警告1同じ依存アセンブリの異なるバージョン間で競合が見つかりました。」
+        //DONE NOTE: →ビルドの詳細を確認して、log4netのバージョンがFxCommonLibと異なることを確認。
+        //DONE NOTE: →同じDLLを参照するように再設定
         //DONE titleの検索をCaseInsensitiveにする。
         //DONE Queryにも同じAnalyzerを適用する必要がある。
         //DONE マルチスレッドで最終どれだけ速くなったか記録を残しておく

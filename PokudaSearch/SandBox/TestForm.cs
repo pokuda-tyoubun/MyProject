@@ -3,6 +3,7 @@ using FlexLucene.Document;
 using FlexLucene.Index;
 using FlexLucene.Store;
 using java.nio.file;
+using Microsoft.WindowsAPICodePack.Shell;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -99,6 +100,26 @@ namespace PokudaSearch.SandBox {
 
             var webPageContents = txtExt.Extract(new Uri("https://ichigo.hopto.org"));
             System.Console.WriteLine(webPageContents.Text);
+        }
+
+        private void ThumbnailButton_Click(object sender, EventArgs e) {
+            this.PictureBox.Image = CreateThumbnail(this.PathText.Text, 1);
+        }
+
+        private Bitmap CreateThumbnail(string path, int scale) {
+            // ファイルが存在した場合
+            FileInfo fi = new FileInfo(path);
+            if (fi.Exists) {
+                ShellFile shellFile = ShellFile.FromFilePath(path);
+                Bitmap bmp = shellFile.Thumbnail.Bitmap;
+                int w = (int)(bmp.Width * scale);
+                int h = (int)(bmp.Height * scale);
+                return bmp;
+            }
+ 
+            //TODO ファイルが存在しない場合はデフォルト表示
+            return null;
+            
         }
     }
 }

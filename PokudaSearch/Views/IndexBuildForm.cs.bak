@@ -28,13 +28,17 @@ namespace PokudaSearch.Views {
                 mode = LuceneIndexWorker.TextExtractMode.IFilter;
             }
 
+            Directory.CreateDirectory(AppObject.RootDirPath);
+            Directory.CreateDirectory(AppObject.RootDirPath + Consts.IndexDirName);
+            Directory.CreateDirectory(AppObject.RootDirPath + Consts.BuildDirName);
+
             Stopwatch sw = new Stopwatch();
             AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_PROCESSING), true, sw);
             try {
-                //LuceneIndexBuilder lib = new LuceneIndexBuilder(this.LogViewerText, LuceneIndexBuilder.TextExtractMode.IFilter);
+                //LuceneIndexBuilder lib = new LuceneIndexBuilder(this.LogViewerText, mode);
                 //lib.CreateIndex(AppObject.AppAnalyzer, 
                 //                AppObject.RootDirPath, 
-                //                LuceneIndexBuilder.IndexDirName, LuceneIndexBuilder.BuildDirName, this.TargetDirText.Text);
+                //                Consts.IndexDirName, Consts.BuildDirName, this.TargetDirText.Text);
                 //lib.CreateMultiFSIndex(AppObject.AppAnalyzer, 
                 //                AppObject.RootDirPath, 
                 //                Consts.IndexDirName, Consts.BuildDirName, this.TargetDirText.Text);
@@ -43,15 +47,11 @@ namespace PokudaSearch.Views {
                 LuceneIndexWorker.CreateIndex(
                     AppObject.AppAnalyzer, 
                     AppObject.RootDirPath, 
+                    Consts.IndexDirName, 
+                    Consts.BuildDirName, 
                     this.TargetDirText.Text,
                     progress,
                     mode);
-                //LuceneIndexWorker.CreateIndexByMultiRAM(
-                //    AppObject.AppAnalyzer, 
-                //    AppObject.RootDirPath, 
-                //    this.TargetDirText.Text,
-                //    progress,
-                //    mode);
             } finally {
                 AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_END), false, sw);
             }
@@ -84,6 +84,8 @@ namespace PokudaSearch.Views {
                 LuceneIndexWorker.MergeAndMove(
                     AppObject.AppAnalyzer, 
                     AppObject.RootDirPath, 
+                    Consts.IndexDirName, 
+                    Consts.BuildDirName, 
                     this.TargetDirText.Text);
             } finally {
                 AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_END), false, sw);
