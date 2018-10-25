@@ -27,10 +27,6 @@
             this.TargetDirText = new System.Windows.Forms.TextBox();
             this.TestButton = new System.Windows.Forms.Button();
             this.TikaTestButton = new System.Windows.Forms.Button();
-            this.ThumbnailButton = new System.Windows.Forms.Button();
-            this.PictureBox = new System.Windows.Forms.PictureBox();
-            this.PathText = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // CreateIndexButton
@@ -72,42 +68,11 @@
             this.TikaTestButton.UseVisualStyleBackColor = true;
             this.TikaTestButton.Click += new System.EventHandler(this.TikaTestButton_Click);
             // 
-            // ThumbnailButton
-            // 
-            this.ThumbnailButton.Location = new System.Drawing.Point(22, 185);
-            this.ThumbnailButton.Name = "ThumbnailButton";
-            this.ThumbnailButton.Size = new System.Drawing.Size(162, 25);
-            this.ThumbnailButton.TabIndex = 4;
-            this.ThumbnailButton.Text = "サムネイル";
-            this.ThumbnailButton.UseVisualStyleBackColor = true;
-            this.ThumbnailButton.Click += new System.EventHandler(this.ThumbnailButton_Click);
-            // 
-            // PictureBox
-            // 
-            this.PictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PictureBox.Location = new System.Drawing.Point(22, 216);
-            this.PictureBox.Name = "PictureBox";
-            this.PictureBox.Size = new System.Drawing.Size(162, 107);
-            this.PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PictureBox.TabIndex = 5;
-            this.PictureBox.TabStop = false;
-            // 
-            // PathText
-            // 
-            this.PathText.Location = new System.Drawing.Point(22, 160);
-            this.PathText.Name = "PathText";
-            this.PathText.Size = new System.Drawing.Size(259, 19);
-            this.PathText.TabIndex = 6;
-            this.PathText.Text = "C:\\Temp\\WS000006.JPG";
-            // 
             // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(589, 407);
-            this.Controls.Add(this.PathText);
-            this.Controls.Add(this.PictureBox);
-            this.Controls.Add(this.ThumbnailButton);
             this.Controls.Add(this.TikaTestButton);
             this.Controls.Add(this.TestButton);
             this.Controls.Add(this.TargetDirText);
@@ -115,7 +80,6 @@
             this.Name = "TestForm";
             this.Text = "フィージビリティテスト";
             this.Load += new System.EventHandler(this.TestForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -127,9 +91,6 @@
         private System.Windows.Forms.TextBox TargetDirText;
         private System.Windows.Forms.Button TestButton;
         private System.Windows.Forms.Button TikaTestButton;
-        private System.Windows.Forms.Button ThumbnailButton;
-        private System.Windows.Forms.PictureBox PictureBox;
-        private System.Windows.Forms.TextBox PathText;
     }
 }
 

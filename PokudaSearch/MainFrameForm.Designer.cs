@@ -36,9 +36,9 @@
             this.ribbonGroup1 = new C1.Win.C1Ribbon.RibbonGroup();
             this.SearchFormButton = new C1.Win.C1Ribbon.RibbonButton();
             this.IndexBuildFormButton = new C1.Win.C1Ribbon.RibbonButton();
-            this.ribbonTopToolBar1 = new C1.Win.C1Ribbon.RibbonTopToolBar();
-            this.ribbonGroup2 = new C1.Win.C1Ribbon.RibbonGroup();
+            this.SandBoxGroup = new C1.Win.C1Ribbon.RibbonGroup();
             this.TestFormButton = new C1.Win.C1Ribbon.RibbonButton();
+            this.ribbonTopToolBar1 = new C1.Win.C1Ribbon.RibbonTopToolBar();
             this.MainStatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainRibbon)).BeginInit();
             this.SuspendLayout();
@@ -98,7 +98,7 @@
             // ribbonTab1
             // 
             this.ribbonTab1.Groups.Add(this.ribbonGroup1);
-            this.ribbonTab1.Groups.Add(this.ribbonGroup2);
+            this.ribbonTab1.Groups.Add(this.SandBoxGroup);
             this.ribbonTab1.Name = "ribbonTab1";
             this.ribbonTab1.Text = "タブ";
             // 
@@ -125,15 +125,12 @@
             this.IndexBuildFormButton.Text = "インデックス作成";
             this.IndexBuildFormButton.Click += new System.EventHandler(this.IndexBuildFormButton_Click);
             // 
-            // ribbonTopToolBar1
+            // SandBoxGroup
             // 
-            this.ribbonTopToolBar1.Name = "ribbonTopToolBar1";
-            // 
-            // ribbonGroup2
-            // 
-            this.ribbonGroup2.Items.Add(this.TestFormButton);
-            this.ribbonGroup2.Name = "ribbonGroup2";
-            this.ribbonGroup2.Text = "SamdBox";
+            this.SandBoxGroup.Items.Add(this.TestFormButton);
+            this.SandBoxGroup.Name = "SandBoxGroup";
+            this.SandBoxGroup.Text = "SandBox";
+            this.SandBoxGroup.DialogLauncherClick += new System.EventHandler(this.SandBoxGroup_DialogLauncherClick);
             // 
             // TestFormButton
             // 
@@ -141,6 +138,10 @@
             this.TestFormButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("TestFormButton.SmallImage")));
             this.TestFormButton.Text = "TestForm";
             this.TestFormButton.Click += new System.EventHandler(this.TestFormButton_Click);
+            // 
+            // ribbonTopToolBar1
+            // 
+            this.ribbonTopToolBar1.Name = "ribbonTopToolBar1";
             // 
             // MainFrameForm
             // 
@@ -177,7 +178,7 @@
         private C1.Win.C1Ribbon.RibbonTopToolBar ribbonTopToolBar1;
         private C1.Win.C1Ribbon.RibbonButton SearchFormButton;
         private C1.Win.C1Ribbon.RibbonButton IndexBuildFormButton;
-        private C1.Win.C1Ribbon.RibbonGroup ribbonGroup2;
+        private C1.Win.C1Ribbon.RibbonGroup SandBoxGroup;
         private C1.Win.C1Ribbon.RibbonButton TestFormButton;
     }
 }

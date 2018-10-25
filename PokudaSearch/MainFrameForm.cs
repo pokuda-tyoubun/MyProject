@@ -29,7 +29,7 @@ namespace PokudaSearch {
         /// <summary>インデックス作成画面</summary>
         public static IndexBuildForm IndexBuildForm;
 
-        /// <summary>インデックス作成画面</summary>
+        /// <summary>SandBox用</summary>
         public static TestForm TestForm;
 
         /// <summary>
@@ -130,13 +130,11 @@ namespace PokudaSearch {
             frm.Show();
         }
 
+        private void SandBoxGroup_DialogLauncherClick(object sender, EventArgs e) {
+
+        }
+
         private void TestFormButton_Click(object sender, EventArgs e) {
-            if (TestForm == null) {
-                TestForm = new TestForm();
-                LoadForm(TestForm);
-            } else {
-                TestForm.Activate();
-            }
         }
 
 
