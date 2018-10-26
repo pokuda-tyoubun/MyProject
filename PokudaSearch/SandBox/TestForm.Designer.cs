@@ -27,6 +27,9 @@
             this.TargetDirText = new System.Windows.Forms.TextBox();
             this.TestButton = new System.Windows.Forms.Button();
             this.TikaTestButton = new System.Windows.Forms.Button();
+            this.TumbnailButton = new System.Windows.Forms.Button();
+            this.PictureBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // CreateIndexButton
@@ -68,18 +71,41 @@
             this.TikaTestButton.UseVisualStyleBackColor = true;
             this.TikaTestButton.Click += new System.EventHandler(this.TikaTestButton_Click);
             // 
+            // TumbnailButton
+            // 
+            this.TumbnailButton.Location = new System.Drawing.Point(31, 191);
+            this.TumbnailButton.Name = "TumbnailButton";
+            this.TumbnailButton.Size = new System.Drawing.Size(121, 30);
+            this.TumbnailButton.TabIndex = 4;
+            this.TumbnailButton.Text = "サムネイル化";
+            this.TumbnailButton.UseVisualStyleBackColor = true;
+            this.TumbnailButton.Click += new System.EventHandler(this.TumbnailButton_Click);
+            // 
+            // PictureBox
+            // 
+            this.PictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PictureBox.Location = new System.Drawing.Point(34, 227);
+            this.PictureBox.Name = "PictureBox";
+            this.PictureBox.Size = new System.Drawing.Size(240, 133);
+            this.PictureBox.TabIndex = 5;
+            this.PictureBox.TabStop = false;
+            // 
             // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(589, 407);
+            this.Controls.Add(this.PictureBox);
+            this.Controls.Add(this.TumbnailButton);
             this.Controls.Add(this.TikaTestButton);
             this.Controls.Add(this.TestButton);
             this.Controls.Add(this.TargetDirText);
             this.Controls.Add(this.CreateIndexButton);
             this.Name = "TestForm";
             this.Text = "フィージビリティテスト";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TestForm_FormClosed);
             this.Load += new System.EventHandler(this.TestForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -91,6 +117,8 @@
         private System.Windows.Forms.TextBox TargetDirText;
         private System.Windows.Forms.Button TestButton;
         private System.Windows.Forms.Button TikaTestButton;
+        private System.Windows.Forms.Button TumbnailButton;
+        private System.Windows.Forms.PictureBox PictureBox;
     }
 }
 

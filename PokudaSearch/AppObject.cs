@@ -10,12 +10,10 @@ using System.Threading.Tasks;
 
 namespace PokudaSearch {
     public static class AppObject {
-        //NOTE:対象のフレームワークを1度でも4.5.2に変更すると以下のエラーになり復旧できなくなる。
-        //NOTE:Could not initialize class FlexLucene.Analysis.Ja.Dict.TokenInfoDictionarySingletonHolder
-        //HACK*パッケージマネージャコンソールからだといけるっぽい
         
         //HACK UI高度化----------------------------------------------
-        //HACK*サムネイル表示
+        //HACK*サムネイルを検索グリッドに表示
+        //HACK*  →速度的に問題がなければMESに適用
         //HACK UI高度化----------------------------------------------
         //HACKインデックス作成高速化----------------------------------------------
         //HACK*大量ファイルでインデックスを作成した場合に、segmentsファイルが作成されない。
@@ -62,6 +60,13 @@ namespace PokudaSearch {
         //HACK 転置インデックスではなく、その場で抽出して検索する機能も欲しい
 
         //DONE List--------------------------------------------------------------------------
+        //NOTE:Could not initialize class FlexLucene.Analysis.Ja.Dict.TokenInfoDictionarySingletonHolder
+        //　上記のエラーが出力される。
+        //【原因】
+        //Nugetパッケージマネージャーコンソールを利用するとFlexLucene.dllが勝手に置き換えられるため。
+        //パッケージのフレームワークを4.5.2に変更しても同様の状況が起きる
+        //【対応方法】
+        //FlexLucene.dllをNuGet管理外（Libフォルダ）に移動させた。
         //DONE titleの検索をCaseInsensitiveにする。
         //DONE Queryにも同じAnalyzerを適用する必要がある。
         //DONE マルチスレッドで最終どれだけ速くなったか記録を残しておく

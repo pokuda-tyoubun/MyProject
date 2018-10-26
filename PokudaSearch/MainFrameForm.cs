@@ -135,6 +135,12 @@ namespace PokudaSearch {
         }
 
         private void TestFormButton_Click(object sender, EventArgs e) {
+            if (TestForm == null) {
+                TestForm = new TestForm();
+                LoadForm(TestForm);
+            } else {
+                IndexBuildForm.Activate();
+            }
         }
 
 

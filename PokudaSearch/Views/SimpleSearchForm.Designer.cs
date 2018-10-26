@@ -350,8 +350,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.KeywordText);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SimpleSearchForm";
             this.Text = "SimpleSearchForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SimpleSearchForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FailureFTSNavi)).EndInit();

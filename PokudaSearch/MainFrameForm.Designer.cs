@@ -150,6 +150,7 @@
             this.ClientSize = new System.Drawing.Size(1043, 629);
             this.Controls.Add(this.MainRibbon);
             this.Controls.Add(this.MainStatusStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.Name = "MainFrameForm";
             this.Text = "PokudaSearch";

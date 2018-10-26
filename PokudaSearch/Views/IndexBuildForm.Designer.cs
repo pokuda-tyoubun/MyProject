@@ -24,6 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IndexBuildForm));
             this.ReferenceButton = new System.Windows.Forms.Button();
             this.CreateIndexButton = new System.Windows.Forms.Button();
             this.LogViewerText = new System.Windows.Forms.TextBox();
@@ -140,6 +141,7 @@
             this.Controls.Add(this.CreateIndexButton);
             this.Controls.Add(this.TargetDirText);
             this.Controls.Add(this.ReferenceButton);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "IndexBuildForm";
             this.Text = "IndexBuildForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.IndexBuildForm_FormClosed);

@@ -245,6 +245,10 @@ namespace PokudaSearch.Views {
             //} 
         }
 
+        private void SimpleSearchForm_FormClosed(object sender, FormClosedEventArgs e) {
+            MainFrameForm.SimpleSearchForm = null;
+        }
+
 
         //private void SearchOld() {
         //    DateTime start = DateTime.Now;
