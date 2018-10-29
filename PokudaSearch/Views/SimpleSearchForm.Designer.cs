@@ -50,19 +50,25 @@
             this.OpenFileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenParentMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchButton = new System.Windows.Forms.Button();
+            this.BottomPanel = new System.Windows.Forms.Panel();
+            this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
+            this.PreviewLabel = new C1.Win.C1SuperTooltip.C1SuperLabel();
+            this.MainPanel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FailureFTSNavi)).BeginInit();
             this.FailureFTSNavi.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ResultGrid)).BeginInit();
             this.ResultContext.SuspendLayout();
+            this.BottomPanel.SuspendLayout();
+            this.MainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
             // 
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label2.Location = new System.Drawing.Point(6, 10);
+            this.label2.Location = new System.Drawing.Point(5, 5);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(66, 20);
             this.label2.TabIndex = 0;
@@ -71,7 +77,7 @@
             // 
             // KeywordText
             // 
-            this.KeywordText.Location = new System.Drawing.Point(78, 10);
+            this.KeywordText.Location = new System.Drawing.Point(77, 5);
             this.KeywordText.Name = "KeywordText";
             this.KeywordText.Size = new System.Drawing.Size(516, 19);
             this.KeywordText.TabIndex = 1;
@@ -80,7 +86,7 @@
             // 
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(6, 35);
+            this.label1.Location = new System.Drawing.Point(5, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(66, 20);
             this.label1.TabIndex = 3;
@@ -89,7 +95,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(78, 35);
+            this.textBox1.Location = new System.Drawing.Point(77, 30);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(104, 19);
             this.textBox1.TabIndex = 4;
@@ -97,7 +103,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(417, 40);
+            this.label3.Location = new System.Drawing.Point(416, 35);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(17, 12);
             this.label3.TabIndex = 115;
@@ -107,7 +113,7 @@
             // 
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label4.Location = new System.Drawing.Point(188, 34);
+            this.label4.Location = new System.Drawing.Point(187, 29);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(66, 20);
             this.label4.TabIndex = 114;
@@ -121,7 +127,7 @@
             this.UpdateDate2.EmptyAsNull = true;
             this.UpdateDate2.FormatType = C1.Win.C1Input.FormatTypeEnum.CustomFormat;
             this.UpdateDate2.ImagePadding = new System.Windows.Forms.Padding(0);
-            this.UpdateDate2.Location = new System.Drawing.Point(440, 37);
+            this.UpdateDate2.Location = new System.Drawing.Point(439, 32);
             this.UpdateDate2.Name = "UpdateDate2";
             this.UpdateDate2.ShowFocusRectangle = true;
             this.UpdateDate2.Size = new System.Drawing.Size(154, 17);
@@ -139,7 +145,7 @@
             this.UpdateDate1.EmptyAsNull = true;
             this.UpdateDate1.FormatType = C1.Win.C1Input.FormatTypeEnum.CustomFormat;
             this.UpdateDate1.ImagePadding = new System.Windows.Forms.Padding(0);
-            this.UpdateDate1.Location = new System.Drawing.Point(260, 37);
+            this.UpdateDate1.Location = new System.Drawing.Point(259, 32);
             this.UpdateDate1.Name = "UpdateDate1";
             this.UpdateDate1.ShowFocusRectangle = true;
             this.UpdateDate1.Size = new System.Drawing.Size(154, 17);
@@ -151,7 +157,7 @@
             this.label7.BackColor = System.Drawing.SystemColors.Info;
             this.label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label7.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label7.Location = new System.Drawing.Point(6, 62);
+            this.label7.Location = new System.Drawing.Point(5, 57);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(106, 23);
             this.label7.TabIndex = 7;
@@ -175,7 +181,7 @@
             this.toolStripButton4,
             this.toolStripSeparator3,
             this.WriteExcelButton});
-            this.FailureFTSNavi.Location = new System.Drawing.Point(117, 60);
+            this.FailureFTSNavi.Location = new System.Drawing.Point(116, 55);
             this.FailureFTSNavi.MoveFirstItem = this.toolStripButton1;
             this.FailureFTSNavi.MoveLastItem = this.toolStripButton4;
             this.FailureFTSNavi.MoveNextItem = this.toolStripButton3;
@@ -284,17 +290,18 @@
             this.ResultGrid.GridName = null;
             this.ResultGrid.IsCol1SelectCheck = false;
             this.ResultGrid.IsEnterRight = false;
-            this.ResultGrid.Location = new System.Drawing.Point(3, 88);
+            this.ResultGrid.Location = new System.Drawing.Point(5, 83);
             this.ResultGrid.Name = "ResultGrid";
             this.ResultGrid.PulldownDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, string>>)(resources.GetObject("ResultGrid.PulldownDic")));
             this.ResultGrid.Rows.Count = 2;
             this.ResultGrid.Rows.DefaultSize = 18;
             this.ResultGrid.ShowErrors = true;
-            this.ResultGrid.Size = new System.Drawing.Size(962, 492);
+            this.ResultGrid.Size = new System.Drawing.Size(958, 333);
             this.ResultGrid.StyleInfo = resources.GetString("ResultGrid.StyleInfo");
             this.ResultGrid.TabIndex = 9;
             this.ResultGrid.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2010Blue;
             this.ResultGrid.WindowsName = null;
+            this.ResultGrid.SelChange += new System.EventHandler(this.ResultGrid_SelChange);
             this.ResultGrid.OwnerDrawCell += new C1.Win.C1FlexGrid.OwnerDrawCellEventHandler(this.ResultGrid_OwnerDrawCell);
             this.ResultGrid.DoubleClick += new System.EventHandler(this.ResultGrid_DoubleClick);
             // 
@@ -324,7 +331,7 @@
             // 
             this.SearchButton.Image = global::PokudaSearch.Properties.Resources.Search24;
             this.SearchButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.SearchButton.Location = new System.Drawing.Point(600, 4);
+            this.SearchButton.Location = new System.Drawing.Point(599, 4);
             this.SearchButton.Name = "SearchButton";
             this.SearchButton.Size = new System.Drawing.Size(80, 52);
             this.SearchButton.TabIndex = 2;
@@ -333,23 +340,69 @@
             this.SearchButton.UseVisualStyleBackColor = true;
             this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
+            // BottomPanel
+            // 
+            this.BottomPanel.Controls.Add(this.PreviewLabel);
+            this.BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.BottomPanel.Location = new System.Drawing.Point(0, 427);
+            this.BottomPanel.Name = "BottomPanel";
+            this.BottomPanel.Size = new System.Drawing.Size(966, 153);
+            this.BottomPanel.TabIndex = 116;
+            // 
+            // collapsibleSplitter3
+            // 
+            this.collapsibleSplitter3.AnimationDelay = 20;
+            this.collapsibleSplitter3.AnimationStep = 20;
+            this.collapsibleSplitter3.BorderStyle3D = System.Windows.Forms.Border3DStyle.RaisedOuter;
+            this.collapsibleSplitter3.ControlToHide = this.BottomPanel;
+            this.collapsibleSplitter3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.collapsibleSplitter3.ExpandParentForm = false;
+            this.collapsibleSplitter3.Location = new System.Drawing.Point(0, 419);
+            this.collapsibleSplitter3.Name = "collapsibleSplitter3";
+            this.collapsibleSplitter3.Size = new System.Drawing.Size(966, 8);
+            this.collapsibleSplitter3.TabIndex = 117;
+            this.collapsibleSplitter3.TabStop = false;
+            this.collapsibleSplitter3.UseAnimations = false;
+            this.collapsibleSplitter3.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
+            // 
+            // PreviewLabel
+            // 
+            this.PreviewLabel.BackColor = System.Drawing.SystemColors.Window;
+            this.PreviewLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PreviewLabel.Location = new System.Drawing.Point(0, 0);
+            this.PreviewLabel.Name = "PreviewLabel";
+            this.PreviewLabel.Size = new System.Drawing.Size(966, 153);
+            this.PreviewLabel.TabIndex = 0;
+            this.PreviewLabel.UseMnemonic = true;
+            // 
+            // MainPanel
+            // 
+            this.MainPanel.Controls.Add(this.label2);
+            this.MainPanel.Controls.Add(this.KeywordText);
+            this.MainPanel.Controls.Add(this.label1);
+            this.MainPanel.Controls.Add(this.textBox1);
+            this.MainPanel.Controls.Add(this.ResultGrid);
+            this.MainPanel.Controls.Add(this.label7);
+            this.MainPanel.Controls.Add(this.label4);
+            this.MainPanel.Controls.Add(this.FailureFTSNavi);
+            this.MainPanel.Controls.Add(this.label3);
+            this.MainPanel.Controls.Add(this.UpdateDate1);
+            this.MainPanel.Controls.Add(this.SearchButton);
+            this.MainPanel.Controls.Add(this.UpdateDate2);
+            this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainPanel.Location = new System.Drawing.Point(0, 0);
+            this.MainPanel.Name = "MainPanel";
+            this.MainPanel.Size = new System.Drawing.Size(966, 419);
+            this.MainPanel.TabIndex = 118;
+            // 
             // SimpleSearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(966, 580);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.FailureFTSNavi);
-            this.Controls.Add(this.ResultGrid);
-            this.Controls.Add(this.SearchButton);
-            this.Controls.Add(this.UpdateDate2);
-            this.Controls.Add(this.UpdateDate1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.KeywordText);
+            this.Controls.Add(this.MainPanel);
+            this.Controls.Add(this.collapsibleSplitter3);
+            this.Controls.Add(this.BottomPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SimpleSearchForm";
             this.Text = "SimpleSearchForm";
@@ -361,8 +414,10 @@
             this.FailureFTSNavi.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ResultGrid)).EndInit();
             this.ResultContext.ResumeLayout(false);
+            this.BottomPanel.ResumeLayout(false);
+            this.MainPanel.ResumeLayout(false);
+            this.MainPanel.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -393,5 +448,9 @@
         private System.Windows.Forms.ContextMenuStrip ResultContext;
         private System.Windows.Forms.ToolStripMenuItem OpenFileMenu;
         private System.Windows.Forms.ToolStripMenuItem OpenParentMenu;
+        private System.Windows.Forms.Panel BottomPanel;
+        private NJFLib.Controls.CollapsibleSplitter collapsibleSplitter3;
+        private C1.Win.C1SuperTooltip.C1SuperLabel PreviewLabel;
+        private System.Windows.Forms.Panel MainPanel;
     }
 }

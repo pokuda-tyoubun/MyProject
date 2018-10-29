@@ -12,6 +12,7 @@ using FxCommonLib.Consts;
 using FxCommonLib.Controls;
 using FxCommonLib.Utils;
 using java.nio.file;
+using Microsoft.WindowsAPICodePack.Shell;
 using PokudaSearch.IndexBuilder;
 using System;
 using System.Collections.Generic;
@@ -34,8 +35,10 @@ namespace PokudaSearch.Views {
 
         /// <summary>列定義</summary>
         private enum ColIndex : int {
+            [EnumLabel("種類")]
+            FileIcon = 1,
             [EnumLabel("ファイル名")]
-            FileName = 1,
+            FileName,
             [EnumLabel("パス")]
             FullPath,
             [EnumLabel("拡張子")]
@@ -45,9 +48,7 @@ namespace PokudaSearch.Views {
             [EnumLabel("スコア")]
             Score,
             [EnumLabel("ハイライト")]
-            Hilight,
-            [EnumLabel("描画済み")]
-            Drawed
+            Hilight
         }
         #endregion Constants
 
@@ -107,6 +108,9 @@ namespace PokudaSearch.Views {
             this.ResultGrid.Rows.Count = RowHeaderCount;
             this.ResultGrid.Cols.Count = Enum.GetValues(typeof(ColIndex)).Length + 1;
 
+            this.ResultGrid[0, (int)ColIndex.FileIcon] = EnumUtil.GetLabel(ColIndex.FileIcon);
+            this.ResultGrid.Cols[(int)ColIndex.FileIcon].Width = 20;
+            this.ResultGrid.Cols[(int)ColIndex.FileIcon].ImageAlign = ImageAlignEnum.CenterCenter;
             this.ResultGrid[0, (int)ColIndex.FileName] = EnumUtil.GetLabel(ColIndex.FileName);
             this.ResultGrid.Cols[(int)ColIndex.FileName].Width = 200;
             this.ResultGrid[0, (int)ColIndex.FullPath] = EnumUtil.GetLabel(ColIndex.FullPath);
@@ -119,11 +123,14 @@ namespace PokudaSearch.Views {
             this.ResultGrid.Cols[(int)ColIndex.Score].Width = 60;
             this.ResultGrid[0, (int)ColIndex.Hilight] = EnumUtil.GetLabel(ColIndex.Hilight);
             this.ResultGrid.Cols[(int)ColIndex.Hilight].Width = 600;
-            this.ResultGrid[0, (int)ColIndex.Drawed] = EnumUtil.GetLabel(ColIndex.Drawed);
-            this.ResultGrid.Cols[(int)ColIndex.Drawed].Width = 60;
         }
 
         private void Search() {
+
+            if (this.KeywordText.Text == "") {
+                //TODO キーワード入力を促す
+                return;
+            }
 
             java.nio.file.Path idxPath = FileSystems.getDefault().getPath(AppObject.RootDirPath + LuceneIndexWorker.IndexDirName);
             var fsDir = FSDirectory.Open(idxPath);
@@ -151,10 +158,15 @@ namespace PokudaSearch.Views {
             AppObject.Logger.Info("length of top docs: " + docs.ScoreDocs.Length);
             this.ResultGrid.Rows.Count = RowHeaderCount + docs.ScoreDocs.Length;
             int row = RowHeaderCount;
+            BitmapUtil bu = new BitmapUtil();
             foreach (ScoreDoc doc in docs.ScoreDocs) {
                 Document thisDoc = idxSearcher.Doc(doc.Doc);
                 string fullPath = thisDoc.Get("path");
 
+                ShellFile shellFile = ShellFile.FromFilePath(fullPath);
+                Bitmap bmp = shellFile.Thumbnail.Bitmap;
+                bmp.MakeTransparent();
+                this.ResultGrid.SetCellImage(row, (int)ColIndex.FileIcon, bu.Resize(bmp, 16, 16));
                 this.ResultGrid[row, (int)ColIndex.FileName] = thisDoc.Get("title");
                 this.ResultGrid[row, (int)ColIndex.FullPath] = fullPath;
 
@@ -165,7 +177,6 @@ namespace PokudaSearch.Views {
                 this.ResultGrid[row, (int)ColIndex.Score] = doc.Score;
 
                 // Highlighterで検索キーワード周辺の文字列(フラグメント)を取得
-                // デフォルトのSimpleHTMLFormatterは <B> タグで検索キーワードを囲って返す
                 // TokenStream が必要なので取得
                 TokenStream stream = TokenSources.GetAnyTokenStream(idxReader,
                         doc.Doc, "content", AppObject.AppAnalyzer);
@@ -174,13 +185,14 @@ namespace PokudaSearch.Views {
 
                 row++;
             }
+            SetHtmlLabel();
         }
 
         private Highlighter CreateHilighter(Query query) {
 
             // Highlighter 作成
             // Formatter と Scorer を与える
-            Formatter formatter = new SimpleHTMLFormatter();
+            Formatter formatter = new SimpleHTMLFormatter("<FONT color=\"red\"><B>", "</B></FONT>");
             QueryScorer scorer = new QueryScorer(query);
             Highlighter highlighter = new Highlighter(formatter, scorer);
             // Fragmenter には SimpleSpanFragmenter を指定
@@ -221,34 +233,58 @@ namespace PokudaSearch.Views {
             Process.Start(path);
         }
 
-        //HACK*Grid上にhtmlを表示できたが、かなり重い
-        // →プレーンテキスト表示にして、プレビューパネルで表示した方が良い
-        C1SuperLabel _htmlLabel = new C1SuperLabel();
         private void ResultGrid_OwnerDrawCell(object sender, C1.Win.C1FlexGrid.OwnerDrawCellEventArgs e) {
-            //if (e.Col == (int)ColIndex.Hilight && e.Row >= this.ResultGrid.Rows.Fixed) {  
-            //    // draw background 
-            //    e.DrawCell(DrawCellFlags.Background); 
-            //    // use the C1SuperLabel to draw the html text  
-            //    //if (StringUtil.NullToBlank(this.ResultGrid[e.Row, (int)ColIndex.Drawed]) != "1" &&
-            //    //    e.Bounds.Width > 0 && e.Bounds.Height > 0) {
-            //    if (e.Bounds.Width > 0 && e.Bounds.Height > 0) {
-            //        _htmlLabel.Text = StringUtil.NullToBlank(this.ResultGrid[e.Row, e.Col]);
-            //        _htmlLabel.BackColor = Color.Transparent;  
-            //        _htmlLabel.DrawToGraphics(e.Graphics, e.Bounds);
+            if (e.Col == (int)ColIndex.Hilight && e.Row >= this.ResultGrid.Rows.Fixed) {  
+                // draw background 
+                e.DrawCell(DrawCellFlags.Background); 
+                // use the C1SuperLabel to draw the html text  
+                //if (StringUtil.NullToBlank(this.ResultGrid[e.Row, (int)ColIndex.Drawed]) != "1" &&
+                //    e.Bounds.Width > 0 && e.Bounds.Height > 0) {
+                string val = StringUtil.NullToBlank(this.ResultGrid[e.Row, e.Col]);
+                if (e.Bounds.Width > 0 && 
+                    e.Bounds.Height > 0 && 
+                    val.IndexOf("<B>") >= 0 &&
+                    _htmlLabelList.Count > 0) {
+                    var htmlLabel = _htmlLabelList[e.Row - this.ResultGrid.Rows.Fixed];
+                    htmlLabel.DrawToGraphics(e.Graphics, e.Bounds);
+                }  
+                // and draw border last  
+                e.DrawCell(DrawCellFlags.Border);  
+                // we're done with this cell  
+                e.Handled = true;  
+            } 
+        }
+        List<C1SuperLabel> _htmlLabelList = new List<C1SuperLabel>();
+        private void SetHtmlLabel() {
+            for (int row = this.ResultGrid.Rows.Fixed; row < this.ResultGrid.Rows.Count; row++) {
+                string val = StringUtil.NullToBlank(this.ResultGrid[row, (int)ColIndex.Hilight]);
+                var label = new C1SuperLabel();
+                label.Text = val;
+                label.BackColor = Color.Transparent;
 
-            //        this.ResultGrid[e.Row, (int)ColIndex.Drawed] = "1";
-            //    }  
-            //    // and draw border last  
-            //    e.DrawCell(DrawCellFlags.Border);  
-            //    // we're done with this cell  
-            //    e.Handled = true;  
-            //} 
+                _htmlLabelList.Add(label);
+            }
         }
 
         private void SimpleSearchForm_FormClosed(object sender, FormClosedEventArgs e) {
             MainFrameForm.SimpleSearchForm = null;
         }
 
+        private void ResultGrid_SelChange(object sender, EventArgs e) {
+            //プレビュー更新
+            UpdatePreviewLabel();
+        }
+
+        /// <summary>
+        /// プレビューラベルを更新
+        /// </summary>
+        private void UpdatePreviewLabel() {
+            int row = this.ResultGrid.Selection.TopRow;
+            if (row > this.ResultGrid.Rows.Fixed) {
+                string val = StringUtil.NullToBlank(this.ResultGrid.Rows[row][(int)ColIndex.Hilight]);
+                this.PreviewLabel.Text = val;
+            }
+        }
 
         //private void SearchOld() {
         //    DateTime start = DateTime.Now;

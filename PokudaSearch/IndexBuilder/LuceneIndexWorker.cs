@@ -35,7 +35,7 @@ namespace PokudaSearch.IndexBuilder {
         /// <summary>Luceneインデックス構築用ディレクトリ名</summary>
         public const string BuildDirName = @"\Build";
         /// <summary>マルチスレッド化にするファイル数の閾値</summary>
-        private const int SplitBorder = 1000000;
+        private const int SplitBorder = 1;
         #endregion Constants
 
         #region MemberVariables

@@ -11,12 +11,14 @@ using System.Threading.Tasks;
 namespace PokudaSearch {
     public static class AppObject {
         
+        //HACK*2フェーズコミット対応
         //HACK UI高度化----------------------------------------------
-        //HACK*サムネイルを検索グリッドに表示
-        //HACK*  →速度的に問題がなければMESに適用
+        //HACK  →速度的に問題がなければMESに適用(Sencha側の問題がある。)
         //HACK UI高度化----------------------------------------------
         //HACKインデックス作成高速化----------------------------------------------
-        //HACK*大量ファイルでインデックスを作成した場合に、segmentsファイルが作成されない。
+        //HACK* マルチプロセス→実装は楽だが、進度の仕組みをどうするか？(共有メモリ?)
+        //HACK* マルチスレッド処理をoutofmemoryにならないように 
+        //HACK 大量ファイルでインデックスを作成した場合に、segmentsファイルが作成されない。
         //     →最後にCommit()を追記
         //         →効果なし
         //     →1000ファイル毎ににCommit()を追記
@@ -26,7 +28,7 @@ namespace PokudaSearch {
         //     →元のシングルスレッドにする。
         //         →進行中
         //     →マルチプロセスが良いかも
-        //HACK*RAMDirectoryとマルチスレッドでインデックスを作成を高速化する。
+        //HACK RAMDirectoryとマルチスレッドでインデックスを作成を高速化する。
         //     →マルチコアの本のPart2-10を参考にしてみる。
         //　　→C\Temp(920件)で実装して、計測してみた。
         //        ・FSDirectory 3:50秒
@@ -36,10 +38,10 @@ namespace PokudaSearch {
         //HACK c:\Workspaceで試みるとハング(0xc0000005 メモリアクセス違反)した
         //     →定期的にファイルに書き出す or FSDirectoryをマルチにして統合する
         //     →実装してみたが 3:54秒(Thread1に大きいファイルが固まっていた)
-        //HACK* →データをばらして試す必要あり。
-        //HACK* 　→シングルスレッド 1:53秒
-        //HACK* 　→2スレッド 1:08秒
-        //HACK* 　→3スレッド 1:13秒
+        //HACK →データをばらして試す必要あり。
+        //HACK 　→シングルスレッド 1:53秒
+        //HACK 　→2スレッド 1:08秒
+        //HACK 　→3スレッド 1:13秒
         //HACKインデックス作成高速化----------------------------------------------
 
         //HACK*FastVectorHilighterに対応させる。(以下のURLを参考に実装)
@@ -60,6 +62,9 @@ namespace PokudaSearch {
         //HACK 転置インデックスではなく、その場で抽出して検索する機能も欲しい
 
         //DONE List--------------------------------------------------------------------------
+        //DONE*Grid上にhtmlを表示できたが、かなり重い
+        // 検索後、htmlLabelListを作成して、ドローするだけにする。
+        //DONE*サムネイルを検索グリッドに表示
         //NOTE:Could not initialize class FlexLucene.Analysis.Ja.Dict.TokenInfoDictionarySingletonHolder
         //　上記のエラーが出力される。
         //【原因】
@@ -70,8 +75,8 @@ namespace PokudaSearch {
         //DONE titleの検索をCaseInsensitiveにする。
         //DONE Queryにも同じAnalyzerを適用する必要がある。
         //DONE マルチスレッドで最終どれだけ速くなったか記録を残しておく
-        // 1スレッド(40万ファイル) : 1h55m
-        // 2スレッド(40万ファイル) : 2h02m
+        // 1スレッド(40万ファイル) : 3h10m
+        // 2スレッド(40万ファイル) : 2h02m(但しマージ失敗)
         //DONE インデックスが追記モードになっているっぽい
         //DONE C\Tempでインデックスを作成してもキーワードが引っ掛からないのは何故か
         //     →hilightFieldType指定が誤っているようだ
