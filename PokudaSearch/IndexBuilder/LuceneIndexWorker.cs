@@ -98,7 +98,7 @@ namespace PokudaSearch.IndexBuilder {
         /// <param name="targetDir"></param>
         /// <param name="progress"></param>
         /// <param name="txtExtractMode"></param>
-        public async static void CreateIndex(
+        public async static void CreateIndexBySingleThread(
             Analyzer analyzer, 
             string rootPath, 
             string targetDir, 
@@ -108,23 +108,10 @@ namespace PokudaSearch.IndexBuilder {
             try {
                 _txtExtractMode = txtExtractMode;
 
-                //先に対象ファイルを分割
-                _targetFileList = SplitTargetFiles(targetDir);
-
                 var worker = await CreateIndexAsync(analyzer, rootPath, targetDir, progress);
 
-                //FIXME FlexLucene.Index.IndexNotFoundException: no segments* file found in SimpleFSDirectory
-                //      →Commit()を明示的に入れてみた。
-                //      →ダメだったら、10000ファイル毎にマージする？
-                //効果なし－＞以下のExceptionがでるのでファイルフラッシュ時間を空けてみる
-                //Thread.Sleep(60000);
-                if (_targetFileList.Length > 1) {
-                    //2つのインデックスをマージ
-                    MergeAndMove(analyzer, rootPath, targetDir);
-                } else {
-                    //インデックスファイルを一時構築用から検索用に移動
-                    CopyIndexDir(rootPath + BuildDirName + "1", rootPath + IndexDirName);
-                }
+                //インデックスファイルを一時構築用から検索用に移動
+                CopyIndexDir(rootPath + BuildDirName + "1", rootPath + IndexDirName);
 
                 AppObject.Logger.Info("インデックス構築処理完了");
             } catch (Exception e) {
@@ -173,19 +160,19 @@ namespace PokudaSearch.IndexBuilder {
             string rootPath, 
             string targetDir, 
             IProgress<ProgressReport> progress) {
-            return Task.Run<LuceneIndexWorker>(() => DoWork(analyzer, rootPath, targetDir, progress));
+            return Task.Run<LuceneIndexWorker>(() => DoWorkSingle(analyzer, rootPath, targetDir, progress));
         }
 
 
         /// <summary>
-        /// 並列でインデックス作成
+        /// インデックス作成
         /// </summary>
         /// <param name="analyzer"></param>
         /// <param name="rootPath"></param>
         /// <param name="targetDir"></param>
         /// <param name="progress"></param>
         /// <returns></returns>
-        private static LuceneIndexWorker DoWork(
+        private static LuceneIndexWorker DoWorkSingle(
             Analyzer analyzer, 
             string rootPath, 
             string targetDir, 
@@ -193,38 +180,18 @@ namespace PokudaSearch.IndexBuilder {
 
             DeleteOldIndexes(rootPath);
 
-            //第1スレッド引数
-            var args1 = new List<object>();
-            //invoke()で呼ばれるメソッドを設定
-            args1.Add(progress);
-            args1.Add(analyzer);
-            args1.Add(rootPath + BuildDirName + "1");
-            args1.Add(_targetFileList[0]);
-            args1.Add("Thread1");
+            var targetFileList = FileUtil.GetAllFileInfo(targetDir);
+            _targetTotal = targetFileList.Count;
 
             var instance = new LuceneIndexWorker();
-            if (_targetFileList.Length == 1) {
-                //1スレッド実行
-                //instance.CreateFSIndex(args1);
-
-                var options = new ParallelOptions() { MaxDegreeOfParallelism = 1 };
-                Parallel.Invoke(options,
-                    () => instance.CreateFSIndex(args1));
-            } else {
-                //第2スレッド
-                var args2 = new List<object>();
-                //invoke()で呼ばれるメソッドを設定
-                args2.Add(progress);
-                args2.Add(analyzer);
-                args2.Add(rootPath + BuildDirName + "2");
-                args2.Add(_targetFileList[1]);
-                args2.Add("Thread2");
-
-                var options = new ParallelOptions() { MaxDegreeOfParallelism = 2 };
-                Parallel.Invoke(options,
-                    () => instance.CreateFSIndex(args1), 
-                    () => instance.CreateFSIndex(args2));
-            }
+            var options = new ParallelOptions() { MaxDegreeOfParallelism = 1 };
+            Parallel.Invoke(options,
+                () => instance.CreateFSIndex(
+                    analyzer, 
+                    rootPath + BuildDirName + "1",
+                    targetFileList,
+                    progress,
+                    "Thread1"));
 
             return instance;
         }
@@ -271,18 +238,14 @@ namespace PokudaSearch.IndexBuilder {
         /// <summary>
         /// １つのスレッドでFSIndexを作成する処理
         /// HACK 引数をばらせる？
-        /// HACK internalとprivateの違い？
         /// </summary>
         /// <param name="args"></param>
-        internal void CreateFSIndex(object args) {
-            //キャスト
-            var argList = (List<object>)args;
-            //引数分解
-            var progress = (IProgress<ProgressReport>)argList[0];
-            var analyzer = (Analyzer)argList[1];
-            var buildDirPath = (string)argList[2];
-            var targetFileList = (List<FileInfo>)argList[3];
-            var threadName = (string)argList[4];
+        internal void CreateFSIndex(
+            Analyzer analyzer, 
+            string buildDirPath, 
+            List<FileInfo> targetFileList, 
+            IProgress<ProgressReport> progress,
+            string threadName) {
 
             IndexWriterConfig config = new IndexWriterConfig(analyzer);
     		IndexWriter indexWriter = null;
@@ -498,6 +461,12 @@ namespace PokudaSearch.IndexBuilder {
 
             return instance;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="progress"></param>
+        /// <param name="rootPath"></param>
+        /// <param name="analyzer"></param>
         internal void WriteFromQueue(IProgress<ProgressReport> progress, string rootPath, Analyzer analyzer) {
             while (true) {
                 Thread.Sleep(3000);
@@ -507,12 +476,22 @@ namespace PokudaSearch.IndexBuilder {
                 }
 
                 if (_que.Count > 0) {
+                    AppObject.Logger.Info(_que + "Before Queue Count:" + _que.Count);
+                    //キューにあるRAMDirectoryをFSDirectoryとして保存
                     RAMDirectory ram = null;
                     _que.TryTake(out ram, 10000);
                     SaveFSIndexFromRAMIndex(ram, rootPath + BuildDirName, analyzer);
+                    AppObject.Logger.Info(_que + "After Queue Count:" + _que.Count);
                 }
             }
         }
+        /// <summary>
+        /// RAMDirectoryとしてインデックスを構築してQueueに追加
+        /// </summary>
+        /// <param name="progress"></param>
+        /// <param name="analyzer"></param>
+        /// <param name="targetFileList"></param>
+        /// <param name="threadName"></param>
         internal void PushRAMDir(
             IProgress<ProgressReport> progress, 
             Analyzer analyzer, 
@@ -537,6 +516,16 @@ namespace PokudaSearch.IndexBuilder {
             foreach (List<FileInfo> list in tmpList) {
                 IndexWriterConfig config = new IndexWriterConfig(analyzer);
         		IndexWriter indexWriter = null;
+
+                //Queueが10件以上になる場合は待ち
+                while (true) {
+                    if (_que.Count <= 10) {
+                        break;
+                    }
+                    AppObject.Logger.Info("Queue is full. Queue Count:" + _que.Count);
+                    Thread.Sleep(3000);
+                }
+
                 var ram = new RAMDirectory();
                 indexWriter = new IndexWriter(ram, config);
 

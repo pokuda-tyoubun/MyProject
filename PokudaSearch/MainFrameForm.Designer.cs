@@ -34,11 +34,12 @@
             this.ribbonQat1 = new C1.Win.C1Ribbon.RibbonQat();
             this.ribbonTab1 = new C1.Win.C1Ribbon.RibbonTab();
             this.ribbonGroup1 = new C1.Win.C1Ribbon.RibbonGroup();
+            this.SandBoxGroup = new C1.Win.C1Ribbon.RibbonGroup();
+            this.ribbonTopToolBar1 = new C1.Win.C1Ribbon.RibbonTopToolBar();
+            this.FileExplorerButton = new C1.Win.C1Ribbon.RibbonButton();
             this.SearchFormButton = new C1.Win.C1Ribbon.RibbonButton();
             this.IndexBuildFormButton = new C1.Win.C1Ribbon.RibbonButton();
-            this.SandBoxGroup = new C1.Win.C1Ribbon.RibbonGroup();
             this.TestFormButton = new C1.Win.C1Ribbon.RibbonButton();
-            this.ribbonTopToolBar1 = new C1.Win.C1Ribbon.RibbonTopToolBar();
             this.MainStatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainRibbon)).BeginInit();
             this.SuspendLayout();
@@ -104,10 +105,30 @@
             // 
             // ribbonGroup1
             // 
+            this.ribbonGroup1.Items.Add(this.FileExplorerButton);
             this.ribbonGroup1.Items.Add(this.SearchFormButton);
             this.ribbonGroup1.Items.Add(this.IndexBuildFormButton);
             this.ribbonGroup1.Name = "ribbonGroup1";
             this.ribbonGroup1.Text = "全文検索";
+            // 
+            // SandBoxGroup
+            // 
+            this.SandBoxGroup.Items.Add(this.TestFormButton);
+            this.SandBoxGroup.Name = "SandBoxGroup";
+            this.SandBoxGroup.Text = "SandBox";
+            this.SandBoxGroup.DialogLauncherClick += new System.EventHandler(this.SandBoxGroup_DialogLauncherClick);
+            // 
+            // ribbonTopToolBar1
+            // 
+            this.ribbonTopToolBar1.Name = "ribbonTopToolBar1";
+            // 
+            // FileExplorerButton
+            // 
+            this.FileExplorerButton.LargeImage = global::PokudaSearch.Properties.Resources.Explorer24;
+            this.FileExplorerButton.Name = "FileExplorerButton";
+            this.FileExplorerButton.SmallImage = global::PokudaSearch.Properties.Resources.Explorer24;
+            this.FileExplorerButton.Text = "エクスプローラ";
+            this.FileExplorerButton.Click += new System.EventHandler(this.FileExplorerButton_Click);
             // 
             // SearchFormButton
             // 
@@ -125,23 +146,12 @@
             this.IndexBuildFormButton.Text = "インデックス作成";
             this.IndexBuildFormButton.Click += new System.EventHandler(this.IndexBuildFormButton_Click);
             // 
-            // SandBoxGroup
-            // 
-            this.SandBoxGroup.Items.Add(this.TestFormButton);
-            this.SandBoxGroup.Name = "SandBoxGroup";
-            this.SandBoxGroup.Text = "SandBox";
-            this.SandBoxGroup.DialogLauncherClick += new System.EventHandler(this.SandBoxGroup_DialogLauncherClick);
-            // 
             // TestFormButton
             // 
             this.TestFormButton.Name = "TestFormButton";
             this.TestFormButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("TestFormButton.SmallImage")));
             this.TestFormButton.Text = "TestForm";
             this.TestFormButton.Click += new System.EventHandler(this.TestFormButton_Click);
-            // 
-            // ribbonTopToolBar1
-            // 
-            this.ribbonTopToolBar1.Name = "ribbonTopToolBar1";
             // 
             // MainFrameForm
             // 
@@ -181,5 +191,6 @@
         private C1.Win.C1Ribbon.RibbonButton IndexBuildFormButton;
         private C1.Win.C1Ribbon.RibbonGroup SandBoxGroup;
         private C1.Win.C1Ribbon.RibbonButton TestFormButton;
+        private C1.Win.C1Ribbon.RibbonButton FileExplorerButton;
     }
 }

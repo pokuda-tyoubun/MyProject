@@ -194,6 +194,12 @@
     <Compile Include="IndexBuilder\LuceneIndexWorker.cs" />
     <Compile Include="IndexBuilder\LuceneIndexBuilder.cs" />
     <Compile Include="IndexBuilder\ProgressReport.cs" />
+    <Compile Include="Views\FileExplorerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FileExplorerForm.Designer.cs">
+      <DependentUpon>FileExplorerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\IndexBuildForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,6 +228,9 @@
     <Compile Include="Views\SimpleSearchForm.Designer.cs">
       <DependentUpon>SimpleSearchForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\FileExplorerForm.resx">
+      <DependentUpon>FileExplorerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\IndexBuildForm.resx">
       <DependentUpon>IndexBuildForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -275,6 +284,7 @@
     <None Include="Resources\Excel24.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Explorer24.png" />
     <Content Include="UserDictionary.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

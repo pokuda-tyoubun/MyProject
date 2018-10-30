@@ -24,6 +24,8 @@ namespace PokudaSearch {
         //-----------------------------------------------------------------------------
         //DONE 右上のChildFormの閉じるボタンが複数でる問題を調査（FxClientでも発生したことがある）
 
+        /// <summary>ファイルエクスプローラ画面</summary>
+        public static FileExplorerForm FileExplorerForm;
         /// <summary>検索画面</summary>
         public static SimpleSearchForm SimpleSearchForm;
         /// <summary>インデックス作成画面</summary>
@@ -139,7 +141,16 @@ namespace PokudaSearch {
                 TestForm = new TestForm();
                 LoadForm(TestForm);
             } else {
-                IndexBuildForm.Activate();
+                TestForm.Activate();
+            }
+        }
+
+        private void FileExplorerButton_Click(object sender, EventArgs e) {
+            if (FileExplorerForm == null) {
+                FileExplorerForm = new FileExplorerForm();
+                LoadForm(FileExplorerForm);
+            } else {
+                FileExplorerForm.Activate();
             }
         }
 

@@ -40,12 +40,13 @@ namespace PokudaSearch.Views {
                 //                Consts.IndexDirName, Consts.BuildDirName, this.TargetDirText.Text);
 
                 var progress = new Progress<ProgressReport>(SetProgressValue);
-                //LuceneIndexWorker.CreateIndex(
+                //LuceneIndexWorker.CreateIndexBySingleThread(
                 //    AppObject.AppAnalyzer, 
                 //    AppObject.RootDirPath, 
                 //    this.TargetDirText.Text,
                 //    progress,
                 //    mode);
+                //Multri RAMDirectoryで構築
                 LuceneIndexWorker.CreateIndexByMultiRAM(
                     AppObject.AppAnalyzer, 
                     AppObject.RootDirPath, 
