@@ -37,6 +37,7 @@
       <HintPath>..\..\..\..\..\Program Files (x86)\ComponentOne\Studio for WinForms\Bin\v4\C1.Win.4.dll</HintPath>
     </Reference>
     <Reference Include="C1.Win.C1Chart.4, Version=4.0.20173.286, Culture=neutral, PublicKeyToken=a22e16972c085838, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.C1Command.4, Version=4.0.20173.286, Culture=neutral, PublicKeyToken=e808566f358766d8, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1FlexGrid.4, Version=4.0.20173.286, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1Input.4, Version=4.0.20173.286, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1Ribbon.4, Version=4.0.20173.286, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />

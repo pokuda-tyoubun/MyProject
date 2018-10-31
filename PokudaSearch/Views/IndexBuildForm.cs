@@ -40,19 +40,19 @@ namespace PokudaSearch.Views {
                 //                Consts.IndexDirName, Consts.BuildDirName, this.TargetDirText.Text);
 
                 var progress = new Progress<ProgressReport>(SetProgressValue);
-                //LuceneIndexWorker.CreateIndexBySingleThread(
-                //    AppObject.AppAnalyzer, 
-                //    AppObject.RootDirPath, 
-                //    this.TargetDirText.Text,
-                //    progress,
-                //    mode);
-                //Multri RAMDirectoryで構築
-                LuceneIndexWorker.CreateIndexByMultiRAM(
+                LuceneIndexWorker.CreateIndexBySingleThread(
                     AppObject.AppAnalyzer, 
                     AppObject.RootDirPath, 
                     this.TargetDirText.Text,
                     progress,
                     mode);
+                //Multri RAMDirectoryで構築
+                //LuceneIndexWorker.CreateIndexByMultiRAM(
+                //    AppObject.AppAnalyzer, 
+                //    AppObject.RootDirPath, 
+                //    this.TargetDirText.Text,
+                //    progress,
+                //    mode);
             } finally {
                 AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_END), false, sw);
             }

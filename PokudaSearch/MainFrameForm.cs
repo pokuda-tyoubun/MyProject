@@ -120,8 +120,8 @@ namespace PokudaSearch {
         public void LoadForms() {
             try {
                 //ファイル検索画面
-                SimpleSearchForm = new SimpleSearchForm();
-                LoadForm(SimpleSearchForm);
+                FileExplorerForm = new FileExplorerForm();
+                LoadForm(FileExplorerForm);
             } finally {
             }
         }

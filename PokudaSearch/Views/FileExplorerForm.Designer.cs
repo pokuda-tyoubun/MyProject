@@ -23,45 +23,135 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.commandLink1 = new Microsoft.WindowsAPICodePack.Controls.WindowsForms.CommandLink();
-            this.explorerBrowser1 = new Microsoft.WindowsAPICodePack.Controls.WindowsForms.ExplorerBrowser();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FileExplorerForm));
+            this.MainExplorer = new Microsoft.WindowsAPICodePack.Controls.WindowsForms.ExplorerBrowser();
+            this.MainPanel = new System.Windows.Forms.Panel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.BackwardButton = new System.Windows.Forms.ToolStripButton();
+            this.MainPathCombo = new System.Windows.Forms.ToolStripComboBox();
+            this.RightPanel = new System.Windows.Forms.Panel();
+            this.SubExplorer = new Microsoft.WindowsAPICodePack.Controls.WindowsForms.ExplorerBrowser();
+            this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
+            this.MainPanel.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
+            this.RightPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // commandLink1
+            // MainExplorer
             // 
-            this.commandLink1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.commandLink1.Location = new System.Drawing.Point(34, 43);
-            this.commandLink1.Name = "commandLink1";
-            this.commandLink1.NoteText = "";
-            this.commandLink1.Size = new System.Drawing.Size(180, 60);
-            this.commandLink1.TabIndex = 0;
-            this.commandLink1.Text = "commandLink1";
-            this.commandLink1.UseVisualStyleBackColor = true;
+            this.MainExplorer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.MainExplorer.Location = new System.Drawing.Point(2, 31);
+            this.MainExplorer.Name = "MainExplorer";
+            this.MainExplorer.PropertyBagName = "Microsoft.WindowsAPICodePack.Controls.WindowsForms.ExplorerBrowser";
+            this.MainExplorer.Size = new System.Drawing.Size(600, 615);
+            this.MainExplorer.TabIndex = 1;
+            this.MainExplorer.NavigationComplete += new System.EventHandler<Microsoft.WindowsAPICodePack.Controls.NavigationCompleteEventArgs>(this.MainExplorer_NavigationComplete);
+            this.MainExplorer.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainExplorer_KeyDown);
+            this.MainExplorer.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.MainExplorer_PreviewKeyDown);
             // 
-            // explorerBrowser1
+            // MainPanel
             // 
-            this.explorerBrowser1.Location = new System.Drawing.Point(291, 103);
-            this.explorerBrowser1.Name = "explorerBrowser1";
-            this.explorerBrowser1.PropertyBagName = "Microsoft.WindowsAPICodePack.Controls.WindowsForms.ExplorerBrowser";
-            this.explorerBrowser1.Size = new System.Drawing.Size(453, 401);
-            this.explorerBrowser1.TabIndex = 1;
+            this.MainPanel.Controls.Add(this.toolStrip1);
+            this.MainPanel.Controls.Add(this.MainExplorer);
+            this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainPanel.Location = new System.Drawing.Point(0, 0);
+            this.MainPanel.Name = "MainPanel";
+            this.MainPanel.Size = new System.Drawing.Size(1010, 647);
+            this.MainPanel.TabIndex = 2;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.BackwardButton,
+            this.MainPathCombo});
+            this.toolStrip1.Location = new System.Drawing.Point(4, 4);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(570, 27);
+            this.toolStrip1.TabIndex = 2;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // BackwardButton
+            // 
+            this.BackwardButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.BackwardButton.Image = ((System.Drawing.Image)(resources.GetObject("BackwardButton.Image")));
+            this.BackwardButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BackwardButton.Name = "BackwardButton";
+            this.BackwardButton.Size = new System.Drawing.Size(23, 24);
+            this.BackwardButton.Text = "toolStripButton1";
+            this.BackwardButton.Click += new System.EventHandler(this.BackwardButton_Click);
+            // 
+            // MainPathCombo
+            // 
+            this.MainPathCombo.AutoSize = false;
+            this.MainPathCombo.Name = "MainPathCombo";
+            this.MainPathCombo.Size = new System.Drawing.Size(500, 23);
+            // 
+            // RightPanel
+            // 
+            this.RightPanel.Controls.Add(this.SubExplorer);
+            this.RightPanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.RightPanel.Location = new System.Drawing.Point(611, 0);
+            this.RightPanel.Name = "RightPanel";
+            this.RightPanel.Size = new System.Drawing.Size(399, 647);
+            this.RightPanel.TabIndex = 3;
+            // 
+            // SubExplorer
+            // 
+            this.SubExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SubExplorer.Location = new System.Drawing.Point(0, 0);
+            this.SubExplorer.Name = "SubExplorer";
+            this.SubExplorer.PropertyBagName = "Microsoft.WindowsAPICodePack.Controls.WindowsForms.ExplorerBrowser";
+            this.SubExplorer.Size = new System.Drawing.Size(399, 647);
+            this.SubExplorer.TabIndex = 0;
+            // 
+            // collapsibleSplitter3
+            // 
+            this.collapsibleSplitter3.AnimationDelay = 20;
+            this.collapsibleSplitter3.AnimationStep = 20;
+            this.collapsibleSplitter3.BorderStyle3D = System.Windows.Forms.Border3DStyle.RaisedOuter;
+            this.collapsibleSplitter3.ControlToHide = this.RightPanel;
+            this.collapsibleSplitter3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.collapsibleSplitter3.ExpandParentForm = false;
+            this.collapsibleSplitter3.Location = new System.Drawing.Point(603, 0);
+            this.collapsibleSplitter3.Name = "collapsibleSplitter3";
+            this.collapsibleSplitter3.Size = new System.Drawing.Size(8, 647);
+            this.collapsibleSplitter3.TabIndex = 118;
+            this.collapsibleSplitter3.TabStop = false;
+            this.collapsibleSplitter3.UseAnimations = false;
+            this.collapsibleSplitter3.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
             // 
             // FileExplorerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(802, 647);
-            this.Controls.Add(this.explorerBrowser1);
-            this.Controls.Add(this.commandLink1);
+            this.ClientSize = new System.Drawing.Size(1010, 647);
+            this.Controls.Add(this.collapsibleSplitter3);
+            this.Controls.Add(this.RightPanel);
+            this.Controls.Add(this.MainPanel);
             this.Name = "FileExplorerForm";
             this.Text = "エクスプローラ";
+            this.Shown += new System.EventHandler(this.FileExplorerForm_Shown);
+            this.MainPanel.ResumeLayout(false);
+            this.MainPanel.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            this.RightPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private Microsoft.WindowsAPICodePack.Controls.WindowsForms.CommandLink commandLink1;
-        private Microsoft.WindowsAPICodePack.Controls.WindowsForms.ExplorerBrowser explorerBrowser1;
+        private Microsoft.WindowsAPICodePack.Controls.WindowsForms.ExplorerBrowser MainExplorer;
+        private System.Windows.Forms.Panel MainPanel;
+        private System.Windows.Forms.Panel RightPanel;
+        private NJFLib.Controls.CollapsibleSplitter collapsibleSplitter3;
+        private Microsoft.WindowsAPICodePack.Controls.WindowsForms.ExplorerBrowser SubExplorer;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton BackwardButton;
+        private System.Windows.Forms.ToolStripComboBox MainPathCombo;
     }
 }

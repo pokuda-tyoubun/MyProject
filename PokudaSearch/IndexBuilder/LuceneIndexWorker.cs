@@ -404,8 +404,9 @@ namespace PokudaSearch.IndexBuilder {
 
         //----------------------------------------------
         //NOTE:RAMDirectoryのマルチスレッド版を作成してみたが、逆に遅い。
-        //HACK:OutOfMemoryも起こしている。
+        //     大量ファイルだと失敗する場合がある。
         #region Multi RAMDirectory
+        [Obsolete]
         public async static void CreateIndexByMultiRAM(
             Analyzer analyzer, 
             string rootPath, 
@@ -469,12 +470,6 @@ namespace PokudaSearch.IndexBuilder {
         /// <param name="analyzer"></param>
         internal void WriteFromQueue(IProgress<ProgressReport> progress, string rootPath, Analyzer analyzer) {
             while (true) {
-                Thread.Sleep(3000);
-                //終了条件判定
-                if (_que.Count == 0 && (_countTotal + _countSkipped) == _targetTotal) {
-                    break;
-                }
-
                 if (_que.Count > 0) {
                     AppObject.Logger.Info(_que + "Before Queue Count:" + _que.Count);
                     //キューにあるRAMDirectoryをFSDirectoryとして保存
@@ -482,6 +477,13 @@ namespace PokudaSearch.IndexBuilder {
                     _que.TryTake(out ram, 10000);
                     SaveFSIndexFromRAMIndex(ram, rootPath + BuildDirName, analyzer);
                     AppObject.Logger.Info(_que + "After Queue Count:" + _que.Count);
+                } else {
+                    Thread.Sleep(1000);
+                }
+                //終了条件判定
+                if (_que.Count == 0 && (_countTotal + _countSkipped) == _targetTotal) {
+                    AppObject.Logger.Info("FSDirectory completed.");
+                    break;
                 }
             }
         }
@@ -503,7 +505,7 @@ namespace PokudaSearch.IndexBuilder {
             var tmpList = new List<List<FileInfo>>();
             List<FileInfo> tmp = null;
             foreach (FileInfo fi in targetFileList) {
-                if (count % 1000 == 0) {
+                if (count % 300 == 0) {
                     tmp = new List<FileInfo>();
                     tmpList.Add(tmp);
                 }
