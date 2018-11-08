@@ -32,7 +32,7 @@ namespace PokudaSearch {
         /// </summary>
         private static void Initialize() {
             AppObject.RootDirPath = Directory.GetParent(Application.ExecutablePath).FullName;
-            AppObject.RootDirPath += LuceneIndexWorker.StoreDirName;
+            AppObject.RootDirPath += LuceneIndexBuilder.StoreDirName;
 
             //Analyzer
             java.io.Reader treader = new java.io.FileReader(AppObject.RootDirPath + @".\..\UserDictionary.txt");

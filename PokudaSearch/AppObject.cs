@@ -11,10 +11,20 @@ using System.Threading.Tasks;
 namespace PokudaSearch {
     public static class AppObject {
         
+        //HACK*自前トランザクションを止める
+        //HACK*差分Updateと、Delete－Insertモードを設ける。
         //HACK*シングルかマルチか上位で分けるように実装
         //HACK UI高度化----------------------------------------------
         //HACK*ファイルエクスプローラの実装
-        //HACK  →速度的に問題がなければMESに適用(Sencha側の問題がある。)
+        //HACK コンテキストメニューにGitが表示されないが参考になるかも
+        //HACK https://www.codeproject.com/Articles/14707/Dual-Pane-File-Manager
+        //HACK*PDFのサムネイル
+        //HACK*Officeのサムネイル(OpenOfficeのライブラリが使える？)
+        //HACK    →GroupDocsで実現できそうだが有料
+        //HACK CodeProjectでは、以下が参考になりそう（コンテキストメニューのGitが表示されていないが）
+        //HACK 上側のURLの方をまずは解析してみる。
+        //HACK    https://www.xlsoft.com/jp/products/groupdocs/index.html
+        //HACK    https://www.codeproject.com/Articles/15059/C-File-Browser
         //HACK UI高度化----------------------------------------------
         //HACKインデックス作成高速化----------------------------------------------
         //HACK* マルチプロセス→実装は楽だが、進度の仕組みをどうするか？(共有メモリ?)
@@ -114,6 +124,7 @@ namespace PokudaSearch {
             _mlu.MessageDictionary.Add("ACT_END", "");
             _mlu.MessageDictionary.Add("MSG_EXTRACT_ZERO", "抽出対象データがありません。");
             _mlu.MessageDictionary.Add("TITLE_WARN", "警告");
+            _mlu.MessageDictionary.Add("TITLE_ERROR", "エラー");
             _mlu.MessageDictionary.Add("MSG_EXCEL2003_DATA_TRUNCATE", "Excelのバージョンが2003以前なので、257列以降は切り捨てます。");
             _mlu.MessageDictionary.Add("MSG_COLORING_BACKCOLOR", "背景色設定中…");
         }

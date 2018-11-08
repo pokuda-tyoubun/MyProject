@@ -34,5 +34,17 @@ namespace PokudaSearch.Properties {
                 this["InitIndexPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("IndexHistory.csv")]
+        public string IndexHistoryCSV {
+            get {
+                return ((string)(this["IndexHistoryCSV"]));
+            }
+            set {
+                this["IndexHistoryCSV"] = value;
+            }
+        }
     }
 }

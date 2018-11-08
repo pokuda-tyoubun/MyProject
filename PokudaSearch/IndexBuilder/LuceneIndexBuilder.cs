@@ -8,7 +8,9 @@ using FxCommonLib.FTSIndexer;
 using FxCommonLib.Utils;
 using java.nio.file;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -20,177 +22,252 @@ using TikaOnDotNet.TextExtraction;
 namespace PokudaSearch.IndexBuilder {
     public class LuceneIndexBuilder {
 
+
+        #region Constants
+        /// <summary>テキスト抽出器モード</summary>
+        public enum TextExtractModes : int {
+            Tika = 0,
+            IFilter
+        }
         /// <summary>Luceneインデックスディレクトリ</summary>
         public const string StoreDirName = @"\IndexStore";
         /// <summary>検索用Luceneインデックスディレクトリ名</summary>
         public const string IndexDirName = @"\Index";
         /// <summary>Luceneインデックス構築用ディレクトリ名</summary>
         public const string BuildDirName = @"\Build";
+        /// <summary>マルチスレッド化にするファイル数の閾値</summary>
+        private const int SplitBorder = 1;
+        #endregion Constants
 
-        //TODO
-        private const int SingleThreadBorder = 1;
-
-        public enum TextExtractMode : int {
-            Tika = 0,
-            IFilter
+        #region Properties
+        /// <summary>インデックス作成開始日時</summary>
+        private static DateTime _startTime = DateTime.Now;
+        public static DateTime StartTime {
+            get { return _startTime; }
         }
+        /// <summary>インデックス作成完了日時</summary>
+        private static DateTime _endTime = DateTime.Now;
+        public static DateTime EndTime {
+            get { return _endTime; }
+        }
+        /// <summary>インデックス作成時間</summary>
+        public static TimeSpan CreateTime {
+            get { return EndTime - StartTime; }
+        }
+        /// <summary>インデックス対象パス</summary>
+        private static string _indexedPath = "";
+        public static string IndexedPath {
+            get { return _indexedPath; }
+        }
+        /// <summary>インデックス作成対象ファイル数</summary>
+		private static int _targetCount = 0;
+        public static int TargetCount {
+            get { return _targetCount; }
+        }
+        /// <summary>インデックスを作成したファイル数</summary>
+		private static int _indexedCount = 0;
+        public static int IndexedCount {
+            get { return _indexedCount; }
+        }
+        /// <summary>IFIlterエラーなどでインデックスに含まれなかったファイル数</summary>
+		private static int _skippedCount = 0;
+        public static int SkippedCount {
+            get { return _skippedCount; }
+        }
+        /// <summary>処理済みファイル数</summary>
+        public static int FinishedCount {
+            get { return _indexedCount + _skippedCount; }
+        }
+        /// <summary>テキスト抽出モード</summary>
+        private static TextExtractModes _txtExtractMode = TextExtractModes.Tika;
+        public static TextExtractModes TextExtractMode {
+            get { return _txtExtractMode; }
+        }
+        /// <summary>インデックスを作成したファイルの総バイト数</summary>
+		private static long _totalBytes = 0;
+        public static long TotalBytes {
+            get { return _totalBytes; }
+        }
+        #endregion Properties
 
+        #region MemberVariables
+        /// <summary>2分割されたインデックス対象ファイルリスト</summary>
+        private static List<FileInfo>[] _targetFileList = null;
+
+        /// <summary>Apache Tikaのテキスト抽出器</summary>
         private TextExtractor _txtExtractor = new TextExtractor();
-
-		private long _bytesTotal = 0;
-		private int _countTotal = 0;
-		private int _countSkipped = 0;
-
-        private TextBox _logViewer = null;
-
-        private TextExtractMode _txtExtractMode = TextExtractMode.Tika;
-
-        private StringBuilder _extractLog = new StringBuilder(""); 
-
+        /// <summary>ハイライトフィールドタイプ</summary>
         private FieldType _hilightFieldType = new FieldType();
+        #endregion MemberVariables
 
-        private delegate void SetProgressValueDelegate(int percent);
-
+        #region Constractors
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        /// <param name="logViewer"></param>
-        /// <param name="txtExtractMode"></param>
-        public LuceneIndexBuilder(TextBox logViewer, TextExtractMode txtExtractMode) {
-            _logViewer = logViewer;
-            _txtExtractMode = txtExtractMode;
-
+        public LuceneIndexBuilder() {
             SetHighlightFieldContentType(_hilightFieldType);
         }
+        #endregion Constractors
 
-        #region PublicMethods
-        // シングルスレッド版---------------------------------------------------------------------------
+
         /// <summary>
-        /// シングルスレッドでの単純なインデックス作成
+        /// ハイライト対象フィールド用のフィールド定義
         /// </summary>
-        /// <param name="rootPath">インデックスファイル用のルートフォルダ</param>
-        /// <param name="indexDir">完成したインデックスファイルの置き場所</param>
-        /// <param name="buildDir">ビルド時の中間ファイルの置き場所</param>
-        /// <param name="targetDir">検索対象のフォルダ</param>
-        public void CreateIndex(Analyzer analyzer, string rootPath, string indexDir, string buildDir, string targetDir) {
+        private void SetHighlightFieldContentType(FieldType fieldType) {
+            // IndexOptions.DOCS : ドキュメントのみインデックスする
+            // IndexOptions.DOCS_AND_FREQS : ドキュメントと語の出現頻度をインデックスする
+            // IndexOptions.DOCS_AND_FREQS_AND_POSITIONS : ドキュメントと語の出現頻度と出現位置をインデックスする。
+            //                                              full scoring, フレーズ検索等が可能になる。
+            // IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS;ドキュメントと語の出現頻度と出現位置と文字オフセットをインデックスする。
 
-            //インデックスを削除
-            FileUtil.DeleteDirectory(new DirectoryInfo(rootPath + buildDir));
+            //PostingsHighlighter用
+            //fieldType.SetIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS);
 
-            IndexWriterConfig config = new IndexWriterConfig(analyzer);
-    		IndexWriter indexWriter = null;
-
-            try {
-                var indexBuildDir = FSDirectory.Open(FileSystems.getDefault().getPath(rootPath + buildDir));
-                indexWriter = new IndexWriter(indexBuildDir, config);
-
-                var di = new DirectoryInfo(targetDir);
-                AddDirRecursively(di, indexWriter);
-            } finally {
-                if (indexWriter != null) {
-                    //クローズ時にIndexファイルがフラッシュされる
-                    indexWriter.Close();
-                }
-            }
-
-            //作成したIndexファイルを上書き
-            DirectoryInfo dir = new DirectoryInfo(rootPath + indexDir);
-            foreach (FileInfo fi in dir.GetFiles()) {
-                fi.Delete();
-            }
-            dir = new DirectoryInfo(rootPath + buildDir);
-            foreach (FileInfo fi in dir.GetFiles()) {
-                File.Copy(fi.FullName, rootPath + indexDir + "\\" + fi.Name, true);
-            }
-
-            AppendLogViewer("インデックス構築処理完了");
+            //FastVectorHighlighterの時は以下を指定
+            fieldType.SetIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS);
+            fieldType.SetStored(true);
+            fieldType.SetTokenized(true);
+            // FastvectorHighlighterを使うための設定
+            fieldType.SetStoreTermVectors(true);
+            fieldType.SetStoreTermVectorPositions(true);
+            fieldType.SetStoreTermVectorOffsets(true);
         }
-        // ThreadPool版---------------------------------------------------------------------------
+
         /// <summary>
-        /// ThreadPoolを使ったインデックス作成処理
+        /// インデックス作成
         /// </summary>
         /// <param name="analyzer"></param>
         /// <param name="rootPath"></param>
-        /// <param name="indexDir"></param>
-        /// <param name="buildDir"></param>
         /// <param name="targetDir"></param>
-        public void CreateMultiFSIndex(Analyzer analyzer, string rootPath, string indexDir, string buildDir, string targetDir) {
-            //インデックスを削除
-            System.IO.Directory.CreateDirectory(rootPath + buildDir + "1");
-            FileUtil.DeleteDirectory(new DirectoryInfo(rootPath + buildDir + "1"));
-            System.IO.Directory.CreateDirectory(rootPath + buildDir + "2");
-            FileUtil.DeleteDirectory(new DirectoryInfo(rootPath + buildDir + "2"));
+        /// <param name="progress"></param>
+        /// <param name="txtExtractMode"></param>
+        public async static void CreateIndexBySingleThread(
+            Analyzer analyzer, 
+            string rootPath, 
+            string targetDir, 
+            IProgress<ProgressReport> progress, 
+            TextExtractModes txtExtractMode) {
 
-            //先に対象ファイルを分割
-            var targetFileList = CreateTargetList(targetDir);
+            try {
+                _txtExtractMode = txtExtractMode;
 
-            //第1スレッド
-            var args1 = new List<object>();
-            //invoke()で呼ばれるメソッドを設定
-            args1.Add(new SetProgressValueDelegate(SetProgressValue));
-            args1.Add(analyzer);
-            args1.Add(rootPath + buildDir + "1");
-            args1.Add(targetFileList[0]);
-            args1.Add("Thread1");
-            ThreadPool.QueueUserWorkItem(new WaitCallback(CreateFSIndex), args1);
+                var worker = await CreateIndexAsync(analyzer, rootPath, targetDir, progress);
 
-            if (targetFileList.Length > 1) {
-                //第2スレッド
-                var args2 = new List<object>();
-                //invoke()で呼ばれるメソッドを設定
-                args2.Add(new SetProgressValueDelegate(SetProgressValue));
-                args2.Add(analyzer);
-                args2.Add(rootPath + buildDir + "2");
-                args2.Add(targetFileList[1]);
-                args2.Add("Thread2");
-                ThreadPool.QueueUserWorkItem(new WaitCallback(CreateFSIndex), args2);
+                AppObject.Logger.Info("インデックス構築処理完了");
+            } catch (Exception e) {
+                AppObject.Logger.Error(e.Message);   
+            } finally {
             }
+        }
 
-            //完了待ち
-            //FIXME 良くないTPLにすべき
-            while (true) {
-                Thread.Sleep(100);
-                int total = _countTotal + _countSkipped;
-                if (total > 0 && total >= targetFileList[0].Count + targetFileList[1].Count) {
-                    //ロック解放待ち
-                    Thread.Sleep(5000);
-                    break;
-                }
-            } 
+        /// <summary>
+        /// インデックスをマージして本番ディレクトリへ移動
+        /// </summary>
+        /// <param name="analyzer"></param>
+        /// <param name="rootPath"></param>
+        /// <param name="targetDir"></param>
+        public static void MergeAndMove(
+            Analyzer analyzer, 
+            string rootPath, 
+            string targetDir) {
 
-            //HACK 完了待ちがサポートされているTPLに書き換える
+            System.IO.Directory.CreateDirectory(rootPath + BuildDirName);
+            FileUtil.DeleteDirectory(new DirectoryInfo(rootPath + BuildDirName));
+
             //2つのインデックスをマージ
-            //FIXME シングルスレッドの場合を記述
-            var fsIndexDir1 = FSDirectory.Open(FileSystems.getDefault().getPath(rootPath + buildDir + "1"));
-            var fsIndexDir2 = FSDirectory.Open(FileSystems.getDefault().getPath(rootPath + buildDir + "2"));
+            var fsIndexDir1 = FSDirectory.Open(FileSystems.getDefault().getPath(rootPath + BuildDirName + "1"));
+            var fsIndexDir2 = FSDirectory.Open(FileSystems.getDefault().getPath(rootPath + BuildDirName + "2"));
             var tmpConf = new IndexWriterConfig(analyzer);
             var dirs = new FlexLucene.Store.Directory[] { fsIndexDir1, fsIndexDir2 };
             var ramIndexDir = MergeIndexAsRAMDir(dirs, tmpConf);
+            //インデックスファイルを一時構築用に保存
+            SaveFSIndexFromRAMIndex(ramIndexDir, rootPath + BuildDirName, analyzer);
 
-            //ファイルにインデックスを保存
-            SaveFSIndexFromRAMIndex(ramIndexDir, rootPath + buildDir, analyzer);
-
-            //作成したIndexファイルを移動
-            CopyIndexDir(rootPath + buildDir, rootPath + indexDir);
-
-            AppendLogViewer("インデックス構築処理完了");
+            //インデックスファイルを一時構築用から検索用に移動
+            CopyIndexDir(rootPath + BuildDirName, rootPath + IndexDirName);
         }
-        #endregion PublicMethods
 
-        #region PrivateMethods
+        /// <summary>
+        /// インデックス作成
+        /// </summary>
+        /// <param name="analyzer"></param>
+        /// <param name="rootPath"></param>
+        /// <param name="targetDir"></param>
+        /// <param name="progress"></param>
+        /// <returns></returns>
+        public static Task<LuceneIndexBuilder> CreateIndexAsync(
+            Analyzer analyzer, 
+            string rootPath, 
+            string targetDir, 
+            IProgress<ProgressReport> progress) {
+            return Task.Run<LuceneIndexBuilder>(() => DoWorkSingle(analyzer, rootPath, targetDir, progress));
+        }
+
+
+        /// <summary>
+        /// インデックス作成
+        /// </summary>
+        /// <param name="analyzer"></param>
+        /// <param name="rootPath"></param>
+        /// <param name="targetDir"></param>
+        /// <param name="progress"></param>
+        /// <returns></returns>
+        private static LuceneIndexBuilder DoWorkSingle(
+            Analyzer analyzer, 
+            string rootPath, 
+            string targetDir, 
+            IProgress<ProgressReport> progress) {
+
+            var targetFileList = FileUtil.GetAllFileInfo(targetDir);
+            _targetCount = targetFileList.Count;
+            _indexedPath = targetDir;
+
+            //インデックス保存場所フォルダ作成
+            System.IO.Directory.CreateDirectory(rootPath);
+            System.IO.Directory.CreateDirectory(rootPath + IndexDirName);
+
+            var instance = new LuceneIndexBuilder();
+            var options = new ParallelOptions() { MaxDegreeOfParallelism = 1 };
+            Parallel.Invoke(options,
+                () => instance.CreateFSIndex(
+                    analyzer, 
+                    //rootPath + BuildDirName + "1",
+                    rootPath + IndexDirName,
+                    targetFileList,
+                    progress,
+                    "Thread1"));
+
+            return instance;
+        }
+        /// <summary>
+        /// RAMDirectoryのインデックスをFSIndexとして保存する
+        /// </summary>
+        /// <param name="ramDir"></param>
+        /// <param name="savePath"></param>
+        /// <param name="analyzer"></param>
+        private static void SaveFSIndexFromRAMIndex(FlexLucene.Store.Directory ramDir, string savePath, Analyzer analyzer) {
+
+            var fsIndexDir = FSDirectory.Open(FileSystems.getDefault().getPath(savePath));
+            var fsConfig = new IndexWriterConfig(analyzer);
+            IndexWriter fsIndexWriter = new IndexWriter(fsIndexDir, fsConfig);
+            try {
+                fsIndexWriter.AddIndexes(new FlexLucene.Store.Directory[]{ramDir});
+                fsIndexWriter.Commit();
+            } finally {
+                fsIndexWriter.Close();
+            }
+        }
         /// <summary>
         /// １つのスレッドでFSIndexを作成する処理
+        /// Delete-Insert
         /// </summary>
         /// <param name="args"></param>
-        private void CreateFSIndex(object args) {
-            //キャスト
-            var argList = (List<object>)args;
-            //引数分解
-            var progress = (SetProgressValueDelegate)argList[0];
-            var analyzer = (Analyzer)argList[1];
-            var buildDirPath = (string)argList[2];
-            var targetFileList = (List<FileInfo>)argList[3];
-            var threadName = (string)argList[4];
+        internal void CreateFSIndex(
+            Analyzer analyzer, 
+            string buildDirPath, 
+            List<FileInfo> targetFileList, 
+            IProgress<ProgressReport> progress,
+            string threadName) {
 
             IndexWriterConfig config = new IndexWriterConfig(analyzer);
     		IndexWriter indexWriter = null;
@@ -198,6 +275,20 @@ namespace PokudaSearch.IndexBuilder {
             try {
                 var indexBuildDir = FSDirectory.Open(FileSystems.getDefault().getPath(buildDirPath));
                 indexWriter = new IndexWriter(indexBuildDir, config);
+
+                //開始時刻を記録
+                _startTime = DateTime.Now;
+                _indexedCount = 0;
+                _skippedCount = 0;
+                progress.Report(new ProgressReport() {
+                    Percent = 0,
+                    ProgressCount = FinishedCount,
+                    TargetCount = _targetCount,
+                    Finished = false
+                });
+
+                //一旦削除
+                indexWriter.DeleteAll();
 
     			foreach (FileInfo fi in targetFileList) {
     				//Officeのテンポラリファイルは無視。
@@ -209,46 +300,57 @@ namespace PokudaSearch.IndexBuilder {
     					AddDocument(fi.FullName, indexWriter);
 
     					//インデックス作成ファイル表示
-                        // Hack Interlocked.Incrementを使うべき
-    					_countTotal++;
-    					_bytesTotal += fi.Length;
-                        AppendLogViewer(threadName + ":" + fi.FullName);
+    					Interlocked.Increment(ref _indexedCount);
+    					Interlocked.Exchange(ref _totalBytes, _totalBytes + fi.Length);
+
+                        AppObject.Logger.Info(threadName + ":" + fi.FullName);
     				} catch (Exception e) {
     					//インデックスが作成できなかったファイルを表示
                         AppObject.Logger.Error(e.Message);
-    					_countSkipped++;
-                        AppendLogViewer(threadName + ":" + "Skipped: " + fi.FullName);
+    					Interlocked.Increment(ref _skippedCount);
+                        AppObject.Logger.Info(threadName + ":" + "Skipped: " + fi.FullName);
     				}
 
                     //進捗度更新を呼び出し。
-                    if (((_countTotal + _countSkipped) % 10) == 0) {
-                        progress.Invoke(_countTotal + _countSkipped);
-                    }
+                    progress.Report(new ProgressReport() {
+                        Percent = (int)((double)(FinishedCount) / _targetCount * 100),
+                        ProgressCount = FinishedCount,
+                        TargetCount = _targetCount,
+                        Finished = false
+                    });
     			}
-                progress.Invoke(_countTotal + _countSkipped);
+                //if (_indexedCount % 1000 == 0) {
+                //    //1000ファイル処理毎にコミット
+                //    indexWriter.Commit();
+                //}
                 AppObject.Logger.Info(threadName + "：完了");
+            } catch (Exception e) {
+                AppObject.Logger.Error(e.StackTrace);
+                if (indexWriter != null) {
+                    indexWriter.Rollback();
+                }
             } finally {
                 if (indexWriter != null) {
                     //クローズ時にIndexファイルがフラッシュされる
+                    indexWriter.Commit();
                     indexWriter.Close();
                 }
+                //完了時刻を記録
+                _endTime = DateTime.Now;
+                progress.Report(new ProgressReport() {
+                    Percent = (int)((double)(FinishedCount) / _targetCount * 100),
+                    ProgressCount = FinishedCount,
+                    TargetCount = _targetCount,
+                    Finished = true
+                });
             }
-        }
-        /// <summary>
-        /// 進捗を表示
-        /// </summary>
-        /// <param name="totalCount"></param>
-        private void SetProgressValue(int totalCount) {
-            //HACK マルチスレッド下ではコントロールにアクセスできない。
-            //_logViewer.Text = (totalCount).ToString() + "件 処理済み";
-            Application.DoEvents();
         }
         /// <summary>
         /// インデックスを本番フォルダへコピー
         /// </summary>
         /// <param name="sourcePath"></param>
         /// <param name="destPath"></param>
-        private void CopyIndexDir(string sourcePath, string destPath) {
+        private static void CopyIndexDir(string sourcePath, string destPath) {
             //HACK 検索時にぶつからないようにセマフォが必要
 
             //対象フォルダ内をクリーンナップ
@@ -263,60 +365,62 @@ namespace PokudaSearch.IndexBuilder {
                 File.Copy(fi.FullName, destPath + "\\" + fi.Name, true);
             }
         }
-
         /// <summary>
-        /// RAMDirectoryのインデックスをFSIndexとして保存する
+		/// 指定したテキスト抽出器でテキスト化したものをインデックス化
+		/// テキスト抽出器の種類は以下のとおり
+		/// 　・Apache Tika
+		/// 　・IFilter
         /// </summary>
-        /// <param name="ramDir"></param>
-        /// <param name="savePath"></param>
-        /// <param name="analyzer"></param>
-        private void SaveFSIndexFromRAMIndex(FlexLucene.Store.Directory ramDir, string savePath, Analyzer analyzer) {
+        /// <param name="path"></param>
+        /// <param name="indexWriter"></param>
+        private void AddDocument(string path, IndexWriter indexWriter) {
+			Document doc = new Document();
+			string filename = System.IO.Path.GetFileName(path);
+			string extention = System.IO.Path.GetExtension(path);
 
-            var fsIndexDir = FSDirectory.Open(FileSystems.getDefault().getPath(savePath));
-            var fsConfig = new IndexWriterConfig(analyzer);
-            IndexWriter fsIndexWriter = new IndexWriter(fsIndexDir, fsConfig);
-            try {
-                fsIndexWriter.AddIndexes(new FlexLucene.Store.Directory[]{ramDir});
-                fsIndexWriter.Commit();
-            } finally {
-                fsIndexWriter.Close();
+            if (_txtExtractMode == TextExtractModes.Tika) {
+                var content = _txtExtractor.Extract(path);
+    			//doc.Add(new TextField("content", content.Text, FieldStore.NO));
+    			doc.Add(new Field("content", content.Text, _hilightFieldType));
+            } else {
+    			//doc.Add(new TextField("content", IFilterParser.Parse(path), FieldStore.NO));
+    			doc.Add(new Field("content", IFilterParser.Parse(path), _hilightFieldType));
             }
+
+			doc.Add(new StringField("path", path, FieldStore.YES));
+			doc.Add(new StringField("title", filename, FieldStore.YES));
+			indexWriter.AddDocument(doc);
         }
 
         /// <summary>
-        /// 引数のStore.Directory配列を全てマージして１つのRAMDirectoryにする
+        /// 構築用ディレクトリにある古いインデックスファイルを削除
         /// </summary>
-        /// <param name="dir1"></param>
-        /// <param name="dir2"></param>
-        /// <param name="config"></param>
-        /// <returns></returns>
-        private FlexLucene.Store.Directory MergeIndexAsRAMDir(
-            FlexLucene.Store.Directory[] dirs,
-            IndexWriterConfig config) {
+        /// <param name="rootPath"></param>
+        private static void DeleteOldIndexes(string rootPath) {
+            System.IO.Directory.CreateDirectory(rootPath);
+            System.IO.Directory.CreateDirectory(rootPath + IndexDirName);
+            System.IO.Directory.CreateDirectory(rootPath + BuildDirName);
+            System.IO.Directory.CreateDirectory(rootPath + BuildDirName + "1");
+            System.IO.Directory.CreateDirectory(rootPath + BuildDirName + "2");
 
-            var ret = new RAMDirectory();
-            var writer = new IndexWriter(ret, config);
-
-            try {
-                writer.AddIndexes(dirs);
-            } finally {
-                writer.Close();
-            }
-
-            return ret;
+            //インデックスを削除
+            FileUtil.DeleteDirectoryExceptOwn(rootPath + BuildDirName);
+            FileUtil.DeleteDirectoryExceptOwn(rootPath + BuildDirName + "1");
+            FileUtil.DeleteDirectoryExceptOwn(rootPath + BuildDirName + "2");
         }
 
         /// <summary>
-        /// 処理対象ファイルを分割する
+        /// 処理対象ファイルを２分割する
         /// </summary>
         /// <param name="targetDir"></param>
         /// <returns></returns>
-        private List<FileInfo>[] CreateTargetList(string targetDir) {
+        private static List<FileInfo>[] SplitTargetFiles(string targetDir) {
             var ret = new List<List<FileInfo>>();
 
             var allFiles = FileUtil.GetAllFileInfo(targetDir);
+            _targetCount = allFiles.Count;
 
-            if (allFiles.Count > SingleThreadBorder && 
+            if (allFiles.Count > SplitBorder && 
                 Environment.ProcessorCount > 1) {
                 //２つのリストで処理
                 int border = allFiles.Count / 2;
@@ -343,164 +447,194 @@ namespace PokudaSearch.IndexBuilder {
             return ret.ToArray();
         }
 
-        /// <summary>
-		/// 再帰的にフォルダを探索してインデックスに追加
-        /// </summary>
-        /// <param name="directory"></param>
-        /// <param name="indexWriter"></param>
-        private void AddDirRecursively(DirectoryInfo directory, IndexWriter indexWriter) {
-
-			foreach (FileInfo fi in directory.GetFiles()) {
-				//Officeのテンポラリファイルは無視。
-                if (fi.Name.StartsWith("~")) {
-					continue;
-                }
-
-				try {
-					AddDocument(fi.FullName, indexWriter);
-
-					//インデックス作成ファイル表示
-					_countTotal++;
-					_bytesTotal += fi.Length;
-                    AppendLogViewer(fi.FullName);
-				} catch (Exception e) {
-					//インデックスが作成できなかったファイルを表示
-                    AppObject.Logger.Error(e.Message);
-					_countSkipped++;
-                    AppendLogViewer("Skipped: " + fi.FullName);
-				}
-
-                if (((_countTotal + _countSkipped) % 10) == 0) {
-                    _logViewer.Text = (_countTotal + _countSkipped).ToString() + "件 処理済み";
-                    Application.DoEvents();
-                }
-			}
-            _logViewer.Text = (_countTotal + _countSkipped).ToString() + "件 処理済み";
-
-			//再帰的にサブフォルダも追加
-			foreach (DirectoryInfo di in directory.GetDirectories()) {
-
-				AddDirRecursively(di, indexWriter);
-			}
-        }
-
-        /// <summary>
-		/// 指定したテキスト抽出器でテキスト化したものをインデックス化
-		/// テキスト抽出器の種類は以下のとおり
-		/// 　・Apache Tika
-		/// 　・IFilter
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="indexWriter"></param>
-        private void AddDocument(string path, IndexWriter indexWriter) {
-			Document doc = new Document();
-			string filename = System.IO.Path.GetFileName(path);
-			string extention = System.IO.Path.GetExtension(path);
-
-            if (_txtExtractMode == TextExtractMode.Tika) {
-                var content = _txtExtractor.Extract(path);
-    			//doc.Add(new TextField("content", content.Text, FieldStore.NO));
-    			doc.Add(new Field("content", IFilterParser.Parse(path), _hilightFieldType));
-            } else {
-    			//doc.Add(new TextField("content", IFilterParser.Parse(path), FieldStore.NO));
-    			doc.Add(new Field("content", IFilterParser.Parse(path), _hilightFieldType));
-            }
-
-			doc.Add(new StringField("path", path, FieldStore.YES));
-			doc.Add(new StringField("title", filename, FieldStore.YES));
-			indexWriter.AddDocument(doc);
-        }
-
-        /// <summary>
-        /// ハイライト対象フィールド用のフィールド定義
-        /// </summary>
-        private void SetHighlightFieldContentType(FieldType fieldType) {
-            // IndexOptions.DOCS : ドキュメントのみインデックスする
-            // IndexOptions.DOCS_AND_FREQS : ドキュメントと語の出現頻度をインデックスする
-            // IndexOptions.DOCS_AND_FREQS_AND_POSITIONS : ドキュメントと語の出現頻度と出現位置をインデックスする。
-            //                                              full scoring, フレーズ検索等が可能になる。
-            // IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS;ドキュメントと語の出現頻度と出現位置と文字オフセットをインデックスする。
-
-            //PostingsHighlighter用
-            //fieldType.SetIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS);
-
-            //FastVectorHighlighterの時は以下を指定
-            fieldType.SetIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS);
-            fieldType.SetStored(true);
-            fieldType.SetTokenized(true);
-            // FastvectorHighlighterを使うための設定
-            fieldType.SetStoreTermVectors(true);
-            fieldType.SetStoreTermVectorPositions(true);
-            fieldType.SetStoreTermVectorOffsets(true);
-        }
-
-        /// <summary>
-        /// ログビューワーに追記
-        /// </summary>
-        /// <param name="msg"></param>
-        private void AppendLogViewer(string msg) {
-            AppObject.Logger.Info(msg);
-
-            if (_logViewer != null) {
-                _extractLog.Insert(0, msg + "\r\n");
-            }
-        }
-        #endregion PrivateMethods
-
-
-        #region Obsolete
-        /// <summary>
-        /// RAMDirectoryで作成して、最後にFSDirectoryへ
-        /// ※シングルスレッドでは、FSDirectoryとパフォーマンスは変わらない。
-        /// ※ヒープ領域を調整するように組まないとメモリエラーでハングする。
-        /// </summary>
-        /// <param name="analyzer"></param>
-        /// <param name="rootPath"></param>
-        /// <param name="indexDir"></param>
-        /// <param name="buildDir"></param>
-        /// <param name="targetDir"></param>
+        //----------------------------------------------
+        //NOTE:RAMDirectoryのマルチスレッド版を作成してみたが、逆に遅い。
+        //     大量ファイルだと失敗する場合がある。
+        #region Multi RAMDirectory
         [Obsolete]
-        public void CreateRAM2FSIndex(Analyzer analyzer, string rootPath, string indexDir, string buildDir, string targetDir) {
+        public async static void CreateIndexByMultiRAM(
+            Analyzer analyzer, 
+            string rootPath, 
+            string targetDir, 
+            IProgress<ProgressReport> progress, 
+            TextExtractModes txtExtractMode) {
 
-            //インデックスを削除
-            FileUtil.DeleteDirectory(new DirectoryInfo(rootPath + buildDir));
-
-            IndexWriterConfig ramConfig = new IndexWriterConfig(analyzer);
-    		IndexWriter ramIndexWriter = null;
-            var fsIndexDir = FSDirectory.Open(FileSystems.getDefault().getPath(rootPath + buildDir));
-            var ramIndexDir = new RAMDirectory();
             try {
-                ramIndexWriter = new IndexWriter(ramIndexDir, ramConfig);
+                _txtExtractMode = txtExtractMode;
 
-                var di = new DirectoryInfo(targetDir);
-                AddDirRecursively(di, ramIndexWriter);
+                //先に対象ファイルを分割
+                _targetFileList = SplitTargetFiles(targetDir);
+
+                var worker = await CreateRAMIndexAsync(analyzer, rootPath, targetDir, progress);
+
+                //インデックスファイルを一時構築用から検索用に移動
+                CopyIndexDir(rootPath + BuildDirName, rootPath + IndexDirName);
+
+                AppObject.Logger.Info("インデックス構築処理完了");
+            } catch (Exception e) {
+                AppObject.Logger.Error(e.Message);   
             } finally {
-                if (ramIndexWriter != null) {
-                    ramIndexWriter.Close();
+            }
+        }
+
+        public static Task<LuceneIndexBuilder> CreateRAMIndexAsync(
+            Analyzer analyzer, 
+            string rootPath, 
+            string targetDir, 
+            IProgress<ProgressReport> progress) {
+            return Task.Run<LuceneIndexBuilder>(() => DoWorkMulti(analyzer, rootPath, targetDir, progress));
+        }
+
+        private BlockingCollection<RAMDirectory> _que = new BlockingCollection<RAMDirectory>(10000);
+        private static LuceneIndexBuilder DoWorkMulti(
+            Analyzer analyzer, 
+            string rootPath, 
+            string targetDir, 
+            IProgress<ProgressReport> progress) {
+
+            DeleteOldIndexes(rootPath);
+
+            //
+            var instance = new LuceneIndexBuilder();
+            var options = new ParallelOptions() { MaxDegreeOfParallelism = 4 };
+            //Parallel.For(0, _targetFileList.Length, options, i => {
+            //    instance.PushRAMDir(progress, analyzer, _targetFileList[i], "Thread" + i.ToString());
+            //});
+            Parallel.Invoke(options,
+                () => instance.WriteFromQueue(progress, rootPath, analyzer),
+                () => instance.PushRAMDir(progress, analyzer, _targetFileList[0], "Thread1"),
+                () => instance.PushRAMDir(progress, analyzer, _targetFileList[1], "Thread2"));
+
+            return instance;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="progress"></param>
+        /// <param name="rootPath"></param>
+        /// <param name="analyzer"></param>
+        internal void WriteFromQueue(IProgress<ProgressReport> progress, string rootPath, Analyzer analyzer) {
+            while (true) {
+                if (_que.Count > 0) {
+                    AppObject.Logger.Info(_que + "Before Queue Count:" + _que.Count);
+                    //キューにあるRAMDirectoryをFSDirectoryとして保存
+                    RAMDirectory ram = null;
+                    _que.TryTake(out ram, 10000);
+                    SaveFSIndexFromRAMIndex(ram, rootPath + BuildDirName, analyzer);
+                    AppObject.Logger.Info(_que + "After Queue Count:" + _que.Count);
+                } else {
+                    Thread.Sleep(1000);
+                }
+                //終了条件判定
+                if (_que.Count == 0 && (FinishedCount) == _targetCount) {
+                    AppObject.Logger.Info("FSDirectory completed.");
+                    break;
                 }
             }
-            //ファイルにインデックスを保存
-            var fsConfig = new IndexWriterConfig(analyzer);
-            IndexWriter fsIndexWriter = new IndexWriter(fsIndexDir, fsConfig);
-            try {
-                fsIndexWriter.AddIndexes(new FlexLucene.Store.Directory[]{ramIndexDir});
-                fsIndexWriter.Commit();
-            } finally {
-                fsIndexWriter.Close();
-            }
-
-            //作成したIndexファイルを上書き
-            DirectoryInfo dir = new DirectoryInfo(rootPath + indexDir);
-            foreach (FileInfo fi in dir.GetFiles()) {
-                fi.Delete();
-            }
-            dir = new DirectoryInfo(rootPath + buildDir);
-            foreach (FileInfo fi in dir.GetFiles()) {
-                File.Copy(fi.FullName, rootPath + indexDir + "\\" + fi.Name, true);
-            }
-
-            AppendLogViewer("インデックス構築処理完了");
         }
-        #endregion Obsolete
+        /// <summary>
+        /// RAMDirectoryとしてインデックスを構築してQueueに追加
+        /// </summary>
+        /// <param name="progress"></param>
+        /// <param name="analyzer"></param>
+        /// <param name="targetFileList"></param>
+        /// <param name="threadName"></param>
+        internal void PushRAMDir(
+            IProgress<ProgressReport> progress, 
+            Analyzer analyzer, 
+            List<FileInfo> targetFileList, 
+            string threadName) {
+
+            //nファイル毎に分割
+            int count = 0;
+            var tmpList = new List<List<FileInfo>>();
+            List<FileInfo> tmp = null;
+            foreach (FileInfo fi in targetFileList) {
+                if (count % 300 == 0) {
+                    tmp = new List<FileInfo>();
+                    tmpList.Add(tmp);
+                }
+                tmp.Add(fi);
+
+                count++;
+            }
+
+            //nファイル毎にRAMDirectoryを作成
+            foreach (List<FileInfo> list in tmpList) {
+                IndexWriterConfig config = new IndexWriterConfig(analyzer);
+        		IndexWriter indexWriter = null;
+
+                //Queueが10件以上になる場合は待ち
+                while (true) {
+                    if (_que.Count <= 10) {
+                        break;
+                    }
+                    AppObject.Logger.Info("Queue is full. Queue Count:" + _que.Count);
+                    Thread.Sleep(3000);
+                }
+
+                var ram = new RAMDirectory();
+                indexWriter = new IndexWriter(ram, config);
+
+    			foreach (FileInfo fi in list) {
+    				//Officeのテンポラリファイルは無視。
+                    if (fi.Name.StartsWith("~")) {
+    					continue;
+                    }
+    				try {
+    					AddDocument(fi.FullName, indexWriter);
+
+    					//インデックス作成ファイル表示
+    					Interlocked.Increment(ref _indexedCount);
+    					Interlocked.Exchange(ref _totalBytes, _totalBytes + fi.Length);
+
+                        AppObject.Logger.Info(threadName + ":" + fi.FullName);
+    				} catch (Exception e) {
+    					//インデックスが作成できなかったファイルを表示
+                        AppObject.Logger.Error(e.Message);
+    					Interlocked.Increment(ref _skippedCount);
+                        AppObject.Logger.Info(threadName + ":" + "Skipped: " + fi.FullName);
+    				} finally {
+                    }
+
+                    //進捗度更新を呼び出し。
+                    progress.Report(new ProgressReport() {
+                        Percent = (int)((double)(FinishedCount) / _targetCount * 100),
+                        ProgressCount = FinishedCount,
+                        TargetCount = _targetCount,
+                        Finished = false
+                    });
+    			}
+                //クローズ時にIndexファイルがフラッシュされる
+                indexWriter.Commit();
+                indexWriter.Close();
+                //キューに追加
+                _que.TryAdd(ram, 10000);
+            }
+            AppObject.Logger.Info(threadName + "：完了");
+        }
+        /// <summary>
+        /// 引数のStore.Directory配列を全てマージして１つのRAMDirectoryにする
+        /// </summary>
+        /// <param name="dir1"></param>
+        /// <param name="dir2"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
+        private static FlexLucene.Store.Directory MergeIndexAsRAMDir(
+            FlexLucene.Store.Directory[] dirs,
+            IndexWriterConfig config) {
+
+            var ret = new RAMDirectory();
+            var writer = new IndexWriter(ret, config);
+
+            try {
+                writer.AddIndexes(dirs);
+            } finally {
+                writer.Close();
+            }
+
+            return ret;
+        }
+        #endregion Multi RAMDirectory
     }
 }

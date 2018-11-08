@@ -132,7 +132,7 @@ namespace PokudaSearch.Views {
                 return;
             }
 
-            java.nio.file.Path idxPath = FileSystems.getDefault().getPath(AppObject.RootDirPath + LuceneIndexWorker.IndexDirName);
+            java.nio.file.Path idxPath = FileSystems.getDefault().getPath(AppObject.RootDirPath + LuceneIndexBuilder.IndexDirName);
             var fsDir = FSDirectory.Open(idxPath);
             IndexReader idxReader = DirectoryReader.Open(fsDir);
             IndexSearcher idxSearcher = new IndexSearcher(idxReader);
@@ -163,8 +163,11 @@ namespace PokudaSearch.Views {
                 Document thisDoc = idxSearcher.Doc(doc.Doc);
                 string fullPath = thisDoc.Get("path");
 
-                ShellFile shellFile = ShellFile.FromFilePath(fullPath);
-                Bitmap bmp = shellFile.Thumbnail.Bitmap;
+                Bitmap bmp = Properties.Resources.File16;
+                if (File.Exists(fullPath)) {
+                    ShellFile shellFile = ShellFile.FromFilePath(fullPath);
+                    bmp = shellFile.Thumbnail.Bitmap;
+                }
                 bmp.MakeTransparent();
                 this.ResultGrid.SetCellImage(row, (int)ColIndex.FileIcon, bu.Resize(bmp, 16, 16));
                 this.ResultGrid[row, (int)ColIndex.FileName] = thisDoc.Get("title");
@@ -230,7 +233,12 @@ namespace PokudaSearch.Views {
                 return;
             }
             string path = StringUtil.NullToBlank(this.ResultGrid[this.ResultGrid.Selection.TopRow, (int)ColIndex.FullPath]);
-            Process.Start(path);
+            if (File.Exists(path)) {
+                Process.Start(path);
+            } else {
+                //HACK メッセージ
+                MessageBox.Show("ファイルが存在しません。", AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ResultGrid_OwnerDrawCell(object sender, C1.Win.C1FlexGrid.OwnerDrawCellEventArgs e) {

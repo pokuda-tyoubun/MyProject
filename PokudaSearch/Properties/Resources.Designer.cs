@@ -83,6 +83,16 @@ namespace PokudaSearch.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
+        internal static System.Drawing.Bitmap File16 {
+            get {
+                object obj = ResourceManager.GetObject("File16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
         internal static System.Drawing.Bitmap Search24 {
             get {
                 object obj = ResourceManager.GetObject("Search24", resourceCulture);

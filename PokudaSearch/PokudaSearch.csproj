@@ -192,7 +192,6 @@
   <ItemGroup>
     <Compile Include="AppObject.cs" />
     <Compile Include="Consts.cs" />
-    <Compile Include="IndexBuilder\LuceneIndexWorker.cs" />
     <Compile Include="IndexBuilder\LuceneIndexBuilder.cs" />
     <Compile Include="IndexBuilder\ProgressReport.cs" />
     <Compile Include="Views\FileExplorerForm.cs">
@@ -286,6 +285,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Explorer24.png" />
+    <None Include="Resources\File16.bmp" />
     <Content Include="UserDictionary.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

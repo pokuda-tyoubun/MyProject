@@ -5,5 +5,8 @@
     <Setting Name="InitIndexPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\Workspace</Value>
     </Setting>
+    <Setting Name="IndexHistoryCSV" Type="System.String" Scope="User">
+      <Value Profile="(Default)">IndexHistory.csv</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

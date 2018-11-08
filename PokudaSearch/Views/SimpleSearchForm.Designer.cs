@@ -33,7 +33,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.UpdateDate2 = new C1.Win.C1Input.C1DateEdit();
             this.UpdateDate1 = new C1.Win.C1Input.C1DateEdit();
-            this.label7 = new System.Windows.Forms.Label();
             this.FailureFTSNavi = new System.Windows.Forms.BindingNavigator(this.components);
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -51,9 +50,12 @@
             this.OpenParentMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchButton = new System.Windows.Forms.Button();
             this.BottomPanel = new System.Windows.Forms.Panel();
-            this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
             this.PreviewLabel = new C1.Win.C1SuperTooltip.C1SuperLabel();
+            this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.BottomRightPanel = new System.Windows.Forms.Panel();
+            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.BottomLeftPanel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FailureFTSNavi)).BeginInit();
@@ -62,6 +64,7 @@
             this.ResultContext.SuspendLayout();
             this.BottomPanel.SuspendLayout();
             this.MainPanel.SuspendLayout();
+            this.BottomLeftPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -152,18 +155,6 @@
             this.UpdateDate1.TabIndex = 5;
             this.UpdateDate1.Tag = null;
             // 
-            // label7
-            // 
-            this.label7.BackColor = System.Drawing.SystemColors.Info;
-            this.label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label7.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label7.Location = new System.Drawing.Point(5, 57);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(106, 23);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "検索結果";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // FailureFTSNavi
             // 
             this.FailureFTSNavi.AddNewItem = null;
@@ -181,7 +172,7 @@
             this.toolStripButton4,
             this.toolStripSeparator3,
             this.WriteExcelButton});
-            this.FailureFTSNavi.Location = new System.Drawing.Point(116, 55);
+            this.FailureFTSNavi.Location = new System.Drawing.Point(8, 55);
             this.FailureFTSNavi.MoveFirstItem = this.toolStripButton1;
             this.FailureFTSNavi.MoveLastItem = this.toolStripButton4;
             this.FailureFTSNavi.MoveNextItem = this.toolStripButton3;
@@ -342,12 +333,24 @@
             // 
             // BottomPanel
             // 
-            this.BottomPanel.Controls.Add(this.PreviewLabel);
+            this.BottomPanel.Controls.Add(this.BottomLeftPanel);
+            this.BottomPanel.Controls.Add(this.splitter1);
+            this.BottomPanel.Controls.Add(this.BottomRightPanel);
             this.BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.BottomPanel.Location = new System.Drawing.Point(0, 427);
             this.BottomPanel.Name = "BottomPanel";
             this.BottomPanel.Size = new System.Drawing.Size(966, 153);
             this.BottomPanel.TabIndex = 116;
+            // 
+            // PreviewLabel
+            // 
+            this.PreviewLabel.BackColor = System.Drawing.SystemColors.Window;
+            this.PreviewLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PreviewLabel.Location = new System.Drawing.Point(0, 0);
+            this.PreviewLabel.Name = "PreviewLabel";
+            this.PreviewLabel.Size = new System.Drawing.Size(622, 153);
+            this.PreviewLabel.TabIndex = 0;
+            this.PreviewLabel.UseMnemonic = true;
             // 
             // collapsibleSplitter3
             // 
@@ -365,16 +368,6 @@
             this.collapsibleSplitter3.UseAnimations = false;
             this.collapsibleSplitter3.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
             // 
-            // PreviewLabel
-            // 
-            this.PreviewLabel.BackColor = System.Drawing.SystemColors.Window;
-            this.PreviewLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PreviewLabel.Location = new System.Drawing.Point(0, 0);
-            this.PreviewLabel.Name = "PreviewLabel";
-            this.PreviewLabel.Size = new System.Drawing.Size(966, 153);
-            this.PreviewLabel.TabIndex = 0;
-            this.PreviewLabel.UseMnemonic = true;
-            // 
             // MainPanel
             // 
             this.MainPanel.Controls.Add(this.label2);
@@ -382,7 +375,6 @@
             this.MainPanel.Controls.Add(this.label1);
             this.MainPanel.Controls.Add(this.textBox1);
             this.MainPanel.Controls.Add(this.ResultGrid);
-            this.MainPanel.Controls.Add(this.label7);
             this.MainPanel.Controls.Add(this.label4);
             this.MainPanel.Controls.Add(this.FailureFTSNavi);
             this.MainPanel.Controls.Add(this.label3);
@@ -394,6 +386,33 @@
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(966, 419);
             this.MainPanel.TabIndex = 118;
+            // 
+            // BottomRightPanel
+            // 
+            this.BottomRightPanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.BottomRightPanel.Location = new System.Drawing.Point(625, 0);
+            this.BottomRightPanel.Name = "BottomRightPanel";
+            this.BottomRightPanel.Size = new System.Drawing.Size(341, 153);
+            this.BottomRightPanel.TabIndex = 1;
+            // 
+            // splitter1
+            // 
+            this.splitter1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.splitter1.Location = new System.Drawing.Point(622, 0);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 153);
+            this.splitter1.TabIndex = 2;
+            this.splitter1.TabStop = false;
+            // 
+            // BottomLeftPanel
+            // 
+            this.BottomLeftPanel.Controls.Add(this.PreviewLabel);
+            this.BottomLeftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BottomLeftPanel.Location = new System.Drawing.Point(0, 0);
+            this.BottomLeftPanel.Name = "BottomLeftPanel";
+            this.BottomLeftPanel.Size = new System.Drawing.Size(622, 153);
+            this.BottomLeftPanel.TabIndex = 3;
             // 
             // SimpleSearchForm
             // 
@@ -417,6 +436,7 @@
             this.BottomPanel.ResumeLayout(false);
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
+            this.BottomLeftPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -433,7 +453,6 @@
         private C1.Win.C1Input.C1DateEdit UpdateDate1;
         internal System.Windows.Forms.Button SearchButton;
         private FxCommonLib.Controls.FlexGridEx ResultGrid;
-        internal System.Windows.Forms.Label label7;
         internal System.Windows.Forms.BindingNavigator FailureFTSNavi;
         internal System.Windows.Forms.ToolStripLabel toolStripLabel1;
         internal System.Windows.Forms.ToolStripButton toolStripButton1;
@@ -452,5 +471,8 @@
         private NJFLib.Controls.CollapsibleSplitter collapsibleSplitter3;
         private C1.Win.C1SuperTooltip.C1SuperLabel PreviewLabel;
         private System.Windows.Forms.Panel MainPanel;
+        private System.Windows.Forms.Panel BottomLeftPanel;
+        private System.Windows.Forms.Splitter splitter1;
+        private System.Windows.Forms.Panel BottomRightPanel;
     }
 }
