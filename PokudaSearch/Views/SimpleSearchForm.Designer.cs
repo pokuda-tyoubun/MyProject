@@ -28,7 +28,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.KeywordText = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.ExtentionText = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.UpdateDate2 = new C1.Win.C1Input.C1DateEdit();
@@ -50,12 +50,12 @@
             this.OpenParentMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchButton = new System.Windows.Forms.Button();
             this.BottomPanel = new System.Windows.Forms.Panel();
+            this.BottomLeftPanel = new System.Windows.Forms.Panel();
             this.PreviewLabel = new C1.Win.C1SuperTooltip.C1SuperLabel();
+            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.BottomRightPanel = new System.Windows.Forms.Panel();
             this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
             this.MainPanel = new System.Windows.Forms.Panel();
-            this.BottomRightPanel = new System.Windows.Forms.Panel();
-            this.splitter1 = new System.Windows.Forms.Splitter();
-            this.BottomLeftPanel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FailureFTSNavi)).BeginInit();
@@ -63,8 +63,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ResultGrid)).BeginInit();
             this.ResultContext.SuspendLayout();
             this.BottomPanel.SuspendLayout();
-            this.MainPanel.SuspendLayout();
             this.BottomLeftPanel.SuspendLayout();
+            this.MainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -96,12 +96,12 @@
             this.label1.Text = "拡張子";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // textBox1
+            // ExtentionText
             // 
-            this.textBox1.Location = new System.Drawing.Point(77, 30);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(104, 19);
-            this.textBox1.TabIndex = 4;
+            this.ExtentionText.Location = new System.Drawing.Point(77, 30);
+            this.ExtentionText.Name = "ExtentionText";
+            this.ExtentionText.Size = new System.Drawing.Size(104, 19);
+            this.ExtentionText.TabIndex = 4;
             // 
             // label3
             // 
@@ -342,6 +342,15 @@
             this.BottomPanel.Size = new System.Drawing.Size(966, 153);
             this.BottomPanel.TabIndex = 116;
             // 
+            // BottomLeftPanel
+            // 
+            this.BottomLeftPanel.Controls.Add(this.PreviewLabel);
+            this.BottomLeftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BottomLeftPanel.Location = new System.Drawing.Point(0, 0);
+            this.BottomLeftPanel.Name = "BottomLeftPanel";
+            this.BottomLeftPanel.Size = new System.Drawing.Size(622, 153);
+            this.BottomLeftPanel.TabIndex = 3;
+            // 
             // PreviewLabel
             // 
             this.PreviewLabel.BackColor = System.Drawing.SystemColors.Window;
@@ -351,6 +360,24 @@
             this.PreviewLabel.Size = new System.Drawing.Size(622, 153);
             this.PreviewLabel.TabIndex = 0;
             this.PreviewLabel.UseMnemonic = true;
+            // 
+            // splitter1
+            // 
+            this.splitter1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.splitter1.Location = new System.Drawing.Point(622, 0);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 153);
+            this.splitter1.TabIndex = 2;
+            this.splitter1.TabStop = false;
+            // 
+            // BottomRightPanel
+            // 
+            this.BottomRightPanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.BottomRightPanel.Location = new System.Drawing.Point(625, 0);
+            this.BottomRightPanel.Name = "BottomRightPanel";
+            this.BottomRightPanel.Size = new System.Drawing.Size(341, 153);
+            this.BottomRightPanel.TabIndex = 1;
             // 
             // collapsibleSplitter3
             // 
@@ -373,7 +400,7 @@
             this.MainPanel.Controls.Add(this.label2);
             this.MainPanel.Controls.Add(this.KeywordText);
             this.MainPanel.Controls.Add(this.label1);
-            this.MainPanel.Controls.Add(this.textBox1);
+            this.MainPanel.Controls.Add(this.ExtentionText);
             this.MainPanel.Controls.Add(this.ResultGrid);
             this.MainPanel.Controls.Add(this.label4);
             this.MainPanel.Controls.Add(this.FailureFTSNavi);
@@ -386,33 +413,6 @@
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(966, 419);
             this.MainPanel.TabIndex = 118;
-            // 
-            // BottomRightPanel
-            // 
-            this.BottomRightPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.BottomRightPanel.Location = new System.Drawing.Point(625, 0);
-            this.BottomRightPanel.Name = "BottomRightPanel";
-            this.BottomRightPanel.Size = new System.Drawing.Size(341, 153);
-            this.BottomRightPanel.TabIndex = 1;
-            // 
-            // splitter1
-            // 
-            this.splitter1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter1.Location = new System.Drawing.Point(622, 0);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 153);
-            this.splitter1.TabIndex = 2;
-            this.splitter1.TabStop = false;
-            // 
-            // BottomLeftPanel
-            // 
-            this.BottomLeftPanel.Controls.Add(this.PreviewLabel);
-            this.BottomLeftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BottomLeftPanel.Location = new System.Drawing.Point(0, 0);
-            this.BottomLeftPanel.Name = "BottomLeftPanel";
-            this.BottomLeftPanel.Size = new System.Drawing.Size(622, 153);
-            this.BottomLeftPanel.TabIndex = 3;
             // 
             // SimpleSearchForm
             // 
@@ -434,9 +434,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.ResultGrid)).EndInit();
             this.ResultContext.ResumeLayout(false);
             this.BottomPanel.ResumeLayout(false);
+            this.BottomLeftPanel.ResumeLayout(false);
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
-            this.BottomLeftPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -446,7 +446,7 @@
         private System.Windows.Forms.Label label2;
         internal System.Windows.Forms.TextBox KeywordText;
         private System.Windows.Forms.Label label1;
-        internal System.Windows.Forms.TextBox textBox1;
+        internal System.Windows.Forms.TextBox ExtentionText;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private C1.Win.C1Input.C1DateEdit UpdateDate2;

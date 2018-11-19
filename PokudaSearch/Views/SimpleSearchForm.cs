@@ -137,58 +137,70 @@ namespace PokudaSearch.Views {
             IndexReader idxReader = DirectoryReader.Open(fsDir);
             IndexSearcher idxSearcher = new IndexSearcher(idxReader);
 
-            var bqb = new BooleanQueryBuilder();
+            var allQuery = new BooleanQueryBuilder();
+            var contentBqb = new BooleanQueryBuilder();
             //QueryParser titleQp = new QueryParser("title", AppObject.AppAnalyzer);
             //Query titleQuery = titleQp.Parse("*" + this.KeywordText.Text + "*"); //最初の文字にWildCardは適用されないようだ。
-            Query titleUpperQuery = new WildcardQuery(new Term("title", "*" + this.KeywordText.Text.ToUpper() + "*"));
-            bqb.Add(titleUpperQuery, BooleanClauseOccur.SHOULD);
-            Query titleLowerQuery = new WildcardQuery(new Term("title", "*" + this.KeywordText.Text.ToLower() + "*"));
-            bqb.Add(titleLowerQuery, BooleanClauseOccur.SHOULD);
+            Query titleQuery = new WildcardQuery(new Term("title", "*" + this.KeywordText.Text.ToLower() + "*"));
+            contentBqb.Add(titleQuery, BooleanClauseOccur.SHOULD);
             QueryParser contentQp = new QueryParser("content", AppObject.AppAnalyzer);
             Query contentQuery = contentQp.Parse(this.KeywordText.Text);
-            bqb.Add(contentQuery, BooleanClauseOccur.SHOULD);
+            contentBqb.Add(contentQuery, BooleanClauseOccur.SHOULD);
+            allQuery.Add(contentBqb.Build(), BooleanClauseOccur.MUST);
+            if (this.ExtentionText.Text != "") {
+                var extBqb = new BooleanQueryBuilder();
+                Query extentionQuery = new WildcardQuery(new Term("extention", "*" + this.ExtentionText.Text.ToLower() + "*"));
+                allQuery.Add(extentionQuery, BooleanClauseOccur.MUST);
+            }
 
             //HACK 上位1000件の旨を表示
-            TopDocs docs = idxSearcher.Search(bqb.Build(), 1000);
+            TopDocs docs = idxSearcher.Search(allQuery.Build(), 1000);
 
             //HACK DataTableに格納してLinqで絞り込む？
 
-            Highlighter hi = CreateHilighter(bqb.Build());
+            Highlighter hi = CreateHilighter(contentBqb.Build());
 
-            AppObject.Logger.Info("length of top docs: " + docs.ScoreDocs.Length);
-            this.ResultGrid.Rows.Count = RowHeaderCount + docs.ScoreDocs.Length;
-            int row = RowHeaderCount;
-            BitmapUtil bu = new BitmapUtil();
-            foreach (ScoreDoc doc in docs.ScoreDocs) {
-                Document thisDoc = idxSearcher.Doc(doc.Doc);
-                string fullPath = thisDoc.Get("path");
+            try {
+                this.ResultGrid.Redraw = false;
 
-                Bitmap bmp = Properties.Resources.File16;
-                if (File.Exists(fullPath)) {
-                    ShellFile shellFile = ShellFile.FromFilePath(fullPath);
-                    bmp = shellFile.Thumbnail.Bitmap;
+                AppObject.Logger.Info("length of top docs: " + docs.ScoreDocs.Length);
+                this.ResultGrid.Rows.Count = RowHeaderCount + docs.ScoreDocs.Length;
+                int row = RowHeaderCount;
+                BitmapUtil bu = new BitmapUtil();
+                foreach (ScoreDoc doc in docs.ScoreDocs) {
+                    Document thisDoc = idxSearcher.Doc(doc.Doc);
+                    string fullPath = thisDoc.Get("path");
+
+                    Bitmap bmp = Properties.Resources.File16;
+                    if (File.Exists(fullPath)) {
+                        ShellFile shellFile = ShellFile.FromFilePath(fullPath);
+                        bmp = shellFile.Thumbnail.Bitmap;
+                    }
+                    bmp.MakeTransparent();
+                    this.ResultGrid.SetCellImage(row, (int)ColIndex.FileIcon, bu.Resize(bmp, 16, 16));
+                    this.ResultGrid[row, (int)ColIndex.FileName] = thisDoc.Get("title");
+                    this.ResultGrid[row, (int)ColIndex.FullPath] = fullPath;
+
+                    //HACK ループ内のnewを避けれないか?
+                    var fi = new FileInfo(fullPath);
+                    this.ResultGrid[row, (int)ColIndex.Extention] = fi.Extension;
+                    this.ResultGrid[row, (int)ColIndex.UpdateDate] = fi.LastWriteTime;
+                    this.ResultGrid[row, (int)ColIndex.Score] = doc.Score;
+
+                    // Highlighterで検索キーワード周辺の文字列(フラグメント)を取得
+                    // TokenStream が必要なので取得
+                    TokenStream stream = TokenSources.GetAnyTokenStream(idxReader,
+                            doc.Doc, "content", AppObject.AppAnalyzer);
+                    string[] str = hi.GetBestFragments(stream, thisDoc.Get("content"), 5);
+                    this.ResultGrid[row, (int)ColIndex.Hilight] = string.Join(",", str);
+
+                    row++;
                 }
-                bmp.MakeTransparent();
-                this.ResultGrid.SetCellImage(row, (int)ColIndex.FileIcon, bu.Resize(bmp, 16, 16));
-                this.ResultGrid[row, (int)ColIndex.FileName] = thisDoc.Get("title");
-                this.ResultGrid[row, (int)ColIndex.FullPath] = fullPath;
-
-                //HACK ループ内のnewを避けれないか?
-                var fi = new FileInfo(fullPath);
-                this.ResultGrid[row, (int)ColIndex.Extention] = fi.Extension;
-                this.ResultGrid[row, (int)ColIndex.UpdateDate] = fi.LastWriteTime;
-                this.ResultGrid[row, (int)ColIndex.Score] = doc.Score;
-
-                // Highlighterで検索キーワード周辺の文字列(フラグメント)を取得
-                // TokenStream が必要なので取得
-                TokenStream stream = TokenSources.GetAnyTokenStream(idxReader,
-                        doc.Doc, "content", AppObject.AppAnalyzer);
-                string[] str = hi.GetBestFragments(stream, thisDoc.Get("content"), 5);
-                this.ResultGrid[row, (int)ColIndex.Hilight] = string.Join(",", str);
-
-                row++;
+                SetHtmlLabel();
+            } finally {
+                this.ResultGrid.Redraw = true;
             }
-            SetHtmlLabel();
+
         }
 
         private Highlighter CreateHilighter(Query query) {

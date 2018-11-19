@@ -388,7 +388,8 @@ namespace PokudaSearch.IndexBuilder {
             }
 
 			doc.Add(new StringField("path", path, FieldStore.YES));
-			doc.Add(new StringField("title", filename, FieldStore.YES));
+			doc.Add(new StringField("title", filename.ToLower(), FieldStore.YES));
+			doc.Add(new StringField("extention", extention.ToLower(), FieldStore.YES));
 			indexWriter.AddDocument(doc);
         }
 

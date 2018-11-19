@@ -12,9 +12,27 @@ namespace PokudaSearch.Views {
     public partial class IndexBuildForm : Form {
 
         #region Constants
-        private enum IndexHistoryColIdx : int {
+        private enum IndexingReserveColIdx : int {
+            [EnumLabel("ステータス")]
+            Status = 0,
             [EnumLabel("モード")]
-            CreateMode = 0,
+            CreateMode,
+            [EnumLabel("パス")]
+            IndexedPath,
+            [EnumLabel("作成開始")]
+            StartTime,
+            [EnumLabel("作成時間(分)")]
+            CreateTime,
+            [EnumLabel("対象ファイル数")]
+            TargetCount,
+            [EnumLabel("テキスト抽出器")]
+            TextExtractMode
+        }
+        private enum IndexHistoryColIdx : int {
+            [EnumLabel("有効")]
+            Active = 0,
+            [EnumLabel("モード")]
+            CreateMode,
             [EnumLabel("パス")]
             IndexedPath,
             [EnumLabel("作成開始")]
@@ -44,6 +62,11 @@ namespace PokudaSearch.Views {
         public DataTable IndexedHistory {
             get { return _history; }
         }
+        /// <summary>有効インデックス</summary>
+        private DataTable _activeIndex = null;
+        public DataTable ActiveIndex {
+            get { return _activeIndex; }
+        }
         #endregion Properties
 
         #region Constractors
@@ -55,6 +78,8 @@ namespace PokudaSearch.Views {
 
             _history = ReadHistoryCSV();
             LoadHistory(_history);
+
+            CreateReservedHeader();
         }
         #endregion Constractors
 
@@ -73,6 +98,7 @@ namespace PokudaSearch.Views {
                 historyTbl = csvUtil.ReadCsv(path, "IndexHistory");
             } else {
                 //ファイルが存在しない場合は、空テーブルを返す
+                historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.Active), typeof(string));
                 historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.CreateMode), typeof(string));
                 historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.IndexedPath), typeof(string));
                 historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.StartTime), typeof(string));
@@ -87,6 +113,29 @@ namespace PokudaSearch.Views {
 
             return historyTbl;
         }
+        private void CreateReservedHeader() {
+            this.ReservedGrid.Cols.Count = EnumUtil.GetCount(typeof(IndexingReserveColIdx)) + 1;
+            this.ReservedGrid.Rows.Count =  HeaderRowCount;
+
+            this.ReservedGrid[0, (int)IndexingReserveColIdx.Status + 1] = EnumUtil.GetLabel(IndexingReserveColIdx.Status);
+            this.ReservedGrid.Cols[(int)IndexingReserveColIdx.Status + 1].Width = 40;
+            this.ReservedGrid.Cols[(int)IndexingReserveColIdx.Status + 1].TextAlign = TextAlignEnum.CenterCenter;
+            this.ReservedGrid[0, (int)IndexingReserveColIdx.CreateMode + 1] = EnumUtil.GetLabel(IndexingReserveColIdx.CreateMode);
+            this.ReservedGrid.Cols[(int)IndexingReserveColIdx.CreateMode + 1].Width = 40;
+            this.ReservedGrid.Cols[(int)IndexingReserveColIdx.CreateMode + 1].TextAlign = TextAlignEnum.CenterCenter;
+            this.ReservedGrid[0, (int)IndexingReserveColIdx.IndexedPath + 1] = EnumUtil.GetLabel(IndexingReserveColIdx.IndexedPath);
+            this.ReservedGrid.Cols[(int)IndexingReserveColIdx.IndexedPath + 1].Width = 200;
+            this.ReservedGrid[0, (int)IndexingReserveColIdx.StartTime + 1] = EnumUtil.GetLabel(IndexingReserveColIdx.StartTime);
+            this.ReservedGrid.Cols[(int)IndexingReserveColIdx.StartTime + 1].Width = 120;
+            this.ReservedGrid[0, (int)IndexingReserveColIdx.CreateTime + 1] = EnumUtil.GetLabel(IndexingReserveColIdx.CreateTime);
+            this.ReservedGrid.Cols[(int)IndexingReserveColIdx.CreateTime + 1].Width = 80;
+            this.ReservedGrid[0, (int)IndexingReserveColIdx.TargetCount + 1] = EnumUtil.GetLabel(IndexingReserveColIdx.TargetCount);
+            this.ReservedGrid.Cols[(int)IndexingReserveColIdx.TargetCount + 1].Width = 80;
+            this.ReservedGrid.Cols[(int)IndexingReserveColIdx.TargetCount + 1].DataType = typeof(int);
+            this.ReservedGrid.Cols[(int)IndexingReserveColIdx.TargetCount + 1].Format = "#,##0";
+            this.ReservedGrid[0, (int)IndexingReserveColIdx.TextExtractMode + 1] = EnumUtil.GetLabel(IndexingReserveColIdx.TextExtractMode);
+            this.ReservedGrid.Cols[(int)IndexingReserveColIdx.TextExtractMode + 1].Width = 80;
+        }
         /// <summary>
         /// インデックス作成履歴グリッドのヘッダーを設定
         /// </summary>
@@ -97,6 +146,9 @@ namespace PokudaSearch.Views {
             this.IndexHistoryGrid.Cols.Count = EnumUtil.GetCount(typeof(IndexHistoryColIdx)) + 1;
             this.IndexHistoryGrid.Rows.Count = _history.Rows.Count + HeaderRowCount;
 
+            this.IndexHistoryGrid[0, (int)IndexHistoryColIdx.Active + 1] = EnumUtil.GetLabel(IndexHistoryColIdx.Active);
+            this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.Active + 1].Width = 40;
+            this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.Active + 1].TextAlign = TextAlignEnum.CenterCenter;
             this.IndexHistoryGrid[0, (int)IndexHistoryColIdx.CreateMode + 1] = EnumUtil.GetLabel(IndexHistoryColIdx.CreateMode);
             this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.CreateMode + 1].Width = 60;
             this.IndexHistoryGrid[0, (int)IndexHistoryColIdx.IndexedPath + 1] = EnumUtil.GetLabel(IndexHistoryColIdx.IndexedPath);
@@ -129,6 +181,8 @@ namespace PokudaSearch.Views {
 
             int row = HeaderRowCount;
             foreach (DataRow dr in _history.Rows) {
+                this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.Active + 1] = 
+                    StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.Active)]);
                 this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.CreateMode + 1] = 
                     StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.CreateMode)]);
                 this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.StartTime + 1] = 
@@ -164,7 +218,11 @@ namespace PokudaSearch.Views {
             if (report.Finished) {
                 //NOTE:マルチスレッドも見据えてカウンタをstatic化したので、
                 //　　 処理結果を戻り値workerから受け取らずにstaticプロパティから受け取る
+                foreach (DataRow dr in _history.Rows) {
+                    dr[(int)IndexHistoryColIdx.Active] = "×";
+                }
                 var newRow = _history.NewRow();
+                newRow[(int)IndexHistoryColIdx.Active] = "○";
                 newRow[(int)IndexHistoryColIdx.CreateMode] = "再作成";
                 newRow[(int)IndexHistoryColIdx.StartTime] = LuceneIndexBuilder.StartTime.ToString("yyyy/MM/dd HH:mm:ss");
                 newRow[(int)IndexHistoryColIdx.EndTime] = LuceneIndexBuilder.EndTime.ToString("yyyy/MM/dd HH:mm:ss");
@@ -175,7 +233,7 @@ namespace PokudaSearch.Views {
                 newRow[(int)IndexHistoryColIdx.SkippedCount] = LuceneIndexBuilder.SkippedCount;
                 newRow[(int)IndexHistoryColIdx.TotalBytes] = FileUtil.GetSizeString(LuceneIndexBuilder.TotalBytes);
                 newRow[(int)IndexHistoryColIdx.TextExtractMode] = EnumUtil.GetName(LuceneIndexBuilder.TextExtractMode);
-                _history.Rows.Add(newRow);
+                _history.Rows.InsertAt(newRow, 0);
                 _history.AcceptChanges();
 
                 LoadHistory(_history);
