@@ -103,6 +103,9 @@ namespace PokudaSearch.SandBox {
         }
 
         private void TumbnailButton_Click(object sender, EventArgs e) {
+            //this.PictureBox.Image = CreateThumbnail(@"C:\Temp\PokudaTest\temp1\ERP(ブランク).xlsx", 0.5);
+            //this.PictureBox.Image = CreateThumbnail(@"C:\Temp\WS000008.JPG", 0.5);
+            //this.PictureBox.Image = CreateThumbnail(@"C:\Temp\test.pdf", 0.5);
             this.PictureBox.Image = CreateThumbnail(@"C:\Temp\PokudaTest\temp1\ERP(ブランク).xlsx", 0.5);
         }
 

@@ -11,7 +11,11 @@ using System.Threading.Tasks;
 namespace PokudaSearch {
     public static class AppObject {
         
+        //HACK*Officeのプレビュー(mhtml or pdfに変換してWebBrowserで表示)
+        //HACK CodePackを使って、縮小表示を有効化してもらう。("2JPEG"ライブラリもあるが商用$149->まずはCodePackで)
+
         //HACKインデックス作成高速化----------------------------------------------
+        //HACK    →GroupDocsで実現できそうだが有料
         //HACK*インデックスをディレクトリ毎に予約化し、マルチスレッドで作成する。（結果をマージしない。）
         //HACKインデックス作成高速化----------------------------------------------
         //HACK*差分Updateモードを実装する。
@@ -26,9 +30,6 @@ namespace PokudaSearch {
         //HACK*ファイルエクスプローラの実装
         //HACK コンテキストメニューにGitが表示されないが参考になるかも
         //HACK https://www.codeproject.com/Articles/14707/Dual-Pane-File-Manager
-        //HACK*PDFのサムネイル
-        //HACK*Officeのサムネイル(OpenOfficeのライブラリが使える？)
-        //HACK    →GroupDocsで実現できそうだが有料
         //HACK CodeProjectでは、以下が参考になりそう（コンテキストメニューのGitが表示されていないが）
         //HACK 上側のURLの方をまずは解析してみる。
         //HACK    https://www.xlsoft.com/jp/products/groupdocs/index.html
@@ -53,6 +54,7 @@ namespace PokudaSearch {
         //HACK 転置インデックスではなく、その場で抽出して検索する機能も欲しい
 
         //DONE List--------------------------------------------------------------------------
+        //DONE PDFのプレビュー機能(WebBrowserコントロールで実現)
         //却下 インデックス作成高速化----------------------------------------------
         //却下  マルチプロセス→実装は楽だが、進度の仕組みをどうするか？(共有メモリ?)
         //却下  マルチスレッド処理をoutofmemoryにならないように 

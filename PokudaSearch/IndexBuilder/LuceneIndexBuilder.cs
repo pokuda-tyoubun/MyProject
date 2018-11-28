@@ -155,7 +155,7 @@ namespace PokudaSearch.IndexBuilder {
 
                 AppObject.Logger.Info("インデックス構築処理完了");
             } catch (Exception e) {
-                AppObject.Logger.Error(e.Message);   
+                AppObject.Logger.Error(e.StackTrace);   
             } finally {
             }
         }
