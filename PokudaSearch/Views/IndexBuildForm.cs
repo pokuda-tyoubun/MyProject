@@ -213,6 +213,7 @@ namespace PokudaSearch.Views {
         /// </summary>
         /// <param name="report"></param>
         private void SetProgressValue(ProgressReport report) {
+            this.ProgressBar.Style = ProgressBarStyle.Continuous;
             this.ProgressBar.Value = report.Percent;
             this.LogViewerText.Text = report.ProgressCount.ToString() + "/" + report.TargetCount.ToString();
             if (report.Finished) {
@@ -254,9 +255,12 @@ namespace PokudaSearch.Views {
                 mode = LuceneIndexBuilder.TextExtractModes.IFilter;
             }
 
+            this.CreateIndexButton.Enabled = false;
             Stopwatch sw = new Stopwatch();
             AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_PROCESSING), true, sw);
             try {
+                this.ProgressBar.Style = ProgressBarStyle.Marquee;
+                this.LogViewerText.Text = "対象ファイルカウント中...";
                 var progress = new Progress<ProgressReport>(SetProgressValue);
                 LuceneIndexBuilder.CreateIndexBySingleThread(
                     AppObject.AppAnalyzer, 
@@ -274,6 +278,7 @@ namespace PokudaSearch.Views {
 
             } finally {
                 AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_END), false, sw);
+                this.CreateIndexButton.Enabled = false;
             }
         }
 

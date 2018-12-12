@@ -194,11 +194,16 @@ namespace PokudaSearch.Views {
 
                     Bitmap bmp = Properties.Resources.File16;
                     if (File.Exists(fullPath)) {
-                        ShellFile shellFile = ShellFile.FromFilePath(fullPath);
-                        bmp = shellFile.Thumbnail.Bitmap;
+                        try {
+                            ShellFile shellFile = ShellFile.FromFilePath(fullPath);
+                            bmp = shellFile.Thumbnail.LargeBitmap;
+                        } catch {
+                            //プレビューを取得できない場合は、デフォルトアイコンを表示
+                        }
                     }
                     bmp.MakeTransparent();
-                    this.ResultGrid.SetCellImage(row, (int)ColIndex.FileIcon, bu.Resize(bmp, 16, 16));
+                    //16,16
+                    this.ResultGrid.SetCellImage(row, (int)ColIndex.FileIcon, bu.Resize(bmp, 256, 256));
                     this.ResultGrid[row, (int)ColIndex.FileName] = thisDoc.Get("title");
                     this.ResultGrid[row, (int)ColIndex.FullPath] = fullPath;
 
@@ -329,7 +334,7 @@ namespace PokudaSearch.Views {
         /// </summary>
         private void UpdatePreviewLabel() {
             int row = this.ResultGrid.Selection.TopRow;
-            if (row > this.ResultGrid.Rows.Fixed) {
+            if (row >= this.ResultGrid.Rows.Fixed) {
                 string val = StringUtil.NullToBlank(this.ResultGrid.Rows[row][(int)ColIndex.Hilight]);
                 this.PreviewLabel.Text = val;
 
