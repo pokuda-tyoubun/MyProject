@@ -13,6 +13,7 @@ namespace PokudaSearch {
         
         //HACK*Officeのプレビュー(mhtml or pdfに変換してWebBrowserで表示)
         //HACK CodePackを使って、縮小表示を有効化してもらう。("2JPEG"ライブラリもあるが商用$149->まずはCodePackで)
+        //HACK デフォルトを×ファイルにしてファイルが存在しないことを判るようにする。
 
         //HACKインデックス作成高速化----------------------------------------------
         //HACK    →GroupDocsで実現できそうだが有料

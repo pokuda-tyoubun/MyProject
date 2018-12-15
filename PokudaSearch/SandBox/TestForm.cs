@@ -115,7 +115,11 @@ namespace PokudaSearch.SandBox {
             FileInfo fi = new FileInfo(path);
             if (fi.Exists) {
                 ShellFile shellFile = ShellFile.FromFilePath(path);
-                Bitmap bmp = shellFile.Thumbnail.Bitmap;
+                //Bitmap bmp = shellFile.Thumbnail.Bitmap; //プレビューで表示される。
+                //Bitmap bmp = shellFile.Thumbnail.SmallBitmap; //プレビューで表示される。
+                //Bitmap bmp = shellFile.Thumbnail.SmallIcon.ToBitmap(); //プレビューで表示される。
+                Bitmap bmp = Icon.ExtractAssociatedIcon(path).ToBitmap();
+
                 int w = (int)((double)bmp.Width * scale);
                 int h = (int)((double)bmp.Height * scale);
                 return bmp;

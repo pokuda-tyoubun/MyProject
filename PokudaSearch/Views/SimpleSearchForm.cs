@@ -20,6 +20,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -52,15 +53,7 @@ namespace PokudaSearch.Views {
         }
         #endregion Constants
 
-        private object _xlApp = null;
-        private ExcelUtil _eu = new ExcelUtil();
-
-        private object _ppApp = null;
-        private PowerPointUtil _ppu = new PowerPointUtil();
-
-        private NetOffice.WordApi.Application _wdApp = null;
-
-        private COMUtil _com = new COMUtil();
+        private BitmapUtil _bu = new BitmapUtil();
 
         /// <summary>
         /// コンストラクタ
@@ -73,13 +66,6 @@ namespace PokudaSearch.Views {
         }
 
         private void SimpleSearchForm_Load(object sender, EventArgs e) {
-            //キャッシュしておく
-            _xlApp = _com.CreateObject("Excel.Application");
-            _eu.SetVisible(_xlApp, false);
-            _ppApp = _com.CreateObject("Powerpoint.Application");
-            //_ppu.SetVisible(_ppApp, PowerPointUtil.MsoTriState.msoTrue);
-
-             _wdApp = new NetOffice.WordApi.Application();
         }
 
         private void WriteExcelButton_Click(object sender, EventArgs e) {
@@ -146,6 +132,9 @@ namespace PokudaSearch.Views {
             this.ResultGrid.Cols[(int)ColIndex.Hilight].Width = 600;
         }
 
+        /// <summary>
+        /// 検索
+        /// </summary>
         private void Search() {
 
             if (this.KeywordText.Text == "") {
@@ -174,8 +163,8 @@ namespace PokudaSearch.Views {
                 allQuery.Add(extentionQuery, BooleanClauseOccur.MUST);
             }
 
-            //HACK 上位1000件の旨を表示
-            TopDocs docs = idxSearcher.Search(allQuery.Build(), 1000);
+            //HACK 上位200件の旨を表示
+            TopDocs docs = idxSearcher.Search(allQuery.Build(), 200);
 
             //HACK DataTableに格納してLinqで絞り込む？
 
@@ -187,7 +176,6 @@ namespace PokudaSearch.Views {
                 AppObject.Logger.Info("length of top docs: " + docs.ScoreDocs.Length);
                 this.ResultGrid.Rows.Count = RowHeaderCount + docs.ScoreDocs.Length;
                 int row = RowHeaderCount;
-                BitmapUtil bu = new BitmapUtil();
                 foreach (ScoreDoc doc in docs.ScoreDocs) {
                     Document thisDoc = idxSearcher.Doc(doc.Doc);
                     string fullPath = thisDoc.Get("path");
@@ -195,15 +183,15 @@ namespace PokudaSearch.Views {
                     Bitmap bmp = Properties.Resources.File16;
                     if (File.Exists(fullPath)) {
                         try {
-                            ShellFile shellFile = ShellFile.FromFilePath(fullPath);
-                            bmp = shellFile.Thumbnail.LargeBitmap;
+
+                            bmp = Icon.ExtractAssociatedIcon(fullPath).ToBitmap();
                         } catch {
                             //プレビューを取得できない場合は、デフォルトアイコンを表示
                         }
                     }
                     bmp.MakeTransparent();
                     //16,16
-                    this.ResultGrid.SetCellImage(row, (int)ColIndex.FileIcon, bu.Resize(bmp, 256, 256));
+                    this.ResultGrid.SetCellImage(row, (int)ColIndex.FileIcon, _bu.Resize(bmp, 16, 16));
                     this.ResultGrid[row, (int)ColIndex.FileName] = thisDoc.Get("title");
                     this.ResultGrid[row, (int)ColIndex.FullPath] = fullPath;
 
@@ -313,14 +301,6 @@ namespace PokudaSearch.Views {
         }
 
         private void SimpleSearchForm_FormClosed(object sender, FormClosedEventArgs e) {
-            _eu.Quit(_xlApp);
-            _com.MReleaseComObject(_xlApp);
-
-            _ppu.Quit(_ppApp);
-            _com.MReleaseComObject(_ppApp);
-
-            _wdApp.Quit();
-
             MainFrameForm.SimpleSearchForm = null;
         }
 
@@ -345,19 +325,18 @@ namespace PokudaSearch.Views {
                         //そのままブラウザに表示
                     } else if (extention.ToLower() == ".xlsx" ||
                                extention.ToLower() == ".xls") {
-                        string tmpPath = SaveXlsToMHtml(fullPath);
+                        string tmpPath = SaveToThumbnailBitmap(fullPath);
                         fullPath = tmpPath;
                     } else if (extention.ToLower() == ".pptx") {
-                        string tmpPath = SavePptToXPS(fullPath, over2007:true);
+                        string tmpPath = SaveToThumbnailBitmap(fullPath);
                         fullPath = tmpPath;
                     } else if (extention.ToLower() == ".ppt") {
-                        string tmpPath = SavePptToXPS(fullPath, over2007:false);
+                        string tmpPath = SaveToThumbnailBitmap(fullPath);
                         fullPath = tmpPath;
                     } else if (extention.ToLower() == ".docx") {
-                        string tmpPath = SaveDocToMHtml(fullPath);
+                        string tmpPath = SaveToThumbnailBitmap(fullPath);
                         fullPath = tmpPath;
                     } else {
-                        //TODO
                     }
 
                     if (fullPath == "") {
@@ -370,84 +349,103 @@ namespace PokudaSearch.Views {
             }
         }
 
-        private string SaveDocToMHtml(string fullPath) {
-            NetOffice.WordApi.Documents docs = null;
-            NetOffice.WordApi.Document doc = null;
+        //private string SaveDocToMHtml(string fullPath) {
+        //    NetOffice.WordApi.Documents docs = null;
+        //    NetOffice.WordApi.Document doc = null;
+        //    string tmpPath = "";
+
+        //    try {
+        //        docs = _wdApp.Documents;
+        //        doc = docs.Open(fullPath);
+        //        tmpPath = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache) + 
+        //                    @"\" + Guid.NewGuid().ToString() + ".mhtml";
+        //        //XPSとして保存
+        //        doc.SaveAs(tmpPath, fileFormat: NetOffice.WordApi.Enums.WdSaveFormat.wdFormatWebArchive);
+
+        //    } catch (Exception e) {
+        //        AppObject.Logger.Warn(e.Message);
+        //        //プレビュー不可
+        //        tmpPath = "";
+        //    } finally {
+        //        doc.Close();
+        //    }
+        //    return tmpPath;
+        //}
+
+        //private string SavePptToXPS(string fullPath, bool over2007) {
+        //    object presentations = null;
+        //    object presentation = null;
+        //    string tmpPath = "";
+
+        //    try {
+        //        presentations = _ppu.GetPresentations(_ppApp);
+        //        if (over2007) {
+        //            presentation = _ppu.Open2007(presentations, fullPath, PowerPointUtil.MsoTriState.msoFalse);
+        //        } else {
+        //            presentation = _ppu.Open(presentations, fullPath, PowerPointUtil.MsoTriState.msoFalse);
+        //        }
+        //        tmpPath = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache) + 
+        //                    @"\" + Guid.NewGuid().ToString() + ".xps";
+        //        //XPSとして保存
+        //        _ppu.SaveAs(presentation, tmpPath, PowerPointUtil.PpFileFormat.PpSaveAsXPS);
+
+        //    } catch (Exception e) {
+        //        AppObject.Logger.Warn(e.Message);
+        //        //プレビュー不可
+        //        tmpPath = "";
+        //    } finally {
+        //        _ppu.Close(presentation);
+        //        _com.MReleaseComObject(presentation);
+        //        _com.MReleaseComObject(presentations);
+        //    }
+        //    return tmpPath;
+        //}
+
+        private string SaveToThumbnailBitmap(string fullPath) {
             string tmpPath = "";
 
             try {
-                docs = _wdApp.Documents;
-                doc = docs.Open(fullPath);
-                tmpPath = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache) + 
-                            @"\" + Guid.NewGuid().ToString() + ".mhtml";
-                //XPSとして保存
-                doc.SaveAs(tmpPath, fileFormat: NetOffice.WordApi.Enums.WdSaveFormat.wdFormatWebArchive);
+                ShellFile shellFile = ShellFile.FromFilePath(fullPath);
+                Bitmap bmp = shellFile.Thumbnail.Bitmap;
 
+                //JPGで保存
+                tmpPath = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache) +
+                        @"\" + Guid.NewGuid().ToString() + ".jpg";
+                _bu.SaveAsJpeg(bmp, tmpPath, 100);
             } catch (Exception e) {
                 AppObject.Logger.Warn(e.Message);
                 //プレビュー不可
                 tmpPath = "";
             } finally {
-                doc.Close();
             }
-            return tmpPath;
+            return "file://" + tmpPath;
         }
 
-        private string SavePptToXPS(string fullPath, bool over2007) {
-            object presentations = null;
-            object presentation = null;
-            string tmpPath = "";
+        //private string SaveXlsToMHtml(string fullPath) {
 
-            try {
-                presentations = _ppu.GetPresentations(_ppApp);
-                if (over2007) {
-                    presentation = _ppu.Open2007(presentations, fullPath, PowerPointUtil.MsoTriState.msoFalse);
-                } else {
-                    presentation = _ppu.Open(presentations, fullPath, PowerPointUtil.MsoTriState.msoFalse);
-                }
-                tmpPath = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache) + 
-                            @"\" + Guid.NewGuid().ToString() + ".xps";
-                //XPSとして保存
-                _ppu.SaveAs(presentation, tmpPath, PowerPointUtil.PpFileFormat.PpSaveAsXPS);
+        //    object books = null;
+        //    object book = null;
+        //    string tmpPath = "";
 
-            } catch (Exception e) {
-                AppObject.Logger.Warn(e.Message);
-                //プレビュー不可
-                tmpPath = "";
-            } finally {
-                _ppu.Close(presentation);
-                _com.MReleaseComObject(presentation);
-                _com.MReleaseComObject(presentations);
-            }
-            return tmpPath;
-        }
+        //    try {
+        //        books = _eu.GetWorkbooks(_xlApp);
+        //        book = _eu.Open(books, fullPath, "");
+        //        tmpPath = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache) + 
+        //                    @"\" + Guid.NewGuid().ToString() + ".mhtml";
+        //        //単一ファイルWebページとして保存
+        //        _eu.SaveAs(book, tmpPath, ExcelUtil.XlFileFormat.XlWebArchive);
 
-
-        private string SaveXlsToMHtml(string fullPath) {
-
-            object books = null;
-            object book = null;
-            string tmpPath = "";
-
-            try {
-                books = _eu.GetWorkbooks(_xlApp);
-                book = _eu.Open(books, fullPath, "");
-                tmpPath = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache) + 
-                            @"\" + Guid.NewGuid().ToString() + ".mhtml";
-                //単一ファイルWebページとして保存
-                _eu.SaveAs(book, tmpPath, ExcelUtil.XlFileFormat.XlWebArchive);
-
-            } catch (Exception e) {
-                AppObject.Logger.Warn(e.Message);
-                //プレビュー不可
-                tmpPath = "";
-            } finally {
-                _eu.Close(book);
-                _com.MReleaseComObject(book);
-                _com.MReleaseComObject(books);
-            }
-            return tmpPath;
-        }
+        //    } catch (Exception e) {
+        //        AppObject.Logger.Warn(e.Message);
+        //        //プレビュー不可
+        //        tmpPath = "";
+        //    } finally {
+        //        _eu.Close(book);
+        //        _com.MReleaseComObject(book);
+        //        _com.MReleaseComObject(books);
+        //    }
+        //    return tmpPath;
+        //}
 
         private void PreviewCheck_CheckedChanged(object sender, EventArgs e) {
             if (this.PreviewCheck.Checked) {
@@ -467,7 +465,7 @@ namespace PokudaSearch.Views {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SimpleSearchForm_Shown(object sender, EventArgs e) {
-            this.PreviewCheck.Checked = false;
+            this.PreviewCheck.Checked = true;
         }
 
         /// <summary>

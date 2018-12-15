@@ -47,6 +47,8 @@
             this.ResultContext = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.OpenFileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenParentMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.CopyMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchButton = new System.Windows.Forms.Button();
             this.BottomPanel = new System.Windows.Forms.Panel();
             this.BottomLeftPanel = new System.Windows.Forms.Panel();
@@ -59,8 +61,6 @@
             this.RightPanel = new System.Windows.Forms.Panel();
             this.BrowserProgress = new System.Windows.Forms.ProgressBar();
             this.PreviewSplitter = new NJFLib.Controls.CollapsibleSplitter();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.CopyMenu = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FailureFTSNavi)).BeginInit();
@@ -276,7 +276,7 @@
             this.toolStripMenuItem2,
             this.CopyMenu});
             this.ResultContext.Name = "ResultContext";
-            this.ResultContext.Size = new System.Drawing.Size(166, 98);
+            this.ResultContext.Size = new System.Drawing.Size(166, 76);
             // 
             // OpenFileMenu
             // 
@@ -291,6 +291,18 @@
             this.OpenParentMenu.Size = new System.Drawing.Size(165, 22);
             this.OpenParentMenu.Text = "親フォルダを開く(&P)";
             this.OpenParentMenu.Click += new System.EventHandler(this.OpenParentMenu_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(162, 6);
+            // 
+            // CopyMenu
+            // 
+            this.CopyMenu.Name = "CopyMenu";
+            this.CopyMenu.Size = new System.Drawing.Size(165, 22);
+            this.CopyMenu.Text = "コピー(&C) Ctrl+C";
+            this.CopyMenu.Click += new System.EventHandler(this.CopyMenu_Click);
             // 
             // SearchButton
             // 
@@ -309,7 +321,7 @@
             // 
             this.BottomPanel.Controls.Add(this.BottomLeftPanel);
             this.BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.BottomPanel.Location = new System.Drawing.Point(0, 427);
+            this.BottomPanel.Location = new System.Drawing.Point(0, 429);
             this.BottomPanel.Name = "BottomPanel";
             this.BottomPanel.Size = new System.Drawing.Size(690, 153);
             this.BottomPanel.TabIndex = 116;
@@ -341,7 +353,7 @@
             this.WebBrowser.Location = new System.Drawing.Point(0, 0);
             this.WebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.WebBrowser.Name = "WebBrowser";
-            this.WebBrowser.Size = new System.Drawing.Size(321, 551);
+            this.WebBrowser.Size = new System.Drawing.Size(516, 553);
             this.WebBrowser.TabIndex = 0;
             this.WebBrowser.ProgressChanged += new System.Windows.Forms.WebBrowserProgressChangedEventHandler(this.WebBrowser_ProgressChanged);
             // 
@@ -362,7 +374,7 @@
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(0, 0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(690, 419);
+            this.MainPanel.Size = new System.Drawing.Size(690, 421);
             this.MainPanel.TabIndex = 118;
             // 
             // PreviewCheck
@@ -403,7 +415,7 @@
             this.ResultGrid.Rows.Count = 2;
             this.ResultGrid.Rows.DefaultSize = 18;
             this.ResultGrid.ShowErrors = true;
-            this.ResultGrid.Size = new System.Drawing.Size(682, 333);
+            this.ResultGrid.Size = new System.Drawing.Size(682, 335);
             this.ResultGrid.StyleInfo = resources.GetString("ResultGrid.StyleInfo");
             this.ResultGrid.TabIndex = 9;
             this.ResultGrid.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2010Blue;
@@ -420,7 +432,7 @@
             this.collapsibleSplitter3.ControlToHide = this.BottomPanel;
             this.collapsibleSplitter3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.collapsibleSplitter3.ExpandParentForm = false;
-            this.collapsibleSplitter3.Location = new System.Drawing.Point(0, 419);
+            this.collapsibleSplitter3.Location = new System.Drawing.Point(0, 421);
             this.collapsibleSplitter3.Name = "collapsibleSplitter3";
             this.collapsibleSplitter3.Size = new System.Drawing.Size(690, 8);
             this.collapsibleSplitter3.TabIndex = 117;
@@ -435,13 +447,13 @@
             this.RightPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.RightPanel.Location = new System.Drawing.Point(698, 0);
             this.RightPanel.Name = "RightPanel";
-            this.RightPanel.Size = new System.Drawing.Size(324, 580);
+            this.RightPanel.Size = new System.Drawing.Size(519, 582);
             this.RightPanel.TabIndex = 119;
             // 
             // BrowserProgress
             // 
             this.BrowserProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.BrowserProgress.Location = new System.Drawing.Point(4, 554);
+            this.BrowserProgress.Location = new System.Drawing.Point(4, 556);
             this.BrowserProgress.Name = "BrowserProgress";
             this.BrowserProgress.Size = new System.Drawing.Size(126, 23);
             this.BrowserProgress.TabIndex = 1;
@@ -456,29 +468,17 @@
             this.PreviewSplitter.ExpandParentForm = false;
             this.PreviewSplitter.Location = new System.Drawing.Point(690, 0);
             this.PreviewSplitter.Name = "PreviewSplitter";
-            this.PreviewSplitter.Size = new System.Drawing.Size(8, 580);
+            this.PreviewSplitter.Size = new System.Drawing.Size(8, 582);
             this.PreviewSplitter.TabIndex = 120;
             this.PreviewSplitter.TabStop = false;
             this.PreviewSplitter.UseAnimations = false;
             this.PreviewSplitter.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
             // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(162, 6);
-            // 
-            // CopyMenu
-            // 
-            this.CopyMenu.Name = "CopyMenu";
-            this.CopyMenu.Size = new System.Drawing.Size(165, 22);
-            this.CopyMenu.Text = "コピー(&C) Ctrl+C";
-            this.CopyMenu.Click += new System.EventHandler(this.CopyMenu_Click);
-            // 
             // SimpleSearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1022, 580);
+            this.ClientSize = new System.Drawing.Size(1217, 582);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.collapsibleSplitter3);
             this.Controls.Add(this.BottomPanel);
