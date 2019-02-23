@@ -41,6 +41,38 @@ namespace PokudaSearch.IndexBuilder {
 
         #region Properties
         /// <summary>インデックス作成開始日時</summary>
+        private static Dictionary<string, string> _targetExtentionDic = new Dictionary<string, string>() {
+            {".csv", ""},
+            {".log", ""},
+            {".txt", ""},
+            {".sql", ""},
+
+            {".chm", ""},
+            {".hlp", ""},
+
+            {".md", ""},
+            {".mdown", ""},
+
+            {".html", ""},
+            {".htm", ""},
+            {".xml", ""},
+
+            {".pdf", ""},
+            {".ppt", ""},
+            {".pptx", ""},
+            {".pptm", ""},
+            {".xls", ""},
+            {".xlsx", ""},
+            {".xlsm", ""},
+            {".xlsb", ""},
+            {".doc", ""},
+            {".docx", ""}
+        };
+        public static Dictionary<string, string> TargetExtentionDic {
+            set { TargetExtentionDic = value; }
+            get { return TargetExtentionDic; }
+        }
+        /// <summary>インデックス作成開始日時</summary>
         private static DateTime _startTime = DateTime.Now;
         public static DateTime StartTime {
             get { return _startTime; }
@@ -146,12 +178,13 @@ namespace PokudaSearch.IndexBuilder {
             string rootPath, 
             string targetDir, 
             IProgress<ProgressReport> progress, 
-            TextExtractModes txtExtractMode) {
+            TextExtractModes txtExtractMode,
+            bool isAppendMode) {
 
             try {
                 _txtExtractMode = txtExtractMode;
 
-                var worker = await CreateIndexAsync(analyzer, rootPath, targetDir, progress);
+                var worker = await CreateIndexAsync(analyzer, rootPath, targetDir, progress, isAppendMode);
 
                 AppObject.Logger.Info("インデックス構築処理完了");
             } catch (Exception e) {
@@ -199,8 +232,9 @@ namespace PokudaSearch.IndexBuilder {
             Analyzer analyzer, 
             string rootPath, 
             string targetDir, 
-            IProgress<ProgressReport> progress) {
-            return Task.Run<LuceneIndexBuilder>(() => DoWorkSingle(analyzer, rootPath, targetDir, progress));
+            IProgress<ProgressReport> progress,
+            bool isAppendMode) {
+            return Task.Run<LuceneIndexBuilder>(() => DoWorkSingle(analyzer, rootPath, targetDir, progress, isAppendMode));
         }
 
 
@@ -216,7 +250,8 @@ namespace PokudaSearch.IndexBuilder {
             Analyzer analyzer, 
             string rootPath, 
             string targetDir, 
-            IProgress<ProgressReport> progress) {
+            IProgress<ProgressReport> progress,
+            bool isAppendMode) {
 
             var targetFileList = FileUtil.GetAllFileInfo(targetDir);
             _targetCount = targetFileList.Count;
@@ -235,7 +270,8 @@ namespace PokudaSearch.IndexBuilder {
                     rootPath + IndexDirName,
                     targetFileList,
                     progress,
-                    "Thread1"));
+                    "Thread1",
+                    isAppendMode));
 
             return instance;
         }
@@ -267,13 +303,15 @@ namespace PokudaSearch.IndexBuilder {
             string buildDirPath, 
             List<FileInfo> targetFileList, 
             IProgress<ProgressReport> progress,
-            string threadName) {
+            string threadName,
+            bool isAppendMode) {
 
             IndexWriterConfig config = new IndexWriterConfig(analyzer);
     		IndexWriter indexWriter = null;
 
             try {
                 var indexBuildDir = FSDirectory.Open(FileSystems.getDefault().getPath(buildDirPath));
+                config.SetRAMBufferSizeMB(1024); //デフォルト16MB
                 indexWriter = new IndexWriter(indexBuildDir, config);
 
                 //開始時刻を記録
@@ -288,7 +326,9 @@ namespace PokudaSearch.IndexBuilder {
                 });
 
                 //一旦削除
-                indexWriter.DeleteAll();
+                if (!isAppendMode) {
+                    indexWriter.DeleteAll();
+                }
 
     			foreach (FileInfo fi in targetFileList) {
     				//Officeのテンポラリファイルは無視。
@@ -297,32 +337,34 @@ namespace PokudaSearch.IndexBuilder {
                     }
 
     				try {
-    					AddDocument(fi.FullName, indexWriter);
-
-    					//インデックス作成ファイル表示
-    					Interlocked.Increment(ref _indexedCount);
-    					Interlocked.Exchange(ref _totalBytes, _totalBytes + fi.Length);
-
-                        AppObject.Logger.Info(threadName + ":" + fi.FullName);
+                        if (AddDocument(fi.FullName, indexWriter, threadName)) {
+        					//インデックス作成ファイル表示
+        					Interlocked.Increment(ref _indexedCount);
+        					Interlocked.Exchange(ref _totalBytes, _totalBytes + fi.Length);
+                            AppObject.Logger.Info(threadName + ":" + fi.FullName);
+                        } else {
+                			Interlocked.Increment(ref _skippedCount);
+                            AppObject.Logger.Info(threadName + ":" + "Out of target extension. Skipped: " + fi.FullName);
+                        }
+    				} catch (IOException ioe) {
+                        AppObject.Logger.Error(ioe.StackTrace);
+    					Interlocked.Increment(ref _skippedCount);
+                        AppObject.Logger.Info(threadName + ":" + "Skipped: " + fi.FullName);
+                        //TODO IndexWriter is Closedをキャッチできるようであれば中断する。
     				} catch (Exception e) {
     					//インデックスが作成できなかったファイルを表示
-                        AppObject.Logger.Error(e.Message);
+                        AppObject.Logger.Warn(e.Message);
     					Interlocked.Increment(ref _skippedCount);
                         AppObject.Logger.Info(threadName + ":" + "Skipped: " + fi.FullName);
     				}
-
                     //進捗度更新を呼び出し。
                     progress.Report(new ProgressReport() {
-                        Percent = (int)((double)(FinishedCount) / _targetCount * 100),
+                        Percent = GetPercentage(),
                         ProgressCount = FinishedCount,
                         TargetCount = _targetCount,
                         Finished = false
                     });
     			}
-                //if (_indexedCount % 1000 == 0) {
-                //    //1000ファイル処理毎にコミット
-                //    indexWriter.Commit();
-                //}
                 AppObject.Logger.Info(threadName + "：完了");
             } catch (Exception e) {
                 AppObject.Logger.Error(e.StackTrace);
@@ -338,12 +380,19 @@ namespace PokudaSearch.IndexBuilder {
                 //完了時刻を記録
                 _endTime = DateTime.Now;
                 progress.Report(new ProgressReport() {
-                    Percent = (int)((double)(FinishedCount) / _targetCount * 100),
+                    Percent = GetPercentage(),
                     ProgressCount = FinishedCount,
                     TargetCount = _targetCount,
                     Finished = true
                 });
             }
+        }
+        private int GetPercentage() {
+            int val = (int)((double)(FinishedCount) / _targetCount * 100);
+            if (val > 100) {
+                val = 100;
+            }
+            return val;
         }
         /// <summary>
         /// インデックスを本番フォルダへコピー
@@ -373,10 +422,16 @@ namespace PokudaSearch.IndexBuilder {
         /// </summary>
         /// <param name="path"></param>
         /// <param name="indexWriter"></param>
-        private void AddDocument(string path, IndexWriter indexWriter) {
+        private bool AddDocument(string path, IndexWriter indexWriter, string threadName) {
 			Document doc = new Document();
 			string filename = System.IO.Path.GetFileName(path);
 			string extention = System.IO.Path.GetExtension(path);
+            
+            if (extention == "" ||
+                !_targetExtentionDic.ContainsKey(extention.ToLower())) {
+                //拡張子なし or 対象拡張子外
+                return false;
+            }
 
             if (_txtExtractMode == TextExtractModes.Tika) {
                 var content = _txtExtractor.Extract(path);
@@ -391,6 +446,8 @@ namespace PokudaSearch.IndexBuilder {
 			doc.Add(new StringField("title", filename.ToLower(), FieldStore.YES));
 			doc.Add(new StringField("extention", extention.ToLower(), FieldStore.YES));
 			indexWriter.AddDocument(doc);
+
+            return true;
         }
 
         /// <summary>
@@ -583,7 +640,7 @@ namespace PokudaSearch.IndexBuilder {
     					continue;
                     }
     				try {
-    					AddDocument(fi.FullName, indexWriter);
+    					AddDocument(fi.FullName, indexWriter, threadName);
 
     					//インデックス作成ファイル表示
     					Interlocked.Increment(ref _indexedCount);
@@ -600,7 +657,7 @@ namespace PokudaSearch.IndexBuilder {
 
                     //進捗度更新を呼び出し。
                     progress.Report(new ProgressReport() {
-                        Percent = (int)((double)(FinishedCount) / _targetCount * 100),
+                        Percent = GetPercentage(),
                         ProgressCount = FinishedCount,
                         TargetCount = _targetCount,
                         Finished = false

@@ -63,6 +63,16 @@ namespace PokudaSearch.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
+        internal static System.Drawing.Bitmap EditClear24 {
+            get {
+                object obj = ResourceManager.GetObject("EditClear24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
         internal static System.Drawing.Bitmap Excel24 {
             get {
                 object obj = ResourceManager.GetObject("Excel24", resourceCulture);

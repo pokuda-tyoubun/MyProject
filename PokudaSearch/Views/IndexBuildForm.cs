@@ -1,6 +1,7 @@
 ﻿using C1.Win.C1FlexGrid;
 using FxCommonLib.Consts;
 using FxCommonLib.Utils;
+using Microsoft.WindowsAPICodePack.Taskbar;
 using PokudaSearch.IndexBuilder;
 using System;
 using System.Data;
@@ -216,7 +217,14 @@ namespace PokudaSearch.Views {
             this.ProgressBar.Style = ProgressBarStyle.Continuous;
             this.ProgressBar.Value = report.Percent;
             this.LogViewerText.Text = report.ProgressCount.ToString() + "/" + report.TargetCount.ToString();
+
+            //タスクバーのプログレス
+            TaskbarManager.Instance.SetProgressValue(report.Percent, 100);
+
             if (report.Finished) {
+
+                //TODO isAppendMode対応
+
                 //NOTE:マルチスレッドも見据えてカウンタをstatic化したので、
                 //　　 処理結果を戻り値workerから受け取らずにstaticプロパティから受け取る
                 foreach (DataRow dr in _history.Rows) {
@@ -240,6 +248,9 @@ namespace PokudaSearch.Views {
                 LoadHistory(_history);
 
                 SaveHistoryCSV();
+
+                TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
+                this.CreateIndexButton.Enabled = true;
             }
         }
 
@@ -267,7 +278,8 @@ namespace PokudaSearch.Views {
                     AppObject.RootDirPath, 
                     this.TargetDirText.Text,
                     progress,
-                    mode);
+                    mode,
+                    false);
                 //Multri RAMDirectoryで構築
                 //LuceneIndexWorker.CreateIndexByMultiRAM(
                 //    AppObject.AppAnalyzer, 
@@ -278,7 +290,6 @@ namespace PokudaSearch.Views {
 
             } finally {
                 AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_END), false, sw);
-                this.CreateIndexButton.Enabled = false;
             }
         }
 
@@ -322,7 +333,29 @@ namespace PokudaSearch.Views {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void UpdateIndexButton_Click(object sender, EventArgs e) {
+            LuceneIndexBuilder.TextExtractModes mode = LuceneIndexBuilder.TextExtractModes.Tika;
+            if (this.IFilterRadio.Checked) {
+                mode = LuceneIndexBuilder.TextExtractModes.IFilter;
+            }
 
+            this.CreateIndexButton.Enabled = false;
+            Stopwatch sw = new Stopwatch();
+            AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_PROCESSING), true, sw);
+            try {
+                this.ProgressBar.Style = ProgressBarStyle.Marquee;
+                this.LogViewerText.Text = "対象ファイルカウント中...";
+                var progress = new Progress<ProgressReport>(SetProgressValue);
+                LuceneIndexBuilder.CreateIndexBySingleThread(
+                    AppObject.AppAnalyzer, 
+                    AppObject.RootDirPath, 
+                    this.TargetDirText.Text,
+                    progress,
+                    mode,
+                    true);
+
+            } finally {
+                AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_END), false, sw);
+            }
         }
     }
 }

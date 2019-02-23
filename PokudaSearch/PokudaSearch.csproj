@@ -245,6 +245,12 @@
     <Compile Include="Views\FileExplorerForm.Designer.cs">
       <DependentUpon>FileExplorerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\IndexBuilderConfigForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\IndexBuilderConfigForm.Designer.cs">
+      <DependentUpon>IndexBuilderConfigForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\IndexBuildForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -275,6 +281,9 @@
     </Compile>
     <EmbeddedResource Include="Views\FileExplorerForm.resx">
       <DependentUpon>FileExplorerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\IndexBuilderConfigForm.resx">
+      <DependentUpon>IndexBuilderConfigForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\IndexBuildForm.resx">
       <DependentUpon>IndexBuildForm.cs</DependentUpon>
@@ -331,6 +340,8 @@
   <ItemGroup>
     <None Include="Resources\Explorer24.png" />
     <None Include="Resources\File16.bmp" />
+    <Content Include="Doc\Skipされた拡張子.txt" />
+    <None Include="Resources\EditClear24.bmp" />
     <Content Include="UserDictionary.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -83,22 +83,22 @@
             // TikaRadio
             // 
             this.TikaRadio.AutoSize = true;
+            this.TikaRadio.Checked = true;
             this.TikaRadio.Location = new System.Drawing.Point(6, 17);
             this.TikaRadio.Name = "TikaRadio";
             this.TikaRadio.Size = new System.Drawing.Size(87, 16);
             this.TikaRadio.TabIndex = 16;
+            this.TikaRadio.TabStop = true;
             this.TikaRadio.Text = "Apache Tika";
             this.TikaRadio.UseVisualStyleBackColor = true;
             // 
             // IFilterRadio
             // 
             this.IFilterRadio.AutoSize = true;
-            this.IFilterRadio.Checked = true;
             this.IFilterRadio.Location = new System.Drawing.Point(110, 17);
             this.IFilterRadio.Name = "IFilterRadio";
             this.IFilterRadio.Size = new System.Drawing.Size(53, 16);
             this.IFilterRadio.TabIndex = 17;
-            this.IFilterRadio.TabStop = true;
             this.IFilterRadio.Text = "IFilter";
             this.IFilterRadio.UseVisualStyleBackColor = true;
             // 

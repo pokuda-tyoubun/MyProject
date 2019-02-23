@@ -49,18 +49,20 @@
             this.OpenParentMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.CopyMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.SearchButton = new System.Windows.Forms.Button();
             this.BottomPanel = new System.Windows.Forms.Panel();
             this.BottomLeftPanel = new System.Windows.Forms.Panel();
-            this.PreviewLabel = new C1.Win.C1SuperTooltip.C1SuperLabel();
-            this.WebBrowser = new System.Windows.Forms.WebBrowser();
-            this.MainPanel = new System.Windows.Forms.Panel();
-            this.PreviewCheck = new System.Windows.Forms.CheckBox();
-            this.ResultGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
-            this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
+            this.PreviewSplitter = new NJFLib.Controls.CollapsibleSplitter();
             this.RightPanel = new System.Windows.Forms.Panel();
             this.BrowserProgress = new System.Windows.Forms.ProgressBar();
-            this.PreviewSplitter = new NJFLib.Controls.CollapsibleSplitter();
+            this.WebBrowser = new System.Windows.Forms.WebBrowser();
+            this.PreviewLabel = new C1.Win.C1SuperTooltip.C1SuperLabel();
+            this.MainPanel = new System.Windows.Forms.Panel();
+            this.ClearButton = new System.Windows.Forms.Button();
+            this.PreviewCheck = new System.Windows.Forms.CheckBox();
+            this.ResultGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
+            this.SearchButton = new System.Windows.Forms.Button();
+            this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
+            this.MoreLikeThisMenu = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FailureFTSNavi)).BeginInit();
@@ -68,9 +70,9 @@
             this.ResultContext.SuspendLayout();
             this.BottomPanel.SuspendLayout();
             this.BottomLeftPanel.SuspendLayout();
+            this.RightPanel.SuspendLayout();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ResultGrid)).BeginInit();
-            this.RightPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -274,76 +276,90 @@
             this.OpenFileMenu,
             this.OpenParentMenu,
             this.toolStripMenuItem2,
-            this.CopyMenu});
+            this.CopyMenu,
+            this.MoreLikeThisMenu});
             this.ResultContext.Name = "ResultContext";
-            this.ResultContext.Size = new System.Drawing.Size(166, 76);
+            this.ResultContext.Size = new System.Drawing.Size(176, 120);
             // 
             // OpenFileMenu
             // 
             this.OpenFileMenu.Name = "OpenFileMenu";
-            this.OpenFileMenu.Size = new System.Drawing.Size(165, 22);
+            this.OpenFileMenu.Size = new System.Drawing.Size(175, 22);
             this.OpenFileMenu.Text = "ファイルを開く(&O)";
             this.OpenFileMenu.Click += new System.EventHandler(this.OpenFileMenu_Click);
             // 
             // OpenParentMenu
             // 
             this.OpenParentMenu.Name = "OpenParentMenu";
-            this.OpenParentMenu.Size = new System.Drawing.Size(165, 22);
+            this.OpenParentMenu.Size = new System.Drawing.Size(175, 22);
             this.OpenParentMenu.Text = "親フォルダを開く(&P)";
             this.OpenParentMenu.Click += new System.EventHandler(this.OpenParentMenu_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(162, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(172, 6);
             // 
             // CopyMenu
             // 
             this.CopyMenu.Name = "CopyMenu";
-            this.CopyMenu.Size = new System.Drawing.Size(165, 22);
+            this.CopyMenu.Size = new System.Drawing.Size(175, 22);
             this.CopyMenu.Text = "コピー(&C) Ctrl+C";
             this.CopyMenu.Click += new System.EventHandler(this.CopyMenu_Click);
-            // 
-            // SearchButton
-            // 
-            this.SearchButton.Image = global::PokudaSearch.Properties.Resources.Search24;
-            this.SearchButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.SearchButton.Location = new System.Drawing.Point(599, 4);
-            this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(80, 52);
-            this.SearchButton.TabIndex = 2;
-            this.SearchButton.Text = "検索(&S)";
-            this.SearchButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.SearchButton.UseVisualStyleBackColor = true;
-            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
             // BottomPanel
             // 
             this.BottomPanel.Controls.Add(this.BottomLeftPanel);
             this.BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.BottomPanel.Location = new System.Drawing.Point(0, 429);
+            this.BottomPanel.Location = new System.Drawing.Point(0, 352);
             this.BottomPanel.Name = "BottomPanel";
-            this.BottomPanel.Size = new System.Drawing.Size(690, 153);
+            this.BottomPanel.Size = new System.Drawing.Size(1004, 230);
             this.BottomPanel.TabIndex = 116;
             // 
             // BottomLeftPanel
             // 
+            this.BottomLeftPanel.Controls.Add(this.PreviewSplitter);
+            this.BottomLeftPanel.Controls.Add(this.RightPanel);
             this.BottomLeftPanel.Controls.Add(this.PreviewLabel);
             this.BottomLeftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BottomLeftPanel.Location = new System.Drawing.Point(0, 0);
             this.BottomLeftPanel.Name = "BottomLeftPanel";
-            this.BottomLeftPanel.Size = new System.Drawing.Size(690, 153);
+            this.BottomLeftPanel.Size = new System.Drawing.Size(1004, 230);
             this.BottomLeftPanel.TabIndex = 3;
             // 
-            // PreviewLabel
+            // PreviewSplitter
             // 
-            this.PreviewLabel.BackColor = System.Drawing.SystemColors.Window;
-            this.PreviewLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PreviewLabel.Location = new System.Drawing.Point(0, 0);
-            this.PreviewLabel.Name = "PreviewLabel";
-            this.PreviewLabel.Size = new System.Drawing.Size(690, 153);
-            this.PreviewLabel.TabIndex = 0;
-            this.PreviewLabel.UseMnemonic = true;
+            this.PreviewSplitter.AnimationDelay = 20;
+            this.PreviewSplitter.AnimationStep = 20;
+            this.PreviewSplitter.BorderStyle3D = System.Windows.Forms.Border3DStyle.RaisedOuter;
+            this.PreviewSplitter.ControlToHide = this.RightPanel;
+            this.PreviewSplitter.Dock = System.Windows.Forms.DockStyle.Right;
+            this.PreviewSplitter.ExpandParentForm = false;
+            this.PreviewSplitter.Location = new System.Drawing.Point(616, 0);
+            this.PreviewSplitter.Name = "PreviewSplitter";
+            this.PreviewSplitter.Size = new System.Drawing.Size(8, 230);
+            this.PreviewSplitter.TabIndex = 121;
+            this.PreviewSplitter.TabStop = false;
+            this.PreviewSplitter.UseAnimations = false;
+            this.PreviewSplitter.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
+            // 
+            // RightPanel
+            // 
+            this.RightPanel.Controls.Add(this.BrowserProgress);
+            this.RightPanel.Controls.Add(this.WebBrowser);
+            this.RightPanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.RightPanel.Location = new System.Drawing.Point(624, 0);
+            this.RightPanel.Name = "RightPanel";
+            this.RightPanel.Size = new System.Drawing.Size(380, 230);
+            this.RightPanel.TabIndex = 120;
+            // 
+            // BrowserProgress
+            // 
+            this.BrowserProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.BrowserProgress.Location = new System.Drawing.Point(4, 204);
+            this.BrowserProgress.Name = "BrowserProgress";
+            this.BrowserProgress.Size = new System.Drawing.Size(126, 23);
+            this.BrowserProgress.TabIndex = 1;
             // 
             // WebBrowser
             // 
@@ -353,12 +369,22 @@
             this.WebBrowser.Location = new System.Drawing.Point(0, 0);
             this.WebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.WebBrowser.Name = "WebBrowser";
-            this.WebBrowser.Size = new System.Drawing.Size(516, 553);
+            this.WebBrowser.Size = new System.Drawing.Size(377, 201);
             this.WebBrowser.TabIndex = 0;
-            this.WebBrowser.ProgressChanged += new System.Windows.Forms.WebBrowserProgressChangedEventHandler(this.WebBrowser_ProgressChanged);
+            // 
+            // PreviewLabel
+            // 
+            this.PreviewLabel.BackColor = System.Drawing.SystemColors.Window;
+            this.PreviewLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PreviewLabel.Location = new System.Drawing.Point(0, 0);
+            this.PreviewLabel.Name = "PreviewLabel";
+            this.PreviewLabel.Size = new System.Drawing.Size(1004, 230);
+            this.PreviewLabel.TabIndex = 0;
+            this.PreviewLabel.UseMnemonic = true;
             // 
             // MainPanel
             // 
+            this.MainPanel.Controls.Add(this.ClearButton);
             this.MainPanel.Controls.Add(this.PreviewCheck);
             this.MainPanel.Controls.Add(this.label2);
             this.MainPanel.Controls.Add(this.KeywordText);
@@ -374,8 +400,21 @@
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(0, 0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(690, 421);
+            this.MainPanel.Size = new System.Drawing.Size(1004, 344);
             this.MainPanel.TabIndex = 118;
+            // 
+            // ClearButton
+            // 
+            this.ClearButton.Image = global::PokudaSearch.Properties.Resources.EditClear24;
+            this.ClearButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.ClearButton.Location = new System.Drawing.Point(683, 4);
+            this.ClearButton.Name = "ClearButton";
+            this.ClearButton.Size = new System.Drawing.Size(80, 52);
+            this.ClearButton.TabIndex = 117;
+            this.ClearButton.Text = "クリア";
+            this.ClearButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.ClearButton.UseVisualStyleBackColor = true;
+            this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
             // PreviewCheck
             // 
@@ -415,7 +454,7 @@
             this.ResultGrid.Rows.Count = 2;
             this.ResultGrid.Rows.DefaultSize = 18;
             this.ResultGrid.ShowErrors = true;
-            this.ResultGrid.Size = new System.Drawing.Size(682, 335);
+            this.ResultGrid.Size = new System.Drawing.Size(996, 258);
             this.ResultGrid.StyleInfo = resources.GetString("ResultGrid.StyleInfo");
             this.ResultGrid.TabIndex = 9;
             this.ResultGrid.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2010Blue;
@@ -423,6 +462,19 @@
             this.ResultGrid.SelChange += new System.EventHandler(this.ResultGrid_SelChange);
             this.ResultGrid.OwnerDrawCell += new C1.Win.C1FlexGrid.OwnerDrawCellEventHandler(this.ResultGrid_OwnerDrawCell);
             this.ResultGrid.DoubleClick += new System.EventHandler(this.ResultGrid_DoubleClick);
+            // 
+            // SearchButton
+            // 
+            this.SearchButton.Image = global::PokudaSearch.Properties.Resources.Search24;
+            this.SearchButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.SearchButton.Location = new System.Drawing.Point(599, 4);
+            this.SearchButton.Name = "SearchButton";
+            this.SearchButton.Size = new System.Drawing.Size(80, 52);
+            this.SearchButton.TabIndex = 2;
+            this.SearchButton.Text = "検索(&S)";
+            this.SearchButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.SearchButton.UseVisualStyleBackColor = true;
+            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
             // collapsibleSplitter3
             // 
@@ -432,58 +484,29 @@
             this.collapsibleSplitter3.ControlToHide = this.BottomPanel;
             this.collapsibleSplitter3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.collapsibleSplitter3.ExpandParentForm = false;
-            this.collapsibleSplitter3.Location = new System.Drawing.Point(0, 421);
+            this.collapsibleSplitter3.Location = new System.Drawing.Point(0, 344);
             this.collapsibleSplitter3.Name = "collapsibleSplitter3";
-            this.collapsibleSplitter3.Size = new System.Drawing.Size(690, 8);
+            this.collapsibleSplitter3.Size = new System.Drawing.Size(1004, 8);
             this.collapsibleSplitter3.TabIndex = 117;
             this.collapsibleSplitter3.TabStop = false;
             this.collapsibleSplitter3.UseAnimations = false;
             this.collapsibleSplitter3.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
             // 
-            // RightPanel
+            // MoreLikeThisMenu
             // 
-            this.RightPanel.Controls.Add(this.BrowserProgress);
-            this.RightPanel.Controls.Add(this.WebBrowser);
-            this.RightPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.RightPanel.Location = new System.Drawing.Point(698, 0);
-            this.RightPanel.Name = "RightPanel";
-            this.RightPanel.Size = new System.Drawing.Size(519, 582);
-            this.RightPanel.TabIndex = 119;
-            // 
-            // BrowserProgress
-            // 
-            this.BrowserProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.BrowserProgress.Location = new System.Drawing.Point(4, 556);
-            this.BrowserProgress.Name = "BrowserProgress";
-            this.BrowserProgress.Size = new System.Drawing.Size(126, 23);
-            this.BrowserProgress.TabIndex = 1;
-            // 
-            // PreviewSplitter
-            // 
-            this.PreviewSplitter.AnimationDelay = 20;
-            this.PreviewSplitter.AnimationStep = 20;
-            this.PreviewSplitter.BorderStyle3D = System.Windows.Forms.Border3DStyle.RaisedOuter;
-            this.PreviewSplitter.ControlToHide = this.RightPanel;
-            this.PreviewSplitter.Dock = System.Windows.Forms.DockStyle.Right;
-            this.PreviewSplitter.ExpandParentForm = false;
-            this.PreviewSplitter.Location = new System.Drawing.Point(690, 0);
-            this.PreviewSplitter.Name = "PreviewSplitter";
-            this.PreviewSplitter.Size = new System.Drawing.Size(8, 582);
-            this.PreviewSplitter.TabIndex = 120;
-            this.PreviewSplitter.TabStop = false;
-            this.PreviewSplitter.UseAnimations = false;
-            this.PreviewSplitter.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
+            this.MoreLikeThisMenu.Name = "MoreLikeThisMenu";
+            this.MoreLikeThisMenu.Size = new System.Drawing.Size(175, 22);
+            this.MoreLikeThisMenu.Text = "類似文書を検索(&M)";
+            this.MoreLikeThisMenu.Click += new System.EventHandler(this.MoreLikeThisMenu_Click);
             // 
             // SimpleSearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1217, 582);
+            this.ClientSize = new System.Drawing.Size(1004, 582);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.collapsibleSplitter3);
             this.Controls.Add(this.BottomPanel);
-            this.Controls.Add(this.PreviewSplitter);
-            this.Controls.Add(this.RightPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SimpleSearchForm";
             this.Text = "SimpleSearchForm";
@@ -498,10 +521,10 @@
             this.ResultContext.ResumeLayout(false);
             this.BottomPanel.ResumeLayout(false);
             this.BottomLeftPanel.ResumeLayout(false);
+            this.RightPanel.ResumeLayout(false);
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ResultGrid)).EndInit();
-            this.RightPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -537,12 +560,14 @@
         private C1.Win.C1SuperTooltip.C1SuperLabel PreviewLabel;
         private System.Windows.Forms.Panel MainPanel;
         private System.Windows.Forms.Panel BottomLeftPanel;
-        private System.Windows.Forms.WebBrowser WebBrowser;
         private System.Windows.Forms.CheckBox PreviewCheck;
-        private System.Windows.Forms.Panel RightPanel;
-        private NJFLib.Controls.CollapsibleSplitter PreviewSplitter;
-        private System.Windows.Forms.ProgressBar BrowserProgress;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem CopyMenu;
+        private NJFLib.Controls.CollapsibleSplitter PreviewSplitter;
+        private System.Windows.Forms.Panel RightPanel;
+        private System.Windows.Forms.ProgressBar BrowserProgress;
+        private System.Windows.Forms.WebBrowser WebBrowser;
+        internal System.Windows.Forms.Button ClearButton;
+        private System.Windows.Forms.ToolStripMenuItem MoreLikeThisMenu;
     }
 }

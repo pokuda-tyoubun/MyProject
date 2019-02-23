@@ -53,6 +53,7 @@ namespace PokudaSearch {
         private void MainFrameForm_Shown(object sender, EventArgs e) {
             //NOTE MainFrameFormの表示後に子フォームを表示しないと、閉じるボタンが複数表示されてしまう。
             LoadForms();
+            //LayoutMdi(MdiLayout.Cascade);
         }
 
         /// <summary>

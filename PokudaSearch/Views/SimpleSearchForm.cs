@@ -4,6 +4,7 @@ using FlexLucene.Analysis;
 using FlexLucene.Analysis.Ja;
 using FlexLucene.Document;
 using FlexLucene.Index;
+using FlexLucene.Queries.Mlt;
 using FlexLucene.Queryparser.Classic;
 using FlexLucene.Search;
 using FlexLucene.Search.Highlight;
@@ -48,6 +49,8 @@ namespace PokudaSearch.Views {
             UpdateDate,
             [EnumLabel("スコア")]
             Score,
+            [EnumLabel("DocId")]
+            DocId,
             [EnumLabel("ハイライト")]
             Hilight
         }
@@ -128,6 +131,8 @@ namespace PokudaSearch.Views {
             this.ResultGrid.Cols[(int)ColIndex.UpdateDate].Width = 60;
             this.ResultGrid[0, (int)ColIndex.Score] = EnumUtil.GetLabel(ColIndex.Score);
             this.ResultGrid.Cols[(int)ColIndex.Score].Width = 60;
+            this.ResultGrid[0, (int)ColIndex.DocId] = EnumUtil.GetLabel(ColIndex.DocId);
+            this.ResultGrid.Cols[(int)ColIndex.DocId].Width = 40;
             this.ResultGrid[0, (int)ColIndex.Hilight] = EnumUtil.GetLabel(ColIndex.Hilight);
             this.ResultGrid.Cols[(int)ColIndex.Hilight].Width = 600;
         }
@@ -151,10 +156,10 @@ namespace PokudaSearch.Views {
             var contentBqb = new BooleanQueryBuilder();
             //QueryParser titleQp = new QueryParser("title", AppObject.AppAnalyzer);
             //Query titleQuery = titleQp.Parse("*" + this.KeywordText.Text + "*"); //最初の文字にWildCardは適用されないようだ。
-            Query titleQuery = new WildcardQuery(new Term("title", "*" + this.KeywordText.Text.ToLower() + "*"));
+            Query titleQuery = new WildcardQuery(new Term("title", "*" + QueryParser.Escape(this.KeywordText.Text.ToLower()) + "*"));
             contentBqb.Add(titleQuery, BooleanClauseOccur.SHOULD);
             QueryParser contentQp = new QueryParser("content", AppObject.AppAnalyzer);
-            Query contentQuery = contentQp.Parse(this.KeywordText.Text);
+            Query contentQuery = contentQp.Parse(QueryParser.Escape(this.KeywordText.Text));
             contentBqb.Add(contentQuery, BooleanClauseOccur.SHOULD);
             allQuery.Add(contentBqb.Build(), BooleanClauseOccur.MUST);
             if (this.ExtentionText.Text != "") {
@@ -171,6 +176,9 @@ namespace PokudaSearch.Views {
             Highlighter hi = CreateHilighter(contentBqb.Build());
 
             try {
+                this.ResultGrid.Rows.Count = RowHeaderCount;
+                _htmlLabelList.Clear();
+
                 this.ResultGrid.Redraw = false;
 
                 AppObject.Logger.Info("length of top docs: " + docs.ScoreDocs.Length);
@@ -200,6 +208,7 @@ namespace PokudaSearch.Views {
                     this.ResultGrid[row, (int)ColIndex.Extention] = fi.Extension;
                     this.ResultGrid[row, (int)ColIndex.UpdateDate] = fi.LastWriteTime;
                     this.ResultGrid[row, (int)ColIndex.Score] = doc.Score;
+                    this.ResultGrid[row, (int)ColIndex.DocId] = doc.Doc;
 
                     // Highlighterで検索キーワード周辺の文字列(フラグメント)を取得
                     // TokenStream が必要なので取得
@@ -263,7 +272,8 @@ namespace PokudaSearch.Views {
                 Process.Start(path);
             } else {
                 //HACK メッセージ
-                MessageBox.Show("ファイルが存在しません。", AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("ファイルが存在しません。", 
+                    AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -321,24 +331,28 @@ namespace PokudaSearch.Views {
                 if (this.PreviewCheck.Checked) {
                     string extention = StringUtil.NullToBlank(this.ResultGrid.Rows[row][(int)ColIndex.Extention]);
                     string fullPath = StringUtil.NullToBlank(this.ResultGrid.Rows[row][(int)ColIndex.FullPath]);
-                    if (extention.ToLower() == ".pdf") {
-                        //そのままブラウザに表示
-                    } else if (extention.ToLower() == ".xlsx" ||
-                               extention.ToLower() == ".xls") {
-                        string tmpPath = SaveToThumbnailBitmap(fullPath);
-                        fullPath = tmpPath;
-                    } else if (extention.ToLower() == ".pptx") {
-                        string tmpPath = SaveToThumbnailBitmap(fullPath);
-                        fullPath = tmpPath;
-                    } else if (extention.ToLower() == ".ppt") {
-                        string tmpPath = SaveToThumbnailBitmap(fullPath);
-                        fullPath = tmpPath;
-                    } else if (extention.ToLower() == ".docx") {
-                        string tmpPath = SaveToThumbnailBitmap(fullPath);
-                        fullPath = tmpPath;
+                    if (!File.Exists(fullPath)) {
+                        fullPath = "";
                     } else {
+                        if (extention.ToLower() == ".pdf") {
+                            //そのままブラウザに表示
+                        } else if (extention.ToLower() == ".xlsx" ||
+                                   extention.ToLower() == ".xls") {
+                            string tmpPath = SaveToThumbnailBitmap(fullPath);
+                            fullPath = tmpPath;
+                        } else if (extention.ToLower() == ".pptx") {
+                            string tmpPath = SavePptToXPS(fullPath, over2007:true);
+                            fullPath = tmpPath;
+                        } else if (extention.ToLower() == ".ppt") {
+                            string tmpPath = SavePptToXPS(fullPath, over2007:false);
+                            fullPath = tmpPath;
+                        } else if (extention.ToLower() == ".docx" ||
+                                   extention.ToLower() == ".doc") {
+                            string tmpPath = SaveDocToMHtml(fullPath);
+                            fullPath = tmpPath;
+                        } else {
+                        }
                     }
-
                     if (fullPath == "") {
                         //TODO プレビュー不可を表示
                         this.WebBrowser.Navigate("");
@@ -349,57 +363,66 @@ namespace PokudaSearch.Views {
             }
         }
 
-        //private string SaveDocToMHtml(string fullPath) {
-        //    NetOffice.WordApi.Documents docs = null;
-        //    NetOffice.WordApi.Document doc = null;
-        //    string tmpPath = "";
+        private string SaveDocToMHtml(string fullPath) {
+            NetOffice.WordApi.Application wdApp = new NetOffice.WordApi.Application();
+            NetOffice.WordApi.Documents docs = null;
+            NetOffice.WordApi.Document doc = null;
+            string tmpPath = "";
 
-        //    try {
-        //        docs = _wdApp.Documents;
-        //        doc = docs.Open(fullPath);
-        //        tmpPath = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache) + 
-        //                    @"\" + Guid.NewGuid().ToString() + ".mhtml";
-        //        //XPSとして保存
-        //        doc.SaveAs(tmpPath, fileFormat: NetOffice.WordApi.Enums.WdSaveFormat.wdFormatWebArchive);
+            try {
+                docs = wdApp.Documents;
+                doc = docs.Open(fullPath);
+                tmpPath = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache) + 
+                            @"\" + Guid.NewGuid().ToString() + ".mhtml";
+                //XPSとして保存
+                doc.SaveAs(tmpPath, fileFormat: NetOffice.WordApi.Enums.WdSaveFormat.wdFormatWebArchive);
 
-        //    } catch (Exception e) {
-        //        AppObject.Logger.Warn(e.Message);
-        //        //プレビュー不可
-        //        tmpPath = "";
-        //    } finally {
-        //        doc.Close();
-        //    }
-        //    return tmpPath;
-        //}
+            } catch (Exception e) {
+                AppObject.Logger.Warn(e.Message);
+                //プレビュー不可
+                tmpPath = "";
+            } finally {
+                doc.Close();
+                wdApp.Dispose();
+            }
+            return tmpPath;
+        }
 
-        //private string SavePptToXPS(string fullPath, bool over2007) {
-        //    object presentations = null;
-        //    object presentation = null;
-        //    string tmpPath = "";
+        private string SavePptToXPS(string fullPath, bool over2007) {
+            NetOffice.PowerPointApi.Application pptApp = new NetOffice.PowerPointApi.Application();
+            NetOffice.PowerPointApi.Presentations presentations = null;
+            NetOffice.PowerPointApi.Presentation presentation = null;
+            string tmpPath = "";
 
-        //    try {
-        //        presentations = _ppu.GetPresentations(_ppApp);
-        //        if (over2007) {
-        //            presentation = _ppu.Open2007(presentations, fullPath, PowerPointUtil.MsoTriState.msoFalse);
-        //        } else {
-        //            presentation = _ppu.Open(presentations, fullPath, PowerPointUtil.MsoTriState.msoFalse);
-        //        }
-        //        tmpPath = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache) + 
-        //                    @"\" + Guid.NewGuid().ToString() + ".xps";
-        //        //XPSとして保存
-        //        _ppu.SaveAs(presentation, tmpPath, PowerPointUtil.PpFileFormat.PpSaveAsXPS);
+            try {
+                presentations = pptApp.Presentations;
+                if (over2007) {
+                    presentation = presentations.Open2007(fileName:fullPath,
+                                                          readOnly:NetOffice.OfficeApi.Enums.MsoTriState.msoFalse,
+                                                          untitled:Type.Missing,
+                                                          withWindow:NetOffice.OfficeApi.Enums.MsoTriState.msoFalse,
+                                                          openAndRepair:Type.Missing);
+                } else {
+                    presentation = presentations.Open(fileName: fullPath,
+                                                      readOnly: NetOffice.OfficeApi.Enums.MsoTriState.msoFalse,
+                                                      untitled: Type.Missing,
+                                                      withWindow: NetOffice.OfficeApi.Enums.MsoTriState.msoFalse);
+                }
+                tmpPath = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache) + 
+                            @"\" + Guid.NewGuid().ToString() + ".xps";
+                //XPSとして保存
+                presentation.SaveAs(tmpPath, fileFormat: NetOffice.PowerPointApi.Enums.PpSaveAsFileType.ppSaveAsXPS);
 
-        //    } catch (Exception e) {
-        //        AppObject.Logger.Warn(e.Message);
-        //        //プレビュー不可
-        //        tmpPath = "";
-        //    } finally {
-        //        _ppu.Close(presentation);
-        //        _com.MReleaseComObject(presentation);
-        //        _com.MReleaseComObject(presentations);
-        //    }
-        //    return tmpPath;
-        //}
+            } catch (Exception e) {
+                AppObject.Logger.Warn(e.Message);
+                //プレビュー不可
+                tmpPath = "";
+            } finally {
+                presentation.Close();
+                pptApp.Dispose();
+            }
+            return tmpPath;
+        }
 
         private string SaveToThumbnailBitmap(string fullPath) {
             string tmpPath = "";
@@ -465,7 +488,7 @@ namespace PokudaSearch.Views {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SimpleSearchForm_Shown(object sender, EventArgs e) {
-            this.PreviewCheck.Checked = true;
+            this.PreviewCheck.Checked = false;
         }
 
         /// <summary>
@@ -490,6 +513,66 @@ namespace PokudaSearch.Views {
         /// <param name="e"></param>
         private void CopyMenu_Click(object sender, EventArgs e) {
             this.ResultGrid.CopyEx();
+        }
+
+        private void ClearButton_Click(object sender, EventArgs e) {
+            this.KeywordText.Text = "";
+            this.ExtentionText.Text = "";
+            this.UpdateDate1.Value = "";
+            this.UpdateDate2.Value = "";
+        }
+
+        private void MoreLikeThisMenu_Click(object sender, EventArgs e) {
+
+            java.nio.file.Path idxPath = FileSystems.getDefault().getPath(AppObject.RootDirPath + LuceneIndexBuilder.IndexDirName);
+            var fsDir = FSDirectory.Open(idxPath);
+            IndexReader idxReader = DirectoryReader.Open(fsDir);
+            IndexSearcher idxSearcher = new IndexSearcher(idxReader);
+            MoreLikeThis mlt = new MoreLikeThis(idxReader);
+            mlt.SetFieldNames(new string[] {"title", "content"});
+            mlt.SetAnalyzer(AppObject.AppAnalyzer);
+
+            int docId = (int)this.ResultGrid[this.ResultGrid.Selection.TopRow, (int)ColIndex.DocId];
+            Query q = mlt.Like(docId);
+
+            TopDocs docs = idxSearcher.Search(q, 10);
+
+            foreach (ScoreDoc doc in docs.ScoreDocs) {
+                Document thisDoc = idxSearcher.Doc(doc.Doc);
+                string fullPath = thisDoc.Get("path");
+
+                Debug.WriteLine(fullPath);
+
+               // Bitmap bmp = Properties.Resources.File16;
+               // if (File.Exists(fullPath)) {
+               //     try {
+
+               //         bmp = Icon.ExtractAssociatedIcon(fullPath).ToBitmap();
+               //     } catch {
+               //         //プレビューを取得できない場合は、デフォルトアイコンを表示
+               //     }
+               // }
+               // bmp.MakeTransparent();
+               // //16,16
+               // this.ResultGrid.SetCellImage(row, (int)ColIndex.FileIcon, _bu.Resize(bmp, 16, 16));
+               // this.ResultGrid[row, (int)ColIndex.FileName] = thisDoc.Get("title");
+               // this.ResultGrid[row, (int)ColIndex.FullPath] = fullPath;
+
+               // //HACK ループ内のnewを避けれないか?
+               // var fi = new FileInfo(fullPath);
+               // this.ResultGrid[row, (int)ColIndex.Extention] = fi.Extension;
+               // this.ResultGrid[row, (int)ColIndex.UpdateDate] = fi.LastWriteTime;
+               // this.ResultGrid[row, (int)ColIndex.Score] = doc.Score;
+
+               // // Highlighterで検索キーワード周辺の文字列(フラグメント)を取得
+               // // TokenStream が必要なので取得
+               // TokenStream stream = TokenSources.GetAnyTokenStream(idxReader,
+               //         doc.Doc, "content", AppObject.AppAnalyzer);
+               // string[] str = hi.GetBestFragments(stream, thisDoc.Get("content"), 5);
+               // this.ResultGrid[row, (int)ColIndex.Hilight] = string.Join(",", str);
+
+               // row++;
+            }
         }
 
 
