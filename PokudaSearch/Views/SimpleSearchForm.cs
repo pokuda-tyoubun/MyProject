@@ -515,6 +515,11 @@ namespace PokudaSearch.Views {
             this.ResultGrid.CopyEx();
         }
 
+        /// <summary>
+        /// クリアボタンクリック
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClearButton_Click(object sender, EventArgs e) {
             this.KeywordText.Text = "";
             this.ExtentionText.Text = "";
@@ -522,6 +527,11 @@ namespace PokudaSearch.Views {
             this.UpdateDate2.Value = "";
         }
 
+        /// <summary>
+        /// 類似文書を検索
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MoreLikeThisMenu_Click(object sender, EventArgs e) {
 
             java.nio.file.Path idxPath = FileSystems.getDefault().getPath(AppObject.RootDirPath + LuceneIndexBuilder.IndexDirName);
@@ -535,43 +545,49 @@ namespace PokudaSearch.Views {
             int docId = (int)this.ResultGrid[this.ResultGrid.Selection.TopRow, (int)ColIndex.DocId];
             Query q = mlt.Like(docId);
 
-            TopDocs docs = idxSearcher.Search(q, 10);
+            this.ResultGrid.Rows.Count = RowHeaderCount;
 
+            TopDocs docs = idxSearcher.Search(q, 10);
+            Highlighter hi = CreateHilighter(q);
+
+            this.ResultGrid.Rows.Count = RowHeaderCount + docs.ScoreDocs.Length;
+            int row = RowHeaderCount;
             foreach (ScoreDoc doc in docs.ScoreDocs) {
                 Document thisDoc = idxSearcher.Doc(doc.Doc);
                 string fullPath = thisDoc.Get("path");
 
                 Debug.WriteLine(fullPath);
 
-               // Bitmap bmp = Properties.Resources.File16;
-               // if (File.Exists(fullPath)) {
-               //     try {
+                Bitmap bmp = Properties.Resources.File16;
+                if (File.Exists(fullPath)) {
+                    try {
 
-               //         bmp = Icon.ExtractAssociatedIcon(fullPath).ToBitmap();
-               //     } catch {
-               //         //プレビューを取得できない場合は、デフォルトアイコンを表示
-               //     }
-               // }
-               // bmp.MakeTransparent();
-               // //16,16
-               // this.ResultGrid.SetCellImage(row, (int)ColIndex.FileIcon, _bu.Resize(bmp, 16, 16));
-               // this.ResultGrid[row, (int)ColIndex.FileName] = thisDoc.Get("title");
-               // this.ResultGrid[row, (int)ColIndex.FullPath] = fullPath;
+                        bmp = Icon.ExtractAssociatedIcon(fullPath).ToBitmap();
+                    } catch {
+                        //プレビューを取得できない場合は、デフォルトアイコンを表示
+                    }
+                }
+                bmp.MakeTransparent();
+                //16,16
+                this.ResultGrid.SetCellImage(row, (int)ColIndex.FileIcon, _bu.Resize(bmp, 16, 16));
+                this.ResultGrid[row, (int)ColIndex.FileName] = thisDoc.Get("title");
+                this.ResultGrid[row, (int)ColIndex.FullPath] = fullPath;
 
-               // //HACK ループ内のnewを避けれないか?
-               // var fi = new FileInfo(fullPath);
-               // this.ResultGrid[row, (int)ColIndex.Extention] = fi.Extension;
-               // this.ResultGrid[row, (int)ColIndex.UpdateDate] = fi.LastWriteTime;
-               // this.ResultGrid[row, (int)ColIndex.Score] = doc.Score;
+                //HACK ループ内のnewを避けれないか?
+                var fi = new FileInfo(fullPath);
+                this.ResultGrid[row, (int)ColIndex.Extention] = fi.Extension;
+                this.ResultGrid[row, (int)ColIndex.UpdateDate] = fi.LastWriteTime;
+                this.ResultGrid[row, (int)ColIndex.Score] = doc.Score;
+                this.ResultGrid[row, (int)ColIndex.DocId] = doc.Doc;
 
-               // // Highlighterで検索キーワード周辺の文字列(フラグメント)を取得
-               // // TokenStream が必要なので取得
-               // TokenStream stream = TokenSources.GetAnyTokenStream(idxReader,
-               //         doc.Doc, "content", AppObject.AppAnalyzer);
-               // string[] str = hi.GetBestFragments(stream, thisDoc.Get("content"), 5);
-               // this.ResultGrid[row, (int)ColIndex.Hilight] = string.Join(",", str);
+                // Highlighterで検索キーワード周辺の文字列(フラグメント)を取得
+                // TokenStream が必要なので取得
+                TokenStream stream = TokenSources.GetAnyTokenStream(idxReader,
+                        doc.Doc, "content", AppObject.AppAnalyzer);
+                string[] str = hi.GetBestFragments(stream, thisDoc.Get("content"), 5);
+                this.ResultGrid[row, (int)ColIndex.Hilight] = string.Join(",", str);
 
-               // row++;
+                row++;
             }
         }
 

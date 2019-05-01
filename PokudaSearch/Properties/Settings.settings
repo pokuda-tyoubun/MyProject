@@ -8,5 +8,8 @@
     <Setting Name="IndexHistoryCSV" Type="System.String" Scope="User">
       <Value Profile="(Default)">IndexHistory.csv</Value>
     </Setting>
+    <Setting Name="SQLITE_DATA_SOURCE" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\DB\PokudaSearch.db</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

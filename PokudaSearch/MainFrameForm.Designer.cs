@@ -34,12 +34,14 @@
             this.ribbonQat1 = new C1.Win.C1Ribbon.RibbonQat();
             this.ribbonTab1 = new C1.Win.C1Ribbon.RibbonTab();
             this.ribbonGroup1 = new C1.Win.C1Ribbon.RibbonGroup();
-            this.SandBoxGroup = new C1.Win.C1Ribbon.RibbonGroup();
-            this.ribbonTopToolBar1 = new C1.Win.C1Ribbon.RibbonTopToolBar();
             this.FileExplorerButton = new C1.Win.C1Ribbon.RibbonButton();
             this.SearchFormButton = new C1.Win.C1Ribbon.RibbonButton();
             this.IndexBuildFormButton = new C1.Win.C1Ribbon.RibbonButton();
+            this.ribbonGroup2 = new C1.Win.C1Ribbon.RibbonGroup();
+            this.ribbonButton1 = new C1.Win.C1Ribbon.RibbonButton();
+            this.SandBoxGroup = new C1.Win.C1Ribbon.RibbonGroup();
             this.TestFormButton = new C1.Win.C1Ribbon.RibbonButton();
+            this.ribbonTopToolBar1 = new C1.Win.C1Ribbon.RibbonTopToolBar();
             this.MainStatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainRibbon)).BeginInit();
             this.SuspendLayout();
@@ -99,6 +101,7 @@
             // ribbonTab1
             // 
             this.ribbonTab1.Groups.Add(this.ribbonGroup1);
+            this.ribbonTab1.Groups.Add(this.ribbonGroup2);
             this.ribbonTab1.Groups.Add(this.SandBoxGroup);
             this.ribbonTab1.Name = "ribbonTab1";
             this.ribbonTab1.Text = "タブ";
@@ -110,17 +113,6 @@
             this.ribbonGroup1.Items.Add(this.IndexBuildFormButton);
             this.ribbonGroup1.Name = "ribbonGroup1";
             this.ribbonGroup1.Text = "全文検索";
-            // 
-            // SandBoxGroup
-            // 
-            this.SandBoxGroup.Items.Add(this.TestFormButton);
-            this.SandBoxGroup.Name = "SandBoxGroup";
-            this.SandBoxGroup.Text = "SandBox";
-            this.SandBoxGroup.DialogLauncherClick += new System.EventHandler(this.SandBoxGroup_DialogLauncherClick);
-            // 
-            // ribbonTopToolBar1
-            // 
-            this.ribbonTopToolBar1.Name = "ribbonTopToolBar1";
             // 
             // FileExplorerButton
             // 
@@ -146,12 +138,35 @@
             this.IndexBuildFormButton.Text = "インデックス作成";
             this.IndexBuildFormButton.Click += new System.EventHandler(this.IndexBuildFormButton_Click);
             // 
+            // ribbonGroup2
+            // 
+            this.ribbonGroup2.Items.Add(this.ribbonButton1);
+            this.ribbonGroup2.Name = "ribbonGroup2";
+            this.ribbonGroup2.Text = "分析";
+            // 
+            // ribbonButton1
+            // 
+            this.ribbonButton1.Name = "ribbonButton1";
+            this.ribbonButton1.SmallImage = ((System.Drawing.Image)(resources.GetObject("ribbonButton1.SmallImage")));
+            this.ribbonButton1.Text = "抽出語リスト";
+            // 
+            // SandBoxGroup
+            // 
+            this.SandBoxGroup.Items.Add(this.TestFormButton);
+            this.SandBoxGroup.Name = "SandBoxGroup";
+            this.SandBoxGroup.Text = "SandBox";
+            this.SandBoxGroup.DialogLauncherClick += new System.EventHandler(this.SandBoxGroup_DialogLauncherClick);
+            // 
             // TestFormButton
             // 
             this.TestFormButton.Name = "TestFormButton";
             this.TestFormButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("TestFormButton.SmallImage")));
             this.TestFormButton.Text = "TestForm";
             this.TestFormButton.Click += new System.EventHandler(this.TestFormButton_Click);
+            // 
+            // ribbonTopToolBar1
+            // 
+            this.ribbonTopToolBar1.Name = "ribbonTopToolBar1";
             // 
             // MainFrameForm
             // 
@@ -192,5 +207,7 @@
         private C1.Win.C1Ribbon.RibbonGroup SandBoxGroup;
         private C1.Win.C1Ribbon.RibbonButton TestFormButton;
         private C1.Win.C1Ribbon.RibbonButton FileExplorerButton;
+        private C1.Win.C1Ribbon.RibbonGroup ribbonGroup2;
+        private C1.Win.C1Ribbon.RibbonButton ribbonButton1;
     }
 }

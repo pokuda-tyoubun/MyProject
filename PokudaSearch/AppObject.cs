@@ -12,11 +12,10 @@ namespace PokudaSearch {
     public static class AppObject {
         
         //HACK インデックス有効拡張子マスタ機能を設ける。
-        //HACK SQLiteを活用する。
 
-        //HACK 類似ファイル検索
 
         //HACK 文書のカテゴライズ
+        //HACK ファセット機能の実装
 
         //HACK 重複ファイル検知
             //サイズ && Tikaの抽出内容
@@ -27,6 +26,7 @@ namespace PokudaSearch {
 
         //HACK売り方--------------------------------------------------------------
         //基本機能は無償にする。
+        //ヘルプサイトに広告を付ける
         //上位機能を有償版にする。
         //HACK売り方--------------------------------------------------------------
 
@@ -89,8 +89,11 @@ namespace PokudaSearch {
         //HACK ディレクトリを絞って検索する機能が欲しい
         //      KWIC Finder風のＵＩにする
         //HACK 転置インデックスではなく、その場で抽出して検索する機能も欲しい
+        //HACK インデックス以下をクロールしてサムネイルを作成する。
 
         //DONE List--------------------------------------------------------------------------
+        //DONE SQLiteを活用する。
+        //DONE 類似ファイル検索
         //DONE Apache Tikaだと大量ファイル時にインデックス作成が完了しない。（最後で止まる）
         //     →インデックス作成から6時間20分後にIndex Writer is Closedのエラーが発生している。
         //          →特定のファイルでcloseになったのか？
@@ -161,6 +164,15 @@ namespace PokudaSearch {
         private static ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public static ILog Logger {
             get { return _logger; }
+        }
+
+        /// <summary>PokudaSearch.dbへの接続文字列</summary>
+        public static string ConnectString { get; set; }
+
+        /// <summary>SQLiteユーティリティ</summary>
+        private static SQLiteDBUtil _db = new SQLiteDBUtil(AppObject.Logger);
+        public static SQLiteDBUtil DbUtil {
+            get { return _db; }
         }
 
         /// <summary>メインフレーム画面のインスタンス</summary>

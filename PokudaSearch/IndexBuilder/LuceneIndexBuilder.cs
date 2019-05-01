@@ -41,33 +41,7 @@ namespace PokudaSearch.IndexBuilder {
 
         #region Properties
         /// <summary>インデックス作成開始日時</summary>
-        private static Dictionary<string, string> _targetExtentionDic = new Dictionary<string, string>() {
-            {".csv", ""},
-            {".log", ""},
-            {".txt", ""},
-            {".sql", ""},
-
-            {".chm", ""},
-            {".hlp", ""},
-
-            {".md", ""},
-            {".mdown", ""},
-
-            {".html", ""},
-            {".htm", ""},
-            {".xml", ""},
-
-            {".pdf", ""},
-            {".ppt", ""},
-            {".pptx", ""},
-            {".pptm", ""},
-            {".xls", ""},
-            {".xlsx", ""},
-            {".xlsm", ""},
-            {".xlsb", ""},
-            {".doc", ""},
-            {".docx", ""}
-        };
+        private static Dictionary<string, string> _targetExtentionDic = null;
         public static Dictionary<string, string> TargetExtentionDic {
             set { TargetExtentionDic = value; }
             get { return TargetExtentionDic; }
@@ -137,10 +111,28 @@ namespace PokudaSearch.IndexBuilder {
         /// コンストラクタ
         /// </summary>
         public LuceneIndexBuilder() {
+            _targetExtentionDic = CreateTargetExtensionsDic();
             SetHighlightFieldContentType(_hilightFieldType);
         }
         #endregion Constractors
 
+        private Dictionary<string, string> CreateTargetExtensionsDic() {
+            var dic = new Dictionary<string, string>();
+
+            AppObject.DbUtil.Open(AppObject.ConnectString);
+            try {
+                DataSet ds = AppObject.DbUtil.ExecSelect(SQLSrc.m_extensions.SELECT_ALL);
+                foreach (DataRow dr in ds.Tables[0].Rows) {
+                    string ext = StringUtil.NullToBlank(dr["extension"]);
+                    if (!dic.ContainsKey(ext)) {
+                        dic.Add(ext, "");
+                    }
+                }
+            } finally {
+                AppObject.DbUtil.Close();
+            }
+            return dic;
+        }
 
         /// <summary>
         /// ハイライト対象フィールド用のフィールド定義

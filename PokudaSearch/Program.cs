@@ -5,6 +5,7 @@ using PokudaSearch.IndexBuilder;
 using PokudaSearch.SandBox;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,6 +32,20 @@ namespace PokudaSearch {
         /// 初期処理
         /// </summary>
         private static void Initialize() {
+
+            //SQLite接続文字列作成
+            var builder = new System.Data.SQLite.SQLiteConnectionStringBuilder {
+                DataSource= Properties.Settings.Default.SQLITE_DATA_SOURCE,
+                Version = 3,
+                LegacyFormat = false,
+                //PageSize = 8192,
+                //CacheSize = 81920,
+                SyncMode = SynchronizationModes.Full, //途中で強制的に電源をOFFにすることも考えられるため。
+                JournalMode = SQLiteJournalModeEnum.Default
+            };
+            AppObject.ConnectString = builder.ToString();
+
+            //ユーザ辞書の設定
             AppObject.RootDirPath = Directory.GetParent(Application.ExecutablePath).FullName;
             AppObject.RootDirPath += LuceneIndexBuilder.StoreDirName;
 
