@@ -49,6 +49,7 @@
             this.OpenParentMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.CopyMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.MoreLikeThisMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.BottomPanel = new System.Windows.Forms.Panel();
             this.BottomLeftPanel = new System.Windows.Forms.Panel();
             this.PreviewSplitter = new NJFLib.Controls.CollapsibleSplitter();
@@ -62,7 +63,10 @@
             this.ResultGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
             this.SearchButton = new System.Windows.Forms.Button();
             this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
-            this.MoreLikeThisMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.SearchGridText = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.FilterGridButton = new System.Windows.Forms.ToolStripButton();
+            this.ClearFilterButton = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FailureFTSNavi)).BeginInit();
@@ -92,6 +96,7 @@
             this.KeywordText.Name = "KeywordText";
             this.KeywordText.Size = new System.Drawing.Size(516, 19);
             this.KeywordText.TabIndex = 1;
+            this.KeywordText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeywordText_KeyPress);
             // 
             // label1
             // 
@@ -178,6 +183,10 @@
             this.toolStripSeparator2,
             this.toolStripButton3,
             this.toolStripButton4,
+            this.toolStripSeparator4,
+            this.SearchGridText,
+            this.FilterGridButton,
+            this.ClearFilterButton,
             this.toolStripSeparator3,
             this.WriteExcelButton});
             this.FailureFTSNavi.Location = new System.Drawing.Point(8, 55);
@@ -187,7 +196,7 @@
             this.FailureFTSNavi.MovePreviousItem = this.toolStripButton2;
             this.FailureFTSNavi.Name = "FailureFTSNavi";
             this.FailureFTSNavi.PositionItem = this.toolStripTextBox1;
-            this.FailureFTSNavi.Size = new System.Drawing.Size(234, 25);
+            this.FailureFTSNavi.Size = new System.Drawing.Size(469, 25);
             this.FailureFTSNavi.TabIndex = 8;
             this.FailureFTSNavi.Text = "BindingNavigator1";
             // 
@@ -279,7 +288,7 @@
             this.CopyMenu,
             this.MoreLikeThisMenu});
             this.ResultContext.Name = "ResultContext";
-            this.ResultContext.Size = new System.Drawing.Size(176, 120);
+            this.ResultContext.Size = new System.Drawing.Size(176, 98);
             // 
             // OpenFileMenu
             // 
@@ -306,6 +315,13 @@
             this.CopyMenu.Size = new System.Drawing.Size(175, 22);
             this.CopyMenu.Text = "コピー(&C) Ctrl+C";
             this.CopyMenu.Click += new System.EventHandler(this.CopyMenu_Click);
+            // 
+            // MoreLikeThisMenu
+            // 
+            this.MoreLikeThisMenu.Name = "MoreLikeThisMenu";
+            this.MoreLikeThisMenu.Size = new System.Drawing.Size(175, 22);
+            this.MoreLikeThisMenu.Text = "類似文書を検索(&M)";
+            this.MoreLikeThisMenu.Click += new System.EventHandler(this.MoreLikeThisMenu_Click);
             // 
             // BottomPanel
             // 
@@ -492,12 +508,39 @@
             this.collapsibleSplitter3.UseAnimations = false;
             this.collapsibleSplitter3.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
             // 
-            // MoreLikeThisMenu
+            // SearchGridText
             // 
-            this.MoreLikeThisMenu.Name = "MoreLikeThisMenu";
-            this.MoreLikeThisMenu.Size = new System.Drawing.Size(175, 22);
-            this.MoreLikeThisMenu.Text = "類似文書を検索(&M)";
-            this.MoreLikeThisMenu.Click += new System.EventHandler(this.MoreLikeThisMenu_Click);
+            this.SearchGridText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SearchGridText.Name = "SearchGridText";
+            this.SearchGridText.Size = new System.Drawing.Size(150, 25);
+            this.SearchGridText.ToolTipText = "入力した文字でフィルタリングします。";
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // FilterGridButton
+            // 
+            this.FilterGridButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.FilterGridButton.Image = global::PokudaSearch.Properties.Resources.Search24;
+            this.FilterGridButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.FilterGridButton.Name = "FilterGridButton";
+            this.FilterGridButton.Size = new System.Drawing.Size(23, 22);
+            this.FilterGridButton.Text = "入力した文字でフィルタリング";
+            this.FilterGridButton.ToolTipText = "入力した文字でフィルタリング";
+            this.FilterGridButton.Click += new System.EventHandler(this.FilterGridButton_Click);
+            // 
+            // ClearFilterButton
+            // 
+            this.ClearFilterButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ClearFilterButton.Image = global::PokudaSearch.Properties.Resources.EditClear24;
+            this.ClearFilterButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ClearFilterButton.Name = "ClearFilterButton";
+            this.ClearFilterButton.Size = new System.Drawing.Size(23, 22);
+            this.ClearFilterButton.Text = "フィルタリング解除";
+            this.ClearFilterButton.ToolTipText = "フィルタリング解除";
+            this.ClearFilterButton.Click += new System.EventHandler(this.ClearFilterButton_Click);
             // 
             // SimpleSearchForm
             // 
@@ -569,5 +612,9 @@
         private System.Windows.Forms.WebBrowser WebBrowser;
         internal System.Windows.Forms.Button ClearButton;
         private System.Windows.Forms.ToolStripMenuItem MoreLikeThisMenu;
+        internal System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripTextBox SearchGridText;
+        private System.Windows.Forms.ToolStripButton FilterGridButton;
+        private System.Windows.Forms.ToolStripButton ClearFilterButton;
     }
 }

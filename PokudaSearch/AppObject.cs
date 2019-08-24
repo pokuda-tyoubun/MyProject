@@ -1,5 +1,6 @@
 ﻿using FlexLucene.Analysis;
 using FlexLucene.Analysis.Ja;
+using FxCommonLib.Models;
 using FxCommonLib.Utils;
 using log4net;
 using System;
@@ -13,6 +14,7 @@ namespace PokudaSearch {
         
         //HACK インデックス有効拡張子マスタ機能を設ける。
 
+        //HACK 検索対象フォルダを絞り込めるか？
 
         //HACK 文書のカテゴライズ
         //HACK ファセット機能の実装
@@ -26,8 +28,9 @@ namespace PokudaSearch {
 
         //HACK売り方--------------------------------------------------------------
         //基本機能は無償にする。
-        //ヘルプサイトに広告を付ける
-        //上位機能を有償版にする。
+        //ヘルプサイトに広告を付ける。
+        //上位機能を有償版にする?
+        //寄与方式にする？(簡単に寄与できる仕組み,クラファン？1Click課金みたいな)
         //HACK売り方--------------------------------------------------------------
 
         //HACK AI機能(上位オプション)----------------------------------------------
@@ -183,6 +186,11 @@ namespace PokudaSearch {
 
         public static Analyzer AppAnalyzer = null;
 
+        /// <summary>フィルターヘルパ</summary>
+        private static FilterHelper _filterHelper = new FilterHelper();
+        public static FilterHelper FilterHelper {
+            get { return _filterHelper; }
+        }
 
         /// <summary>メッセージリソース</summary>
         private static MultiLangUtil _mlu = new MultiLangUtil();
@@ -198,6 +206,8 @@ namespace PokudaSearch {
             _mlu.MessageDictionary.Add("ACT_EXTRACT", "抽出中...");
             _mlu.MessageDictionary.Add("ACT_SEARCH", "検索中…");
             _mlu.MessageDictionary.Add("ACT_PROCESSING", "処理中 ...");
+            _mlu.MessageDictionary.Add("ACT_FILTER", "絞込中 ...");
+            _mlu.MessageDictionary.Add("ACT_RESET_FILTER", "絞込を解除中 ...");
             _mlu.MessageDictionary.Add("ACT_END", "");
             _mlu.MessageDictionary.Add("MSG_EXTRACT_ZERO", "抽出対象データがありません。");
             _mlu.MessageDictionary.Add("TITLE_WARN", "警告");

@@ -303,7 +303,7 @@ namespace PokudaSearch.IndexBuilder {
 
             try {
                 var indexBuildDir = FSDirectory.Open(FileSystems.getDefault().getPath(buildDirPath));
-                config.SetRAMBufferSizeMB(1024); //デフォルト16MB
+                config.SetRAMBufferSizeMB(2048); //デフォルト16MB
                 indexWriter = new IndexWriter(indexBuildDir, config);
 
                 //開始時刻を記録
@@ -342,12 +342,16 @@ namespace PokudaSearch.IndexBuilder {
                         AppObject.Logger.Error(ioe.StackTrace);
     					Interlocked.Increment(ref _skippedCount);
                         AppObject.Logger.Info(threadName + ":" + "Skipped: " + fi.FullName);
-                        //TODO IndexWriter is Closedをキャッチできるようであれば中断する。
     				} catch (Exception e) {
     					//インデックスが作成できなかったファイルを表示
                         AppObject.Logger.Warn(e.Message);
     					Interlocked.Increment(ref _skippedCount);
                         AppObject.Logger.Info(threadName + ":" + "Skipped: " + fi.FullName);
+                        if (e.Message.IndexOf("IndexWriter is closed") >= 0) {
+                            AppObject.Logger.Warn(e.GetBaseException().ToString());
+                            throw new AlreadyClosedException("Index file capacity over. Please divide index directory.");
+                            return;
+                        }
     				}
                     //進捗度更新を呼び出し。
                     progress.Report(new ProgressReport() {

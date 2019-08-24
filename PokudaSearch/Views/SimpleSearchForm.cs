@@ -525,6 +525,8 @@ namespace PokudaSearch.Views {
             this.ExtentionText.Text = "";
             this.UpdateDate1.Value = "";
             this.UpdateDate2.Value = "";
+
+            this.KeywordText.Focus();
         }
 
         /// <summary>
@@ -589,6 +591,21 @@ namespace PokudaSearch.Views {
 
                 row++;
             }
+        }
+
+        private void KeywordText_KeyPress(object sender, KeyPressEventArgs e) {
+            if (e.KeyChar == (char)Keys.Enter) {
+                this.SearchButton.PerformClick();
+            }
+        }
+
+        private void FilterGridButton_Click(object sender, EventArgs e) {
+            AppObject.FilterHelper.SetGridFilter(this.Cursor, this.ResultGrid, this.SearchGridText.Text, AppObject.MLUtil.GetMsg(CommonConsts.ACT_FILTER));
+        }
+
+        private void ClearFilterButton_Click(object sender, EventArgs e) {
+            this.SearchGridText.Text = "";
+            AppObject.FilterHelper.SetGridFilter(this.Cursor, this.ResultGrid, this.SearchGridText.Text, AppObject.MLUtil.GetMsg(CommonConsts.ACT_RESET_FILTER));
         }
 
 
