@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -95,11 +96,14 @@ namespace PokudaSearch.SandBox {
         private void TikaTestButton_Click(object sender, EventArgs e) {
             TextExtractor txtExt = new TextExtractor();
 
-            var wordDocContents = txtExt.Extract(@"C:\Workspace\Repo\Git\ecoLLaboMES\doc\01.標準化\Fx標準化.xlsx");
-            System.Console.WriteLine(wordDocContents.Text);
+            var txtDocContents = txtExt.Extract(@"C:\Workspace\Repo\Git\FxCommon\src\FxCommonLib\FxCommonLib.Tests\TestData\Sample.xlsx");
+            Trace.WriteLine(txtDocContents.Text);
+
+            var xlsDocContents = txtExt.Extract(@"C:\Workspace\Repo\Git\ecoLLaboMES\doc\01.標準化\Fx標準化.xlsx");
+            Trace.WriteLine(xlsDocContents.Text);
 
             var webPageContents = txtExt.Extract(new Uri("https://ichigo.hopto.org"));
-            System.Console.WriteLine(webPageContents.Text);
+            Trace.WriteLine(webPageContents.Text);
         }
 
         private void TumbnailButton_Click(object sender, EventArgs e) {

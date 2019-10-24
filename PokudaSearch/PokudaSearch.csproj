@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>5ff34036</NuGetPackageImportStamp>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">.\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -244,6 +246,11 @@
     <Compile Include="Consts.cs" />
     <Compile Include="IndexBuilder\LuceneIndexBuilder.cs" />
     <Compile Include="IndexBuilder\ProgressReport.cs" />
+    <Compile Include="SQLSrc\t_index_history.Designer.cs">
+      <DependentUpon>t_index_history.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="SQLSrc\m_extensions.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -289,6 +296,10 @@
     <Compile Include="Views\SimpleSearchForm.Designer.cs">
       <DependentUpon>SimpleSearchForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SQLSrc\t_index_history.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>t_index_history.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="SQLSrc\m_extensions.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>m_extensions.Designer.cs</LastGenOutput>
@@ -372,7 +383,9 @@
       <ErrorText>このプロジェクトが参照している NuGet パッケージが、このコンピューター上で見つかりません。パッケージをダウンロードするには、NuGet パッケージの復元を有効化してください。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。不足しているファイルは {0} です。</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('packages\System.Data.SQLite.Core.1.0.110.0\build\net45\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.Data.SQLite.Core.1.0.110.0\build\net45\System.Data.SQLite.Core.targets'))" />
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

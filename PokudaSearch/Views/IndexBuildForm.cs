@@ -4,7 +4,9 @@ using FxCommonLib.Utils;
 using Microsoft.WindowsAPICodePack.Taskbar;
 using PokudaSearch.IndexBuilder;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Data.SQLite;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
@@ -90,6 +92,34 @@ namespace PokudaSearch.Views {
             string path = Environment.CurrentDirectory + @"\" + Properties.Settings.Default.IndexHistoryCSV;
             csvUtil.WriteCsv(_history, path, true);
         }
+
+        private void InsertHistory2DB(DataRow row) {
+            AppObject.DbUtil.Open(AppObject.ConnectString);
+            try {
+                var param = new List<SQLiteParameter>();
+                //param.Add(new SQLiteParameter("@予約No", 1));
+                param.Add(new SQLiteParameter("@作成開始", DateTime.Parse(row[(int)IndexHistoryColIdx.StartTime].ToString())));
+                param.Add(new SQLiteParameter("@作成完了", DateTime.Parse(row[(int)IndexHistoryColIdx.EndTime].ToString())));
+                param.Add(new SQLiteParameter("@有効", row[(int)IndexHistoryColIdx.Active].ToString() == "○" ? 1 : 0));
+                param.Add(new SQLiteParameter("@モード", row[(int)IndexHistoryColIdx.CreateMode]));
+                param.Add(new SQLiteParameter("@パス", row[(int)IndexHistoryColIdx.IndexedPath]));
+                param.Add(new SQLiteParameter("@作成時間(分)", row[(int)IndexHistoryColIdx.CreateTime]));
+                param.Add(new SQLiteParameter("@対象ファイル数", row[(int)IndexHistoryColIdx.TargetCount]));
+                param.Add(new SQLiteParameter("@インデックス済み", row[(int)IndexHistoryColIdx.IndexedCount]));
+                param.Add(new SQLiteParameter("@インデックス対象外", row[(int)IndexHistoryColIdx.SkippedCount]));
+                param.Add(new SQLiteParameter("@総バイト数", row[(int)IndexHistoryColIdx.TotalBytes]));
+                param.Add(new SQLiteParameter("@テキスト抽出器", row[(int)IndexHistoryColIdx.TextExtractMode]));
+                AppObject.DbUtil.ExecuteNonQuery(SQLSrc.t_index_history.INSERT, param.ToArray());
+
+                AppObject.DbUtil.Commit();
+            } catch(Exception) {
+                AppObject.DbUtil.Rollback();
+                throw;
+            } finally {
+                AppObject.DbUtil.Close();
+            }
+        }
+
 
         private DataTable ReadHistoryCSV() {
             CSVUtil csvUtil = new CSVUtil();
@@ -247,6 +277,8 @@ namespace PokudaSearch.Views {
 
                 LoadHistory(_history);
 
+                InsertHistory2DB(newRow);
+                //HACK SQLiteに移行
                 SaveHistoryCSV();
 
                 TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
@@ -305,14 +337,29 @@ namespace PokudaSearch.Views {
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void IndexBuildForm_FormClosed(object sender, FormClosedEventArgs e) {
             MainFrameForm.IndexBuildForm = null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void IndexBuildForm_Load(object sender, EventArgs e) {
             this.TargetDirText.Text = Properties.Settings.Default.InitIndexPath;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MergeIndexButton_Click(object sender, EventArgs e) {
             Stopwatch sw = new Stopwatch();
             AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_SEARCH), true, sw);

@@ -116,6 +116,10 @@ namespace PokudaSearch.IndexBuilder {
         }
         #endregion Constractors
 
+        /// <summary>
+        /// 検索対象拡張子の辞書を作成
+        /// </summary>
+        /// <returns></returns>
         private Dictionary<string, string> CreateTargetExtensionsDic() {
             var dic = new Dictionary<string, string>();
 
@@ -244,6 +248,12 @@ namespace PokudaSearch.IndexBuilder {
             string targetDir, 
             IProgress<ProgressReport> progress,
             bool isAppendMode) {
+
+            //カウントを初期化
+            _targetCount = 0;
+            _indexedCount = 0;
+            _skippedCount = 0;
+            _totalBytes = 0;
 
             var targetFileList = FileUtil.GetAllFileInfo(targetDir);
             _targetCount = targetFileList.Count;

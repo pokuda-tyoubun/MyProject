@@ -5,14 +5,25 @@ using FxCommonLib.Utils;
 using log4net;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TikaOnDotNet.TextExtraction;
 
 namespace PokudaSearch {
     public static class AppObject {
         
-        //HACK インデックス有効拡張子マスタ機能を設ける。
+        //着手候補の優先度------------------
+        //HACK*インデックスをディレクトリ毎に予約化し、マルチスレッドで作成する。（結果をマージしない。）
+            //t_index_historyに予約-作成状況を記録
+            //複数のパスをIndex化できる。
+            //選択したIndexを削除できる。
+            //WebページもIndex化できる。
+
+        //HACK*差分Updateモードを実装する。
+
+        //HACK 拡張子"txt"のファイルはReadToEndでテキストを受け取るようにする。
 
         //HACK 検索対象フォルダを絞り込めるか？
 
@@ -21,10 +32,12 @@ namespace PokudaSearch {
 
         //HACK 重複ファイル検知
             //サイズ && Tikaの抽出内容
-            //ユーグリッド法
+            //ユーグリッド法(類似)
 
         //HACK 類似画像検索
             //apatch alike
+
+        //HACK インデックス有効拡張子マスタメンテ機能を設ける。
 
         //HACK売り方--------------------------------------------------------------
         //基本機能は無償にする。
@@ -215,5 +228,72 @@ namespace PokudaSearch {
             _mlu.MessageDictionary.Add("MSG_EXCEL2003_DATA_TRUNCATE", "Excelのバージョンが2003以前なので、257列以降は切り捨てます。");
             _mlu.MessageDictionary.Add("MSG_COLORING_BACKCOLOR", "背景色設定中…");
         }
+
+        //TODO 配置場所を要検討
+        /// <summary>
+        /// ファイルの中身をテキスト抽出して内容が同じか判定する
+        /// </summary>
+        /// <param name="filePath1"></param>
+        /// <param name="filePath2"></param>
+        /// <returns></returns>
+        public static bool IsSameContents(string filePath1, string filePath2) {
+            bool ret = false;
+
+            //拡張子が同じか確認
+            string ext1 = Path.GetExtension(filePath1);
+            string ext2 = Path.GetExtension(filePath2);
+            if (ext1 != ext2) {
+                return false;
+            }
+
+            string txt1 = "";
+            string txt2 = "";
+            if (ext1.ToLower() == ".txt") {
+                using (var reader = new StreamReader(filePath1)) {
+                    txt1 = reader.ReadToEnd();
+                }
+                using (var reader = new StreamReader(filePath2)) {
+                    txt2 = reader.ReadToEnd();
+                }
+                
+            } else {
+                var txtExtractor = new TextExtractor();
+
+                var content1 = txtExtractor.Extract(filePath1);
+                txt1 = content1.Text;
+                var content2 = txtExtractor.Extract(filePath2);
+                txt2 = content2.Text;
+            }
+
+            if (txt1 == txt2) {
+                ret = true;
+            }
+
+            return ret;
+        }
+        //[TestMethod]
+        //public void IsSameContentsTest() {
+        //    bool ret = false;
+        //    var txtExtractor = new TextExtractor();
+
+        //    //テキストファイルでの比較
+        //    //NOTE テキストファイルの中身がに日本語が入ると抽出できていない
+        //    // ⇒ReadToEndで文字列を取得するようにした
+        //    ret = FileUtil.IsSameContents(@".\TestData\Sample.txt", @".\TestData\SampleCopy.txt");
+        //    Assert.AreEqual(ret, true);
+
+        //    ret = FileUtil.IsSameContents(@".\TestData\Sample.txt", @".\TestData\SampleDiff.txt");
+        //    Assert.AreEqual(ret, false);
+
+        //    // エクセルでの比較
+        //    ret = FileUtil.IsSameContents(@".\TestData\Sample.xlsx", @".\TestData\SampleCopy.xlsx");
+        //    Assert.AreEqual(ret, true);
+
+        //    ret = FileUtil.IsSameContents(@".\TestData\Sample.xlsx", @".\TestData\SampleDiff.xlsx");
+        //    Assert.AreEqual(ret, false);
+
+        //    //TODO テキスト抽出できない場合
+
+        //}
     }
 }

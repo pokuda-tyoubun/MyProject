@@ -42,6 +42,10 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.SearchGridText = new System.Windows.Forms.ToolStripTextBox();
+            this.FilterGridButton = new System.Windows.Forms.ToolStripButton();
+            this.ClearFilterButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.WriteExcelButton = new System.Windows.Forms.ToolStripButton();
             this.ResultContext = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -58,15 +62,12 @@
             this.WebBrowser = new System.Windows.Forms.WebBrowser();
             this.PreviewLabel = new C1.Win.C1SuperTooltip.C1SuperLabel();
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.TargetIndexGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
             this.ClearButton = new System.Windows.Forms.Button();
             this.PreviewCheck = new System.Windows.Forms.CheckBox();
             this.ResultGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
             this.SearchButton = new System.Windows.Forms.Button();
             this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
-            this.SearchGridText = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.FilterGridButton = new System.Windows.Forms.ToolStripButton();
-            this.ClearFilterButton = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FailureFTSNavi)).BeginInit();
@@ -76,6 +77,7 @@
             this.BottomLeftPanel.SuspendLayout();
             this.RightPanel.SuspendLayout();
             this.MainPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TargetIndexGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -94,7 +96,7 @@
             // 
             this.KeywordText.Location = new System.Drawing.Point(77, 5);
             this.KeywordText.Name = "KeywordText";
-            this.KeywordText.Size = new System.Drawing.Size(516, 19);
+            this.KeywordText.Size = new System.Drawing.Size(356, 19);
             this.KeywordText.TabIndex = 1;
             this.KeywordText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeywordText_KeyPress);
             // 
@@ -143,7 +145,7 @@
             this.UpdateDate2.EmptyAsNull = true;
             this.UpdateDate2.FormatType = C1.Win.C1Input.FormatTypeEnum.CustomFormat;
             this.UpdateDate2.ImagePadding = new System.Windows.Forms.Padding(0);
-            this.UpdateDate2.Location = new System.Drawing.Point(439, 32);
+            this.UpdateDate2.Location = new System.Drawing.Point(259, 50);
             this.UpdateDate2.Name = "UpdateDate2";
             this.UpdateDate2.ShowFocusRectangle = true;
             this.UpdateDate2.Size = new System.Drawing.Size(154, 17);
@@ -189,14 +191,14 @@
             this.ClearFilterButton,
             this.toolStripSeparator3,
             this.WriteExcelButton});
-            this.FailureFTSNavi.Location = new System.Drawing.Point(8, 55);
+            this.FailureFTSNavi.Location = new System.Drawing.Point(9, 80);
             this.FailureFTSNavi.MoveFirstItem = this.toolStripButton1;
             this.FailureFTSNavi.MoveLastItem = this.toolStripButton4;
             this.FailureFTSNavi.MoveNextItem = this.toolStripButton3;
             this.FailureFTSNavi.MovePreviousItem = this.toolStripButton2;
             this.FailureFTSNavi.Name = "FailureFTSNavi";
             this.FailureFTSNavi.PositionItem = this.toolStripTextBox1;
-            this.FailureFTSNavi.Size = new System.Drawing.Size(469, 25);
+            this.FailureFTSNavi.Size = new System.Drawing.Size(438, 25);
             this.FailureFTSNavi.TabIndex = 8;
             this.FailureFTSNavi.Text = "BindingNavigator1";
             // 
@@ -262,6 +264,40 @@
             this.toolStripButton4.RightToLeftAutoMirrorImage = true;
             this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton4.Text = "最後に移動";
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // SearchGridText
+            // 
+            this.SearchGridText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SearchGridText.Name = "SearchGridText";
+            this.SearchGridText.Size = new System.Drawing.Size(150, 25);
+            this.SearchGridText.ToolTipText = "入力した文字でフィルタリングします。";
+            // 
+            // FilterGridButton
+            // 
+            this.FilterGridButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.FilterGridButton.Image = global::PokudaSearch.Properties.Resources.Search24;
+            this.FilterGridButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.FilterGridButton.Name = "FilterGridButton";
+            this.FilterGridButton.Size = new System.Drawing.Size(23, 22);
+            this.FilterGridButton.Text = "入力した文字でフィルタリング";
+            this.FilterGridButton.ToolTipText = "入力した文字でフィルタリング";
+            this.FilterGridButton.Click += new System.EventHandler(this.FilterGridButton_Click);
+            // 
+            // ClearFilterButton
+            // 
+            this.ClearFilterButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ClearFilterButton.Image = global::PokudaSearch.Properties.Resources.EditClear24;
+            this.ClearFilterButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ClearFilterButton.Name = "ClearFilterButton";
+            this.ClearFilterButton.Size = new System.Drawing.Size(23, 22);
+            this.ClearFilterButton.Text = "フィルタリング解除";
+            this.ClearFilterButton.ToolTipText = "フィルタリング解除";
+            this.ClearFilterButton.Click += new System.EventHandler(this.ClearFilterButton_Click);
             // 
             // toolStripSeparator3
             // 
@@ -400,6 +436,7 @@
             // 
             // MainPanel
             // 
+            this.MainPanel.Controls.Add(this.TargetIndexGrid);
             this.MainPanel.Controls.Add(this.ClearButton);
             this.MainPanel.Controls.Add(this.PreviewCheck);
             this.MainPanel.Controls.Add(this.label2);
@@ -419,11 +456,39 @@
             this.MainPanel.Size = new System.Drawing.Size(1004, 344);
             this.MainPanel.TabIndex = 118;
             // 
+            // TargetIndexGrid
+            // 
+            this.TargetIndexGrid.AfterErrorInfo = ((System.Collections.Generic.Dictionary<string, string>)(resources.GetObject("TargetIndexGrid.AfterErrorInfo")));
+            this.TargetIndexGrid.AllowEditing = false;
+            this.TargetIndexGrid.AllowFiltering = true;
+            this.TargetIndexGrid.AllowResizing = C1.Win.C1FlexGrid.AllowResizingEnum.Both;
+            this.TargetIndexGrid.AutoClipboard = true;
+            this.TargetIndexGrid.ColumnInfo = "10,1,0,0,0,90,Columns:";
+            this.TargetIndexGrid.ContextMenuStrip = this.ResultContext;
+            this.TargetIndexGrid.DrawMode = C1.Win.C1FlexGrid.DrawModeEnum.OwnerDraw;
+            this.TargetIndexGrid.EnableReadOnlyColor = false;
+            this.TargetIndexGrid.EnableUpdateCellStyle = false;
+            this.TargetIndexGrid.Font = new System.Drawing.Font("MS UI Gothic", 9F);
+            this.TargetIndexGrid.GridName = null;
+            this.TargetIndexGrid.IsCol1SelectCheck = false;
+            this.TargetIndexGrid.IsEnterRight = false;
+            this.TargetIndexGrid.Location = new System.Drawing.Point(624, 5);
+            this.TargetIndexGrid.Name = "TargetIndexGrid";
+            this.TargetIndexGrid.PulldownDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, string>>)(resources.GetObject("TargetIndexGrid.PulldownDic")));
+            this.TargetIndexGrid.Rows.Count = 2;
+            this.TargetIndexGrid.Rows.DefaultSize = 18;
+            this.TargetIndexGrid.ShowErrors = true;
+            this.TargetIndexGrid.Size = new System.Drawing.Size(368, 51);
+            this.TargetIndexGrid.StyleInfo = resources.GetString("TargetIndexGrid.StyleInfo");
+            this.TargetIndexGrid.TabIndex = 118;
+            this.TargetIndexGrid.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2010Blue;
+            this.TargetIndexGrid.WindowsName = null;
+            // 
             // ClearButton
             // 
             this.ClearButton.Image = global::PokudaSearch.Properties.Resources.EditClear24;
             this.ClearButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.ClearButton.Location = new System.Drawing.Point(683, 4);
+            this.ClearButton.Location = new System.Drawing.Point(523, 4);
             this.ClearButton.Name = "ClearButton";
             this.ClearButton.Size = new System.Drawing.Size(80, 52);
             this.ClearButton.TabIndex = 117;
@@ -437,7 +502,7 @@
             this.PreviewCheck.AutoSize = true;
             this.PreviewCheck.Checked = true;
             this.PreviewCheck.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.PreviewCheck.Location = new System.Drawing.Point(559, 64);
+            this.PreviewCheck.Location = new System.Drawing.Point(444, 61);
             this.PreviewCheck.Name = "PreviewCheck";
             this.PreviewCheck.Size = new System.Drawing.Size(120, 16);
             this.PreviewCheck.TabIndex = 116;
@@ -464,13 +529,13 @@
             this.ResultGrid.GridName = null;
             this.ResultGrid.IsCol1SelectCheck = false;
             this.ResultGrid.IsEnterRight = false;
-            this.ResultGrid.Location = new System.Drawing.Point(5, 83);
+            this.ResultGrid.Location = new System.Drawing.Point(5, 108);
             this.ResultGrid.Name = "ResultGrid";
             this.ResultGrid.PulldownDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, string>>)(resources.GetObject("ResultGrid.PulldownDic")));
             this.ResultGrid.Rows.Count = 2;
             this.ResultGrid.Rows.DefaultSize = 18;
             this.ResultGrid.ShowErrors = true;
-            this.ResultGrid.Size = new System.Drawing.Size(996, 258);
+            this.ResultGrid.Size = new System.Drawing.Size(996, 233);
             this.ResultGrid.StyleInfo = resources.GetString("ResultGrid.StyleInfo");
             this.ResultGrid.TabIndex = 9;
             this.ResultGrid.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2010Blue;
@@ -483,7 +548,7 @@
             // 
             this.SearchButton.Image = global::PokudaSearch.Properties.Resources.Search24;
             this.SearchButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.SearchButton.Location = new System.Drawing.Point(599, 4);
+            this.SearchButton.Location = new System.Drawing.Point(439, 4);
             this.SearchButton.Name = "SearchButton";
             this.SearchButton.Size = new System.Drawing.Size(80, 52);
             this.SearchButton.TabIndex = 2;
@@ -507,40 +572,6 @@
             this.collapsibleSplitter3.TabStop = false;
             this.collapsibleSplitter3.UseAnimations = false;
             this.collapsibleSplitter3.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
-            // 
-            // SearchGridText
-            // 
-            this.SearchGridText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.SearchGridText.Name = "SearchGridText";
-            this.SearchGridText.Size = new System.Drawing.Size(150, 25);
-            this.SearchGridText.ToolTipText = "入力した文字でフィルタリングします。";
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
-            // FilterGridButton
-            // 
-            this.FilterGridButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.FilterGridButton.Image = global::PokudaSearch.Properties.Resources.Search24;
-            this.FilterGridButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.FilterGridButton.Name = "FilterGridButton";
-            this.FilterGridButton.Size = new System.Drawing.Size(23, 22);
-            this.FilterGridButton.Text = "入力した文字でフィルタリング";
-            this.FilterGridButton.ToolTipText = "入力した文字でフィルタリング";
-            this.FilterGridButton.Click += new System.EventHandler(this.FilterGridButton_Click);
-            // 
-            // ClearFilterButton
-            // 
-            this.ClearFilterButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ClearFilterButton.Image = global::PokudaSearch.Properties.Resources.EditClear24;
-            this.ClearFilterButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ClearFilterButton.Name = "ClearFilterButton";
-            this.ClearFilterButton.Size = new System.Drawing.Size(23, 22);
-            this.ClearFilterButton.Text = "フィルタリング解除";
-            this.ClearFilterButton.ToolTipText = "フィルタリング解除";
-            this.ClearFilterButton.Click += new System.EventHandler(this.ClearFilterButton_Click);
             // 
             // SimpleSearchForm
             // 
@@ -567,6 +598,7 @@
             this.RightPanel.ResumeLayout(false);
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TargetIndexGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultGrid)).EndInit();
             this.ResumeLayout(false);
 
@@ -616,5 +648,6 @@
         private System.Windows.Forms.ToolStripTextBox SearchGridText;
         private System.Windows.Forms.ToolStripButton FilterGridButton;
         private System.Windows.Forms.ToolStripButton ClearFilterButton;
+        private FxCommonLib.Controls.FlexGridEx TargetIndexGrid;
     }
 }

@@ -122,12 +122,13 @@
             // 
             // MergeIndexButton
             // 
-            this.MergeIndexButton.Location = new System.Drawing.Point(651, 0);
+            this.MergeIndexButton.Location = new System.Drawing.Point(592, -1);
             this.MergeIndexButton.Name = "MergeIndexButton";
             this.MergeIndexButton.Size = new System.Drawing.Size(102, 29);
             this.MergeIndexButton.TabIndex = 20;
             this.MergeIndexButton.Text = "インデックスマージ";
             this.MergeIndexButton.UseVisualStyleBackColor = true;
+            this.MergeIndexButton.Visible = false;
             this.MergeIndexButton.Click += new System.EventHandler(this.MergeIndexButton_Click);
             // 
             // IndexHistoryGrid

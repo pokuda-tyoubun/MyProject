@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="InitIndexPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Workspace</Value>
+      <Value Profile="(Default)">C:\Temp\PokudaTest</Value>
     </Setting>
     <Setting Name="IndexHistoryCSV" Type="System.String" Scope="User">
       <Value Profile="(Default)">IndexHistory.csv</Value>

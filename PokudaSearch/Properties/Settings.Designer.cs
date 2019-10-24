@@ -25,7 +25,7 @@ namespace PokudaSearch.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Workspace")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Temp\\PokudaTest")]
         public string InitIndexPath {
             get {
                 return ((string)(this["InitIndexPath"]));
