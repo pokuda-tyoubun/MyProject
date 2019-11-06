@@ -29,6 +29,7 @@
             this.TikaTestButton = new System.Windows.Forms.Button();
             this.TumbnailButton = new System.Windows.Forms.Button();
             this.PictureBox = new System.Windows.Forms.PictureBox();
+            this.MultiSearcherButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,11 +91,22 @@
             this.PictureBox.TabIndex = 5;
             this.PictureBox.TabStop = false;
             // 
+            // MultiSearcherButton
+            // 
+            this.MultiSearcherButton.Location = new System.Drawing.Point(168, 111);
+            this.MultiSearcherButton.Name = "MultiSearcherButton";
+            this.MultiSearcherButton.Size = new System.Drawing.Size(139, 32);
+            this.MultiSearcherButton.TabIndex = 6;
+            this.MultiSearcherButton.Text = "MultiSearcherテスト";
+            this.MultiSearcherButton.UseVisualStyleBackColor = true;
+            this.MultiSearcherButton.Click += new System.EventHandler(this.MultiSearcherButton_Click);
+            // 
             // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(589, 407);
+            this.Controls.Add(this.MultiSearcherButton);
             this.Controls.Add(this.PictureBox);
             this.Controls.Add(this.TumbnailButton);
             this.Controls.Add(this.TikaTestButton);
@@ -119,6 +131,7 @@
         private System.Windows.Forms.Button TikaTestButton;
         private System.Windows.Forms.Button TumbnailButton;
         private System.Windows.Forms.PictureBox PictureBox;
+        private System.Windows.Forms.Button MultiSearcherButton;
     }
 }
 

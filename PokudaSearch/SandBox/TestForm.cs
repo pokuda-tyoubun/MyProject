@@ -1,6 +1,7 @@
 ﻿using FlexLucene.Analysis.Ja;
 using FlexLucene.Document;
 using FlexLucene.Index;
+using FlexLucene.Search;
 using FlexLucene.Store;
 using java.nio.file;
 using Microsoft.WindowsAPICodePack.Shell;
@@ -136,6 +137,11 @@ namespace PokudaSearch.SandBox {
 
         private void TestForm_FormClosed(object sender, FormClosedEventArgs e) {
             MainFrameForm.TestForm = null;
+        }
+
+        private void MultiSearcherButton_Click(object sender, EventArgs e) {
+            //FlexLucene.Index.MultiReader
+            //MultiSearcher ms = new MultiSearcher();
         }
     }
 }
