@@ -97,7 +97,7 @@
             this.MultiSearcherButton.Name = "MultiSearcherButton";
             this.MultiSearcherButton.Size = new System.Drawing.Size(139, 32);
             this.MultiSearcherButton.TabIndex = 6;
-            this.MultiSearcherButton.Text = "MultiSearcherテスト";
+            this.MultiSearcherButton.Text = "MultiReaderテスト";
             this.MultiSearcherButton.UseVisualStyleBackColor = true;
             this.MultiSearcherButton.Click += new System.EventHandler(this.MultiSearcherButton_Click);
             // 

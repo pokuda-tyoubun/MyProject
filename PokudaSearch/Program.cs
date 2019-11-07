@@ -59,10 +59,17 @@ namespace PokudaSearch {
                 treader.close();    
             }
 
-            AppObject.AppAnalyzer = new JapaneseAnalyzer(userDic, 
+            AppObject.AppAnalyzer = new JapaneseAnalyzer(userDic, //ユーザ定義辞書
                 JapaneseTokenizerMode.SEARCH,
                 JapaneseAnalyzer.GetDefaultStopSet(), 
                 JapaneseAnalyzer.GetDefaultStopTags());
+            //JapaneseTokenizerMode.EXTENDED;
+            // ->拡張モードは、未知の単語のユニグラムを出力します。
+            //JapaneseTokenizerMode.NORMAL;
+            // ->通常のセグメンテーション：化合物の分解なし
+            //JapaneseTokenizerMode.SEARCH;
+            // ->検索を対象としたセグメンテーション：
+            //   これには、長い名詞の複合化プロセスが含まれ、同義語としての完全な複合トークンも含まれます。
 
             //AppObject.AppAnalyzer = new JapaneseAnalyzer();
         }

@@ -138,6 +138,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.IndexHistoryGrid.AutoClipboard = true;
+            this.IndexHistoryGrid.CellButtonDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.HashSet<string>>)(resources.GetObject("IndexHistoryGrid.CellButtonDic")));
             this.IndexHistoryGrid.ColumnInfo = "10,1,0,0,0,90,Columns:";
             this.IndexHistoryGrid.DrawMode = C1.Win.C1FlexGrid.DrawModeEnum.OwnerDraw;
             this.IndexHistoryGrid.EnableReadOnlyColor = false;
@@ -149,7 +150,7 @@
             this.IndexHistoryGrid.Name = "IndexHistoryGrid";
             this.IndexHistoryGrid.PulldownDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, string>>)(resources.GetObject("IndexHistoryGrid.PulldownDic")));
             this.IndexHistoryGrid.Rows.DefaultSize = 18;
-            this.IndexHistoryGrid.Size = new System.Drawing.Size(791, 136);
+            this.IndexHistoryGrid.Size = new System.Drawing.Size(923, 136);
             this.IndexHistoryGrid.StyleInfo = resources.GetString("IndexHistoryGrid.StyleInfo");
             this.IndexHistoryGrid.TabIndex = 21;
             this.IndexHistoryGrid.WindowsName = null;
@@ -178,9 +179,9 @@
             this.BottomPanel.Controls.Add(this.label4);
             this.BottomPanel.Controls.Add(this.IndexHistoryGrid);
             this.BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.BottomPanel.Location = new System.Drawing.Point(0, 330);
+            this.BottomPanel.Location = new System.Drawing.Point(0, 402);
             this.BottomPanel.Name = "BottomPanel";
-            this.BottomPanel.Size = new System.Drawing.Size(797, 165);
+            this.BottomPanel.Size = new System.Drawing.Size(929, 165);
             this.BottomPanel.TabIndex = 24;
             // 
             // label4
@@ -203,9 +204,9 @@
             this.collapsibleSplitter3.ControlToHide = this.BottomPanel;
             this.collapsibleSplitter3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.collapsibleSplitter3.ExpandParentForm = false;
-            this.collapsibleSplitter3.Location = new System.Drawing.Point(0, 322);
+            this.collapsibleSplitter3.Location = new System.Drawing.Point(0, 394);
             this.collapsibleSplitter3.Name = "collapsibleSplitter3";
-            this.collapsibleSplitter3.Size = new System.Drawing.Size(797, 8);
+            this.collapsibleSplitter3.Size = new System.Drawing.Size(929, 8);
             this.collapsibleSplitter3.TabIndex = 119;
             this.collapsibleSplitter3.TabStop = false;
             this.collapsibleSplitter3.UseAnimations = false;
@@ -226,7 +227,7 @@
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(0, 0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(797, 322);
+            this.MainPanel.Size = new System.Drawing.Size(929, 394);
             this.MainPanel.TabIndex = 121;
             // 
             // label1
@@ -248,6 +249,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ReservedGrid.AutoClipboard = true;
+            this.ReservedGrid.CellButtonDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.HashSet<string>>)(resources.GetObject("ReservedGrid.CellButtonDic")));
             this.ReservedGrid.ColumnInfo = "10,1,0,0,0,90,Columns:";
             this.ReservedGrid.DrawMode = C1.Win.C1FlexGrid.DrawModeEnum.OwnerDraw;
             this.ReservedGrid.EnableReadOnlyColor = false;
@@ -259,7 +261,7 @@
             this.ReservedGrid.Name = "ReservedGrid";
             this.ReservedGrid.PulldownDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, string>>)(resources.GetObject("ReservedGrid.PulldownDic")));
             this.ReservedGrid.Rows.DefaultSize = 18;
-            this.ReservedGrid.Size = new System.Drawing.Size(791, 155);
+            this.ReservedGrid.Size = new System.Drawing.Size(923, 227);
             this.ReservedGrid.StyleInfo = resources.GetString("ReservedGrid.StyleInfo");
             this.ReservedGrid.TabIndex = 23;
             this.ReservedGrid.WindowsName = null;
@@ -268,7 +270,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(797, 495);
+            this.ClientSize = new System.Drawing.Size(929, 567);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.collapsibleSplitter3);
             this.Controls.Add(this.BottomPanel);

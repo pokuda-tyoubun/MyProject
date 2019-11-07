@@ -336,7 +336,7 @@
     <None Include="DB\PokudaSearch.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Doc\機能一覧.xlsx" />
+    <None Include="Doc\機能一覧＆NOTE.xlsx" />
     <None Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

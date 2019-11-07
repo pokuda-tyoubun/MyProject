@@ -69,6 +69,7 @@ namespace PokudaSearch {
         //HACK*親画面を閉じた時に、インデックス作成を中断する。
         //HACK*シングルかマルチか上位で分けるように実装
         //HACK ディレクトリが異なればindexを分けてMultiReader(Lucene3ではMultiSearcher)を使うようにする。
+            //PokudaSearchTest.MultiReaderTestを参照
         //HACK Yahoo Googleの検索オプションのUIを真似る(P222も参考に)
         //HACK 特定のサイトもインデックス対象とする
         //HACK   →html、xmlはtikaを使う必要があるかも
