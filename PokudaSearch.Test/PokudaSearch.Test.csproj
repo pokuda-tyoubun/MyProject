@@ -168,6 +168,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Views\IndexBuildFormTest.cs" />
     <Compile Include="SandBoxTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

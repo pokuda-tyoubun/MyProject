@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace PokudaSearch.IndexBuilder {
     public class ProgressReport {
-        public bool Finished = false;
+        public enum ProgressStatus : int {
+            None = 1,
+            Start,
+            Processing,
+            Finished
+        }
+
+        public ProgressStatus Status = ProgressStatus.None;
         public int ProgressCount = 0;
         public int Percent = 0;
         public int TargetCount = 0;

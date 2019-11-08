@@ -10,6 +10,7 @@ using System.Data.SQLite;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace PokudaSearch.Views {
     public partial class IndexBuildForm : Form {
@@ -32,8 +33,8 @@ namespace PokudaSearch.Views {
             TextExtractMode
         }
         private enum IndexHistoryColIdx : int {
-            [EnumLabel("有効")]
-            Active = 0,
+            [EnumLabel("予約No")]
+            ReservedNo = 0,
             [EnumLabel("モード")]
             CreateMode,
             [EnumLabel("パス")]
@@ -99,8 +100,7 @@ namespace PokudaSearch.Views {
                 var param = new List<SQLiteParameter>();
                 //param.Add(new SQLiteParameter("@予約No", 1));
                 param.Add(new SQLiteParameter("@作成開始", DateTime.Parse(row[(int)IndexHistoryColIdx.StartTime].ToString())));
-                param.Add(new SQLiteParameter("@作成完了", DateTime.Parse(row[(int)IndexHistoryColIdx.EndTime].ToString())));
-                param.Add(new SQLiteParameter("@有効", row[(int)IndexHistoryColIdx.Active].ToString() == "○" ? 1 : 0));
+                param.Add(new SQLiteParameter("@作成完了", DBNull.Value));
                 param.Add(new SQLiteParameter("@モード", row[(int)IndexHistoryColIdx.CreateMode]));
                 param.Add(new SQLiteParameter("@パス", row[(int)IndexHistoryColIdx.IndexedPath]));
                 param.Add(new SQLiteParameter("@作成時間(分)", row[(int)IndexHistoryColIdx.CreateTime]));
@@ -118,6 +118,23 @@ namespace PokudaSearch.Views {
             } finally {
                 AppObject.DbUtil.Close();
             }
+
+        }
+
+        private int GetReservedNo() {
+            int ret = 0;
+
+            AppObject.DbUtil.Open(AppObject.ConnectString);
+            try {
+                var param = new List<SQLiteParameter>();
+                DataSet ds = AppObject.DbUtil.ExecSelect(SQLSrc.t_index_history.SELECT_NEW_ONE, param.ToArray());
+                if (ds.Tables[0].Rows.Count > 0) {
+                    ret = int.Parse(ds.Tables[0].Rows[0]["予約No"].ToString());
+                }
+            } finally {
+                AppObject.DbUtil.Close();
+            }
+            return ret;
         }
 
 
@@ -129,7 +146,7 @@ namespace PokudaSearch.Views {
                 historyTbl = csvUtil.ReadCsv(path, "IndexHistory");
             } else {
                 //ファイルが存在しない場合は、空テーブルを返す
-                historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.Active), typeof(string));
+                historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.ReservedNo), typeof(string));
                 historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.CreateMode), typeof(string));
                 historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.IndexedPath), typeof(string));
                 historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.StartTime), typeof(string));
@@ -177,9 +194,8 @@ namespace PokudaSearch.Views {
             this.IndexHistoryGrid.Cols.Count = EnumUtil.GetCount(typeof(IndexHistoryColIdx)) + 1;
             this.IndexHistoryGrid.Rows.Count = _history.Rows.Count + HeaderRowCount;
 
-            this.IndexHistoryGrid[0, (int)IndexHistoryColIdx.Active + 1] = EnumUtil.GetLabel(IndexHistoryColIdx.Active);
-            this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.Active + 1].Width = 40;
-            this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.Active + 1].TextAlign = TextAlignEnum.CenterCenter;
+            this.IndexHistoryGrid[0, (int)IndexHistoryColIdx.ReservedNo + 1] = EnumUtil.GetLabel(IndexHistoryColIdx.ReservedNo);
+            this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.ReservedNo + 1].Width = 60;
             this.IndexHistoryGrid[0, (int)IndexHistoryColIdx.CreateMode + 1] = EnumUtil.GetLabel(IndexHistoryColIdx.CreateMode);
             this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.CreateMode + 1].Width = 60;
             this.IndexHistoryGrid[0, (int)IndexHistoryColIdx.IndexedPath + 1] = EnumUtil.GetLabel(IndexHistoryColIdx.IndexedPath);
@@ -212,8 +228,8 @@ namespace PokudaSearch.Views {
 
             int row = HeaderRowCount;
             foreach (DataRow dr in _history.Rows) {
-                this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.Active + 1] = 
-                    StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.Active)]);
+                this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.ReservedNo + 1] = 
+                    StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.ReservedNo)]);
                 this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.CreateMode + 1] = 
                     StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.CreateMode)]);
                 this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.StartTime + 1] = 
@@ -248,23 +264,18 @@ namespace PokudaSearch.Views {
             this.ProgressBar.Value = report.Percent;
             this.LogViewerText.Text = report.ProgressCount.ToString() + "/" + report.TargetCount.ToString();
 
+            //HACK isAppendMode対応
+
             //タスクバーのプログレス
             TaskbarManager.Instance.SetProgressValue(report.Percent, 100);
 
-            if (report.Finished) {
-
-                //TODO isAppendMode対応
-
-                //NOTE:マルチスレッドも見据えてカウンタをstatic化したので、
-                //　　 処理結果を戻り値workerから受け取らずにstaticプロパティから受け取る
-                foreach (DataRow dr in _history.Rows) {
-                    dr[(int)IndexHistoryColIdx.Active] = "×";
-                }
+            if (report.Status == ProgressReport.ProgressStatus.Start) {
+                //開始時
                 var newRow = _history.NewRow();
-                newRow[(int)IndexHistoryColIdx.Active] = "○";
+                newRow[(int)IndexHistoryColIdx.ReservedNo] = -1;
                 newRow[(int)IndexHistoryColIdx.CreateMode] = "再作成";
                 newRow[(int)IndexHistoryColIdx.StartTime] = LuceneIndexBuilder.StartTime.ToString("yyyy/MM/dd HH:mm:ss");
-                newRow[(int)IndexHistoryColIdx.EndTime] = LuceneIndexBuilder.EndTime.ToString("yyyy/MM/dd HH:mm:ss");
+                newRow[(int)IndexHistoryColIdx.EndTime] = DBNull.Value;
                 newRow[(int)IndexHistoryColIdx.CreateTime] = LuceneIndexBuilder.CreateTime.TotalMinutes;
                 newRow[(int)IndexHistoryColIdx.IndexedPath] = LuceneIndexBuilder.IndexedPath;
                 newRow[(int)IndexHistoryColIdx.TargetCount] = LuceneIndexBuilder.TargetCount;
@@ -272,12 +283,41 @@ namespace PokudaSearch.Views {
                 newRow[(int)IndexHistoryColIdx.SkippedCount] = LuceneIndexBuilder.SkippedCount;
                 newRow[(int)IndexHistoryColIdx.TotalBytes] = FileUtil.GetSizeString(LuceneIndexBuilder.TotalBytes);
                 newRow[(int)IndexHistoryColIdx.TextExtractMode] = EnumUtil.GetName(LuceneIndexBuilder.TextExtractMode);
-                _history.Rows.InsertAt(newRow, 0);
-                _history.AcceptChanges();
-
-                LoadHistory(_history);
 
                 InsertHistory2DB(newRow);
+                LuceneIndexBuilder.ReservedNo = GetReservedNo();
+                newRow[(int)IndexHistoryColIdx.ReservedNo] = LuceneIndexBuilder.ReservedNo;
+
+                _history.Rows.InsertAt(newRow, 0);
+                _history.AcceptChanges();
+                LoadHistory(_history);
+
+            } else if (report.Status == ProgressReport.ProgressStatus.Finished) {
+                //完了時
+                //NOTE:マルチスレッドも見据えてカウンタをstatic化したので、
+                //　　 処理結果を戻り値workerから受け取らずにstaticプロパティから受け取る
+
+                DataRow[] historyRows = (
+                    from row in _history.AsEnumerable()
+                    let qReservedNo = row.Field<string>(EnumUtil.GetName(IndexHistoryColIdx.ReservedNo))
+                    where qReservedNo == LuceneIndexBuilder.ReservedNo.ToString()
+                    select row).ToArray();
+                
+                if (historyRows.Length > 0) {
+                    DataRow dr = historyRows[0];
+                    dr[(int)IndexHistoryColIdx.EndTime] = LuceneIndexBuilder.EndTime.ToString("yyyy/MM/dd HH:mm:ss");
+                    dr[(int)IndexHistoryColIdx.CreateTime] = LuceneIndexBuilder.CreateTime.TotalMinutes;
+                    dr[(int)IndexHistoryColIdx.TargetCount] = LuceneIndexBuilder.TargetCount;
+                    dr[(int)IndexHistoryColIdx.IndexedCount] = LuceneIndexBuilder.IndexedCount;
+                    dr[(int)IndexHistoryColIdx.SkippedCount] = LuceneIndexBuilder.SkippedCount;
+                    dr[(int)IndexHistoryColIdx.TotalBytes] = FileUtil.GetSizeString(LuceneIndexBuilder.TotalBytes);
+                }
+                _history.AcceptChanges();
+                LoadHistory(_history);
+
+                //TODO ここから
+                //UpdateHistory2DB(newRow);
+
                 //HACK SQLiteに移行
                 SaveHistoryCSV();
 

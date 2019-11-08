@@ -64,7 +64,6 @@ namespace PokudaSearch.SQLSrc {
         ///   INSERT INTO [t_index_history] (
         /// [作成開始]
         ///,[作成完了]
-        ///,[有効]
         ///,[モード]
         ///,[パス]
         ///,[作成時間(分)]
@@ -76,7 +75,6 @@ namespace PokudaSearch.SQLSrc {
         ///) VALUES (
         /// @作成開始
         ///,@作成完了
-        ///,@有効
         ///,@モード
         ///,@パス
         ///,@作成時間(分)
@@ -98,7 +96,6 @@ namespace PokudaSearch.SQLSrc {
         /// [予約No]
         ///,[作成開始]
         ///,[作成完了]
-        ///,[有効]
         ///,[モード]
         ///,[パス]
         ///,[作成時間(分)]
@@ -111,7 +108,6 @@ namespace PokudaSearch.SQLSrc {
         /// @予約No
         ///,@作成開始
         ///,@作成完了
-        ///,@有効
         ///,@モード
         ///,@パス
         ///,@作成時間(分)
@@ -133,7 +129,6 @@ namespace PokudaSearch.SQLSrc {
         /// [予約No]
         ///,[作成開始]
         ///,[作成完了]
-        ///,[有効]
         ///,[モード]
         ///,[パス]
         ///,[作成時間(分)]
@@ -148,6 +143,29 @@ namespace PokudaSearch.SQLSrc {
         internal static string SELECT_ALL {
             get {
                 return ResourceManager.GetString("SELECT_ALL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   SELECT 
+        /// [予約No]
+        ///, [作成開始]
+        ///, [作成完了]
+        ///, [モード]
+        ///, [パス]
+        ///, [作成時間(分)]
+        ///, [対象ファイル数]
+        ///, [インデックス済み]
+        ///, [インデックス対象外]
+        ///, [総バイト数]
+        ///, [テキスト抽出器]
+        ///FROM [t_index_history]
+        ///ORDER BY [予約No] DESC
+        ///LIMIT 1 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SELECT_NEW_ONE {
+            get {
+                return ResourceManager.GetString("SELECT_NEW_ONE", resourceCulture);
             }
         }
     }

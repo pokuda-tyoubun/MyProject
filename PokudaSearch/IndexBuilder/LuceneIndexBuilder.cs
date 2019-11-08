@@ -43,8 +43,8 @@ namespace PokudaSearch.IndexBuilder {
         /// <summary>インデックス作成開始日時</summary>
         private static Dictionary<string, string> _targetExtentionDic = null;
         public static Dictionary<string, string> TargetExtentionDic {
-            set { TargetExtentionDic = value; }
-            get { return TargetExtentionDic; }
+            set { _targetExtentionDic = value; }
+            get { return _targetExtentionDic; }
         }
         /// <summary>インデックス作成開始日時</summary>
         private static DateTime _startTime = DateTime.Now;
@@ -93,6 +93,12 @@ namespace PokudaSearch.IndexBuilder {
 		private static long _totalBytes = 0;
         public static long TotalBytes {
             get { return _totalBytes; }
+        }
+        /// <summary>予約No</summary>
+		private static int _reservedNo = 0;
+        public static int ReservedNo {
+            set { _reservedNo = value; }
+            get { return _reservedNo; }
         }
         #endregion Properties
 
@@ -324,7 +330,7 @@ namespace PokudaSearch.IndexBuilder {
                     Percent = 0,
                     ProgressCount = FinishedCount,
                     TargetCount = _targetCount,
-                    Finished = false
+                    Status = ProgressReport.ProgressStatus.Start
                 });
 
                 //一旦削除
@@ -368,7 +374,7 @@ namespace PokudaSearch.IndexBuilder {
                         Percent = GetPercentage(),
                         ProgressCount = FinishedCount,
                         TargetCount = _targetCount,
-                        Finished = false
+                        Status = ProgressReport.ProgressStatus.Processing
                     });
     			}
                 AppObject.Logger.Info(threadName + "：完了");
@@ -389,7 +395,7 @@ namespace PokudaSearch.IndexBuilder {
                     Percent = GetPercentage(),
                     ProgressCount = FinishedCount,
                     TargetCount = _targetCount,
-                    Finished = true
+                    Status = ProgressReport.ProgressStatus.Finished
                 });
             }
         }
@@ -666,7 +672,7 @@ namespace PokudaSearch.IndexBuilder {
                         Percent = GetPercentage(),
                         ProgressCount = FinishedCount,
                         TargetCount = _targetCount,
-                        Finished = false
+                        Status = ProgressReport.ProgressStatus.Processing
                     });
     			}
                 //クローズ時にIndexファイルがフラッシュされる

@@ -334,7 +334,7 @@
       <DependentUpon>SimpleSearchForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="DB\PokudaSearch.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Doc\機能一覧＆NOTE.xlsx" />
     <None Include="log4net.config">
@@ -369,6 +369,9 @@
   <ItemGroup>
     <None Include="Resources\Explorer24.png" />
     <None Include="Resources\File16.bmp" />
+    <Content Include="DB\CREATE_m_extensions.sql" />
+    <Content Include="DB\CREATE_t_index_history.sql" />
+    <Content Include="DB\CREATE_t_active_index.sql" />
     <Content Include="Doc\Skipされた拡張子.txt" />
     <None Include="Resources\EditClear24.bmp" />
     <Content Include="UserDictionary.txt">
