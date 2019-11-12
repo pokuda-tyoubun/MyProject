@@ -29,16 +29,15 @@
             this.RightBrowser = new System.Windows.Forms.WebBrowser();
             this.RunButton = new System.Windows.Forms.Button();
             this.TopPanel = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.KeywordText = new System.Windows.Forms.TextBox();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.LeftSplitter = new NJFLib.Controls.CollapsibleSplitter();
-            this.LeftPanel.SuspendLayout();
-            this.RightPanel.SuspendLayout();
             this.TopPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // LeftPanel
             // 
-            this.LeftPanel.Controls.Add(this.LeftBrowser);
             this.LeftPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.LeftPanel.Location = new System.Drawing.Point(0, 108);
             this.LeftPanel.Name = "LeftPanel";
@@ -47,16 +46,14 @@
             // 
             // LeftBrowser
             // 
-            this.LeftBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LeftBrowser.Location = new System.Drawing.Point(0, 0);
+            this.LeftBrowser.Location = new System.Drawing.Point(458, 6);
             this.LeftBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.LeftBrowser.Name = "LeftBrowser";
-            this.LeftBrowser.Size = new System.Drawing.Size(507, 595);
+            this.LeftBrowser.Size = new System.Drawing.Size(84, 64);
             this.LeftBrowser.TabIndex = 0;
             // 
             // RightPanel
             // 
-            this.RightPanel.Controls.Add(this.RightBrowser);
             this.RightPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RightPanel.Location = new System.Drawing.Point(507, 108);
             this.RightPanel.Name = "RightPanel";
@@ -65,11 +62,10 @@
             // 
             // RightBrowser
             // 
-            this.RightBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RightBrowser.Location = new System.Drawing.Point(0, 0);
+            this.RightBrowser.Location = new System.Drawing.Point(558, 6);
             this.RightBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.RightBrowser.Name = "RightBrowser";
-            this.RightBrowser.Size = new System.Drawing.Size(445, 595);
+            this.RightBrowser.Size = new System.Drawing.Size(101, 64);
             this.RightBrowser.TabIndex = 0;
             // 
             // RunButton
@@ -84,12 +80,34 @@
             // 
             // TopPanel
             // 
+            this.TopPanel.Controls.Add(this.RightBrowser);
+            this.TopPanel.Controls.Add(this.LeftBrowser);
+            this.TopPanel.Controls.Add(this.label2);
+            this.TopPanel.Controls.Add(this.KeywordText);
             this.TopPanel.Controls.Add(this.RunButton);
             this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TopPanel.Location = new System.Drawing.Point(0, 0);
             this.TopPanel.Name = "TopPanel";
             this.TopPanel.Size = new System.Drawing.Size(952, 100);
             this.TopPanel.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label2.Location = new System.Drawing.Point(6, 6);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(66, 20);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "キーワード";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // KeywordText
+            // 
+            this.KeywordText.Location = new System.Drawing.Point(78, 6);
+            this.KeywordText.Name = "KeywordText";
+            this.KeywordText.Size = new System.Drawing.Size(356, 19);
+            this.KeywordText.TabIndex = 4;
             // 
             // splitter1
             // 
@@ -131,9 +149,8 @@
             this.Name = "PriceCompareForm";
             this.Text = "PriceCompareForm";
             this.Load += new System.EventHandler(this.PriceCompareForm_Load);
-            this.LeftPanel.ResumeLayout(false);
-            this.RightPanel.ResumeLayout(false);
             this.TopPanel.ResumeLayout(false);
+            this.TopPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -148,5 +165,7 @@
         private System.Windows.Forms.Panel TopPanel;
         private System.Windows.Forms.Splitter splitter1;
         private NJFLib.Controls.CollapsibleSplitter LeftSplitter;
+        private System.Windows.Forms.Label label2;
+        internal System.Windows.Forms.TextBox KeywordText;
     }
 }

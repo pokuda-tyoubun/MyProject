@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Gecko;
+using Gecko.DOM;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +14,8 @@ using System.Windows.Forms;
 namespace PokudaPriceInspector.Views {
     public partial class PriceCompareForm : Form {
 
+        private GeckoWebBrowser _leftBrowser = null;
+        private GeckoWebBrowser _rightBrowser = null;
 
         public PriceCompareForm() {
             InitializeComponent();
@@ -23,11 +27,21 @@ namespace PokudaPriceInspector.Views {
         }
 
         private void PriceCompareForm_Load(object sender, EventArgs e) {
+            _leftBrowser = new GeckoWebBrowser();
+            this.LeftPanel.Controls.Add(_leftBrowser);
+            _leftBrowser.Dock = DockStyle.Fill;
+            _leftBrowser.Navigate("https://www.amazon.co.jp/");
 
-            this.LeftBrowser.ScriptErrorsSuppressed = true;
-            this.LeftBrowser.Navigate("https://www.amazon.co.jp/");
+            _rightBrowser = new GeckoWebBrowser();
+            this.RightPanel.Controls.Add(_rightBrowser);
+            _rightBrowser.Dock = DockStyle.Fill;
+            _rightBrowser.Navigate("https://www.mercari.com/jp/");;
 
-            this.RightBrowser.Navigate("");
+            //this.LeftBrowser.ScriptErrorsSuppressed = true;
+            //this.LeftBrowser.Navigate("https://www.amazon.co.jp/");
+
+            //this.RightBrowser.ScriptErrorsSuppressed = true;
+            //this.RightBrowser.Navigate("https://www.mercari.com/jp/");
 
             //CefSettings settings = new CefSettings();
             //settings.BrowserSubprocessPath = Path.Combine(
@@ -51,15 +65,45 @@ namespace PokudaPriceInspector.Views {
         }
 
         private void RunButton_Click(object sender, EventArgs e) {
-            HtmlElementCollection all = this.LeftBrowser.Document.All;
-            HtmlElementCollection forms = all.GetElementsByName("field-keywords");
-            forms[0].InnerText = "c#";
-
-            //TODOここから
-            //Submitの方法が不明
-            //forms[0].In
+            SearchAmazon(_leftBrowser, this.KeywordText.Text);
+            SearchMercari(_rightBrowser, this.KeywordText.Text);
         }
 
+        private void SearchAmazon(IGeckoWebBrowser browser, string keyword) {
+
+            GeckoElement element = browser.Document.GetElementById("twotabsearchtextbox");
+            GeckoInputElement inputter = (GeckoInputElement)element;
+            inputter.SetAttribute("value", keyword);
+
+
+            GeckoElementCollection forms = browser.Document.GetElementsByName("site-search");
+            ((GeckoFormElement)forms[0]).submit();
+
+
+            //HtmlElementCollection all = browser.Document.All;
+            //HtmlElementCollection forms = all.GetElementsByName("field-keywords");
+            //forms[0].InnerText = keyword;
+
+            //forms = all.GetElementsByName("site-search");
+            //forms[0].InvokeMember("submit");
+        }
+
+        private void SearchMercari(IGeckoWebBrowser browser, string keyword) {
+
+            GeckoElementCollection elements = browser.Document.GetElementsByName("keyword");
+            GeckoInputElement inputter = (GeckoInputElement)elements[0];
+            inputter.SetAttribute("value", keyword);
+
+            var form = (GeckoFormElement)inputter.Parent;
+            form.submit();
+
+
+            //HtmlElementCollection all = browser.Document.All;
+            //HtmlElementCollection forms = all.GetElementsByName("keyword");
+            //forms[0].InnerText = keyword;
+
+            //forms[0].InvokeMember("submit");
+        }
 
     }
 }
