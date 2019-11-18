@@ -16,21 +16,27 @@ namespace PokudaSearch.Views {
     public partial class IndexBuildForm : Form {
 
         #region Constants
-        private enum IndexingReserveColIdx : int {
-            [EnumLabel("ステータス")]
-            Status = 0,
+        private enum ActiveIndexColIdx : int {
+            [EnumLabel("パス")]
+            IndexedPath = 0,
             [EnumLabel("モード")]
             CreateMode,
-            [EnumLabel("パス")]
-            IndexedPath,
-            [EnumLabel("作成開始")]
-            StartTime,
             [EnumLabel("作成時間(分)")]
             CreateTime,
             [EnumLabel("対象ファイル数")]
             TargetCount,
+            [EnumLabel("インデックス済み数")]
+            IndexedCount,
+            [EnumLabel("インデックス対象外数")]
+            SkippedCount,
+            [EnumLabel("総バイト数")]
+            TotalBytes,
             [EnumLabel("テキスト抽出器")]
-            TextExtractMode
+            TextExtractMode,
+            [EnumLabel("作成日")]
+            InsertDate, 
+            [EnumLabel("更新日")]
+            UpdateDate
         }
         private enum IndexHistoryColIdx : int {
             [EnumLabel("予約No")]
@@ -83,7 +89,6 @@ namespace PokudaSearch.Views {
             _history = ReadHistoryCSV();
             LoadHistory(_history);
 
-            CreateReservedHeader();
         }
         #endregion Constractors
 
@@ -93,7 +98,57 @@ namespace PokudaSearch.Views {
             string path = Environment.CurrentDirectory + @"\" + Properties.Settings.Default.IndexHistoryCSV;
             csvUtil.WriteCsv(_history, path, true);
         }
+        private void UpdateActiveIndex(DataRow row) {
+            AppObject.DbUtil.Open(AppObject.ConnectString);
+            try {
+                var param = new List<SQLiteParameter>();
+                param.Add(new SQLiteParameter("@パス", row[(int)IndexHistoryColIdx.IndexedPath]));
+                param.Add(new SQLiteParameter("@モード", row[(int)IndexHistoryColIdx.CreateMode]));
+                param.Add(new SQLiteParameter("@作成時間(分)", row[(int)IndexHistoryColIdx.CreateTime]));
+                param.Add(new SQLiteParameter("@対象ファイル数", row[(int)IndexHistoryColIdx.TargetCount]));
+                param.Add(new SQLiteParameter("@インデックス済み", row[(int)IndexHistoryColIdx.IndexedCount]));
+                param.Add(new SQLiteParameter("@インデックス対象外", row[(int)IndexHistoryColIdx.SkippedCount]));
+                param.Add(new SQLiteParameter("@総バイト数", row[(int)IndexHistoryColIdx.TotalBytes]));
+                param.Add(new SQLiteParameter("@テキスト抽出器", row[(int)IndexHistoryColIdx.TextExtractMode]));
+                param.Add(new SQLiteParameter("@作成完了", DateTime.Parse(row[(int)IndexHistoryColIdx.EndTime].ToString())));
+                AppObject.DbUtil.ExecuteNonQuery(SQLSrc.t_active_index.INSERT_OR_REPLACE, param.ToArray());
 
+                AppObject.DbUtil.Commit();
+            } catch(Exception) {
+                AppObject.DbUtil.Rollback();
+                throw;
+            } finally {
+                AppObject.DbUtil.Close();
+            }
+        }
+
+        private void UpdateHistory2DB(DataRow row, int reservedNo) {
+            AppObject.DbUtil.Open(AppObject.ConnectString);
+            try {
+                //HACK パラメタ処理の共通化
+                var param = new List<SQLiteParameter>();
+                param.Add(new SQLiteParameter("@予約No", reservedNo));
+                param.Add(new SQLiteParameter("@作成開始", DateTime.Parse(row[(int)IndexHistoryColIdx.StartTime].ToString())));
+                param.Add(new SQLiteParameter("@作成完了", DateTime.Parse(row[(int)IndexHistoryColIdx.EndTime].ToString())));
+                param.Add(new SQLiteParameter("@モード", row[(int)IndexHistoryColIdx.CreateMode]));
+                param.Add(new SQLiteParameter("@パス", row[(int)IndexHistoryColIdx.IndexedPath]));
+                param.Add(new SQLiteParameter("@作成時間(分)", row[(int)IndexHistoryColIdx.CreateTime]));
+                param.Add(new SQLiteParameter("@対象ファイル数", row[(int)IndexHistoryColIdx.TargetCount]));
+                param.Add(new SQLiteParameter("@インデックス済み", row[(int)IndexHistoryColIdx.IndexedCount]));
+                param.Add(new SQLiteParameter("@インデックス対象外", row[(int)IndexHistoryColIdx.SkippedCount]));
+                param.Add(new SQLiteParameter("@総バイト数", row[(int)IndexHistoryColIdx.TotalBytes]));
+                param.Add(new SQLiteParameter("@テキスト抽出器", row[(int)IndexHistoryColIdx.TextExtractMode]));
+                AppObject.DbUtil.ExecuteNonQuery(SQLSrc.t_index_history.INSERT_OR_REPLACE, param.ToArray());
+
+                AppObject.DbUtil.Commit();
+            } catch(Exception) {
+                AppObject.DbUtil.Rollback();
+                throw;
+            } finally {
+                AppObject.DbUtil.Close();
+            }
+
+        }
         private void InsertHistory2DB(DataRow row) {
             AppObject.DbUtil.Open(AppObject.ConnectString);
             try {
@@ -161,28 +216,14 @@ namespace PokudaSearch.Views {
 
             return historyTbl;
         }
-        private void CreateReservedHeader() {
-            this.ReservedGrid.Cols.Count = EnumUtil.GetCount(typeof(IndexingReserveColIdx)) + 1;
-            this.ReservedGrid.Rows.Count =  HeaderRowCount;
-
-            this.ReservedGrid[0, (int)IndexingReserveColIdx.Status + 1] = EnumUtil.GetLabel(IndexingReserveColIdx.Status);
-            this.ReservedGrid.Cols[(int)IndexingReserveColIdx.Status + 1].Width = 40;
-            this.ReservedGrid.Cols[(int)IndexingReserveColIdx.Status + 1].TextAlign = TextAlignEnum.CenterCenter;
-            this.ReservedGrid[0, (int)IndexingReserveColIdx.CreateMode + 1] = EnumUtil.GetLabel(IndexingReserveColIdx.CreateMode);
-            this.ReservedGrid.Cols[(int)IndexingReserveColIdx.CreateMode + 1].Width = 40;
-            this.ReservedGrid.Cols[(int)IndexingReserveColIdx.CreateMode + 1].TextAlign = TextAlignEnum.CenterCenter;
-            this.ReservedGrid[0, (int)IndexingReserveColIdx.IndexedPath + 1] = EnumUtil.GetLabel(IndexingReserveColIdx.IndexedPath);
-            this.ReservedGrid.Cols[(int)IndexingReserveColIdx.IndexedPath + 1].Width = 200;
-            this.ReservedGrid[0, (int)IndexingReserveColIdx.StartTime + 1] = EnumUtil.GetLabel(IndexingReserveColIdx.StartTime);
-            this.ReservedGrid.Cols[(int)IndexingReserveColIdx.StartTime + 1].Width = 120;
-            this.ReservedGrid[0, (int)IndexingReserveColIdx.CreateTime + 1] = EnumUtil.GetLabel(IndexingReserveColIdx.CreateTime);
-            this.ReservedGrid.Cols[(int)IndexingReserveColIdx.CreateTime + 1].Width = 80;
-            this.ReservedGrid[0, (int)IndexingReserveColIdx.TargetCount + 1] = EnumUtil.GetLabel(IndexingReserveColIdx.TargetCount);
-            this.ReservedGrid.Cols[(int)IndexingReserveColIdx.TargetCount + 1].Width = 80;
-            this.ReservedGrid.Cols[(int)IndexingReserveColIdx.TargetCount + 1].DataType = typeof(int);
-            this.ReservedGrid.Cols[(int)IndexingReserveColIdx.TargetCount + 1].Format = "#,##0";
-            this.ReservedGrid[0, (int)IndexingReserveColIdx.TextExtractMode + 1] = EnumUtil.GetLabel(IndexingReserveColIdx.TextExtractMode);
-            this.ReservedGrid.Cols[(int)IndexingReserveColIdx.TextExtractMode + 1].Width = 80;
+        public void LoadActiveIndex() {
+            AppObject.DbUtil.Open(AppObject.ConnectString);
+            try {
+                DataSet ds = AppObject.DbUtil.ExecSelect(SQLSrc.t_active_index.SELECT, null);
+                this.ActiveIndexGrid.DataSource = ds.Tables[0];
+            } finally {
+                AppObject.DbUtil.Close();
+            }
         }
         /// <summary>
         /// インデックス作成履歴グリッドのヘッダーを設定
@@ -315,8 +356,10 @@ namespace PokudaSearch.Views {
                 _history.AcceptChanges();
                 LoadHistory(_history);
 
-                //TODO ここから
-                //UpdateHistory2DB(newRow);
+                UpdateHistory2DB(historyRows[0], LuceneIndexBuilder.ReservedNo);
+
+                UpdateActiveIndex(historyRows[0]);
+                LoadActiveIndex();
 
                 //HACK SQLiteに移行
                 SaveHistoryCSV();

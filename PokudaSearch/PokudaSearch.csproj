@@ -246,6 +246,11 @@
     <Compile Include="Consts.cs" />
     <Compile Include="IndexBuilder\LuceneIndexBuilder.cs" />
     <Compile Include="IndexBuilder\ProgressReport.cs" />
+    <Compile Include="SQLSrc\t_active_index.Designer.cs">
+      <DependentUpon>t_active_index.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="SQLSrc\t_index_history.Designer.cs">
       <DependentUpon>t_index_history.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -296,6 +301,10 @@
     <Compile Include="Views\SimpleSearchForm.Designer.cs">
       <DependentUpon>SimpleSearchForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SQLSrc\t_active_index.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>t_active_index.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="SQLSrc\t_index_history.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>t_index_history.Designer.cs</LastGenOutput>

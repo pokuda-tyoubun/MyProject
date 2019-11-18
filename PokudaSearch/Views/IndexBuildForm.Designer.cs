@@ -41,12 +41,12 @@
             this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.ReservedGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
+            this.ActiveIndexGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IndexHistoryGrid)).BeginInit();
             this.BottomPanel.SuspendLayout();
             this.MainPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ReservedGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ActiveIndexGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // ReferenceButton
@@ -219,7 +219,7 @@
             this.MainPanel.Controls.Add(this.ReferenceButton);
             this.MainPanel.Controls.Add(this.CreateIndexButton);
             this.MainPanel.Controls.Add(this.LogViewerText);
-            this.MainPanel.Controls.Add(this.ReservedGrid);
+            this.MainPanel.Controls.Add(this.ActiveIndexGrid);
             this.MainPanel.Controls.Add(this.groupBox1);
             this.MainPanel.Controls.Add(this.UpdateIndexButton);
             this.MainPanel.Controls.Add(this.ProgressBar);
@@ -239,32 +239,32 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(117, 21);
             this.label1.TabIndex = 120;
-            this.label1.Text = "インデックシング予約";
+            this.label1.Text = "有効インデックス";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // ReservedGrid
+            // ActiveIndexGrid
             // 
-            this.ReservedGrid.AfterErrorInfo = ((System.Collections.Generic.Dictionary<string, string>)(resources.GetObject("ReservedGrid.AfterErrorInfo")));
-            this.ReservedGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.ActiveIndexGrid.AfterErrorInfo = ((System.Collections.Generic.Dictionary<string, string>)(resources.GetObject("ActiveIndexGrid.AfterErrorInfo")));
+            this.ActiveIndexGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ReservedGrid.AutoClipboard = true;
-            this.ReservedGrid.CellButtonDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.HashSet<string>>)(resources.GetObject("ReservedGrid.CellButtonDic")));
-            this.ReservedGrid.ColumnInfo = "10,1,0,0,0,90,Columns:";
-            this.ReservedGrid.DrawMode = C1.Win.C1FlexGrid.DrawModeEnum.OwnerDraw;
-            this.ReservedGrid.EnableReadOnlyColor = false;
-            this.ReservedGrid.EnableUpdateCellStyle = false;
-            this.ReservedGrid.GridName = null;
-            this.ReservedGrid.IsCol1SelectCheck = false;
-            this.ReservedGrid.IsEnterRight = false;
-            this.ReservedGrid.Location = new System.Drawing.Point(3, 163);
-            this.ReservedGrid.Name = "ReservedGrid";
-            this.ReservedGrid.PulldownDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, string>>)(resources.GetObject("ReservedGrid.PulldownDic")));
-            this.ReservedGrid.Rows.DefaultSize = 18;
-            this.ReservedGrid.Size = new System.Drawing.Size(923, 227);
-            this.ReservedGrid.StyleInfo = resources.GetString("ReservedGrid.StyleInfo");
-            this.ReservedGrid.TabIndex = 23;
-            this.ReservedGrid.WindowsName = null;
+            this.ActiveIndexGrid.AutoClipboard = true;
+            this.ActiveIndexGrid.CellButtonDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.HashSet<string>>)(resources.GetObject("ActiveIndexGrid.CellButtonDic")));
+            this.ActiveIndexGrid.ColumnInfo = "10,1,0,0,0,90,Columns:";
+            this.ActiveIndexGrid.DrawMode = C1.Win.C1FlexGrid.DrawModeEnum.OwnerDraw;
+            this.ActiveIndexGrid.EnableReadOnlyColor = false;
+            this.ActiveIndexGrid.EnableUpdateCellStyle = false;
+            this.ActiveIndexGrid.GridName = null;
+            this.ActiveIndexGrid.IsCol1SelectCheck = false;
+            this.ActiveIndexGrid.IsEnterRight = false;
+            this.ActiveIndexGrid.Location = new System.Drawing.Point(3, 163);
+            this.ActiveIndexGrid.Name = "ActiveIndexGrid";
+            this.ActiveIndexGrid.PulldownDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, string>>)(resources.GetObject("ActiveIndexGrid.PulldownDic")));
+            this.ActiveIndexGrid.Rows.DefaultSize = 18;
+            this.ActiveIndexGrid.Size = new System.Drawing.Size(923, 227);
+            this.ActiveIndexGrid.StyleInfo = resources.GetString("ActiveIndexGrid.StyleInfo");
+            this.ActiveIndexGrid.TabIndex = 23;
+            this.ActiveIndexGrid.WindowsName = null;
             // 
             // IndexBuildForm
             // 
@@ -285,7 +285,7 @@
             this.BottomPanel.ResumeLayout(false);
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ReservedGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ActiveIndexGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -308,6 +308,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel MainPanel;
         private System.Windows.Forms.Label label1;
-        private FxCommonLib.Controls.FlexGridEx ReservedGrid;
+        private FxCommonLib.Controls.FlexGridEx ActiveIndexGrid;
     }
 }
