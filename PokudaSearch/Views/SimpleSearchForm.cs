@@ -323,6 +323,9 @@ namespace PokudaSearch.Views {
         /// プレビューラベルを更新
         /// </summary>
         private void UpdatePreviewLabel() {
+            this.PreviewWarnLabel.Visible = false;
+            this.ShowPreviewButton.Visible = false;
+
             int row = this.ResultGrid.Selection.TopRow;
             if (row >= this.ResultGrid.Rows.Fixed) {
                 string val = StringUtil.NullToBlank(this.ResultGrid.Rows[row][(int)ColIndex.Hilight]);
@@ -338,18 +341,36 @@ namespace PokudaSearch.Views {
                             //そのままブラウザに表示
                         } else if (extention.ToLower() == ".xlsx" ||
                                    extention.ToLower() == ".xls") {
+
                             string tmpPath = SaveToThumbnailBitmap(fullPath);
                             fullPath = tmpPath;
                         } else if (extention.ToLower() == ".pptx") {
-                            string tmpPath = SavePptToXPS(fullPath, over2007:true);
-                            fullPath = tmpPath;
+
+                            this.PreviewWarnLabel.Visible = true;
+                            this.ShowPreviewButton.Visible = true;
+
+                            this.WebBrowser.Navigate("");
+                            return;
+                            //string tmpPath = SavePptToXPS(fullPath, over2007:true);
+                            //fullPath = tmpPath;
                         } else if (extention.ToLower() == ".ppt") {
-                            string tmpPath = SavePptToXPS(fullPath, over2007:false);
-                            fullPath = tmpPath;
+                            this.PreviewWarnLabel.Visible = true;
+                            this.ShowPreviewButton.Visible = true;
+
+                            this.WebBrowser.Navigate("");
+                            return;
+                            //string tmpPath = SavePptToXPS(fullPath, over2007:false);
+                            //fullPath = tmpPath;
                         } else if (extention.ToLower() == ".docx" ||
                                    extention.ToLower() == ".doc") {
-                            string tmpPath = SaveDocToMHtml(fullPath);
-                            fullPath = tmpPath;
+
+                            this.PreviewWarnLabel.Visible = true;
+                            this.ShowPreviewButton.Visible = true;
+
+                            this.WebBrowser.Navigate("");
+                            return;
+                            //string tmpPath = SaveDocToMHtml(fullPath);
+                            //fullPath = tmpPath;
                         } else {
                         }
                     }
@@ -606,6 +627,42 @@ namespace PokudaSearch.Views {
         private void ClearFilterButton_Click(object sender, EventArgs e) {
             this.SearchGridText.Text = "";
             AppObject.FilterHelper.SetGridFilter(this.Cursor, this.ResultGrid, this.SearchGridText.Text, AppObject.MLUtil.GetMsg(CommonConsts.ACT_RESET_FILTER));
+        }
+
+        /// <summary>
+        /// プレビュー表示ボタンクリック
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowPreviewButton_Click(object sender, EventArgs e) {
+
+            this.Cursor = Cursors.WaitCursor;
+
+            try {
+                int row = this.ResultGrid.Selection.TopRow;
+                string extention = StringUtil.NullToBlank(this.ResultGrid.Rows[row][(int)ColIndex.Extention]);
+                string fullPath = StringUtil.NullToBlank(this.ResultGrid.Rows[row][(int)ColIndex.FullPath]);
+
+                if (extention.ToLower() == ".pdf") {
+                    //そのままブラウザに表示
+                } else if (extention.ToLower() == ".xlsx" ||
+                           extention.ToLower() == ".xls") {
+                    //ブラウザに表示
+                } else if (extention.ToLower() == ".pptx") {
+                    string tmpPath = SavePptToXPS(fullPath, over2007: true);
+                    fullPath = tmpPath;
+                } else if (extention.ToLower() == ".ppt") {
+                    string tmpPath = SavePptToXPS(fullPath, over2007: false);
+                    fullPath = tmpPath;
+                } else if (extention.ToLower() == ".docx" ||
+                           extention.ToLower() == ".doc") {
+                    string tmpPath = SaveDocToMHtml(fullPath);
+                    fullPath = tmpPath;
+                }
+                this.WebBrowser.Navigate(fullPath);
+            } finally {
+                this.Cursor = Cursors.Default;
+            }
         }
 
 

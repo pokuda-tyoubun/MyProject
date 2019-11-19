@@ -23,6 +23,8 @@ namespace PokudaSearch {
 
         //HACK*差分Updateモードを実装する。
 
+        //HACK Officeなどプレビューに時間がかかるファイルは、プレビュー表示ボタンで初めて表示するのでも良い。
+
         //HACK 拡張子"txt"のファイルはReadToEndでテキストを受け取るようにする。
 
         //HACK 検索対象フォルダを絞り込めるか？
