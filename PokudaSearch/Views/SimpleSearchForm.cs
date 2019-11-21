@@ -509,7 +509,7 @@ namespace PokudaSearch.Views {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SimpleSearchForm_Shown(object sender, EventArgs e) {
-            this.PreviewCheck.Checked = false;
+            this.PreviewCheck.Checked = true;
         }
 
         /// <summary>

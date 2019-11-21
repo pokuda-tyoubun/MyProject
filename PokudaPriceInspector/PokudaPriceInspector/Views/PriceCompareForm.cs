@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,7 +21,8 @@ namespace PokudaPriceInspector.Views {
     public partial class PriceCompareForm : Form {
 
         private GeckoWebBrowser _rateBrowser = null;
-        private GeckoWebBrowser _leftBrowser = null;
+        //TODO 何も表示されない(WebBrowserだと表示される)
+        private WebBrowser _leftBrowser = null;
         private GeckoWebBrowser _rightBrowser = null;
 
         public PriceCompareForm() {
@@ -30,23 +32,24 @@ namespace PokudaPriceInspector.Views {
         private void PriceCompareForm_Load(object sender, EventArgs e) {
             //TODO
             //GetOpenPriceCNHJPY();
+            this.GeckoBrowser.Navigate("https://www.saiyasune.com/");
 
             _rateBrowser = new GeckoWebBrowser();
             this.RatePanel.Controls.Add(_rateBrowser);
             _rateBrowser.Dock = DockStyle.Fill;
             _rateBrowser.Navigate("https://stocks.finance.yahoo.co.jp/stocks/detail/?code=CNHJPY=FX");
 
-            _leftBrowser = new GeckoWebBrowser();
+            _leftBrowser = new WebBrowser();
             this.LeftPanel.Controls.Add(_leftBrowser);
             _leftBrowser.Dock = DockStyle.Fill;
-            _leftBrowser.Navigate("https://www.amazon.co.jp/");
-            //TODO 何も表示されない(WebBrowserだと表示される)
-            //_leftBrowser.Navigate("https://www.saiyasune.com/");
+            _leftBrowser.ScriptErrorsSuppressed = true;
+            _leftBrowser.Navigate("https://www.saiyasune.com/");
 
             _rightBrowser = new GeckoWebBrowser();
             this.RightPanel.Controls.Add(_rightBrowser);
             _rightBrowser.Dock = DockStyle.Fill;
-            _rightBrowser.Navigate("https://www.mercari.com/jp/");;
+            //_rightBrowser.Navigate("https://www.mercari.com/jp/");;
+            _rightBrowser.Navigate("https://www.mercari.com/jp/category/5/");;
 
             //this.LeftBrowser.ScriptErrorsSuppressed = true;
             //this.LeftBrowser.Navigate("https://www.saiyasune.com/");
@@ -81,7 +84,11 @@ namespace PokudaPriceInspector.Views {
             //SearchSaiyasune(_leftBrowser, this.KeywordText.Text);
             //SearchMercari(_rightBrowser, this.KeywordText.Text);
 
-            GetOpenPriceCNHJPY();
+            List<Item> list = CreateMercariItemList(_rightBrowser);
+            foreach (var item in list) {
+                SearchSaiyasune(_leftBrowser, item.ItemName);
+                break;
+            }
         }
 
         private void SearchAmazon(IGeckoWebBrowser browser, string keyword) {
@@ -102,21 +109,16 @@ namespace PokudaPriceInspector.Views {
             //forms = all.GetElementsByName("site-search");
             //forms[0].InvokeMember("submit");
         }
-        private void SearchSaiyasune(IGeckoWebBrowser browser, string keyword) {
+        private void SearchSaiyasune(WebBrowser browser, string keyword) {
 
-            GeckoElementCollection forms = browser.Document.GetElementsByName("keywords");
-            GeckoInputElement inputter = (GeckoInputElement)forms[0];
-            inputter.SetAttribute("value", keyword);
+            HtmlElementCollection all = browser.Document.All;
+            HtmlElementCollection forms = all.GetElementsByName("keywords");
+            forms[1].InnerText = keyword;
 
-            ((GeckoFormElement)forms[0].Parent).submit();
+            //TODO formタグで処理する必要があるようだ
+            forms = all.GetElementsByName("submit");
+            forms[0].InvokeMember("submit");
 
-
-            //HtmlElementCollection all = browser.Document.All;
-            //HtmlElementCollection forms = all.GetElementsByName("field-keywords");
-            //forms[0].InnerText = keyword;
-
-            //forms = all.GetElementsByName("site-search");
-            //forms[0].InvokeMember("submit");
         }
 
         private Decimal GetPriceAmazon(IGeckoWebBrowser browser) {
@@ -133,13 +135,33 @@ namespace PokudaPriceInspector.Views {
 
             var form = (GeckoFormElement)inputter.Parent;
             form.submit();
+        }
 
+        private struct Item {
+            public string Code;
+            public string ItemName;
+            public Decimal Price;
+        }
+        private List<Item> CreateMercariItemList(IGeckoWebBrowser browser) {
+            var gbu = new GeckoBrowserUtil();
+            List<Item> ret = new List<Item>();
 
-            //HtmlElementCollection all = browser.Document.All;
-            //HtmlElementCollection forms = all.GetElementsByName("keyword");
-            //forms[0].InnerText = keyword;
+            GeckoElement root = (GeckoElement)browser.Document.SelectSingle("//div[@class='items-box-content clearfix category-brand-list']");
+            //root.QuerySelector()
+            var itemList = gbu.GetElementByClassNameRecv(root, "items-box-body");
+            foreach (var element in itemList) {
+                var i = new Item();
+                var title = gbu.GetElementByClassNameRecv(element, "items-box-name font-2")[0];
+                i.ItemName = title.TextContent;
+                var price = gbu.GetElementByClassNameRecv(element, "items-box-price font-5")[0];
+                i.Price = Decimal.Parse(price.TextContent.Replace("¥", ""));
 
-            //forms[0].InvokeMember("submit");
+                Trace.WriteLine(i.ItemName);
+                Trace.WriteLine(i.Price);
+                ret.Add(i);
+            }
+
+            return ret;
         }
 
         //private async void GetOpenPriceCNHJPY() {
@@ -161,6 +183,10 @@ namespace PokudaPriceInspector.Views {
 
         private void GetCnhJpyRateButton_Click(object sender, EventArgs e) {
             this.CnhJpyRateNum.Value = GetOpenPriceCNHJPY();
+        }
+
+        private void GeckoBrowser_NavigationError(object sender, GeckoNavigationErrorEventArgs e) {
+            Trace.WriteLine(e.ToString());
         }
 
     }

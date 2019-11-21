@@ -1,6 +1,7 @@
 ﻿using Gecko;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,16 +30,18 @@ namespace PokudaPriceInspector.Utils {
         }
         private void GetElementByClassNameRecv(GeckoElement root, string className, List<GeckoElement> ret) {
             foreach (var node in root.ChildNodes) {
-                if (node.GetType() == typeof(GeckoHtmlElement)) {
+                if (node.GetType() != typeof(GeckoNode)) {
                     GeckoElement element = (GeckoElement)node;
 
                     string tmp = element.GetAttribute("class");
+                    //Trace.WriteLine(tmp);
                     if (tmp == className) {
                         //合致したelementを追加
                         ret.Add(element);
                     }
                     GetElementByClassNameRecv(element, className, ret);
                 }
+                //Trace.WriteLine(node.LocalName);
             }
         }
     }

@@ -29,20 +29,21 @@
             this.RightBrowser = new System.Windows.Forms.WebBrowser();
             this.RunButton = new System.Windows.Forms.Button();
             this.TopPanel = new System.Windows.Forms.Panel();
+            this.CnhJpyRateNum = new C1.Win.C1Input.C1NumericEdit();
+            this.UsdJpyRateNum = new C1.Win.C1Input.C1NumericEdit();
+            this.GetCnhJpyRateButton = new System.Windows.Forms.Button();
+            this.GetUsdJpyRateButton = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.RatePanel = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.KeywordText = new System.Windows.Forms.TextBox();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.GeckoBrowser = new Gecko.GeckoWebBrowser();
             this.LeftSplitter = new NJFLib.Controls.CollapsibleSplitter();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.GetUsdJpyRateButton = new System.Windows.Forms.Button();
-            this.GetCnhJpyRateButton = new System.Windows.Forms.Button();
-            this.UsdJpyRateNum = new C1.Win.C1Input.C1NumericEdit();
-            this.CnhJpyRateNum = new C1.Win.C1Input.C1NumericEdit();
             this.TopPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.UsdJpyRateNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CnhJpyRateNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UsdJpyRateNum)).BeginInit();
             this.SuspendLayout();
             // 
             // LeftPanel
@@ -89,6 +90,7 @@
             // 
             // TopPanel
             // 
+            this.TopPanel.Controls.Add(this.GeckoBrowser);
             this.TopPanel.Controls.Add(this.CnhJpyRateNum);
             this.TopPanel.Controls.Add(this.UsdJpyRateNum);
             this.TopPanel.Controls.Add(this.GetCnhJpyRateButton);
@@ -106,6 +108,76 @@
             this.TopPanel.Name = "TopPanel";
             this.TopPanel.Size = new System.Drawing.Size(952, 591);
             this.TopPanel.TabIndex = 3;
+            // 
+            // CnhJpyRateNum
+            // 
+            this.CnhJpyRateNum.ErrorInfo.ErrorAction = C1.Win.C1Input.ErrorActionEnum.ResetValue;
+            this.CnhJpyRateNum.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.CnhJpyRateNum.ImagePadding = new System.Windows.Forms.Padding(0);
+            this.CnhJpyRateNum.Location = new System.Drawing.Point(78, 53);
+            this.CnhJpyRateNum.Name = "CnhJpyRateNum";
+            this.CnhJpyRateNum.ShowFocusRectangle = true;
+            this.CnhJpyRateNum.Size = new System.Drawing.Size(100, 20);
+            this.CnhJpyRateNum.TabIndex = 13;
+            this.CnhJpyRateNum.Tag = null;
+            this.CnhJpyRateNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.CnhJpyRateNum.VisibleButtons = C1.Win.C1Input.DropDownControlButtonFlags.UpDown;
+            // 
+            // UsdJpyRateNum
+            // 
+            this.UsdJpyRateNum.ErrorInfo.ErrorAction = C1.Win.C1Input.ErrorActionEnum.ResetValue;
+            this.UsdJpyRateNum.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.UsdJpyRateNum.ImagePadding = new System.Windows.Forms.Padding(0);
+            this.UsdJpyRateNum.Location = new System.Drawing.Point(78, 30);
+            this.UsdJpyRateNum.Name = "UsdJpyRateNum";
+            this.UsdJpyRateNum.ShowFocusRectangle = true;
+            this.UsdJpyRateNum.Size = new System.Drawing.Size(100, 20);
+            this.UsdJpyRateNum.TabIndex = 12;
+            this.UsdJpyRateNum.Tag = null;
+            this.UsdJpyRateNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.UsdJpyRateNum.VisibleButtons = C1.Win.C1Input.DropDownControlButtonFlags.UpDown;
+            // 
+            // GetCnhJpyRateButton
+            // 
+            this.GetCnhJpyRateButton.Location = new System.Drawing.Point(180, 53);
+            this.GetCnhJpyRateButton.Name = "GetCnhJpyRateButton";
+            this.GetCnhJpyRateButton.Size = new System.Drawing.Size(69, 22);
+            this.GetCnhJpyRateButton.TabIndex = 11;
+            this.GetCnhJpyRateButton.Text = "再取得";
+            this.GetCnhJpyRateButton.UseVisualStyleBackColor = true;
+            this.GetCnhJpyRateButton.Click += new System.EventHandler(this.GetCnhJpyRateButton_Click);
+            // 
+            // GetUsdJpyRateButton
+            // 
+            this.GetUsdJpyRateButton.Location = new System.Drawing.Point(180, 29);
+            this.GetUsdJpyRateButton.Name = "GetUsdJpyRateButton";
+            this.GetUsdJpyRateButton.Size = new System.Drawing.Size(69, 21);
+            this.GetUsdJpyRateButton.TabIndex = 10;
+            this.GetUsdJpyRateButton.Text = "再取得";
+            this.GetUsdJpyRateButton.UseVisualStyleBackColor = true;
+            this.GetUsdJpyRateButton.Click += new System.EventHandler(this.GetUsdJpyRateButton_Click);
+            // 
+            // label3
+            // 
+            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label3.Location = new System.Drawing.Point(6, 54);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(66, 20);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "CNHJPY";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label1
+            // 
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label1.Location = new System.Drawing.Point(6, 30);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(66, 20);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "USDJPY";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // RatePanel
             // 
@@ -143,6 +215,15 @@
             this.splitter1.TabIndex = 237;
             this.splitter1.TabStop = false;
             // 
+            // GeckoBrowser
+            // 
+            this.GeckoBrowser.Location = new System.Drawing.Point(12, 147);
+            this.GeckoBrowser.Name = "GeckoBrowser";
+            this.GeckoBrowser.Size = new System.Drawing.Size(264, 117);
+            this.GeckoBrowser.TabIndex = 14;
+            this.GeckoBrowser.UseHttpActivityObserver = false;
+            this.GeckoBrowser.NavigationError += new System.EventHandler<Gecko.Events.GeckoNavigationErrorEventArgs>(this.GeckoBrowser_NavigationError);
+            // 
             // LeftSplitter
             // 
             this.LeftSplitter.AnimationDelay = 20;
@@ -159,76 +240,6 @@
             this.LeftSplitter.UseAnimations = false;
             this.LeftSplitter.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
             // 
-            // label1
-            // 
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(6, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 20);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "USDJPY";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label3
-            // 
-            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label3.Location = new System.Drawing.Point(6, 54);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 20);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "CNHJPY";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // GetUsdJpyRateButton
-            // 
-            this.GetUsdJpyRateButton.Location = new System.Drawing.Point(180, 29);
-            this.GetUsdJpyRateButton.Name = "GetUsdJpyRateButton";
-            this.GetUsdJpyRateButton.Size = new System.Drawing.Size(69, 21);
-            this.GetUsdJpyRateButton.TabIndex = 10;
-            this.GetUsdJpyRateButton.Text = "再取得";
-            this.GetUsdJpyRateButton.UseVisualStyleBackColor = true;
-            this.GetUsdJpyRateButton.Click += new System.EventHandler(this.GetUsdJpyRateButton_Click);
-            // 
-            // GetCnhJpyRateButton
-            // 
-            this.GetCnhJpyRateButton.Location = new System.Drawing.Point(180, 53);
-            this.GetCnhJpyRateButton.Name = "GetCnhJpyRateButton";
-            this.GetCnhJpyRateButton.Size = new System.Drawing.Size(69, 22);
-            this.GetCnhJpyRateButton.TabIndex = 11;
-            this.GetCnhJpyRateButton.Text = "再取得";
-            this.GetCnhJpyRateButton.UseVisualStyleBackColor = true;
-            this.GetCnhJpyRateButton.Click += new System.EventHandler(this.GetCnhJpyRateButton_Click);
-            // 
-            // UsdJpyRateNum
-            // 
-            this.UsdJpyRateNum.ErrorInfo.ErrorAction = C1.Win.C1Input.ErrorActionEnum.ResetValue;
-            this.UsdJpyRateNum.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.UsdJpyRateNum.ImagePadding = new System.Windows.Forms.Padding(0);
-            this.UsdJpyRateNum.Location = new System.Drawing.Point(78, 30);
-            this.UsdJpyRateNum.Name = "UsdJpyRateNum";
-            this.UsdJpyRateNum.ShowFocusRectangle = true;
-            this.UsdJpyRateNum.Size = new System.Drawing.Size(100, 20);
-            this.UsdJpyRateNum.TabIndex = 12;
-            this.UsdJpyRateNum.Tag = null;
-            this.UsdJpyRateNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.UsdJpyRateNum.VisibleButtons = C1.Win.C1Input.DropDownControlButtonFlags.UpDown;
-            // 
-            // CnhJpyRateNum
-            // 
-            this.CnhJpyRateNum.ErrorInfo.ErrorAction = C1.Win.C1Input.ErrorActionEnum.ResetValue;
-            this.CnhJpyRateNum.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.CnhJpyRateNum.ImagePadding = new System.Windows.Forms.Padding(0);
-            this.CnhJpyRateNum.Location = new System.Drawing.Point(78, 53);
-            this.CnhJpyRateNum.Name = "CnhJpyRateNum";
-            this.CnhJpyRateNum.ShowFocusRectangle = true;
-            this.CnhJpyRateNum.Size = new System.Drawing.Size(100, 20);
-            this.CnhJpyRateNum.TabIndex = 13;
-            this.CnhJpyRateNum.Tag = null;
-            this.CnhJpyRateNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.CnhJpyRateNum.VisibleButtons = C1.Win.C1Input.DropDownControlButtonFlags.UpDown;
-            // 
             // PriceCompareForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -244,8 +255,8 @@
             this.Load += new System.EventHandler(this.PriceCompareForm_Load);
             this.TopPanel.ResumeLayout(false);
             this.TopPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.UsdJpyRateNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CnhJpyRateNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UsdJpyRateNum)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -269,5 +280,6 @@
         private System.Windows.Forms.Button GetUsdJpyRateButton;
         private C1.Win.C1Input.C1NumericEdit UsdJpyRateNum;
         private C1.Win.C1Input.C1NumericEdit CnhJpyRateNum;
+        private Gecko.GeckoWebBrowser GeckoBrowser;
     }
 }
