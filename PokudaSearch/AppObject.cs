@@ -15,6 +15,12 @@ namespace PokudaSearch {
     public static class AppObject {
         
         //着手候補の優先度------------------
+        //HACK*FileExplorerのパスコンボを画面の大きさに応じてサイズ変更するようにする。
+        //HACK*7zip、TortoiseGitのコンテキストメニューを表示するようにする。
+        //HACK*通常のエクスプローラーを表示できるようにする。
+        //HACK*Alt↑を有効にする。
+
+
         //HACK*インデックスをディレクトリ毎に予約化し、マルチスレッドで作成する。（結果をマージしない。）
             //t_index_historyに予約-作成状況を記録
             //複数のパスをIndex化できる。

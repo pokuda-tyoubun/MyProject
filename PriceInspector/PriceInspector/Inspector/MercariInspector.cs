@@ -15,28 +15,32 @@ namespace PriceInspector.Inspector {
 
         private IWebDriver _webDriver = new ChromeDriver();
 
-        public MercariInspector() {
-            _webDriver.Url = @"https://www.mercari.com/jp/category/5/";
+        public MercariInspector(string targetUrl) {
+            _webDriver.Url = targetUrl;
         }
 
         public List<Item> CreateMercariItemList() {
             List<Item> ret = new List<Item>();
 
             var root = _webDriver.FindElement(By.XPath("//div[@class='items-box-content clearfix category-brand-list']"));
-            var itemList = root.FindElements(By.ClassName("items-box-body"));
+            var itemList = root.FindElements(By.ClassName("items-box"));
             foreach (var element in itemList.AsEnumerable()) {
                 //<div class="items-box-body">
                 //  <h3 class="items-box-name font-2">
                 //  <div class="xx">
                 //    <div class="items-box-price font-5">
                 var i = new Item();
-                var title = element.FindElement(By.XPath("h3[@class='items-box-name font-2']"));
+                var title = element.FindElement(By.XPath("a/div/h3[@class='items-box-name font-2']"));
                 i.ItemName = title.Text;
-                var price = element.FindElement(By.XPath("div/div[@class='items-box-price font-5']"));
+                var price = element.FindElement(By.XPath("a/div/div/div[@class='items-box-price font-5']"));
                 i.MercariPrice = Decimal.Parse(price.Text.Replace("¥", ""));
+
+                var a = element.FindElement(By.XPath("a"));
+                i.MercariUrl = a.GetAttribute("href");
 
                 Trace.WriteLine(i.ItemName);
                 Trace.WriteLine(i.MercariPrice);
+                Trace.WriteLine(i.MercariUrl);
                 ret.Add(i);
             }
 

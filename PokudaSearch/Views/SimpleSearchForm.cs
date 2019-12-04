@@ -665,6 +665,10 @@ namespace PokudaSearch.Views {
             }
         }
 
+        private void BrowserPreviewPanel_Paint(object sender, PaintEventArgs e) {
+
+        }
+
 
         //private void SearchOld() {
         //    DateTime start = DateTime.Now;

@@ -102,5 +102,11 @@ namespace PokudaSearch.Views {
                 MessageBox.Show("存在しないパスです。", AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void SubPathCombo_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter) {
+                ChangePath(this.SubExplorer, this.SubPathCombo);
+            }
+        }
     }
 }

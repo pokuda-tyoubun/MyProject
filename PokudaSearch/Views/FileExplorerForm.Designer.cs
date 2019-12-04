@@ -67,6 +67,8 @@
             // 
             // toolStrip1
             // 
+            this.toolStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.BackwardButton,
@@ -106,13 +108,16 @@
             // 
             // toolStrip2
             // 
+            this.toolStrip2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.toolStrip2.AutoSize = false;
             this.toolStrip2.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton1,
             this.SubPathCombo});
             this.toolStrip2.Location = new System.Drawing.Point(2, 3);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(237, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(598, 27);
             this.toolStrip2.TabIndex = 3;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -122,14 +127,15 @@
             this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 24);
             this.toolStripButton1.Text = "toolStripButton1";
             // 
             // SubPathCombo
             // 
             this.SubPathCombo.AutoSize = false;
             this.SubPathCombo.Name = "SubPathCombo";
-            this.SubPathCombo.Size = new System.Drawing.Size(200, 23);
+            this.SubPathCombo.Size = new System.Drawing.Size(500, 23);
+            this.SubPathCombo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SubPathCombo_KeyDown);
             // 
             // SubExplorer
             // 
@@ -175,7 +181,6 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.RightPanel.ResumeLayout(false);
-            this.RightPanel.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);

@@ -55,20 +55,20 @@
             this.CopyMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.MoreLikeThisMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.PreviewPanel = new System.Windows.Forms.Panel();
+            this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
+            this.BrowserPreviewPanel = new System.Windows.Forms.Panel();
+            this.PreviewWarnLabel = new System.Windows.Forms.Label();
+            this.ShowPreviewButton = new System.Windows.Forms.Button();
+            this.BrowserProgress = new System.Windows.Forms.ProgressBar();
+            this.WebBrowser = new System.Windows.Forms.WebBrowser();
             this.TextPreviewPanel = new System.Windows.Forms.Panel();
             this.PreviewLabel = new C1.Win.C1SuperTooltip.C1SuperLabel();
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.TargetIndexGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
             this.ClearButton = new System.Windows.Forms.Button();
             this.PreviewCheck = new System.Windows.Forms.CheckBox();
-            this.SearchButton = new System.Windows.Forms.Button();
-            this.BrowserPreviewPanel = new System.Windows.Forms.Panel();
-            this.BrowserProgress = new System.Windows.Forms.ProgressBar();
-            this.WebBrowser = new System.Windows.Forms.WebBrowser();
-            this.ShowPreviewButton = new System.Windows.Forms.Button();
-            this.PreviewWarnLabel = new System.Windows.Forms.Label();
-            this.TargetIndexGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
             this.ResultGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
-            this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
+            this.SearchButton = new System.Windows.Forms.Button();
             this.PreviewSplitter = new NJFLib.Controls.CollapsibleSplitter();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate1)).BeginInit();
@@ -76,9 +76,9 @@
             this.FailureFTSNavi.SuspendLayout();
             this.ResultContext.SuspendLayout();
             this.PreviewPanel.SuspendLayout();
+            this.BrowserPreviewPanel.SuspendLayout();
             this.TextPreviewPanel.SuspendLayout();
             this.MainPanel.SuspendLayout();
-            this.BrowserPreviewPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TargetIndexGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultGrid)).BeginInit();
             this.SuspendLayout();
@@ -369,8 +369,77 @@
             this.PreviewPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.PreviewPanel.Location = new System.Drawing.Point(657, 0);
             this.PreviewPanel.Name = "PreviewPanel";
-            this.PreviewPanel.Size = new System.Drawing.Size(419, 582);
+            this.PreviewPanel.Size = new System.Drawing.Size(419, 659);
             this.PreviewPanel.TabIndex = 116;
+            // 
+            // collapsibleSplitter3
+            // 
+            this.collapsibleSplitter3.AnimationDelay = 20;
+            this.collapsibleSplitter3.AnimationStep = 20;
+            this.collapsibleSplitter3.BorderStyle3D = System.Windows.Forms.Border3DStyle.RaisedOuter;
+            this.collapsibleSplitter3.ControlToHide = this.BrowserPreviewPanel;
+            this.collapsibleSplitter3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.collapsibleSplitter3.ExpandParentForm = false;
+            this.collapsibleSplitter3.Location = new System.Drawing.Point(0, 146);
+            this.collapsibleSplitter3.Name = "collapsibleSplitter3";
+            this.collapsibleSplitter3.Size = new System.Drawing.Size(419, 8);
+            this.collapsibleSplitter3.TabIndex = 123;
+            this.collapsibleSplitter3.TabStop = false;
+            this.collapsibleSplitter3.UseAnimations = false;
+            this.collapsibleSplitter3.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
+            // 
+            // BrowserPreviewPanel
+            // 
+            this.BrowserPreviewPanel.Controls.Add(this.PreviewWarnLabel);
+            this.BrowserPreviewPanel.Controls.Add(this.ShowPreviewButton);
+            this.BrowserPreviewPanel.Controls.Add(this.BrowserProgress);
+            this.BrowserPreviewPanel.Controls.Add(this.WebBrowser);
+            this.BrowserPreviewPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.BrowserPreviewPanel.Location = new System.Drawing.Point(0, 154);
+            this.BrowserPreviewPanel.Name = "BrowserPreviewPanel";
+            this.BrowserPreviewPanel.Size = new System.Drawing.Size(419, 505);
+            this.BrowserPreviewPanel.TabIndex = 122;
+            this.BrowserPreviewPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.BrowserPreviewPanel_Paint);
+            // 
+            // PreviewWarnLabel
+            // 
+            this.PreviewWarnLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.PreviewWarnLabel.AutoSize = true;
+            this.PreviewWarnLabel.Location = new System.Drawing.Point(132, 484);
+            this.PreviewWarnLabel.Name = "PreviewWarnLabel";
+            this.PreviewWarnLabel.Size = new System.Drawing.Size(173, 12);
+            this.PreviewWarnLabel.TabIndex = 3;
+            this.PreviewWarnLabel.Text = "プレビュー表示に時間が掛かります。";
+            // 
+            // ShowPreviewButton
+            // 
+            this.ShowPreviewButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ShowPreviewButton.Location = new System.Drawing.Point(311, 479);
+            this.ShowPreviewButton.Name = "ShowPreviewButton";
+            this.ShowPreviewButton.Size = new System.Drawing.Size(102, 22);
+            this.ShowPreviewButton.TabIndex = 2;
+            this.ShowPreviewButton.Text = "表示する";
+            this.ShowPreviewButton.UseVisualStyleBackColor = true;
+            this.ShowPreviewButton.Click += new System.EventHandler(this.ShowPreviewButton_Click);
+            // 
+            // BrowserProgress
+            // 
+            this.BrowserProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.BrowserProgress.Location = new System.Drawing.Point(4, 479);
+            this.BrowserProgress.Name = "BrowserProgress";
+            this.BrowserProgress.Size = new System.Drawing.Size(126, 23);
+            this.BrowserProgress.TabIndex = 1;
+            // 
+            // WebBrowser
+            // 
+            this.WebBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.WebBrowser.Location = new System.Drawing.Point(3, 3);
+            this.WebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.WebBrowser.Name = "WebBrowser";
+            this.WebBrowser.Size = new System.Drawing.Size(412, 470);
+            this.WebBrowser.TabIndex = 0;
             // 
             // TextPreviewPanel
             // 
@@ -378,7 +447,7 @@
             this.TextPreviewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TextPreviewPanel.Location = new System.Drawing.Point(0, 0);
             this.TextPreviewPanel.Name = "TextPreviewPanel";
-            this.TextPreviewPanel.Size = new System.Drawing.Size(419, 284);
+            this.TextPreviewPanel.Size = new System.Drawing.Size(419, 154);
             this.TextPreviewPanel.TabIndex = 3;
             // 
             // PreviewLabel
@@ -387,7 +456,7 @@
             this.PreviewLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PreviewLabel.Location = new System.Drawing.Point(0, 0);
             this.PreviewLabel.Name = "PreviewLabel";
-            this.PreviewLabel.Size = new System.Drawing.Size(419, 284);
+            this.PreviewLabel.Size = new System.Drawing.Size(419, 154);
             this.PreviewLabel.TabIndex = 0;
             this.PreviewLabel.UseMnemonic = true;
             // 
@@ -410,99 +479,8 @@
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(0, 0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(657, 582);
+            this.MainPanel.Size = new System.Drawing.Size(657, 659);
             this.MainPanel.TabIndex = 118;
-            // 
-            // ClearButton
-            // 
-            this.ClearButton.Image = global::PokudaSearch.Properties.Resources.EditClear24;
-            this.ClearButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.ClearButton.Location = new System.Drawing.Point(523, 4);
-            this.ClearButton.Name = "ClearButton";
-            this.ClearButton.Size = new System.Drawing.Size(80, 52);
-            this.ClearButton.TabIndex = 117;
-            this.ClearButton.Text = "クリア";
-            this.ClearButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.ClearButton.UseVisualStyleBackColor = true;
-            this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
-            // 
-            // PreviewCheck
-            // 
-            this.PreviewCheck.AutoSize = true;
-            this.PreviewCheck.Checked = true;
-            this.PreviewCheck.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.PreviewCheck.Location = new System.Drawing.Point(444, 61);
-            this.PreviewCheck.Name = "PreviewCheck";
-            this.PreviewCheck.Size = new System.Drawing.Size(120, 16);
-            this.PreviewCheck.TabIndex = 116;
-            this.PreviewCheck.Text = "プレビュー機能を使う";
-            this.PreviewCheck.UseVisualStyleBackColor = true;
-            this.PreviewCheck.CheckedChanged += new System.EventHandler(this.PreviewCheck_CheckedChanged);
-            // 
-            // SearchButton
-            // 
-            this.SearchButton.Image = global::PokudaSearch.Properties.Resources.Search24;
-            this.SearchButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.SearchButton.Location = new System.Drawing.Point(439, 4);
-            this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(80, 52);
-            this.SearchButton.TabIndex = 2;
-            this.SearchButton.Text = "検索(&S)";
-            this.SearchButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.SearchButton.UseVisualStyleBackColor = true;
-            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
-            // 
-            // BrowserPreviewPanel
-            // 
-            this.BrowserPreviewPanel.Controls.Add(this.PreviewWarnLabel);
-            this.BrowserPreviewPanel.Controls.Add(this.ShowPreviewButton);
-            this.BrowserPreviewPanel.Controls.Add(this.BrowserProgress);
-            this.BrowserPreviewPanel.Controls.Add(this.WebBrowser);
-            this.BrowserPreviewPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.BrowserPreviewPanel.Location = new System.Drawing.Point(0, 284);
-            this.BrowserPreviewPanel.Name = "BrowserPreviewPanel";
-            this.BrowserPreviewPanel.Size = new System.Drawing.Size(419, 298);
-            this.BrowserPreviewPanel.TabIndex = 122;
-            // 
-            // BrowserProgress
-            // 
-            this.BrowserProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.BrowserProgress.Location = new System.Drawing.Point(4, 272);
-            this.BrowserProgress.Name = "BrowserProgress";
-            this.BrowserProgress.Size = new System.Drawing.Size(126, 23);
-            this.BrowserProgress.TabIndex = 1;
-            // 
-            // WebBrowser
-            // 
-            this.WebBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.WebBrowser.Location = new System.Drawing.Point(3, 3);
-            this.WebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.WebBrowser.Name = "WebBrowser";
-            this.WebBrowser.Size = new System.Drawing.Size(412, 263);
-            this.WebBrowser.TabIndex = 0;
-            // 
-            // ShowPreviewButton
-            // 
-            this.ShowPreviewButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ShowPreviewButton.Location = new System.Drawing.Point(311, 272);
-            this.ShowPreviewButton.Name = "ShowPreviewButton";
-            this.ShowPreviewButton.Size = new System.Drawing.Size(102, 22);
-            this.ShowPreviewButton.TabIndex = 2;
-            this.ShowPreviewButton.Text = "表示する";
-            this.ShowPreviewButton.UseVisualStyleBackColor = true;
-            this.ShowPreviewButton.Click += new System.EventHandler(this.ShowPreviewButton_Click);
-            // 
-            // PreviewWarnLabel
-            // 
-            this.PreviewWarnLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.PreviewWarnLabel.AutoSize = true;
-            this.PreviewWarnLabel.Location = new System.Drawing.Point(132, 277);
-            this.PreviewWarnLabel.Name = "PreviewWarnLabel";
-            this.PreviewWarnLabel.Size = new System.Drawing.Size(173, 12);
-            this.PreviewWarnLabel.TabIndex = 3;
-            this.PreviewWarnLabel.Text = "プレビュー表示に時間が掛かります。";
             // 
             // TargetIndexGrid
             // 
@@ -533,6 +511,32 @@
             this.TargetIndexGrid.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2010Blue;
             this.TargetIndexGrid.WindowsName = null;
             // 
+            // ClearButton
+            // 
+            this.ClearButton.Image = global::PokudaSearch.Properties.Resources.EditClear24;
+            this.ClearButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.ClearButton.Location = new System.Drawing.Point(523, 4);
+            this.ClearButton.Name = "ClearButton";
+            this.ClearButton.Size = new System.Drawing.Size(80, 52);
+            this.ClearButton.TabIndex = 117;
+            this.ClearButton.Text = "クリア";
+            this.ClearButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.ClearButton.UseVisualStyleBackColor = true;
+            this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
+            // 
+            // PreviewCheck
+            // 
+            this.PreviewCheck.AutoSize = true;
+            this.PreviewCheck.Checked = true;
+            this.PreviewCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.PreviewCheck.Location = new System.Drawing.Point(444, 61);
+            this.PreviewCheck.Name = "PreviewCheck";
+            this.PreviewCheck.Size = new System.Drawing.Size(120, 16);
+            this.PreviewCheck.TabIndex = 116;
+            this.PreviewCheck.Text = "プレビュー機能を使う";
+            this.PreviewCheck.UseVisualStyleBackColor = true;
+            this.PreviewCheck.CheckedChanged += new System.EventHandler(this.PreviewCheck_CheckedChanged);
+            // 
             // ResultGrid
             // 
             this.ResultGrid.AfterErrorInfo = ((System.Collections.Generic.Dictionary<string, string>)(resources.GetObject("ResultGrid.AfterErrorInfo")));
@@ -559,7 +563,7 @@
             this.ResultGrid.Rows.Count = 2;
             this.ResultGrid.Rows.DefaultSize = 18;
             this.ResultGrid.ShowErrors = true;
-            this.ResultGrid.Size = new System.Drawing.Size(649, 471);
+            this.ResultGrid.Size = new System.Drawing.Size(649, 548);
             this.ResultGrid.StyleInfo = resources.GetString("ResultGrid.StyleInfo");
             this.ResultGrid.TabIndex = 9;
             this.ResultGrid.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2010Blue;
@@ -568,21 +572,18 @@
             this.ResultGrid.OwnerDrawCell += new C1.Win.C1FlexGrid.OwnerDrawCellEventHandler(this.ResultGrid_OwnerDrawCell);
             this.ResultGrid.DoubleClick += new System.EventHandler(this.ResultGrid_DoubleClick);
             // 
-            // collapsibleSplitter3
+            // SearchButton
             // 
-            this.collapsibleSplitter3.AnimationDelay = 20;
-            this.collapsibleSplitter3.AnimationStep = 20;
-            this.collapsibleSplitter3.BorderStyle3D = System.Windows.Forms.Border3DStyle.RaisedOuter;
-            this.collapsibleSplitter3.ControlToHide = this.BrowserPreviewPanel;
-            this.collapsibleSplitter3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.collapsibleSplitter3.ExpandParentForm = false;
-            this.collapsibleSplitter3.Location = new System.Drawing.Point(0, 276);
-            this.collapsibleSplitter3.Name = "collapsibleSplitter3";
-            this.collapsibleSplitter3.Size = new System.Drawing.Size(419, 8);
-            this.collapsibleSplitter3.TabIndex = 123;
-            this.collapsibleSplitter3.TabStop = false;
-            this.collapsibleSplitter3.UseAnimations = false;
-            this.collapsibleSplitter3.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
+            this.SearchButton.Image = global::PokudaSearch.Properties.Resources.Search24;
+            this.SearchButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.SearchButton.Location = new System.Drawing.Point(439, 4);
+            this.SearchButton.Name = "SearchButton";
+            this.SearchButton.Size = new System.Drawing.Size(80, 52);
+            this.SearchButton.TabIndex = 2;
+            this.SearchButton.Text = "検索(&S)";
+            this.SearchButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.SearchButton.UseVisualStyleBackColor = true;
+            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
             // PreviewSplitter
             // 
@@ -594,7 +595,7 @@
             this.PreviewSplitter.ExpandParentForm = false;
             this.PreviewSplitter.Location = new System.Drawing.Point(649, 0);
             this.PreviewSplitter.Name = "PreviewSplitter";
-            this.PreviewSplitter.Size = new System.Drawing.Size(8, 582);
+            this.PreviewSplitter.Size = new System.Drawing.Size(8, 659);
             this.PreviewSplitter.TabIndex = 123;
             this.PreviewSplitter.TabStop = false;
             this.PreviewSplitter.UseAnimations = false;
@@ -604,7 +605,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1076, 582);
+            this.ClientSize = new System.Drawing.Size(1076, 659);
             this.Controls.Add(this.PreviewSplitter);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.PreviewPanel);
@@ -621,11 +622,11 @@
             this.FailureFTSNavi.PerformLayout();
             this.ResultContext.ResumeLayout(false);
             this.PreviewPanel.ResumeLayout(false);
+            this.BrowserPreviewPanel.ResumeLayout(false);
+            this.BrowserPreviewPanel.PerformLayout();
             this.TextPreviewPanel.ResumeLayout(false);
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
-            this.BrowserPreviewPanel.ResumeLayout(false);
-            this.BrowserPreviewPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TargetIndexGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultGrid)).EndInit();
             this.ResumeLayout(false);
