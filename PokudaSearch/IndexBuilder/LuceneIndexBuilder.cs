@@ -366,7 +366,6 @@ namespace PokudaSearch.IndexBuilder {
                         if (e.Message.IndexOf("IndexWriter is closed") >= 0) {
                             AppObject.Logger.Warn(e.GetBaseException().ToString());
                             throw new AlreadyClosedException("Index file capacity over. Please divide index directory.");
-                            return;
                         }
     				}
                     //進捗度更新を呼び出し。

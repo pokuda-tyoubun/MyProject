@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PriceInspector.Inspector {
@@ -40,8 +41,31 @@ namespace PriceInspector.Inspector {
                     var price = element.FindElement(By.XPath("div[4]/div/div[1]/div[2]/div/a/span/span[2]/span[2]"));
                     item.AmazonJpPrice = Decimal.Parse(price.Text.Replace("¥", ""));
 
+                    var a = element.FindElement(By.XPath("div[3]/div/div[1]/h2/a"));
+                    a.Click();
+
+                    _webDriver.SwitchTo().Window( _webDriver.WindowHandles.Last());
+                    //ASIN
+                    try {
+                        var asinb = _webDriver.FindElement(By.XPath("//*[text()=\"ASIN:\"]"));
+                        var asin = asinb.FindElement(By.XPath(".."));
+                        item.Code = asin.Text;
+                    } catch (NoSuchElementException) {
+                    }
+                    //ISBN
+                    try {
+                        //var isbnb = _webDriver.FindElement(By.XPath("//*[text()=\"ISBN-13:\"]"));
+                        var isbnb = _webDriver.FindElement(By.XPath("//*[@id='detail_bullets_id']/table/tbody/tr/td/div/ul/li[5]/b"));
+                        var isbn = isbnb.FindElement(By.XPath(".."));
+                        item.Code = isbn.Text;
+                    } catch (NoSuchElementException) {
+                    }
+
                     ret.Add(item);
                     i++;
+
+                    _webDriver.SwitchTo().Window( _webDriver.WindowHandles.Last()).Close();
+                    _webDriver.SwitchTo().Window( _webDriver.WindowHandles.First());
                 } catch (NoSuchElementException) {
                     //何もしない
                 }
