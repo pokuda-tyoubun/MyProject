@@ -15,19 +15,23 @@ namespace PokudaSearch {
     public static class AppObject {
         
         //着手候補の優先度------------------
+        //HACK*差分Updateモードを実装する。
+
+        //HACK*.chmをダウンロードしないように
+
         //HACK*FileExplorerのパスコンボを画面の大きさに応じてサイズ変更するようにする。
         //HACK*7zip、TortoiseGitのコンテキストメニューを表示するようにする。
         //HACK*通常のエクスプローラーを表示できるようにする。
         //HACK*Alt↑を有効にする。
 
+        //HACK グリッドフィルタリングにMigemoを組み込む
+        //     参考 http://thinkingskeever.hatenablog.com/entry/2018/03/11/003000
 
         //HACK*インデックスをディレクトリ毎に予約化し、マルチスレッドで作成する。（結果をマージしない。）
             //t_index_historyに予約-作成状況を記録
             //複数のパスをIndex化できる。
             //選択したIndexを削除できる。
             //WebページもIndex化できる。
-
-        //HACK*差分Updateモードを実装する。
 
         //HACK Officeなどプレビューに時間がかかるファイルは、プレビュー表示ボタンで初めて表示するのでも良い。
 

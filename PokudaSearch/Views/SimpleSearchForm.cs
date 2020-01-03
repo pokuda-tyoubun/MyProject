@@ -332,6 +332,7 @@ namespace PokudaSearch.Views {
                 this.PreviewLabel.Text = val;
 
                 if (this.PreviewCheck.Checked) {
+                    this.WebBrowser.Visible = true;
                     string extention = StringUtil.NullToBlank(this.ResultGrid.Rows[row][(int)ColIndex.Extention]);
                     string fullPath = StringUtil.NullToBlank(this.ResultGrid.Rows[row][(int)ColIndex.FullPath]);
                     if (!File.Exists(fullPath)) {
@@ -344,6 +345,10 @@ namespace PokudaSearch.Views {
 
                             string tmpPath = SaveToThumbnailBitmap(fullPath);
                             fullPath = tmpPath;
+                        } else if (extention.ToLower() == ".csv") {
+                            this.RichTextBox.Text = ReadCsvToString(fullPath);
+                            this.WebBrowser.Visible = false;
+                            return;
                         } else if (extention.ToLower() == ".pptx") {
 
                             this.PreviewWarnLabel.Visible = true;
@@ -617,6 +622,7 @@ namespace PokudaSearch.Views {
         private void KeywordText_KeyPress(object sender, KeyPressEventArgs e) {
             if (e.KeyChar == (char)Keys.Enter) {
                 this.SearchButton.PerformClick();
+                e.Handled = true;
             }
         }
 
@@ -667,6 +673,49 @@ namespace PokudaSearch.Views {
 
         private void BrowserPreviewPanel_Paint(object sender, PaintEventArgs e) {
 
+        }
+
+        private void DiffMenu_Click(object sender, EventArgs e) {
+
+            int cnt = 1;
+            string src1 = "";
+            string src2 = "";
+            foreach (Row r in this.ResultGrid.Rows.Selected) {
+                if (cnt == 1) {
+                    src1 = StringUtil.NullToBlank(r[(int)ColIndex.FullPath]);
+                } else if (cnt == 2) {
+                    src2 = StringUtil.NullToBlank(r[(int)ColIndex.FullPath]);
+                    break;
+                }
+                cnt++;
+            }
+            Process.Start(Properties.Settings.Default.DiffExe, src1 + " " + src2);
+        }
+
+        private void SimpleSearchForm_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.F && e.Control == true) {
+                this.KeywordText.Focus();
+                e.SuppressKeyPress = true;
+            }
+            if (e.KeyCode == Keys.F && e.Alt == true) {
+                this.SearchGridText.Focus();
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void SearchGridText_KeyPress(object sender, KeyPressEventArgs e) {
+            if (e.KeyChar == (char)Keys.Enter) {
+                this.FilterGridButton.PerformClick();
+                e.Handled = true;
+            }
+        }
+
+        private string ReadCsvToString(string csvPath) {
+            string ret = "";
+            using (var sr = new StreamReader(csvPath, Encoding.GetEncoding(932))) {
+                ret = sr.ReadToEnd();
+            }
+            return ret;
         }
 
 
