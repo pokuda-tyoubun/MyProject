@@ -1,5 +1,8 @@
+DROP TABLE [t_active_index];
+
 CREATE TABLE [t_active_index] ( 
 [パス] VARCHAR(255) NOT NULL DEFAULT '', 
+[インデックスパス] VARCHAR(255) NOT NULL DEFAULT '', 
 [モード] VARCHAR(10) NOT NULL DEFAULT '', 
 [作成時間(分)] INTEGER NOT NULL DEFAULT '0', 
 [対象ファイル数] INTEGER NOT NULL DEFAULT '0', 

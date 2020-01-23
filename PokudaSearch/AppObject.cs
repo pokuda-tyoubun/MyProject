@@ -15,6 +15,12 @@ namespace PokudaSearch {
     public static class AppObject {
         
         //着手候補の優先度------------------
+        //HACK*インデックスをディレクトリ毎に予約化し、マルチスレッドで作成する。（結果をマージしない。）
+            //t_index_historyに予約-作成状況を記録
+            //複数のパスをIndex化できる。
+            //選択したIndexを削除できる。
+            //WebページもIndex化できる。
+
         //HACK*差分Updateモードを実装する。
 
         //HACK*.chmをダウンロードしないように
@@ -26,12 +32,6 @@ namespace PokudaSearch {
 
         //HACK グリッドフィルタリングにMigemoを組み込む
         //     参考 http://thinkingskeever.hatenablog.com/entry/2018/03/11/003000
-
-        //HACK*インデックスをディレクトリ毎に予約化し、マルチスレッドで作成する。（結果をマージしない。）
-            //t_index_historyに予約-作成状況を記録
-            //複数のパスをIndex化できる。
-            //選択したIndexを削除できる。
-            //WebページもIndex化できる。
 
         //HACK Officeなどプレビューに時間がかかるファイルは、プレビュー表示ボタンで初めて表示するのでも良い。
 

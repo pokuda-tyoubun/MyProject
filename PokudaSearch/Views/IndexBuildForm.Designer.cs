@@ -42,11 +42,14 @@
             this.MainPanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.ActiveIndexGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
+            this.ActiveIndexContext = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.DeleteIndexMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IndexHistoryGrid)).BeginInit();
             this.BottomPanel.SuspendLayout();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ActiveIndexGrid)).BeginInit();
+            this.ActiveIndexContext.SuspendLayout();
             this.SuspendLayout();
             // 
             // ReferenceButton
@@ -266,6 +269,20 @@
             this.ActiveIndexGrid.TabIndex = 23;
             this.ActiveIndexGrid.WindowsName = null;
             // 
+            // ActiveIndexContext
+            // 
+            this.ActiveIndexContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DeleteIndexMenu});
+            this.ActiveIndexContext.Name = "ActiveIndexContext";
+            this.ActiveIndexContext.Size = new System.Drawing.Size(181, 48);
+            // 
+            // DeleteIndexMenu
+            // 
+            this.DeleteIndexMenu.Name = "DeleteIndexMenu";
+            this.DeleteIndexMenu.Size = new System.Drawing.Size(180, 22);
+            this.DeleteIndexMenu.Text = "インデックス削除(&D)";
+            this.DeleteIndexMenu.Click += new System.EventHandler(this.DeleteIndexMenu_Click);
+            // 
             // IndexBuildForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -286,6 +303,7 @@
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ActiveIndexGrid)).EndInit();
+            this.ActiveIndexContext.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -309,5 +327,7 @@
         private System.Windows.Forms.Panel MainPanel;
         private System.Windows.Forms.Label label1;
         private FxCommonLib.Controls.FlexGridEx ActiveIndexGrid;
+        private System.Windows.Forms.ContextMenuStrip ActiveIndexContext;
+        private System.Windows.Forms.ToolStripMenuItem DeleteIndexMenu;
     }
 }

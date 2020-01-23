@@ -267,7 +267,7 @@ namespace PokudaSearch.IndexBuilder {
 
             //インデックス保存場所フォルダ作成
             System.IO.Directory.CreateDirectory(rootPath);
-            System.IO.Directory.CreateDirectory(rootPath + IndexDirName);
+            System.IO.Directory.CreateDirectory(rootPath + IndexDirName + _reservedNo.ToString());
 
             var instance = new LuceneIndexBuilder();
             var options = new ParallelOptions() { MaxDegreeOfParallelism = 1 };
@@ -275,7 +275,7 @@ namespace PokudaSearch.IndexBuilder {
                 () => instance.CreateFSIndex(
                     analyzer, 
                     //rootPath + BuildDirName + "1",
-                    rootPath + IndexDirName,
+                    rootPath + IndexDirName + _reservedNo.ToString(),
                     targetFileList,
                     progress,
                     "Thread1",

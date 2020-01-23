@@ -19,6 +19,8 @@ namespace PokudaSearch.Views {
         private enum ActiveIndexColIdx : int {
             [EnumLabel("パス")]
             IndexedPath = 0,
+            [EnumLabel("インデックスパス")]
+            IndexStorePath,
             [EnumLabel("モード")]
             CreateMode,
             [EnumLabel("作成時間(分)")]
@@ -102,15 +104,16 @@ namespace PokudaSearch.Views {
             AppObject.DbUtil.Open(AppObject.ConnectString);
             try {
                 var param = new List<SQLiteParameter>();
-                param.Add(new SQLiteParameter("@パス", row[(int)IndexHistoryColIdx.IndexedPath]));
-                param.Add(new SQLiteParameter("@モード", row[(int)IndexHistoryColIdx.CreateMode]));
-                param.Add(new SQLiteParameter("@作成時間(分)", row[(int)IndexHistoryColIdx.CreateTime]));
-                param.Add(new SQLiteParameter("@対象ファイル数", row[(int)IndexHistoryColIdx.TargetCount]));
-                param.Add(new SQLiteParameter("@インデックス済み", row[(int)IndexHistoryColIdx.IndexedCount]));
-                param.Add(new SQLiteParameter("@インデックス対象外", row[(int)IndexHistoryColIdx.SkippedCount]));
-                param.Add(new SQLiteParameter("@総バイト数", row[(int)IndexHistoryColIdx.TotalBytes]));
-                param.Add(new SQLiteParameter("@テキスト抽出器", row[(int)IndexHistoryColIdx.TextExtractMode]));
-                param.Add(new SQLiteParameter("@作成完了", DateTime.Parse(row[(int)IndexHistoryColIdx.EndTime].ToString())));
+                param.Add(new SQLiteParameter("@パス", row[(int)ActiveIndexColIdx.IndexedPath]));
+                param.Add(new SQLiteParameter("@インデックスパス", row[(int)ActiveIndexColIdx.IndexStorePath]));
+                param.Add(new SQLiteParameter("@モード", row[(int)ActiveIndexColIdx.CreateMode]));
+                param.Add(new SQLiteParameter("@作成時間(分)", row[(int)ActiveIndexColIdx.CreateTime]));
+                param.Add(new SQLiteParameter("@対象ファイル数", row[(int)ActiveIndexColIdx.TargetCount]));
+                param.Add(new SQLiteParameter("@インデックス済み", row[(int)ActiveIndexColIdx.IndexedCount]));
+                param.Add(new SQLiteParameter("@インデックス対象外", row[(int)ActiveIndexColIdx.SkippedCount]));
+                param.Add(new SQLiteParameter("@総バイト数", row[(int)ActiveIndexColIdx.TotalBytes]));
+                param.Add(new SQLiteParameter("@テキスト抽出器", row[(int)ActiveIndexColIdx.TextExtractMode]));
+                param.Add(new SQLiteParameter("@作成完了", DateTime.Parse(row[(int)ActiveIndexColIdx.InsertDate].ToString())));
                 AppObject.DbUtil.ExecuteNonQuery(SQLSrc.t_active_index.INSERT_OR_REPLACE, param.ToArray());
 
                 AppObject.DbUtil.Commit();
@@ -486,6 +489,16 @@ namespace PokudaSearch.Views {
             } finally {
                 AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_END), false, sw);
             }
+        }
+
+        /// <summary>
+        /// インデックスを削除
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteIndexMenu_Click(object sender, EventArgs e) {
+            //インデックスディレクトリを削除
+            //有効インデックス削除
         }
     }
 }

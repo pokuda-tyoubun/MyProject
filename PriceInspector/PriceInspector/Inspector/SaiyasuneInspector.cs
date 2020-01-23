@@ -70,7 +70,7 @@ namespace PriceInspector.Inspector {
                             //スルー
                         }
 
-                        if (item.Profit() > 1000) {
+                        if (item.Profit() > 2000) {
                             item.SaiyasuneUrl = _webDriver.Url;
                             item.TraceAll();
                             _profitCandidates.Add(item);
