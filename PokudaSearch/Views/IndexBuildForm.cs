@@ -16,7 +16,7 @@ namespace PokudaSearch.Views {
     public partial class IndexBuildForm : Form {
 
         #region Constants
-        private enum ActiveIndexColIdx : int {
+        public enum ActiveIndexColIdx : int {
             [EnumLabel("パス")]
             IndexedPath = 0,
             [EnumLabel("インデックスパス")]
@@ -90,7 +90,7 @@ namespace PokudaSearch.Views {
 
             _history = ReadHistoryCSV();
             LoadHistory(_history);
-
+            LoadActiveIndex();
         }
         #endregion Constractors
 
@@ -104,17 +104,33 @@ namespace PokudaSearch.Views {
             AppObject.DbUtil.Open(AppObject.ConnectString);
             try {
                 var param = new List<SQLiteParameter>();
-                param.Add(new SQLiteParameter("@パス", row[(int)ActiveIndexColIdx.IndexedPath]));
-                param.Add(new SQLiteParameter("@インデックスパス", row[(int)ActiveIndexColIdx.IndexStorePath]));
-                param.Add(new SQLiteParameter("@モード", row[(int)ActiveIndexColIdx.CreateMode]));
-                param.Add(new SQLiteParameter("@作成時間(分)", row[(int)ActiveIndexColIdx.CreateTime]));
-                param.Add(new SQLiteParameter("@対象ファイル数", row[(int)ActiveIndexColIdx.TargetCount]));
-                param.Add(new SQLiteParameter("@インデックス済み", row[(int)ActiveIndexColIdx.IndexedCount]));
-                param.Add(new SQLiteParameter("@インデックス対象外", row[(int)ActiveIndexColIdx.SkippedCount]));
-                param.Add(new SQLiteParameter("@総バイト数", row[(int)ActiveIndexColIdx.TotalBytes]));
-                param.Add(new SQLiteParameter("@テキスト抽出器", row[(int)ActiveIndexColIdx.TextExtractMode]));
-                param.Add(new SQLiteParameter("@作成完了", DateTime.Parse(row[(int)ActiveIndexColIdx.InsertDate].ToString())));
+                param.Add(new SQLiteParameter("@パス", row[(int)IndexHistoryColIdx.IndexedPath]));
+                param.Add(new SQLiteParameter("@インデックスパス", AppObject.RootDirPath + @"\Index" + LuceneIndexBuilder.ReservedNo));
+                param.Add(new SQLiteParameter("@モード", row[(int)IndexHistoryColIdx.CreateMode]));
+                param.Add(new SQLiteParameter("@作成時間(分)", row[(int)IndexHistoryColIdx.CreateTime]));
+                param.Add(new SQLiteParameter("@対象ファイル数", row[(int)IndexHistoryColIdx.TargetCount]));
+                param.Add(new SQLiteParameter("@インデックス済み", row[(int)IndexHistoryColIdx.IndexedCount]));
+                param.Add(new SQLiteParameter("@インデックス対象外", row[(int)IndexHistoryColIdx.SkippedCount]));
+                param.Add(new SQLiteParameter("@総バイト数", row[(int)IndexHistoryColIdx.TotalBytes]));
+                param.Add(new SQLiteParameter("@テキスト抽出器", row[(int)IndexHistoryColIdx.TextExtractMode]));
+                param.Add(new SQLiteParameter("@作成完了", DateTime.Parse(row[(int)IndexHistoryColIdx.EndTime].ToString())));
                 AppObject.DbUtil.ExecuteNonQuery(SQLSrc.t_active_index.INSERT_OR_REPLACE, param.ToArray());
+
+                AppObject.DbUtil.Commit();
+            } catch(Exception) {
+                AppObject.DbUtil.Rollback();
+                throw;
+            } finally {
+                AppObject.DbUtil.Close();
+            }
+        }
+        private void DeleteActiveIndex(string path) {
+
+            AppObject.DbUtil.Open(AppObject.ConnectString);
+            try {
+                var param = new List<SQLiteParameter>();
+                param.Add(new SQLiteParameter("@パス", path));
+                AppObject.DbUtil.ExecuteNonQuery(SQLSrc.t_active_index.DELETE, param.ToArray());
 
                 AppObject.DbUtil.Commit();
             } catch(Exception) {
@@ -220,10 +236,15 @@ namespace PokudaSearch.Views {
             return historyTbl;
         }
         public void LoadActiveIndex() {
+            DataTable dt = SelectActiveIndex();
+            this.ActiveIndexGrid.DataSource = dt;
+        }
+
+        public static DataTable SelectActiveIndex() {
             AppObject.DbUtil.Open(AppObject.ConnectString);
             try {
                 DataSet ds = AppObject.DbUtil.ExecSelect(SQLSrc.t_active_index.SELECT, null);
-                this.ActiveIndexGrid.DataSource = ds.Tables[0];
+                return ds.Tables[0];
             } finally {
                 AppObject.DbUtil.Close();
             }
@@ -329,7 +350,6 @@ namespace PokudaSearch.Views {
                 newRow[(int)IndexHistoryColIdx.TextExtractMode] = EnumUtil.GetName(LuceneIndexBuilder.TextExtractMode);
 
                 InsertHistory2DB(newRow);
-                LuceneIndexBuilder.ReservedNo = GetReservedNo();
                 newRow[(int)IndexHistoryColIdx.ReservedNo] = LuceneIndexBuilder.ReservedNo;
 
                 _history.Rows.InsertAt(newRow, 0);
@@ -390,6 +410,8 @@ namespace PokudaSearch.Views {
             try {
                 this.ProgressBar.Style = ProgressBarStyle.Marquee;
                 this.LogViewerText.Text = "対象ファイルカウント中...";
+
+                LuceneIndexBuilder.ReservedNo = GetReservedNo();
                 var progress = new Progress<ProgressReport>(SetProgressValue);
                 LuceneIndexBuilder.CreateIndexBySingleThread(
                     AppObject.AppAnalyzer, 
@@ -497,8 +519,41 @@ namespace PokudaSearch.Views {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void DeleteIndexMenu_Click(object sender, EventArgs e) {
+            string path = StringUtil.NullToBlank(this.ActiveIndexGrid[this.ActiveIndexGrid.Selection.TopRow, (int)ActiveIndexColIdx.IndexedPath + 1]);
+            string indexedPath = StringUtil.NullToBlank(this.ActiveIndexGrid[this.ActiveIndexGrid.Selection.TopRow, (int)ActiveIndexColIdx.IndexStorePath + 1]);
             //インデックスディレクトリを削除
-            //有効インデックス削除
+            if (Directory.Exists(indexedPath)) {
+                FileUtil.DeleteDirectory(new DirectoryInfo(indexedPath));
+            }
+            //有効インデックステーブルから削除
+            DeleteActiveIndex(path);
+            LoadActiveIndex();
+        }
+
+        /// <summary>
+        /// コピーメニュークリック
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CopyMenu_Click(object sender, EventArgs e) {
+            this.IndexHistoryGrid.CopyEx();
+        }
+
+        /// <summary>
+        /// コピーメニュークリック
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ActiveIndexCopyMenu_Click(object sender, EventArgs e) {
+            this.ActiveIndexGrid.CopyEx();
+        }
+
+        private void UpdateIndexMenu_Click(object sender, EventArgs e) {
+
+        }
+
+        private void CreateIndexMenu_Click(object sender, EventArgs e) {
+
         }
     }
 }

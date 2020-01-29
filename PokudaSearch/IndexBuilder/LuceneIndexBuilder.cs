@@ -176,10 +176,10 @@ namespace PokudaSearch.IndexBuilder {
         /// <param name="progress"></param>
         /// <param name="txtExtractMode"></param>
         public async static void CreateIndexBySingleThread(
-            Analyzer analyzer, 
-            string rootPath, 
-            string targetDir, 
-            IProgress<ProgressReport> progress, 
+            Analyzer analyzer,
+            string rootPath,
+            string targetDir,
+            IProgress<ProgressReport> progress,
             TextExtractModes txtExtractMode,
             bool isAppendMode) {
 
@@ -190,7 +190,7 @@ namespace PokudaSearch.IndexBuilder {
 
                 AppObject.Logger.Info("インデックス構築処理完了");
             } catch (Exception e) {
-                AppObject.Logger.Error(e.StackTrace);   
+                AppObject.Logger.Error(e.StackTrace);
             } finally {
             }
         }
@@ -202,8 +202,8 @@ namespace PokudaSearch.IndexBuilder {
         /// <param name="rootPath"></param>
         /// <param name="targetDir"></param>
         public static void MergeAndMove(
-            Analyzer analyzer, 
-            string rootPath, 
+            Analyzer analyzer,
+            string rootPath,
             string targetDir) {
 
             System.IO.Directory.CreateDirectory(rootPath + BuildDirName);
@@ -231,9 +231,9 @@ namespace PokudaSearch.IndexBuilder {
         /// <param name="progress"></param>
         /// <returns></returns>
         public static Task<LuceneIndexBuilder> CreateIndexAsync(
-            Analyzer analyzer, 
-            string rootPath, 
-            string targetDir, 
+            Analyzer analyzer,
+            string rootPath,
+            string targetDir,
             IProgress<ProgressReport> progress,
             bool isAppendMode) {
             return Task.Run<LuceneIndexBuilder>(() => DoWorkSingle(analyzer, rootPath, targetDir, progress, isAppendMode));
@@ -249,9 +249,9 @@ namespace PokudaSearch.IndexBuilder {
         /// <param name="progress"></param>
         /// <returns></returns>
         private static LuceneIndexBuilder DoWorkSingle(
-            Analyzer analyzer, 
-            string rootPath, 
-            string targetDir, 
+            Analyzer analyzer,
+            string rootPath,
+            string targetDir,
             IProgress<ProgressReport> progress,
             bool isAppendMode) {
 
@@ -273,7 +273,7 @@ namespace PokudaSearch.IndexBuilder {
             var options = new ParallelOptions() { MaxDegreeOfParallelism = 1 };
             Parallel.Invoke(options,
                 () => instance.CreateFSIndex(
-                    analyzer, 
+                    analyzer,
                     //rootPath + BuildDirName + "1",
                     rootPath + IndexDirName + _reservedNo.ToString(),
                     targetFileList,
@@ -295,7 +295,7 @@ namespace PokudaSearch.IndexBuilder {
             var fsConfig = new IndexWriterConfig(analyzer);
             IndexWriter fsIndexWriter = new IndexWriter(fsIndexDir, fsConfig);
             try {
-                fsIndexWriter.AddIndexes(new FlexLucene.Store.Directory[]{ramDir});
+                fsIndexWriter.AddIndexes(new FlexLucene.Store.Directory[] { ramDir });
                 fsIndexWriter.Commit();
             } finally {
                 fsIndexWriter.Close();
@@ -307,15 +307,15 @@ namespace PokudaSearch.IndexBuilder {
         /// </summary>
         /// <param name="args"></param>
         internal void CreateFSIndex(
-            Analyzer analyzer, 
-            string buildDirPath, 
-            List<FileInfo> targetFileList, 
+            Analyzer analyzer,
+            string buildDirPath,
+            List<FileInfo> targetFileList,
             IProgress<ProgressReport> progress,
             string threadName,
             bool isAppendMode) {
 
             IndexWriterConfig config = new IndexWriterConfig(analyzer);
-    		IndexWriter indexWriter = null;
+            IndexWriter indexWriter = null;
 
             try {
                 var indexBuildDir = FSDirectory.Open(FileSystems.getDefault().getPath(buildDirPath));
@@ -338,36 +338,38 @@ namespace PokudaSearch.IndexBuilder {
                     indexWriter.DeleteAll();
                 }
 
-    			foreach (FileInfo fi in targetFileList) {
-    				//Officeのテンポラリファイルは無視。
+                foreach (FileInfo fi in targetFileList) {
+                    //Officeのテンポラリファイルは無視。
                     if (fi.Name.StartsWith("~")) {
-    					continue;
+                        continue;
                     }
 
-    				try {
+                    try {
                         if (AddDocument(fi.FullName, indexWriter, threadName)) {
-        					//インデックス作成ファイル表示
-        					Interlocked.Increment(ref _indexedCount);
-        					Interlocked.Exchange(ref _totalBytes, _totalBytes + fi.Length);
+                            //インデックス作成ファイル表示
+                            Interlocked.Increment(ref _indexedCount);
+                            Interlocked.Exchange(ref _totalBytes, _totalBytes + fi.Length);
                             AppObject.Logger.Info(threadName + ":" + fi.FullName);
                         } else {
-                			Interlocked.Increment(ref _skippedCount);
+                            Interlocked.Increment(ref _skippedCount);
                             AppObject.Logger.Info(threadName + ":" + "Out of target extension. Skipped: " + fi.FullName);
                         }
-    				} catch (IOException ioe) {
+                    } catch (IOException ioe) {
                         AppObject.Logger.Error(ioe.StackTrace);
-    					Interlocked.Increment(ref _skippedCount);
+                        Interlocked.Increment(ref _skippedCount);
                         AppObject.Logger.Info(threadName + ":" + "Skipped: " + fi.FullName);
-    				} catch (Exception e) {
-    					//インデックスが作成できなかったファイルを表示
+                        GC.Collect();
+                    } catch (Exception e) {
+                        //インデックスが作成できなかったファイルを表示
                         AppObject.Logger.Warn(e.Message);
-    					Interlocked.Increment(ref _skippedCount);
+                        Interlocked.Increment(ref _skippedCount);
                         AppObject.Logger.Info(threadName + ":" + "Skipped: " + fi.FullName);
+                        GC.Collect();
                         if (e.Message.IndexOf("IndexWriter is closed") >= 0) {
                             AppObject.Logger.Warn(e.GetBaseException().ToString());
                             throw new AlreadyClosedException("Index file capacity over. Please divide index directory.");
                         }
-    				}
+                    }
                     //進捗度更新を呼び出し。
                     progress.Report(new ProgressReport() {
                         Percent = GetPercentage(),
@@ -375,10 +377,10 @@ namespace PokudaSearch.IndexBuilder {
                         TargetCount = _targetCount,
                         Status = ProgressReport.ProgressStatus.Processing
                     });
-    			}
+                }
                 AppObject.Logger.Info(threadName + "：完了");
             } catch (Exception e) {
-                AppObject.Logger.Error(e.StackTrace);
+                AppObject.Logger.Error(e.Message);
                 if (indexWriter != null) {
                     indexWriter.Rollback();
                 }
@@ -434,23 +436,28 @@ namespace PokudaSearch.IndexBuilder {
         /// <param name="path"></param>
         /// <param name="indexWriter"></param>
         private bool AddDocument(string path, IndexWriter indexWriter, string threadName) {
-			Document doc = new Document();
-			string filename = System.IO.Path.GetFileName(path);
-			string extention = System.IO.Path.GetExtension(path);
-            
+            Document doc = new Document();
+            string filename = System.IO.Path.GetFileName(path);
+            string extention = System.IO.Path.GetExtension(path);
+
             if (extention == "" ||
                 !_targetExtentionDic.ContainsKey(extention.ToLower())) {
                 //拡張子なし or 対象拡張子外
                 return false;
             }
+            if (new FileInfo(path).Length > 104857600) {
+                //サイズオーバー
+                //HACK 外だし
+                return false;
+            }
 
             if (_txtExtractMode == TextExtractModes.Tika) {
                 var content = _txtExtractor.Extract(path);
-    			//doc.Add(new TextField("content", content.Text, FieldStore.NO));
-    			doc.Add(new Field("content", content.Text, _hilightFieldType));
+                //doc.Add(new TextField("content", content.Text, FieldStore.NO));
+                doc.Add(new Field("content", content.Text, _hilightFieldType));
             } else {
-    			//doc.Add(new TextField("content", IFilterParser.Parse(path), FieldStore.NO));
-    			doc.Add(new Field("content", IFilterParser.Parse(path), _hilightFieldType));
+                //doc.Add(new TextField("content", IFilterParser.Parse(path), FieldStore.NO));
+                doc.Add(new Field("content", IFilterParser.Parse(path), _hilightFieldType));
             }
 
 			doc.Add(new StringField("path", path, FieldStore.YES));
@@ -705,5 +712,13 @@ namespace PokudaSearch.IndexBuilder {
             return ret;
         }
         #endregion Multi RAMDirectory
+
+        public static string ReadCsvToString(string csvPath) {
+            string ret = "";
+            using (var sr = new StreamReader(csvPath, Encoding.GetEncoding(932))) {
+                ret = sr.ReadToEnd();
+            }
+            return ret;
+        }
     }
 }

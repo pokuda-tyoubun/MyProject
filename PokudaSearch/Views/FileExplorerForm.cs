@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -64,6 +65,21 @@ namespace PokudaSearch.Views {
                 SendKeys.Send("{LEFT}");
                 return;
             }
+            if ((e.Modifiers & Keys.Alt) == Keys.Alt && e.KeyCode == Keys.Left) {
+                this.MainExplorer.NavigateLogLocation(NavigationLogDirection.Backward);
+                return;
+            }
+            if ((e.Modifiers & Keys.Alt) == Keys.Alt && e.KeyCode == Keys.Right) {
+                this.MainExplorer.NavigateLogLocation(NavigationLogDirection.Forward);
+                return;
+            }
+            if ((e.Modifiers & Keys.Alt) == Keys.Alt && e.KeyCode == Keys.Up) {
+                string path = this.MainExplorer.NavigationLog.CurrentLocation.ParsingName;
+                var parent = Directory.GetParent(path);
+                this.MainExplorer.Navigate(ShellObject.FromParsingName(parent.FullName));
+                return;
+            }
+
             if (e.KeyCode == Keys.Oem1) {
                 _command = ":";
                 return;
@@ -76,7 +92,7 @@ namespace PokudaSearch.Views {
         }
 
         private void MainExplorer_NavigationComplete(object sender, NavigationCompleteEventArgs e) {
-            //this.MainPathCombo.Text = this.MainExplorer.NavigateLogLocation
+            //this.mainPathCombo.Text = this.MainExplorer.NavigateLogLocation
             this.MainPathCombo.Text = e.NewLocation.ParsingName;
             this.Text = e.NewLocation.Name;
         }

@@ -56,22 +56,22 @@
             this.MoreLikeThisMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.DiffMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.PreviewPanel = new System.Windows.Forms.Panel();
+            this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
             this.BrowserPreviewPanel = new System.Windows.Forms.Panel();
             this.PreviewWarnLabel = new System.Windows.Forms.Label();
             this.ShowPreviewButton = new System.Windows.Forms.Button();
             this.BrowserProgress = new System.Windows.Forms.ProgressBar();
             this.WebBrowser = new System.Windows.Forms.WebBrowser();
+            this.RichTextBox = new System.Windows.Forms.RichTextBox();
             this.TextPreviewPanel = new System.Windows.Forms.Panel();
             this.PreviewLabel = new C1.Win.C1SuperTooltip.C1SuperLabel();
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.TargetIndexGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
             this.ClearButton = new System.Windows.Forms.Button();
             this.PreviewCheck = new System.Windows.Forms.CheckBox();
-            this.SearchButton = new System.Windows.Forms.Button();
-            this.RichTextBox = new System.Windows.Forms.RichTextBox();
-            this.PreviewSplitter = new NJFLib.Controls.CollapsibleSplitter();
-            this.TargetIndexGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
             this.ResultGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
-            this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
+            this.SearchButton = new System.Windows.Forms.Button();
+            this.PreviewSplitter = new NJFLib.Controls.CollapsibleSplitter();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FailureFTSNavi)).BeginInit();
@@ -378,10 +378,26 @@
             this.PreviewPanel.Controls.Add(this.TextPreviewPanel);
             this.PreviewPanel.Controls.Add(this.BrowserPreviewPanel);
             this.PreviewPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.PreviewPanel.Location = new System.Drawing.Point(657, 0);
+            this.PreviewPanel.Location = new System.Drawing.Point(840, 0);
             this.PreviewPanel.Name = "PreviewPanel";
             this.PreviewPanel.Size = new System.Drawing.Size(419, 659);
             this.PreviewPanel.TabIndex = 116;
+            // 
+            // collapsibleSplitter3
+            // 
+            this.collapsibleSplitter3.AnimationDelay = 20;
+            this.collapsibleSplitter3.AnimationStep = 20;
+            this.collapsibleSplitter3.BorderStyle3D = System.Windows.Forms.Border3DStyle.RaisedOuter;
+            this.collapsibleSplitter3.ControlToHide = this.BrowserPreviewPanel;
+            this.collapsibleSplitter3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.collapsibleSplitter3.ExpandParentForm = false;
+            this.collapsibleSplitter3.Location = new System.Drawing.Point(0, 146);
+            this.collapsibleSplitter3.Name = "collapsibleSplitter3";
+            this.collapsibleSplitter3.Size = new System.Drawing.Size(419, 8);
+            this.collapsibleSplitter3.TabIndex = 123;
+            this.collapsibleSplitter3.TabStop = false;
+            this.collapsibleSplitter3.UseAnimations = false;
+            this.collapsibleSplitter3.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
             // 
             // BrowserPreviewPanel
             // 
@@ -437,6 +453,17 @@
             this.WebBrowser.Size = new System.Drawing.Size(412, 470);
             this.WebBrowser.TabIndex = 0;
             // 
+            // RichTextBox
+            // 
+            this.RichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RichTextBox.Location = new System.Drawing.Point(4, 3);
+            this.RichTextBox.Name = "RichTextBox";
+            this.RichTextBox.Size = new System.Drawing.Size(412, 470);
+            this.RichTextBox.TabIndex = 119;
+            this.RichTextBox.Text = "";
+            // 
             // TextPreviewPanel
             // 
             this.TextPreviewPanel.Controls.Add(this.PreviewLabel);
@@ -475,8 +502,39 @@
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(0, 0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(657, 659);
+            this.MainPanel.Size = new System.Drawing.Size(840, 659);
             this.MainPanel.TabIndex = 118;
+            // 
+            // TargetIndexGrid
+            // 
+            this.TargetIndexGrid.AfterErrorInfo = ((System.Collections.Generic.Dictionary<string, string>)(resources.GetObject("TargetIndexGrid.AfterErrorInfo")));
+            this.TargetIndexGrid.AllowEditing = false;
+            this.TargetIndexGrid.AllowFiltering = true;
+            this.TargetIndexGrid.AllowResizing = C1.Win.C1FlexGrid.AllowResizingEnum.Both;
+            this.TargetIndexGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TargetIndexGrid.AutoClipboard = true;
+            this.TargetIndexGrid.CellButtonDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.HashSet<string>>)(resources.GetObject("TargetIndexGrid.CellButtonDic")));
+            this.TargetIndexGrid.ColumnInfo = "10,1,0,0,0,90,Columns:";
+            this.TargetIndexGrid.ContextMenuStrip = this.ResultContext;
+            this.TargetIndexGrid.DrawMode = C1.Win.C1FlexGrid.DrawModeEnum.OwnerDraw;
+            this.TargetIndexGrid.EnableReadOnlyColor = false;
+            this.TargetIndexGrid.EnableUpdateCellStyle = false;
+            this.TargetIndexGrid.Font = new System.Drawing.Font("MS UI Gothic", 9F);
+            this.TargetIndexGrid.GridName = null;
+            this.TargetIndexGrid.IsCol1SelectCheck = false;
+            this.TargetIndexGrid.IsEnterRight = false;
+            this.TargetIndexGrid.Location = new System.Drawing.Point(618, 5);
+            this.TargetIndexGrid.Name = "TargetIndexGrid";
+            this.TargetIndexGrid.PulldownDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, string>>)(resources.GetObject("TargetIndexGrid.PulldownDic")));
+            this.TargetIndexGrid.Rows.Count = 2;
+            this.TargetIndexGrid.Rows.DefaultSize = 18;
+            this.TargetIndexGrid.ShowErrors = true;
+            this.TargetIndexGrid.Size = new System.Drawing.Size(210, 101);
+            this.TargetIndexGrid.StyleInfo = resources.GetString("TargetIndexGrid.StyleInfo");
+            this.TargetIndexGrid.TabIndex = 118;
+            this.TargetIndexGrid.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2010Blue;
+            this.TargetIndexGrid.WindowsName = null;
             // 
             // ClearButton
             // 
@@ -503,72 +561,6 @@
             this.PreviewCheck.Text = "プレビュー機能を使う";
             this.PreviewCheck.UseVisualStyleBackColor = true;
             this.PreviewCheck.CheckedChanged += new System.EventHandler(this.PreviewCheck_CheckedChanged);
-            // 
-            // SearchButton
-            // 
-            this.SearchButton.Image = global::PokudaSearch.Properties.Resources.Search24;
-            this.SearchButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.SearchButton.Location = new System.Drawing.Point(439, 4);
-            this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(80, 52);
-            this.SearchButton.TabIndex = 2;
-            this.SearchButton.Text = "検索(&S)";
-            this.SearchButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.SearchButton.UseVisualStyleBackColor = true;
-            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
-            // 
-            // RichTextBox
-            // 
-            this.RichTextBox.Location = new System.Drawing.Point(4, 3);
-            this.RichTextBox.Name = "RichTextBox";
-            this.RichTextBox.Size = new System.Drawing.Size(412, 470);
-            this.RichTextBox.TabIndex = 119;
-            this.RichTextBox.Text = "";
-            // 
-            // PreviewSplitter
-            // 
-            this.PreviewSplitter.AnimationDelay = 20;
-            this.PreviewSplitter.AnimationStep = 20;
-            this.PreviewSplitter.BorderStyle3D = System.Windows.Forms.Border3DStyle.RaisedOuter;
-            this.PreviewSplitter.ControlToHide = this.PreviewPanel;
-            this.PreviewSplitter.Dock = System.Windows.Forms.DockStyle.Right;
-            this.PreviewSplitter.ExpandParentForm = false;
-            this.PreviewSplitter.Location = new System.Drawing.Point(649, 0);
-            this.PreviewSplitter.Name = "PreviewSplitter";
-            this.PreviewSplitter.Size = new System.Drawing.Size(8, 659);
-            this.PreviewSplitter.TabIndex = 123;
-            this.PreviewSplitter.TabStop = false;
-            this.PreviewSplitter.UseAnimations = false;
-            this.PreviewSplitter.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
-            // 
-            // TargetIndexGrid
-            // 
-            this.TargetIndexGrid.AfterErrorInfo = ((System.Collections.Generic.Dictionary<string, string>)(resources.GetObject("TargetIndexGrid.AfterErrorInfo")));
-            this.TargetIndexGrid.AllowEditing = false;
-            this.TargetIndexGrid.AllowFiltering = true;
-            this.TargetIndexGrid.AllowResizing = C1.Win.C1FlexGrid.AllowResizingEnum.Both;
-            this.TargetIndexGrid.AutoClipboard = true;
-            this.TargetIndexGrid.CellButtonDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.HashSet<string>>)(resources.GetObject("TargetIndexGrid.CellButtonDic")));
-            this.TargetIndexGrid.ColumnInfo = "10,1,0,0,0,90,Columns:";
-            this.TargetIndexGrid.ContextMenuStrip = this.ResultContext;
-            this.TargetIndexGrid.DrawMode = C1.Win.C1FlexGrid.DrawModeEnum.OwnerDraw;
-            this.TargetIndexGrid.EnableReadOnlyColor = false;
-            this.TargetIndexGrid.EnableUpdateCellStyle = false;
-            this.TargetIndexGrid.Font = new System.Drawing.Font("MS UI Gothic", 9F);
-            this.TargetIndexGrid.GridName = null;
-            this.TargetIndexGrid.IsCol1SelectCheck = false;
-            this.TargetIndexGrid.IsEnterRight = false;
-            this.TargetIndexGrid.Location = new System.Drawing.Point(616, 16);
-            this.TargetIndexGrid.Name = "TargetIndexGrid";
-            this.TargetIndexGrid.PulldownDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, string>>)(resources.GetObject("TargetIndexGrid.PulldownDic")));
-            this.TargetIndexGrid.Rows.Count = 2;
-            this.TargetIndexGrid.Rows.DefaultSize = 18;
-            this.TargetIndexGrid.ShowErrors = true;
-            this.TargetIndexGrid.Size = new System.Drawing.Size(95, 51);
-            this.TargetIndexGrid.StyleInfo = resources.GetString("TargetIndexGrid.StyleInfo");
-            this.TargetIndexGrid.TabIndex = 118;
-            this.TargetIndexGrid.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2010Blue;
-            this.TargetIndexGrid.WindowsName = null;
             // 
             // ResultGrid
             // 
@@ -597,7 +589,7 @@
             this.ResultGrid.Rows.DefaultSize = 18;
             this.ResultGrid.SelectionMode = C1.Win.C1FlexGrid.SelectionModeEnum.ListBox;
             this.ResultGrid.ShowErrors = true;
-            this.ResultGrid.Size = new System.Drawing.Size(649, 548);
+            this.ResultGrid.Size = new System.Drawing.Size(832, 548);
             this.ResultGrid.StyleInfo = resources.GetString("ResultGrid.StyleInfo");
             this.ResultGrid.TabIndex = 9;
             this.ResultGrid.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2010Blue;
@@ -606,27 +598,40 @@
             this.ResultGrid.OwnerDrawCell += new C1.Win.C1FlexGrid.OwnerDrawCellEventHandler(this.ResultGrid_OwnerDrawCell);
             this.ResultGrid.DoubleClick += new System.EventHandler(this.ResultGrid_DoubleClick);
             // 
-            // collapsibleSplitter3
+            // SearchButton
             // 
-            this.collapsibleSplitter3.AnimationDelay = 20;
-            this.collapsibleSplitter3.AnimationStep = 20;
-            this.collapsibleSplitter3.BorderStyle3D = System.Windows.Forms.Border3DStyle.RaisedOuter;
-            this.collapsibleSplitter3.ControlToHide = this.BrowserPreviewPanel;
-            this.collapsibleSplitter3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.collapsibleSplitter3.ExpandParentForm = false;
-            this.collapsibleSplitter3.Location = new System.Drawing.Point(0, 146);
-            this.collapsibleSplitter3.Name = "collapsibleSplitter3";
-            this.collapsibleSplitter3.Size = new System.Drawing.Size(419, 8);
-            this.collapsibleSplitter3.TabIndex = 123;
-            this.collapsibleSplitter3.TabStop = false;
-            this.collapsibleSplitter3.UseAnimations = false;
-            this.collapsibleSplitter3.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
+            this.SearchButton.Image = global::PokudaSearch.Properties.Resources.Search24;
+            this.SearchButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.SearchButton.Location = new System.Drawing.Point(439, 4);
+            this.SearchButton.Name = "SearchButton";
+            this.SearchButton.Size = new System.Drawing.Size(80, 52);
+            this.SearchButton.TabIndex = 2;
+            this.SearchButton.Text = "検索(&S)";
+            this.SearchButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.SearchButton.UseVisualStyleBackColor = true;
+            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
+            // 
+            // PreviewSplitter
+            // 
+            this.PreviewSplitter.AnimationDelay = 20;
+            this.PreviewSplitter.AnimationStep = 20;
+            this.PreviewSplitter.BorderStyle3D = System.Windows.Forms.Border3DStyle.RaisedOuter;
+            this.PreviewSplitter.ControlToHide = this.PreviewPanel;
+            this.PreviewSplitter.Dock = System.Windows.Forms.DockStyle.Right;
+            this.PreviewSplitter.ExpandParentForm = false;
+            this.PreviewSplitter.Location = new System.Drawing.Point(832, 0);
+            this.PreviewSplitter.Name = "PreviewSplitter";
+            this.PreviewSplitter.Size = new System.Drawing.Size(8, 659);
+            this.PreviewSplitter.TabIndex = 123;
+            this.PreviewSplitter.TabStop = false;
+            this.PreviewSplitter.UseAnimations = false;
+            this.PreviewSplitter.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
             // 
             // SimpleSearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1076, 659);
+            this.ClientSize = new System.Drawing.Size(1259, 659);
             this.Controls.Add(this.PreviewSplitter);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.PreviewPanel);

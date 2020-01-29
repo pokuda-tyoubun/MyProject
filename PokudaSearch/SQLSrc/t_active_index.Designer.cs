@@ -19,7 +19,7 @@ namespace PokudaSearch.SQLSrc {
     // または Visual Studio のようなツールを使用して自動生成されました。
     // メンバーを追加または削除するには、.ResX ファイルを編集して、/str オプションと共に
     // ResGen を実行し直すか、または VS プロジェクトをビルドし直します。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class t_active_index {
@@ -47,7 +47,7 @@ namespace PokudaSearch.SQLSrc {
         }
         
         /// <summary>
-        ///   厳密に型指定されたこのリソース クラスを使用して、すべての検索リソースに対し、
+        ///   すべてについて、現在のスレッドの CurrentUICulture プロパティをオーバーライドします
         ///   現在のスレッドの CurrentUICulture プロパティをオーバーライドします。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -61,8 +61,19 @@ namespace PokudaSearch.SQLSrc {
         }
         
         /// <summary>
+        ///   DELETE FROM [t_active_index]
+        ///WHERE [パス] = @パス に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string DELETE {
+            get {
+                return ResourceManager.GetString("DELETE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   INSERT OR REPLACE INTO [t_active_index] (
         /// [パス]
+        ///,[インデックスパス]
         ///,[モード]
         ///,[作成時間(分)]
         ///,[対象ファイル数]
@@ -74,6 +85,7 @@ namespace PokudaSearch.SQLSrc {
         ///,[更新日]
         ///) VALUES ( 
         /// @パス
+        ///,@インデックスパス
         ///,@モード
         ///,@作成時間(分)
         ///,@対象ファイル数
@@ -96,6 +108,7 @@ namespace PokudaSearch.SQLSrc {
         /// <summary>
         ///   SELECT 
         /// [パス]
+        ///,[インデックスパス]
         ///,[モード]
         ///,[作成時間(分)]
         ///,[対象ファイル数]

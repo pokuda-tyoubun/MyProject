@@ -137,20 +137,48 @@ namespace PokudaSearch.Views {
             this.ResultGrid.Cols[(int)ColIndex.Hilight].Width = 600;
         }
 
+        private MultiReader GetMultiReader(DataTable activeIndexTbl) {
+            IndexReader[] idxList = new IndexReader[activeIndexTbl.Rows.Count];
+            int cnt = 0;
+            foreach (DataRow dr in activeIndexTbl.Rows) {
+                string path = StringUtil.NullToBlank(dr[(int)IndexBuildForm.ActiveIndexColIdx.IndexStorePath]);
+
+                java.nio.file.Path idxPath = FileSystems.getDefault().getPath(path);
+                var fsDir = FSDirectory.Open(idxPath);
+                var idxReader = DirectoryReader.Open(fsDir);
+                idxList[cnt] = idxReader;
+
+                cnt++;
+            }
+
+            return new MultiReader(idxList);
+        }
+
+
         /// <summary>
         /// 検索
         /// </summary>
         private void Search() {
 
             if (this.KeywordText.Text == "") {
-                //TODO キーワード入力を促す
+                MessageBox.Show("キーワードを入力して下さい。", 
+                    AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            java.nio.file.Path idxPath = FileSystems.getDefault().getPath(AppObject.RootDirPath + LuceneIndexBuilder.IndexDirName);
-            var fsDir = FSDirectory.Open(idxPath);
-            IndexReader idxReader = DirectoryReader.Open(fsDir);
-            IndexSearcher idxSearcher = new IndexSearcher(idxReader);
+            DataTable dt = IndexBuildForm.SelectActiveIndex();
+            if (dt.Rows.Count == 0) {
+                MessageBox.Show("有効なインデックスが存在しません。", 
+                    AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //java.nio.file.Path idxPath = FileSystems.getDefault().getPath(AppObject.RootDirPath + LuceneIndexBuilder.IndexDirName);
+            //var fsDir = FSDirectory.Open(idxPath);
+            //IndexReader idxReader = DirectoryReader.Open(fsDir);
+            MultiReader mr = GetMultiReader(dt);
+            
+            IndexSearcher idxSearcher = new IndexSearcher(mr);
 
             var allQuery = new BooleanQueryBuilder();
             var contentBqb = new BooleanQueryBuilder();
@@ -212,7 +240,7 @@ namespace PokudaSearch.Views {
 
                     // Highlighterで検索キーワード周辺の文字列(フラグメント)を取得
                     // TokenStream が必要なので取得
-                    TokenStream stream = TokenSources.GetAnyTokenStream(idxReader,
+                    TokenStream stream = TokenSources.GetAnyTokenStream(mr,
                             doc.Doc, "content", AppObject.AppAnalyzer);
                     string[] str = hi.GetBestFragments(stream, thisDoc.Get("content"), 5);
                     this.ResultGrid[row, (int)ColIndex.Hilight] = string.Join(",", str);
@@ -346,7 +374,7 @@ namespace PokudaSearch.Views {
                             string tmpPath = SaveToThumbnailBitmap(fullPath);
                             fullPath = tmpPath;
                         } else if (extention.ToLower() == ".csv") {
-                            this.RichTextBox.Text = ReadCsvToString(fullPath);
+                            this.RichTextBox.Text = LuceneIndexBuilder.ReadCsvToString(fullPath);
                             this.WebBrowser.Visible = false;
                             return;
                         } else if (extention.ToLower() == ".pptx") {
@@ -708,14 +736,6 @@ namespace PokudaSearch.Views {
                 this.FilterGridButton.PerformClick();
                 e.Handled = true;
             }
-        }
-
-        private string ReadCsvToString(string csvPath) {
-            string ret = "";
-            using (var sr = new StreamReader(csvPath, Encoding.GetEncoding(932))) {
-                ret = sr.ReadToEnd();
-            }
-            return ret;
         }
 
 

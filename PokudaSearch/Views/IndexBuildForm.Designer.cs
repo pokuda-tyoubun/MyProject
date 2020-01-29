@@ -34,6 +34,8 @@
             this.ProgressBar = new System.Windows.Forms.ProgressBar();
             this.MergeIndexButton = new System.Windows.Forms.Button();
             this.IndexHistoryGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
+            this.IndexHistoryContext = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CopyMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.TargetDirText = new FxCommonLib.Controls.FilePathTextBox(this.components);
             this.UpdateIndexButton = new System.Windows.Forms.Button();
             this.BottomPanel = new System.Windows.Forms.Panel();
@@ -44,8 +46,13 @@
             this.ActiveIndexGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
             this.ActiveIndexContext = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.DeleteIndexMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ActiveIndexCopyMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.CreateIndexMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.UpdateIndexMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IndexHistoryGrid)).BeginInit();
+            this.IndexHistoryContext.SuspendLayout();
             this.BottomPanel.SuspendLayout();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ActiveIndexGrid)).BeginInit();
@@ -137,12 +144,14 @@
             // IndexHistoryGrid
             // 
             this.IndexHistoryGrid.AfterErrorInfo = ((System.Collections.Generic.Dictionary<string, string>)(resources.GetObject("IndexHistoryGrid.AfterErrorInfo")));
+            this.IndexHistoryGrid.AllowEditing = false;
             this.IndexHistoryGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.IndexHistoryGrid.AutoClipboard = true;
             this.IndexHistoryGrid.CellButtonDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.HashSet<string>>)(resources.GetObject("IndexHistoryGrid.CellButtonDic")));
             this.IndexHistoryGrid.ColumnInfo = "10,1,0,0,0,90,Columns:";
+            this.IndexHistoryGrid.ContextMenuStrip = this.IndexHistoryContext;
             this.IndexHistoryGrid.DrawMode = C1.Win.C1FlexGrid.DrawModeEnum.OwnerDraw;
             this.IndexHistoryGrid.EnableReadOnlyColor = false;
             this.IndexHistoryGrid.EnableUpdateCellStyle = false;
@@ -157,6 +166,20 @@
             this.IndexHistoryGrid.StyleInfo = resources.GetString("IndexHistoryGrid.StyleInfo");
             this.IndexHistoryGrid.TabIndex = 21;
             this.IndexHistoryGrid.WindowsName = null;
+            // 
+            // IndexHistoryContext
+            // 
+            this.IndexHistoryContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CopyMenu});
+            this.IndexHistoryContext.Name = "ActiveIndexContext";
+            this.IndexHistoryContext.Size = new System.Drawing.Size(120, 26);
+            // 
+            // CopyMenu
+            // 
+            this.CopyMenu.Name = "CopyMenu";
+            this.CopyMenu.Size = new System.Drawing.Size(119, 22);
+            this.CopyMenu.Text = "コピー(&C)";
+            this.CopyMenu.Click += new System.EventHandler(this.CopyMenu_Click);
             // 
             // TargetDirText
             // 
@@ -248,12 +271,14 @@
             // ActiveIndexGrid
             // 
             this.ActiveIndexGrid.AfterErrorInfo = ((System.Collections.Generic.Dictionary<string, string>)(resources.GetObject("ActiveIndexGrid.AfterErrorInfo")));
+            this.ActiveIndexGrid.AllowEditing = false;
             this.ActiveIndexGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ActiveIndexGrid.AutoClipboard = true;
             this.ActiveIndexGrid.CellButtonDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.HashSet<string>>)(resources.GetObject("ActiveIndexGrid.CellButtonDic")));
             this.ActiveIndexGrid.ColumnInfo = "10,1,0,0,0,90,Columns:";
+            this.ActiveIndexGrid.ContextMenuStrip = this.ActiveIndexContext;
             this.ActiveIndexGrid.DrawMode = C1.Win.C1FlexGrid.DrawModeEnum.OwnerDraw;
             this.ActiveIndexGrid.EnableReadOnlyColor = false;
             this.ActiveIndexGrid.EnableUpdateCellStyle = false;
@@ -272,9 +297,13 @@
             // ActiveIndexContext
             // 
             this.ActiveIndexContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.DeleteIndexMenu});
+            this.UpdateIndexMenu,
+            this.CreateIndexMenu,
+            this.DeleteIndexMenu,
+            this.toolStripMenuItem1,
+            this.ActiveIndexCopyMenu});
             this.ActiveIndexContext.Name = "ActiveIndexContext";
-            this.ActiveIndexContext.Size = new System.Drawing.Size(181, 48);
+            this.ActiveIndexContext.Size = new System.Drawing.Size(181, 120);
             // 
             // DeleteIndexMenu
             // 
@@ -282,6 +311,32 @@
             this.DeleteIndexMenu.Size = new System.Drawing.Size(180, 22);
             this.DeleteIndexMenu.Text = "インデックス削除(&D)";
             this.DeleteIndexMenu.Click += new System.EventHandler(this.DeleteIndexMenu_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // ActiveIndexCopyMenu
+            // 
+            this.ActiveIndexCopyMenu.Name = "ActiveIndexCopyMenu";
+            this.ActiveIndexCopyMenu.Size = new System.Drawing.Size(180, 22);
+            this.ActiveIndexCopyMenu.Text = "コピー(&C)";
+            this.ActiveIndexCopyMenu.Click += new System.EventHandler(this.ActiveIndexCopyMenu_Click);
+            // 
+            // CreateIndexMenu
+            // 
+            this.CreateIndexMenu.Name = "CreateIndexMenu";
+            this.CreateIndexMenu.Size = new System.Drawing.Size(180, 22);
+            this.CreateIndexMenu.Text = "インデックス再作成(&B)";
+            this.CreateIndexMenu.Click += new System.EventHandler(this.CreateIndexMenu_Click);
+            // 
+            // UpdateIndexMenu
+            // 
+            this.UpdateIndexMenu.Name = "UpdateIndexMenu";
+            this.UpdateIndexMenu.Size = new System.Drawing.Size(180, 22);
+            this.UpdateIndexMenu.Text = "インデックス更新(&U)";
+            this.UpdateIndexMenu.Click += new System.EventHandler(this.UpdateIndexMenu_Click);
             // 
             // IndexBuildForm
             // 
@@ -299,6 +354,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IndexHistoryGrid)).EndInit();
+            this.IndexHistoryContext.ResumeLayout(false);
             this.BottomPanel.ResumeLayout(false);
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
@@ -329,5 +385,11 @@
         private FxCommonLib.Controls.FlexGridEx ActiveIndexGrid;
         private System.Windows.Forms.ContextMenuStrip ActiveIndexContext;
         private System.Windows.Forms.ToolStripMenuItem DeleteIndexMenu;
+        private System.Windows.Forms.ContextMenuStrip IndexHistoryContext;
+        private System.Windows.Forms.ToolStripMenuItem CopyMenu;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem ActiveIndexCopyMenu;
+        private System.Windows.Forms.ToolStripMenuItem UpdateIndexMenu;
+        private System.Windows.Forms.ToolStripMenuItem CreateIndexMenu;
     }
 }

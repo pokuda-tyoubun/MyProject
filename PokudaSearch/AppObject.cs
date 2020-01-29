@@ -16,9 +16,9 @@ namespace PokudaSearch {
         
         //着手候補の優先度------------------
         //HACK*インデックスをディレクトリ毎に予約化し、マルチスレッドで作成する。（結果をマージしない。）
-            //t_index_historyに予約-作成状況を記録
-            //複数のパスをIndex化できる。
-            //選択したIndexを削除できる。
+            //DONE t_index_historyに予約-作成状況を記録
+            //DONE 複数のパスをIndex化できる。
+            //DONE 選択したIndexを削除できる。
             //WebページもIndex化できる。
 
         //HACK*差分Updateモードを実装する。
@@ -28,7 +28,6 @@ namespace PokudaSearch {
         //HACK*FileExplorerのパスコンボを画面の大きさに応じてサイズ変更するようにする。
         //HACK*7zip、TortoiseGitのコンテキストメニューを表示するようにする。
         //HACK*通常のエクスプローラーを表示できるようにする。
-        //HACK*Alt↑を有効にする。
 
         //HACK グリッドフィルタリングにMigemoを組み込む
         //     参考 http://thinkingskeever.hatenablog.com/entry/2018/03/11/003000
@@ -69,7 +68,6 @@ namespace PokudaSearch {
         //・サジェスチョン
         //HACK AI機能--------------------------------------------------------------
 
-        //HACK*Officeのプレビュー(mhtml or pdfに変換してWebBrowserで表示)
 
         //HACK 検索スコアにBM25Simiralityも選択できるようにする。
 
@@ -121,6 +119,8 @@ namespace PokudaSearch {
         //HACK インデックス以下をクロールしてサムネイルを作成する。
 
         //DONE List--------------------------------------------------------------------------
+        //DONE*Alt↑を有効にする。
+        //DONE*Officeのプレビュー(mhtml or pdfに変換してWebBrowserで表示)
         //DONE SQLiteを活用する。
         //DONE 類似ファイル検索
         //DONE Apache Tikaだと大量ファイル時にインデックス作成が完了しない。（最後で止まる）

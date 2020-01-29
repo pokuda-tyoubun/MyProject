@@ -75,7 +75,7 @@
             this.MainPathCombo});
             this.toolStrip1.Location = new System.Drawing.Point(4, 4);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(537, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(537, 25);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -85,7 +85,7 @@
             this.BackwardButton.Image = ((System.Drawing.Image)(resources.GetObject("BackwardButton.Image")));
             this.BackwardButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BackwardButton.Name = "BackwardButton";
-            this.BackwardButton.Size = new System.Drawing.Size(23, 24);
+            this.BackwardButton.Size = new System.Drawing.Size(23, 22);
             this.BackwardButton.Text = "toolStripButton1";
             this.BackwardButton.Click += new System.EventHandler(this.BackwardButton_Click);
             // 
