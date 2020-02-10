@@ -41,6 +41,8 @@
             this.ribbonButton1 = new C1.Win.C1Ribbon.RibbonButton();
             this.SandBoxGroup = new C1.Win.C1Ribbon.RibbonGroup();
             this.TestFormButton = new C1.Win.C1Ribbon.RibbonButton();
+            this.ribbonGroup3 = new C1.Win.C1Ribbon.RibbonGroup();
+            this.HelpButton = new C1.Win.C1Ribbon.RibbonButton();
             this.ribbonTopToolBar1 = new C1.Win.C1Ribbon.RibbonTopToolBar();
             this.MainStatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainRibbon)).BeginInit();
@@ -103,6 +105,7 @@
             this.ribbonTab1.Groups.Add(this.ribbonGroup1);
             this.ribbonTab1.Groups.Add(this.ribbonGroup2);
             this.ribbonTab1.Groups.Add(this.SandBoxGroup);
+            this.ribbonTab1.Groups.Add(this.ribbonGroup3);
             this.ribbonTab1.Name = "ribbonTab1";
             this.ribbonTab1.Text = "タブ";
             // 
@@ -164,6 +167,19 @@
             this.TestFormButton.Text = "TestForm";
             this.TestFormButton.Click += new System.EventHandler(this.TestFormButton_Click);
             // 
+            // ribbonGroup3
+            // 
+            this.ribbonGroup3.Items.Add(this.HelpButton);
+            this.ribbonGroup3.Name = "ribbonGroup3";
+            this.ribbonGroup3.Text = "ヘルプ";
+            // 
+            // HelpButton
+            // 
+            this.HelpButton.LargeImage = ((System.Drawing.Image)(resources.GetObject("HelpButton.LargeImage")));
+            this.HelpButton.Name = "HelpButton";
+            this.HelpButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("HelpButton.SmallImage")));
+            this.HelpButton.Click += new System.EventHandler(this.HelpButton_Click);
+            // 
             // ribbonTopToolBar1
             // 
             this.ribbonTopToolBar1.Name = "ribbonTopToolBar1";
@@ -209,5 +225,7 @@
         private C1.Win.C1Ribbon.RibbonButton FileExplorerButton;
         private C1.Win.C1Ribbon.RibbonGroup ribbonGroup2;
         private C1.Win.C1Ribbon.RibbonButton ribbonButton1;
+        private C1.Win.C1Ribbon.RibbonGroup ribbonGroup3;
+        private C1.Win.C1Ribbon.RibbonButton HelpButton;
     }
 }

@@ -11,9 +11,15 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using System.Linq;
+using FxCommonLib.Controls;
 
 namespace PokudaSearch.Views {
     public partial class IndexBuildForm : Form {
+
+        private static DataTable _activeIndexTbl = null;
+        public DataTable ActiveIndexTbl {
+            get { return _activeIndexTbl; }
+        }
 
         #region Constants
         public enum ActiveIndexColIdx : int {
@@ -27,9 +33,9 @@ namespace PokudaSearch.Views {
             CreateTime,
             [EnumLabel("対象ファイル数")]
             TargetCount,
-            [EnumLabel("インデックス済み数")]
+            [EnumLabel("インデックス済み")]
             IndexedCount,
-            [EnumLabel("インデックス対象外数")]
+            [EnumLabel("インデックス対象外")]
             SkippedCount,
             [EnumLabel("総バイト数")]
             TotalBytes,
@@ -55,9 +61,9 @@ namespace PokudaSearch.Views {
             CreateTime,
             [EnumLabel("対象ファイル数")]
             TargetCount,
-            [EnumLabel("インデックス済み数")]
+            [EnumLabel("インデックス済み")]
             IndexedCount,
-            [EnumLabel("インデックス対象外数")]
+            [EnumLabel("インデックス対象外")]
             SkippedCount,
             [EnumLabel("総バイト数")]
             TotalBytes,
@@ -69,11 +75,6 @@ namespace PokudaSearch.Views {
         #endregion Constants
 
         #region Properties
-        /// <summary>インデックス作成履歴</summary>
-        private DataTable _history = null;
-        public DataTable IndexedHistory {
-            get { return _history; }
-        }
         /// <summary>有効インデックス</summary>
         private DataTable _activeIndex = null;
         public DataTable ActiveIndex {
@@ -88,32 +89,31 @@ namespace PokudaSearch.Views {
         public IndexBuildForm() {
             InitializeComponent();
 
-            _history = ReadHistoryCSV();
-            LoadHistory(_history);
-            LoadActiveIndex();
+            LoadHistory();
+            LoadActiveIndex(this.ActiveIndexGrid);
         }
         #endregion Constractors
 
-        private void SaveHistoryCSV() {
-            CSVUtil csvUtil = new CSVUtil();
+        //private void SaveHistoryCSV() {
+        //    CSVUtil csvUtil = new CSVUtil();
 
-            string path = Environment.CurrentDirectory + @"\" + Properties.Settings.Default.IndexHistoryCSV;
-            csvUtil.WriteCsv(_history, path, true);
-        }
+        //    string path = Environment.CurrentDirectory + @"\" + Properties.Settings.Default.IndexHistoryCSV;
+        //    csvUtil.WriteCsv(_history, path, true);
+        //}
         private void UpdateActiveIndex(DataRow row) {
             AppObject.DbUtil.Open(AppObject.ConnectString);
             try {
                 var param = new List<SQLiteParameter>();
-                param.Add(new SQLiteParameter("@パス", row[(int)IndexHistoryColIdx.IndexedPath]));
+                param.Add(new SQLiteParameter("@パス", row[EnumUtil.GetLabel(IndexHistoryColIdx.IndexedPath)]));
                 param.Add(new SQLiteParameter("@インデックスパス", AppObject.RootDirPath + @"\Index" + LuceneIndexBuilder.ReservedNo));
-                param.Add(new SQLiteParameter("@モード", row[(int)IndexHistoryColIdx.CreateMode]));
-                param.Add(new SQLiteParameter("@作成時間(分)", row[(int)IndexHistoryColIdx.CreateTime]));
-                param.Add(new SQLiteParameter("@対象ファイル数", row[(int)IndexHistoryColIdx.TargetCount]));
-                param.Add(new SQLiteParameter("@インデックス済み", row[(int)IndexHistoryColIdx.IndexedCount]));
-                param.Add(new SQLiteParameter("@インデックス対象外", row[(int)IndexHistoryColIdx.SkippedCount]));
-                param.Add(new SQLiteParameter("@総バイト数", row[(int)IndexHistoryColIdx.TotalBytes]));
-                param.Add(new SQLiteParameter("@テキスト抽出器", row[(int)IndexHistoryColIdx.TextExtractMode]));
-                param.Add(new SQLiteParameter("@作成完了", DateTime.Parse(row[(int)IndexHistoryColIdx.EndTime].ToString())));
+                param.Add(new SQLiteParameter("@モード", row[EnumUtil.GetLabel(IndexHistoryColIdx.CreateMode)]));
+                param.Add(new SQLiteParameter("@作成時間(分)", row[EnumUtil.GetLabel(IndexHistoryColIdx.CreateTime)]));
+                param.Add(new SQLiteParameter("@対象ファイル数", row[EnumUtil.GetLabel(IndexHistoryColIdx.TargetCount)]));
+                param.Add(new SQLiteParameter("@インデックス済み", row[EnumUtil.GetLabel(IndexHistoryColIdx.IndexedCount)]));
+                param.Add(new SQLiteParameter("@インデックス対象外", row[EnumUtil.GetLabel(IndexHistoryColIdx.SkippedCount)]));
+                param.Add(new SQLiteParameter("@総バイト数", row[EnumUtil.GetLabel(IndexHistoryColIdx.TotalBytes)]));
+                param.Add(new SQLiteParameter("@テキスト抽出器", row[EnumUtil.GetLabel(IndexHistoryColIdx.TextExtractMode)]));
+                param.Add(new SQLiteParameter("@作成完了", DateTime.Parse(row[EnumUtil.GetLabel(IndexHistoryColIdx.EndTime)].ToString())));
                 AppObject.DbUtil.ExecuteNonQuery(SQLSrc.t_active_index.INSERT_OR_REPLACE, param.ToArray());
 
                 AppObject.DbUtil.Commit();
@@ -141,24 +141,10 @@ namespace PokudaSearch.Views {
             }
         }
 
-        private void UpdateHistory2DB(DataRow row, int reservedNo) {
+        private void UpdateHistory(List<SQLiteParameter> param) {
             AppObject.DbUtil.Open(AppObject.ConnectString);
             try {
-                //HACK パラメタ処理の共通化
-                var param = new List<SQLiteParameter>();
-                param.Add(new SQLiteParameter("@予約No", reservedNo));
-                param.Add(new SQLiteParameter("@作成開始", DateTime.Parse(row[(int)IndexHistoryColIdx.StartTime].ToString())));
-                param.Add(new SQLiteParameter("@作成完了", DateTime.Parse(row[(int)IndexHistoryColIdx.EndTime].ToString())));
-                param.Add(new SQLiteParameter("@モード", row[(int)IndexHistoryColIdx.CreateMode]));
-                param.Add(new SQLiteParameter("@パス", row[(int)IndexHistoryColIdx.IndexedPath]));
-                param.Add(new SQLiteParameter("@作成時間(分)", row[(int)IndexHistoryColIdx.CreateTime]));
-                param.Add(new SQLiteParameter("@対象ファイル数", row[(int)IndexHistoryColIdx.TargetCount]));
-                param.Add(new SQLiteParameter("@インデックス済み", row[(int)IndexHistoryColIdx.IndexedCount]));
-                param.Add(new SQLiteParameter("@インデックス対象外", row[(int)IndexHistoryColIdx.SkippedCount]));
-                param.Add(new SQLiteParameter("@総バイト数", row[(int)IndexHistoryColIdx.TotalBytes]));
-                param.Add(new SQLiteParameter("@テキスト抽出器", row[(int)IndexHistoryColIdx.TextExtractMode]));
-                AppObject.DbUtil.ExecuteNonQuery(SQLSrc.t_index_history.INSERT_OR_REPLACE, param.ToArray());
-
+                AppObject.DbUtil.ExecuteNonQuery(SQLSrc.t_index_history.UPDATE, param.ToArray());
                 AppObject.DbUtil.Commit();
             } catch(Exception) {
                 AppObject.DbUtil.Rollback();
@@ -168,23 +154,10 @@ namespace PokudaSearch.Views {
             }
 
         }
-        private void InsertHistory2DB(DataRow row) {
+        private void InsertHistory(List<SQLiteParameter> param) {
             AppObject.DbUtil.Open(AppObject.ConnectString);
             try {
-                var param = new List<SQLiteParameter>();
-                //param.Add(new SQLiteParameter("@予約No", 1));
-                param.Add(new SQLiteParameter("@作成開始", DateTime.Parse(row[(int)IndexHistoryColIdx.StartTime].ToString())));
-                param.Add(new SQLiteParameter("@作成完了", DBNull.Value));
-                param.Add(new SQLiteParameter("@モード", row[(int)IndexHistoryColIdx.CreateMode]));
-                param.Add(new SQLiteParameter("@パス", row[(int)IndexHistoryColIdx.IndexedPath]));
-                param.Add(new SQLiteParameter("@作成時間(分)", row[(int)IndexHistoryColIdx.CreateTime]));
-                param.Add(new SQLiteParameter("@対象ファイル数", row[(int)IndexHistoryColIdx.TargetCount]));
-                param.Add(new SQLiteParameter("@インデックス済み", row[(int)IndexHistoryColIdx.IndexedCount]));
-                param.Add(new SQLiteParameter("@インデックス対象外", row[(int)IndexHistoryColIdx.SkippedCount]));
-                param.Add(new SQLiteParameter("@総バイト数", row[(int)IndexHistoryColIdx.TotalBytes]));
-                param.Add(new SQLiteParameter("@テキスト抽出器", row[(int)IndexHistoryColIdx.TextExtractMode]));
                 AppObject.DbUtil.ExecuteNonQuery(SQLSrc.t_index_history.INSERT, param.ToArray());
-
                 AppObject.DbUtil.Commit();
             } catch(Exception) {
                 AppObject.DbUtil.Rollback();
@@ -204,6 +177,7 @@ namespace PokudaSearch.Views {
                 DataSet ds = AppObject.DbUtil.ExecSelect(SQLSrc.t_index_history.SELECT_NEW_ONE, param.ToArray());
                 if (ds.Tables[0].Rows.Count > 0) {
                     ret = int.Parse(ds.Tables[0].Rows[0]["予約No"].ToString());
+                    ret++;
                 }
             } finally {
                 AppObject.DbUtil.Close();
@@ -212,52 +186,34 @@ namespace PokudaSearch.Views {
         }
 
 
-        private DataTable ReadHistoryCSV() {
-            CSVUtil csvUtil = new CSVUtil();
-            DataTable historyTbl = new DataTable("IndexHistory");
-            string path = Environment.CurrentDirectory + @"\" + Properties.Settings.Default.IndexHistoryCSV;
-            if (File.Exists(path)) {
-                historyTbl = csvUtil.ReadCsv(path, "IndexHistory");
-            } else {
-                //ファイルが存在しない場合は、空テーブルを返す
-                historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.ReservedNo), typeof(string));
-                historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.CreateMode), typeof(string));
-                historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.IndexedPath), typeof(string));
-                historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.StartTime), typeof(string));
-                historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.EndTime), typeof(string));
-                historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.CreateTime), typeof(string));
-                historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.TargetCount), typeof(string));
-                historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.IndexedCount), typeof(string));
-                historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.SkippedCount), typeof(string));
-                historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.TotalBytes), typeof(string));
-                historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.TextExtractMode), typeof(string));
-            }
+        //private DataTable ReadHistoryCSV() {
+        //    CSVUtil csvUtil = new CSVUtil();
+        //    DataTable historyTbl = new DataTable("IndexHistory");
+        //    string path = Environment.CurrentDirectory + @"\" + Properties.Settings.Default.IndexHistoryCSV;
+        //    if (File.Exists(path)) {
+        //        historyTbl = csvUtil.ReadCsv(path, "IndexHistory");
+        //    } else {
+        //        //ファイルが存在しない場合は、空テーブルを返す
+        //        historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.ReservedNo), typeof(string));
+        //        historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.CreateMode), typeof(string));
+        //        historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.IndexedPath), typeof(string));
+        //        historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.StartTime), typeof(string));
+        //        historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.EndTime), typeof(string));
+        //        historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.CreateTime), typeof(string));
+        //        historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.TargetCount), typeof(string));
+        //        historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.IndexedCount), typeof(string));
+        //        historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.SkippedCount), typeof(string));
+        //        historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.TotalBytes), typeof(string));
+        //        historyTbl.Columns.Add(EnumUtil.GetName(IndexHistoryColIdx.TextExtractMode), typeof(string));
+        //    }
 
-            return historyTbl;
-        }
-        public void LoadActiveIndex() {
-            DataTable dt = SelectActiveIndex();
-            this.ActiveIndexGrid.DataSource = dt;
-        }
-
-        public static DataTable SelectActiveIndex() {
-            AppObject.DbUtil.Open(AppObject.ConnectString);
-            try {
-                DataSet ds = AppObject.DbUtil.ExecSelect(SQLSrc.t_active_index.SELECT, null);
-                return ds.Tables[0];
-            } finally {
-                AppObject.DbUtil.Close();
-            }
-        }
-        /// <summary>
-        /// インデックス作成履歴グリッドのヘッダーを設定
-        /// </summary>
-        public void LoadHistory(DataTable history) {
-
-            //this.IndexHistoryGrid.DataSource = history;
+        //    return historyTbl;
+        //}
+        public DataTable LoadHistory() {
+            DataTable dt = SelectIndexHistory();
 
             this.IndexHistoryGrid.Cols.Count = EnumUtil.GetCount(typeof(IndexHistoryColIdx)) + 1;
-            this.IndexHistoryGrid.Rows.Count = _history.Rows.Count + HeaderRowCount;
+            this.IndexHistoryGrid.Rows.Count = dt.Rows.Count + HeaderRowCount;
 
             this.IndexHistoryGrid[0, (int)IndexHistoryColIdx.ReservedNo + 1] = EnumUtil.GetLabel(IndexHistoryColIdx.ReservedNo);
             this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.ReservedNo + 1].Width = 60;
@@ -292,33 +248,209 @@ namespace PokudaSearch.Views {
             this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.TextExtractMode + 1].Width = 80;
 
             int row = HeaderRowCount;
-            foreach (DataRow dr in _history.Rows) {
+            foreach (DataRow dr in dt.Rows) {
                 this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.ReservedNo + 1] = 
-                    StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.ReservedNo)]);
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(IndexHistoryColIdx.ReservedNo)]);
                 this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.CreateMode + 1] = 
-                    StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.CreateMode)]);
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(IndexHistoryColIdx.CreateMode)]);
                 this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.StartTime + 1] = 
-                    StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.StartTime)]);
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(IndexHistoryColIdx.StartTime)]);
                 this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.EndTime + 1] = 
-                    StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.EndTime)]);
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(IndexHistoryColIdx.EndTime)]);
                 this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.CreateTime + 1] = 
-                    StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.CreateTime)]);
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(IndexHistoryColIdx.CreateTime)]);
                 this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.IndexedPath + 1] = 
-                    StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.IndexedPath)]);
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(IndexHistoryColIdx.IndexedPath)]);
                 this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.TargetCount + 1] = 
-                    StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.TargetCount)]);
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(IndexHistoryColIdx.TargetCount)]);
                 this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.IndexedCount + 1] = 
-                    StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.IndexedCount)]);
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(IndexHistoryColIdx.IndexedCount)]);
                 this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.SkippedCount + 1] = 
-                    StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.SkippedCount)]);
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(IndexHistoryColIdx.SkippedCount)]);
                 this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.TotalBytes + 1] = 
-                    StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.TotalBytes)]);
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(IndexHistoryColIdx.TotalBytes)]);
                 this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.TextExtractMode + 1] = 
-                    StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.TextExtractMode)]);
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(IndexHistoryColIdx.TextExtractMode)]);
 
                 row++;
             }
+
+            return dt;
         }
+        public static void LoadActiveIndex(FlexGridEx grid, bool appendCheckBox = false) {
+            DataTable dt = SelectActiveIndex();
+            _activeIndexTbl = dt;
+
+            int offset = 0;
+            if (appendCheckBox) {
+                offset++;
+            }
+
+            grid.Cols.Count = EnumUtil.GetCount(typeof(ActiveIndexColIdx)) + 1 + offset;
+            grid.Rows.Count = dt.Rows.Count + HeaderRowCount;
+
+            if (appendCheckBox) {
+                grid.Cols[0].Width = 2;
+                grid[0, 1] = "";
+                grid.Cols[1].Width = 30;
+                grid.Cols[1].DataType = typeof(bool);
+            }
+            grid[0, (int)ActiveIndexColIdx.IndexedPath + 1 + offset] = EnumUtil.GetLabel(ActiveIndexColIdx.IndexedPath);
+            if (appendCheckBox) {
+                grid.Cols[(int)ActiveIndexColIdx.IndexedPath + 1 + offset].Width = 500;
+            } else {
+                grid.Cols[(int)ActiveIndexColIdx.IndexedPath + 1 + offset].Width = 320;
+            }
+            grid[0, (int)ActiveIndexColIdx.IndexStorePath + 1 + offset] = EnumUtil.GetLabel(ActiveIndexColIdx.IndexStorePath);
+            grid.Cols[(int)ActiveIndexColIdx.IndexStorePath + 1 + offset].Width = 80;
+            grid[0, (int)ActiveIndexColIdx.CreateMode + 1 + offset] = EnumUtil.GetLabel(ActiveIndexColIdx.CreateMode);
+            grid.Cols[(int)ActiveIndexColIdx.CreateMode + 1 + offset].Width = 60;
+            grid[0, (int)ActiveIndexColIdx.CreateTime + 1 + offset] = EnumUtil.GetLabel(ActiveIndexColIdx.CreateTime);
+            grid.Cols[(int)ActiveIndexColIdx.CreateTime + 1 + offset].Width = 80;
+            grid.Cols[(int)ActiveIndexColIdx.CreateTime + 1 + offset].DataType = typeof(int);
+            grid.Cols[(int)ActiveIndexColIdx.CreateTime + 1 + offset].Format = "#,##0";
+            grid[0, (int)ActiveIndexColIdx.TargetCount + 1 + offset] = EnumUtil.GetLabel(ActiveIndexColIdx.TargetCount);
+            grid.Cols[(int)ActiveIndexColIdx.TargetCount + 1 + offset].Width = 80;
+            grid.Cols[(int)ActiveIndexColIdx.TargetCount + 1 + offset].DataType = typeof(int);
+            grid.Cols[(int)ActiveIndexColIdx.TargetCount + 1 + offset].Format = "#,##0";
+            grid[0, (int)ActiveIndexColIdx.IndexedCount + 1 + offset] = EnumUtil.GetLabel(ActiveIndexColIdx.IndexedCount);
+            grid.Cols[(int)ActiveIndexColIdx.IndexedCount + 1 + offset].Width = 80;
+            grid.Cols[(int)ActiveIndexColIdx.IndexedCount + 1 + offset].DataType = typeof(int);
+            grid.Cols[(int)ActiveIndexColIdx.IndexedCount + 1 + offset].Format = "#,##0";
+            grid[0, (int)ActiveIndexColIdx.SkippedCount + 1 + offset] = EnumUtil.GetLabel(ActiveIndexColIdx.SkippedCount);
+            grid.Cols[(int)ActiveIndexColIdx.SkippedCount + 1 + offset].Width = 80;
+            grid.Cols[(int)ActiveIndexColIdx.SkippedCount + 1 + offset].DataType = typeof(int);
+            grid.Cols[(int)ActiveIndexColIdx.SkippedCount + 1 + offset].Format = "#,##0";
+            grid[0, (int)ActiveIndexColIdx.TotalBytes + 1 + offset] = EnumUtil.GetLabel(ActiveIndexColIdx.TotalBytes);
+            grid.Cols[(int)ActiveIndexColIdx.TotalBytes + 1 + offset].Width = 80;
+            grid.Cols[(int)ActiveIndexColIdx.TotalBytes + 1 + offset].TextAlign = TextAlignEnum.RightCenter;
+            grid[0, (int)ActiveIndexColIdx.TextExtractMode + 1 + offset] = EnumUtil.GetLabel(ActiveIndexColIdx.TextExtractMode);
+            grid.Cols[(int)ActiveIndexColIdx.TextExtractMode + 1 + offset].Width = 80;
+            grid[0, (int)ActiveIndexColIdx.InsertDate + 1 + offset] = EnumUtil.GetLabel(ActiveIndexColIdx.InsertDate);
+            grid.Cols[(int)ActiveIndexColIdx.InsertDate + 1 + offset].Width = 120;
+            grid[0, (int)ActiveIndexColIdx.UpdateDate + 1 + offset] = EnumUtil.GetLabel(ActiveIndexColIdx.UpdateDate);
+            grid.Cols[(int)ActiveIndexColIdx.UpdateDate + 1 + offset].Width = 120;
+
+            int row = HeaderRowCount;
+            foreach (DataRow dr in dt.Rows) {
+                if (appendCheckBox) {
+                    grid[row, 1] = true;
+                }
+                grid[row, (int)ActiveIndexColIdx.IndexedPath + 1 + offset] = 
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(ActiveIndexColIdx.IndexedPath)]);
+                grid[row, (int)ActiveIndexColIdx.IndexStorePath + 1 + offset] = 
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(ActiveIndexColIdx.IndexStorePath)]);
+                grid[row, (int)ActiveIndexColIdx.CreateMode + 1 + offset] = 
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(ActiveIndexColIdx.CreateMode)]);
+                grid[row, (int)ActiveIndexColIdx.CreateTime + 1 + offset] = 
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(ActiveIndexColIdx.CreateTime)]);
+                grid[row, (int)ActiveIndexColIdx.TargetCount + 1 + offset] = 
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(ActiveIndexColIdx.TargetCount)]);
+                grid[row, (int)ActiveIndexColIdx.IndexedCount + 1 + offset] = 
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(ActiveIndexColIdx.IndexedCount)]);
+                grid[row, (int)ActiveIndexColIdx.SkippedCount + 1 + offset] = 
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(ActiveIndexColIdx.SkippedCount)]);
+                grid[row, (int)ActiveIndexColIdx.TotalBytes + 1 + offset] = 
+                    FileUtil.GetSizeString(StringUtil.NullToBlank(dr[EnumUtil.GetLabel(ActiveIndexColIdx.TotalBytes)]));
+                grid[row, (int)ActiveIndexColIdx.TextExtractMode + 1 + offset] = 
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(ActiveIndexColIdx.TextExtractMode)]);
+                grid[row, (int)ActiveIndexColIdx.InsertDate + 1 + offset] = 
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(ActiveIndexColIdx.InsertDate)]);
+                grid[row, (int)ActiveIndexColIdx.UpdateDate + 1 + offset] = 
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(ActiveIndexColIdx.UpdateDate)]);
+
+                row++;
+            }
+
+        }
+
+        private DataTable SelectIndexHistory() {
+            AppObject.DbUtil.Open(AppObject.ConnectString);
+            try {
+                DataSet ds = AppObject.DbUtil.ExecSelect(SQLSrc.t_index_history.SELECT_ALL + " ORDER BY [予約No] DESC", null);
+                return ds.Tables[0];
+            } finally {
+                AppObject.DbUtil.Close();
+            }
+        }
+
+        public static DataTable SelectActiveIndex() {
+            AppObject.DbUtil.Open(AppObject.ConnectString);
+            try {
+                DataSet ds = AppObject.DbUtil.ExecSelect(SQLSrc.t_active_index.SELECT, null);
+                return ds.Tables[0];
+            } finally {
+                AppObject.DbUtil.Close();
+            }
+        }
+        /// <summary>
+        /// インデックス作成履歴グリッドのヘッダーを設定
+        /// </summary>
+        //public void LoadHistory(DataTable history) {
+
+        //    this.IndexHistoryGrid.Cols.Count = EnumUtil.GetCount(typeof(IndexHistoryColIdx)) + 1;
+        //    this.IndexHistoryGrid.Rows.Count = _history.Rows.Count + HeaderRowCount;
+
+        //    this.IndexHistoryGrid[0, (int)IndexHistoryColIdx.ReservedNo + 1] = EnumUtil.GetLabel(IndexHistoryColIdx.ReservedNo);
+        //    this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.ReservedNo + 1].Width = 60;
+        //    this.IndexHistoryGrid[0, (int)IndexHistoryColIdx.CreateMode + 1] = EnumUtil.GetLabel(IndexHistoryColIdx.CreateMode);
+        //    this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.CreateMode + 1].Width = 60;
+        //    this.IndexHistoryGrid[0, (int)IndexHistoryColIdx.IndexedPath + 1] = EnumUtil.GetLabel(IndexHistoryColIdx.IndexedPath);
+        //    this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.IndexedPath + 1].Width = 200;
+        //    this.IndexHistoryGrid[0, (int)IndexHistoryColIdx.StartTime + 1] = EnumUtil.GetLabel(IndexHistoryColIdx.StartTime);
+        //    this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.StartTime + 1].Width = 120;
+        //    this.IndexHistoryGrid[0, (int)IndexHistoryColIdx.EndTime + 1] = EnumUtil.GetLabel(IndexHistoryColIdx.EndTime);
+        //    this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.EndTime + 1].Width = 120;
+        //    this.IndexHistoryGrid[0, (int)IndexHistoryColIdx.CreateTime + 1] = EnumUtil.GetLabel(IndexHistoryColIdx.CreateTime);
+        //    this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.CreateTime + 1].Width = 80;
+        //    this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.CreateTime + 1].DataType = typeof(int);
+        //    this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.CreateTime + 1].Format = "#,##0";
+        //    this.IndexHistoryGrid[0, (int)IndexHistoryColIdx.TargetCount + 1] = EnumUtil.GetLabel(IndexHistoryColIdx.TargetCount);
+        //    this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.TargetCount + 1].Width = 80;
+        //    this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.TargetCount + 1].DataType = typeof(int);
+        //    this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.TargetCount + 1].Format = "#,##0";
+        //    this.IndexHistoryGrid[0, (int)IndexHistoryColIdx.IndexedCount + 1] = EnumUtil.GetLabel(IndexHistoryColIdx.IndexedCount);
+        //    this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.IndexedCount + 1].Width = 80;
+        //    this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.IndexedCount + 1].DataType = typeof(int);
+        //    this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.IndexedCount + 1].Format = "#,##0";
+        //    this.IndexHistoryGrid[0, (int)IndexHistoryColIdx.SkippedCount + 1] = EnumUtil.GetLabel(IndexHistoryColIdx.SkippedCount);
+        //    this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.SkippedCount + 1].Width = 80;
+        //    this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.SkippedCount + 1].DataType = typeof(int);
+        //    this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.SkippedCount + 1].Format = "#,##0";
+        //    this.IndexHistoryGrid[0, (int)IndexHistoryColIdx.TotalBytes + 1] = EnumUtil.GetLabel(IndexHistoryColIdx.TotalBytes);
+        //    this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.TotalBytes + 1].Width = 80;
+        //    this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.TotalBytes + 1].TextAlign = TextAlignEnum.RightCenter;
+        //    this.IndexHistoryGrid[0, (int)IndexHistoryColIdx.TextExtractMode + 1] = EnumUtil.GetLabel(IndexHistoryColIdx.TextExtractMode);
+        //    this.IndexHistoryGrid.Cols[(int)IndexHistoryColIdx.TextExtractMode + 1].Width = 80;
+
+        //    int row = HeaderRowCount;
+        //    foreach (DataRow dr in _history.Rows) {
+        //        this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.ReservedNo + 1] = 
+        //            StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.ReservedNo)]);
+        //        this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.CreateMode + 1] = 
+        //            StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.CreateMode)]);
+        //        this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.StartTime + 1] = 
+        //            StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.StartTime)]);
+        //        this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.EndTime + 1] = 
+        //            StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.EndTime)]);
+        //        this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.CreateTime + 1] = 
+        //            StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.CreateTime)]);
+        //        this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.IndexedPath + 1] = 
+        //            StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.IndexedPath)]);
+        //        this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.TargetCount + 1] = 
+        //            StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.TargetCount)]);
+        //        this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.IndexedCount + 1] = 
+        //            StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.IndexedCount)]);
+        //        this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.SkippedCount + 1] = 
+        //            StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.SkippedCount)]);
+        //        this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.TotalBytes + 1] = 
+        //            StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.TotalBytes)]);
+        //        this.IndexHistoryGrid[row, (int)IndexHistoryColIdx.TextExtractMode + 1] = 
+        //            StringUtil.NullToBlank(dr[EnumUtil.GetName(IndexHistoryColIdx.TextExtractMode)]);
+
+        //        row++;
+        //    }
+        //}
 
         /// <summary>
         /// インデックス作成の進捗報告
@@ -336,56 +468,42 @@ namespace PokudaSearch.Views {
 
             if (report.Status == ProgressReport.ProgressStatus.Start) {
                 //開始時
-                var newRow = _history.NewRow();
-                newRow[(int)IndexHistoryColIdx.ReservedNo] = -1;
-                newRow[(int)IndexHistoryColIdx.CreateMode] = "再作成";
-                newRow[(int)IndexHistoryColIdx.StartTime] = LuceneIndexBuilder.StartTime.ToString("yyyy/MM/dd HH:mm:ss");
-                newRow[(int)IndexHistoryColIdx.EndTime] = DBNull.Value;
-                newRow[(int)IndexHistoryColIdx.CreateTime] = LuceneIndexBuilder.CreateTime.TotalMinutes;
-                newRow[(int)IndexHistoryColIdx.IndexedPath] = LuceneIndexBuilder.IndexedPath;
-                newRow[(int)IndexHistoryColIdx.TargetCount] = LuceneIndexBuilder.TargetCount;
-                newRow[(int)IndexHistoryColIdx.IndexedCount] = LuceneIndexBuilder.IndexedCount;
-                newRow[(int)IndexHistoryColIdx.SkippedCount] = LuceneIndexBuilder.SkippedCount;
-                newRow[(int)IndexHistoryColIdx.TotalBytes] = FileUtil.GetSizeString(LuceneIndexBuilder.TotalBytes);
-                newRow[(int)IndexHistoryColIdx.TextExtractMode] = EnumUtil.GetName(LuceneIndexBuilder.TextExtractMode);
+                var param = new List<SQLiteParameter>();
+                //param.Add(new SQLiteParameter("@予約No", 1));
+                param.Add(new SQLiteParameter("@作成開始", LuceneIndexBuilder.StartTime));
+                //param.Add(new SQLiteParameter("@作成開始", DBNull.Value));
+                param.Add(new SQLiteParameter("@作成完了", DBNull.Value));
+                param.Add(new SQLiteParameter("@モード", "再作成"));
+                param.Add(new SQLiteParameter("@パス", LuceneIndexBuilder.IndexedPath));
+                param.Add(new SQLiteParameter("@作成時間(分)", LuceneIndexBuilder.CreateTime.TotalMinutes));
+                param.Add(new SQLiteParameter("@対象ファイル数", LuceneIndexBuilder.TargetCount));
+                param.Add(new SQLiteParameter("@インデックス済み", LuceneIndexBuilder.IndexedCount));
+                param.Add(new SQLiteParameter("@インデックス対象外", LuceneIndexBuilder.SkippedCount));
+                param.Add(new SQLiteParameter("@総バイト数", FileUtil.GetSizeString(LuceneIndexBuilder.TotalBytes)));
+                param.Add(new SQLiteParameter("@テキスト抽出器", EnumUtil.GetName(LuceneIndexBuilder.TextExtractMode)));
 
-                InsertHistory2DB(newRow);
-                newRow[(int)IndexHistoryColIdx.ReservedNo] = LuceneIndexBuilder.ReservedNo;
-
-                _history.Rows.InsertAt(newRow, 0);
-                _history.AcceptChanges();
-                LoadHistory(_history);
+                InsertHistory(param);
+                LoadHistory();
 
             } else if (report.Status == ProgressReport.ProgressStatus.Finished) {
                 //完了時
                 //NOTE:マルチスレッドも見据えてカウンタをstatic化したので、
                 //　　 処理結果を戻り値workerから受け取らずにstaticプロパティから受け取る
 
-                DataRow[] historyRows = (
-                    from row in _history.AsEnumerable()
-                    let qReservedNo = row.Field<string>(EnumUtil.GetName(IndexHistoryColIdx.ReservedNo))
-                    where qReservedNo == LuceneIndexBuilder.ReservedNo.ToString()
-                    select row).ToArray();
-                
-                if (historyRows.Length > 0) {
-                    DataRow dr = historyRows[0];
-                    dr[(int)IndexHistoryColIdx.EndTime] = LuceneIndexBuilder.EndTime.ToString("yyyy/MM/dd HH:mm:ss");
-                    dr[(int)IndexHistoryColIdx.CreateTime] = LuceneIndexBuilder.CreateTime.TotalMinutes;
-                    dr[(int)IndexHistoryColIdx.TargetCount] = LuceneIndexBuilder.TargetCount;
-                    dr[(int)IndexHistoryColIdx.IndexedCount] = LuceneIndexBuilder.IndexedCount;
-                    dr[(int)IndexHistoryColIdx.SkippedCount] = LuceneIndexBuilder.SkippedCount;
-                    dr[(int)IndexHistoryColIdx.TotalBytes] = FileUtil.GetSizeString(LuceneIndexBuilder.TotalBytes);
-                }
-                _history.AcceptChanges();
-                LoadHistory(_history);
+                //HACK パラメタ処理の共通化
+                var param = new List<SQLiteParameter>();
+                param.Add(new SQLiteParameter("@予約No", LuceneIndexBuilder.ReservedNo.ToString()));
+                param.Add(new SQLiteParameter("@作成完了", LuceneIndexBuilder.EndTime));
+                param.Add(new SQLiteParameter("@作成時間(分)", LuceneIndexBuilder.CreateTime.TotalMinutes));
+                param.Add(new SQLiteParameter("@対象ファイル数", LuceneIndexBuilder.TargetCount));
+                param.Add(new SQLiteParameter("@インデックス済み", LuceneIndexBuilder.IndexedCount));
+                param.Add(new SQLiteParameter("@インデックス対象外", LuceneIndexBuilder.SkippedCount));
+                param.Add(new SQLiteParameter("@総バイト数", FileUtil.GetSizeString(LuceneIndexBuilder.TotalBytes)));
+                UpdateHistory(param);
+                var historyTbl = LoadHistory();
 
-                UpdateHistory2DB(historyRows[0], LuceneIndexBuilder.ReservedNo);
-
-                UpdateActiveIndex(historyRows[0]);
-                LoadActiveIndex();
-
-                //HACK SQLiteに移行
-                SaveHistoryCSV();
+                UpdateActiveIndex(historyTbl.Rows[0]);
+                LoadActiveIndex(this.ActiveIndexGrid);
 
                 TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
                 this.CreateIndexButton.Enabled = true;
@@ -527,7 +645,7 @@ namespace PokudaSearch.Views {
             }
             //有効インデックステーブルから削除
             DeleteActiveIndex(path);
-            LoadActiveIndex();
+            LoadActiveIndex(this.ActiveIndexGrid);
         }
 
         /// <summary>

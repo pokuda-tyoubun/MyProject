@@ -34,6 +34,8 @@ namespace PokudaSearch.Views {
         #region Constants
         /// <summary>検索結果一覧のヘッダ行数</summary>
         private const int RowHeaderCount = 1;
+        /// <summary>検索対象チェック列</summary>
+        private const int TargetCheckCol = 1;
 
         /// <summary>列定義</summary>
         private enum ColIndex : int {
@@ -58,6 +60,8 @@ namespace PokudaSearch.Views {
 
         private BitmapUtil _bu = new BitmapUtil();
 
+        private MultiReader _multiReader = null;
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -66,6 +70,7 @@ namespace PokudaSearch.Views {
 
             CreateHeader();
 
+            IndexBuildForm.LoadActiveIndex(this.TargetIndexGrid, true);
         }
 
         private void SimpleSearchForm_Load(object sender, EventArgs e) {
@@ -137,13 +142,12 @@ namespace PokudaSearch.Views {
             this.ResultGrid.Cols[(int)ColIndex.Hilight].Width = 600;
         }
 
-        private MultiReader GetMultiReader(DataTable activeIndexTbl) {
-            IndexReader[] idxList = new IndexReader[activeIndexTbl.Rows.Count];
+        private MultiReader GetMultiReader(List<string> targetIndexList) {
+            IndexReader[] idxList = new IndexReader[targetIndexList.Count];
             int cnt = 0;
-            foreach (DataRow dr in activeIndexTbl.Rows) {
-                string path = StringUtil.NullToBlank(dr[(int)IndexBuildForm.ActiveIndexColIdx.IndexStorePath]);
+            foreach (string indexStorePath in targetIndexList) {
 
-                java.nio.file.Path idxPath = FileSystems.getDefault().getPath(path);
+                java.nio.file.Path idxPath = FileSystems.getDefault().getPath(indexStorePath);
                 var fsDir = FSDirectory.Open(idxPath);
                 var idxReader = DirectoryReader.Open(fsDir);
                 idxList[cnt] = idxReader;
@@ -154,6 +158,18 @@ namespace PokudaSearch.Views {
             return new MultiReader(idxList);
         }
 
+        private List<string> GetSelectedIndex() {
+            var ret = new List<string>();
+
+            for (int i = 1; i < this.TargetIndexGrid.Rows.Count; i++) {
+                Row r = this.TargetIndexGrid.Rows[i];
+                if (bool.Parse(StringUtil.NullToBlank(r[TargetCheckCol]))) {
+                    ret.Add(StringUtil.NullToBlank(r[(int)IndexBuildForm.ActiveIndexColIdx.IndexStorePath + 2]));
+                }
+            }
+
+            return ret;
+        }
 
         /// <summary>
         /// 検索
@@ -166,19 +182,16 @@ namespace PokudaSearch.Views {
                 return;
             }
 
-            DataTable dt = IndexBuildForm.SelectActiveIndex();
-            if (dt.Rows.Count == 0) {
-                MessageBox.Show("有効なインデックスが存在しません。", 
+            var indexList = GetSelectedIndex();
+            if (indexList.Count == 0) {
+                MessageBox.Show("検索対象インデックスを選択して下さい。", 
                     AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            //java.nio.file.Path idxPath = FileSystems.getDefault().getPath(AppObject.RootDirPath + LuceneIndexBuilder.IndexDirName);
-            //var fsDir = FSDirectory.Open(idxPath);
-            //IndexReader idxReader = DirectoryReader.Open(fsDir);
-            MultiReader mr = GetMultiReader(dt);
+            _multiReader = GetMultiReader(indexList);
             
-            IndexSearcher idxSearcher = new IndexSearcher(mr);
+            IndexSearcher idxSearcher = new IndexSearcher(_multiReader);
 
             var allQuery = new BooleanQueryBuilder();
             var contentBqb = new BooleanQueryBuilder();
@@ -240,7 +253,7 @@ namespace PokudaSearch.Views {
 
                     // Highlighterで検索キーワード周辺の文字列(フラグメント)を取得
                     // TokenStream が必要なので取得
-                    TokenStream stream = TokenSources.GetAnyTokenStream(mr,
+                    TokenStream stream = TokenSources.GetAnyTokenStream(_multiReader,
                             doc.Doc, "content", AppObject.AppAnalyzer);
                     string[] str = hi.GetBestFragments(stream, thisDoc.Get("content"), 5);
                     this.ResultGrid[row, (int)ColIndex.Hilight] = string.Join(",", str);
@@ -590,11 +603,11 @@ namespace PokudaSearch.Views {
         /// <param name="e"></param>
         private void MoreLikeThisMenu_Click(object sender, EventArgs e) {
 
-            java.nio.file.Path idxPath = FileSystems.getDefault().getPath(AppObject.RootDirPath + LuceneIndexBuilder.IndexDirName);
-            var fsDir = FSDirectory.Open(idxPath);
-            IndexReader idxReader = DirectoryReader.Open(fsDir);
-            IndexSearcher idxSearcher = new IndexSearcher(idxReader);
-            MoreLikeThis mlt = new MoreLikeThis(idxReader);
+            //java.nio.file.Path idxPath = FileSystems.getDefault().getPath(AppObject.RootDirPath + LuceneIndexBuilder.IndexDirName);
+            //var fsDir = FSDirectory.Open(idxPath);
+            //IndexReader idxReader = DirectoryReader.Open(fsDir);
+            IndexSearcher idxSearcher = new IndexSearcher(_multiReader);
+            MoreLikeThis mlt = new MoreLikeThis(_multiReader);
             mlt.SetFieldNames(new string[] {"title", "content"});
             mlt.SetAnalyzer(AppObject.AppAnalyzer);
 
@@ -638,7 +651,7 @@ namespace PokudaSearch.Views {
 
                 // Highlighterで検索キーワード周辺の文字列(フラグメント)を取得
                 // TokenStream が必要なので取得
-                TokenStream stream = TokenSources.GetAnyTokenStream(idxReader,
+                TokenStream stream = TokenSources.GetAnyTokenStream(_multiReader,
                         doc.Doc, "content", AppObject.AppAnalyzer);
                 string[] str = hi.GetBestFragments(stream, thisDoc.Get("content"), 5);
                 this.ResultGrid[row, (int)ColIndex.Hilight] = string.Join(",", str);
@@ -738,49 +751,20 @@ namespace PokudaSearch.Views {
             }
         }
 
+        private void SelectAllMenu_Click(object sender, EventArgs e) {
+            foreach (Row r in this.TargetIndexGrid.Rows) {
+                if (r.Index > 0) {
+                    r[TargetCheckCol] = true;
+                }
+            }
+        }
 
-        //private void SearchOld() {
-        //    DateTime start = DateTime.Now;
-        //    IndexSearcher searcher = null;
-
-        //    try {
-        //        searcher = new IndexSearcher(_rootDir + _indexDir);
-        //    } catch (IOException ex) {
-        //        MessageBox.Show("インデックスファイルが存在しないか、破損しております。インデックスを再作成してください。\n詳細：\n" + ex.Message,
-        //            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        return;
-        //    }
-
-        //    this.ResultsList.Items.Clear();
-
-        //    string keyword = this.QueryText.Text.Trim();
-        //    if (keyword == String.Empty) {
-        //        return;
-        //    }
-
-        //    Query query = QueryParser.Parse(keyword, "text", new StandardAnalyzer());
-
-        //    // Search
-        //    Hits hits = searcher.Search(query);
-
-        //    for (int i = 0; i < hits.Length(); i++) {
-        //        Document doc = hits.Doc(i);
-
-        //        // 検索結果をセット
-        //        string filename = doc.Get("title");
-        //        string path = doc.Get("path");
-        //        string folder = Path.GetDirectoryName(path);
-        //        DirectoryInfo di = new DirectoryInfo(folder);
-
-        //        ListViewItem item = new ListViewItem(new string[] {null, filename, di.FullName, hits.Score(i).ToString()});
-        //        item.Tag = path;
-        //        this.ResultsList.Items.Add(item);
-        //        Application.DoEvents();
-        //    } 
-        //    searcher.Close();
-
-        //    string searchReport = String.Format("検索時間：{0} 該当ファイル数：{1}", (DateTime.Now - start), hits.Length());
-        //    status(searchReport);
-        //}
+        private void ReleaseAllMenu_Click(object sender, EventArgs e) {
+            foreach (Row r in this.TargetIndexGrid.Rows) {
+                if (r.Index > 0) {
+                    r[TargetCheckCol] = false;
+                }
+            }
+        }
     }
 }

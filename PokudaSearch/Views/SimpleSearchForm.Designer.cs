@@ -67,6 +67,10 @@
             this.PreviewLabel = new C1.Win.C1SuperTooltip.C1SuperLabel();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.TargetIndexGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
+            this.TargetContext = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.SelectAllMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.ReleaseAllMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.ClearButton = new System.Windows.Forms.Button();
             this.PreviewCheck = new System.Windows.Forms.CheckBox();
             this.ResultGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
@@ -82,6 +86,7 @@
             this.TextPreviewPanel.SuspendLayout();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TargetIndexGrid)).BeginInit();
+            this.TargetContext.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ResultGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -508,7 +513,6 @@
             // TargetIndexGrid
             // 
             this.TargetIndexGrid.AfterErrorInfo = ((System.Collections.Generic.Dictionary<string, string>)(resources.GetObject("TargetIndexGrid.AfterErrorInfo")));
-            this.TargetIndexGrid.AllowEditing = false;
             this.TargetIndexGrid.AllowFiltering = true;
             this.TargetIndexGrid.AllowResizing = C1.Win.C1FlexGrid.AllowResizingEnum.Both;
             this.TargetIndexGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -516,7 +520,7 @@
             this.TargetIndexGrid.AutoClipboard = true;
             this.TargetIndexGrid.CellButtonDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.HashSet<string>>)(resources.GetObject("TargetIndexGrid.CellButtonDic")));
             this.TargetIndexGrid.ColumnInfo = "10,1,0,0,0,90,Columns:";
-            this.TargetIndexGrid.ContextMenuStrip = this.ResultContext;
+            this.TargetIndexGrid.ContextMenuStrip = this.TargetContext;
             this.TargetIndexGrid.DrawMode = C1.Win.C1FlexGrid.DrawModeEnum.OwnerDraw;
             this.TargetIndexGrid.EnableReadOnlyColor = false;
             this.TargetIndexGrid.EnableUpdateCellStyle = false;
@@ -535,6 +539,34 @@
             this.TargetIndexGrid.TabIndex = 118;
             this.TargetIndexGrid.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2010Blue;
             this.TargetIndexGrid.WindowsName = null;
+            // 
+            // TargetContext
+            // 
+            this.TargetContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SelectAllMenu,
+            this.ReleaseAllMenu,
+            this.toolStripSeparator5});
+            this.TargetContext.Name = "ResultContext";
+            this.TargetContext.Size = new System.Drawing.Size(129, 54);
+            // 
+            // SelectAllMenu
+            // 
+            this.SelectAllMenu.Name = "SelectAllMenu";
+            this.SelectAllMenu.Size = new System.Drawing.Size(128, 22);
+            this.SelectAllMenu.Text = "全選択(&S)";
+            this.SelectAllMenu.Click += new System.EventHandler(this.SelectAllMenu_Click);
+            // 
+            // ReleaseAllMenu
+            // 
+            this.ReleaseAllMenu.Name = "ReleaseAllMenu";
+            this.ReleaseAllMenu.Size = new System.Drawing.Size(128, 22);
+            this.ReleaseAllMenu.Text = "全解除(&R)";
+            this.ReleaseAllMenu.Click += new System.EventHandler(this.ReleaseAllMenu_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(125, 6);
             // 
             // ClearButton
             // 
@@ -656,6 +688,7 @@
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TargetIndexGrid)).EndInit();
+            this.TargetContext.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ResultGrid)).EndInit();
             this.ResumeLayout(false);
 
@@ -710,5 +743,9 @@
         private NJFLib.Controls.CollapsibleSplitter PreviewSplitter;
         private System.Windows.Forms.ToolStripMenuItem DiffMenu;
         private System.Windows.Forms.RichTextBox RichTextBox;
+        private System.Windows.Forms.ContextMenuStrip TargetContext;
+        private System.Windows.Forms.ToolStripMenuItem SelectAllMenu;
+        private System.Windows.Forms.ToolStripMenuItem ReleaseAllMenu;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
     }
 }

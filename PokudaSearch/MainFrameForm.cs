@@ -157,6 +157,13 @@ namespace PokudaSearch {
             }
         }
 
+        /// <summary>
+        /// ヘルプサイト表示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HelpButton_Click(object sender, EventArgs e) {
 
+        }
     }
 }

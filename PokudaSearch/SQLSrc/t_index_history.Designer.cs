@@ -19,7 +19,7 @@ namespace PokudaSearch.SQLSrc {
     // または Visual Studio のようなツールを使用して自動生成されました。
     // メンバーを追加または削除するには、.ResX ファイルを編集して、/str オプションと共に
     // ResGen を実行し直すか、または VS プロジェクトをビルドし直します。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class t_index_history {
@@ -47,7 +47,7 @@ namespace PokudaSearch.SQLSrc {
         }
         
         /// <summary>
-        ///   厳密に型指定されたこのリソース クラスを使用して、すべての検索リソースに対し、
+        ///   すべてについて、現在のスレッドの CurrentUICulture プロパティをオーバーライドします
         ///   現在のスレッドの CurrentUICulture プロパティをオーバーライドします。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -166,6 +166,22 @@ namespace PokudaSearch.SQLSrc {
         internal static string SELECT_NEW_ONE {
             get {
                 return ResourceManager.GetString("SELECT_NEW_ONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   UPDATE [t_index_history] SET 
+        /// [作成完了] = @作成完了
+        ///,[作成時間(分)] = @作成時間(分)
+        ///,[対象ファイル数] = @対象ファイル数
+        ///,[インデックス済み] = @インデックス済み
+        ///,[インデックス対象外] = @インデックス対象外
+        ///,[総バイト数] = @総バイト数
+        ///WHERE [予約No] = @予約No に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string UPDATE {
+            get {
+                return ResourceManager.GetString("UPDATE", resourceCulture);
             }
         }
     }
