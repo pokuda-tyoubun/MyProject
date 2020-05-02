@@ -1,7 +1,0 @@
-CREATE TABLE [m_extensions] (
-[extension] VARCHAR(10) NOT NULL DEFAULT '' UNIQUE,
-[category] VARCHAR(30) NOT NULL DEFAULT '',
-[note] VARCHAR(100) NOT NULL DEFAULT '',
-[enabled] BOOLEAN NOT NULL DEFAULT FALSE,
-PRIMARY KEY([extension])
-);

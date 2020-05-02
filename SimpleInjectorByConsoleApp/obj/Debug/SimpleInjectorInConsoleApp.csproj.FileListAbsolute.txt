@@ -1,8 +1,0 @@
-C:\Workspace\Repo\Git\MyProject\SimpleInjectorByConsoleApp\obj\Debug\SimpleInjectorInConsoleApp.csprojResolveAssemblyReference.cache
-C:\Workspace\Repo\Git\MyProject\SimpleInjectorByConsoleApp\obj\Debug\SimpleInjectorByConsoleApp.exe
-C:\Workspace\Repo\Git\MyProject\SimpleInjectorByConsoleApp\bin\Debug\SimpleInjectorByConsoleApp.exe.config
-C:\Workspace\Repo\Git\MyProject\SimpleInjectorByConsoleApp\bin\Debug\SimpleInjectorByConsoleApp.exe
-C:\Workspace\Repo\Git\MyProject\SimpleInjectorByConsoleApp\bin\Debug\SimpleInjectorByConsoleApp.pdb
-C:\Workspace\Repo\Git\MyProject\SimpleInjectorByConsoleApp\bin\Debug\SimpleInjector.dll
-C:\Workspace\Repo\Git\MyProject\SimpleInjectorByConsoleApp\bin\Debug\SimpleInjector.xml
-C:\Workspace\Repo\Git\MyProject\SimpleInjectorByConsoleApp\obj\Debug\SimpleInjectorByConsoleApp.pdb
