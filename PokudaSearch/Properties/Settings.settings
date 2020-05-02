@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PokudaSearch.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="InitIndexPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SQLITE_DATA_SOURCE" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.\DB\PokudaSearch.db</Value>
+    </Setting>
+    <Setting Name="DiffExe" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files\WinMerge\WinMergeU.exe</Value>
+    </Setting>
+    <Setting Name="MaxSeachResultNum" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="FileSizeLimit" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="BufferSizeLimit" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">512</Value>
+    </Setting>
+    <Setting Name="HelpUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://pokuda-tyoubun.blogspot.com/p/pokudasearch.html</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
