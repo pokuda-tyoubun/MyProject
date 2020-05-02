@@ -168,5 +168,24 @@ namespace PokudaSearch.SQLSrc {
                 return ResourceManager.GetString("SELECT_NEW_ONE", resourceCulture);
             }
         }
+<<<<<<< HEAD
+        
+        /// <summary>
+        ///   UPDATE [t_index_history] SET
+        /// [作成完了] = @作成完了
+        ///,[作成時間(分)] = @作成時間
+        ///,[対象ファイル数] = @対象ファイル数
+        ///,[インデックス済み] = @インデックス済み
+        ///,[インデックス対象外] = @インデックス対象外
+        ///,[総バイト数] = @総バイト数
+        ///WHERE [予約No] = @予約No に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string UPDATE {
+            get {
+                return ResourceManager.GetString("UPDATE", resourceCulture);
+            }
+        }
+=======
+>>>>>>> parent of 169e1d1... 検索インデックスを指定できるように修正
     }
 }

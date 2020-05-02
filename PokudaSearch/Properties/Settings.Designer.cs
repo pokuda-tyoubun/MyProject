@@ -12,7 +12,7 @@ namespace PokudaSearch.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.4.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,25 +25,13 @@ namespace PokudaSearch.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Temp\\PokudaTest")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string InitIndexPath {
             get {
                 return ((string)(this["InitIndexPath"]));
             }
             set {
                 this["InitIndexPath"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("IndexHistory.csv")]
-        public string IndexHistoryCSV {
-            get {
-                return ((string)(this["IndexHistoryCSV"]));
-            }
-            set {
-                this["IndexHistoryCSV"] = value;
             }
         }
         
@@ -68,6 +56,54 @@ namespace PokudaSearch.Properties {
             }
             set {
                 this["DiffExe"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        public int MaxSeachResultNum {
+            get {
+                return ((int)(this["MaxSeachResultNum"]));
+            }
+            set {
+                this["MaxSeachResultNum"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        public int FileSizeLimit {
+            get {
+                return ((int)(this["FileSizeLimit"]));
+            }
+            set {
+                this["FileSizeLimit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("512")]
+        public int BufferSizeLimit {
+            get {
+                return ((int)(this["BufferSizeLimit"]));
+            }
+            set {
+                this["BufferSizeLimit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://pokuda-tyoubun.blogspot.com/p/pokudasearch.html")]
+        public string HelpUrl {
+            get {
+                return ((string)(this["HelpUrl"]));
+            }
+            set {
+                this["HelpUrl"] = value;
             }
         }
     }

@@ -5,8 +5,11 @@ using FxCommonLib.Utils;
 using log4net;
 using System;
 using System.Collections.Generic;
+using System.Deployment.Application;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using TikaOnDotNet.TextExtraction;
@@ -69,10 +72,9 @@ namespace PokudaSearch {
         //HACK AI機能--------------------------------------------------------------
 
 
-        //HACK 検索スコアにBM25Simiralityも選択できるようにする。
-
-
         //HACKインデックス作成高速化----------------------------------------------
+<<<<<<< HEAD
+=======
         //HACK    →GroupDocsで実現できそうだが有料
         //HACK*インデックスをディレクトリ毎に予約化し、マルチスレッドで作成する。（結果をマージしない。）
         //HACK*差分Updateモードを実装する。
@@ -80,10 +82,8 @@ namespace PokudaSearch {
         //HACK*シングルかマルチか上位で分けるように実装
         //HACK ディレクトリが異なればindexを分けてMultiReader(Lucene3ではMultiSearcher)を使うようにする。
             //PokudaSearchTest.MultiReaderTestを参照
+>>>>>>> parent of 169e1d1... 検索インデックスを指定できるように修正
         //HACK Yahoo Googleの検索オプションのUIを真似る(P222も参考に)
-        //HACK 特定のサイトもインデックス対象とする
-        //HACK   →html、xmlはtikaを使う必要があるかも
-        //HACK サーバーサイドでは、DelayClosedIndexSercherを使う。(Session毎にスレッドが違うので問題ない？)
         //HACKインデックス作成高速化----------------------------------------------
 
         //HACK UI高度化----------------------------------------------
@@ -91,7 +91,6 @@ namespace PokudaSearch {
             //HACK Viキーバインド化--------------------------------------------------
             //HACK "/yakyu"で"野球"にフォーカスを当てれるようにする。+"n"で次の野球にできる?
             //HACK or "/"でCtrl+Fにする
-        //HACK 検索キーワードのサジェスチャー機能の作成（過去の入力値で学習？、Solrに機能がある？）
         //HACK コンテキストメニューにGitが表示されないが参考になるかも
         //HACK https://www.codeproject.com/Articles/14707/Dual-Pane-File-Manager
         //HACK CodeProjectでは、以下が参考になりそう（コンテキストメニューのGitが表示されていないが）
@@ -224,6 +223,15 @@ namespace PokudaSearch {
             get { return _mlu; }
         }
 
+
+        public static string GetVersion() {
+            Assembly asm = Assembly.GetEntryAssembly();
+            string path = asm.Location;
+            FileVersionInfo vi = FileVersionInfo.GetVersionInfo(path);
+
+            return vi.FileVersion; 
+        }
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -240,6 +248,7 @@ namespace PokudaSearch {
             _mlu.MessageDictionary.Add("TITLE_ERROR", "エラー");
             _mlu.MessageDictionary.Add("MSG_EXCEL2003_DATA_TRUNCATE", "Excelのバージョンが2003以前なので、257列以降は切り捨てます。");
             _mlu.MessageDictionary.Add("MSG_COLORING_BACKCOLOR", "背景色設定中…");
+            _mlu.MessageDictionary.Add("MSG_DO_STOP", "処理を中断しますか？");
         }
 
         //TODO 配置場所を要検討

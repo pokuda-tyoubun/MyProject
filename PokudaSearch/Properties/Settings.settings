@@ -3,16 +3,25 @@
   <Profiles />
   <Settings>
     <Setting Name="InitIndexPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Temp\PokudaTest</Value>
-    </Setting>
-    <Setting Name="IndexHistoryCSV" Type="System.String" Scope="User">
-      <Value Profile="(Default)">IndexHistory.csv</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="SQLITE_DATA_SOURCE" Type="System.String" Scope="User">
       <Value Profile="(Default)">.\DB\PokudaSearch.db</Value>
     </Setting>
     <Setting Name="DiffExe" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\Program Files\WinMerge\WinMergeU.exe</Value>
+    </Setting>
+    <Setting Name="MaxSeachResultNum" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="FileSizeLimit" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="BufferSizeLimit" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">512</Value>
+    </Setting>
+    <Setting Name="HelpUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://pokuda-tyoubun.blogspot.com/p/pokudasearch.html</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -27,9 +27,7 @@ namespace PokudaSearch {
         /// <summary>ファイルエクスプローラ画面</summary>
         public static FileExplorerForm FileExplorerForm;
         /// <summary>検索画面</summary>
-        public static SimpleSearchForm SimpleSearchForm;
-        /// <summary>インデックス作成画面</summary>
-        public static IndexBuildForm IndexBuildForm;
+        public static SearchForm SearchForm;
 
         /// <summary>SandBox用</summary>
         public static TestForm TestForm;
@@ -39,6 +37,14 @@ namespace PokudaSearch {
         /// </summary>
         public MainFrameForm() {
             InitializeComponent();
+
+#if DEBUG
+# else
+            this.FileExplorerFormButton.Visible = false;
+            this.TagGroup.Visible = false;
+            this.AnalyzeGroup.Visible = false;
+            this.SandBoxGroup.Visible = false;
+#endif
         }
 
         /// <summary>
@@ -47,7 +53,7 @@ namespace PokudaSearch {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void MainFrameForm_Load(object sender, EventArgs e) {
-
+            this.Text = "PokudaSearch Ver." + AppObject.GetVersion();
         }
 
         private void MainFrameForm_Shown(object sender, EventArgs e) {
@@ -93,11 +99,11 @@ namespace PokudaSearch {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SearchFormButton_Click(object sender, EventArgs e) {
-            if (SimpleSearchForm == null) {
-                SimpleSearchForm = new SimpleSearchForm();
-                LoadForm(SimpleSearchForm);
+            if (SearchForm == null) {
+                SearchForm = new SearchForm();
+                LoadForm(SearchForm);
             } else {
-                SimpleSearchForm.Activate();
+                SearchForm.Activate();
             }
         }
 
@@ -107,12 +113,8 @@ namespace PokudaSearch {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void IndexBuildFormButton_Click(object sender, EventArgs e) {
-            if (IndexBuildForm == null) {
-                IndexBuildForm = new IndexBuildForm();
-                LoadForm(IndexBuildForm);
-            } else {
-                IndexBuildForm.Activate();
-            }
+            var ibf = new IndexBuildForm();
+            ibf.ShowDialog();
         }
 
         /// <summary>
@@ -123,11 +125,15 @@ namespace PokudaSearch {
                 //ファイル検索画面
                 //FileExplorerForm = new FileExplorerForm();
                 //LoadForm(FileExplorerForm);
-                SimpleSearchForm = new SimpleSearchForm();
-                LoadForm(SimpleSearchForm);
+                SearchForm = new SearchForm();
+                LoadForm(SearchForm);
             } finally {
             }
         }
+        /// <summary>
+        /// 初期表示画面起動
+        /// </summary>
+        /// <param name="frm"></param>
 
         private void LoadForm(Form frm) {
             frm.MdiParent = this;
@@ -148,7 +154,12 @@ namespace PokudaSearch {
             }
         }
 
-        private void FileExplorerButton_Click(object sender, EventArgs e) {
+        /// <summary>
+        /// ファイルエクスプローラー画面表示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FileExplorerFormButton_Click(object sender, EventArgs e) {
             if (FileExplorerForm == null) {
                 FileExplorerForm = new FileExplorerForm();
                 LoadForm(FileExplorerForm);
@@ -157,6 +168,32 @@ namespace PokudaSearch {
             }
         }
 
+<<<<<<< HEAD
+        /// <summary>
+        /// ヘルプサイト表示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HelpButton1_Click(object sender, EventArgs e) {
+            Process.Start(Properties.Settings.Default.HelpUrl);
+        }
 
+        /// <summary>
+        /// 設定画面を表示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ConfigButton_Click(object sender, EventArgs e) {
+            var cf = new ConfigForm();
+            cf.ShowDialog();
+        }
+
+        private void TagEditButton_Click(object sender, EventArgs e) {
+            var tf = new TagEditForm();
+            tf.ShowDialog();
+        }
+=======
+
+>>>>>>> parent of 169e1d1... 検索インデックスを指定できるように修正
     }
 }

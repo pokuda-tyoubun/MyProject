@@ -124,5 +124,9 @@ namespace PokudaSearch.Views {
                 ChangePath(this.SubExplorer, this.SubPathCombo);
             }
         }
+
+        private void FileExplorerForm_FormClosed(object sender, FormClosedEventArgs e) {
+            MainFrameForm.FileExplorerForm = null;
+        }
     }
 }

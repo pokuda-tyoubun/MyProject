@@ -166,4 +166,20 @@ WHERE [パス] = @パス</value>
 FROM [t_active_index]
 ORDER BY [更新日] DESC</value>
   </data>
+  <data name="SELECT_ONE" xml:space="preserve">
+    <value>SELECT 
+ [パス]
+,[インデックスパス]
+,[モード]
+,[作成時間(分)]
+,[対象ファイル数]
+,[インデックス済み]
+,[インデックス対象外]
+,[総バイト数]
+,[テキスト抽出器]
+,[作成日]
+,[更新日]
+FROM [t_active_index]
+WHERE [パス] = @パス</value>
+  </data>
 </root>

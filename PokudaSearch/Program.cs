@@ -1,13 +1,14 @@
 ﻿using FlexLucene.Analysis;
 using FlexLucene.Analysis.Ja;
 using FlexLucene.Analysis.Ja.Dict;
-using PokudaSearch.IndexBuilder;
+using PokudaSearch.IndexUtil;
 using PokudaSearch.SandBox;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,6 +21,9 @@ namespace PokudaSearch {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            //x86,x64 dllの切替処理
+            AppDomain.CurrentDomain.AssemblyResolve += Resolver;
 
             //起動時に初期処理
             Initialize();
@@ -72,6 +76,23 @@ namespace PokudaSearch {
             //   これには、長い名詞の複合化プロセスが含まれ、同義語としての完全な複合トークンも含まれます。
 
             //AppObject.AppAnalyzer = new JapaneseAnalyzer();
+        }
+        
+        private static Assembly Resolver(object sender, ResolveEventArgs args) {
+            if (args.Name.StartsWith("CefSharp")) {
+                string assemblyName = args.Name.Split(new[] { ',' }, 2)[0] + ".dll";
+                string path = Directory.GetParent(Application.ExecutablePath).FullName;
+                string archSpecificPath = Path.Combine(path,
+                                                       Environment.Is64BitProcess ? "x64" : "x86",
+                                                       assemblyName);
+                AppObject.Logger.Info("CefSharp path:" + archSpecificPath);
+                //string archSpecificPath = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase,
+                //                                       Environment.Is64BitProcess ? "x64" : "x86",
+                //                                       assemblyName);
+
+                return File.Exists(archSpecificPath) ? Assembly.LoadFile(archSpecificPath) : null;
+            }
+            return null;
         }
     }
 }

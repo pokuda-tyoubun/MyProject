@@ -173,8 +173,10 @@
             this.Controls.Add(this.collapsibleSplitter3);
             this.Controls.Add(this.RightPanel);
             this.Controls.Add(this.MainPanel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FileExplorerForm";
             this.Text = "エクスプローラ";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FileExplorerForm_FormClosed);
             this.Shown += new System.EventHandler(this.FileExplorerForm_Shown);
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();

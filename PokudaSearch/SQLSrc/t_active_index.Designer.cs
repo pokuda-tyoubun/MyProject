@@ -126,5 +126,27 @@ namespace PokudaSearch.SQLSrc {
                 return ResourceManager.GetString("SELECT", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   SELECT 
+        /// [パス]
+        ///,[インデックスパス]
+        ///,[モード]
+        ///,[作成時間(分)]
+        ///,[対象ファイル数]
+        ///,[インデックス済み]
+        ///,[インデックス対象外]
+        ///,[総バイト数]
+        ///,[テキスト抽出器]
+        ///,[作成日]
+        ///,[更新日]
+        ///FROM [t_active_index]
+        ///WHERE [パス] = @パス に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SELECT_ONE {
+            get {
+                return ResourceManager.GetString("SELECT_ONE", resourceCulture);
+            }
+        }
     }
 }

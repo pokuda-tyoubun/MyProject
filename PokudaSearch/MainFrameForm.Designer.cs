@@ -32,15 +32,24 @@
             this.ribbonBottomToolBar1 = new C1.Win.C1Ribbon.RibbonBottomToolBar();
             this.ribbonConfigToolBar1 = new C1.Win.C1Ribbon.RibbonConfigToolBar();
             this.ribbonQat1 = new C1.Win.C1Ribbon.RibbonQat();
-            this.ribbonTab1 = new C1.Win.C1Ribbon.RibbonTab();
-            this.ribbonGroup1 = new C1.Win.C1Ribbon.RibbonGroup();
-            this.FileExplorerButton = new C1.Win.C1Ribbon.RibbonButton();
+            this.MainTab = new C1.Win.C1Ribbon.RibbonTab();
+            this.FullTextSearchGroup = new C1.Win.C1Ribbon.RibbonGroup();
+            this.FileExplorerFormButton = new C1.Win.C1Ribbon.RibbonButton();
             this.SearchFormButton = new C1.Win.C1Ribbon.RibbonButton();
             this.IndexBuildFormButton = new C1.Win.C1Ribbon.RibbonButton();
-            this.ribbonGroup2 = new C1.Win.C1Ribbon.RibbonGroup();
+            this.TagGroup = new C1.Win.C1Ribbon.RibbonGroup();
+            this.TagEditButton = new C1.Win.C1Ribbon.RibbonButton();
+            this.AnalyzeGroup = new C1.Win.C1Ribbon.RibbonGroup();
             this.ribbonButton1 = new C1.Win.C1Ribbon.RibbonButton();
             this.SandBoxGroup = new C1.Win.C1Ribbon.RibbonGroup();
             this.TestFormButton = new C1.Win.C1Ribbon.RibbonButton();
+<<<<<<< HEAD
+            this.ConfigGroup = new C1.Win.C1Ribbon.RibbonGroup();
+            this.ConfigButton = new C1.Win.C1Ribbon.RibbonButton();
+            this.HelpGroup = new C1.Win.C1Ribbon.RibbonGroup();
+            this.HelpButton1 = new C1.Win.C1Ribbon.RibbonButton();
+=======
+>>>>>>> parent of 169e1d1... 検索インデックスを指定できるように修正
             this.ribbonTopToolBar1 = new C1.Win.C1Ribbon.RibbonTopToolBar();
             this.MainStatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainRibbon)).BeginInit();
@@ -78,7 +87,7 @@
             this.MainRibbon.Name = "MainRibbon";
             this.MainRibbon.QatHolder = this.ribbonQat1;
             this.MainRibbon.Size = new System.Drawing.Size(1043, 153);
-            this.MainRibbon.Tabs.Add(this.ribbonTab1);
+            this.MainRibbon.Tabs.Add(this.MainTab);
             this.MainRibbon.TopToolBarHolder = this.ribbonTopToolBar1;
             this.MainRibbon.VisualStyle = C1.Win.C1Ribbon.VisualStyle.Office2010Black;
             // 
@@ -98,29 +107,40 @@
             // 
             this.ribbonQat1.Name = "ribbonQat1";
             // 
-            // ribbonTab1
+            // MainTab
             // 
+<<<<<<< HEAD
+            this.MainTab.Groups.Add(this.FullTextSearchGroup);
+            this.MainTab.Groups.Add(this.TagGroup);
+            this.MainTab.Groups.Add(this.AnalyzeGroup);
+            this.MainTab.Groups.Add(this.SandBoxGroup);
+            this.MainTab.Groups.Add(this.ConfigGroup);
+            this.MainTab.Groups.Add(this.HelpGroup);
+            this.MainTab.Name = "MainTab";
+            this.MainTab.Text = "メイン";
+=======
             this.ribbonTab1.Groups.Add(this.ribbonGroup1);
             this.ribbonTab1.Groups.Add(this.ribbonGroup2);
             this.ribbonTab1.Groups.Add(this.SandBoxGroup);
             this.ribbonTab1.Name = "ribbonTab1";
             this.ribbonTab1.Text = "タブ";
+>>>>>>> parent of 169e1d1... 検索インデックスを指定できるように修正
             // 
-            // ribbonGroup1
+            // FullTextSearchGroup
             // 
-            this.ribbonGroup1.Items.Add(this.FileExplorerButton);
-            this.ribbonGroup1.Items.Add(this.SearchFormButton);
-            this.ribbonGroup1.Items.Add(this.IndexBuildFormButton);
-            this.ribbonGroup1.Name = "ribbonGroup1";
-            this.ribbonGroup1.Text = "全文検索";
+            this.FullTextSearchGroup.Items.Add(this.FileExplorerFormButton);
+            this.FullTextSearchGroup.Items.Add(this.SearchFormButton);
+            this.FullTextSearchGroup.Items.Add(this.IndexBuildFormButton);
+            this.FullTextSearchGroup.Name = "FullTextSearchGroup";
+            this.FullTextSearchGroup.Text = "全文検索";
             // 
-            // FileExplorerButton
+            // FileExplorerFormButton
             // 
-            this.FileExplorerButton.LargeImage = global::PokudaSearch.Properties.Resources.Explorer24;
-            this.FileExplorerButton.Name = "FileExplorerButton";
-            this.FileExplorerButton.SmallImage = global::PokudaSearch.Properties.Resources.Explorer24;
-            this.FileExplorerButton.Text = "エクスプローラ";
-            this.FileExplorerButton.Click += new System.EventHandler(this.FileExplorerButton_Click);
+            this.FileExplorerFormButton.LargeImage = global::PokudaSearch.Properties.Resources.Explorer24;
+            this.FileExplorerFormButton.Name = "FileExplorerFormButton";
+            this.FileExplorerFormButton.SmallImage = global::PokudaSearch.Properties.Resources.Explorer24;
+            this.FileExplorerFormButton.Text = "エクスプローラ";
+            this.FileExplorerFormButton.Click += new System.EventHandler(this.FileExplorerFormButton_Click);
             // 
             // SearchFormButton
             // 
@@ -138,11 +158,24 @@
             this.IndexBuildFormButton.Text = "インデックス作成";
             this.IndexBuildFormButton.Click += new System.EventHandler(this.IndexBuildFormButton_Click);
             // 
-            // ribbonGroup2
+            // TagGroup
             // 
-            this.ribbonGroup2.Items.Add(this.ribbonButton1);
-            this.ribbonGroup2.Name = "ribbonGroup2";
-            this.ribbonGroup2.Text = "分析";
+            this.TagGroup.Items.Add(this.TagEditButton);
+            this.TagGroup.Name = "TagGroup";
+            this.TagGroup.Text = "タグ編集";
+            // 
+            // TagEditButton
+            // 
+            this.TagEditButton.Name = "TagEditButton";
+            this.TagEditButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("TagEditButton.SmallImage")));
+            this.TagEditButton.Text = "ボタン";
+            this.TagEditButton.Click += new System.EventHandler(this.TagEditButton_Click);
+            // 
+            // AnalyzeGroup
+            // 
+            this.AnalyzeGroup.Items.Add(this.ribbonButton1);
+            this.AnalyzeGroup.Name = "AnalyzeGroup";
+            this.AnalyzeGroup.Text = "分析";
             // 
             // ribbonButton1
             // 
@@ -164,6 +197,35 @@
             this.TestFormButton.Text = "TestForm";
             this.TestFormButton.Click += new System.EventHandler(this.TestFormButton_Click);
             // 
+<<<<<<< HEAD
+            // ConfigGroup
+            // 
+            this.ConfigGroup.Items.Add(this.ConfigButton);
+            this.ConfigGroup.Name = "ConfigGroup";
+            this.ConfigGroup.Text = "設定";
+            // 
+            // ConfigButton
+            // 
+            this.ConfigButton.LargeImage = ((System.Drawing.Image)(resources.GetObject("ConfigButton.LargeImage")));
+            this.ConfigButton.Name = "ConfigButton";
+            this.ConfigButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("ConfigButton.SmallImage")));
+            this.ConfigButton.Click += new System.EventHandler(this.ConfigButton_Click);
+            // 
+            // HelpGroup
+            // 
+            this.HelpGroup.Items.Add(this.HelpButton1);
+            this.HelpGroup.Name = "HelpGroup";
+            this.HelpGroup.Text = "ヘルプ";
+            // 
+            // HelpButton1
+            // 
+            this.HelpButton1.LargeImage = ((System.Drawing.Image)(resources.GetObject("HelpButton1.LargeImage")));
+            this.HelpButton1.Name = "HelpButton1";
+            this.HelpButton1.SmallImage = ((System.Drawing.Image)(resources.GetObject("HelpButton1.SmallImage")));
+            this.HelpButton1.Click += new System.EventHandler(this.HelpButton1_Click);
+            // 
+=======
+>>>>>>> parent of 169e1d1... 検索インデックスを指定できるように修正
             // ribbonTopToolBar1
             // 
             this.ribbonTopToolBar1.Name = "ribbonTopToolBar1";
@@ -199,15 +261,24 @@
         private C1.Win.C1Ribbon.RibbonBottomToolBar ribbonBottomToolBar1;
         private C1.Win.C1Ribbon.RibbonConfigToolBar ribbonConfigToolBar1;
         private C1.Win.C1Ribbon.RibbonQat ribbonQat1;
-        private C1.Win.C1Ribbon.RibbonTab ribbonTab1;
-        private C1.Win.C1Ribbon.RibbonGroup ribbonGroup1;
+        private C1.Win.C1Ribbon.RibbonTab MainTab;
+        private C1.Win.C1Ribbon.RibbonGroup FullTextSearchGroup;
         private C1.Win.C1Ribbon.RibbonTopToolBar ribbonTopToolBar1;
         private C1.Win.C1Ribbon.RibbonButton SearchFormButton;
         private C1.Win.C1Ribbon.RibbonButton IndexBuildFormButton;
         private C1.Win.C1Ribbon.RibbonGroup SandBoxGroup;
         private C1.Win.C1Ribbon.RibbonButton TestFormButton;
-        private C1.Win.C1Ribbon.RibbonButton FileExplorerButton;
-        private C1.Win.C1Ribbon.RibbonGroup ribbonGroup2;
+        private C1.Win.C1Ribbon.RibbonButton FileExplorerFormButton;
+        private C1.Win.C1Ribbon.RibbonGroup AnalyzeGroup;
         private C1.Win.C1Ribbon.RibbonButton ribbonButton1;
+<<<<<<< HEAD
+        private C1.Win.C1Ribbon.RibbonGroup HelpGroup;
+        private C1.Win.C1Ribbon.RibbonButton HelpButton1;
+        private C1.Win.C1Ribbon.RibbonButton ConfigButton;
+        private C1.Win.C1Ribbon.RibbonGroup ConfigGroup;
+        private C1.Win.C1Ribbon.RibbonGroup TagGroup;
+        private C1.Win.C1Ribbon.RibbonButton TagEditButton;
+=======
+>>>>>>> parent of 169e1d1... 検索インデックスを指定できるように修正
     }
 }

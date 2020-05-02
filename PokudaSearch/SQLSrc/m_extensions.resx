@@ -119,9 +119,10 @@
   </resheader>
   <data name="SELECT_ALL" xml:space="preserve">
     <value>SELECT 
- [extension]
+  [extension]
+, [category]
 , [note] 
 FROM [m_extensions]
-WHERE (1 = 1)</value>
+WHERE [enabled] = true</value>
   </data>
 </root>

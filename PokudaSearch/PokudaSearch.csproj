@@ -1,6 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\CefSharp.WinForms.79.1.350\build\CefSharp.WinForms.props" Condition="Exists('packages\CefSharp.WinForms.79.1.350\build\CefSharp.WinForms.props')" />
+  <Import Project="packages\CefSharp.Common.79.1.350\build\CefSharp.Common.props" Condition="Exists('packages\CefSharp.Common.79.1.350\build\CefSharp.Common.props')" />
+  <Import Project="packages\cef.redist.x86.79.1.35\build\cef.redist.x86.props" Condition="Exists('packages\cef.redist.x86.79.1.35\build\cef.redist.x86.props')" />
+  <Import Project="packages\cef.redist.x64.79.1.35\build\cef.redist.x64.props" Condition="Exists('packages\cef.redist.x64.79.1.35\build\cef.redist.x64.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
+  </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -9,11 +16,14 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PokudaSearch</RootNamespace>
     <AssemblyName>PokudaSearch</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>5ff34036</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">.\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+    <CefSharpAnyCpuSupport>true</CefSharpAnyCpuSupport>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +43,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -57,6 +68,15 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Pokuda64.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>PokudaPKey.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="C1.Win.4, Version=4.0.20173.286, Culture=neutral, PublicKeyToken=944ae1ea0e47ca04, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -68,6 +88,11 @@
     <Reference Include="C1.Win.C1Input.4, Version=4.0.20173.286, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1Ribbon.4, Version=4.0.20173.286, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
     <Reference Include="C1.Win.C1SuperTooltip.4, Version=4.0.20173.286, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.C1TileControl.4, Version=4.0.20173.286, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL" />
+    <Reference Include="ExcelApi, Version=1.7.3.0, Culture=neutral, PublicKeyToken=26cf6d85ba68fa54, processorArchitecture=MSIL">
+      <HintPath>packages\NetOffice.Excel.1.7.4.4\lib\net45\ExcelApi.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
     <Reference Include="FlexLucene, Version=6.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Lib\FlexLucene.dll</HintPath>
@@ -206,6 +231,9 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>True</Private>
     </Reference>
+    <Reference Include="policy.2.0.taglib-sharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL">
+      <HintPath>packages\taglib.2.1.0.0\lib\policy.2.0.taglib-sharp.dll</HintPath>
+    </Reference>
     <Reference Include="PowerPointApi, Version=1.7.3.0, Culture=neutral, PublicKeyToken=2aedeb5ce89d4005, processorArchitecture=MSIL">
       <HintPath>packages\NetOffice.PowerPoint.1.7.4.4\lib\net45\PowerPointApi.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -225,6 +253,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="taglib-sharp, Version=2.1.0.0, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL">
+      <HintPath>packages\taglib.2.1.0.0\lib\taglib-sharp.dll</HintPath>
+    </Reference>
     <Reference Include="TikaOnDotNet, Version=1.17.1.0, Culture=neutral, PublicKeyToken=fd70f0f601f583f3, processorArchitecture=MSIL">
       <HintPath>packages\TikaOnDotnet.TextExtractor.1.17.1\lib\TikaOnDotNet.dll</HintPath>
       <Private>True</Private>
@@ -238,6 +269,9 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>True</Private>
     </Reference>
+    <Reference Include="WebDriver, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Selenium.WebDriver.3.141.0\lib\net45\WebDriver.dll</HintPath>
+    </Reference>
     <Reference Include="WordApi, Version=1.7.3.0, Culture=neutral, PublicKeyToken=dd9255e6bcd130c8, processorArchitecture=MSIL">
       <HintPath>packages\NetOffice.Word.1.7.4.4\lib\net45\WordApi.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -247,8 +281,14 @@
   <ItemGroup>
     <Compile Include="AppObject.cs" />
     <Compile Include="Consts.cs" />
-    <Compile Include="IndexBuilder\LuceneIndexBuilder.cs" />
-    <Compile Include="IndexBuilder\ProgressReport.cs" />
+    <Compile Include="IndexUtil\LuceneIndexBuilder.cs" />
+    <Compile Include="IndexUtil\LuceneIndexReaderUtil.cs" />
+    <Compile Include="IndexUtil\ProgressReport.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SQLSrc\t_active_index.Designer.cs">
       <DependentUpon>t_active_index.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -264,17 +304,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>m_extensions.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\TagEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TagEditForm.Designer.cs">
+      <DependentUpon>TagEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ConfigForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ConfigForm.Designer.cs">
+      <DependentUpon>ConfigForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\FileExplorerForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\FileExplorerForm.Designer.cs">
       <DependentUpon>FileExplorerForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\IndexBuilderConfigForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\IndexBuilderConfigForm.Designer.cs">
-      <DependentUpon>IndexBuilderConfigForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\IndexBuildForm.cs">
       <SubType>Form</SubType>
@@ -298,12 +344,13 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\SimpleSearchForm.cs">
+    <Compile Include="Views\SearchForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\SimpleSearchForm.Designer.cs">
-      <DependentUpon>SimpleSearchForm.cs</DependentUpon>
+    <Compile Include="Views\SearchForm.Designer.cs">
+      <DependentUpon>SearchForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="WebDriver\MP4WebDriver.cs" />
     <EmbeddedResource Include="SQLSrc\t_active_index.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>t_active_index.Designer.cs</LastGenOutput>
@@ -316,11 +363,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>m_extensions.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\TagEditForm.resx">
+      <DependentUpon>TagEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ConfigForm.resx">
+      <DependentUpon>ConfigForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\FileExplorerForm.resx">
       <DependentUpon>FileExplorerForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\IndexBuilderConfigForm.resx">
-      <DependentUpon>IndexBuilderConfigForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\IndexBuildForm.resx">
       <DependentUpon>IndexBuildForm.cs</DependentUpon>
@@ -334,16 +384,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <EmbeddedResource Include="Views\SimpleSearchForm.resx">
-      <DependentUpon>SimpleSearchForm.cs</DependentUpon>
+    <EmbeddedResource Include="Views\SearchForm.resx">
+      <DependentUpon>SearchForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.manifest">
       <SubType>Designer</SubType>
@@ -352,10 +397,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Doc\機能一覧＆NOTE.xlsx" />
+    <None Include="Installer\PokudaCert.pfx" />
     <None Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="PokudaPKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -389,11 +436,14 @@
     <Content Include="DB\CREATE_t_active_index.sql" />
     <Content Include="Doc\Skipされた拡張子.txt" />
     <None Include="Resources\EditClear24.bmp" />
+    <Content Include="Installer\Installer.iss" />
+    <None Include="Resources\Pokuda64.ico" />
+    <Content Include="Pokuda64.ico" />
+    <None Include="Resources\Nose128.ico" />
     <Content Include="UserDictionary.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\System.Data.SQLite.Core.1.0.110.0\build\net45\System.Data.SQLite.Core.targets" Condition="Exists('packages\System.Data.SQLite.Core.1.0.110.0\build\net45\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -402,8 +452,18 @@
     </PropertyGroup>
     <Error Condition="!Exists('packages\System.Data.SQLite.Core.1.0.110.0\build\net45\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.Data.SQLite.Core.1.0.110.0\build\net45\System.Data.SQLite.Core.targets'))" />
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('packages\cef.redist.x64.79.1.35\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\cef.redist.x64.79.1.35\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('packages\cef.redist.x86.79.1.35\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\cef.redist.x86.79.1.35\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('packages\CefSharp.Common.79.1.350\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.Common.79.1.350\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('packages\CefSharp.Common.79.1.350\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.Common.79.1.350\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('packages\CefSharp.WinForms.79.1.350\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.WinForms.79.1.350\build\CefSharp.WinForms.props'))" />
+    <Error Condition="!Exists('packages\CefSharp.WinForms.79.1.350\build\CefSharp.WinForms.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.WinForms.79.1.350\build\CefSharp.WinForms.targets'))" />
+    <Error Condition="!Exists('packages\Selenium.Chrome.WebDriver.81.0.0\build\Selenium.Chrome.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Selenium.Chrome.WebDriver.81.0.0\build\Selenium.Chrome.WebDriver.targets'))" />
   </Target>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Import Project="packages\CefSharp.Common.79.1.350\build\CefSharp.Common.targets" Condition="Exists('packages\CefSharp.Common.79.1.350\build\CefSharp.Common.targets')" />
+  <Import Project="packages\CefSharp.WinForms.79.1.350\build\CefSharp.WinForms.targets" Condition="Exists('packages\CefSharp.WinForms.79.1.350\build\CefSharp.WinForms.targets')" />
+  <Import Project="packages\Selenium.Chrome.WebDriver.81.0.0\build\Selenium.Chrome.WebDriver.targets" Condition="Exists('packages\Selenium.Chrome.WebDriver.81.0.0\build\Selenium.Chrome.WebDriver.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
