@@ -531,7 +531,7 @@ namespace PokudaSearch.Views {
             LoadActiveIndex(this.ActiveIndexGrid);
             this.TargetDirText.Text = Properties.Settings.Default.InitIndexPath;
 
-            var logViewer = new TextBoxAppender();
+            var logViewer = new TextBoxAppenderEx();
             logViewer.TextBoxName = this.Log4NetTextBox.Name;
             logViewer.FormName = this.Name;
             logViewer.PrefixFilter = "IndexingThread1";
@@ -703,6 +703,11 @@ namespace PokudaSearch.Views {
                 TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
                 this.Close();
             }
+        }
+
+        private void AddIndexButton_Click(object sender, EventArgs e) {
+            //インデックス判定
+            //t_active_indexに追加
         }
     }
 }

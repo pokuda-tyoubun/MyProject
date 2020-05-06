@@ -38,7 +38,7 @@
             this.SearchFormButton = new C1.Win.C1Ribbon.RibbonButton();
             this.IndexBuildFormButton = new C1.Win.C1Ribbon.RibbonButton();
             this.TagGroup = new C1.Win.C1Ribbon.RibbonGroup();
-            this.TagEditButton = new C1.Win.C1Ribbon.RibbonButton();
+            this.TagEditFormButton = new C1.Win.C1Ribbon.RibbonButton();
             this.AnalyzeGroup = new C1.Win.C1Ribbon.RibbonGroup();
             this.ribbonButton1 = new C1.Win.C1Ribbon.RibbonButton();
             this.SandBoxGroup = new C1.Win.C1Ribbon.RibbonGroup();
@@ -149,16 +149,16 @@
             // 
             // TagGroup
             // 
-            this.TagGroup.Items.Add(this.TagEditButton);
+            this.TagGroup.Items.Add(this.TagEditFormButton);
             this.TagGroup.Name = "TagGroup";
             this.TagGroup.Text = "タグ編集";
             // 
-            // TagEditButton
+            // TagEditFormButton
             // 
-            this.TagEditButton.Name = "TagEditButton";
-            this.TagEditButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("TagEditButton.SmallImage")));
-            this.TagEditButton.Text = "ボタン";
-            this.TagEditButton.Click += new System.EventHandler(this.TagEditButton_Click);
+            this.TagEditFormButton.Name = "TagEditFormButton";
+            this.TagEditFormButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("TagEditFormButton.SmallImage")));
+            this.TagEditFormButton.Text = "ボタン";
+            this.TagEditFormButton.Click += new System.EventHandler(this.TagEditFormButton_Click);
             // 
             // AnalyzeGroup
             // 
@@ -262,6 +262,6 @@
         private C1.Win.C1Ribbon.RibbonButton ConfigButton;
         private C1.Win.C1Ribbon.RibbonGroup ConfigGroup;
         private C1.Win.C1Ribbon.RibbonGroup TagGroup;
-        private C1.Win.C1Ribbon.RibbonButton TagEditButton;
+        private C1.Win.C1Ribbon.RibbonButton TagEditFormButton;
     }
 }

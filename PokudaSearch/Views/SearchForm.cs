@@ -245,7 +245,7 @@ namespace PokudaSearch.Views {
                 string val = StringUtil.NullToBlank(this.ResultGrid[e.Row, e.Col]);
                 if (e.Bounds.Width > 0 &&
                     e.Bounds.Height > 0 &&
-                    val.IndexOf("<B>") >= 0 &&
+                    val.IndexOf("<b>") >= 0 &&
                     _htmlLabelList.Count > 0) {
                     var htmlLabel = _htmlLabelList[e.Row - this.ResultGrid.Rows.Fixed];
                     htmlLabel.DrawToGraphics(e.Graphics, e.Bounds);
@@ -766,7 +766,7 @@ namespace PokudaSearch.Views {
 
             // Highlighter 作成
             // Formatter と Scorer を与える
-            Formatter formatter = new SimpleHTMLFormatter("<FONT color=\"red\"><B>", "</B></FONT>");
+            Formatter formatter = new SimpleHTMLFormatter("<font color=\"red\"><b>", "</b></font>");
             QueryScorer scorer = new QueryScorer(query);
             Highlighter highlighter = new Highlighter(formatter, scorer);
             // Fragmenter には SimpleSpanFragmenter を指定

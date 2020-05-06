@@ -39,7 +39,8 @@ namespace PokudaSearch {
 
             //SQLite接続文字列作成
             var builder = new System.Data.SQLite.SQLiteConnectionStringBuilder {
-                DataSource= Properties.Settings.Default.SQLITE_DATA_SOURCE,
+                DataSource= Directory.GetParent(Application.ExecutablePath).FullName + 
+                            Properties.Settings.Default.SQLITE_DATA_SOURCE,
                 Version = 3,
                 LegacyFormat = false,
                 //PageSize = 8192,

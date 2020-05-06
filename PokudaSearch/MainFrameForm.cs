@@ -187,7 +187,7 @@ namespace PokudaSearch {
             cf.ShowDialog();
         }
 
-        private void TagEditButton_Click(object sender, EventArgs e) {
+        private void TagEditFormButton_Click(object sender, EventArgs e) {
             var tf = new TagEditForm();
             tf.ShowDialog();
         }

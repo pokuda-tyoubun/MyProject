@@ -37,7 +37,7 @@ namespace PokudaSearch.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\DB\\PokudaSearch.db")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\DB\\PokudaSearch.db")]
         public string SQLITE_DATA_SOURCE {
             get {
                 return ((string)(this["SQLITE_DATA_SOURCE"]));
