@@ -33,7 +33,9 @@ namespace PokudaSearch.IndexUtil {
             [EnumLabel("作成")]
             Create = 0,
             [EnumLabel("更新")]
-            Update
+            Update,
+            [EnumLabel("外部参照")]
+            External
         }
         #region IndexField
         public const string Path = "Path";
@@ -156,13 +158,11 @@ namespace PokudaSearch.IndexUtil {
         /// <summary>
         /// インデックス作成
         /// </summary>
-        /// <param name="analyzer"></param>
         /// <param name="rootPath"></param>
         /// <param name="targetDir"></param>
         /// <param name="progress"></param>
         /// <param name="txtExtractMode"></param>
         public async static void CreateIndexBySingleThread(
-            Analyzer analyzer,
             string rootPath,
             string targetDir,
             IProgress<ProgressReport> progress,
@@ -173,7 +173,7 @@ namespace PokudaSearch.IndexUtil {
             try {
                 _txtExtractMode = txtExtractMode;
 
-                var worker = await CreateIndexAsync(analyzer, rootPath, targetDir, progress, orgIndexStorePath);
+                var worker = await CreateIndexAsync(rootPath, targetDir, progress, orgIndexStorePath);
 
                 AppObject.Logger.Info("インデックス構築完了");
             } catch (Exception e) {
@@ -212,18 +212,16 @@ namespace PokudaSearch.IndexUtil {
         /// <summary>
         /// インデックス作成
         /// </summary>
-        /// <param name="analyzer"></param>
         /// <param name="rootPath"></param>
         /// <param name="targetDir"></param>
         /// <param name="progress"></param>
         /// <returns></returns>
         public static Task<LuceneIndexBuilder> CreateIndexAsync(
-            Analyzer analyzer,
             string rootPath,
             string targetDir,
             IProgress<ProgressReport> progress,
             string orgIndexStorePath) {
-            return Task.Run<LuceneIndexBuilder>(() => CreateSingle(analyzer, rootPath, targetDir, progress, orgIndexStorePath));
+            return Task.Run<LuceneIndexBuilder>(() => CreateSingle(rootPath, targetDir, progress, orgIndexStorePath));
         }
         //public static Task<LuceneIndexBuilder> UpdateIndexAsync(
         //    Analyzer analyzer,
@@ -297,13 +295,11 @@ namespace PokudaSearch.IndexUtil {
         /// <summary>
         /// インデックス作成
         /// </summary>
-        /// <param name="analyzer"></param>
         /// <param name="rootPath"></param>
         /// <param name="targetDir"></param>
         /// <param name="progress"></param>
         /// <returns></returns>
         private static LuceneIndexBuilder CreateSingle(
-            Analyzer analyzer,
             string rootPath,
             string targetDir,
             IProgress<ProgressReport> progress,
@@ -334,7 +330,6 @@ namespace PokudaSearch.IndexUtil {
             var options = new ParallelOptions() { MaxDegreeOfParallelism = 1 };
             Parallel.Invoke(options,
                 () => instance.CreateFSIndex(
-                    analyzer,
                     //rootPath + BuildDirName + "1",
                     _indexStorePath,
                     targetFileList,
@@ -367,13 +362,12 @@ namespace PokudaSearch.IndexUtil {
         /// </summary>
         /// <param name="args"></param>
         internal void CreateFSIndex(
-            Analyzer analyzer,
             string buildDirPath,
             List<FileInfo> targetFileList,
             IProgress<ProgressReport> progress,
             string threadName) {
 
-            IndexWriterConfig config = new IndexWriterConfig(analyzer);
+            IndexWriterConfig config = new IndexWriterConfig(AppObject.AppAnalyzer);
             IndexWriter indexWriter = null;
             FSDirectory indexBuildDir = null;
             Dictionary<string, DocInfo> docDic = null;
@@ -467,6 +461,7 @@ namespace PokudaSearch.IndexUtil {
                 }
                 throw e;
             } finally {
+                indexBuildDir.Close();
                 if (indexWriter != null) {
                     //クローズ時にIndexファイルがフラッシュされる
                     indexWriter.Close();

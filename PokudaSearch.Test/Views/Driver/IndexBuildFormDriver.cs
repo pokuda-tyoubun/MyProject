@@ -1,4 +1,5 @@
-﻿using Codeer.Friendly.CCC.Util;
+﻿using Codeer.Friendly;
+using Codeer.Friendly.CCC.Util;
 using Codeer.Friendly.Dynamic;
 using Codeer.Friendly.Windows;
 using Codeer.Friendly.Windows.Grasp;
@@ -12,6 +13,8 @@ using System.Threading.Tasks;
 namespace PokudaSearch.Test.Views.Driver {
     public class IndexBuildFormDriver {
         public WindowControl Window { get; private set; }
+
+        public Async Async { get; private set; }
         public FormsTextBox TargetDirText { get; private set; }
         public FormsButton ReferenceButton { get; private set; }
 
@@ -21,8 +24,10 @@ namespace PokudaSearch.Test.Views.Driver {
         public FwFlexGridEx ActiveIndexGrid { get; private set; }
         public FwFlexGridEx IndexHistoryGrid { get; private set; }
 
-        public IndexBuildFormDriver(WindowControl window) {
+        public IndexBuildFormDriver(WindowControl window, Async async) {
             Window = window;
+            Async = async;
+
             TargetDirText = new FormsTextBox(Window.Dynamic().TargetDirText);
             ReferenceButton = new FormsButton(Window.Dynamic().ReferenceButton);
             UpdateIndexButton = new FormsButton(Window.Dynamic().UpdateIndexButton);
@@ -31,5 +36,14 @@ namespace PokudaSearch.Test.Views.Driver {
             IndexHistoryGrid = new FwFlexGridEx(Window.Dynamic().IndexHistoryGrid);
         }
 
+
+        public void Close() {
+            Window.Close();
+            if(Async == null) {
+                Window.WaitForDestroy();
+                return;
+            }
+            Async.WaitForCompletion();
+        }
     }
 }

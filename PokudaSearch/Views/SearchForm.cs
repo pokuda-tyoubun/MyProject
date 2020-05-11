@@ -84,6 +84,8 @@ namespace PokudaSearch.Views {
         private List<string> _selectedIndexList = null;
         /// <summary>プレビュー用ブラウザ</summary>
         private ChromiumWebBrowser _chromeBrowser;
+        /// <summary>リモートパスの辞書</summary>
+        private Dictionary<string, string> _remotePathDic;
         #endregion MemberVariables
 
         #region Constractors
@@ -97,7 +99,7 @@ namespace PokudaSearch.Views {
             CreateHeader();
 
             TargetIndexGridControl = this.TargetIndexGrid;
-            IndexBuildForm.LoadActiveIndex(this.TargetIndexGrid, true);
+            IndexBuildForm.LoadActiveIndex(AppObject.ConnectString, this.TargetIndexGrid, appendCheckBox:true);
 
             //チェックボックス固定
             this.TargetIndexGrid.Cols.Frozen = 1;
@@ -660,6 +662,22 @@ namespace PokudaSearch.Views {
 
             return ret;
         }
+        private Dictionary<string, string> CreateSelectedRemotePathDic() {
+            var ret = new Dictionary<string, string>();
+
+            for (int i = 1; i < this.TargetIndexGrid.Rows.Count; i++) {
+                Row r = this.TargetIndexGrid.Rows[i];
+                if (bool.Parse(StringUtil.NullToBlank(r[TargetCheckCol]))) {
+                    string remotePath = StringUtil.NullToBlank(r[(int)IndexBuildForm.ActiveIndexColIdx.RemotePath + 2]);
+                    string localPath = StringUtil.NullToBlank(r[(int)IndexBuildForm.ActiveIndexColIdx.LocalPath + 2]);
+                    if (remotePath != "" && !ret.ContainsKey(remotePath)) {
+                        ret.Add(remotePath, localPath);
+                    }
+                }
+            }
+
+            return ret;
+        }
 
         /// <summary>
         /// 検索
@@ -673,6 +691,7 @@ namespace PokudaSearch.Views {
             }
 
             _selectedIndexList = GetSelectedIndex();
+            _remotePathDic = CreateSelectedRemotePathDic();
             if (_selectedIndexList.Count == 0) {
                 MessageBox.Show("検索対象インデックスを選択して下さい。",
                     AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -702,13 +721,12 @@ namespace PokudaSearch.Views {
             TopDocs docs = idxSearcher.Search(allQuery.Build(), MaxSeachResultNum);
 
             //HACK DataTableに格納してLinqで絞り込む？
-
+            
             Highlighter hi = CreateHilighter(contentBqb.Build());
 
             try {
                 this.ResultGrid.Rows.Count = RowHeaderCount;
                 _htmlLabelList.Clear();
-
                 this.ResultGrid.Redraw = false;
 
                 AppObject.Logger.Info("length of top docs: " + docs.ScoreDocs.Length);
@@ -718,6 +736,7 @@ namespace PokudaSearch.Views {
                 foreach (ScoreDoc doc in docs.ScoreDocs) {
                     Document thisDoc = idxSearcher.Doc(doc.Doc);
                     string fullPath = thisDoc.Get(LuceneIndexBuilder.Path);
+                    fullPath = ConvertRemotePath(fullPath);
 
                     Bitmap bmp = Properties.Resources.File16;
                     if (File.Exists(fullPath)) {
@@ -755,6 +774,20 @@ namespace PokudaSearch.Views {
                 multiReader.Close();
                 this.ResultGrid.Redraw = true;
             }
+        }
+
+        private string ConvertRemotePath(string fullPath) {
+            string ret = fullPath;
+            if (_remotePathDic.Count > 0) {
+                foreach (var kvp in _remotePathDic) {
+                    string remotePath = kvp.Key;
+                    string localPath = kvp.Value;
+                    if (fullPath.Contains(remotePath)) {
+                        ret = ret.Replace(remotePath, localPath);
+                    }
+                }
+            }
+            return ret;
         }
 
         /// <summary>

@@ -12,57 +12,26 @@ using FlexLucene.Store;
 using FlexLucene.Index;
 using System.Diagnostics;
 using FlexLucene.Document;
+using Microsoft.WindowsAPICodePack.Shell;
+using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
 
 namespace PokudaSearch.Test {
     [TestClass]
     public class SandBoxTest {
         [TestMethod]
-        public void MultiReaderTest() {
+        public void FilePropertiesTest() {
+            var file = ShellFile.FromFilePath(@"C:\Temp\test.jpg");
+            //拡張プロパティ取得
+            Console.WriteLine(file.Properties.System.Title.Value);
+            Console.WriteLine(file.Properties.System.Author.Value);
+            Console.WriteLine(file.Properties.System.Comment.Value);
 
-            //ユーザ辞書の設定
-            java.io.Reader treader = new java.io.FileReader(@"C:\Workspace\Repo\Git\MyProject\PokudaSearch\UserDictionary.txt");
-            UserDictionary userDic = null;
-            try {
-                //ユーザ辞書
-                userDic = UserDictionary.Open(treader);
-            } finally {
-                treader.close();    
-            }
-            //Analyzer
-            var analyzer = new JapaneseAnalyzer(userDic, 
-                JapaneseTokenizerMode.SEARCH,
-                JapaneseAnalyzer.GetDefaultStopSet(), 
-                JapaneseAnalyzer.GetDefaultStopTags());
-
-            //テスト用IndexReaderを２つ準備する。
-            java.nio.file.Path idxPath1 = FileSystems.getDefault().getPath(
-                @"C:\Workspace\Repo\Git\MyProject\PokudaSearch.Test\IndexForTest\Index1");
-            java.nio.file.Path idxPath2 = FileSystems.getDefault().getPath(
-                @"C:\Workspace\Repo\Git\MyProject\PokudaSearch.Test\IndexForTest\Index2");
-            var fsDir1 = FSDirectory.Open(idxPath1);
-            var fsDir2 = FSDirectory.Open(idxPath2);
-
-            IndexReader ir1 = DirectoryReader.Open(fsDir1);
-            IndexReader ir2 = DirectoryReader.Open(fsDir2);
-
-            IndexReader[] indexReaders = new IndexReader[2];
-            indexReaders[0] = ir1;
-            indexReaders[1] = ir2;
-
-            var multiReader = new FlexLucene.Index.MultiReader(indexReaders);
-            var idxSearcher = new IndexSearcher(multiReader);
-
-            Query titleQuery = new WildcardQuery(new Term(LuceneIndexBuilder.IndexFieldTitle, "*mbom*"));
-
-            //HACK 上位200件の旨を表示
-            TopDocs docs = idxSearcher.Search(titleQuery, 200);
-
-            Trace.WriteLine("length of top docs: " + docs.ScoreDocs.Length);
-            foreach (ScoreDoc doc in docs.ScoreDocs) {
-                Document thisDoc = idxSearcher.Doc(doc.Doc);
-                string fullPath = thisDoc.Get(LuceneIndexBuilder.IndexFieldPath);
-                Trace.WriteLine(fullPath);
-            }
+            //拡張プロパティセット
+            ShellPropertyWriter propertyWriter =  file.Properties.GetPropertyWriter();
+            propertyWriter.WriteProperty(SystemProperties.System.Title, new string[] { "タイトル" });
+            propertyWriter.WriteProperty(SystemProperties.System.Author, new string[] { "著者" });
+            propertyWriter.WriteProperty(SystemProperties.System.Comment, new string[] { "コメント" });
+            propertyWriter.Close();
         }
     }
 }

@@ -81,6 +81,8 @@ namespace PokudaSearch.SQLSrc {
         ///,[インデックス対象外]
         ///,[総バイト数]
         ///,[テキスト抽出器]
+        ///,[リモートパス]
+        ///,[ローカルパス]
         ///,[作成日]
         ///,[更新日]
         ///) VALUES ( 
@@ -93,6 +95,8 @@ namespace PokudaSearch.SQLSrc {
         ///,@インデックス対象外
         ///,@総バイト数
         ///,@テキスト抽出器
+        ///,@リモートパス
+        ///,@ローカルパス
         ///,CASE WHEN EXISTS (SELECT * FROM [t_active_index] WHERE [パス] = @パス)
         /// THEN (SELECT [作成日] FROM [t_active_index] WHERE [パス] = @パス)
         /// ELSE @作成完了 END
@@ -116,6 +120,8 @@ namespace PokudaSearch.SQLSrc {
         ///,[インデックス対象外]
         ///,[総バイト数]
         ///,[テキスト抽出器]
+        ///,[リモートパス]
+        ///,[ローカルパス]
         ///,[作成日]
         ///,[更新日]
         ///FROM [t_active_index]
@@ -138,6 +144,8 @@ namespace PokudaSearch.SQLSrc {
         ///,[インデックス対象外]
         ///,[総バイト数]
         ///,[テキスト抽出器]
+        ///,[リモートパス]
+        ///,[ローカルパス]
         ///,[作成日]
         ///,[更新日]
         ///FROM [t_active_index]

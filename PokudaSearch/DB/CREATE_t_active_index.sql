@@ -10,6 +10,8 @@ CREATE TABLE [t_active_index] (
 [インデックス対象外] INTEGER NOT NULL DEFAULT '0', 
 [総バイト数] INTEGER NOT NULL DEFAULT '0', 
 [テキスト抽出器] VARCHAR(10) NOT NULL DEFAULT '',
+[リモートパス] VARCHAR(255) NOT NULL DEFAULT '', 
+[ローカルパス] VARCHAR(255) NOT NULL DEFAULT '', 
 [作成日] DATETIME, 
 [更新日] DATETIME,
 PRIMARY KEY(パス)

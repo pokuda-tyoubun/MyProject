@@ -14,6 +14,9 @@ namespace PokudaSearch.Test.Driver {
         public static Killer Killer { get; private set; }
         private static Process _process = null;
 
+        /// <summary>
+        /// プロセスを起動し、アタッチする。
+        /// </summary>
         public static void Attach() {
             if (_process != null && !_process.Responding) {
                 //NOTE:この場合、一旦終了しないと後続の処理で例外が発生する
@@ -21,8 +24,8 @@ namespace PokudaSearch.Test.Driver {
                 _process = null;
             }
             if (_process == null) {
-                _process = Process.Start(@"..\..\..\..\PokudaSearch\PokudaSearch\bin\Debug\PokudaSearch.exe");
-                App = new WindowsAppFriend(_process);
+                _process = Process.Start(@"..\..\..\PokudaSearch\bin\Debug\PokudaSearch.exe");
+                App = new WindowsAppFriend(_process, clrVersion:"4.0");
                 MainFrameForm = new MainFrameFormDriver(WindowControl.FromZTop(App));
             }
             App = new WindowsAppFriend(_process);
@@ -35,6 +38,10 @@ namespace PokudaSearch.Test.Driver {
             Killer = new Killer(10000, _process.Id);
         }
 
+        /// <summary>
+        /// アタッチを解放
+        /// </summary>
+        /// <param name="isContinue"></param>
         public static void Release(bool isContinue) {
             if (isContinue) {
                 Killer.Finish();

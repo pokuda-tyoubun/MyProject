@@ -45,5 +45,18 @@ namespace PokudaSearch.IndexUtil {
 
             return dic;
         }
+
+        public int GetDocumentCount(string idxDirPath) {
+            FSDirectory fsIdxDirPath = null;
+            IndexReader ir = null;
+            try {
+                fsIdxDirPath = FSDirectory.Open(FileSystems.getDefault().getPath(idxDirPath));
+                ir = DirectoryReader.Open(fsIdxDirPath);
+                return ir.MaxDoc();
+            } finally {
+                ir.Close();
+                fsIdxDirPath.Close();
+            }
+        }
     }
 }

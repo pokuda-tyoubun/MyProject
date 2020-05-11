@@ -13,3 +13,6 @@ Lucene.Net.Analysis.CJK
 JapaneseAnalyzerTest
 JapaneseAnalyzer
 IndexBuilderTest
+/PokudaSearch/.vs/PokudaSearch/v16/Server/sqlite3/*.lock
+.vs
+Doc

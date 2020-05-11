@@ -38,6 +38,10 @@ namespace PokudaSearch.Views {
             TotalBytes,
             [EnumLabel("テキスト抽出器")]
             TextExtractMode,
+            [EnumLabel("リモートパス")]
+            RemotePath,
+            [EnumLabel("ローカルパス")]
+            LocalPath,
             [EnumLabel("作成日")]
             InsertDate, 
             [EnumLabel("更新日")]
@@ -85,6 +89,8 @@ namespace PokudaSearch.Views {
         /// </summary>
         public IndexBuildForm() {
             InitializeComponent();
+
+            this.UpdateIndexMenu.Enabled = false;
         }
 
         #endregion Constractors
@@ -96,7 +102,7 @@ namespace PokudaSearch.Views {
         private void DeleteNonActiveIndex() {
             var dic = new Dictionary<string, string>();
 
-            DataTable dt = SelectActiveIndex();
+            DataTable dt = SelectActiveIndex(AppObject.ConnectString);
             foreach (DataRow dr in dt.Rows) {
                 string storePath = StringUtil.NullToBlank(dr[EnumUtil.GetLabel(ActiveIndexColIdx.IndexStorePath)]);
                 dic.Add(storePath, "");
@@ -118,25 +124,15 @@ namespace PokudaSearch.Views {
         /// </summary>
         /// <param name="row"></param>
 
-        private void UpdateActiveIndex(DataRow row, string storePath = "") {
+        private void UpdateActiveIndex(List<SQLiteParameter> paramList, string deletePath = "") {
             AppObject.DbUtil.Open(AppObject.ConnectString);
             try {
-                var param = new List<SQLiteParameter>();
-                param.Add(new SQLiteParameter("@パス", row[EnumUtil.GetLabel(IndexHistoryColIdx.IndexedPath)]));
-                if (StringUtil.NullToBlank(storePath) == "") {
-                    param.Add(new SQLiteParameter("@インデックスパス", AppObject.RootDirPath + @"\Index" + LuceneIndexBuilder.ReservedNo));
-                } else {
-                    param.Add(new SQLiteParameter("@インデックスパス", storePath));
+                if (deletePath != "") {
+                    var delParam = new List<SQLiteParameter>();
+                    delParam.Add(new SQLiteParameter("@パス", deletePath));
+                    AppObject.DbUtil.ExecuteNonQuery(SQLSrc.t_active_index.DELETE, delParam.ToArray());
                 }
-                param.Add(new SQLiteParameter("@モード", row[EnumUtil.GetLabel(IndexHistoryColIdx.CreateMode)]));
-                param.Add(new SQLiteParameter("@作成時間(分)", row[EnumUtil.GetLabel(IndexHistoryColIdx.CreateTime)]));
-                param.Add(new SQLiteParameter("@対象ファイル数", row[EnumUtil.GetLabel(IndexHistoryColIdx.TargetCount)]));
-                param.Add(new SQLiteParameter("@インデックス済み", row[EnumUtil.GetLabel(IndexHistoryColIdx.IndexedCount)]));
-                param.Add(new SQLiteParameter("@インデックス対象外", row[EnumUtil.GetLabel(IndexHistoryColIdx.SkippedCount)]));
-                param.Add(new SQLiteParameter("@総バイト数", row[EnumUtil.GetLabel(IndexHistoryColIdx.TotalBytes)]));
-                param.Add(new SQLiteParameter("@テキスト抽出器", row[EnumUtil.GetLabel(IndexHistoryColIdx.TextExtractMode)]));
-                param.Add(new SQLiteParameter("@作成完了", row[EnumUtil.GetLabel(IndexHistoryColIdx.EndTime)]));
-                AppObject.DbUtil.ExecuteNonQuery(SQLSrc.t_active_index.INSERT_OR_REPLACE, param.ToArray());
+                AppObject.DbUtil.ExecuteNonQuery(SQLSrc.t_active_index.INSERT_OR_REPLACE, paramList.ToArray());
 
                 AppObject.DbUtil.Commit();
             } catch(Exception) {
@@ -299,8 +295,8 @@ namespace PokudaSearch.Views {
         /// </summary>
         /// <param name="grid"></param>
         /// <param name="appendCheckBox"></param>
-        public static void LoadActiveIndex(FlexGridEx grid, bool appendCheckBox = false) {
-            DataTable dt = SelectActiveIndex();
+        public static void LoadActiveIndex(string connectString, FlexGridEx grid, bool appendCheckBox = false) {
+            DataTable dt = SelectActiveIndex(connectString);
             _activeIndex = dt;
 
             int offset = 0;
@@ -348,6 +344,10 @@ namespace PokudaSearch.Views {
             grid.Cols[(int)ActiveIndexColIdx.TotalBytes + 1 + offset].TextAlign = TextAlignEnum.RightCenter;
             grid[0, (int)ActiveIndexColIdx.TextExtractMode + 1 + offset] = EnumUtil.GetLabel(ActiveIndexColIdx.TextExtractMode);
             grid.Cols[(int)ActiveIndexColIdx.TextExtractMode + 1 + offset].Width = 80;
+            grid[0, (int)ActiveIndexColIdx.RemotePath + 1 + offset] = EnumUtil.GetLabel(ActiveIndexColIdx.RemotePath);
+            grid.Cols[(int)ActiveIndexColIdx.RemotePath + 1 + offset].Width = 120;
+            grid[0, (int)ActiveIndexColIdx.LocalPath + 1 + offset] = EnumUtil.GetLabel(ActiveIndexColIdx.LocalPath);
+            grid.Cols[(int)ActiveIndexColIdx.LocalPath + 1 + offset].Width = 120;
             grid[0, (int)ActiveIndexColIdx.InsertDate + 1 + offset] = EnumUtil.GetLabel(ActiveIndexColIdx.InsertDate);
             grid.Cols[(int)ActiveIndexColIdx.InsertDate + 1 + offset].Width = 120;
             grid[0, (int)ActiveIndexColIdx.UpdateDate + 1 + offset] = EnumUtil.GetLabel(ActiveIndexColIdx.UpdateDate);
@@ -376,6 +376,10 @@ namespace PokudaSearch.Views {
                     FileUtil.GetSizeString(StringUtil.NullToZero(dr[EnumUtil.GetLabel(ActiveIndexColIdx.TotalBytes)]));
                 grid[row, (int)ActiveIndexColIdx.TextExtractMode + 1 + offset] = 
                     StringUtil.NullToBlank(dr[EnumUtil.GetLabel(ActiveIndexColIdx.TextExtractMode)]);
+                grid[row, (int)ActiveIndexColIdx.RemotePath + 1 + offset] = 
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(ActiveIndexColIdx.RemotePath)]);
+                grid[row, (int)ActiveIndexColIdx.LocalPath + 1 + offset] = 
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(ActiveIndexColIdx.LocalPath)]);
                 grid[row, (int)ActiveIndexColIdx.InsertDate + 1 + offset] = 
                     StringUtil.NullToBlank(dr[EnumUtil.GetLabel(ActiveIndexColIdx.InsertDate)]);
                 grid[row, (int)ActiveIndexColIdx.UpdateDate + 1 + offset] = 
@@ -399,7 +403,7 @@ namespace PokudaSearch.Views {
                 AppObject.DbUtil.Close();
             }
         }
-        private DataTable SelectActiveIndex(string indexedPath) {
+        private DataTable SelectOneActiveIndex(string connectString, string indexedPath) {
             AppObject.DbUtil.Open(AppObject.ConnectString);
             try {
                 var param = new List<SQLiteParameter>();
@@ -415,8 +419,8 @@ namespace PokudaSearch.Views {
         /// 有効Indexを選択
         /// </summary>
         /// <returns></returns>
-        public static DataTable SelectActiveIndex() {
-            AppObject.DbUtil.Open(AppObject.ConnectString);
+        public static DataTable SelectActiveIndex(string connectString) {
+            AppObject.DbUtil.Open(connectString);
             try {
                 DataSet ds = AppObject.DbUtil.ExecSelect(SQLSrc.t_active_index.SELECT, null);
                 return ds.Tables[0];
@@ -464,6 +468,7 @@ namespace PokudaSearch.Views {
                 //　　 処理結果を戻り値workerから受け取らずにstaticプロパティから受け取る
                 if (LuceneIndexBuilder.DoStop == false) {
                     //HACK パラメタ処理の共通化
+                    //t_history_indexの更新-----------------------
                     var param = new List<SQLiteParameter>();
                     param.Add(new SQLiteParameter("@作成完了", LuceneIndexBuilder.EndTime));
                     param.Add(new SQLiteParameter("@作成時間", LuceneIndexBuilder.CreateTime.TotalMinutes));
@@ -475,13 +480,29 @@ namespace PokudaSearch.Views {
                     UpdateHistory(param);
                     var historyTbl = LoadHistory();
 
-                    if (LuceneIndexBuilder.CreateMode == LuceneIndexBuilder.CreateModes.Create) {
-                        UpdateActiveIndex(historyTbl.Rows[0]);
+                    //t_active_indexの更新-----------------------
+                    var aiParam = new List<SQLiteParameter>();
+                    var row = historyTbl.Rows[0];
+                    string storePath = StringUtil.NullToBlank(LuceneIndexBuilder.IndexStorePath);
+                    aiParam.Add(new SQLiteParameter("@パス", row[EnumUtil.GetLabel(IndexHistoryColIdx.IndexedPath)]));
+                    if (storePath == "") {
+                        aiParam.Add(new SQLiteParameter("@インデックスパス", AppObject.RootDirPath + @"\Index" + LuceneIndexBuilder.ReservedNo));
                     } else {
-                        UpdateActiveIndex(historyTbl.Rows[0], LuceneIndexBuilder.IndexStorePath);
+                        aiParam.Add(new SQLiteParameter("@インデックスパス", storePath));
                     }
-                    LoadActiveIndex(this.ActiveIndexGrid);
-                    LoadActiveIndex(SearchForm.TargetIndexGridControl, true);
+                    aiParam.Add(new SQLiteParameter("@モード", row[EnumUtil.GetLabel(IndexHistoryColIdx.CreateMode)]));
+                    aiParam.Add(new SQLiteParameter("@作成時間(分)", row[EnumUtil.GetLabel(IndexHistoryColIdx.CreateTime)]));
+                    aiParam.Add(new SQLiteParameter("@対象ファイル数", row[EnumUtil.GetLabel(IndexHistoryColIdx.TargetCount)]));
+                    aiParam.Add(new SQLiteParameter("@インデックス済み", row[EnumUtil.GetLabel(IndexHistoryColIdx.IndexedCount)]));
+                    aiParam.Add(new SQLiteParameter("@インデックス対象外", row[EnumUtil.GetLabel(IndexHistoryColIdx.SkippedCount)]));
+                    aiParam.Add(new SQLiteParameter("@総バイト数", row[EnumUtil.GetLabel(IndexHistoryColIdx.TotalBytes)]));
+                    aiParam.Add(new SQLiteParameter("@テキスト抽出器", row[EnumUtil.GetLabel(IndexHistoryColIdx.TextExtractMode)]));
+                    aiParam.Add(new SQLiteParameter("@リモートパス", ""));
+                    aiParam.Add(new SQLiteParameter("@ローカルパス", ""));
+                    aiParam.Add(new SQLiteParameter("@作成完了", row[EnumUtil.GetLabel(IndexHistoryColIdx.EndTime)]));
+                    UpdateActiveIndex(aiParam);
+                    LoadActiveIndex(AppObject.ConnectString, this.ActiveIndexGrid);
+                    LoadActiveIndex(AppObject.ConnectString, SearchForm.TargetIndexGridControl, appendCheckBox:true);
                 }
 
                 DeleteNonActiveIndex();
@@ -528,7 +549,7 @@ namespace PokudaSearch.Views {
             this.StopButton.Enabled = false;
 
             LoadHistory();
-            LoadActiveIndex(this.ActiveIndexGrid);
+            LoadActiveIndex(AppObject.ConnectString, this.ActiveIndexGrid);
             this.TargetDirText.Text = Properties.Settings.Default.InitIndexPath;
 
             var logViewer = new TextBoxAppenderEx();
@@ -574,7 +595,7 @@ namespace PokudaSearch.Views {
             string targetDir = (this.TargetDirText.Text);
             if (!new DirectoryInfo(targetDir).Exists) {
                 MessageBox.Show("指定されたフォルダは存在しません。",
-                    AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             CreateIndex(targetDir);
@@ -599,7 +620,6 @@ namespace PokudaSearch.Views {
 
                 LuceneIndexBuilder.ReservedNo = GetReservedNo();
                 LuceneIndexBuilder.CreateIndexBySingleThread(
-                    AppObject.AppAnalyzer, 
                     AppObject.RootDirPath, 
                     targetDir,
                     progress,
@@ -621,7 +641,7 @@ namespace PokudaSearch.Views {
             string targetDir = (this.TargetDirText.Text);
             if (!new DirectoryInfo(targetDir).Exists) {
                 MessageBox.Show("指定されたフォルダは存在しません。",
-                    AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -642,14 +662,17 @@ namespace PokudaSearch.Views {
         private void DeleteIndexMenu_Click(object sender, EventArgs e) {
             string path = StringUtil.NullToBlank(this.ActiveIndexGrid[this.ActiveIndexGrid.Selection.TopRow, (int)ActiveIndexColIdx.IndexedPath + 1]);
             string indexedPath = StringUtil.NullToBlank(this.ActiveIndexGrid[this.ActiveIndexGrid.Selection.TopRow, (int)ActiveIndexColIdx.IndexStorePath + 1]);
-            //インデックスディレクトリを削除
-            if (Directory.Exists(indexedPath)) {
-                FileUtil.DeleteDirectory(new DirectoryInfo(indexedPath));
+            string createMode = StringUtil.NullToBlank(this.ActiveIndexGrid[this.ActiveIndexGrid.Selection.TopRow, (int)ActiveIndexColIdx.CreateMode + 1]);
+            if (createMode != EnumUtil.GetLabel(LuceneIndexBuilder.CreateModes.External)) {
+                //インデックスディレクトリを物理的に削除
+                if (Directory.Exists(indexedPath)) {
+                    FileUtil.DeleteDirectory(new DirectoryInfo(indexedPath));
+                }
             }
             //有効インデックステーブルから削除
             DeleteActiveIndex(path);
-            LoadActiveIndex(this.ActiveIndexGrid);
-            LoadActiveIndex(SearchForm.TargetIndexGridControl, true);
+            LoadActiveIndex(AppObject.ConnectString, this.ActiveIndexGrid);
+            LoadActiveIndex(AppObject.ConnectString, SearchForm.TargetIndexGridControl, appendCheckBox:true);
         }
 
         /// <summary>
@@ -684,17 +707,6 @@ namespace PokudaSearch.Views {
             this.CreateIndex(targetDir, orgIndexStorePath);
         }
 
-        /// <summary>
-        /// インデックス作成メニュークリック
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CreateIndexMenu_Click(object sender, EventArgs e) {
-            string path = StringUtil.NullToBlank(this.ActiveIndexGrid[this.ActiveIndexGrid.Selection.TopRow, (int)ActiveIndexColIdx.IndexedPath + 1]);
-            this.TargetDirText.Text = path;
-            this.CreateIndexButton.PerformClick();
-        }
-
         private void StopButton_Click(object sender, EventArgs e) {
             var result = MessageBox.Show(AppObject.MLUtil.GetMsg(Consts.MSG_DO_STOP),
                 AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -705,9 +717,158 @@ namespace PokudaSearch.Views {
             }
         }
 
+        /// <summary>
+        /// 外部インデックス追加ボタンをクリック
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddIndexButton_Click(object sender, EventArgs e) {
+            int targetCount = 0;
+            string storeDir = this.TargetDirText.Text;
+            if (!new DirectoryInfo(storeDir).Exists) {
+                MessageBox.Show("指定されたフォルダは存在しません。",
+                    AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             //インデックス判定
-            //t_active_indexに追加
+            var liru = new LuceneIndexReaderUtil();
+            try {
+                targetCount = liru.GetDocumentCount(storeDir);
+            } catch {
+                MessageBox.Show("有効なインデックスではありません。",
+                    AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //対応パス設定
+            string remotePath = "";
+            string localPath = "";
+            var ipf = new InteractionPathForm();
+            try {
+                if (ipf.ShowDialog() == DialogResult.Cancel) {
+                    return;
+                }
+                remotePath = ipf.RemotePath;
+                localPath = ipf.LocalPath;
+                //ローカルパスの存在チェック
+                if (!new DirectoryInfo(localPath).Exists) {
+                    MessageBox.Show("指定されたローカルフォルダは存在しません。",
+                        AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                //t_active_indexに追加(モードは、"外部参照")
+                var param = new List<SQLiteParameter>();
+                param.Add(new SQLiteParameter("@パス", localPath));
+                param.Add(new SQLiteParameter("@インデックスパス", storeDir));
+                param.Add(new SQLiteParameter("@モード", EnumUtil.GetLabel(LuceneIndexBuilder.CreateModes.External)));
+                param.Add(new SQLiteParameter("@作成時間(分)", 0));
+                param.Add(new SQLiteParameter("@対象ファイル数", targetCount));
+                param.Add(new SQLiteParameter("@インデックス済み", targetCount));
+                param.Add(new SQLiteParameter("@インデックス対象外", 0));
+                param.Add(new SQLiteParameter("@総バイト数", 0));
+                param.Add(new SQLiteParameter("@テキスト抽出器", EnumUtil.GetName(LuceneIndexBuilder.TextExtractMode)));
+                param.Add(new SQLiteParameter("@リモートパス", remotePath));
+                param.Add(new SQLiteParameter("@ローカルパス", localPath));
+                param.Add(new SQLiteParameter("@作成完了", DateTime.Now));
+                UpdateActiveIndex(param);
+                LoadActiveIndex(AppObject.ConnectString, this.ActiveIndexGrid);
+                LoadActiveIndex(AppObject.ConnectString, SearchForm.TargetIndexGridControl, appendCheckBox:true);
+            } finally {
+                ipf.Dispose();
+            }
+        }
+
+        private void ShowOuterIndexForm() {
+
+            string dbPath = this.TargetDirText.Text;
+            if (!File.Exists(dbPath)) {
+                MessageBox.Show("指定されたファイルは存在しません。",
+                    AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            FileInfo dbFile = new FileInfo(dbPath);
+            if (dbFile.Name == "PokudaSearch.db") {
+                MessageBox.Show("「PokudaSearch.db」ファイルを選択して下さい。",
+                    AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var oif = new OuterIndexForm(dbFile);
+            try {
+                if (oif.ShowDialog() == DialogResult.Cancel) {
+                    return;
+                }
+            } finally {
+                oif.Dispose();
+            }
+        }
+
+        private void ActiveIndexGrid_SelChange(object sender, EventArgs e) {
+            if (this.ActiveIndexGrid.Selection.TopRow < HeaderRowCount) {
+                this.UpdateIndexMenu.Enabled = false;
+                return;
+            }
+
+            string createMode = StringUtil.NullToBlank(this.ActiveIndexGrid[this.ActiveIndexGrid.Selection.TopRow, (int)ActiveIndexColIdx.CreateMode + 1]);
+            if (createMode == EnumUtil.GetLabel(LuceneIndexBuilder.CreateModes.External)) {
+                //インデックス更新不可
+                this.UpdateIndexMenu.Enabled = false;
+            } else {
+                this.UpdateIndexMenu.Enabled = true;
+            }
+        }
+
+        private void EditInteractionPathMenu_Click(object sender, EventArgs e) {
+            if (this.ActiveIndexGrid.Selection.TopRow < HeaderRowCount) {
+                return;
+            }
+            int rowIdx = this.ActiveIndexGrid.Selection.TopRow;
+            string storeDir = StringUtil.NullToBlank(this.ActiveIndexGrid[rowIdx, (int)ActiveIndexColIdx.IndexStorePath + 1]);
+            string createMode = StringUtil.NullToBlank(this.ActiveIndexGrid[rowIdx, (int)ActiveIndexColIdx.CreateMode + 1]);
+            int targetCount = int.Parse(StringUtil.NullToZero(this.ActiveIndexGrid[rowIdx, (int)ActiveIndexColIdx.TargetCount + 1]));
+            string extractMode = StringUtil.NullToBlank(this.ActiveIndexGrid[rowIdx, (int)ActiveIndexColIdx.TextExtractMode + 1]);
+            string remotePath = StringUtil.NullToBlank(this.ActiveIndexGrid[rowIdx, (int)ActiveIndexColIdx.RemotePath + 1]);
+            string orgLocalPath = StringUtil.NullToBlank(this.ActiveIndexGrid[rowIdx, (int)ActiveIndexColIdx.LocalPath + 1]);
+            string newLoaclPath = "";
+
+            //対応パス設定
+            var ipf = new InteractionPathForm(remotePath, orgLocalPath);
+            try {
+                if (ipf.ShowDialog() == DialogResult.Cancel) {
+                    return;
+                }
+                remotePath = ipf.RemotePath;
+                newLoaclPath = ipf.LocalPath;
+
+                //ローカルパスの存在チェック
+                if (!new DirectoryInfo(newLoaclPath).Exists) {
+                    MessageBox.Show("指定されたローカルフォルダは存在しません。",
+                        AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                //t_active_indexに追加(モードは、"外部参照")
+                var param = new List<SQLiteParameter>();
+                param.Add(new SQLiteParameter("@パス", newLoaclPath));
+                param.Add(new SQLiteParameter("@インデックスパス", storeDir));
+                param.Add(new SQLiteParameter("@モード", createMode));
+                param.Add(new SQLiteParameter("@作成時間(分)", 0));
+                param.Add(new SQLiteParameter("@対象ファイル数", targetCount));
+                param.Add(new SQLiteParameter("@インデックス済み", targetCount));
+                param.Add(new SQLiteParameter("@インデックス対象外", 0));
+                param.Add(new SQLiteParameter("@総バイト数", 0));
+                param.Add(new SQLiteParameter("@テキスト抽出器", extractMode));
+                param.Add(new SQLiteParameter("@リモートパス", remotePath));
+                param.Add(new SQLiteParameter("@ローカルパス", newLoaclPath));
+                param.Add(new SQLiteParameter("@作成完了", DateTime.Now));
+                UpdateActiveIndex(param, orgLocalPath);
+                LoadActiveIndex(AppObject.ConnectString, this.ActiveIndexGrid);
+                LoadActiveIndex(AppObject.ConnectString, SearchForm.TargetIndexGridControl, appendCheckBox:true);
+            } finally {
+                ipf.Dispose();
+            }
         }
     }
 }
