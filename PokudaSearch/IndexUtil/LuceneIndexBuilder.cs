@@ -399,6 +399,7 @@ namespace PokudaSearch.IndexUtil {
                 Thread.Sleep(1000);
                 AppObject.Logger.Info(threadName + "Indexing start.");
                 foreach (FileInfo fi in targetFileList) {
+                    Thread.Sleep(10);
                     if (DoStop) {
                         //中断
                         AppObject.Logger.Info("Stop command executed.");

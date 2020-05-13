@@ -5,6 +5,7 @@ using FxCommonLib.Utils;
 using log4net;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Deployment.Application;
 using System.Diagnostics;
 using System.IO;
@@ -12,6 +13,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using TikaOnDotNet.TextExtraction;
 
 namespace PokudaSearch {
@@ -225,6 +227,20 @@ namespace PokudaSearch {
             }
 
             return ret;
+        }
+
+        public static string GetConnectString(string sqliteDataSource) {
+
+            var builder = new System.Data.SQLite.SQLiteConnectionStringBuilder {
+                DataSource = sqliteDataSource,
+                Version = 3,
+                LegacyFormat = false,
+                //PageSize = 8192,
+                //CacheSize = 81920,
+                SyncMode = SynchronizationModes.Full, //途中で強制的に電源をOFFにすることも考えられるため。
+                JournalMode = SQLiteJournalModeEnum.Default
+            };
+            return builder.ToString();
         }
         //[TestMethod]
         //public void IsSameContentsTest() {

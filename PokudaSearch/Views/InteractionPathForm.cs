@@ -46,12 +46,8 @@ namespace PokudaSearch.Views {
             string remotePath = this.RemotePathText.Text;
             string localPath = this.LocalPathText.Text;
             //末尾の\を除去
-            if (remotePath.EndsWith(@"\")) {
-                remotePath = remotePath.Remove(remotePath.Length - 1);
-            }
-            if (localPath.EndsWith(@"\")) {
-                localPath = localPath.Remove(localPath.Length - 1);
-            }
+            remotePath = StringUtil.RemoveLastChar(remotePath, '\\');
+            localPath = StringUtil.RemoveLastChar(localPath, '\\');
 
             RemotePath = remotePath;
             LocalPath = localPath;

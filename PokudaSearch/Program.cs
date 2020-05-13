@@ -37,18 +37,9 @@ namespace PokudaSearch {
         /// </summary>
         private static void Initialize() {
 
-            //SQLite接続文字列作成
-            var builder = new System.Data.SQLite.SQLiteConnectionStringBuilder {
-                DataSource= Directory.GetParent(Application.ExecutablePath).FullName + 
-                            Properties.Settings.Default.SQLITE_DATA_SOURCE,
-                Version = 3,
-                LegacyFormat = false,
-                //PageSize = 8192,
-                //CacheSize = 81920,
-                SyncMode = SynchronizationModes.Full, //途中で強制的に電源をOFFにすることも考えられるため。
-                JournalMode = SQLiteJournalModeEnum.Default
-            };
-            AppObject.ConnectString = builder.ToString();
+            string sqliteDataSource = Directory.GetParent(Application.ExecutablePath).FullName + 
+                                            Properties.Settings.Default.SQLITE_DATA_SOURCE;
+            AppObject.ConnectString = AppObject.GetConnectString(sqliteDataSource);
 
             //ユーザ辞書の設定
             AppObject.RootDirPath = Directory.GetParent(Application.ExecutablePath).FullName;
