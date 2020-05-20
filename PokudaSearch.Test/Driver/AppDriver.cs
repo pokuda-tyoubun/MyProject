@@ -1,4 +1,5 @@
-﻿using Codeer.Friendly.Windows;
+﻿using Codeer.Friendly.Dynamic;
+using Codeer.Friendly.Windows;
 using Codeer.Friendly.Windows.Grasp;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace PokudaSearch.Test.Driver {
         public static MainFrameFormDriver MainFrameForm { get; set; }
         public static Killer Killer { get; private set; }
         private static Process _process = null;
+        private static dynamic _appObject;
 
         /// <summary>
         /// プロセスを起動し、アタッチする。
@@ -26,6 +28,7 @@ namespace PokudaSearch.Test.Driver {
             if (_process == null) {
                 _process = Process.Start(@"..\..\..\PokudaSearch\bin\Debug\PokudaSearch.exe");
                 App = new WindowsAppFriend(_process, clrVersion:"4.0");
+                _appObject = AppDriver.App.Type("PokudaSearch.AppObject");
                 MainFrameForm = new MainFrameFormDriver(WindowControl.FromZTop(App));
             }
             App = new WindowsAppFriend(_process);
@@ -34,8 +37,8 @@ namespace PokudaSearch.Test.Driver {
             InitApp();
 
             //HACK:何秒が適当か検討する
-            //10秒固まったらキル
-            Killer = new Killer(10000, _process.Id);
+            //100秒固まったらキル
+            Killer = new Killer(100000, _process.Id);
         }
 
         /// <summary>
@@ -74,6 +77,13 @@ namespace PokudaSearch.Test.Driver {
         /// <returns></returns>
         public static WindowControl GetMordalWindow() {
             return MainFrameForm.Window.WaitForNextModal();
+        }
+
+        public static string GetMsg(string key) {
+            return _appObject.MLUtil.GetMsg(key);
+        }
+        public static string GetKey(AppObject.Msg msgId) {
+            return _appObject.GetLabel(msgId);
         }
     }
 }

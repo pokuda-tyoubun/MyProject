@@ -18,6 +18,7 @@ using FxCommonLib.Controls;
 using FxCommonLib.Utils;
 using java.nio.file;
 using Microsoft.WindowsAPICodePack.Shell;
+using PokudaSearch.Exceptions;
 using PokudaSearch.IndexUtil;
 using System;
 using System.Collections.Concurrent;
@@ -81,7 +82,7 @@ namespace PokudaSearch.Views {
         /// <summary>プレビューリクエスト待ちスタック</summary>
         private Stack<int> _selectedStack = new Stack<int>();
         /// <summary>選択インデックスを一時的に保持</summary>
-        private List<string> _selectedIndexList = null;
+        private List<KeyValuePair<string, string>> _selectedIndexList = null;
         /// <summary>プレビュー用ブラウザ</summary>
         private ChromiumWebBrowser _chromeBrowser;
         /// <summary>リモートパスの辞書</summary>
@@ -152,7 +153,7 @@ namespace PokudaSearch.Views {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void WriteExcelButton_Click(object sender, EventArgs e) {
-            ProgressDialog pd = new ProgressDialog(AppObject.MLUtil.GetMsg(CommonConsts.ACT_EXTRACT),
+            ProgressDialog pd = new ProgressDialog(AppObject.GetMsg(AppObject.Msg.ACT_EXTRACT),
                 new DoWorkEventHandler(Extract2Excel_DoWork), 0);
 
             DialogResult result;
@@ -163,7 +164,7 @@ namespace PokudaSearch.Views {
                     //失敗
                     Exception ex = pd.Error;
                     AppObject.Logger.Error(ex.Message);
-                    MessageBox.Show(ex.Message, AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             } finally {
                 pd.Dispose();
@@ -188,11 +189,11 @@ namespace PokudaSearch.Views {
         private void SearchButton_Click(object sender, EventArgs e) {
             Stopwatch sw = new Stopwatch();
             Cursor.Current = Cursors.WaitCursor;
-            AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_SEARCH), true, sw);
+            AppObject.Frame.SetStatusMsg(AppObject.GetMsg(AppObject.Msg.ACT_SEARCH), true, sw);
             try {
                 Search();
             } finally {
-                AppObject.Frame.SetStatusMsg(AppObject.MLUtil.GetMsg(CommonConsts.ACT_END), false, sw);
+                AppObject.Frame.SetStatusMsg(AppObject.GetMsg(AppObject.Msg.ACT_END), false, sw);
                 Cursor.Current = Cursors.Default;
             }
         }
@@ -304,8 +305,15 @@ namespace PokudaSearch.Views {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void MoreLikeThisMenu_Click(object sender, EventArgs e) {
-
-            var multiReader = GetMultiReader(_selectedIndexList);
+            MultiReader multiReader = null;
+            try {
+                multiReader = GetMultiReader(_selectedIndexList);
+            } catch (UnlinkedIndexException ex) {
+                //検索中断
+                MessageBox.Show(string.Format(AppObject.GetMsg(AppObject.Msg.ERR_UNLINKED_INDEX), ex.TargetIndex),
+                    AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             IndexSearcher idxSearcher = new IndexSearcher(multiReader);
             MoreLikeThis mlt = new MoreLikeThis(multiReader);
             mlt.SetFieldNames(new string[] { LuceneIndexBuilder.Title, LuceneIndexBuilder.Content });
@@ -377,7 +385,8 @@ namespace PokudaSearch.Views {
         /// <param name="e"></param>
 
         private void FilterGridButton_Click(object sender, EventArgs e) {
-            AppObject.FilterHelper.SetGridFilter(this.Cursor, this.ResultGrid, this.SearchGridText.Text, AppObject.MLUtil.GetMsg(CommonConsts.ACT_FILTER));
+            AppObject.FilterHelper.SetGridFilter(this.Cursor, this.ResultGrid, this.SearchGridText.Text, 
+                AppObject.GetMsg(AppObject.Msg.ACT_FILTER));
         }
 
         /// <summary>
@@ -387,7 +396,8 @@ namespace PokudaSearch.Views {
         /// <param name="e"></param>
         private void ClearFilterButton_Click(object sender, EventArgs e) {
             this.SearchGridText.Text = "";
-            AppObject.FilterHelper.SetGridFilter(this.Cursor, this.ResultGrid, this.SearchGridText.Text, AppObject.MLUtil.GetMsg(CommonConsts.ACT_RESET_FILTER));
+            AppObject.FilterHelper.SetGridFilter(this.Cursor, this.ResultGrid, this.SearchGridText.Text, 
+                AppObject.GetMsg(AppObject.Msg.ACT_RESET_FILTER));
         }
 
         /// <summary>
@@ -435,8 +445,8 @@ namespace PokudaSearch.Views {
         private void DiffMenu_Click(object sender, EventArgs e) {
             string diffExe = Properties.Settings.Default.DiffExe;
             if (!File.Exists(diffExe)) {
-                MessageBox.Show("差分ツールの指定が誤っています。",
-                    AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(AppObject.GetMsg(AppObject.Msg.ERR_INVALID_PATH),
+                    AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -630,15 +640,22 @@ namespace PokudaSearch.Views {
         /// </summary>
         /// <param name="targetIndexList"></param>
         /// <returns></returns>
-        private MultiReader GetMultiReader(List<string> targetIndexList) {
+        private MultiReader GetMultiReader(List<KeyValuePair<string, string>> targetIndexList) {
             IndexReader[] idxList = new IndexReader[targetIndexList.Count];
             int cnt = 0;
-            foreach (string indexStorePath in targetIndexList) {
-
-                java.nio.file.Path idxPath = FileSystems.getDefault().getPath(indexStorePath);
-                var fsDir = FSDirectory.Open(idxPath);
-                var idxReader = DirectoryReader.Open(fsDir);
-                idxList[cnt] = idxReader;
+            foreach (var kvp in targetIndexList) {
+                string indexedPath = kvp.Key;
+                string storePath = kvp.Value;
+                try {
+                    java.nio.file.Path idxPath = FileSystems.getDefault().getPath(storePath);
+                    var fsDir = FSDirectory.Open(idxPath);
+                    var idxReader = DirectoryReader.Open(fsDir);
+                    idxList[cnt] = idxReader;
+                } catch (java.io.IOException) {
+                    var ex = new UnlinkedIndexException();
+                    ex.TargetIndex = indexedPath;
+                    throw ex;
+                }
 
                 cnt++;
             }
@@ -650,16 +667,17 @@ namespace PokudaSearch.Views {
         /// 選択された検索対象インデックスを取得
         /// </summary>
         /// <returns></returns>
-        private List<string> GetSelectedIndex() {
-            var ret = new List<string>();
+        private List<KeyValuePair<string, string>> GetSelectedIndex() {
+            var ret = new List<KeyValuePair<string, string>>();
 
             for (int i = 1; i < this.TargetIndexGrid.Rows.Count; i++) {
                 Row r = this.TargetIndexGrid.Rows[i];
                 if (bool.Parse(StringUtil.NullToBlank(r[TargetCheckCol]))) {
-                    ret.Add(StringUtil.NullToBlank(r[(int)IndexBuildForm.ActiveIndexColIdx.IndexStorePath + 2]));
+                    string indexedPath = StringUtil.NullToBlank(r[(int)IndexBuildForm.ActiveIndexColIdx.IndexedPath + 2]);
+                    string storePath = StringUtil.NullToBlank(r[(int)IndexBuildForm.ActiveIndexColIdx.IndexStorePath + 2]);
+                    ret.Add(new KeyValuePair<string, string>(indexedPath, storePath));
                 }
             }
-
             return ret;
         }
         private Dictionary<string, string> CreateSelectedRemotePathDic() {
@@ -685,20 +703,28 @@ namespace PokudaSearch.Views {
         private void Search() {
 
             if (this.KeywordText.Text == "") {
-                MessageBox.Show("キーワードを入力して下さい。",
-                    AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(AppObject.GetMsg(AppObject.Msg.MSG_INPUT_KEYWORD),
+                    AppObject.GetMsg(AppObject.Msg.TITLE_INFO), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             _selectedIndexList = GetSelectedIndex();
             _remotePathDic = CreateSelectedRemotePathDic();
             if (_selectedIndexList.Count == 0) {
-                MessageBox.Show("検索対象インデックスを選択して下さい。",
-                    AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(AppObject.GetMsg(AppObject.Msg.MSG_CHECKON_TARGET_INDEX),
+                    AppObject.GetMsg(AppObject.Msg.TITLE_INFO), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            var multiReader = GetMultiReader(_selectedIndexList);
+            MultiReader multiReader = null;
+            try {
+                multiReader = GetMultiReader(_selectedIndexList);
+            } catch (UnlinkedIndexException ex) {
+                //検索中断
+                MessageBox.Show(string.Format(AppObject.GetMsg(AppObject.Msg.ERR_UNLINKED_INDEX), ex.TargetIndex),
+                    AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             IndexSearcher idxSearcher = new IndexSearcher(multiReader);
 
             var allQuery = new BooleanQueryBuilder();
@@ -823,8 +849,8 @@ namespace PokudaSearch.Views {
                 Process.Start(path);
             } else {
                 //HACK メッセージ
-                MessageBox.Show("ファイルが存在しません。",
-                    AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(AppObject.GetMsg(AppObject.Msg.ERR_FILE_NOT_FOUND),
+                    AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -948,8 +974,8 @@ namespace PokudaSearch.Views {
             try {
                 wdApp = new NetOffice.WordApi.Application();
             } catch (Exception) {
-                MessageBox.Show("Microsoft Wordがインストールされていません。",
-                    AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(AppObject.GetMsg(AppObject.Msg.ERR_UNINSTALLED_MS_WORD),
+                    AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return tmpPath;
             }
             try {
@@ -1021,8 +1047,8 @@ namespace PokudaSearch.Views {
             try {
                 xlsApp = new NetOffice.ExcelApi.Application();
             } catch (Exception) {
-                MessageBox.Show("Microsoft Excelがインストールされていません。",
-                    AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(AppObject.GetMsg(AppObject.Msg.ERR_UNINSTALLED_MS_XLS),
+                    AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return tmpPath;
             }
             try {
@@ -1080,8 +1106,8 @@ namespace PokudaSearch.Views {
             try {
                 pptApp = new NetOffice.PowerPointApi.Application();
             } catch (Exception) {
-                MessageBox.Show("Microsoft PowerPointがインストールされていません。",
-                    AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(AppObject.GetMsg(AppObject.Msg.ERR_UNINSTALLED_MS_PPT),
+                    AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return tmpPath;
             }
             try {
@@ -1256,6 +1282,28 @@ namespace PokudaSearch.Views {
             } else {
                 this.PreviewPanel.Width = 420;
                 this.BrowserPreviewPanel.Height = 505;
+            }
+        }
+
+        private void SelectLocalIndexButton_Click(object sender, EventArgs e) {
+            foreach (Row r in this.TargetIndexGrid.Rows) {
+                string createMode = StringUtil.NullToBlank(r[(int)IndexBuildForm.ActiveIndexColIdx.CreateMode + 2]);
+                if (createMode == EnumUtil.GetLabel(LuceneIndexBuilder.CreateModes.OuterReference)) {
+                    r[TargetCheckCol] = false;
+                } else {
+                    r[TargetCheckCol] = true;
+                }
+            }
+        }
+
+        private void SelectOuterIndexButton_Click(object sender, EventArgs e) {
+            foreach (Row r in this.TargetIndexGrid.Rows) {
+                string createMode = StringUtil.NullToBlank(r[(int)IndexBuildForm.ActiveIndexColIdx.CreateMode + 2]);
+                if (createMode == EnumUtil.GetLabel(LuceneIndexBuilder.CreateModes.OuterReference)) {
+                    r[TargetCheckCol] = true;
+                } else {
+                    r[TargetCheckCol] = false;
+                }
             }
         }
     }

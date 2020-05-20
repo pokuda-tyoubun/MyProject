@@ -281,6 +281,7 @@
   <ItemGroup>
     <Compile Include="AppObject.cs" />
     <Compile Include="Consts.cs" />
+    <Compile Include="Exceptions\UnlinkedIndexException.cs" />
     <Compile Include="IndexUtil\LuceneIndexBuilder.cs" />
     <Compile Include="IndexUtil\LuceneIndexReaderUtil.cs" />
     <Compile Include="IndexUtil\ProgressReport.cs" />

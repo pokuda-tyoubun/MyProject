@@ -33,5 +33,14 @@ namespace PokudaSearch.Test {
             propertyWriter.WriteProperty(SystemProperties.System.Comment, new string[] { "コメント" });
             propertyWriter.Close();
         }
+        [TestMethod]
+        public void PathReplaceTest() {
+            string path1 = @"S:\bin\DB\test.db";
+            string path2 = @"C:\Temp\bin\IndexStore\Index1";
+
+            string tmp1 = path1.Substring(0, path1.IndexOf(@"bin\DB"));
+            string tmp2 = path2.Substring(path2.IndexOf(@"bin\IndexStore"));
+            Assert.AreEqual(tmp1 + tmp2, @"S:\bin\IndexStore\Index1");
+        }
     }
 }

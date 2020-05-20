@@ -92,6 +92,8 @@
             this.SearchPanel = new System.Windows.Forms.Panel();
             this.ExpandPreviewCheck = new System.Windows.Forms.CheckBox();
             this.collapsibleSplitter1 = new NJFLib.Controls.CollapsibleSplitter();
+            this.SelectLocalIndexButton = new System.Windows.Forms.Button();
+            this.SelectOuterIndexButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultNavi)).BeginInit();
@@ -722,6 +724,8 @@
             // 
             // SearchPanel
             // 
+            this.SearchPanel.Controls.Add(this.SelectOuterIndexButton);
+            this.SearchPanel.Controls.Add(this.SelectLocalIndexButton);
             this.SearchPanel.Controls.Add(this.ExpandPreviewCheck);
             this.SearchPanel.Controls.Add(this.label2);
             this.SearchPanel.Controls.Add(this.TargetIndexGrid);
@@ -770,6 +774,26 @@
             this.collapsibleSplitter1.TabStop = false;
             this.collapsibleSplitter1.UseAnimations = false;
             this.collapsibleSplitter1.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
+            // 
+            // SelectLocalIndexButton
+            // 
+            this.SelectLocalIndexButton.Location = new System.Drawing.Point(465, 63);
+            this.SelectLocalIndexButton.Name = "SelectLocalIndexButton";
+            this.SelectLocalIndexButton.Size = new System.Drawing.Size(94, 21);
+            this.SelectLocalIndexButton.TabIndex = 117;
+            this.SelectLocalIndexButton.Text = "ローカルインデックスのみ";
+            this.SelectLocalIndexButton.UseVisualStyleBackColor = true;
+            this.SelectLocalIndexButton.Click += new System.EventHandler(this.SelectLocalIndexButton_Click);
+            // 
+            // SelectOuterIndexButton
+            // 
+            this.SelectOuterIndexButton.Location = new System.Drawing.Point(465, 87);
+            this.SelectOuterIndexButton.Name = "SelectOuterIndexButton";
+            this.SelectOuterIndexButton.Size = new System.Drawing.Size(94, 21);
+            this.SelectOuterIndexButton.TabIndex = 118;
+            this.SelectOuterIndexButton.Text = "外部インデックスのみ";
+            this.SelectOuterIndexButton.UseVisualStyleBackColor = true;
+            this.SelectOuterIndexButton.Click += new System.EventHandler(this.SelectOuterIndexButton_Click);
             // 
             // SearchForm
             // 
@@ -870,5 +894,7 @@
         private C1.Win.C1Tile.Tile tile3;
         private C1.Win.C1Tile.Template tempDoc;
         private System.Windows.Forms.CheckBox ExpandPreviewCheck;
+        private System.Windows.Forms.Button SelectOuterIndexButton;
+        private System.Windows.Forms.Button SelectLocalIndexButton;
     }
 }

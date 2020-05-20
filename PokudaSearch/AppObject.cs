@@ -129,6 +129,8 @@ namespace PokudaSearch {
             get { return _logger; }
         }
 
+        public static bool AlreadyLoadedLogviewer = false;
+
         /// <summary>PokudaSearch.dbへの接続文字列</summary>
         public static string ConnectString { get; set; }
 
@@ -146,18 +148,79 @@ namespace PokudaSearch {
 
         public static Analyzer AppAnalyzer = null;
 
-        /// <summary>フィルターヘルパ</summary>
-        private static FilterHelper _filterHelper = new FilterHelper();
-        public static FilterHelper FilterHelper {
-            get { return _filterHelper; }
-        }
-
         /// <summary>メッセージリソース</summary>
         private static MultiLangUtil _mlu = new MultiLangUtil();
         public static MultiLangUtil MLUtil {
             get { return _mlu; }
         }
+        public static string GetMsg(Msg msgId) {
+            string key = EnumUtil.GetName(msgId);
+            return _mlu.GetMsg(key);
+        }
+        #region Message
+        public enum Msg : int {
+            [EnumLabel("抽出中...")]
+            ACT_EXTRACT = 0,
+            [EnumLabel("検索中…")]
+            ACT_SEARCH,
+            [EnumLabel("処理中 ...")]
+            ACT_PROCESSING,
+            [EnumLabel("絞込中 ...")]
+            ACT_FILTER,
+            [EnumLabel("絞込を解除中 ...")]
+            ACT_RESET_FILTER,
+            [EnumLabel("")]
+            ACT_END,
+            [EnumLabel("情報")]
+            TITLE_INFO,
+            [EnumLabel("警告")]
+            TITLE_WARN,
+            [EnumLabel("エラー")]
+            TITLE_ERROR,
+            [EnumLabel("抽出対象データがありません。")]
+            MSG_EXTRACT_ZERO,
+            [EnumLabel("Excelのバージョンが2003以前なので、257列以降は切り捨てます。")]
+            MSG_EXCEL2003_DATA_TRUNCATE,
+            [EnumLabel("背景色設定中…")]
+            MSG_COLORING_BACKCOLOR,
+            [EnumLabel("処理を中断しますか？")]
+            MSG_DO_STOP,
+            [EnumLabel("インデックス対象が0件でした。")]
+            MSG_INDEXED_COUNT_ZERO,
+            [EnumLabel("キーワードを入力して下さい。")]
+            MSG_INPUT_KEYWORD,
+            [EnumLabel("検索対象インデックスを選択して下さい。")]
+            MSG_CHECKON_TARGET_INDEX,
+            [EnumLabel("指定されたフォルダは存在しません。")]
+            ERR_DIR_NOT_FOUND,
+            [EnumLabel("ファイルが存在しません。")]
+            ERR_FILE_NOT_FOUND,
+            [EnumLabel("インデックス数が上限に達しました。これ以上インデックスを追加することはできません。")]
+            MSG_INDEX_COUNT_MAX,
+            [EnumLabel("指定されたローカルフォルダは存在しません。")]
+            ERR_LOCALDIR_NOT_FOUND,
+            [EnumLabel("「PokudaSearch.db」ファイルが存在しません。")]
+            ERR_DBFILE_NOT_FOUND,
+            [EnumLabel("無効なパスです。")]
+            ERR_INVALID_PATH,
+            [EnumLabel("Microsoft Wordがインストールされていません。")]
+            ERR_UNINSTALLED_MS_WORD,
+            [EnumLabel("Microsoft Excelがインストールされていません。")]
+            ERR_UNINSTALLED_MS_XLS,
+            [EnumLabel("Microsoft PowerPointがインストールされていません。")]
+            ERR_UNINSTALLED_MS_PPT,
+            [EnumLabel("情報を取得できませんでした。")]
+            ERR_CANNOT_GET_INFO,
+            [EnumLabel("[{0}]へのインデックスが参照できないため検索を中断します。")]
+            ERR_UNLINKED_INDEX,
+        }
+        #endregion Message
 
+        /// <summary>フィルターヘルパ</summary>
+        private static FilterHelper _filterHelper = new FilterHelper();
+        public static FilterHelper FilterHelper {
+            get { return _filterHelper; }
+        }
 
         public static string GetVersion() {
             Assembly asm = Assembly.GetEntryAssembly();
@@ -171,19 +234,15 @@ namespace PokudaSearch {
         /// コンストラクタ
         /// </summary>
         static AppObject() {
-            //HACK Settingsファイルに移行
-            _mlu.MessageDictionary.Add("ACT_EXTRACT", "抽出中...");
-            _mlu.MessageDictionary.Add("ACT_SEARCH", "検索中…");
-            _mlu.MessageDictionary.Add("ACT_PROCESSING", "処理中 ...");
-            _mlu.MessageDictionary.Add("ACT_FILTER", "絞込中 ...");
-            _mlu.MessageDictionary.Add("ACT_RESET_FILTER", "絞込を解除中 ...");
-            _mlu.MessageDictionary.Add("ACT_END", "");
-            _mlu.MessageDictionary.Add("MSG_EXTRACT_ZERO", "抽出対象データがありません。");
-            _mlu.MessageDictionary.Add("TITLE_WARN", "警告");
-            _mlu.MessageDictionary.Add("TITLE_ERROR", "エラー");
-            _mlu.MessageDictionary.Add("MSG_EXCEL2003_DATA_TRUNCATE", "Excelのバージョンが2003以前なので、257列以降は切り捨てます。");
-            _mlu.MessageDictionary.Add("MSG_COLORING_BACKCOLOR", "背景色設定中…");
-            _mlu.MessageDictionary.Add("MSG_DO_STOP", "処理を中断しますか？");
+            foreach (Msg value in Enum.GetValues(typeof(Msg))) {
+                var key = value.ToString();
+                var label = EnumUtil.GetLabel(value);
+                _mlu.MessageDictionary.Add(key, label);
+            }
+        }
+
+        public static string GetLabel(Msg msgId) {
+            return EnumUtil.GetLabel(msgId);
         }
 
         //TODO 配置場所を要検討

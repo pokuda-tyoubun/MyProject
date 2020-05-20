@@ -83,8 +83,8 @@ namespace PokudaSearch.WebDriver {
 
                     return info;
                 } catch (NoSuchElementException) {
-                    MessageBox.Show("情報を取得できませんでした。", AppObject.MLUtil.GetMsg(CommonConsts.TITLE_WARN), 
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(AppObject.GetMsg(AppObject.Msg.ERR_CANNOT_GET_INFO), 
+                        AppObject.GetMsg(AppObject.Msg.TITLE_WARN), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return info;
                 }
             } finally {

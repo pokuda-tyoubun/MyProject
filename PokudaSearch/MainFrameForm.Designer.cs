@@ -57,9 +57,9 @@
             this.MainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StatusLabel,
             this.ProgressBar});
-            this.MainStatusStrip.Location = new System.Drawing.Point(0, 602);
+            this.MainStatusStrip.Location = new System.Drawing.Point(0, 684);
             this.MainStatusStrip.Name = "MainStatusStrip";
-            this.MainStatusStrip.Size = new System.Drawing.Size(1043, 27);
+            this.MainStatusStrip.Size = new System.Drawing.Size(1184, 27);
             this.MainStatusStrip.TabIndex = 4;
             this.MainStatusStrip.Text = "statusStrip1";
             // 
@@ -83,7 +83,7 @@
             this.MainRibbon.Location = new System.Drawing.Point(0, 0);
             this.MainRibbon.Name = "MainRibbon";
             this.MainRibbon.QatHolder = this.ribbonQat1;
-            this.MainRibbon.Size = new System.Drawing.Size(1043, 153);
+            this.MainRibbon.Size = new System.Drawing.Size(1184, 153);
             this.MainRibbon.Tabs.Add(this.MainTab);
             this.MainRibbon.TopToolBarHolder = this.ribbonTopToolBar1;
             this.MainRibbon.VisualStyle = C1.Win.C1Ribbon.VisualStyle.Office2010Black;
@@ -220,7 +220,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1043, 629);
+            this.ClientSize = new System.Drawing.Size(1184, 711);
             this.Controls.Add(this.MainRibbon);
             this.Controls.Add(this.MainStatusStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

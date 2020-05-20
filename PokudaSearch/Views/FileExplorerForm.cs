@@ -114,8 +114,8 @@ namespace PokudaSearch.Views {
             try {
                 eb.Navigate(ShellFileSystemFolder.FromFolderPath(tcb.Text));
             } catch (COMException) {
-                //HACK メッセージ
-                MessageBox.Show("存在しないパスです。", AppObject.MLUtil.GetMsg(CommonConsts.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(AppObject.GetMsg(AppObject.Msg.ERR_INVALID_PATH), 
+                    AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

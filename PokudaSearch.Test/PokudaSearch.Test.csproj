@@ -236,8 +236,11 @@
     <Compile Include="Interfaces\IFormDriver.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="MainFrameFormTest.cs" />
+    <Compile Include="Views\Driver\OuterIndexFormDriver.cs" />
     <Compile Include="Views\Driver\IndexBuildFormDriver.cs" />
     <Compile Include="Views\Driver\SearchFormDriver.cs" />
+    <Compile Include="Views\OuterIndexFormTest.cs" />
+    <Compile Include="Views\SearchFormTest.cs" />
     <Compile Include="Views\IndexBuildFormTest.cs" />
     <Compile Include="SandBoxTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -255,6 +258,10 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TestData\Normal\" />
+    <Folder Include="TestData\Zero\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

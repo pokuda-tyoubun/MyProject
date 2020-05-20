@@ -31,9 +31,10 @@ namespace PokudaSearch.Test.Driver {
 
         public IndexBuildFormDriver IndexBuildFormButton_EmulateClick() {
             Async async = new Async();
-            IndexBuildFormButton.EmulateClick();
-            var indexBuildForm = new WindowControl(AppDriver.App.Type<MainFrameForm>().IndexBuildForm);
-            return new IndexBuildFormDriver(indexBuildForm, async);
+            IndexBuildFormButton.EmulateClick(async);
+            //var indexBuildForm = new WindowControl(AppDriver.App.Type<MainFrameForm>().IndexBuildForm);
+            var indexBuildForm = new IndexBuildFormDriver(WindowControl.FromZTop(AppDriver.App), async);
+            return indexBuildForm;
         }
         public SearchFormDriver SearchFormButton_EmulateClick() {
             SearchFormButton.EmulateClick();

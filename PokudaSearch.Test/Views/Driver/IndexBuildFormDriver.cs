@@ -15,11 +15,15 @@ namespace PokudaSearch.Test.Views.Driver {
         public WindowControl Window { get; private set; }
 
         public Async Async { get; private set; }
+
         public FormsTextBox TargetDirText { get; private set; }
         public FormsButton ReferenceButton { get; private set; }
 
         public FormsButton UpdateIndexButton { get; private set; }
+        public FormsButton AddOuterIndexButton { get; private set; }
+
         public FormsButton StopButton { get; private set; }
+        public FormsProgressBar ProgressBar { get; private set; }
 
         public FwFlexGridEx ActiveIndexGrid { get; private set; }
         public FwFlexGridEx IndexHistoryGrid { get; private set; }
@@ -31,7 +35,9 @@ namespace PokudaSearch.Test.Views.Driver {
             TargetDirText = new FormsTextBox(Window.Dynamic().TargetDirText);
             ReferenceButton = new FormsButton(Window.Dynamic().ReferenceButton);
             UpdateIndexButton = new FormsButton(Window.Dynamic().UpdateIndexButton);
+            AddOuterIndexButton = new FormsButton(Window.Dynamic().AddOuterIndexButton);
             StopButton = new FormsButton(Window.Dynamic().StopButton);
+            ProgressBar = new FormsProgressBar(Window.Dynamic().ProgressBar);
             ActiveIndexGrid = new FwFlexGridEx(Window.Dynamic().ActiveIndexGrid);
             IndexHistoryGrid = new FwFlexGridEx(Window.Dynamic().IndexHistoryGrid);
         }

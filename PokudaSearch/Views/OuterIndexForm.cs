@@ -28,8 +28,8 @@ namespace PokudaSearch.Views {
         #region Properties
         /// <summary>接続文字列</summary>
         public string ConnectString;
-        /// <summary>リモートパス</summary>
-        public string RemotePath;
+        /// <summary>外部参照パス</summary>
+        public string OuterPath;
         /// <summary>ローカルパス</summary>
         public string LocalPath;
         /// <summary>インデックスパス</summary>
@@ -43,16 +43,19 @@ namespace PokudaSearch.Views {
         private FileInfo _dbFile = null;
         #endregion MemberVariables
 
+        #region Constractors
         public OuterIndexForm(FileInfo dbFile) {
             InitializeComponent();
 
             ConnectString = AppObject.GetConnectString(dbFile.FullName);
             _dbFile = dbFile;
-            RemotePath = "";
+            OuterPath = "";
             LocalPath = "";
             IndexStorePath = "";
         }
+        #endregion Constractors
 
+        #region EventHandlers
         /// <summary>
         /// フォームロード
         /// </summary>
@@ -60,10 +63,6 @@ namespace PokudaSearch.Views {
         /// <param name="e"></param>
         private void OuterIndexForm_Load(object sender, EventArgs e) {
             IndexBuildForm.LoadActiveIndex(ConnectString, this.ActiveIndexGrid, appendCheckBox:false);
-            //先頭行を選択
-            if (this.ActiveIndexGrid.Rows.Count >= HeaderRowCount) {
-                this.ActiveIndexGrid.Rows[1].Selected = true;
-            }
         }
 
         /// <summary>
@@ -72,15 +71,15 @@ namespace PokudaSearch.Views {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void OKButton_Click(object sender, EventArgs e) {
-            string storePath = this.IndexStorePathText.Text;
-            string remotePath = this.RemotePathText.Text;
+            string storePath = this.OuterStorePathText.Text;
+            string outerPath = this.OuterTargetPathText.Text;
             string localPath = this.LocalPathText.Text;
             //末尾の\を除去
             storePath = StringUtil.RemoveLastChar(storePath, '\\');
-            remotePath = StringUtil.RemoveLastChar(remotePath, '\\');
+            outerPath = StringUtil.RemoveLastChar(outerPath, '\\');
             localPath = StringUtil.RemoveLastChar(localPath, '\\');
 
-            RemotePath = remotePath;
+            OuterPath = outerPath;
             LocalPath = localPath;
             IndexStorePath = storePath;
 
@@ -93,7 +92,7 @@ namespace PokudaSearch.Views {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void CancelButton1_Click(object sender, EventArgs e) {
-            RemotePath = "";
+            OuterPath = "";
             LocalPath = "";
             IndexStorePath = "";
             TargetCount = 0;
@@ -107,7 +106,7 @@ namespace PokudaSearch.Views {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void RefButton_Click(object sender, EventArgs e) {
+        private void ReferenceButton_Click(object sender, EventArgs e) {
             string selectedPath = FileUtil.GetSelectedDirectory("ローカルパス選択", this.LocalPathText.Text);
             if (!String.IsNullOrEmpty(selectedPath)) {
                 this.LocalPathText.Text = selectedPath;
@@ -117,8 +116,8 @@ namespace PokudaSearch.Views {
 
         private void ActiveIndexGrid_SelChange(object sender, EventArgs e) {
             if (this.ActiveIndexGrid.Selection.TopRow < HeaderRowCount) {
-                this.IndexStorePathText.Text = "";
-                this.RemotePathText.Text = "";
+                this.OuterStorePathText.Text = "";
+                this.OuterTargetPathText.Text = "";
                 return;
             }
 
@@ -126,13 +125,21 @@ namespace PokudaSearch.Views {
                                     (int)ActiveIndexColIdx.IndexStorePath + 1]);
             string tmp1 = _dbFile.FullName.Substring(0, _dbFile.FullName.IndexOf(@"bin\DB"));
             string tmp2 = storePath.Substring(storePath.IndexOf(@"bin\IndexStore"));
-            this.IndexStorePathText.Text = tmp1 + tmp2;
+            this.OuterStorePathText.Text = tmp1 + tmp2;
 
             string remotePath = StringUtil.NullToBlank(this.ActiveIndexGrid[this.ActiveIndexGrid.Selection.TopRow, 
                                     (int)ActiveIndexColIdx.IndexedPath + 1]);
-            this.RemotePathText.Text = remotePath;
+            this.OuterTargetPathText.Text = remotePath;
             TargetCount = int.Parse(StringUtil.NullToZero(this.ActiveIndexGrid[this.ActiveIndexGrid.Selection.TopRow, 
                                     (int)ActiveIndexColIdx.TargetCount + 1]));
         }
+
+        private void OuterIndexForm_Shown(object sender, EventArgs e) {
+            //先頭行を選択
+            if (this.ActiveIndexGrid.Rows.Count >= HeaderRowCount) {
+                this.ActiveIndexGrid.Select(1, 2);
+            }
+        }
+        #endregion EventHandlers
     }
 }

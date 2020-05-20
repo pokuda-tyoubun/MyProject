@@ -35,7 +35,7 @@ namespace PokudaSearch.IndexUtil {
             [EnumLabel("更新")]
             Update,
             [EnumLabel("外部参照")]
-            External
+            OuterReference
         }
         #region IndexField
         public const string Path = "Path";
@@ -462,8 +462,7 @@ namespace PokudaSearch.IndexUtil {
                 }
                 throw e;
             } finally {
-                indexBuildDir.Close();
-                if (indexWriter != null) {
+                if (indexWriter != null && indexWriter.IsOpen()) {
                     //クローズ時にIndexファイルがフラッシュされる
                     indexWriter.Close();
                 }
@@ -475,6 +474,7 @@ namespace PokudaSearch.IndexUtil {
                     TargetCount = _targetCount,
                     Status = ProgressReport.ProgressStatus.Finished
                 });
+                indexBuildDir.Close();
             }
         }
         /// <summary>
@@ -482,9 +482,12 @@ namespace PokudaSearch.IndexUtil {
         /// </summary>
         /// <returns></returns>
         private int GetPercentage() {
-            int val = (int)((double)(FinishedCount) / _targetCount * 100);
-            if (val > 100) {
-                val = 100;
+            int val = 0;
+            if (_targetCount > 0) {
+                val = (int)((double)(FinishedCount) / _targetCount * 100);
+                if (val > 100) {
+                    val = 100;
+                }
             }
             return val;
         }

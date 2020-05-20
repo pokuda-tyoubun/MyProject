@@ -32,7 +32,7 @@ namespace PokudaSearch.Test {
         }
         #region AutoTest
         [TestMethod, TestCategory("Auto"), TestCategory("個別")]
-        public void AutoTestインデックス作成() {
+        public void インデックス作成画面表示Test() {
             var indexBuildForm = _mainFrameForm.IndexBuildFormButton_EmulateClick();
             string windowText = indexBuildForm.Window.GetWindowText();
             indexBuildForm.Close();

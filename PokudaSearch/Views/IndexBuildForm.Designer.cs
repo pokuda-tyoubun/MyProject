@@ -40,20 +40,20 @@
             this.Log4NetTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.MainPanel = new System.Windows.Forms.Panel();
-            this.AddIndexButton = new System.Windows.Forms.Button();
+            this.AddOuterIndexButton = new System.Windows.Forms.Button();
             this.StopButton = new System.Windows.Forms.Button();
             this.IndexHistoryGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
             this.TargetDirText = new FxCommonLib.Controls.FilePathTextBox(this.components);
-            this.label1 = new System.Windows.Forms.Label();
+            this.ActiveIndexLabel = new System.Windows.Forms.Label();
             this.ActiveIndexGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
             this.ActiveIndexContext = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.UpdateIndexMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteIndexMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.EditInteractionPathMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ActiveIndexCopyMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.EditInteractionPathMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.IndexHistoryContext.SuspendLayout();
             this.BottomPanel.SuspendLayout();
@@ -92,7 +92,7 @@
             this.LogViewerText.Name = "LogViewerText";
             this.LogViewerText.ReadOnly = true;
             this.LogViewerText.Size = new System.Drawing.Size(123, 20);
-            this.LogViewerText.TabIndex = 6;
+            this.LogViewerText.TabIndex = 5;
             // 
             // TikaRadio
             // 
@@ -124,7 +124,7 @@
             this.groupBox1.Location = new System.Drawing.Point(5, 31);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(213, 39);
-            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "テキストコンバータ";
             // 
@@ -133,7 +133,7 @@
             this.ProgressBar.Location = new System.Drawing.Point(350, 47);
             this.ProgressBar.Name = "ProgressBar";
             this.ProgressBar.Size = new System.Drawing.Size(241, 22);
-            this.ProgressBar.TabIndex = 7;
+            this.ProgressBar.TabIndex = 6;
             // 
             // MergeIndexButton
             // 
@@ -166,7 +166,7 @@
             this.UpdateIndexButton.Location = new System.Drawing.Point(538, 6);
             this.UpdateIndexButton.Name = "UpdateIndexButton";
             this.UpdateIndexButton.Size = new System.Drawing.Size(113, 22);
-            this.UpdateIndexButton.TabIndex = 3;
+            this.UpdateIndexButton.TabIndex = 2;
             this.UpdateIndexButton.Text = "インデックス作成(&B)";
             this.UpdateIndexButton.UseVisualStyleBackColor = true;
             this.UpdateIndexButton.Click += new System.EventHandler(this.UpdateIndexButton_Click);
@@ -207,12 +207,12 @@
             // 
             // MainPanel
             // 
-            this.MainPanel.Controls.Add(this.AddIndexButton);
+            this.MainPanel.Controls.Add(this.AddOuterIndexButton);
             this.MainPanel.Controls.Add(this.StopButton);
             this.MainPanel.Controls.Add(this.IndexHistoryGrid);
             this.MainPanel.Controls.Add(this.label4);
             this.MainPanel.Controls.Add(this.TargetDirText);
-            this.MainPanel.Controls.Add(this.label1);
+            this.MainPanel.Controls.Add(this.ActiveIndexLabel);
             this.MainPanel.Controls.Add(this.ReferenceButton);
             this.MainPanel.Controls.Add(this.CreateIndexButton);
             this.MainPanel.Controls.Add(this.LogViewerText);
@@ -225,25 +225,25 @@
             this.MainPanel.Location = new System.Drawing.Point(0, 0);
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(929, 394);
-            this.MainPanel.TabIndex = 121;
+            this.MainPanel.TabIndex = 0;
             // 
-            // AddIndexButton
+            // AddOuterIndexButton
             // 
-            this.AddIndexButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.AddIndexButton.Location = new System.Drawing.Point(654, 5);
-            this.AddIndexButton.Name = "AddIndexButton";
-            this.AddIndexButton.Size = new System.Drawing.Size(126, 22);
-            this.AddIndexButton.TabIndex = 13;
-            this.AddIndexButton.Text = "外部インデックス追加";
-            this.AddIndexButton.UseVisualStyleBackColor = true;
-            this.AddIndexButton.Click += new System.EventHandler(this.AddIndexButton_Click);
+            this.AddOuterIndexButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.AddOuterIndexButton.Location = new System.Drawing.Point(654, 5);
+            this.AddOuterIndexButton.Name = "AddOuterIndexButton";
+            this.AddOuterIndexButton.Size = new System.Drawing.Size(126, 22);
+            this.AddOuterIndexButton.TabIndex = 3;
+            this.AddOuterIndexButton.Text = "外部インデックス追加";
+            this.AddOuterIndexButton.UseVisualStyleBackColor = true;
+            this.AddOuterIndexButton.Click += new System.EventHandler(this.AddOuterIndexButton_Click);
             // 
             // StopButton
             // 
             this.StopButton.Location = new System.Drawing.Point(595, 47);
             this.StopButton.Name = "StopButton";
             this.StopButton.Size = new System.Drawing.Size(70, 22);
-            this.StopButton.TabIndex = 8;
+            this.StopButton.TabIndex = 7;
             this.StopButton.Text = "中断";
             this.StopButton.UseVisualStyleBackColor = true;
             this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
@@ -271,7 +271,7 @@
             this.IndexHistoryGrid.Rows.DefaultSize = 18;
             this.IndexHistoryGrid.Size = new System.Drawing.Size(923, 91);
             this.IndexHistoryGrid.StyleInfo = resources.GetString("IndexHistoryGrid.StyleInfo");
-            this.IndexHistoryGrid.TabIndex = 12;
+            this.IndexHistoryGrid.TabIndex = 10;
             this.IndexHistoryGrid.WindowsName = null;
             // 
             // TargetDirText
@@ -282,17 +282,17 @@
             this.TargetDirText.Size = new System.Drawing.Size(460, 19);
             this.TargetDirText.TabIndex = 0;
             // 
-            // label1
+            // ActiveIndexLabel
             // 
-            this.label1.BackColor = System.Drawing.SystemColors.Info;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(3, 73);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(117, 21);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "有効インデックス";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ActiveIndexLabel.BackColor = System.Drawing.SystemColors.Info;
+            this.ActiveIndexLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ActiveIndexLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.ActiveIndexLabel.Location = new System.Drawing.Point(3, 73);
+            this.ActiveIndexLabel.Name = "ActiveIndexLabel";
+            this.ActiveIndexLabel.Size = new System.Drawing.Size(165, 21);
+            this.ActiveIndexLabel.TabIndex = 8;
+            this.ActiveIndexLabel.Text = "有効インデックス(最大20)";
+            this.ActiveIndexLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ActiveIndexGrid
             // 
@@ -316,7 +316,7 @@
             this.ActiveIndexGrid.Rows.DefaultSize = 18;
             this.ActiveIndexGrid.Size = new System.Drawing.Size(923, 173);
             this.ActiveIndexGrid.StyleInfo = resources.GetString("ActiveIndexGrid.StyleInfo");
-            this.ActiveIndexGrid.TabIndex = 10;
+            this.ActiveIndexGrid.TabIndex = 9;
             this.ActiveIndexGrid.WindowsName = null;
             this.ActiveIndexGrid.SelChange += new System.EventHandler(this.ActiveIndexGrid_SelChange);
             // 
@@ -330,31 +330,43 @@
             this.toolStripSeparator1,
             this.ActiveIndexCopyMenu});
             this.ActiveIndexContext.Name = "ActiveIndexContext";
-            this.ActiveIndexContext.Size = new System.Drawing.Size(181, 126);
+            this.ActiveIndexContext.Size = new System.Drawing.Size(170, 104);
             // 
             // UpdateIndexMenu
             // 
             this.UpdateIndexMenu.Name = "UpdateIndexMenu";
-            this.UpdateIndexMenu.Size = new System.Drawing.Size(180, 22);
+            this.UpdateIndexMenu.Size = new System.Drawing.Size(169, 22);
             this.UpdateIndexMenu.Text = "インデックス更新(&U)";
             this.UpdateIndexMenu.Click += new System.EventHandler(this.UpdateIndexMenu_Click);
             // 
             // DeleteIndexMenu
             // 
             this.DeleteIndexMenu.Name = "DeleteIndexMenu";
-            this.DeleteIndexMenu.Size = new System.Drawing.Size(180, 22);
+            this.DeleteIndexMenu.Size = new System.Drawing.Size(169, 22);
             this.DeleteIndexMenu.Text = "インデックス削除(&D)";
             this.DeleteIndexMenu.Click += new System.EventHandler(this.DeleteIndexMenu_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(166, 6);
+            // 
+            // EditInteractionPathMenu
+            // 
+            this.EditInteractionPathMenu.Name = "EditInteractionPathMenu";
+            this.EditInteractionPathMenu.Size = new System.Drawing.Size(169, 22);
+            this.EditInteractionPathMenu.Text = "対応パス編集(&I)";
+            this.EditInteractionPathMenu.Click += new System.EventHandler(this.EditInteractionPathMenu_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(166, 6);
             // 
             // ActiveIndexCopyMenu
             // 
             this.ActiveIndexCopyMenu.Name = "ActiveIndexCopyMenu";
-            this.ActiveIndexCopyMenu.Size = new System.Drawing.Size(180, 22);
+            this.ActiveIndexCopyMenu.Size = new System.Drawing.Size(169, 22);
             this.ActiveIndexCopyMenu.Text = "コピー(&C)";
             this.ActiveIndexCopyMenu.Click += new System.EventHandler(this.ActiveIndexCopyMenu_Click);
             // 
@@ -373,18 +385,6 @@
             this.collapsibleSplitter3.TabStop = false;
             this.collapsibleSplitter3.UseAnimations = false;
             this.collapsibleSplitter3.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
-            // 
-            // EditInteractionPathMenu
-            // 
-            this.EditInteractionPathMenu.Name = "EditInteractionPathMenu";
-            this.EditInteractionPathMenu.Size = new System.Drawing.Size(180, 22);
-            this.EditInteractionPathMenu.Text = "対応パス編集(&I)";
-            this.EditInteractionPathMenu.Click += new System.EventHandler(this.EditInteractionPathMenu_Click);
             // 
             // IndexBuildForm
             // 
@@ -431,7 +431,7 @@
         private NJFLib.Controls.CollapsibleSplitter collapsibleSplitter3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel MainPanel;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label ActiveIndexLabel;
         private FxCommonLib.Controls.FlexGridEx ActiveIndexGrid;
         private System.Windows.Forms.ContextMenuStrip ActiveIndexContext;
         private System.Windows.Forms.ToolStripMenuItem DeleteIndexMenu;
@@ -442,7 +442,7 @@
         private System.Windows.Forms.ToolStripMenuItem UpdateIndexMenu;
         private System.Windows.Forms.TextBox Log4NetTextBox;
         private System.Windows.Forms.Button StopButton;
-        private System.Windows.Forms.Button AddIndexButton;
+        private System.Windows.Forms.Button AddOuterIndexButton;
         private System.Windows.Forms.ToolStripMenuItem EditInteractionPathMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
