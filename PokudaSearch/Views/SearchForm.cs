@@ -75,6 +75,7 @@ namespace PokudaSearch.Views {
         #endregion Properties
 
         #region MemberVariables
+        private bool _returnFocus = false;
         /// <summary>ビットマップユーティリティ</summary>
         private BitmapUtil _bu = new BitmapUtil();
         /// <summary>C1SuperLabelのリスト(高速化のためキャッシュする)</summary>
@@ -1048,6 +1049,9 @@ namespace PokudaSearch.Views {
                         _chromeBrowser.Load("about:blank");
                     } else {
                         _chromeBrowser.Load(fullPath);
+                        //NOTE : Load後、何故かResultGridからFocusが外れてPageDown／Upが効かなくなるので
+                        //       強制的にResultGridにフォーカスを戻す。
+                        _returnFocus = true;
                     }
                 }
             }
@@ -1399,5 +1403,14 @@ namespace PokudaSearch.Views {
             this.PreviewPanel.Width = 1000;
         }
         #endregion PrivateMethods
+
+        private void ResultGrid_Leave(object sender, EventArgs e) {
+            if (_returnFocus) {
+                //NOTE : Load後、何故かResultGridからFocusが外れてPageDown／Upが効かなくなるので
+                //       強制的にResultGridにフォーカスを戻す。
+                this.ResultGrid.Focus();
+                _returnFocus = false;
+            }
+        }
     }
 }
