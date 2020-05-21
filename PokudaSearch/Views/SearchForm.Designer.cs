@@ -25,15 +25,15 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchForm));
-            C1.Win.C1Tile.PanelElement panelElement7 = new C1.Win.C1Tile.PanelElement();
-            C1.Win.C1Tile.ImageElement imageElement5 = new C1.Win.C1Tile.ImageElement();
-            C1.Win.C1Tile.TextElement textElement9 = new C1.Win.C1Tile.TextElement();
-            C1.Win.C1Tile.TextElement textElement10 = new C1.Win.C1Tile.TextElement();
-            C1.Win.C1Tile.ImageElement imageElement6 = new C1.Win.C1Tile.ImageElement();
-            C1.Win.C1Tile.PanelElement panelElement8 = new C1.Win.C1Tile.PanelElement();
-            C1.Win.C1Tile.TextElement textElement11 = new C1.Win.C1Tile.TextElement();
-            C1.Win.C1Tile.PanelElement panelElement9 = new C1.Win.C1Tile.PanelElement();
-            C1.Win.C1Tile.TextElement textElement12 = new C1.Win.C1Tile.TextElement();
+            C1.Win.C1Tile.PanelElement panelElement4 = new C1.Win.C1Tile.PanelElement();
+            C1.Win.C1Tile.ImageElement imageElement3 = new C1.Win.C1Tile.ImageElement();
+            C1.Win.C1Tile.TextElement textElement5 = new C1.Win.C1Tile.TextElement();
+            C1.Win.C1Tile.TextElement textElement6 = new C1.Win.C1Tile.TextElement();
+            C1.Win.C1Tile.ImageElement imageElement4 = new C1.Win.C1Tile.ImageElement();
+            C1.Win.C1Tile.PanelElement panelElement5 = new C1.Win.C1Tile.PanelElement();
+            C1.Win.C1Tile.TextElement textElement7 = new C1.Win.C1Tile.TextElement();
+            C1.Win.C1Tile.PanelElement panelElement6 = new C1.Win.C1Tile.PanelElement();
+            C1.Win.C1Tile.TextElement textElement8 = new C1.Win.C1Tile.TextElement();
             this.label2 = new System.Windows.Forms.Label();
             this.KeywordText = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -481,15 +481,15 @@
             // 
             // 
             // 
-            panelElement7.Alignment = System.Drawing.ContentAlignment.BottomLeft;
-            panelElement7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            panelElement7.Children.Add(imageElement5);
-            panelElement7.Children.Add(textElement9);
-            panelElement7.Margin = new System.Windows.Forms.Padding(10, 6, 10, 6);
-            this.ResultTile.DefaultTemplate.Elements.Add(panelElement7);
-            this.ResultTile.DefaultTemplate.Elements.Add(textElement10);
+            panelElement4.Alignment = System.Drawing.ContentAlignment.BottomLeft;
+            panelElement4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            panelElement4.Children.Add(imageElement3);
+            panelElement4.Children.Add(textElement5);
+            panelElement4.Margin = new System.Windows.Forms.Padding(10, 6, 10, 6);
+            this.ResultTile.DefaultTemplate.Elements.Add(panelElement4);
+            this.ResultTile.DefaultTemplate.Elements.Add(textElement6);
             this.ResultTile.Groups.Add(this.group1);
-            this.ResultTile.Location = new System.Drawing.Point(419, 92);
+            this.ResultTile.Location = new System.Drawing.Point(95, 360);
             this.ResultTile.Name = "ResultTile";
             this.ResultTile.Orientation = C1.Win.C1Tile.LayoutOrientation.Vertical;
             this.ResultTile.Size = new System.Drawing.Size(398, 233);
@@ -517,25 +517,25 @@
             // tempDoc
             // 
             this.tempDoc.Description = "テンプレート １";
-            panelElement8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            textElement11.BackColorSelector = C1.Win.C1Tile.BackColorSelector.Unbound;
-            textElement11.ForeColor = System.Drawing.Color.Black;
-            textElement11.ForeColorSelector = C1.Win.C1Tile.ForeColorSelector.Unbound;
-            textElement11.SingleLine = true;
-            panelElement8.Children.Add(textElement11);
-            panelElement8.Dock = System.Windows.Forms.DockStyle.Top;
-            panelElement8.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            panelElement9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            textElement12.BackColorSelector = C1.Win.C1Tile.BackColorSelector.Unbound;
-            textElement12.ForeColor = System.Drawing.Color.Black;
-            textElement12.ForeColorSelector = C1.Win.C1Tile.ForeColorSelector.Unbound;
-            textElement12.TextSelector = C1.Win.C1Tile.TextSelector.Text1;
-            panelElement9.Children.Add(textElement12);
-            panelElement9.Dock = System.Windows.Forms.DockStyle.Bottom;
-            panelElement9.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.tempDoc.Elements.Add(imageElement6);
-            this.tempDoc.Elements.Add(panelElement8);
-            this.tempDoc.Elements.Add(panelElement9);
+            panelElement5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            textElement7.BackColorSelector = C1.Win.C1Tile.BackColorSelector.Unbound;
+            textElement7.ForeColor = System.Drawing.Color.Black;
+            textElement7.ForeColorSelector = C1.Win.C1Tile.ForeColorSelector.Unbound;
+            textElement7.SingleLine = true;
+            panelElement5.Children.Add(textElement7);
+            panelElement5.Dock = System.Windows.Forms.DockStyle.Top;
+            panelElement5.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            panelElement6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            textElement8.BackColorSelector = C1.Win.C1Tile.BackColorSelector.Unbound;
+            textElement8.ForeColor = System.Drawing.Color.Black;
+            textElement8.ForeColorSelector = C1.Win.C1Tile.ForeColorSelector.Unbound;
+            textElement8.TextSelector = C1.Win.C1Tile.TextSelector.Text1;
+            panelElement6.Children.Add(textElement8);
+            panelElement6.Dock = System.Windows.Forms.DockStyle.Bottom;
+            panelElement6.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.tempDoc.Elements.Add(imageElement4);
+            this.tempDoc.Elements.Add(panelElement5);
+            this.tempDoc.Elements.Add(panelElement6);
             this.tempDoc.Name = "tempDoc";
             // 
             // tile2
@@ -571,14 +571,14 @@
             this.ResultGrid.GridName = null;
             this.ResultGrid.IsCol1SelectCheck = false;
             this.ResultGrid.IsEnterRight = false;
-            this.ResultGrid.Location = new System.Drawing.Point(5, 29);
+            this.ResultGrid.Location = new System.Drawing.Point(2, 29);
             this.ResultGrid.Name = "ResultGrid";
             this.ResultGrid.PulldownDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, string>>)(resources.GetObject("ResultGrid.PulldownDic")));
             this.ResultGrid.Rows.Count = 2;
             this.ResultGrid.Rows.DefaultSize = 18;
             this.ResultGrid.SelectionMode = C1.Win.C1FlexGrid.SelectionModeEnum.ListBox;
             this.ResultGrid.ShowErrors = true;
-            this.ResultGrid.Size = new System.Drawing.Size(545, 627);
+            this.ResultGrid.Size = new System.Drawing.Size(551, 627);
             this.ResultGrid.StyleInfo = resources.GetString("ResultGrid.StyleInfo");
             this.ResultGrid.TabIndex = 9;
             this.ResultGrid.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2010Blue;
@@ -818,10 +818,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1259, 659);
             this.Controls.Add(this.MainPanel);
-            this.Controls.Add(this.collapsibleSplitter1);
-            this.Controls.Add(this.SearchPanel);
             this.Controls.Add(this.PreviewSplitter);
             this.Controls.Add(this.PreviewPanel);
+            this.Controls.Add(this.collapsibleSplitter1);
+            this.Controls.Add(this.SearchPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "SearchForm";
