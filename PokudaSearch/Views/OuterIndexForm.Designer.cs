@@ -92,7 +92,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(120, 19);
             this.label3.TabIndex = 4;
-            this.label3.Text = "外部検索対象パス";
+            this.label3.Text = "外部検索パス";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // OuterTargetPathText

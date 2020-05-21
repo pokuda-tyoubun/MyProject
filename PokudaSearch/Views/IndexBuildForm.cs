@@ -39,7 +39,7 @@ namespace PokudaSearch.Views {
             [EnumLabel("テキスト抽出器")]
             TextExtractMode,
             [EnumLabel("リモートパス")]
-            RemotePath,
+            OuterPath,
             [EnumLabel("ローカルパス")]
             LocalPath,
             [EnumLabel("作成日")]
@@ -348,8 +348,8 @@ namespace PokudaSearch.Views {
             grid.Cols[(int)ActiveIndexColIdx.TotalBytes + 1 + offset].TextAlign = TextAlignEnum.RightCenter;
             grid[0, (int)ActiveIndexColIdx.TextExtractMode + 1 + offset] = EnumUtil.GetLabel(ActiveIndexColIdx.TextExtractMode);
             grid.Cols[(int)ActiveIndexColIdx.TextExtractMode + 1 + offset].Width = 80;
-            grid[0, (int)ActiveIndexColIdx.RemotePath + 1 + offset] = EnumUtil.GetLabel(ActiveIndexColIdx.RemotePath);
-            grid.Cols[(int)ActiveIndexColIdx.RemotePath + 1 + offset].Width = 120;
+            grid[0, (int)ActiveIndexColIdx.OuterPath + 1 + offset] = EnumUtil.GetLabel(ActiveIndexColIdx.OuterPath);
+            grid.Cols[(int)ActiveIndexColIdx.OuterPath + 1 + offset].Width = 120;
             grid[0, (int)ActiveIndexColIdx.LocalPath + 1 + offset] = EnumUtil.GetLabel(ActiveIndexColIdx.LocalPath);
             grid.Cols[(int)ActiveIndexColIdx.LocalPath + 1 + offset].Width = 120;
             grid[0, (int)ActiveIndexColIdx.InsertDate + 1 + offset] = EnumUtil.GetLabel(ActiveIndexColIdx.InsertDate);
@@ -380,8 +380,8 @@ namespace PokudaSearch.Views {
                     FileUtil.GetSizeString(StringUtil.NullToZero(dr[EnumUtil.GetLabel(ActiveIndexColIdx.TotalBytes)]));
                 grid[row, (int)ActiveIndexColIdx.TextExtractMode + 1 + offset] = 
                     StringUtil.NullToBlank(dr[EnumUtil.GetLabel(ActiveIndexColIdx.TextExtractMode)]);
-                grid[row, (int)ActiveIndexColIdx.RemotePath + 1 + offset] = 
-                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(ActiveIndexColIdx.RemotePath)]);
+                grid[row, (int)ActiveIndexColIdx.OuterPath + 1 + offset] = 
+                    StringUtil.NullToBlank(dr[EnumUtil.GetLabel(ActiveIndexColIdx.OuterPath)]);
                 grid[row, (int)ActiveIndexColIdx.LocalPath + 1 + offset] = 
                     StringUtil.NullToBlank(dr[EnumUtil.GetLabel(ActiveIndexColIdx.LocalPath)]);
                 grid[row, (int)ActiveIndexColIdx.InsertDate + 1 + offset] = 
@@ -792,7 +792,7 @@ namespace PokudaSearch.Views {
                 if (oif.ShowDialog() == DialogResult.Cancel) {
                     return;
                 }
-                string remotePath = oif.OuterPath;
+                string outerPath = oif.OuterPath;
                 string localPath = oif.LocalPath;
                 string storePath = oif.IndexStorePath;
                 int targetCount = oif.TargetCount;
@@ -814,7 +814,7 @@ namespace PokudaSearch.Views {
                 param.Add(new SQLiteParameter("@インデックス対象外", 0));
                 param.Add(new SQLiteParameter("@総バイト数", 0));
                 param.Add(new SQLiteParameter("@テキスト抽出器", EnumUtil.GetName(LuceneIndexBuilder.TextExtractMode)));
-                param.Add(new SQLiteParameter("@リモートパス", remotePath));
+                param.Add(new SQLiteParameter("@リモートパス", outerPath));
                 param.Add(new SQLiteParameter("@ローカルパス", localPath));
                 param.Add(new SQLiteParameter("@作成完了", DateTime.Now));
                 UpdateActiveIndex(param);
@@ -859,17 +859,17 @@ namespace PokudaSearch.Views {
             string createMode = StringUtil.NullToBlank(this.ActiveIndexGrid[rowIdx, (int)ActiveIndexColIdx.CreateMode + 1]);
             int targetCount = int.Parse(StringUtil.NullToZero(this.ActiveIndexGrid[rowIdx, (int)ActiveIndexColIdx.TargetCount + 1]));
             string extractMode = StringUtil.NullToBlank(this.ActiveIndexGrid[rowIdx, (int)ActiveIndexColIdx.TextExtractMode + 1]);
-            string remotePath = StringUtil.NullToBlank(this.ActiveIndexGrid[rowIdx, (int)ActiveIndexColIdx.RemotePath + 1]);
+            string outerPath = StringUtil.NullToBlank(this.ActiveIndexGrid[rowIdx, (int)ActiveIndexColIdx.OuterPath + 1]);
             string orgLocalPath = StringUtil.NullToBlank(this.ActiveIndexGrid[rowIdx, (int)ActiveIndexColIdx.LocalPath + 1]);
             string newLoaclPath = "";
 
             //対応パス設定
-            var ipf = new InteractionPathForm(remotePath, orgLocalPath);
+            var ipf = new InteractionPathForm(outerPath, orgLocalPath);
             try {
                 if (ipf.ShowDialog() == DialogResult.Cancel) {
                     return;
                 }
-                remotePath = ipf.RemotePath;
+                outerPath = ipf.OuterPath;
                 newLoaclPath = ipf.LocalPath;
 
                 //ローカルパスの存在チェック
@@ -890,7 +890,7 @@ namespace PokudaSearch.Views {
                 param.Add(new SQLiteParameter("@インデックス対象外", 0));
                 param.Add(new SQLiteParameter("@総バイト数", 0));
                 param.Add(new SQLiteParameter("@テキスト抽出器", extractMode));
-                param.Add(new SQLiteParameter("@リモートパス", remotePath));
+                param.Add(new SQLiteParameter("@リモートパス", outerPath));
                 param.Add(new SQLiteParameter("@ローカルパス", newLoaclPath));
                 param.Add(new SQLiteParameter("@作成完了", DateTime.Now));
                 UpdateActiveIndex(param, orgLocalPath);

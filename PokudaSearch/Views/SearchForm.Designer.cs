@@ -25,15 +25,15 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchForm));
-            C1.Win.C1Tile.PanelElement panelElement4 = new C1.Win.C1Tile.PanelElement();
-            C1.Win.C1Tile.ImageElement imageElement3 = new C1.Win.C1Tile.ImageElement();
-            C1.Win.C1Tile.TextElement textElement5 = new C1.Win.C1Tile.TextElement();
-            C1.Win.C1Tile.TextElement textElement6 = new C1.Win.C1Tile.TextElement();
-            C1.Win.C1Tile.ImageElement imageElement4 = new C1.Win.C1Tile.ImageElement();
-            C1.Win.C1Tile.PanelElement panelElement5 = new C1.Win.C1Tile.PanelElement();
-            C1.Win.C1Tile.TextElement textElement7 = new C1.Win.C1Tile.TextElement();
-            C1.Win.C1Tile.PanelElement panelElement6 = new C1.Win.C1Tile.PanelElement();
-            C1.Win.C1Tile.TextElement textElement8 = new C1.Win.C1Tile.TextElement();
+            C1.Win.C1Tile.PanelElement panelElement7 = new C1.Win.C1Tile.PanelElement();
+            C1.Win.C1Tile.ImageElement imageElement5 = new C1.Win.C1Tile.ImageElement();
+            C1.Win.C1Tile.TextElement textElement9 = new C1.Win.C1Tile.TextElement();
+            C1.Win.C1Tile.TextElement textElement10 = new C1.Win.C1Tile.TextElement();
+            C1.Win.C1Tile.ImageElement imageElement6 = new C1.Win.C1Tile.ImageElement();
+            C1.Win.C1Tile.PanelElement panelElement8 = new C1.Win.C1Tile.PanelElement();
+            C1.Win.C1Tile.TextElement textElement11 = new C1.Win.C1Tile.TextElement();
+            C1.Win.C1Tile.PanelElement panelElement9 = new C1.Win.C1Tile.PanelElement();
+            C1.Win.C1Tile.TextElement textElement12 = new C1.Win.C1Tile.TextElement();
             this.label2 = new System.Windows.Forms.Label();
             this.KeywordText = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -90,10 +90,12 @@
             this.SearchButton = new System.Windows.Forms.Button();
             this.PreviewSplitter = new NJFLib.Controls.CollapsibleSplitter();
             this.SearchPanel = new System.Windows.Forms.Panel();
+            this.ReleaseAllButton = new System.Windows.Forms.Button();
+            this.SelectAllButton = new System.Windows.Forms.Button();
+            this.SelectOuterIndexButton = new System.Windows.Forms.Button();
+            this.SelectLocalIndexButton = new System.Windows.Forms.Button();
             this.ExpandPreviewCheck = new System.Windows.Forms.CheckBox();
             this.collapsibleSplitter1 = new NJFLib.Controls.CollapsibleSplitter();
-            this.SelectLocalIndexButton = new System.Windows.Forms.Button();
-            this.SelectOuterIndexButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultNavi)).BeginInit();
@@ -113,7 +115,7 @@
             // 
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label2.Location = new System.Drawing.Point(6, 6);
+            this.label2.Location = new System.Drawing.Point(6, 360);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(66, 20);
             this.label2.TabIndex = 0;
@@ -122,9 +124,9 @@
             // 
             // KeywordText
             // 
-            this.KeywordText.Location = new System.Drawing.Point(76, 6);
+            this.KeywordText.Location = new System.Drawing.Point(76, 360);
             this.KeywordText.Name = "KeywordText";
-            this.KeywordText.Size = new System.Drawing.Size(356, 19);
+            this.KeywordText.Size = new System.Drawing.Size(186, 19);
             this.KeywordText.TabIndex = 0;
             this.KeywordText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeywordText_KeyPress);
             // 
@@ -132,7 +134,7 @@
             // 
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(6, 30);
+            this.label1.Location = new System.Drawing.Point(6, 384);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(66, 20);
             this.label1.TabIndex = 3;
@@ -141,7 +143,7 @@
             // 
             // ExtensionText
             // 
-            this.ExtensionText.Location = new System.Drawing.Point(76, 30);
+            this.ExtensionText.Location = new System.Drawing.Point(76, 384);
             this.ExtensionText.Name = "ExtensionText";
             this.ExtensionText.Size = new System.Drawing.Size(104, 19);
             this.ExtensionText.TabIndex = 1;
@@ -149,7 +151,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(234, 58);
+            this.label3.Location = new System.Drawing.Point(234, 412);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(17, 12);
             this.label3.TabIndex = 115;
@@ -159,7 +161,7 @@
             // 
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label4.Location = new System.Drawing.Point(6, 54);
+            this.label4.Location = new System.Drawing.Point(6, 408);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(66, 20);
             this.label4.TabIndex = 114;
@@ -173,7 +175,7 @@
             this.UpdateDate2.EmptyAsNull = true;
             this.UpdateDate2.FormatType = C1.Win.C1Input.FormatTypeEnum.CustomFormat;
             this.UpdateDate2.ImagePadding = new System.Windows.Forms.Padding(0);
-            this.UpdateDate2.Location = new System.Drawing.Point(256, 56);
+            this.UpdateDate2.Location = new System.Drawing.Point(76, 430);
             this.UpdateDate2.Name = "UpdateDate2";
             this.UpdateDate2.ShowFocusRectangle = true;
             this.UpdateDate2.Size = new System.Drawing.Size(154, 17);
@@ -191,7 +193,7 @@
             this.UpdateDate1.EmptyAsNull = true;
             this.UpdateDate1.FormatType = C1.Win.C1Input.FormatTypeEnum.CustomFormat;
             this.UpdateDate1.ImagePadding = new System.Windows.Forms.Padding(0);
-            this.UpdateDate1.Location = new System.Drawing.Point(76, 56);
+            this.UpdateDate1.Location = new System.Drawing.Point(76, 410);
             this.UpdateDate1.Name = "UpdateDate1";
             this.UpdateDate1.ShowFocusRectangle = true;
             this.UpdateDate1.Size = new System.Drawing.Size(154, 17);
@@ -216,7 +218,7 @@
             this.ClearFilterButton,
             this.toolStripSeparator3,
             this.WriteExcelButton});
-            this.ResultNavi.Location = new System.Drawing.Point(6, 11);
+            this.ResultNavi.Location = new System.Drawing.Point(6, 4);
             this.ResultNavi.MoveFirstItem = null;
             this.ResultNavi.MoveLastItem = null;
             this.ResultNavi.MoveNextItem = null;
@@ -467,9 +469,9 @@
             this.MainPanel.Controls.Add(this.ResultGrid);
             this.MainPanel.Controls.Add(this.ResultNavi);
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainPanel.Location = new System.Drawing.Point(0, 111);
+            this.MainPanel.Location = new System.Drawing.Point(279, 0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(832, 548);
+            this.MainPanel.Size = new System.Drawing.Size(553, 659);
             this.MainPanel.TabIndex = 118;
             // 
             // ResultTile
@@ -479,13 +481,13 @@
             // 
             // 
             // 
-            panelElement4.Alignment = System.Drawing.ContentAlignment.BottomLeft;
-            panelElement4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            panelElement4.Children.Add(imageElement3);
-            panelElement4.Children.Add(textElement5);
-            panelElement4.Margin = new System.Windows.Forms.Padding(10, 6, 10, 6);
-            this.ResultTile.DefaultTemplate.Elements.Add(panelElement4);
-            this.ResultTile.DefaultTemplate.Elements.Add(textElement6);
+            panelElement7.Alignment = System.Drawing.ContentAlignment.BottomLeft;
+            panelElement7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            panelElement7.Children.Add(imageElement5);
+            panelElement7.Children.Add(textElement9);
+            panelElement7.Margin = new System.Windows.Forms.Padding(10, 6, 10, 6);
+            this.ResultTile.DefaultTemplate.Elements.Add(panelElement7);
+            this.ResultTile.DefaultTemplate.Elements.Add(textElement10);
             this.ResultTile.Groups.Add(this.group1);
             this.ResultTile.Location = new System.Drawing.Point(419, 92);
             this.ResultTile.Name = "ResultTile";
@@ -515,25 +517,25 @@
             // tempDoc
             // 
             this.tempDoc.Description = "テンプレート １";
-            panelElement5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            textElement7.BackColorSelector = C1.Win.C1Tile.BackColorSelector.Unbound;
-            textElement7.ForeColor = System.Drawing.Color.Black;
-            textElement7.ForeColorSelector = C1.Win.C1Tile.ForeColorSelector.Unbound;
-            textElement7.SingleLine = true;
-            panelElement5.Children.Add(textElement7);
-            panelElement5.Dock = System.Windows.Forms.DockStyle.Top;
-            panelElement5.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            panelElement6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            textElement8.BackColorSelector = C1.Win.C1Tile.BackColorSelector.Unbound;
-            textElement8.ForeColor = System.Drawing.Color.Black;
-            textElement8.ForeColorSelector = C1.Win.C1Tile.ForeColorSelector.Unbound;
-            textElement8.TextSelector = C1.Win.C1Tile.TextSelector.Text1;
-            panelElement6.Children.Add(textElement8);
-            panelElement6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            panelElement6.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.tempDoc.Elements.Add(imageElement4);
-            this.tempDoc.Elements.Add(panelElement5);
-            this.tempDoc.Elements.Add(panelElement6);
+            panelElement8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            textElement11.BackColorSelector = C1.Win.C1Tile.BackColorSelector.Unbound;
+            textElement11.ForeColor = System.Drawing.Color.Black;
+            textElement11.ForeColorSelector = C1.Win.C1Tile.ForeColorSelector.Unbound;
+            textElement11.SingleLine = true;
+            panelElement8.Children.Add(textElement11);
+            panelElement8.Dock = System.Windows.Forms.DockStyle.Top;
+            panelElement8.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            panelElement9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            textElement12.BackColorSelector = C1.Win.C1Tile.BackColorSelector.Unbound;
+            textElement12.ForeColor = System.Drawing.Color.Black;
+            textElement12.ForeColorSelector = C1.Win.C1Tile.ForeColorSelector.Unbound;
+            textElement12.TextSelector = C1.Win.C1Tile.TextSelector.Text1;
+            panelElement9.Children.Add(textElement12);
+            panelElement9.Dock = System.Windows.Forms.DockStyle.Bottom;
+            panelElement9.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.tempDoc.Elements.Add(imageElement6);
+            this.tempDoc.Elements.Add(panelElement8);
+            this.tempDoc.Elements.Add(panelElement9);
             this.tempDoc.Name = "tempDoc";
             // 
             // tile2
@@ -569,14 +571,14 @@
             this.ResultGrid.GridName = null;
             this.ResultGrid.IsCol1SelectCheck = false;
             this.ResultGrid.IsEnterRight = false;
-            this.ResultGrid.Location = new System.Drawing.Point(5, 39);
+            this.ResultGrid.Location = new System.Drawing.Point(5, 29);
             this.ResultGrid.Name = "ResultGrid";
             this.ResultGrid.PulldownDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, string>>)(resources.GetObject("ResultGrid.PulldownDic")));
             this.ResultGrid.Rows.Count = 2;
             this.ResultGrid.Rows.DefaultSize = 18;
             this.ResultGrid.SelectionMode = C1.Win.C1FlexGrid.SelectionModeEnum.ListBox;
             this.ResultGrid.ShowErrors = true;
-            this.ResultGrid.Size = new System.Drawing.Size(824, 506);
+            this.ResultGrid.Size = new System.Drawing.Size(545, 627);
             this.ResultGrid.StyleInfo = resources.GetString("ResultGrid.StyleInfo");
             this.ResultGrid.TabIndex = 9;
             this.ResultGrid.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2010Blue;
@@ -590,9 +592,6 @@
             this.TargetIndexGrid.AfterErrorInfo = ((System.Collections.Generic.Dictionary<string, string>)(resources.GetObject("TargetIndexGrid.AfterErrorInfo")));
             this.TargetIndexGrid.AllowFiltering = true;
             this.TargetIndexGrid.AllowResizing = C1.Win.C1FlexGrid.AllowResizingEnum.Both;
-            this.TargetIndexGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.TargetIndexGrid.AutoClipboard = true;
             this.TargetIndexGrid.CellButtonDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.HashSet<string>>)(resources.GetObject("TargetIndexGrid.CellButtonDic")));
             this.TargetIndexGrid.ColumnInfo = "10,1,0,0,0,90,Columns:";
@@ -604,17 +603,18 @@
             this.TargetIndexGrid.GridName = null;
             this.TargetIndexGrid.IsCol1SelectCheck = false;
             this.TargetIndexGrid.IsEnterRight = false;
-            this.TargetIndexGrid.Location = new System.Drawing.Point(611, 6);
+            this.TargetIndexGrid.Location = new System.Drawing.Point(6, 55);
             this.TargetIndexGrid.Name = "TargetIndexGrid";
             this.TargetIndexGrid.PulldownDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, string>>)(resources.GetObject("TargetIndexGrid.PulldownDic")));
             this.TargetIndexGrid.Rows.Count = 2;
             this.TargetIndexGrid.Rows.DefaultSize = 18;
             this.TargetIndexGrid.ShowErrors = true;
-            this.TargetIndexGrid.Size = new System.Drawing.Size(215, 101);
+            this.TargetIndexGrid.Size = new System.Drawing.Size(256, 298);
             this.TargetIndexGrid.StyleInfo = resources.GetString("TargetIndexGrid.StyleInfo");
             this.TargetIndexGrid.TabIndex = 7;
             this.TargetIndexGrid.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2010Blue;
             this.TargetIndexGrid.WindowsName = null;
+            this.TargetIndexGrid.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TargetIndexGrid_MouseMove);
             // 
             // TargetContext
             // 
@@ -668,14 +668,12 @@
             // 
             // ClearButton
             // 
-            this.ClearButton.Image = global::PokudaSearch.Properties.Resources.EditClear24;
             this.ClearButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.ClearButton.Location = new System.Drawing.Point(525, 5);
+            this.ClearButton.Location = new System.Drawing.Point(110, 453);
             this.ClearButton.Name = "ClearButton";
-            this.ClearButton.Size = new System.Drawing.Size(80, 52);
+            this.ClearButton.Size = new System.Drawing.Size(100, 25);
             this.ClearButton.TabIndex = 5;
             this.ClearButton.Text = "クリア";
-            this.ClearButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.ClearButton.UseVisualStyleBackColor = true;
             this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
@@ -685,7 +683,7 @@
             this.PreviewCheck.AutoSize = true;
             this.PreviewCheck.Checked = true;
             this.PreviewCheck.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.PreviewCheck.Location = new System.Drawing.Point(6, 80);
+            this.PreviewCheck.Location = new System.Drawing.Point(6, 499);
             this.PreviewCheck.Name = "PreviewCheck";
             this.PreviewCheck.Size = new System.Drawing.Size(131, 22);
             this.PreviewCheck.TabIndex = 6;
@@ -695,14 +693,12 @@
             // 
             // SearchButton
             // 
-            this.SearchButton.Image = global::PokudaSearch.Properties.Resources.Search24;
             this.SearchButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.SearchButton.Location = new System.Drawing.Point(441, 5);
+            this.SearchButton.Location = new System.Drawing.Point(6, 453);
             this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(80, 52);
+            this.SearchButton.Size = new System.Drawing.Size(100, 25);
             this.SearchButton.TabIndex = 4;
             this.SearchButton.Text = "検索(&S)";
-            this.SearchButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.SearchButton.UseVisualStyleBackColor = true;
             this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
@@ -724,6 +720,8 @@
             // 
             // SearchPanel
             // 
+            this.SearchPanel.Controls.Add(this.ReleaseAllButton);
+            this.SearchPanel.Controls.Add(this.SelectAllButton);
             this.SearchPanel.Controls.Add(this.SelectOuterIndexButton);
             this.SearchPanel.Controls.Add(this.SelectLocalIndexButton);
             this.SearchPanel.Controls.Add(this.ExpandPreviewCheck);
@@ -739,11 +737,51 @@
             this.SearchPanel.Controls.Add(this.label4);
             this.SearchPanel.Controls.Add(this.label1);
             this.SearchPanel.Controls.Add(this.ExtensionText);
-            this.SearchPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.SearchPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.SearchPanel.Location = new System.Drawing.Point(0, 0);
             this.SearchPanel.Name = "SearchPanel";
-            this.SearchPanel.Size = new System.Drawing.Size(832, 111);
+            this.SearchPanel.Size = new System.Drawing.Size(271, 659);
             this.SearchPanel.TabIndex = 0;
+            // 
+            // ReleaseAllButton
+            // 
+            this.ReleaseAllButton.Location = new System.Drawing.Point(6, 29);
+            this.ReleaseAllButton.Name = "ReleaseAllButton";
+            this.ReleaseAllButton.Size = new System.Drawing.Size(67, 21);
+            this.ReleaseAllButton.TabIndex = 120;
+            this.ReleaseAllButton.Text = "全解除";
+            this.ReleaseAllButton.UseVisualStyleBackColor = true;
+            this.ReleaseAllButton.Click += new System.EventHandler(this.ReleaseAllButton_Click);
+            // 
+            // SelectAllButton
+            // 
+            this.SelectAllButton.Location = new System.Drawing.Point(6, 5);
+            this.SelectAllButton.Name = "SelectAllButton";
+            this.SelectAllButton.Size = new System.Drawing.Size(67, 21);
+            this.SelectAllButton.TabIndex = 119;
+            this.SelectAllButton.Text = "全選択";
+            this.SelectAllButton.UseVisualStyleBackColor = true;
+            this.SelectAllButton.Click += new System.EventHandler(this.SelectAllButton_Click);
+            // 
+            // SelectOuterIndexButton
+            // 
+            this.SelectOuterIndexButton.Location = new System.Drawing.Point(82, 29);
+            this.SelectOuterIndexButton.Name = "SelectOuterIndexButton";
+            this.SelectOuterIndexButton.Size = new System.Drawing.Size(129, 21);
+            this.SelectOuterIndexButton.TabIndex = 118;
+            this.SelectOuterIndexButton.Text = "外部のみ";
+            this.SelectOuterIndexButton.UseVisualStyleBackColor = true;
+            this.SelectOuterIndexButton.Click += new System.EventHandler(this.SelectOuterIndexButton_Click);
+            // 
+            // SelectLocalIndexButton
+            // 
+            this.SelectLocalIndexButton.Location = new System.Drawing.Point(82, 5);
+            this.SelectLocalIndexButton.Name = "SelectLocalIndexButton";
+            this.SelectLocalIndexButton.Size = new System.Drawing.Size(129, 21);
+            this.SelectLocalIndexButton.TabIndex = 117;
+            this.SelectLocalIndexButton.Text = "ローカルのみ";
+            this.SelectLocalIndexButton.UseVisualStyleBackColor = true;
+            this.SelectLocalIndexButton.Click += new System.EventHandler(this.SelectLocalIndexButton_Click);
             // 
             // ExpandPreviewCheck
             // 
@@ -751,7 +789,7 @@
             this.ExpandPreviewCheck.AutoSize = true;
             this.ExpandPreviewCheck.Checked = true;
             this.ExpandPreviewCheck.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ExpandPreviewCheck.Location = new System.Drawing.Point(139, 80);
+            this.ExpandPreviewCheck.Location = new System.Drawing.Point(6, 525);
             this.ExpandPreviewCheck.Name = "ExpandPreviewCheck";
             this.ExpandPreviewCheck.Size = new System.Drawing.Size(169, 22);
             this.ExpandPreviewCheck.TabIndex = 116;
@@ -765,43 +803,22 @@
             this.collapsibleSplitter1.AnimationStep = 20;
             this.collapsibleSplitter1.BorderStyle3D = System.Windows.Forms.Border3DStyle.RaisedOuter;
             this.collapsibleSplitter1.ControlToHide = this.SearchPanel;
-            this.collapsibleSplitter1.Dock = System.Windows.Forms.DockStyle.Top;
             this.collapsibleSplitter1.ExpandParentForm = false;
-            this.collapsibleSplitter1.Location = new System.Drawing.Point(0, 111);
+            this.collapsibleSplitter1.Location = new System.Drawing.Point(271, 0);
             this.collapsibleSplitter1.Name = "collapsibleSplitter1";
-            this.collapsibleSplitter1.Size = new System.Drawing.Size(832, 8);
+            this.collapsibleSplitter1.Size = new System.Drawing.Size(8, 659);
             this.collapsibleSplitter1.TabIndex = 125;
             this.collapsibleSplitter1.TabStop = false;
             this.collapsibleSplitter1.UseAnimations = false;
             this.collapsibleSplitter1.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
-            // 
-            // SelectLocalIndexButton
-            // 
-            this.SelectLocalIndexButton.Location = new System.Drawing.Point(465, 63);
-            this.SelectLocalIndexButton.Name = "SelectLocalIndexButton";
-            this.SelectLocalIndexButton.Size = new System.Drawing.Size(94, 21);
-            this.SelectLocalIndexButton.TabIndex = 117;
-            this.SelectLocalIndexButton.Text = "ローカルインデックスのみ";
-            this.SelectLocalIndexButton.UseVisualStyleBackColor = true;
-            this.SelectLocalIndexButton.Click += new System.EventHandler(this.SelectLocalIndexButton_Click);
-            // 
-            // SelectOuterIndexButton
-            // 
-            this.SelectOuterIndexButton.Location = new System.Drawing.Point(465, 87);
-            this.SelectOuterIndexButton.Name = "SelectOuterIndexButton";
-            this.SelectOuterIndexButton.Size = new System.Drawing.Size(94, 21);
-            this.SelectOuterIndexButton.TabIndex = 118;
-            this.SelectOuterIndexButton.Text = "外部インデックスのみ";
-            this.SelectOuterIndexButton.UseVisualStyleBackColor = true;
-            this.SelectOuterIndexButton.Click += new System.EventHandler(this.SelectOuterIndexButton_Click);
             // 
             // SearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1259, 659);
-            this.Controls.Add(this.collapsibleSplitter1);
             this.Controls.Add(this.MainPanel);
+            this.Controls.Add(this.collapsibleSplitter1);
             this.Controls.Add(this.SearchPanel);
             this.Controls.Add(this.PreviewSplitter);
             this.Controls.Add(this.PreviewPanel);
@@ -896,5 +913,7 @@
         private System.Windows.Forms.CheckBox ExpandPreviewCheck;
         private System.Windows.Forms.Button SelectOuterIndexButton;
         private System.Windows.Forms.Button SelectLocalIndexButton;
+        private System.Windows.Forms.Button ReleaseAllButton;
+        private System.Windows.Forms.Button SelectAllButton;
     }
 }

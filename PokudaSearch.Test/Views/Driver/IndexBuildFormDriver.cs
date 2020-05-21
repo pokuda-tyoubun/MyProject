@@ -4,6 +4,7 @@ using Codeer.Friendly.Dynamic;
 using Codeer.Friendly.Windows;
 using Codeer.Friendly.Windows.Grasp;
 using Ong.Friendly.FormsStandardControls;
+using PokudaSearch.Test.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,13 @@ namespace PokudaSearch.Test.Views.Driver {
             ProgressBar = new FormsProgressBar(Window.Dynamic().ProgressBar);
             ActiveIndexGrid = new FwFlexGridEx(Window.Dynamic().ActiveIndexGrid);
             IndexHistoryGrid = new FwFlexGridEx(Window.Dynamic().IndexHistoryGrid);
+        }
+
+
+        public OuterIndexFormDriver AddOuterIndexButton_EmulateClick(Async async) {
+            AddOuterIndexButton.EmulateClick(async);
+            var outerIndexForm = new OuterIndexFormDriver(WindowControl.FromZTop(AppDriver.App), async);
+            return outerIndexForm;
         }
 
 

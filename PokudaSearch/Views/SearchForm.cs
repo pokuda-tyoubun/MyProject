@@ -85,8 +85,14 @@ namespace PokudaSearch.Views {
         private List<KeyValuePair<string, string>> _selectedIndexList = null;
         /// <summary>プレビュー用ブラウザ</summary>
         private ChromiumWebBrowser _chromeBrowser;
-        /// <summary>リモートパスの辞書</summary>
-        private Dictionary<string, string> _remotePathDic;
+        /// <summary>外部パスの辞書</summary>
+        private Dictionary<string, string> _outerPathDic;
+        /// <summary>セルのツールチップ</summary>
+		private ToolTip _ttip;
+        /// <summary>直近のマウス直下のセル行</summary>
+        private int _lastRow = 0;
+        /// <summary>直近のマウス直下のセル列</summary>
+        private int _lastCol = 0;
         #endregion MemberVariables
 
         #region Constractors
@@ -111,11 +117,11 @@ namespace PokudaSearch.Views {
             this.ResultTile.Visible = false;
 #endif
         }
-#endregion Constractors
+        #endregion Constractors
 
 
 
-#region EventHandlers
+        #region EventHandlers
         /// <summary>
         /// Webブラウザーのプログレス変更
         /// </summary>
@@ -540,10 +546,6 @@ namespace PokudaSearch.Views {
             }
         }
 
-        private void MaximizedPreview() {
-            this.PreviewCheck.Checked = true;
-            this.PreviewPanel.Width = 1000;
-        }
 
         /// <summary>
         /// グリッドフィルタテキストKeyPress
@@ -605,9 +607,119 @@ namespace PokudaSearch.Views {
         private void TargetCopyMenu_Click(object sender, EventArgs e) {
             this.TargetIndexGrid.CopyEx();
         }
-#endregion EventHandlers
+        private void ListViewButton_Click(object sender, EventArgs e) {
 
-#region PrivateMethods
+        }
+
+        private void TileViewButton_Click(object sender, EventArgs e) {
+
+            //タイル初期化
+            this.ResultTile.Groups[0].Tiles.Clear(true);
+
+            //FIXME まずはグリッドと同じ情報を表示してみる
+            //for(int i = 1; i <= 12; i++) {
+            //    var tile = new Tile();
+
+            //    string fileName = "WS000003.JPG_" + i.ToString();
+
+            //    tile.HorizontalSize = 1;
+            //    tile.VerticalSize = 1;
+            //    tile.Template = tempDoc;
+            //    tile.Text = fileName;
+            //    tile.Text1 = "2020/04/23 17:43";
+            //    tile.Tag = "Tag";
+
+            //    string tmpUri = SaveToThumbnailBitmap(@"C:\Temp\WS000003.JPG");
+            //    tile.Image = Image.FromFile(tmpUri.Replace("file://", ""));
+            //    //tile.Click += Tile_Click;
+
+            //    //if (!string.IsNullOrEmpty(photo.ThumbnailUri))
+            //    //    _downloadQueue.Enqueue(new DownloadItem(photo.ThumbnailUri, tile, false));
+            //    //if (!string.IsNullOrEmpty(photo.AuthorBuddyIconUri))
+            //    //    _downloadQueue.Enqueue(new DownloadItem(photo.AuthorBuddyIconUri, tile, true));
+
+
+            //    this.ResultTile.Groups[0].Tiles.Add(tile);
+            //}
+
+            int i = 0;
+            foreach(Row r in this.ResultGrid.Rows) {
+                if (i < RowHeaderCount) {
+                    i++;
+                    continue;
+                }
+
+                string fileName = StringUtil.NullToBlank(r[(int)ColIndex.FileName]);
+                string updateDate = StringUtil.NullToBlank(r[(int)ColIndex.UpdateDate]);
+                string fullPath = StringUtil.NullToBlank(r[(int)ColIndex.FullPath]);
+                var tile = new Tile();
+
+                tile.HorizontalSize = 1;
+                tile.VerticalSize = 1;
+                tile.Template = tempDoc;
+                tile.Text = fileName;
+                tile.Text1 = updateDate;
+                tile.Tag = "Tag";
+
+                ShellFile shellFile = ShellFile.FromFilePath(fullPath);
+                Bitmap bmp = shellFile.Thumbnail.Bitmap;
+                tile.Image = bmp;
+
+                this.ResultTile.Groups[0].Tiles.Add(tile);
+
+                i++;
+            }
+        }
+
+        private void ExpandPreviewCheck_CheckedChanged(object sender, EventArgs e) {
+            if (this.ExpandPreviewCheck.Checked) {
+                this.PreviewPanel.Width = (int)(this.Width * 0.9);
+                this.BrowserPreviewPanel.Height = (int)(this.Height * 0.8);
+            } else {
+                this.PreviewPanel.Width = 420;
+                this.BrowserPreviewPanel.Height = 505;
+            }
+        }
+
+        private void SelectLocalIndexButton_Click(object sender, EventArgs e) {
+            foreach (Row r in this.TargetIndexGrid.Rows) {
+                string createMode = StringUtil.NullToBlank(r[(int)IndexBuildForm.ActiveIndexColIdx.CreateMode + 2]);
+                if (createMode == EnumUtil.GetLabel(LuceneIndexBuilder.CreateModes.OuterReference)) {
+                    r[TargetCheckCol] = false;
+                } else {
+                    r[TargetCheckCol] = true;
+                }
+            }
+        }
+
+        private void SelectOuterIndexButton_Click(object sender, EventArgs e) {
+            foreach (Row r in this.TargetIndexGrid.Rows) {
+                string createMode = StringUtil.NullToBlank(r[(int)IndexBuildForm.ActiveIndexColIdx.CreateMode + 2]);
+                if (createMode == EnumUtil.GetLabel(LuceneIndexBuilder.CreateModes.OuterReference)) {
+                    r[TargetCheckCol] = true;
+                } else {
+                    r[TargetCheckCol] = false;
+                }
+            }
+        }
+
+        private void SelectAllButton_Click(object sender, EventArgs e) {
+            foreach (Row r in this.TargetIndexGrid.Rows) {
+                r[TargetCheckCol] = true;
+            }
+        }
+
+        private void ReleaseAllButton_Click(object sender, EventArgs e) {
+            foreach (Row r in this.TargetIndexGrid.Rows) {
+                r[TargetCheckCol] = false;
+            }
+        }
+        private void TargetIndexGrid_MouseMove(object sender, MouseEventArgs e) {
+			ShowTooltip(sender, e);
+        }
+        #endregion EventHandlers
+
+        #region PrivateMethods
         /// <summary>
         /// グリッドのヘッダを作成
         /// </summary>
@@ -680,16 +792,21 @@ namespace PokudaSearch.Views {
             }
             return ret;
         }
-        private Dictionary<string, string> CreateSelectedRemotePathDic() {
+
+        /// <summary>
+        /// 選択されている外部パスの辞書を作成
+        /// </summary>
+        /// <returns></returns>
+        private Dictionary<string, string> CreateSelectedOuterPathDic() {
             var ret = new Dictionary<string, string>();
 
             for (int i = 1; i < this.TargetIndexGrid.Rows.Count; i++) {
                 Row r = this.TargetIndexGrid.Rows[i];
                 if (bool.Parse(StringUtil.NullToBlank(r[TargetCheckCol]))) {
-                    string remotePath = StringUtil.NullToBlank(r[(int)IndexBuildForm.ActiveIndexColIdx.RemotePath + 2]);
+                    string outerPath = StringUtil.NullToBlank(r[(int)IndexBuildForm.ActiveIndexColIdx.OuterPath + 2]);
                     string localPath = StringUtil.NullToBlank(r[(int)IndexBuildForm.ActiveIndexColIdx.LocalPath + 2]);
-                    if (remotePath != "" && !ret.ContainsKey(remotePath)) {
-                        ret.Add(remotePath, localPath);
+                    if (outerPath != "" && !ret.ContainsKey(outerPath)) {
+                        ret.Add(outerPath, localPath);
                     }
                 }
             }
@@ -709,7 +826,7 @@ namespace PokudaSearch.Views {
             }
 
             _selectedIndexList = GetSelectedIndex();
-            _remotePathDic = CreateSelectedRemotePathDic();
+            _outerPathDic = CreateSelectedOuterPathDic();
             if (_selectedIndexList.Count == 0) {
                 MessageBox.Show(AppObject.GetMsg(AppObject.Msg.MSG_CHECKON_TARGET_INDEX),
                     AppObject.GetMsg(AppObject.Msg.TITLE_INFO), MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -762,7 +879,7 @@ namespace PokudaSearch.Views {
                 foreach (ScoreDoc doc in docs.ScoreDocs) {
                     Document thisDoc = idxSearcher.Doc(doc.Doc);
                     string fullPath = thisDoc.Get(LuceneIndexBuilder.Path);
-                    fullPath = ConvertRemotePath(fullPath);
+                    fullPath = ConvertOuterPath(fullPath);
 
                     Bitmap bmp = Properties.Resources.File16;
                     if (File.Exists(fullPath)) {
@@ -802,14 +919,19 @@ namespace PokudaSearch.Views {
             }
         }
 
-        private string ConvertRemotePath(string fullPath) {
+        /// <summary>
+        /// 外部パスをローカルパスに変換
+        /// </summary>
+        /// <param name="fullPath"></param>
+        /// <returns></returns>
+        private string ConvertOuterPath(string fullPath) {
             string ret = fullPath;
-            if (_remotePathDic.Count > 0) {
-                foreach (var kvp in _remotePathDic) {
-                    string remotePath = kvp.Key;
+            if (_outerPathDic.Count > 0) {
+                foreach (var kvp in _outerPathDic) {
+                    string outerPath = kvp.Key;
                     string localPath = kvp.Value;
-                    if (fullPath.Contains(remotePath)) {
-                        ret = ret.Replace(remotePath, localPath);
+                    if (fullPath.Contains(outerPath)) {
+                        ret = ret.Replace(outerPath, localPath);
                     }
                 }
             }
@@ -1038,6 +1160,11 @@ namespace PokudaSearch.Views {
             }
             return tmpPath;
         }
+        /// <summary>
+        /// ExcelをHTMLとして保存
+        /// </summary>
+        /// <param name="fullPath"></param>
+        /// <returns></returns>
         private string SaveXlsToHTML(string fullPath) {
             NetOffice.ExcelApi.Application xlsApp = null;
             NetOffice.ExcelApi.Workbooks books = null;
@@ -1068,6 +1195,11 @@ namespace PokudaSearch.Views {
             }
             return tmpPath;
         }
+        /// <summary>
+        /// ExcelをMHtmlとして保存
+        /// </summary>
+        /// <param name="fullPath"></param>
+        /// <returns></returns>
         private string SaveXlsToMHtml(string fullPath) {
             NetOffice.ExcelApi.Application xlsApp = new NetOffice.ExcelApi.Application();
             NetOffice.ExcelApi.Workbooks books = null;
@@ -1209,102 +1341,63 @@ namespace PokudaSearch.Views {
             }
         }
 
-#endregion PrivateMethods
+        /// <summary>
+        /// セルのツールチップを表示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowTooltip(object sender, System.Windows.Forms.MouseEventArgs e) {
+            string text = null;
+            if (e.Button == MouseButtons.None) {
+                // マウス座標を取得します。
+                int row = this.TargetIndexGrid.MouseRow;
+                int col = this.TargetIndexGrid.MouseCol;
 
-        private void ListViewButton_Click(object sender, EventArgs e) {
-
-        }
-
-        private void TileViewButton_Click(object sender, EventArgs e) {
-
-            //タイル初期化
-            this.ResultTile.Groups[0].Tiles.Clear(true);
-
-            //FIXME まずはグリッドと同じ情報を表示してみる
-            //for(int i = 1; i <= 12; i++) {
-            //    var tile = new Tile();
-
-            //    string fileName = "WS000003.JPG_" + i.ToString();
-
-            //    tile.HorizontalSize = 1;
-            //    tile.VerticalSize = 1;
-            //    tile.Template = tempDoc;
-            //    tile.Text = fileName;
-            //    tile.Text1 = "2020/04/23 17:43";
-            //    tile.Tag = "Tag";
-
-            //    string tmpUri = SaveToThumbnailBitmap(@"C:\Temp\WS000003.JPG");
-            //    tile.Image = Image.FromFile(tmpUri.Replace("file://", ""));
-            //    //tile.Click += Tile_Click;
-
-            //    //if (!string.IsNullOrEmpty(photo.ThumbnailUri))
-            //    //    _downloadQueue.Enqueue(new DownloadItem(photo.ThumbnailUri, tile, false));
-            //    //if (!string.IsNullOrEmpty(photo.AuthorBuddyIconUri))
-            //    //    _downloadQueue.Enqueue(new DownloadItem(photo.AuthorBuddyIconUri, tile, true));
-
-
-            //    this.ResultTile.Groups[0].Tiles.Add(tile);
-            //}
-
-            int i = 0;
-            foreach(Row r in this.ResultGrid.Rows) {
-                if (i < RowHeaderCount) {
-                    i++;
-                    continue;
+                // セル上でのみ
+                if (row == _lastRow && col == _lastCol) {
+                    return;
                 }
 
-                string fileName = StringUtil.NullToBlank(r[(int)ColIndex.FileName]);
-                string updateDate = StringUtil.NullToBlank(r[(int)ColIndex.UpdateDate]);
-                string fullPath = StringUtil.NullToBlank(r[(int)ColIndex.FullPath]);
-                var tile = new Tile();
+                _lastRow = row;
+                _lastCol = col;
 
-                tile.HorizontalSize = 1;
-                tile.VerticalSize = 1;
-                tile.Template = tempDoc;
-                tile.Text = fileName;
-                tile.Text1 = updateDate;
-                tile.Tag = "Tag";
+				// ツールチップに表示するテキストを取得します。
+				if (row > -1 && col > -1) {
+					// 書式設定されている値を取得します。
+					text = this.TargetIndexGrid.GetDataDisplay(row, col);
 
-                ShellFile shellFile = ShellFile.FromFilePath(fullPath);
-                Bitmap bmp = shellFile.Thumbnail.Bitmap;
-                tile.Image = bmp;
+					Rectangle rc = this.TargetIndexGrid.GetCellRect(row, col, false);
+					rc.Intersect(this.TargetIndexGrid.ClientRectangle);
 
-                this.ResultTile.Groups[0].Tiles.Add(tile);
-
-                i++;
+					// テキストのサイズを取得します。
+					using(Graphics g = this.TargetIndexGrid.CreateGraphics()) {
+						CellStyle s = this.TargetIndexGrid.GetCellStyleDisplay(row, col);
+						float wid = g.MeasureString(text, s.Font).Width;
+						wid += s.Margins.Left + s.Margins.Right + s.Border.Width;
+						if(wid < rc.Width) {
+							text = null;
+						}
+					}
+				}
             }
+			// ツールチップを生成します。
+			if (text != null && _ttip == null) {
+				_ttip = new ToolTip();
+			}
+
+			// ツールチップに表示するテキストを設定します。
+			if(_ttip != null && _ttip.GetToolTip(this.TargetIndexGrid) != text) {
+				_ttip.SetToolTip(this.TargetIndexGrid, text);
+			}
         }
 
-        private void ExpandPreviewCheck_CheckedChanged(object sender, EventArgs e) {
-            if (this.ExpandPreviewCheck.Checked) {
-                this.PreviewPanel.Width = (int)(this.Width * 0.9);
-                this.BrowserPreviewPanel.Height = (int)(this.Height * 0.8);
-            } else {
-                this.PreviewPanel.Width = 420;
-                this.BrowserPreviewPanel.Height = 505;
-            }
+        /// <summary>
+        /// プレビューパネル最大化
+        /// </summary>
+        private void MaximizedPreview() {
+            this.PreviewCheck.Checked = true;
+            this.PreviewPanel.Width = 1000;
         }
-
-        private void SelectLocalIndexButton_Click(object sender, EventArgs e) {
-            foreach (Row r in this.TargetIndexGrid.Rows) {
-                string createMode = StringUtil.NullToBlank(r[(int)IndexBuildForm.ActiveIndexColIdx.CreateMode + 2]);
-                if (createMode == EnumUtil.GetLabel(LuceneIndexBuilder.CreateModes.OuterReference)) {
-                    r[TargetCheckCol] = false;
-                } else {
-                    r[TargetCheckCol] = true;
-                }
-            }
-        }
-
-        private void SelectOuterIndexButton_Click(object sender, EventArgs e) {
-            foreach (Row r in this.TargetIndexGrid.Rows) {
-                string createMode = StringUtil.NullToBlank(r[(int)IndexBuildForm.ActiveIndexColIdx.CreateMode + 2]);
-                if (createMode == EnumUtil.GetLabel(LuceneIndexBuilder.CreateModes.OuterReference)) {
-                    r[TargetCheckCol] = true;
-                } else {
-                    r[TargetCheckCol] = false;
-                }
-            }
-        }
+        #endregion PrivateMethods
     }
 }

@@ -48,7 +48,7 @@ namespace PokudaSearch.Test.Views {
         }
 
 
-        [TestMethod]
+        [TestMethod, TestCategory("作成済")]
         public void 存在しないフォルダを指定Test() {
             _indexBuildForm.TargetDirText.SetWindowText(@"C:\Temp2");
 
@@ -58,7 +58,7 @@ namespace PokudaSearch.Test.Views {
 
             Assert.AreEqual(retMsg, AppDriver.GetMsg("ERR_DIR_NOT_FOUND"));
         }
-        [TestMethod]
+        [TestMethod, TestCategory("作成済")]
         public void インデックス新規作成_0件Test() {
             const string testPath = @"C:\Workspace\Repo\Git\MyProject\PokudaSearch.Test\TestData\Zero";
             _indexBuildForm.TargetDirText.SetWindowText(testPath);
@@ -83,7 +83,7 @@ namespace PokudaSearch.Test.Views {
             string retMsg = FriendlyUtil.GetMsgBoxMessage(_indexBuildForm.Window, async2);
             Assert.AreEqual(retMsg, AppDriver.GetMsg("MSG_INDEXED_COUNT_ZERO"));
         }
-        [TestMethod]
+        [TestMethod, TestCategory("作成済")]
         public void インデックス新規作成Test() {
             const string testPath = @"C:\Workspace\Repo\Git\MyProject\PokudaSearch.Test\TestData\Normal";
             _indexBuildForm.TargetDirText.SetWindowText(testPath);
@@ -107,7 +107,7 @@ namespace PokudaSearch.Test.Views {
                 async.WaitForCompletion();
             }
         }
-        [TestMethod]
+        [TestMethod, TestCategory("作成済")]
         public void 外部インデックス追加Test() {
             const string testPath = @"S:\PokudaSearch v1.0.0.3\bin\DB";
             _indexBuildForm.TargetDirText.SetWindowText(testPath);
@@ -116,23 +116,63 @@ namespace PokudaSearch.Test.Views {
             Async async = new Async();
             //完了するまで待機
             try {
-                _indexBuildForm.AddOuterIndexButton.EmulateClick(async);
+                var outerIndexForm = _indexBuildForm.AddOuterIndexButton_EmulateClick(async);
 
+                string localPath = @"S:\40.Azure";
+                outerIndexForm.ActiveIndexGrid.Select(1, 1);
+                outerIndexForm.LocalPathText.SetWindowText(localPath);
+
+                //参照ボタンクリック
+                Async async2 = new Async();
+                outerIndexForm.ReferenceButton.EmulateClick(async2);
                 var dirDlg = _indexBuildForm.Window.WaitForNextModal();
+                //フォルダ選択OKボタンクリック
+                var okButton = dirDlg.IdentifyFromWindowText("OK");
+                okButton.SendMessage(FriendlyUtil.BM_CLICK, IntPtr.Zero, IntPtr.Zero);
+                string dirPath = outerIndexForm.LocalPathText.GetWindowText();
+                Assert.AreEqual(dirPath, localPath);
 
+                //OKボタンクリック
+                outerIndexForm.OKButton.EmulateClick();
             } finally {
                 async.WaitForCompletion();
             }
+
+            string cellValue = StringUtil.NullToBlank(_indexBuildForm.ActiveIndexGrid[1, 1]);
+            Assert.AreEqual(cellValue, EnumUtil.GetLabel(LuceneIndexBuilder.CreateModes.OuterReference));
         }
         [TestMethod]
-        public void 外部インデックスに繋がらない場合Test() {
-        }
-        [TestMethod]
-        public void サーバ側で外部インデックスが削除された場合Test() {
+        public void インデックス全削除Test() {
+            //手動テストOK
         }
         [TestMethod]
         public void インデックスMax20Test() {
-            //TODO
+            for (int i = 1; i <= 21; i++) {
+                string testPath = @"C:\Workspace\Repo\Git\MyProject\PokudaSearch.Test\TestData\Max\No" + i.ToString();
+                _indexBuildForm.TargetDirText.SetWindowText(testPath);
+
+                //インデックス作成
+                Async async = new Async();
+                //完了するまで待機
+                try {
+                    _indexBuildForm.UpdateIndexButton.EmulateClick(async);
+
+                    while (true) {
+                        Thread.Sleep(1000);
+                        string val = _indexBuildForm.ProgressBar.AppVar["Value"]().Core.ToString();
+                        //進捗100%
+                        if (val == "100") {
+                            Assert.AreEqual(true, true);
+                            break;
+                        }
+                    }
+                } finally {
+                    async.WaitForCompletion();
+                }
+            }
+        }
+        [TestMethod]
+        public void 外部インデックスパスが存在しないTest() {
         }
 
         [TestMethod]

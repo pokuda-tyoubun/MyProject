@@ -29,7 +29,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.LocalPathText = new FxCommonLib.Controls.FilePathTextBox(this.components);
             this.label3 = new System.Windows.Forms.Label();
-            this.RemotePathText = new FxCommonLib.Controls.FilePathTextBox(this.components);
+            this.OuterPathText = new FxCommonLib.Controls.FilePathTextBox(this.components);
             this.RefButton = new System.Windows.Forms.Button();
             this.CancelButton1 = new System.Windows.Forms.Button();
             this.OKButton = new System.Windows.Forms.Button();
@@ -41,7 +41,7 @@
             this.MainPanel.Controls.Add(this.label1);
             this.MainPanel.Controls.Add(this.LocalPathText);
             this.MainPanel.Controls.Add(this.label3);
-            this.MainPanel.Controls.Add(this.RemotePathText);
+            this.MainPanel.Controls.Add(this.OuterPathText);
             this.MainPanel.Controls.Add(this.RefButton);
             this.MainPanel.Controls.Add(this.CancelButton1);
             this.MainPanel.Controls.Add(this.OKButton);
@@ -85,13 +85,13 @@
             this.label3.Text = "リモートパス";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // RemotePathText
+            // OuterPathText
             // 
-            this.RemotePathText.AllowDrop = true;
-            this.RemotePathText.Location = new System.Drawing.Point(92, 6);
-            this.RemotePathText.Name = "RemotePathText";
-            this.RemotePathText.Size = new System.Drawing.Size(404, 19);
-            this.RemotePathText.TabIndex = 4;
+            this.OuterPathText.AllowDrop = true;
+            this.OuterPathText.Location = new System.Drawing.Point(92, 6);
+            this.OuterPathText.Name = "OuterPathText";
+            this.OuterPathText.Size = new System.Drawing.Size(404, 19);
+            this.OuterPathText.TabIndex = 4;
             // 
             // RefButton
             // 
@@ -146,7 +146,7 @@
         private System.Windows.Forms.Button OKButton;
         private System.Windows.Forms.Button CancelButton1;
         internal System.Windows.Forms.Label label3;
-        private FxCommonLib.Controls.FilePathTextBox RemotePathText;
+        private FxCommonLib.Controls.FilePathTextBox OuterPathText;
         private System.Windows.Forms.Button RefButton;
         internal System.Windows.Forms.Label label1;
         private FxCommonLib.Controls.FilePathTextBox LocalPathText;

@@ -19,21 +19,21 @@ using System.Windows.Forms;
 namespace PokudaSearch.Views {
     public partial class InteractionPathForm : Form {
         
-        public string RemotePath;
+        public string OuterPath;
         public string LocalPath;
 
         public InteractionPathForm() {
             InitializeComponent();
 
-            RemotePath = "";
+            OuterPath = "";
             LocalPath = "";
         }
-        public InteractionPathForm(string remotePath, string localPath) {
+        public InteractionPathForm(string outerPath, string localPath) {
             InitializeComponent();
 
-            RemotePath = remotePath;
+            OuterPath = outerPath;
             LocalPath = localPath;
-            this.RemotePathText.Text = remotePath;
+            this.OuterPathText.Text = outerPath;
             this.LocalPathText.Text = localPath;
         }
 
@@ -43,13 +43,13 @@ namespace PokudaSearch.Views {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void OKButton_Click(object sender, EventArgs e) {
-            string remotePath = this.RemotePathText.Text;
+            string outerPath = this.OuterPathText.Text;
             string localPath = this.LocalPathText.Text;
             //末尾の\を除去
-            remotePath = StringUtil.RemoveLastChar(remotePath, '\\');
+            outerPath = StringUtil.RemoveLastChar(outerPath, '\\');
             localPath = StringUtil.RemoveLastChar(localPath, '\\');
 
-            RemotePath = remotePath;
+            OuterPath = outerPath;
             LocalPath = localPath;
 
             DialogResult = DialogResult.OK;
@@ -61,7 +61,7 @@ namespace PokudaSearch.Views {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void CancelButton1_Click(object sender, EventArgs e) {
-            RemotePath = "";
+            OuterPath = "";
             LocalPath = "";
 
             DialogResult = DialogResult.Cancel;

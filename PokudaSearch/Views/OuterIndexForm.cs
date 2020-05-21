@@ -113,6 +113,11 @@ namespace PokudaSearch.Views {
             }
         }
 
+        /// <summary>
+        /// 有効インデックスの選択変更時
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void ActiveIndexGrid_SelChange(object sender, EventArgs e) {
             if (this.ActiveIndexGrid.Selection.TopRow < HeaderRowCount) {
@@ -127,13 +132,18 @@ namespace PokudaSearch.Views {
             string tmp2 = storePath.Substring(storePath.IndexOf(@"bin\IndexStore"));
             this.OuterStorePathText.Text = tmp1 + tmp2;
 
-            string remotePath = StringUtil.NullToBlank(this.ActiveIndexGrid[this.ActiveIndexGrid.Selection.TopRow, 
+            string outerPath = StringUtil.NullToBlank(this.ActiveIndexGrid[this.ActiveIndexGrid.Selection.TopRow, 
                                     (int)ActiveIndexColIdx.IndexedPath + 1]);
-            this.OuterTargetPathText.Text = remotePath;
+            this.OuterTargetPathText.Text = outerPath;
             TargetCount = int.Parse(StringUtil.NullToZero(this.ActiveIndexGrid[this.ActiveIndexGrid.Selection.TopRow, 
                                     (int)ActiveIndexColIdx.TargetCount + 1]));
         }
 
+        /// <summary>
+        /// フォーム表示時
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OuterIndexForm_Shown(object sender, EventArgs e) {
             //先頭行を選択
             if (this.ActiveIndexGrid.Rows.Count >= HeaderRowCount) {
