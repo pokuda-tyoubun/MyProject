@@ -101,6 +101,26 @@ namespace PokudaSearch.Properties {
         }
         
         /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap LocalDrive16 {
+            get {
+                object obj = ResourceManager.GetObject("LocalDrive16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap NetworkDrive16 {
+            get {
+                object obj = ResourceManager.GetObject("NetworkDrive16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   (アイコン) に類似した型 System.Drawing.Icon のローカライズされたリソースを検索します。
         /// </summary>
         internal static System.Drawing.Icon Nose128 {
@@ -117,6 +137,26 @@ namespace PokudaSearch.Properties {
             get {
                 object obj = ResourceManager.GetObject("Pokuda64", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap Preview32 {
+            get {
+                object obj = ResourceManager.GetObject("Preview32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap PreviewExpand32 {
+            get {
+                object obj = ResourceManager.GetObject("PreviewExpand32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

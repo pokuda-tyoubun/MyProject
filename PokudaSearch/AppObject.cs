@@ -17,8 +17,8 @@ using System.Windows.Forms;
 using TikaOnDotNet.TextExtraction;
 
 namespace PokudaSearch {
+
     public static class AppObject {
-        
 
         //HACKインデックス作成高速化----------------------------------------------
         //HACK Yahoo Googleの検索オプションのUIを真似る(P222も参考に)
@@ -123,6 +123,9 @@ namespace PokudaSearch {
         //DONE C\Tempでインデックスを作成してもキーワードが引っ掛からないのは何故か
         //     →hilightFieldType指定が誤っているようだ
 
+        public const int TrialPeriod = 30;
+        public const string LicenseKey = "POKUDA-879B4C51-8B48-4EB6-AB0D-4A89AD1DA5D2";
+
         /// <summary>ロガー</summary>
         private static ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public static ILog Logger {
@@ -130,6 +133,8 @@ namespace PokudaSearch {
         }
 
         public static bool AlreadyLoadedLogviewer = false;
+        public static bool IsTrial = true;
+        public static int RemainingDays = 0;
 
         /// <summary>PokudaSearch.dbへの接続文字列</summary>
         public static string ConnectString { get; set; }
@@ -193,6 +198,8 @@ namespace PokudaSearch {
             MSG_CHECKON_TARGET_INDEX,
             [EnumLabel("指定されたフォルダは存在しません。")]
             ERR_DIR_NOT_FOUND,
+            [EnumLabel("ライセンスキーが認証されました。ご購入ありがとうございました。")]
+            MSG_LICENSE_VERIFIED,
             [EnumLabel("ファイルが存在しません。")]
             ERR_FILE_NOT_FOUND,
             [EnumLabel("インデックス数が上限に達しました。これ以上インデックスを追加することはできません。")]
@@ -213,6 +220,8 @@ namespace PokudaSearch {
             ERR_CANNOT_GET_INFO,
             [EnumLabel("[{0}]へのインデックスが参照できないため検索を中断します。")]
             ERR_UNLINKED_INDEX,
+            [EnumLabel("ライセンスキーを認証できませんでした。\nライセンスキーをご確認のうえ、再度入力してください。")]
+            ERR_LICENSE_CANNOT_VERIFIED,
         }
         #endregion Message
 

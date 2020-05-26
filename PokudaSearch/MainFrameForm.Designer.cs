@@ -43,9 +43,9 @@
             this.ribbonButton1 = new C1.Win.C1Ribbon.RibbonButton();
             this.SandBoxGroup = new C1.Win.C1Ribbon.RibbonGroup();
             this.TestFormButton = new C1.Win.C1Ribbon.RibbonButton();
-            this.ConfigGroup = new C1.Win.C1Ribbon.RibbonGroup();
-            this.ConfigButton = new C1.Win.C1Ribbon.RibbonButton();
             this.HelpGroup = new C1.Win.C1Ribbon.RibbonGroup();
+            this.ConfigButton = new C1.Win.C1Ribbon.RibbonButton();
+            this.VerifyLicenseButton = new C1.Win.C1Ribbon.RibbonButton();
             this.HelpButton1 = new C1.Win.C1Ribbon.RibbonButton();
             this.ribbonTopToolBar1 = new C1.Win.C1Ribbon.RibbonTopToolBar();
             this.MainStatusStrip.SuspendLayout();
@@ -57,9 +57,9 @@
             this.MainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StatusLabel,
             this.ProgressBar});
-            this.MainStatusStrip.Location = new System.Drawing.Point(0, 684);
+            this.MainStatusStrip.Location = new System.Drawing.Point(0, 834);
             this.MainStatusStrip.Name = "MainStatusStrip";
-            this.MainStatusStrip.Size = new System.Drawing.Size(1184, 27);
+            this.MainStatusStrip.Size = new System.Drawing.Size(1284, 27);
             this.MainStatusStrip.TabIndex = 4;
             this.MainStatusStrip.Text = "statusStrip1";
             // 
@@ -83,7 +83,7 @@
             this.MainRibbon.Location = new System.Drawing.Point(0, 0);
             this.MainRibbon.Name = "MainRibbon";
             this.MainRibbon.QatHolder = this.ribbonQat1;
-            this.MainRibbon.Size = new System.Drawing.Size(1184, 153);
+            this.MainRibbon.Size = new System.Drawing.Size(1284, 153);
             this.MainRibbon.Tabs.Add(this.MainTab);
             this.MainRibbon.TopToolBarHolder = this.ribbonTopToolBar1;
             this.MainRibbon.VisualStyle = C1.Win.C1Ribbon.VisualStyle.Office2010Black;
@@ -110,7 +110,6 @@
             this.MainTab.Groups.Add(this.TagGroup);
             this.MainTab.Groups.Add(this.AnalyzeGroup);
             this.MainTab.Groups.Add(this.SandBoxGroup);
-            this.MainTab.Groups.Add(this.ConfigGroup);
             this.MainTab.Groups.Add(this.HelpGroup);
             this.MainTab.Name = "MainTab";
             this.MainTab.Text = "メイン";
@@ -144,7 +143,7 @@
             this.IndexBuildFormButton.LargeImage = ((System.Drawing.Image)(resources.GetObject("IndexBuildFormButton.LargeImage")));
             this.IndexBuildFormButton.Name = "IndexBuildFormButton";
             this.IndexBuildFormButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("IndexBuildFormButton.SmallImage")));
-            this.IndexBuildFormButton.Text = "インデックス作成";
+            this.IndexBuildFormButton.Text = "インデックス管理";
             this.IndexBuildFormButton.Click += new System.EventHandler(this.IndexBuildFormButton_Click);
             // 
             // TagGroup
@@ -186,30 +185,36 @@
             this.TestFormButton.Text = "TestForm";
             this.TestFormButton.Click += new System.EventHandler(this.TestFormButton_Click);
             // 
-            // ConfigGroup
+            // HelpGroup
             // 
-            this.ConfigGroup.Items.Add(this.ConfigButton);
-            this.ConfigGroup.Name = "ConfigGroup";
-            this.ConfigGroup.Text = "設定";
+            this.HelpGroup.Items.Add(this.ConfigButton);
+            this.HelpGroup.Items.Add(this.VerifyLicenseButton);
+            this.HelpGroup.Items.Add(this.HelpButton1);
+            this.HelpGroup.Name = "HelpGroup";
+            this.HelpGroup.Text = "ヘルプ";
             // 
             // ConfigButton
             // 
             this.ConfigButton.LargeImage = ((System.Drawing.Image)(resources.GetObject("ConfigButton.LargeImage")));
             this.ConfigButton.Name = "ConfigButton";
             this.ConfigButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("ConfigButton.SmallImage")));
+            this.ConfigButton.Text = "設定";
             this.ConfigButton.Click += new System.EventHandler(this.ConfigButton_Click);
             // 
-            // HelpGroup
+            // VerifyLicenseButton
             // 
-            this.HelpGroup.Items.Add(this.HelpButton1);
-            this.HelpGroup.Name = "HelpGroup";
-            this.HelpGroup.Text = "ヘルプ";
+            this.VerifyLicenseButton.LargeImage = ((System.Drawing.Image)(resources.GetObject("VerifyLicenseButton.LargeImage")));
+            this.VerifyLicenseButton.Name = "VerifyLicenseButton";
+            this.VerifyLicenseButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("VerifyLicenseButton.SmallImage")));
+            this.VerifyLicenseButton.Text = "ライセンス認証";
+            this.VerifyLicenseButton.Click += new System.EventHandler(this.VerifyLicenseButton_Click);
             // 
             // HelpButton1
             // 
             this.HelpButton1.LargeImage = ((System.Drawing.Image)(resources.GetObject("HelpButton1.LargeImage")));
             this.HelpButton1.Name = "HelpButton1";
             this.HelpButton1.SmallImage = ((System.Drawing.Image)(resources.GetObject("HelpButton1.SmallImage")));
+            this.HelpButton1.Text = "ヘルプサイト";
             this.HelpButton1.Click += new System.EventHandler(this.HelpButton1_Click);
             // 
             // ribbonTopToolBar1
@@ -220,7 +225,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1184, 711);
+            this.ClientSize = new System.Drawing.Size(1284, 861);
             this.Controls.Add(this.MainRibbon);
             this.Controls.Add(this.MainStatusStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -260,8 +265,8 @@
         private C1.Win.C1Ribbon.RibbonGroup HelpGroup;
         private C1.Win.C1Ribbon.RibbonButton HelpButton1;
         private C1.Win.C1Ribbon.RibbonButton ConfigButton;
-        private C1.Win.C1Ribbon.RibbonGroup ConfigGroup;
         private C1.Win.C1Ribbon.RibbonGroup TagGroup;
         private C1.Win.C1Ribbon.RibbonButton TagEditFormButton;
+        private C1.Win.C1Ribbon.RibbonButton VerifyLicenseButton;
     }
 }

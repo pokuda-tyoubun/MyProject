@@ -18,10 +18,15 @@ using System.Windows.Forms;
 
 namespace PokudaSearch.Views {
     public partial class InteractionPathForm : Form {
-        
-        public string OuterPath;
-        public string LocalPath;
 
+        #region Properties
+        /// <summary>外部検索パス</summary>
+        public string OuterPath;
+        /// <summary>対応ローカルパス</summary>
+        public string LocalPath;
+        #endregion Properties
+
+        #region Constractors
         public InteractionPathForm() {
             InitializeComponent();
 
@@ -36,7 +41,9 @@ namespace PokudaSearch.Views {
             this.OuterPathText.Text = outerPath;
             this.LocalPathText.Text = localPath;
         }
+        #endregion Constractors
 
+        #region EventHandlers
         /// <summary>
         /// OK
         /// </summary>
@@ -79,6 +86,6 @@ namespace PokudaSearch.Views {
                 this.LocalPathText.Text = selectedPath;
             }
         }
-
+        #endregion EventHandlers
     }
 }

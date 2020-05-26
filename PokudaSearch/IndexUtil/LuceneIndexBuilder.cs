@@ -324,6 +324,7 @@ namespace PokudaSearch.IndexUtil {
                 //インデックス保存場所フォルダ作成
                 System.IO.Directory.CreateDirectory(rootPath);
                 System.IO.Directory.CreateDirectory(_indexStorePath);
+                _createMode = CreateModes.Create;
             }
 
             var instance = new LuceneIndexBuilder();

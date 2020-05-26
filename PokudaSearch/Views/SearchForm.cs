@@ -109,8 +109,8 @@ namespace PokudaSearch.Views {
             TargetIndexGridControl = this.TargetIndexGrid;
             IndexBuildForm.LoadActiveIndex(AppObject.ConnectString, this.TargetIndexGrid, appendCheckBox:true);
 
-            //チェックボックス固定
-            this.TargetIndexGrid.Cols.Frozen = 1;
+            //チェックボックスとモードを固定
+            this.TargetIndexGrid.Cols.Frozen = (int)IndexBuildForm.ActiveIndexColIdx.CreateMode + 2;
 #if DEBUG
 #else
             this.TileViewButton.Visible = false;
@@ -149,6 +149,8 @@ namespace PokudaSearch.Views {
         /// <param name="e"></param>
         private void SearchForm_Load(object sender, EventArgs e) {
             MaxSeachResultNum = Properties.Settings.Default.MaxSeachResultNum;
+            PreviewCheckToolTip.SetToolTip(PreviewCheck, "プレビュー表示(Ctrl + P)");
+            ExpandPreviewCheckToolTip.SetToolTip(ExpandPreviewCheck, "プレビュー拡大(Ctrl + Shift + P)");
 
             if (StringUtil.NullToBlank(Properties.Settings.Default.DiffExe) == "") {
                 this.DiffMenu.Enabled = false;
@@ -532,16 +534,16 @@ namespace PokudaSearch.Views {
                 e.SuppressKeyPress = true;
                 return;
             }
-            if (e.KeyCode == Keys.F && e.Alt == true) {
+            if (e.KeyCode == Keys.F && e.Control == true) {
                 this.SearchGridText.Focus();
                 e.SuppressKeyPress = true;
                 return;
             }
-            if (e.KeyCode == Keys.P && e.Alt == true && e.Shift == true) {
+            if (e.KeyCode == Keys.P && e.Control == true && e.Shift == true) {
                 this.ExpandPreviewCheck.Checked = !this.ExpandPreviewCheck.Checked;
                 return;
             }
-            if (e.KeyCode == Keys.P && e.Alt == true) {
+            if (e.KeyCode == Keys.P && e.Control == true) {
                 this.PreviewCheck.Checked = !this.PreviewCheck.Checked;
                 return;
             }
@@ -678,12 +680,15 @@ namespace PokudaSearch.Views {
                 this.BrowserPreviewPanel.Height = (int)(this.Height * 0.8);
             } else {
                 this.PreviewPanel.Width = 420;
-                this.BrowserPreviewPanel.Height = 505;
+                this.BrowserPreviewPanel.Height = (int)(this.Height * 0.8);
             }
         }
 
         private void SelectLocalIndexButton_Click(object sender, EventArgs e) {
             foreach (Row r in this.TargetIndexGrid.Rows) {
+                if (r.Index < RowHeaderCount) {
+                    continue;
+                }
                 string createMode = StringUtil.NullToBlank(r[(int)IndexBuildForm.ActiveIndexColIdx.CreateMode + 2]);
                 if (createMode == EnumUtil.GetLabel(LuceneIndexBuilder.CreateModes.OuterReference)) {
                     r[TargetCheckCol] = false;
@@ -695,6 +700,9 @@ namespace PokudaSearch.Views {
 
         private void SelectOuterIndexButton_Click(object sender, EventArgs e) {
             foreach (Row r in this.TargetIndexGrid.Rows) {
+                if (r.Index < RowHeaderCount) {
+                    continue;
+                }
                 string createMode = StringUtil.NullToBlank(r[(int)IndexBuildForm.ActiveIndexColIdx.CreateMode + 2]);
                 if (createMode == EnumUtil.GetLabel(LuceneIndexBuilder.CreateModes.OuterReference)) {
                     r[TargetCheckCol] = true;
@@ -706,12 +714,18 @@ namespace PokudaSearch.Views {
 
         private void SelectAllButton_Click(object sender, EventArgs e) {
             foreach (Row r in this.TargetIndexGrid.Rows) {
+                if (r.Index < RowHeaderCount) {
+                    continue;
+                }
                 r[TargetCheckCol] = true;
             }
         }
 
         private void ReleaseAllButton_Click(object sender, EventArgs e) {
             foreach (Row r in this.TargetIndexGrid.Rows) {
+                if (r.Index < RowHeaderCount) {
+                    continue;
+                }
                 r[TargetCheckCol] = false;
             }
         }

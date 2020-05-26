@@ -69,7 +69,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Pokuda64.ico</ApplicationIcon>
+    <ApplicationIcon>PokudaSearch128.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
@@ -290,6 +290,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SQLSrc\m_license.Designer.cs">
+      <DependentUpon>m_license.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="SQLSrc\t_active_index.Designer.cs">
       <DependentUpon>t_active_index.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -304,6 +309,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>m_extensions.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LicenseVerificationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\LicenseVerificationForm.Designer.cs">
+      <DependentUpon>LicenseVerificationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\OuterIndexForm.cs">
       <SubType>Form</SubType>
@@ -364,6 +375,10 @@
       <DependentUpon>SearchForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WebDriver\MP4WebDriver.cs" />
+    <EmbeddedResource Include="SQLSrc\m_license.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>m_license.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="SQLSrc\t_active_index.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>t_active_index.Designer.cs</LastGenOutput>
@@ -375,6 +390,9 @@
     <EmbeddedResource Include="SQLSrc\m_extensions.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>m_extensions.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\LicenseVerificationForm.resx">
+      <DependentUpon>LicenseVerificationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\OuterIndexForm.resx">
       <DependentUpon>OuterIndexForm.cs</DependentUpon>
@@ -448,6 +466,7 @@
   <ItemGroup>
     <None Include="Resources\Explorer24.png" />
     <None Include="Resources\File16.bmp" />
+    <Content Include="DB\CREATE_m_license.sql" />
     <Content Include="DB\CREATE_m_extensions.sql" />
     <Content Include="DB\CREATE_t_index_history.sql" />
     <Content Include="DB\CREATE_t_active_index.sql" />
@@ -457,6 +476,11 @@
     <None Include="Resources\Pokuda64.ico" />
     <Content Include="Pokuda64.ico" />
     <None Include="Resources\Nose128.ico" />
+    <None Include="Resources\Preview32.bmp" />
+    <None Include="Resources\PreviewExpand32.bmp" />
+    <Content Include="PokudaSearch128.ico" />
+    <None Include="Resources\NetworkDrive16.bmp" />
+    <None Include="Resources\LocalDrive16.bmp" />
     <Content Include="UserDictionary.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

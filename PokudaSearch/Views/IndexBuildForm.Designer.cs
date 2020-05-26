@@ -54,6 +54,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ActiveIndexCopyMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
+            this.HistoryPanel = new System.Windows.Forms.Panel();
+            this.collapsibleSplitter1 = new NJFLib.Controls.CollapsibleSplitter();
             this.groupBox1.SuspendLayout();
             this.IndexHistoryContext.SuspendLayout();
             this.BottomPanel.SuspendLayout();
@@ -61,6 +63,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.IndexHistoryGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ActiveIndexGrid)).BeginInit();
             this.ActiveIndexContext.SuspendLayout();
+            this.HistoryPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // ReferenceButton
@@ -175,7 +178,7 @@
             // 
             this.BottomPanel.Controls.Add(this.Log4NetTextBox);
             this.BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.BottomPanel.Location = new System.Drawing.Point(0, 402);
+            this.BottomPanel.Location = new System.Drawing.Point(0, 440);
             this.BottomPanel.Name = "BottomPanel";
             this.BottomPanel.Size = new System.Drawing.Size(929, 165);
             this.BottomPanel.TabIndex = 24;
@@ -198,7 +201,7 @@
             this.label4.BackColor = System.Drawing.SystemColors.Info;
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label4.Location = new System.Drawing.Point(3, 273);
+            this.label4.Location = new System.Drawing.Point(5, 5);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(117, 21);
             this.label4.TabIndex = 11;
@@ -209,8 +212,6 @@
             // 
             this.MainPanel.Controls.Add(this.AddOuterIndexButton);
             this.MainPanel.Controls.Add(this.StopButton);
-            this.MainPanel.Controls.Add(this.IndexHistoryGrid);
-            this.MainPanel.Controls.Add(this.label4);
             this.MainPanel.Controls.Add(this.TargetDirText);
             this.MainPanel.Controls.Add(this.ActiveIndexLabel);
             this.MainPanel.Controls.Add(this.ReferenceButton);
@@ -224,7 +225,7 @@
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(0, 0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(929, 394);
+            this.MainPanel.Size = new System.Drawing.Size(929, 270);
             this.MainPanel.TabIndex = 0;
             // 
             // AddOuterIndexButton
@@ -265,11 +266,11 @@
             this.IndexHistoryGrid.GridName = null;
             this.IndexHistoryGrid.IsCol1SelectCheck = false;
             this.IndexHistoryGrid.IsEnterRight = false;
-            this.IndexHistoryGrid.Location = new System.Drawing.Point(3, 297);
+            this.IndexHistoryGrid.Location = new System.Drawing.Point(5, 29);
             this.IndexHistoryGrid.Name = "IndexHistoryGrid";
             this.IndexHistoryGrid.PulldownDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, string>>)(resources.GetObject("IndexHistoryGrid.PulldownDic")));
             this.IndexHistoryGrid.Rows.DefaultSize = 18;
-            this.IndexHistoryGrid.Size = new System.Drawing.Size(923, 91);
+            this.IndexHistoryGrid.Size = new System.Drawing.Size(923, 119);
             this.IndexHistoryGrid.StyleInfo = resources.GetString("IndexHistoryGrid.StyleInfo");
             this.IndexHistoryGrid.TabIndex = 10;
             this.IndexHistoryGrid.WindowsName = null;
@@ -298,7 +299,8 @@
             // 
             this.ActiveIndexGrid.AfterErrorInfo = ((System.Collections.Generic.Dictionary<string, string>)(resources.GetObject("ActiveIndexGrid.AfterErrorInfo")));
             this.ActiveIndexGrid.AllowEditing = false;
-            this.ActiveIndexGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.ActiveIndexGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ActiveIndexGrid.AutoClipboard = true;
             this.ActiveIndexGrid.CellButtonDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.HashSet<string>>)(resources.GetObject("ActiveIndexGrid.CellButtonDic")));
@@ -314,7 +316,7 @@
             this.ActiveIndexGrid.Name = "ActiveIndexGrid";
             this.ActiveIndexGrid.PulldownDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, string>>)(resources.GetObject("ActiveIndexGrid.PulldownDic")));
             this.ActiveIndexGrid.Rows.DefaultSize = 18;
-            this.ActiveIndexGrid.Size = new System.Drawing.Size(923, 173);
+            this.ActiveIndexGrid.Size = new System.Drawing.Size(923, 167);
             this.ActiveIndexGrid.StyleInfo = resources.GetString("ActiveIndexGrid.StyleInfo");
             this.ActiveIndexGrid.TabIndex = 9;
             this.ActiveIndexGrid.WindowsName = null;
@@ -378,7 +380,7 @@
             this.collapsibleSplitter3.ControlToHide = this.BottomPanel;
             this.collapsibleSplitter3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.collapsibleSplitter3.ExpandParentForm = false;
-            this.collapsibleSplitter3.Location = new System.Drawing.Point(0, 394);
+            this.collapsibleSplitter3.Location = new System.Drawing.Point(0, 432);
             this.collapsibleSplitter3.Name = "collapsibleSplitter3";
             this.collapsibleSplitter3.Size = new System.Drawing.Size(929, 8);
             this.collapsibleSplitter3.TabIndex = 0;
@@ -386,12 +388,40 @@
             this.collapsibleSplitter3.UseAnimations = false;
             this.collapsibleSplitter3.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
             // 
+            // HistoryPanel
+            // 
+            this.HistoryPanel.Controls.Add(this.label4);
+            this.HistoryPanel.Controls.Add(this.IndexHistoryGrid);
+            this.HistoryPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.HistoryPanel.Location = new System.Drawing.Point(0, 278);
+            this.HistoryPanel.Name = "HistoryPanel";
+            this.HistoryPanel.Size = new System.Drawing.Size(929, 154);
+            this.HistoryPanel.TabIndex = 25;
+            // 
+            // collapsibleSplitter1
+            // 
+            this.collapsibleSplitter1.AnimationDelay = 20;
+            this.collapsibleSplitter1.AnimationStep = 20;
+            this.collapsibleSplitter1.BorderStyle3D = System.Windows.Forms.Border3DStyle.RaisedOuter;
+            this.collapsibleSplitter1.ControlToHide = this.HistoryPanel;
+            this.collapsibleSplitter1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.collapsibleSplitter1.ExpandParentForm = false;
+            this.collapsibleSplitter1.Location = new System.Drawing.Point(0, 270);
+            this.collapsibleSplitter1.Name = "collapsibleSplitter1";
+            this.collapsibleSplitter1.Size = new System.Drawing.Size(929, 8);
+            this.collapsibleSplitter1.TabIndex = 26;
+            this.collapsibleSplitter1.TabStop = false;
+            this.collapsibleSplitter1.UseAnimations = false;
+            this.collapsibleSplitter1.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
+            // 
             // IndexBuildForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(929, 567);
+            this.ClientSize = new System.Drawing.Size(929, 605);
             this.Controls.Add(this.MainPanel);
+            this.Controls.Add(this.collapsibleSplitter1);
+            this.Controls.Add(this.HistoryPanel);
             this.Controls.Add(this.collapsibleSplitter3);
             this.Controls.Add(this.BottomPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -410,6 +440,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.IndexHistoryGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ActiveIndexGrid)).EndInit();
             this.ActiveIndexContext.ResumeLayout(false);
+            this.HistoryPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -445,5 +476,7 @@
         private System.Windows.Forms.Button AddOuterIndexButton;
         private System.Windows.Forms.ToolStripMenuItem EditInteractionPathMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.Panel HistoryPanel;
+        private NJFLib.Controls.CollapsibleSplitter collapsibleSplitter1;
     }
 }

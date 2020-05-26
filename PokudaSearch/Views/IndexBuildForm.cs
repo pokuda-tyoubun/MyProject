@@ -485,7 +485,7 @@ namespace PokudaSearch.Views {
                     var historyTbl = LoadHistory();
 
                     //t_active_indexの更新-----------------------
-                    if (LuceneIndexBuilder.IndexedCount > 0) {
+                    if (LuceneIndexBuilder.TargetCount > 0) {
                         var aiParam = new List<SQLiteParameter>();
                         var row = historyTbl.Rows[0];
                         string storePath = StringUtil.NullToBlank(LuceneIndexBuilder.IndexStorePath);
@@ -508,6 +508,8 @@ namespace PokudaSearch.Views {
                         UpdateActiveIndex(aiParam);
                         LoadActiveIndex(AppObject.ConnectString, this.ActiveIndexGrid);
                         LoadActiveIndex(AppObject.ConnectString, SearchForm.TargetIndexGridControl, appendCheckBox: true);
+
+                        this.LogViewerText.Text = "完了";
                     } else {
                         MessageBox.Show(AppObject.GetMsg(AppObject.Msg.MSG_INDEXED_COUNT_ZERO), 
                             AppObject.GetMsg(AppObject.Msg.TITLE_INFO), MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -530,6 +532,7 @@ namespace PokudaSearch.Views {
                     this.StopButton.Enabled = false;
                 }
 
+                report.Status = ProgressReport.ProgressStatus.None;
             }
         }
 
