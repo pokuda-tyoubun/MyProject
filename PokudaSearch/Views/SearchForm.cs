@@ -4,9 +4,12 @@ using C1.Win.C1SuperTooltip;
 using C1.Win.C1Tile;
 using CefSharp;
 using CefSharp.WinForms;
+using com.drew.metadata;
 using FlexLucene.Analysis;
 using FlexLucene.Analysis.Ja;
 using FlexLucene.Document;
+using FlexLucene.Facet;
+using FlexLucene.Facet.Taxonomy.Directory;
 using FlexLucene.Index;
 using FlexLucene.Queries.Mlt;
 using FlexLucene.Queryparser.Classic;
@@ -18,7 +21,6 @@ using FxCommonLib.Controls;
 using FxCommonLib.Utils;
 using java.nio.file;
 using Microsoft.WindowsAPICodePack.Shell;
-using PokudaSearch.Exceptions;
 using PokudaSearch.IndexUtil;
 using System;
 using System.Collections.Concurrent;
@@ -65,13 +67,16 @@ namespace PokudaSearch.Views {
         #endregion Constants
 
         #region Properties
+        /// <summary>最大検索結果数</summary>
         public int MaxSeachResultNum = 0;
+
         /// <summary>ナレッジ管理画面</summary>
         private static FlexGridEx _targetIndexGrid = null;
         public static FlexGridEx TargetIndexGridControl {
             set { _targetIndexGrid = value; }
             get { return _targetIndexGrid; }
         }
+
         #endregion Properties
 
         #region MemberVariables
@@ -152,9 +157,16 @@ namespace PokudaSearch.Views {
             PreviewCheckToolTip.SetToolTip(PreviewCheck, "プレビュー表示(Ctrl + P)");
             ExpandPreviewCheckToolTip.SetToolTip(ExpandPreviewCheck, "プレビュー拡大(Ctrl + Shift + P)");
 
+            //差分ツールメニューの活性設定
             if (StringUtil.NullToBlank(Properties.Settings.Default.DiffExe) == "") {
                 this.DiffMenu.Enabled = false;
+            } else {
+                this.DiffMenu.Enabled = true;
             }
+
+            //デフォルトインデックスターゲットの設定
+            CheckedLocalIndex(Properties.Settings.Default.LocalIndexChecked);
+            CheckedOuterIndex(Properties.Settings.Default.OuterIndexChecked);
         }
         /// <summary>
         /// Excel出力ボタン
@@ -314,15 +326,15 @@ namespace PokudaSearch.Views {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void MoreLikeThisMenu_Click(object sender, EventArgs e) {
-            MultiReader multiReader = null;
-            try {
-                multiReader = GetMultiReader(_selectedIndexList);
-            } catch (UnlinkedIndexException ex) {
+            string unlinkedIndexPath = "";
+            MultiReader multiReader = GetMultiReader(_selectedIndexList, out unlinkedIndexPath);
+            if (unlinkedIndexPath != "") {
                 //検索中断
-                MessageBox.Show(string.Format(AppObject.GetMsg(AppObject.Msg.ERR_UNLINKED_INDEX), ex.TargetIndex),
+                MessageBox.Show(string.Format(AppObject.GetMsg(AppObject.Msg.ERR_UNLINKED_INDEX), unlinkedIndexPath),
                     AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             IndexSearcher idxSearcher = new IndexSearcher(multiReader);
             MoreLikeThis mlt = new MoreLikeThis(multiReader);
             mlt.SetFieldNames(new string[] { LuceneIndexBuilder.Title, LuceneIndexBuilder.Content });
@@ -767,7 +779,10 @@ namespace PokudaSearch.Views {
         /// </summary>
         /// <param name="targetIndexList"></param>
         /// <returns></returns>
-        private MultiReader GetMultiReader(List<KeyValuePair<string, string>> targetIndexList) {
+        private MultiReader GetMultiReader(List<KeyValuePair<string, string>> targetIndexList, 
+            out string unlinkedIndexPath) {
+
+            unlinkedIndexPath = "";
             IndexReader[] idxList = new IndexReader[targetIndexList.Count];
             int cnt = 0;
             foreach (var kvp in targetIndexList) {
@@ -779,9 +794,11 @@ namespace PokudaSearch.Views {
                     var idxReader = DirectoryReader.Open(fsDir);
                     idxList[cnt] = idxReader;
                 } catch (java.io.IOException) {
-                    var ex = new UnlinkedIndexException();
-                    ex.TargetIndex = indexedPath;
-                    throw ex;
+                    //var ex = new UnlinkedIndexException();
+                    //ex.TargetIndex = indexedPath;
+                    //throw ex;
+                    unlinkedIndexPath = indexedPath;
+                    return null;
                 }
 
                 cnt++;
@@ -848,12 +865,11 @@ namespace PokudaSearch.Views {
                 return;
             }
 
-            MultiReader multiReader = null;
-            try {
-                multiReader = GetMultiReader(_selectedIndexList);
-            } catch (UnlinkedIndexException ex) {
+            string unlinkedIndexPath = "";
+            MultiReader multiReader = GetMultiReader(_selectedIndexList, out unlinkedIndexPath);
+            if (unlinkedIndexPath != "") {
                 //検索中断
-                MessageBox.Show(string.Format(AppObject.GetMsg(AppObject.Msg.ERR_UNLINKED_INDEX), ex.TargetIndex),
+                MessageBox.Show(string.Format(AppObject.GetMsg(AppObject.Msg.ERR_UNLINKED_INDEX), unlinkedIndexPath),
                     AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -1425,6 +1441,41 @@ namespace PokudaSearch.Views {
                 this.ResultGrid.Focus();
                 _returnFocus = false;
             }
+        }
+
+        public void CheckedLocalIndex(bool isChecked) {
+            foreach (Row r in this.TargetIndexGrid.Rows) {
+                if (r.Index < RowHeaderCount) {
+                    continue;
+                }
+                string createMode = StringUtil.NullToBlank(r[(int)IndexBuildForm.ActiveIndexColIdx.CreateMode + 2]);
+                if (createMode != EnumUtil.GetLabel(LuceneIndexBuilder.CreateModes.OuterReference)) {
+                    r[TargetCheckCol] = isChecked;
+                }
+            }
+        }
+        public void CheckedOuterIndex(bool isChecked) {
+            foreach (Row r in this.TargetIndexGrid.Rows) {
+                if (r.Index < RowHeaderCount) {
+                    continue;
+                }
+                string createMode = StringUtil.NullToBlank(r[(int)IndexBuildForm.ActiveIndexColIdx.CreateMode + 2]);
+                if (createMode == EnumUtil.GetLabel(LuceneIndexBuilder.CreateModes.OuterReference)) {
+                    r[TargetCheckCol] = isChecked;
+                }
+            }
+        }
+
+        private void FacetTest() {
+            string unlinkedIndexPath = "";
+            MultiReader multiReader = GetMultiReader(_selectedIndexList, out unlinkedIndexPath);
+            IndexSearcher idxSearcher = new IndexSearcher(multiReader);
+
+            FacetsCollector fc = new FacetsCollector();
+            //Top10カテゴリを表示
+            FacetsCollector.Search(idxSearcher, new MatchAllDocsQuery(), 10, fc);
+
+            //予めカテゴリを登録する必要があるようなので、一旦保留
         }
     }
 }

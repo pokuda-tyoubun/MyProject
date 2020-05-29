@@ -330,45 +330,45 @@
             this.MoreLikeThisMenu,
             this.DiffMenu});
             this.ResultContext.Name = "ResultContext";
-            this.ResultContext.Size = new System.Drawing.Size(176, 120);
+            this.ResultContext.Size = new System.Drawing.Size(181, 142);
             // 
             // OpenFileMenu
             // 
             this.OpenFileMenu.Name = "OpenFileMenu";
-            this.OpenFileMenu.Size = new System.Drawing.Size(175, 22);
+            this.OpenFileMenu.Size = new System.Drawing.Size(180, 22);
             this.OpenFileMenu.Text = "ファイルを開く(&O)";
             this.OpenFileMenu.Click += new System.EventHandler(this.OpenFileMenu_Click);
             // 
             // OpenParentMenu
             // 
             this.OpenParentMenu.Name = "OpenParentMenu";
-            this.OpenParentMenu.Size = new System.Drawing.Size(175, 22);
+            this.OpenParentMenu.Size = new System.Drawing.Size(180, 22);
             this.OpenParentMenu.Text = "親フォルダを開く(&P)";
             this.OpenParentMenu.Click += new System.EventHandler(this.OpenParentMenu_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(172, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
             // 
             // CopyMenu
             // 
             this.CopyMenu.Name = "CopyMenu";
-            this.CopyMenu.Size = new System.Drawing.Size(175, 22);
+            this.CopyMenu.Size = new System.Drawing.Size(180, 22);
             this.CopyMenu.Text = "コピー(&C) Ctrl+C";
             this.CopyMenu.Click += new System.EventHandler(this.CopyMenu_Click);
             // 
             // MoreLikeThisMenu
             // 
             this.MoreLikeThisMenu.Name = "MoreLikeThisMenu";
-            this.MoreLikeThisMenu.Size = new System.Drawing.Size(175, 22);
+            this.MoreLikeThisMenu.Size = new System.Drawing.Size(180, 22);
             this.MoreLikeThisMenu.Text = "類似文書を検索(&M)";
             this.MoreLikeThisMenu.Click += new System.EventHandler(this.MoreLikeThisMenu_Click);
             // 
             // DiffMenu
             // 
             this.DiffMenu.Name = "DiffMenu";
-            this.DiffMenu.Size = new System.Drawing.Size(175, 22);
+            this.DiffMenu.Size = new System.Drawing.Size(180, 22);
             this.DiffMenu.Text = "差分(&D)";
             this.DiffMenu.Click += new System.EventHandler(this.DiffMenu_Click);
             // 
@@ -929,7 +929,6 @@
         private System.Windows.Forms.Button ShowPreviewButton;
         private NJFLib.Controls.CollapsibleSplitter collapsibleSplitter3;
         private NJFLib.Controls.CollapsibleSplitter PreviewSplitter;
-        private System.Windows.Forms.ToolStripMenuItem DiffMenu;
         private System.Windows.Forms.RichTextBox RichTextBox;
         private System.Windows.Forms.ContextMenuStrip TargetContext;
         private System.Windows.Forms.ToolStripMenuItem SelectAllMenu;
@@ -957,5 +956,6 @@
         private System.Windows.Forms.ToolTip PreviewCheckToolTip;
         private System.Windows.Forms.ToolTip ExpandPreviewCheckToolTip;
         private System.Windows.Forms.SplitContainer SearchSplitContainer;
+        public System.Windows.Forms.ToolStripMenuItem DiffMenu;
     }
 }

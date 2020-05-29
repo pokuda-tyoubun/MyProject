@@ -41,6 +41,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.FileSizeLimitNum = new C1.Win.C1Input.C1NumericEdit();
             this.FileSizeLimitLabel = new System.Windows.Forms.Label();
+            this.LocalIndexCheck = new System.Windows.Forms.CheckBox();
+            this.OuterIndexCheck = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MaxSeachResultNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BufferSizeLimitNum)).BeginInit();
@@ -49,6 +52,9 @@
             // 
             // MainPanel
             // 
+            this.MainPanel.Controls.Add(this.label4);
+            this.MainPanel.Controls.Add(this.OuterIndexCheck);
+            this.MainPanel.Controls.Add(this.LocalIndexCheck);
             this.MainPanel.Controls.Add(this.label3);
             this.MainPanel.Controls.Add(this.DiffToolText);
             this.MainPanel.Controls.Add(this.RefButton);
@@ -69,7 +75,6 @@
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(580, 265);
             this.MainPanel.TabIndex = 0;
-            this.MainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.MainPanel_Paint);
             // 
             // label3
             // 
@@ -77,7 +82,7 @@
             this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label3.Font = new System.Drawing.Font("MS UI Gothic", 9F);
             this.label3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label3.Location = new System.Drawing.Point(7, 53);
+            this.label3.Location = new System.Drawing.Point(14, 53);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(82, 19);
             this.label3.TabIndex = 3;
@@ -87,14 +92,14 @@
             // DiffToolText
             // 
             this.DiffToolText.AllowDrop = true;
-            this.DiffToolText.Location = new System.Drawing.Point(93, 53);
+            this.DiffToolText.Location = new System.Drawing.Point(100, 53);
             this.DiffToolText.Name = "DiffToolText";
             this.DiffToolText.Size = new System.Drawing.Size(404, 19);
             this.DiffToolText.TabIndex = 4;
             // 
             // RefButton
             // 
-            this.RefButton.Location = new System.Drawing.Point(501, 51);
+            this.RefButton.Location = new System.Drawing.Point(508, 51);
             this.RefButton.Name = "RefButton";
             this.RefButton.Size = new System.Drawing.Size(65, 22);
             this.RefButton.TabIndex = 5;
@@ -108,7 +113,7 @@
             this.MaxSearchResultLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.MaxSearchResultLabel.Font = new System.Drawing.Font("MS UI Gothic", 9F);
             this.MaxSearchResultLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.MaxSearchResultLabel.Location = new System.Drawing.Point(7, 33);
+            this.MaxSearchResultLabel.Location = new System.Drawing.Point(14, 33);
             this.MaxSearchResultLabel.Name = "MaxSearchResultLabel";
             this.MaxSearchResultLabel.Size = new System.Drawing.Size(239, 17);
             this.MaxSearchResultLabel.TabIndex = 1;
@@ -120,7 +125,7 @@
             this.MaxSeachResultNum.ErrorInfo.ErrorAction = C1.Win.C1Input.ErrorActionEnum.ResetValue;
             this.MaxSeachResultNum.Font = new System.Drawing.Font("MS UI Gothic", 9F);
             this.MaxSeachResultNum.ImagePadding = new System.Windows.Forms.Padding(0);
-            this.MaxSeachResultNum.Location = new System.Drawing.Point(250, 33);
+            this.MaxSeachResultNum.Location = new System.Drawing.Point(257, 33);
             this.MaxSeachResultNum.Name = "MaxSeachResultNum";
             this.MaxSeachResultNum.ShowFocusRectangle = true;
             this.MaxSeachResultNum.Size = new System.Drawing.Size(100, 17);
@@ -173,7 +178,7 @@
             this.CauseLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.CauseLabel.Font = new System.Drawing.Font("MS UI Gothic", 12F);
             this.CauseLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.CauseLabel.Location = new System.Drawing.Point(6, 95);
+            this.CauseLabel.Location = new System.Drawing.Point(6, 87);
             this.CauseLabel.Name = "CauseLabel";
             this.CauseLabel.Size = new System.Drawing.Size(194, 23);
             this.CauseLabel.TabIndex = 6;
@@ -185,7 +190,7 @@
             this.label2.BackColor = System.Drawing.SystemColors.Control;
             this.label2.Font = new System.Drawing.Font("MS UI Gothic", 9F);
             this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label2.Location = new System.Drawing.Point(355, 143);
+            this.label2.Location = new System.Drawing.Point(362, 135);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(36, 17);
             this.label2.TabIndex = 12;
@@ -197,7 +202,7 @@
             this.BufferSizeLimitNum.ErrorInfo.ErrorAction = C1.Win.C1Input.ErrorActionEnum.ResetValue;
             this.BufferSizeLimitNum.Font = new System.Drawing.Font("MS UI Gothic", 9F);
             this.BufferSizeLimitNum.ImagePadding = new System.Windows.Forms.Padding(0);
-            this.BufferSizeLimitNum.Location = new System.Drawing.Point(250, 143);
+            this.BufferSizeLimitNum.Location = new System.Drawing.Point(257, 135);
             this.BufferSizeLimitNum.Name = "BufferSizeLimitNum";
             this.BufferSizeLimitNum.ShowFocusRectangle = true;
             this.BufferSizeLimitNum.Size = new System.Drawing.Size(100, 17);
@@ -217,7 +222,7 @@
             this.BufferSizeLimitLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BufferSizeLimitLabel.Font = new System.Drawing.Font("MS UI Gothic", 9F);
             this.BufferSizeLimitLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BufferSizeLimitLabel.Location = new System.Drawing.Point(6, 143);
+            this.BufferSizeLimitLabel.Location = new System.Drawing.Point(13, 135);
             this.BufferSizeLimitLabel.Name = "BufferSizeLimitLabel";
             this.BufferSizeLimitLabel.Size = new System.Drawing.Size(239, 17);
             this.BufferSizeLimitLabel.TabIndex = 10;
@@ -229,7 +234,7 @@
             this.label1.BackColor = System.Drawing.SystemColors.Control;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 9F);
             this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(355, 122);
+            this.label1.Location = new System.Drawing.Point(362, 114);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(36, 17);
             this.label1.TabIndex = 9;
@@ -241,7 +246,7 @@
             this.FileSizeLimitNum.ErrorInfo.ErrorAction = C1.Win.C1Input.ErrorActionEnum.ResetValue;
             this.FileSizeLimitNum.Font = new System.Drawing.Font("MS UI Gothic", 9F);
             this.FileSizeLimitNum.ImagePadding = new System.Windows.Forms.Padding(0);
-            this.FileSizeLimitNum.Location = new System.Drawing.Point(250, 122);
+            this.FileSizeLimitNum.Location = new System.Drawing.Point(257, 114);
             this.FileSizeLimitNum.Name = "FileSizeLimitNum";
             this.FileSizeLimitNum.ShowFocusRectangle = true;
             this.FileSizeLimitNum.Size = new System.Drawing.Size(100, 17);
@@ -261,12 +266,51 @@
             this.FileSizeLimitLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.FileSizeLimitLabel.Font = new System.Drawing.Font("MS UI Gothic", 9F);
             this.FileSizeLimitLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.FileSizeLimitLabel.Location = new System.Drawing.Point(6, 122);
+            this.FileSizeLimitLabel.Location = new System.Drawing.Point(13, 114);
             this.FileSizeLimitLabel.Name = "FileSizeLimitLabel";
             this.FileSizeLimitLabel.Size = new System.Drawing.Size(239, 17);
             this.FileSizeLimitLabel.TabIndex = 7;
             this.FileSizeLimitLabel.Text = "最大ファイルサイズ";
             this.FileSizeLimitLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // LocalIndexCheck
+            // 
+            this.LocalIndexCheck.Checked = true;
+            this.LocalIndexCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.LocalIndexCheck.Image = global::PokudaSearch.Properties.Resources.LocalDrive16;
+            this.LocalIndexCheck.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.LocalIndexCheck.Location = new System.Drawing.Point(12, 194);
+            this.LocalIndexCheck.Name = "LocalIndexCheck";
+            this.LocalIndexCheck.Size = new System.Drawing.Size(151, 21);
+            this.LocalIndexCheck.TabIndex = 15;
+            this.LocalIndexCheck.Text = "　　　ローカルインデックス";
+            this.LocalIndexCheck.UseVisualStyleBackColor = true;
+            // 
+            // OuterIndexCheck
+            // 
+            this.OuterIndexCheck.Checked = true;
+            this.OuterIndexCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.OuterIndexCheck.Image = global::PokudaSearch.Properties.Resources.NetworkDrive16;
+            this.OuterIndexCheck.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.OuterIndexCheck.Location = new System.Drawing.Point(167, 194);
+            this.OuterIndexCheck.Name = "OuterIndexCheck";
+            this.OuterIndexCheck.Size = new System.Drawing.Size(133, 21);
+            this.OuterIndexCheck.TabIndex = 16;
+            this.OuterIndexCheck.Text = "　　　外部インデックス";
+            this.OuterIndexCheck.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.SystemColors.Info;
+            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label4.Font = new System.Drawing.Font("MS UI Gothic", 12F);
+            this.label4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label4.Location = new System.Drawing.Point(5, 168);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(194, 23);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "デフォルト対象インデックス";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ConfigForm
             // 
@@ -274,6 +318,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(580, 265);
             this.Controls.Add(this.MainPanel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -308,5 +353,8 @@
         internal System.Windows.Forms.Label label3;
         private FxCommonLib.Controls.FilePathTextBox DiffToolText;
         private System.Windows.Forms.Button RefButton;
+        internal System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox OuterIndexCheck;
+        private System.Windows.Forms.CheckBox LocalIndexCheck;
     }
 }

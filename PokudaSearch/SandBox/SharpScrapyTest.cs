@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PokudaSearch.Exceptions {
-    public class UnlinkedIndexException : Exception{
-        public string TargetIndex;
+namespace PokudaSearch.SandBox {
+    public class SharpScrapyTest {
     }
 }

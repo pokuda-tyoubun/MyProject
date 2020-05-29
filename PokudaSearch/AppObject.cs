@@ -202,6 +202,8 @@ namespace PokudaSearch {
             MSG_LICENSE_VERIFIED,
             [EnumLabel("ファイルが存在しません。")]
             ERR_FILE_NOT_FOUND,
+            [EnumLabel("{0}ファイルが存在しません。")]
+            ERR_X_FILE_NOT_FOUND,
             [EnumLabel("インデックス数が上限に達しました。これ以上インデックスを追加することはできません。")]
             MSG_INDEX_COUNT_MAX,
             [EnumLabel("指定されたローカルフォルダは存在しません。")]

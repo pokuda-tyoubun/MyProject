@@ -21,7 +21,13 @@
       <Value Profile="(Default)">512</Value>
     </Setting>
     <Setting Name="HelpUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://pokuda-tyoubun.blogspot.com/p/pokudasearch.html</Value>
+      <Value Profile="(Default)">https://pokuda-tyoubun.blogspot.com/p/pokuda-search-pro.html</Value>
+    </Setting>
+    <Setting Name="LocalIndexChecked" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="OuterIndexChecked" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

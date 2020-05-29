@@ -281,7 +281,6 @@
   <ItemGroup>
     <Compile Include="AppObject.cs" />
     <Compile Include="Consts.cs" />
-    <Compile Include="Exceptions\UnlinkedIndexException.cs" />
     <Compile Include="IndexUtil\LuceneIndexBuilder.cs" />
     <Compile Include="IndexUtil\LuceneIndexReaderUtil.cs" />
     <Compile Include="IndexUtil\ProgressReport.cs" />
@@ -290,6 +289,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SandBox\SharpScrapyTest.cs" />
     <Compile Include="SQLSrc\m_license.Designer.cs">
       <DependentUpon>m_license.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -466,6 +466,7 @@
   <ItemGroup>
     <None Include="Resources\Explorer24.png" />
     <None Include="Resources\File16.bmp" />
+    <Content Include="DB\DB_RESET.sql" />
     <Content Include="DB\CREATE_m_license.sql" />
     <Content Include="DB\CREATE_m_extensions.sql" />
     <Content Include="DB\CREATE_t_index_history.sql" />

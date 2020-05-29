@@ -317,5 +317,9 @@ namespace PokudaSearch {
             }
             this.Text = "Pokuda Search Pro Ver." + AppObject.GetVersion() + trialPeriod;
         }
+
+        private void ribbonButton1_Click(object sender, EventArgs e) {
+
+        }
     }
 }
