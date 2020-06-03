@@ -5,6 +5,7 @@ using FlexLucene.Search;
 using FlexLucene.Store;
 using java.nio.file;
 using Microsoft.WindowsAPICodePack.Shell;
+using PokudaSearch.WebDriver;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -142,6 +143,9 @@ namespace PokudaSearch.SandBox {
         private void MultiSearcherButton_Click(object sender, EventArgs e) {
             //FlexLucene.Index.MultiReader
             //MultiSearcher ms = new MultiSearcher();
+        }
+
+        private void WebClawringTestButton_Click(object sender, EventArgs e) {
         }
     }
 }

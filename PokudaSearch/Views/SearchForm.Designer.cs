@@ -65,7 +65,7 @@
             this.BrowserPreviewPanel = new System.Windows.Forms.Panel();
             this.PreviewWarnLabel = new System.Windows.Forms.Label();
             this.ShowPreviewButton = new System.Windows.Forms.Button();
-            this.BrowserProgress = new System.Windows.Forms.ProgressBar();
+            this.CefSharpPanel = new PokudaSearch.Controls.CefSharpPanel();
             this.RichTextBox = new System.Windows.Forms.RichTextBox();
             this.TextPreviewPanel = new System.Windows.Forms.Panel();
             this.PreviewLabel = new C1.Win.C1SuperTooltip.C1SuperLabel();
@@ -330,45 +330,45 @@
             this.MoreLikeThisMenu,
             this.DiffMenu});
             this.ResultContext.Name = "ResultContext";
-            this.ResultContext.Size = new System.Drawing.Size(181, 142);
+            this.ResultContext.Size = new System.Drawing.Size(176, 120);
             // 
             // OpenFileMenu
             // 
             this.OpenFileMenu.Name = "OpenFileMenu";
-            this.OpenFileMenu.Size = new System.Drawing.Size(180, 22);
+            this.OpenFileMenu.Size = new System.Drawing.Size(175, 22);
             this.OpenFileMenu.Text = "ファイルを開く(&O)";
             this.OpenFileMenu.Click += new System.EventHandler(this.OpenFileMenu_Click);
             // 
             // OpenParentMenu
             // 
             this.OpenParentMenu.Name = "OpenParentMenu";
-            this.OpenParentMenu.Size = new System.Drawing.Size(180, 22);
+            this.OpenParentMenu.Size = new System.Drawing.Size(175, 22);
             this.OpenParentMenu.Text = "親フォルダを開く(&P)";
             this.OpenParentMenu.Click += new System.EventHandler(this.OpenParentMenu_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(172, 6);
             // 
             // CopyMenu
             // 
             this.CopyMenu.Name = "CopyMenu";
-            this.CopyMenu.Size = new System.Drawing.Size(180, 22);
+            this.CopyMenu.Size = new System.Drawing.Size(175, 22);
             this.CopyMenu.Text = "コピー(&C) Ctrl+C";
             this.CopyMenu.Click += new System.EventHandler(this.CopyMenu_Click);
             // 
             // MoreLikeThisMenu
             // 
             this.MoreLikeThisMenu.Name = "MoreLikeThisMenu";
-            this.MoreLikeThisMenu.Size = new System.Drawing.Size(180, 22);
+            this.MoreLikeThisMenu.Size = new System.Drawing.Size(175, 22);
             this.MoreLikeThisMenu.Text = "類似文書を検索(&M)";
             this.MoreLikeThisMenu.Click += new System.EventHandler(this.MoreLikeThisMenu_Click);
             // 
             // DiffMenu
             // 
             this.DiffMenu.Name = "DiffMenu";
-            this.DiffMenu.Size = new System.Drawing.Size(180, 22);
+            this.DiffMenu.Size = new System.Drawing.Size(175, 22);
             this.DiffMenu.Text = "差分(&D)";
             this.DiffMenu.Click += new System.EventHandler(this.DiffMenu_Click);
             // 
@@ -403,7 +403,7 @@
             // 
             this.BrowserPreviewPanel.Controls.Add(this.PreviewWarnLabel);
             this.BrowserPreviewPanel.Controls.Add(this.ShowPreviewButton);
-            this.BrowserPreviewPanel.Controls.Add(this.BrowserProgress);
+            this.BrowserPreviewPanel.Controls.Add(this.CefSharpPanel);
             this.BrowserPreviewPanel.Controls.Add(this.RichTextBox);
             this.BrowserPreviewPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.BrowserPreviewPanel.Location = new System.Drawing.Point(0, 154);
@@ -415,7 +415,7 @@
             // 
             this.PreviewWarnLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.PreviewWarnLabel.AutoSize = true;
-            this.PreviewWarnLabel.Location = new System.Drawing.Point(228, 484);
+            this.PreviewWarnLabel.Location = new System.Drawing.Point(229, 484);
             this.PreviewWarnLabel.Name = "PreviewWarnLabel";
             this.PreviewWarnLabel.Size = new System.Drawing.Size(79, 12);
             this.PreviewWarnLabel.TabIndex = 3;
@@ -424,7 +424,7 @@
             // ShowPreviewButton
             // 
             this.ShowPreviewButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ShowPreviewButton.Location = new System.Drawing.Point(311, 479);
+            this.ShowPreviewButton.Location = new System.Drawing.Point(312, 479);
             this.ShowPreviewButton.Name = "ShowPreviewButton";
             this.ShowPreviewButton.Size = new System.Drawing.Size(102, 22);
             this.ShowPreviewButton.TabIndex = 2;
@@ -432,22 +432,21 @@
             this.ShowPreviewButton.UseVisualStyleBackColor = true;
             this.ShowPreviewButton.Click += new System.EventHandler(this.ShowPreviewButton_Click);
             // 
-            // BrowserProgress
+            // CefSharpPanel
             // 
-            this.BrowserProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.BrowserProgress.Location = new System.Drawing.Point(4, 479);
-            this.BrowserProgress.Name = "BrowserProgress";
-            this.BrowserProgress.Size = new System.Drawing.Size(126, 23);
-            this.BrowserProgress.TabIndex = 1;
+            this.CefSharpPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.CefSharpPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CefSharpPanel.Location = new System.Drawing.Point(0, 0);
+            this.CefSharpPanel.Name = "CefSharpPanel";
+            this.CefSharpPanel.Size = new System.Drawing.Size(419, 505);
+            this.CefSharpPanel.TabIndex = 4;
             // 
             // RichTextBox
             // 
-            this.RichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.RichTextBox.Location = new System.Drawing.Point(4, 3);
+            this.RichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RichTextBox.Location = new System.Drawing.Point(0, 0);
             this.RichTextBox.Name = "RichTextBox";
-            this.RichTextBox.Size = new System.Drawing.Size(412, 470);
+            this.RichTextBox.Size = new System.Drawing.Size(419, 505);
             this.RichTextBox.TabIndex = 0;
             this.RichTextBox.Text = "";
             // 
@@ -923,7 +922,6 @@
         private System.Windows.Forms.ToolStripButton FilterGridButton;
         private System.Windows.Forms.ToolStripButton ClearFilterButton;
         private System.Windows.Forms.Panel BrowserPreviewPanel;
-        private System.Windows.Forms.ProgressBar BrowserProgress;
         private FxCommonLib.Controls.FlexGridEx TargetIndexGrid;
         private System.Windows.Forms.Label PreviewWarnLabel;
         private System.Windows.Forms.Button ShowPreviewButton;
@@ -957,5 +955,6 @@
         private System.Windows.Forms.ToolTip ExpandPreviewCheckToolTip;
         private System.Windows.Forms.SplitContainer SearchSplitContainer;
         public System.Windows.Forms.ToolStripMenuItem DiffMenu;
+        private Controls.CefSharpPanel CefSharpPanel;
     }
 }

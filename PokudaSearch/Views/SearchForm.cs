@@ -22,6 +22,7 @@ using FxCommonLib.Utils;
 using java.nio.file;
 using Microsoft.WindowsAPICodePack.Shell;
 using PokudaSearch.IndexUtil;
+using PokudaSearch.WebDriver;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -35,6 +36,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Threading;
 
 namespace PokudaSearch.Views {
     public partial class SearchForm : Form {
@@ -89,8 +91,6 @@ namespace PokudaSearch.Views {
         private Stack<int> _selectedStack = new Stack<int>();
         /// <summary>選択インデックスを一時的に保持</summary>
         private List<KeyValuePair<string, string>> _selectedIndexList = null;
-        /// <summary>プレビュー用ブラウザ</summary>
-        private ChromiumWebBrowser _chromeBrowser;
         /// <summary>外部パスの辞書</summary>
         private Dictionary<string, string> _outerPathDic;
         /// <summary>セルのツールチップ</summary>
@@ -107,7 +107,6 @@ namespace PokudaSearch.Views {
         /// </summary>
         public SearchForm() {
             InitializeComponent();
-            InitializeChromium();
 
             CreateHeader();
 
@@ -128,25 +127,6 @@ namespace PokudaSearch.Views {
 
 
         #region EventHandlers
-        /// <summary>
-        /// Webブラウザーのプログレス変更
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ChromeBrowser_LoadingStateChanged(object sender, CefSharp.LoadingStateChangedEventArgs e) {
-            delegate_UpdateProgressBar callback = new delegate_UpdateProgressBar(UpdateProgressBar);
-            this.BrowserProgress.Invoke(callback, e.IsLoading);
-        }
-        /// <summary>
-        /// Webブラウザーのロードエラー時
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ChromeBrowser_LoadError(object sender, CefSharp.LoadErrorEventArgs e) {
-            AppObject.Logger.Warn("ChromeBrowser LoadError occured. : " + e.FailedUrl);
-            _chromeBrowser.Load("about:blank");
-        }
-
         /// <summary>
         /// フォームロード時
         /// </summary>
@@ -289,7 +269,7 @@ namespace PokudaSearch.Views {
             int selectedRow = this.ResultGrid.Selection.TopRow;
 
             //NOTE Loading時に再表示するとCOMエラーになるのを回避
-            if (_chromeBrowser.IsLoading) {
+            if (this.CefSharpPanel.Browser.IsLoading) {
                 _selectedStack.Push(selectedRow);
             } else {
                 if (_selectedStack.Count > 0) {
@@ -452,7 +432,7 @@ namespace PokudaSearch.Views {
                     string tmpPath = SaveDocToPDF(fullPath);
                     fullPath = tmpPath;
                 }
-                _chromeBrowser.Load(fullPath);
+                this.CefSharpPanel.Browser.Load(fullPath);
 
             } finally {
                 this.Cursor = Cursors.Default;
@@ -623,7 +603,8 @@ namespace PokudaSearch.Views {
             this.TargetIndexGrid.CopyEx();
         }
         private void ListViewButton_Click(object sender, EventArgs e) {
-
+            WebClawringDriver wcd = new WebClawringDriver();
+            wcd.Clawring(this.CefSharpPanel);
         }
 
         private void TileViewButton_Click(object sender, EventArgs e) {
@@ -1033,7 +1014,7 @@ namespace PokudaSearch.Views {
                 this.PreviewLabel.Text = val;
 
                 if (this.PreviewCheck.Checked) {
-                    _chromeBrowser.Visible = true;
+                    this.CefSharpPanel.Visible = true;
                     string extension = StringUtil.NullToBlank(this.ResultGrid.Rows[selectedRow][(int)ColIndex.Extension]);
                     string fullPath = StringUtil.NullToBlank(this.ResultGrid.Rows[selectedRow][(int)ColIndex.FullPath]);
                     if (!File.Exists(fullPath)) {
@@ -1050,7 +1031,7 @@ namespace PokudaSearch.Views {
                             fullPath = tmpPath;
                         } else if (extension.ToLower() == ".csv") {
                             this.RichTextBox.Text = LuceneIndexBuilder.ReadToString(fullPath);
-                            _chromeBrowser.Visible = false;
+                            this.CefSharpPanel.Visible = false;
                             return;
                         } else if (extension.ToLower() == ".pptx") {
 
@@ -1058,7 +1039,6 @@ namespace PokudaSearch.Views {
                             this.ShowPreviewButton.Visible = true;
                             string tmpPath = SaveToThumbnailBitmap(fullPath);
                             fullPath = tmpPath;
-                            //_chromeBrowser.Load("about:blank");
                         } else if (extension.ToLower() == ".ppt") {
                             this.PreviewWarnLabel.Visible = true;
                             this.ShowPreviewButton.Visible = true;
@@ -1076,9 +1056,9 @@ namespace PokudaSearch.Views {
                     }
                     if (fullPath == "") {
                         //TODO プレビュー不可を表示
-                        _chromeBrowser.Load("about:blank");
+                        this.CefSharpPanel.Browser.Load("about:blank");
                     } else {
-                        _chromeBrowser.Load(fullPath);
+                        this.CefSharpPanel.Browser.Load(fullPath);
                         //NOTE : Load後、何故かResultGridからFocusが外れてPageDown／Upが効かなくなるので
                         //       強制的にResultGridにフォーカスを戻す。
                         _returnFocus = true;
@@ -1332,50 +1312,6 @@ namespace PokudaSearch.Views {
         }
 
         /// <summary>
-        /// Chromiumの初期化処理
-        /// </summary>
-        private void InitializeChromium() {
-
-            CefSettings settings = new CefSettings();
-            settings.Locale = "ja";
-            settings.LogSeverity = LogSeverity.Disable;
-            settings.BrowserSubprocessPath = System.IO.Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase,
-                                                   Environment.Is64BitProcess ? "x64" : "x86",
-                                                   "CefSharp.BrowserSubprocess.exe");
-
-            Cef.Initialize(settings, performDependencyCheck: false, browserProcessHandler: null);
-
-            _chromeBrowser = new ChromiumWebBrowser("about:blank");
-            this.BrowserPreviewPanel.Controls.Add(_chromeBrowser);
-            _chromeBrowser.Dock = DockStyle.None;
-            _chromeBrowser.Size = new Size(412, 470);
-            _chromeBrowser.Location = new Point(3, 3);
-            _chromeBrowser.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
-            _chromeBrowser.BringToFront();
-
-            _chromeBrowser.LoadingStateChanged += ChromeBrowser_LoadingStateChanged;
-            _chromeBrowser.LoadError += ChromeBrowser_LoadError;
-        }
-
-        /// <summary>プログレスバー更新イベント</summary>
-        /// <param name="isLoading"></param>
-        delegate void delegate_UpdateProgressBar(bool isLoading);
-        /// <summary>
-        /// プレビューブラウザのプログレスバー更新
-        /// </summary>
-        /// <param name="isLoading"></param>
-        private void UpdateProgressBar(bool isLoading) {
-            if (isLoading) {
-                this.BrowserProgress.Style = ProgressBarStyle.Marquee;
-                this.BrowserProgress.MarqueeAnimationSpeed = 100;
-            } else {
-                this.BrowserProgress.Style = ProgressBarStyle.Blocks;
-                this.BrowserProgress.Value = 0;
-                this.MainPanel.Focus();
-            }
-        }
-
-        /// <summary>
         /// セルのツールチップを表示
         /// </summary>
         /// <param name="sender"></param>
@@ -1477,5 +1413,6 @@ namespace PokudaSearch.Views {
 
             //予めカテゴリを登録する必要があるようなので、一旦保留
         }
+
     }
 }

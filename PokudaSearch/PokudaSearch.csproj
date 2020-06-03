@@ -272,6 +272,9 @@
     <Reference Include="WebDriver, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Selenium.WebDriver.3.141.0\lib\net45\WebDriver.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\WindowsBase.4.6.1055.0\lib\WindowsBase.dll</HintPath>
+    </Reference>
     <Reference Include="WordApi, Version=1.7.3.0, Culture=neutral, PublicKeyToken=dd9255e6bcd130c8, processorArchitecture=MSIL">
       <HintPath>packages\NetOffice.Word.1.7.4.4\lib\net45\WordApi.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -281,6 +284,12 @@
   <ItemGroup>
     <Compile Include="AppObject.cs" />
     <Compile Include="Consts.cs" />
+    <Compile Include="Controls\CefSharpPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CefSharpPanel.Designer.cs">
+      <DependentUpon>CefSharpPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="IndexUtil\LuceneIndexBuilder.cs" />
     <Compile Include="IndexUtil\LuceneIndexReaderUtil.cs" />
     <Compile Include="IndexUtil\ProgressReport.cs" />
@@ -289,7 +298,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SandBox\SharpScrapyTest.cs" />
     <Compile Include="SQLSrc\m_license.Designer.cs">
       <DependentUpon>m_license.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -375,6 +383,10 @@
       <DependentUpon>SearchForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WebDriver\MP4WebDriver.cs" />
+    <Compile Include="WebDriver\WebClawringDriver.cs" />
+    <EmbeddedResource Include="Controls\CefSharpPanel.resx">
+      <DependentUpon>CefSharpPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SQLSrc\m_license.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>m_license.Designer.cs</LastGenOutput>

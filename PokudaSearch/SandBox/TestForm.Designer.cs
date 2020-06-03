@@ -30,6 +30,7 @@
             this.TumbnailButton = new System.Windows.Forms.Button();
             this.PictureBox = new System.Windows.Forms.PictureBox();
             this.MultiSearcherButton = new System.Windows.Forms.Button();
+            this.WebClawringTestButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,11 +102,22 @@
             this.MultiSearcherButton.UseVisualStyleBackColor = true;
             this.MultiSearcherButton.Click += new System.EventHandler(this.MultiSearcherButton_Click);
             // 
+            // WebClawringTestButton
+            // 
+            this.WebClawringTestButton.Location = new System.Drawing.Point(440, 10);
+            this.WebClawringTestButton.Name = "WebClawringTestButton";
+            this.WebClawringTestButton.Size = new System.Drawing.Size(124, 36);
+            this.WebClawringTestButton.TabIndex = 7;
+            this.WebClawringTestButton.Text = "WebClawringTest";
+            this.WebClawringTestButton.UseVisualStyleBackColor = true;
+            this.WebClawringTestButton.Click += new System.EventHandler(this.WebClawringTestButton_Click);
+            // 
             // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(589, 407);
+            this.ClientSize = new System.Drawing.Size(771, 450);
+            this.Controls.Add(this.WebClawringTestButton);
             this.Controls.Add(this.MultiSearcherButton);
             this.Controls.Add(this.PictureBox);
             this.Controls.Add(this.TumbnailButton);
@@ -132,6 +144,7 @@
         private System.Windows.Forms.Button TumbnailButton;
         private System.Windows.Forms.PictureBox PictureBox;
         private System.Windows.Forms.Button MultiSearcherButton;
+        private System.Windows.Forms.Button WebClawringTestButton;
     }
 }
 
