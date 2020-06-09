@@ -14,6 +14,7 @@ using System.Diagnostics;
 using FlexLucene.Document;
 using Microsoft.WindowsAPICodePack.Shell;
 using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
+using PokudaSearch.Test.TaskCompletionSource;
 
 namespace PokudaSearch.Test {
     [TestClass]
@@ -41,6 +42,24 @@ namespace PokudaSearch.Test {
             string tmp1 = path1.Substring(0, path1.IndexOf(@"bin\DB"));
             string tmp2 = path2.Substring(path2.IndexOf(@"bin\IndexStore"));
             Assert.AreEqual(tmp1 + tmp2, @"S:\bin\IndexStore\Index1");
+        }
+
+
+        [TestMethod]
+        public void TaskCompletionSourceTest() {
+
+            var p = new Program();
+            p.RunAsync();
+
+            //ステータス変更
+            //p.CurrentStatus = Program.Status.Successful;
+
+            var task = p.CompletionSource.Task;
+            try {
+                task.Wait();
+            } catch { }
+            Console.WriteLine(task.Status);
+
         }
     }
 }

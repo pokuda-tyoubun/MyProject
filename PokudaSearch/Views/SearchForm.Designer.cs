@@ -65,7 +65,6 @@
             this.BrowserPreviewPanel = new System.Windows.Forms.Panel();
             this.PreviewWarnLabel = new System.Windows.Forms.Label();
             this.ShowPreviewButton = new System.Windows.Forms.Button();
-            this.CefSharpPanel = new PokudaSearch.Controls.CefSharpPanel();
             this.RichTextBox = new System.Windows.Forms.RichTextBox();
             this.TextPreviewPanel = new System.Windows.Forms.Panel();
             this.PreviewLabel = new C1.Win.C1SuperTooltip.C1SuperLabel();
@@ -99,6 +98,7 @@
             this.collapsibleSplitter1 = new NJFLib.Controls.CollapsibleSplitter();
             this.PreviewCheckToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.ExpandPreviewCheckToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.CefSharpPanel = new PokudaSearch.Controls.CefSharpPanel();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultNavi)).BeginInit();
@@ -374,9 +374,9 @@
             // 
             // PreviewPanel
             // 
+            this.PreviewPanel.Controls.Add(this.BrowserPreviewPanel);
             this.PreviewPanel.Controls.Add(this.collapsibleSplitter3);
             this.PreviewPanel.Controls.Add(this.TextPreviewPanel);
-            this.PreviewPanel.Controls.Add(this.BrowserPreviewPanel);
             this.PreviewPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.PreviewPanel.Location = new System.Drawing.Point(840, 0);
             this.PreviewPanel.Name = "PreviewPanel";
@@ -388,10 +388,10 @@
             this.collapsibleSplitter3.AnimationDelay = 20;
             this.collapsibleSplitter3.AnimationStep = 20;
             this.collapsibleSplitter3.BorderStyle3D = System.Windows.Forms.Border3DStyle.RaisedOuter;
-            this.collapsibleSplitter3.ControlToHide = this.BrowserPreviewPanel;
-            this.collapsibleSplitter3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.collapsibleSplitter3.ControlToHide = this.TextPreviewPanel;
+            this.collapsibleSplitter3.Dock = System.Windows.Forms.DockStyle.Top;
             this.collapsibleSplitter3.ExpandParentForm = false;
-            this.collapsibleSplitter3.Location = new System.Drawing.Point(0, 146);
+            this.collapsibleSplitter3.Location = new System.Drawing.Point(0, 154);
             this.collapsibleSplitter3.Name = "collapsibleSplitter3";
             this.collapsibleSplitter3.Size = new System.Drawing.Size(419, 8);
             this.collapsibleSplitter3.TabIndex = 123;
@@ -405,17 +405,17 @@
             this.BrowserPreviewPanel.Controls.Add(this.ShowPreviewButton);
             this.BrowserPreviewPanel.Controls.Add(this.CefSharpPanel);
             this.BrowserPreviewPanel.Controls.Add(this.RichTextBox);
-            this.BrowserPreviewPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.BrowserPreviewPanel.Location = new System.Drawing.Point(0, 154);
+            this.BrowserPreviewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BrowserPreviewPanel.Location = new System.Drawing.Point(0, 162);
             this.BrowserPreviewPanel.Name = "BrowserPreviewPanel";
-            this.BrowserPreviewPanel.Size = new System.Drawing.Size(419, 505);
+            this.BrowserPreviewPanel.Size = new System.Drawing.Size(419, 497);
             this.BrowserPreviewPanel.TabIndex = 122;
             // 
             // PreviewWarnLabel
             // 
             this.PreviewWarnLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.PreviewWarnLabel.AutoSize = true;
-            this.PreviewWarnLabel.Location = new System.Drawing.Point(229, 484);
+            this.PreviewWarnLabel.Location = new System.Drawing.Point(229, 476);
             this.PreviewWarnLabel.Name = "PreviewWarnLabel";
             this.PreviewWarnLabel.Size = new System.Drawing.Size(79, 12);
             this.PreviewWarnLabel.TabIndex = 3;
@@ -424,7 +424,7 @@
             // ShowPreviewButton
             // 
             this.ShowPreviewButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ShowPreviewButton.Location = new System.Drawing.Point(312, 479);
+            this.ShowPreviewButton.Location = new System.Drawing.Point(312, 471);
             this.ShowPreviewButton.Name = "ShowPreviewButton";
             this.ShowPreviewButton.Size = new System.Drawing.Size(102, 22);
             this.ShowPreviewButton.TabIndex = 2;
@@ -432,28 +432,19 @@
             this.ShowPreviewButton.UseVisualStyleBackColor = true;
             this.ShowPreviewButton.Click += new System.EventHandler(this.ShowPreviewButton_Click);
             // 
-            // CefSharpPanel
-            // 
-            this.CefSharpPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.CefSharpPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CefSharpPanel.Location = new System.Drawing.Point(0, 0);
-            this.CefSharpPanel.Name = "CefSharpPanel";
-            this.CefSharpPanel.Size = new System.Drawing.Size(419, 505);
-            this.CefSharpPanel.TabIndex = 4;
-            // 
             // RichTextBox
             // 
             this.RichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RichTextBox.Location = new System.Drawing.Point(0, 0);
             this.RichTextBox.Name = "RichTextBox";
-            this.RichTextBox.Size = new System.Drawing.Size(419, 505);
+            this.RichTextBox.Size = new System.Drawing.Size(419, 497);
             this.RichTextBox.TabIndex = 0;
             this.RichTextBox.Text = "";
             // 
             // TextPreviewPanel
             // 
             this.TextPreviewPanel.Controls.Add(this.PreviewLabel);
-            this.TextPreviewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TextPreviewPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TextPreviewPanel.Location = new System.Drawing.Point(0, 0);
             this.TextPreviewPanel.Name = "TextPreviewPanel";
             this.TextPreviewPanel.Size = new System.Drawing.Size(419, 154);
@@ -845,6 +836,15 @@
             this.collapsibleSplitter1.TabStop = false;
             this.collapsibleSplitter1.UseAnimations = false;
             this.collapsibleSplitter1.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
+            // 
+            // CefSharpPanel
+            // 
+            this.CefSharpPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.CefSharpPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CefSharpPanel.Location = new System.Drawing.Point(0, 0);
+            this.CefSharpPanel.Name = "CefSharpPanel";
+            this.CefSharpPanel.Size = new System.Drawing.Size(419, 497);
+            this.CefSharpPanel.TabIndex = 4;
             // 
             // SearchForm
             // 

@@ -95,9 +95,13 @@ namespace PokudaSearch.Views {
             this.ActiveIndexLabel.Text = "有効インデックス（最大" + ActiveIndexLimit.ToString() + "）";
             this.UpdateIndexMenu.Enabled = false;
 
+#if DEBUG
+#else
+            this.WebClawringButton.Visible = false;
+#endif
         }
 
-        #endregion Constractors
+#endregion Constractors
 
         /// <summary>
         /// 非アクティブになっているインデックスを削除
@@ -757,9 +761,9 @@ namespace PokudaSearch.Views {
             }
         }
 
-        #region PrivateMethods
+#region PrivateMethods
 
-        #region EventHandlers
+#region EventHandlers
         /// <summary>
         /// 外部インデックス追加ボタンをクリック
         /// </summary>
@@ -768,7 +772,7 @@ namespace PokudaSearch.Views {
         private void AddOuterIndexButton_Click(object sender, EventArgs e) {
             ShowOuterIndexForm();
         }
-        #endregion EventHandlers
+#endregion EventHandlers
 
         /// <summary>
         /// 外部インデックス追加画面を表示
@@ -903,6 +907,19 @@ namespace PokudaSearch.Views {
                 ipf.Dispose();
             }
         }
-        #endregion PrivateMethods
+#endregion PrivateMethods
+
+        private void WebClawringButton_Click(object sender, EventArgs e) {
+            //string rootUrl = "http://078134995:Ais5vs2004@192.168.13.67/docs/html/kitei/index.htm";
+            string rootUrl = "http://078134995:Ais5vs2004@192.168.13.67/docs/html/kitei/3-2%20%E8%BE%9E%E4%BB%A4%E8%A6%8F%E7%A8%8B/3-2jirei.htm";
+            //var browserPanel = MainFrameForm.SearchForm.BrowserPanel;
+            //MainFrameForm.SearchForm.Controls.Remove(browserPanel);
+            WebBrowserForm wbf = new WebBrowserForm(rootUrl, MainFrameForm.SearchForm.BrowserPanel);
+            wbf.ShowDialog();
+            //ブラウザを戻す
+            //MainFrameForm.SearchForm.BrowserPreviewPanelControl.Controls.Add(browserPanel);
+            //browserPanel.BringToFront();
+            wbf.Dispose();
+        }
     }
 }

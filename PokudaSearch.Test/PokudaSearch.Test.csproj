@@ -234,11 +234,13 @@
     <Compile Include="Driver\Killer.cs" />
     <Compile Include="Driver\MainFrameFormDriver.cs" />
     <Compile Include="Interfaces\IFormDriver.cs" />
+    <Compile Include="TaskCompletionSource\Program.cs" />
     <Compile Include="TestBase.cs" />
     <Compile Include="MainFrameFormTest.cs" />
     <Compile Include="Views\Driver\OuterIndexFormDriver.cs" />
     <Compile Include="Views\Driver\IndexBuildFormDriver.cs" />
     <Compile Include="Views\Driver\SearchFormDriver.cs" />
+    <Compile Include="Views\ConfigFormTest.cs" />
     <Compile Include="Views\OuterIndexFormTest.cs" />
     <Compile Include="Views\SearchFormTest.cs" />
     <Compile Include="Views\IndexBuildFormTest.cs" />

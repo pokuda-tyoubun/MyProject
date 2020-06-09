@@ -78,6 +78,12 @@ namespace PokudaSearch.Views {
             set { _targetIndexGrid = value; }
             get { return _targetIndexGrid; }
         }
+        public Controls.CefSharpPanel BrowserPanel {
+            get { return this.CefSharpPanel; }
+        }
+        public Panel BrowserPreviewPanelControl {
+            get { return this.BrowserPreviewPanel; }
+        }
 
         #endregion Properties
 
@@ -602,9 +608,18 @@ namespace PokudaSearch.Views {
         private void TargetCopyMenu_Click(object sender, EventArgs e) {
             this.TargetIndexGrid.CopyEx();
         }
-        private void ListViewButton_Click(object sender, EventArgs e) {
-            WebClawringDriver wcd = new WebClawringDriver();
-            wcd.Clawring(this.CefSharpPanel);
+        private async void ListViewButton_Click(object sender, EventArgs e) {
+
+            string rootUrl = "http://078134995:Ais5vs2004@192.168.13.67/docs/html/kitei/index.htm";
+            //string rootUrl = "http://078134995:Ais5vs2004@192.168.13.67/docs/html/kitei/1-3%20%E7%A4%BE%E5%86%85%E6%A8%99%E6%BA%96%E8%A6%8F%E7%A8%8B/1-3hyojyun.htm";
+            WebClawringDriver wcd = new WebClawringDriver(this.CefSharpPanel);
+            var dic = await wcd.Clawring(rootUrl);
+
+            foreach (var kvp in dic) {
+                AppObject.Logger.Info(kvp.Key);
+                AppObject.Logger.Info(kvp.Value.Title);
+            }
+            //データが取れたのでインデックス画面側で実行できるように移行する。
         }
 
         private void TileViewButton_Click(object sender, EventArgs e) {

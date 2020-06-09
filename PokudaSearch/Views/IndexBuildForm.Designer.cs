@@ -42,7 +42,6 @@
             this.MainPanel = new System.Windows.Forms.Panel();
             this.AddOuterIndexButton = new System.Windows.Forms.Button();
             this.StopButton = new System.Windows.Forms.Button();
-            this.IndexHistoryGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
             this.TargetDirText = new FxCommonLib.Controls.FilePathTextBox(this.components);
             this.ActiveIndexLabel = new System.Windows.Forms.Label();
             this.ActiveIndexGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
@@ -53,16 +52,18 @@
             this.EditInteractionPathMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ActiveIndexCopyMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.IndexHistoryGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
             this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
             this.HistoryPanel = new System.Windows.Forms.Panel();
             this.collapsibleSplitter1 = new NJFLib.Controls.CollapsibleSplitter();
+            this.WebClawringButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.IndexHistoryContext.SuspendLayout();
             this.BottomPanel.SuspendLayout();
             this.MainPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.IndexHistoryGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ActiveIndexGrid)).BeginInit();
             this.ActiveIndexContext.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IndexHistoryGrid)).BeginInit();
             this.HistoryPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -210,6 +211,7 @@
             // 
             // MainPanel
             // 
+            this.MainPanel.Controls.Add(this.WebClawringButton);
             this.MainPanel.Controls.Add(this.AddOuterIndexButton);
             this.MainPanel.Controls.Add(this.StopButton);
             this.MainPanel.Controls.Add(this.TargetDirText);
@@ -231,7 +233,7 @@
             // AddOuterIndexButton
             // 
             this.AddOuterIndexButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.AddOuterIndexButton.Location = new System.Drawing.Point(654, 5);
+            this.AddOuterIndexButton.Location = new System.Drawing.Point(654, 6);
             this.AddOuterIndexButton.Name = "AddOuterIndexButton";
             this.AddOuterIndexButton.Size = new System.Drawing.Size(126, 22);
             this.AddOuterIndexButton.TabIndex = 3;
@@ -248,32 +250,6 @@
             this.StopButton.Text = "中断";
             this.StopButton.UseVisualStyleBackColor = true;
             this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
-            // 
-            // IndexHistoryGrid
-            // 
-            this.IndexHistoryGrid.AfterErrorInfo = ((System.Collections.Generic.Dictionary<string, string>)(resources.GetObject("IndexHistoryGrid.AfterErrorInfo")));
-            this.IndexHistoryGrid.AllowEditing = false;
-            this.IndexHistoryGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.IndexHistoryGrid.AutoClipboard = true;
-            this.IndexHistoryGrid.CellButtonDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.HashSet<string>>)(resources.GetObject("IndexHistoryGrid.CellButtonDic")));
-            this.IndexHistoryGrid.ColumnInfo = "10,1,0,0,0,90,Columns:";
-            this.IndexHistoryGrid.ContextMenuStrip = this.IndexHistoryContext;
-            this.IndexHistoryGrid.DrawMode = C1.Win.C1FlexGrid.DrawModeEnum.OwnerDraw;
-            this.IndexHistoryGrid.EnableReadOnlyColor = false;
-            this.IndexHistoryGrid.EnableUpdateCellStyle = false;
-            this.IndexHistoryGrid.GridName = null;
-            this.IndexHistoryGrid.IsCol1SelectCheck = false;
-            this.IndexHistoryGrid.IsEnterRight = false;
-            this.IndexHistoryGrid.Location = new System.Drawing.Point(5, 29);
-            this.IndexHistoryGrid.Name = "IndexHistoryGrid";
-            this.IndexHistoryGrid.PulldownDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, string>>)(resources.GetObject("IndexHistoryGrid.PulldownDic")));
-            this.IndexHistoryGrid.Rows.DefaultSize = 18;
-            this.IndexHistoryGrid.Size = new System.Drawing.Size(923, 119);
-            this.IndexHistoryGrid.StyleInfo = resources.GetString("IndexHistoryGrid.StyleInfo");
-            this.IndexHistoryGrid.TabIndex = 10;
-            this.IndexHistoryGrid.WindowsName = null;
             // 
             // TargetDirText
             // 
@@ -372,6 +348,32 @@
             this.ActiveIndexCopyMenu.Text = "コピー(&C)";
             this.ActiveIndexCopyMenu.Click += new System.EventHandler(this.ActiveIndexCopyMenu_Click);
             // 
+            // IndexHistoryGrid
+            // 
+            this.IndexHistoryGrid.AfterErrorInfo = ((System.Collections.Generic.Dictionary<string, string>)(resources.GetObject("IndexHistoryGrid.AfterErrorInfo")));
+            this.IndexHistoryGrid.AllowEditing = false;
+            this.IndexHistoryGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.IndexHistoryGrid.AutoClipboard = true;
+            this.IndexHistoryGrid.CellButtonDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.HashSet<string>>)(resources.GetObject("IndexHistoryGrid.CellButtonDic")));
+            this.IndexHistoryGrid.ColumnInfo = "10,1,0,0,0,90,Columns:";
+            this.IndexHistoryGrid.ContextMenuStrip = this.IndexHistoryContext;
+            this.IndexHistoryGrid.DrawMode = C1.Win.C1FlexGrid.DrawModeEnum.OwnerDraw;
+            this.IndexHistoryGrid.EnableReadOnlyColor = false;
+            this.IndexHistoryGrid.EnableUpdateCellStyle = false;
+            this.IndexHistoryGrid.GridName = null;
+            this.IndexHistoryGrid.IsCol1SelectCheck = false;
+            this.IndexHistoryGrid.IsEnterRight = false;
+            this.IndexHistoryGrid.Location = new System.Drawing.Point(5, 29);
+            this.IndexHistoryGrid.Name = "IndexHistoryGrid";
+            this.IndexHistoryGrid.PulldownDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, string>>)(resources.GetObject("IndexHistoryGrid.PulldownDic")));
+            this.IndexHistoryGrid.Rows.DefaultSize = 18;
+            this.IndexHistoryGrid.Size = new System.Drawing.Size(923, 119);
+            this.IndexHistoryGrid.StyleInfo = resources.GetString("IndexHistoryGrid.StyleInfo");
+            this.IndexHistoryGrid.TabIndex = 10;
+            this.IndexHistoryGrid.WindowsName = null;
+            // 
             // collapsibleSplitter3
             // 
             this.collapsibleSplitter3.AnimationDelay = 20;
@@ -414,6 +416,16 @@
             this.collapsibleSplitter1.UseAnimations = false;
             this.collapsibleSplitter1.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
             // 
+            // WebClawringButton
+            // 
+            this.WebClawringButton.Location = new System.Drawing.Point(815, 6);
+            this.WebClawringButton.Name = "WebClawringButton";
+            this.WebClawringButton.Size = new System.Drawing.Size(102, 22);
+            this.WebClawringButton.TabIndex = 10;
+            this.WebClawringButton.Text = "Webインデックス";
+            this.WebClawringButton.UseVisualStyleBackColor = true;
+            this.WebClawringButton.Click += new System.EventHandler(this.WebClawringButton_Click);
+            // 
             // IndexBuildForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -437,9 +449,9 @@
             this.BottomPanel.PerformLayout();
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.IndexHistoryGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ActiveIndexGrid)).EndInit();
             this.ActiveIndexContext.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.IndexHistoryGrid)).EndInit();
             this.HistoryPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -478,5 +490,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Panel HistoryPanel;
         private NJFLib.Controls.CollapsibleSplitter collapsibleSplitter1;
+        private System.Windows.Forms.Button WebClawringButton;
     }
 }

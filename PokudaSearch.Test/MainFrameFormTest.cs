@@ -39,5 +39,60 @@ namespace PokudaSearch.Test {
             Assert.AreEqual("インデックス作成", windowText);
         }
         #endregion AutoTest
+
+        [TestMethod]
+        public void タブオーダーTest() {
+            Assert.AreEqual("2020.05.26", "2020.05.26");
+        }
+        [TestMethod]
+        public void 試用開始初回Test() {
+            //試用期間残が30日で起動
+            Assert.AreEqual("2020.05.26", "2020.05.26");
+        }
+        [TestMethod]
+        public void 試用開始2日目Test() {
+            //試用期間残が29日で起動
+            //update [m_license] set [利用開始日] = "2020-05-25"
+            Assert.AreEqual("2020.05.26", "2020.05.26");
+        }
+        [TestMethod]
+        public void 試用開始2日目_認証キャンセルTest() {
+            //試用期間残が29日で起動
+            Assert.AreEqual("2020.05.26", "2020.05.26");
+        }
+        [TestMethod]
+        public void 試用開始2日目_認証失敗Test() {
+            //試用期間残が29日で起動
+            Assert.AreEqual("2020.05.26", "2020.05.26");
+        }
+        [TestMethod]
+        public void 試用開始2日目_認証成功Test() {
+            //試用期間残が29日で起動
+            //UIが認証済みになる。
+            Assert.AreEqual("2020.05.26", "2020.05.26");
+        }
+        [TestMethod]
+        public void 試用開始30日目Test() {
+            //update [m_license] set [利用開始日] = '2020-04-26', [認証キー] = 'dummy'
+            //試用期間残が0日で起動
+            Assert.AreEqual("2020.05.26", "2020.05.26");
+        }
+        [TestMethod]
+        public void 試用開始31日目_認証キャンセルTest() {
+            //認証ダイアログ表示
+            //アプリ終了
+            Assert.AreEqual("2020.05.26", "2020.05.26");
+        }
+        [TestMethod]
+        public void 試用開始31日目_認証失敗Test() {
+            //認証ダイアログ表示
+            //アプリ終了
+            Assert.AreEqual("2020.05.26", "2020.05.26");
+        }
+        [TestMethod]
+        public void 試用開始31日目_認証成功Test() {
+            //認証ダイアログ表示
+            Assert.AreEqual("2020.05.26", "2020.05.26");
+        }
     }
 }

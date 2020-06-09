@@ -171,17 +171,39 @@ namespace PokudaSearch.Test.Views {
                 }
             }
         }
-        [TestMethod]
-        public void 外部インデックスパスが存在しないTest() {
-        }
 
+
+        #region ManualTest
+        [TestMethod]
+        public void 外部インデックスボタン_存在しないフォルダを指定Test() {
+            Assert.AreEqual("2020.05.27", "2020.05.27");
+        }
+        [TestMethod]
+        public void 外部インデックスボタン_PokudaSearch_dbが存在しないTest() {
+            Assert.AreEqual("2020.05.27", "2020.05.27");
+        }
         [TestMethod]
         public void インデックス作成に失敗した場合Test() {
             //FIXME
         }
-        [TestMethod]
+        //------------------------------------------------------------------------------
+        [TestMethod, TestCategory("Manual"), TestCategory("共通")]
+        public void 全てのスプリッタをドラッグTest() {
+            Assert.AreEqual("2020.05.27", "2020.05.27");
+        }
+        [TestMethod, TestCategory("Manual"), TestCategory("共通")]
+        public void 全てのスプリッタを折り畳むTest() {
+            Assert.AreEqual("2020.05.27", "2020.05.27");
+        }
+        [TestMethod, TestCategory("Manual"), TestCategory("共通")]
+        public void ウィンドウのサイズ変更Test() {
+            Assert.AreEqual("2020.05.27", "2020.05.27");
+        }
+        [TestMethod, TestCategory("Manual"), TestCategory("共通")]
         public void タブオーダーTest() {
             Assert.AreEqual(true, true);
         }
+        #endregion ManualTest
+
     }
 }

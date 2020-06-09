@@ -318,6 +318,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>m_extensions.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\WebBrowserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\WebBrowserForm.Designer.cs">
+      <DependentUpon>WebBrowserForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\LicenseVerificationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -402,6 +408,9 @@
     <EmbeddedResource Include="SQLSrc\m_extensions.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>m_extensions.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\WebBrowserForm.resx">
+      <DependentUpon>WebBrowserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\LicenseVerificationForm.resx">
       <DependentUpon>LicenseVerificationForm.cs</DependentUpon>

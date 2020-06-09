@@ -16,7 +16,6 @@ using System.Threading;
 namespace PokudaSearch.Controls {
     public partial class CefSharpPanel : UserControl {
 
-
         #region MemberVariables
         #endregion MemberVariables
 
@@ -38,6 +37,7 @@ namespace PokudaSearch.Controls {
                 return _chromeBrowser;
             }
         }
+        private TaskCompletionSource<bool> _completionSource = null;
 
         #region Constractors
         public CefSharpPanel() {
@@ -48,6 +48,9 @@ namespace PokudaSearch.Controls {
         }
         #endregion Constractors
 
+        public void ResetCompletionSource() {
+            _completionSource = null;
+        }
 
         private void InitializeChromium() {
 
@@ -63,11 +66,6 @@ namespace PokudaSearch.Controls {
 
             _chromeBrowser = new ChromiumWebBrowser("about:blank");
             this.BrowserPanel.Controls.Add(_chromeBrowser);
-            //_chromeBrowser.Dock = DockStyle.Fill;
-            //_chromeBrowser.Size = new Size(412, 470);
-            //_chromeBrowser.Location = new Point(3, 3);
-            //_chromeBrowser.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
-            //_chromeBrowser.BringToFront();
 
             _chromeBrowser.LoadingStateChanged += ChromeBrowser_LoadingStateChanged;
             _chromeBrowser.LoadError += ChromeBrowser_LoadError;
@@ -101,7 +99,14 @@ namespace PokudaSearch.Controls {
             _loadComplete = true;
             Dispatcher.CurrentDispatcher.BeginInvoke((Action)(async () => {
                 _currentPageSource = await _chromeBrowser.GetSourceAsync();
+
+                if (_completionSource != null) {
+                    if (!_completionSource.Task.IsCompleted) {
+                        _completionSource.SetResult(true);
+                    }
+                }
             }));
+
         }
         #endregion EventHandlers
 
@@ -135,25 +140,81 @@ namespace PokudaSearch.Controls {
 
         }
 
-        //public static Task LoadPageAsync(IWebBrowser browser, string address = null) {
-        //    var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
 
-        //    EventHandler<LoadingStateChangedEventArgs> handler = null;
-        //    handler = (sender, args) => {
-        //        //Wait for while page to finish loading not just the first frame
-        //        if (!args.IsLoading) {
-        //            browser.LoadingStateChanged -= handler;
-        //            //Important that the continuation runs async using TaskCreationOptions.RunContinuationsAsynchronously
-        //            tcs.TrySetResult(true);
-        //        }
-        //    };
+        public Task LoadPageAsync(string url = null) {
+            _completionSource = new TaskCompletionSource<bool>();
 
-        //    browser.LoadingStateChanged += handler;
+            ThreadPool.QueueUserWorkItem(_ => {
+                _chromeBrowser.Load(url);
+            });
 
-        //    if (!string.IsNullOrEmpty(address)) {
-        //        browser.Load(address);
-        //    }
-        //    return tcs.Task;
-        //}
+            var task = _completionSource.Task;
+            return task;
+        }
+
+        public async Task<int> GetLinkNum() {
+            var list = await GetLinks();
+            return list.Count;
+        }
+        public Task<List<string>> GetLinks() {
+            var ret = new List<string>();
+            var completionSource = new TaskCompletionSource<List<string>>();
+            //if (_chromeBrowser.CanExecuteJavascriptInMainFrame) {
+                const string script = @"(function()
+            					{
+        	    					var linksArray = new Array();
+        	    					for (var i = 0; i < document.links.length; i++) {
+        	    						linksArray[i] = String(document.links[i].href);
+        	    					}
+        	    					return linksArray;
+            					})();";
+
+                Dispatcher.CurrentDispatcher.BeginInvoke((Action)(async () => {
+                    await _chromeBrowser.EvaluateScriptAsync(script).ContinueWith(x => {
+                        var response = x.Result;
+                        if (response.Success && response.Result != null) {
+                            var list = (List<object>)response.Result;
+                            foreach (string url in list) {
+                                ret.Add(url);
+                            }
+                        }
+                        completionSource.SetResult(ret);
+                    });
+                }));
+            //} else {
+            //    completionSource.SetResult(ret);
+            //}
+            Task<List<string>> task = completionSource.Task;
+            return task;
+        }
+
+        public Task<string> GetTitle() {
+            var completionSource = new TaskCompletionSource<string>();
+            //if (_chromeBrowser.CanExecuteJavascriptInMainFrame) {
+        		const string script = @"document.title;";
+
+                Dispatcher.CurrentDispatcher.BeginInvoke((Action)(async () => {
+                    //_chromeBrowser.ExecuteScriptAsync(script);
+                    await _chromeBrowser.EvaluateScriptAsync(script).ContinueWith(x => {
+                        var response = x.Result;
+                        if (response.Success && response.Result != null) {
+                            var title = response.Result;
+                            completionSource.SetResult(title.ToString());
+                        } else {
+                            completionSource.SetResult("");
+                        }
+                    });
+                }));
+            //} else {
+            //    completionSource.SetResult("");
+            //}
+
+            Task<string> task = completionSource.Task;
+            return task;
+        }
+
+        public void CefShutdown() {
+            CefSharp.Cef.Shutdown();
+        }
     }
 }
