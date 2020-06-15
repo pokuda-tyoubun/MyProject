@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static PokudaSearch.IndexUtil.LuceneIndexBuilder;
 
 namespace PokudaSearch.WebDriver {
     public class WebClawringDriver {
@@ -23,13 +24,6 @@ namespace PokudaSearch.WebDriver {
             _cefSharpPanel = cefSharpPanel;
         }
 
-        public struct WebContents {
-            public string Url;
-            public string Title;
-            public string Extention;
-            public DateTime updateDate;
-            public string contents;
-        }
 
         private CefSharpPanel _cefSharpPanel;
 
@@ -72,9 +66,12 @@ namespace PokudaSearch.WebDriver {
                 var wc = new WebContents();
                 wc.Url = currentUrl;
                 wc.Title = await _cefSharpPanel.GetTitle();
-                wc.Extention = Path.GetExtension(currentUrl);
-                wc.updateDate = DateTime.Now;
-                wc.contents = _cefSharpPanel.CurrentPageSource;
+                wc.Extention = System.IO.Path.GetExtension(currentUrl);
+                wc.UpdateDate = DateTime.Now;
+                //UTF8に変換して保持
+                byte[] b = Encoding.Default.GetBytes(_cefSharpPanel.CurrentPageSource);
+                wc.Contents = Encoding.Unicode.GetString(b);
+                wc.Bytes = Encoding.Unicode.GetByteCount(wc.Contents);
                 clawringDic.Add(currentUrl, wc);
 
                 var list = await _cefSharpPanel.GetLinks();

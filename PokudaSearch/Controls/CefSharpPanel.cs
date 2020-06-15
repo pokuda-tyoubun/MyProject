@@ -31,7 +31,7 @@ namespace PokudaSearch.Controls {
                 return _currentPageSource;
             }
         }
-        private ChromiumWebBrowser _chromeBrowser;
+        private ChromiumWebBrowser _chromeBrowser = null;
         public ChromiumWebBrowser Browser {
             get {
                 return _chromeBrowser;
@@ -44,6 +44,7 @@ namespace PokudaSearch.Controls {
             InitializeComponent();
             if (!DesignModeUtil.IsDesignMode()) {
                 InitializeChromium();
+                InitializeInstance();
             }
         }
         #endregion Constractors
@@ -63,6 +64,13 @@ namespace PokudaSearch.Controls {
                                                    "CefSharp.BrowserSubprocess.exe");
 
             Cef.Initialize(settings, performDependencyCheck: false, browserProcessHandler: null);
+        }
+
+        public void InitializeInstance() {
+            if (_chromeBrowser != null) {
+                this.BrowserPanel.Controls.Remove(_chromeBrowser);
+                _chromeBrowser = null;
+            }
 
             _chromeBrowser = new ChromiumWebBrowser("about:blank");
             this.BrowserPanel.Controls.Add(_chromeBrowser);

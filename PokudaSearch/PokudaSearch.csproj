@@ -503,6 +503,7 @@
     <Content Include="PokudaSearch128.ico" />
     <None Include="Resources\NetworkDrive16.bmp" />
     <None Include="Resources\LocalDrive16.bmp" />
+    <None Include="Resources\WebPage16.bmp" />
     <Content Include="UserDictionary.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

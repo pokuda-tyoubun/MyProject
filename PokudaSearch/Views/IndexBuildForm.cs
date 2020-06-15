@@ -14,6 +14,7 @@ using System.Linq;
 using FxCommonLib.Controls;
 using FxCommonLib.Log4NetAppender;
 using log4net.Appender;
+using static PokudaSearch.IndexUtil.LuceneIndexBuilder;
 
 namespace PokudaSearch.Views {
     public partial class IndexBuildForm : Form {
@@ -209,7 +210,7 @@ namespace PokudaSearch.Views {
         /// 予約No取得
         /// </summary>
         /// <returns></returns>
-        private int GetReservedNo() {
+        public int GetReservedNo() {
             int ret = 0;
 
             AppObject.DbUtil.Open(AppObject.ConnectString);
@@ -668,6 +669,36 @@ namespace PokudaSearch.Views {
                 AppObject.Frame.SetStatusMsg(AppObject.GetMsg(AppObject.Msg.ACT_END), false, sw);
             }
         }
+        private void CreateWebIndex(string targetUrl, Dictionary<string, WebContents> targetDic) {
+            LuceneIndexBuilder.TextExtractModes mode = LuceneIndexBuilder.TextExtractModes.Tika;
+            if (this.IFilterRadio.Checked) {
+                mode = LuceneIndexBuilder.TextExtractModes.IFilter;
+            }
+
+            this.CreateIndexButton.Enabled = false;
+            this.AddOuterIndexButton.Enabled = false;
+            this.UpdateIndexButton.Enabled = false;
+            this.StopButton.Enabled = true;
+
+            Stopwatch sw = new Stopwatch();
+            AppObject.Frame.SetStatusMsg(AppObject.GetMsg(AppObject.Msg.ACT_PROCESSING), true, sw);
+            try {
+                this.ProgressBar.Style = ProgressBarStyle.Marquee;
+                this.LogViewerText.Text = "対象ファイルカウント中...";
+                var progress = new Progress<ProgressReport>(SetProgressValue);
+
+                LuceneIndexBuilder.ReservedNo = GetReservedNo();
+                LuceneIndexBuilder.CreateWebIndexBySingleThread(
+                    AppObject.RootDirPath, 
+                    targetUrl,
+                    targetDic,
+                    progress,
+                    mode);
+
+            } finally {
+                AppObject.Frame.SetStatusMsg(AppObject.GetMsg(AppObject.Msg.ACT_END), false, sw);
+            }
+        }
 
         /// <summary>
         /// インデックス更新
@@ -910,16 +941,21 @@ namespace PokudaSearch.Views {
 #endregion PrivateMethods
 
         private void WebClawringButton_Click(object sender, EventArgs e) {
-            //string rootUrl = "http://078134995:Ais5vs2004@192.168.13.67/docs/html/kitei/index.htm";
-            string rootUrl = "http://078134995:Ais5vs2004@192.168.13.67/docs/html/kitei/3-2%20%E8%BE%9E%E4%BB%A4%E8%A6%8F%E7%A8%8B/3-2jirei.htm";
-            //var browserPanel = MainFrameForm.SearchForm.BrowserPanel;
-            //MainFrameForm.SearchForm.Controls.Remove(browserPanel);
-            WebBrowserForm wbf = new WebBrowserForm(rootUrl, MainFrameForm.SearchForm.BrowserPanel);
+            //string targetUrl = "http://078134995:Ais5vs2004@192.168.13.67/docs/html/kitei/index.htm";
+            //string targetUrl = "http://078134995:Ais5vs2004@192.168.13.67/docs/html/kitei/3-2%20%E8%BE%9E%E4%BB%A4%E8%A6%8F%E7%A8%8B/3-2jirei.htm";
+            string targetUrl = "https://pokuda-tyoubun.blogspot.com/";
+            var browserPanel = MainFrameForm.SearchForm.BrowserPanel;
+            MainFrameForm.SearchForm.Controls.Remove(browserPanel);
+            WebBrowserForm wbf = new WebBrowserForm(targetUrl, browserPanel, this);
             wbf.ShowDialog();
+            var targetDic = wbf.TargetDic;
             //ブラウザを戻す
-            //MainFrameForm.SearchForm.BrowserPreviewPanelControl.Controls.Add(browserPanel);
-            //browserPanel.BringToFront();
+            MainFrameForm.SearchForm.BrowserPreviewPanelControl.Controls.Add(browserPanel);
+            browserPanel.BringToFront();
+
             wbf.Dispose();
+
+            CreateWebIndex(targetUrl, targetDic);
         }
     }
 }

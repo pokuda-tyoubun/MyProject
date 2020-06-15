@@ -61,11 +61,11 @@
             this.MoreLikeThisMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.DiffMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.PreviewPanel = new System.Windows.Forms.Panel();
-            this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
             this.BrowserPreviewPanel = new System.Windows.Forms.Panel();
             this.PreviewWarnLabel = new System.Windows.Forms.Label();
             this.ShowPreviewButton = new System.Windows.Forms.Button();
             this.RichTextBox = new System.Windows.Forms.RichTextBox();
+            this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
             this.TextPreviewPanel = new System.Windows.Forms.Panel();
             this.PreviewLabel = new C1.Win.C1SuperTooltip.C1SuperLabel();
             this.MainPanel = new System.Windows.Forms.Panel();
@@ -383,22 +383,6 @@
             this.PreviewPanel.Size = new System.Drawing.Size(419, 659);
             this.PreviewPanel.TabIndex = 116;
             // 
-            // collapsibleSplitter3
-            // 
-            this.collapsibleSplitter3.AnimationDelay = 20;
-            this.collapsibleSplitter3.AnimationStep = 20;
-            this.collapsibleSplitter3.BorderStyle3D = System.Windows.Forms.Border3DStyle.RaisedOuter;
-            this.collapsibleSplitter3.ControlToHide = this.TextPreviewPanel;
-            this.collapsibleSplitter3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.collapsibleSplitter3.ExpandParentForm = false;
-            this.collapsibleSplitter3.Location = new System.Drawing.Point(0, 154);
-            this.collapsibleSplitter3.Name = "collapsibleSplitter3";
-            this.collapsibleSplitter3.Size = new System.Drawing.Size(419, 8);
-            this.collapsibleSplitter3.TabIndex = 123;
-            this.collapsibleSplitter3.TabStop = false;
-            this.collapsibleSplitter3.UseAnimations = false;
-            this.collapsibleSplitter3.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
-            // 
             // BrowserPreviewPanel
             // 
             this.BrowserPreviewPanel.Controls.Add(this.PreviewWarnLabel);
@@ -440,6 +424,22 @@
             this.RichTextBox.Size = new System.Drawing.Size(419, 497);
             this.RichTextBox.TabIndex = 0;
             this.RichTextBox.Text = "";
+            // 
+            // collapsibleSplitter3
+            // 
+            this.collapsibleSplitter3.AnimationDelay = 20;
+            this.collapsibleSplitter3.AnimationStep = 20;
+            this.collapsibleSplitter3.BorderStyle3D = System.Windows.Forms.Border3DStyle.RaisedOuter;
+            this.collapsibleSplitter3.ControlToHide = this.TextPreviewPanel;
+            this.collapsibleSplitter3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.collapsibleSplitter3.ExpandParentForm = false;
+            this.collapsibleSplitter3.Location = new System.Drawing.Point(0, 154);
+            this.collapsibleSplitter3.Name = "collapsibleSplitter3";
+            this.collapsibleSplitter3.Size = new System.Drawing.Size(419, 8);
+            this.collapsibleSplitter3.TabIndex = 123;
+            this.collapsibleSplitter3.TabStop = false;
+            this.collapsibleSplitter3.UseAnimations = false;
+            this.collapsibleSplitter3.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
             // 
             // TextPreviewPanel
             // 

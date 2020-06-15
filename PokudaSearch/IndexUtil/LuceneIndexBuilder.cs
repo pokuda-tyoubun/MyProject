@@ -7,6 +7,9 @@ using FlexLucene.Store;
 using FxCommonLib.FTSIndexer;
 using FxCommonLib.Utils;
 using java.nio.file;
+using org.apache.tika.metadata;
+using org.apache.tika.parser;
+using org.apache.tika.sax;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -21,7 +24,14 @@ using TikaOnDotNet.TextExtraction;
 
 namespace PokudaSearch.IndexUtil {
     public class LuceneIndexBuilder {
-
+        public struct WebContents {
+            public string Url;
+            public string Title;
+            public string Extention;
+            public DateTime UpdateDate;
+            public string Contents;
+            public long Bytes;
+        }
 
         #region Constants
         /// <summary>テキスト抽出器モード</summary>
@@ -181,6 +191,25 @@ namespace PokudaSearch.IndexUtil {
             } finally {
             }
         }
+        public async static void CreateWebIndexBySingleThread(
+            string rootPath,
+            string targetUrl,
+            Dictionary<string, WebContents> targetDic,
+            IProgress<ProgressReport> progress,
+            TextExtractModes txtExtractMode) {
+
+            DoStop = false;
+            try {
+                _txtExtractMode = txtExtractMode;
+
+                var worker = await CreateWebIndexAsync(rootPath, targetUrl, targetDic, progress);
+
+                AppObject.Logger.Info("インデックス構築完了");
+            } catch (Exception e) {
+                AppObject.Logger.Error(e.StackTrace);
+            } finally {
+            }
+        }
 
         /// <summary>
         /// インデックスをマージして本番ディレクトリへ移動
@@ -223,14 +252,21 @@ namespace PokudaSearch.IndexUtil {
             string orgIndexStorePath) {
             return Task.Run<LuceneIndexBuilder>(() => CreateSingle(rootPath, targetDir, progress, orgIndexStorePath));
         }
-        //public static Task<LuceneIndexBuilder> UpdateIndexAsync(
-        //    Analyzer analyzer,
-        //    string rootPath,
-        //    string targetDir,
-        //    IProgress<ProgressReport> progress,
-        //    string orgBuildPath) {
-        //    return Task.Run<LuceneIndexBuilder>(() => UpdateSingle(analyzer, rootPath, targetDir, progress, orgBuildPath));
-        //}
+        /// <summary>
+        /// Webインデックス作成
+        /// </summary>
+        /// <param name="rootPath"></param>
+        /// <param name="targetUrl"></param>
+        /// <param name="targetDic"></param>
+        /// <param name="progress"></param>
+        /// <returns></returns>
+        public static Task<LuceneIndexBuilder> CreateWebIndexAsync(
+            string rootPath,
+            string targetUrl,
+            Dictionary<string, WebContents> targetDic,
+            IProgress<ProgressReport> progress) {
+            return Task.Run<LuceneIndexBuilder>(() => CreateWebIndex(rootPath, targetUrl, targetDic, progress));
+        }
         /// <summary>
         /// CSVファイルの内容を文字列として取得
         /// </summary>
@@ -340,6 +376,45 @@ namespace PokudaSearch.IndexUtil {
             return instance;
         }
         /// <summary>
+        /// Webインデックス作成
+        /// </summary>
+        /// <param name="rootPath"></param>
+        /// <param name="targetUrl"></param>
+        /// <param name="targetDic"></param>
+        /// <param name="progress"></param>
+        /// <returns></returns>
+        private static LuceneIndexBuilder CreateWebIndex(
+            string rootPath,
+            string targetUrl,
+            Dictionary<string, WebContents> targetDic,
+            IProgress<ProgressReport> progress) {
+
+            //カウントを初期化
+            _targetCount = 0;
+            _indexedCount = 0;
+            _skippedCount = 0;
+            _totalBytes = 0;
+
+            _targetCount = targetDic.Count;
+            _indexedPath = targetUrl;
+            _indexStorePath = rootPath + IndexDirName + _reservedNo.ToString();
+            //インデックス保存場所フォルダ作成
+            System.IO.Directory.CreateDirectory(rootPath);
+            System.IO.Directory.CreateDirectory(_indexStorePath);
+            _createMode = CreateModes.Create;
+
+            var instance = new LuceneIndexBuilder();
+            var options = new ParallelOptions() { MaxDegreeOfParallelism = 1 };
+            Parallel.Invoke(options,
+                () => instance.CreateWebFSIndex(
+                    _indexStorePath,
+                    targetDic,
+                    progress,
+                    "IndexingThread1"));
+
+            return instance;
+        }
+        /// <summary>
         /// RAMDirectoryのインデックスをFSIndexとして保存する
         /// </summary>
         /// <param name="ramDir"></param>
@@ -357,6 +432,121 @@ namespace PokudaSearch.IndexUtil {
                 fsIndexWriter.Close();
             }
         }
+        internal void CreateWebFSIndex(
+            string buildDirPath,
+            Dictionary<string, WebContents> targetDic,
+            IProgress<ProgressReport> progress,
+            string threadName) {
+
+            IndexWriterConfig config = new IndexWriterConfig(AppObject.AppAnalyzer);
+            IndexWriter indexWriter = null;
+            FSDirectory indexBuildDir = null;
+            Dictionary<string, DocInfo> docDic = null;
+
+            int bufferSize = Properties.Settings.Default.BufferSizeLimit;
+            try {
+                indexBuildDir = FSDirectory.Open(FileSystems.getDefault().getPath(buildDirPath));
+                if (_createMode == CreateModes.Update) {
+                    //既存ドキュメントを辞書化
+                    var liru = new LuceneIndexReaderUtil();
+                    docDic = liru.CreateDocumentDic(indexBuildDir);
+                }
+
+                config.SetRAMBufferSizeMB(bufferSize); //デフォルト16MB
+                indexWriter = new IndexWriter(indexBuildDir, config);
+
+                //開始時刻を記録
+                _startTime = DateTime.Now;
+                _indexedCount = 0;
+                _skippedCount = 0;
+                progress.Report(new ProgressReport() {
+                    Percent = 0,
+                    ProgressCount = FinishedCount,
+                    TargetCount = _targetCount,
+                    Status = ProgressReport.ProgressStatus.Start
+                });
+
+                //NOTE すぐにログ出力すると、フリーズ現象が発生する。
+                Thread.Sleep(1000);
+                AppObject.Logger.Info(threadName + "Indexing start.");
+                foreach (var kvp in targetDic) {
+                    var wc = kvp.Value;
+
+                    Thread.Sleep(10);
+                    if (DoStop) {
+                        //中断
+                        AppObject.Logger.Info("Stop command executed.");
+                        indexWriter.Rollback();
+                        return;
+                    }
+
+                    try {
+                        if (AddWebDocument(wc, indexWriter, threadName)) {
+                            //インデックス作成ファイル表示
+                            AppObject.Logger.Info(threadName + ":" + wc.Url);
+                            Interlocked.Increment(ref _indexedCount);
+                            Interlocked.Exchange(ref _totalBytes, _totalBytes + wc.Bytes);
+                        } 
+                    } catch (IOException ioe) {
+                        AppObject.Logger.Error(ioe.StackTrace);
+                        Interlocked.Increment(ref _skippedCount);
+                        AppObject.Logger.Info(threadName + ":" + "Skipped: " + wc.Url);
+                        GC.Collect();
+                    } catch (Exception e) {
+                        //インデックスが作成できなかったファイルを表示
+                        AppObject.Logger.Warn(e.Message);
+                        Interlocked.Increment(ref _skippedCount);
+                        AppObject.Logger.Info(threadName + ":" + "Skipped: " + wc.Url);
+                        GC.Collect();
+                        if (e.Message.IndexOf("IndexWriter is closed") >= 0) {
+                            AppObject.Logger.Warn(e.GetBaseException().ToString());
+                            throw new AlreadyClosedException("Index file capacity over. Please divide index directory.");
+                        }
+                    }
+                    //進捗度更新を呼び出し。
+                    progress.Report(new ProgressReport() {
+                        Percent = GetPercentage(),
+                        ProgressCount = FinishedCount,
+                        TargetCount = _targetCount,
+                        Status = ProgressReport.ProgressStatus.Processing
+                    });
+                }
+                if (docDic != null) {
+                    //削除されたファイルをインデックスから除去
+                    foreach(var kvp in docDic) {
+                        if (kvp.Value.Exists == false) {
+                            //削除
+                            Term t = new Term(LuceneIndexBuilder.Path, kvp.Value.Path);
+                            indexWriter.DeleteDocuments(t);
+                        }
+                    }
+
+                }
+                indexWriter.Commit();
+                AppObject.Logger.Info(threadName + "：完了");
+            } catch (Exception e) {
+                AppObject.Logger.Error(e.Message);
+                if (indexWriter != null) {
+                    indexWriter.Rollback();
+                }
+                throw e;
+            } finally {
+                if (indexWriter != null && indexWriter.IsOpen()) {
+                    //クローズ時にIndexファイルがフラッシュされる
+                    indexWriter.Close();
+                }
+                //完了時刻を記録
+                _endTime = DateTime.Now;
+                progress.Report(new ProgressReport() {
+                    Percent = GetPercentage(),
+                    ProgressCount = FinishedCount,
+                    TargetCount = _targetCount,
+                    Status = ProgressReport.ProgressStatus.Finished
+                });
+                indexBuildDir.Close();
+            }
+        }
+
         /// <summary>
         /// １つのスレッドでFSIndexを作成する処理
         /// Delete-Insert
@@ -512,6 +702,50 @@ namespace PokudaSearch.IndexUtil {
                 File.Copy(fi.FullName, destPath + "\\" + fi.Name, true);
             }
         }
+
+        private BodyContentHandler _handler = new BodyContentHandler();
+        private Metadata _metadata = new Metadata();
+        private Parser _parser = new AutoDetectParser();
+        /// <summary>
+        /// Webページをインデックス化
+        /// </summary>
+        /// <param name="wc"></param>
+        /// <param name="indexWriter"></param>
+        /// <param name="threadName"></param>
+        /// <returns></returns>
+        private bool AddWebDocument(WebContents wc, IndexWriter indexWriter, string threadName) {
+            string extension = wc.Extention;
+
+            //ドキュメント追加
+            Document doc = new Document();
+            if (extension.ToLower() == ".html" || 
+                extension.ToLower() == ".htm" ||
+                extension.ToLower() == "") {
+                if (wc.Contents.Length > 0) {
+                    if (_txtExtractMode == TextExtractModes.Tika) {
+                        byte[] data = System.Text.Encoding.Unicode.GetBytes(wc.Contents);
+                        _parser.parse(new java.io.ByteArrayInputStream(data), _handler, _metadata, new ParseContext());
+                        string content = _handler.toString();
+                        doc.Add(new Field(Content, content, _hilightFieldType));
+                    } else {
+                        doc.Add(new Field(Content, IFilterParser.Parse(wc.Contents), _hilightFieldType));
+                    }
+                }
+            } else {
+                //FIXME ダウンロードしてインデックス化
+                //バイト数セット
+                //インデックス後削除
+            }
+
+			doc.Add(new StringField(Path, wc.Url, FieldStore.YES));
+			doc.Add(new StringField(Title, wc.Title, FieldStore.YES));
+			doc.Add(new StringField(Extension, extension.ToLower(), FieldStore.YES));
+			doc.Add(new StringField(UpdateDate, wc.UpdateDate.ToString("yyyy/MM/dd HH:mm:ss"), FieldStore.YES));
+			indexWriter.AddDocument(doc);
+
+            return true;
+        }
+
         /// <summary>
 		/// 指定したテキスト抽出器でテキスト化したものをインデックス化
 		/// テキスト抽出器の種類は以下のとおり

@@ -15,6 +15,9 @@ using FlexLucene.Queries.Mlt;
 using FlexLucene.Queryparser.Classic;
 using FlexLucene.Search;
 using FlexLucene.Search.Highlight;
+using FlexLucene.Search.Spell;
+using FlexLucene.Search.Suggest;
+using FlexLucene.Search.Suggest.Analyzing;
 using FlexLucene.Store;
 using FxCommonLib.Consts;
 using FxCommonLib.Controls;
@@ -344,17 +347,21 @@ namespace PokudaSearch.Views {
                 foreach (ScoreDoc doc in docs.ScoreDocs) {
                     Document thisDoc = idxSearcher.Doc(doc.Doc);
                     string fullPath = thisDoc.Get(LuceneIndexBuilder.Path);
+                    bool isUrl = fullPath.StartsWith("http");
 
-                    Debug.WriteLine(fullPath);
+                    Bitmap bmp = null;
+                    if (!isUrl && File.Exists(fullPath)) {
+                        bmp = Properties.Resources.File16;
+                        if (File.Exists(fullPath)) {
+                            try {
 
-                    Bitmap bmp = Properties.Resources.File16;
-                    if (File.Exists(fullPath)) {
-                        try {
-
-                            bmp = Icon.ExtractAssociatedIcon(fullPath).ToBitmap();
-                        } catch {
-                            //プレビューを取得できない場合は、デフォルトアイコンを表示
+                                bmp = Icon.ExtractAssociatedIcon(fullPath).ToBitmap();
+                            } catch {
+                                //プレビューを取得できない場合は、デフォルトアイコンを表示
+                            }
                         }
+                    } else {
+                        bmp = Properties.Resources.WebPage16;
                     }
                     bmp.MakeTransparent();
                     //16,16
@@ -363,9 +370,13 @@ namespace PokudaSearch.Views {
                     this.ResultGrid[row, (int)ColIndex.FullPath] = fullPath;
 
                     //HACK ループ内のnewを避けれないか?
-                    var fi = new FileInfo(fullPath);
-                    this.ResultGrid[row, (int)ColIndex.Extension] = fi.Extension;
-                    this.ResultGrid[row, (int)ColIndex.UpdateDate] = fi.LastWriteTime;
+                    if (isUrl) {
+                        this.ResultGrid[row, (int)ColIndex.UpdateDate] = thisDoc.Get(LuceneIndexBuilder.UpdateDate);
+                    } else {
+                        var fi = new FileInfo(fullPath);
+                        this.ResultGrid[row, (int)ColIndex.UpdateDate] = fi.LastWriteTime;
+                    }
+                    this.ResultGrid[row, (int)ColIndex.Extension] = thisDoc.Get(LuceneIndexBuilder.Extension);
                     this.ResultGrid[row, (int)ColIndex.Score] = doc.Score;
                     this.ResultGrid[row, (int)ColIndex.DocId] = doc.Doc;
 
@@ -505,7 +516,7 @@ namespace PokudaSearch.Views {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void CopyMenu_Click(object sender, EventArgs e) {
-            this.ResultGrid.CopyEx();
+            this.ResultGrid.CopyCursorCellValue();
         }
 
         /// <summary>
@@ -608,18 +619,10 @@ namespace PokudaSearch.Views {
         private void TargetCopyMenu_Click(object sender, EventArgs e) {
             this.TargetIndexGrid.CopyEx();
         }
-        private async void ListViewButton_Click(object sender, EventArgs e) {
+        private void ListViewButton_Click(object sender, EventArgs e) {
 
-            string rootUrl = "http://078134995:Ais5vs2004@192.168.13.67/docs/html/kitei/index.htm";
-            //string rootUrl = "http://078134995:Ais5vs2004@192.168.13.67/docs/html/kitei/1-3%20%E7%A4%BE%E5%86%85%E6%A8%99%E6%BA%96%E8%A6%8F%E7%A8%8B/1-3hyojyun.htm";
-            WebClawringDriver wcd = new WebClawringDriver(this.CefSharpPanel);
-            var dic = await wcd.Clawring(rootUrl);
-
-            foreach (var kvp in dic) {
-                AppObject.Logger.Info(kvp.Key);
-                AppObject.Logger.Info(kvp.Value.Title);
-            }
-            //データが取れたのでインデックス画面側で実行できるように移行する。
+            //FuzzySearch();
+            FuzzySuggest();
         }
 
         private void TileViewButton_Click(object sender, EventArgs e) {
@@ -907,15 +910,21 @@ namespace PokudaSearch.Views {
                     Document thisDoc = idxSearcher.Doc(doc.Doc);
                     string fullPath = thisDoc.Get(LuceneIndexBuilder.Path);
                     fullPath = ConvertOuterPath(fullPath);
+                    bool isUrl = fullPath.StartsWith("http");
 
-                    Bitmap bmp = Properties.Resources.File16;
-                    if (File.Exists(fullPath)) {
-                        try {
+                    Bitmap bmp = null;
+                    if (!isUrl && File.Exists(fullPath)) {
+                        bmp = Properties.Resources.File16;
+                        if (File.Exists(fullPath)) {
+                            try {
 
-                            bmp = Icon.ExtractAssociatedIcon(fullPath).ToBitmap();
-                        } catch {
-                            //プレビューを取得できない場合は、デフォルトアイコンを表示
+                                bmp = Icon.ExtractAssociatedIcon(fullPath).ToBitmap();
+                            } catch {
+                                //プレビューを取得できない場合は、デフォルトアイコンを表示
+                            }
                         }
+                    } else {
+                        bmp = Properties.Resources.WebPage16;
                     }
                     bmp.MakeTransparent();
                     //16,16
@@ -924,9 +933,13 @@ namespace PokudaSearch.Views {
                     this.ResultGrid[row, (int)ColIndex.FullPath] = fullPath;
 
                     //HACK ループ内のnewを避けれないか?
-                    var fi = new FileInfo(fullPath);
-                    this.ResultGrid[row, (int)ColIndex.Extension] = fi.Extension;
-                    this.ResultGrid[row, (int)ColIndex.UpdateDate] = fi.LastWriteTime;
+                    if (isUrl) {
+                        this.ResultGrid[row, (int)ColIndex.UpdateDate] = thisDoc.Get(LuceneIndexBuilder.UpdateDate);
+                    } else {
+                        var fi = new FileInfo(fullPath);
+                        this.ResultGrid[row, (int)ColIndex.UpdateDate] = fi.LastWriteTime;
+                    }
+                    this.ResultGrid[row, (int)ColIndex.Extension] = thisDoc.Get(LuceneIndexBuilder.Extension);
                     this.ResultGrid[row, (int)ColIndex.Score] = doc.Score;
                     this.ResultGrid[row, (int)ColIndex.DocId] = doc.Doc;
 
@@ -994,12 +1007,16 @@ namespace PokudaSearch.Views {
                 return;
             }
             string path = StringUtil.NullToBlank(this.ResultGrid[this.ResultGrid.Selection.TopRow, (int)ColIndex.FullPath]);
-            if (File.Exists(path)) {
+            if (path.StartsWith("http")) {
                 Process.Start(path);
             } else {
-                //HACK メッセージ
-                MessageBox.Show(AppObject.GetMsg(AppObject.Msg.ERR_FILE_NOT_FOUND),
-                    AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (File.Exists(path)) {
+                    Process.Start(path);
+                } else {
+                    //HACK メッセージ
+                    MessageBox.Show(AppObject.GetMsg(AppObject.Msg.ERR_FILE_NOT_FOUND),
+                        AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -1032,7 +1049,8 @@ namespace PokudaSearch.Views {
                     this.CefSharpPanel.Visible = true;
                     string extension = StringUtil.NullToBlank(this.ResultGrid.Rows[selectedRow][(int)ColIndex.Extension]);
                     string fullPath = StringUtil.NullToBlank(this.ResultGrid.Rows[selectedRow][(int)ColIndex.FullPath]);
-                    if (!File.Exists(fullPath)) {
+
+                    if (!fullPath.StartsWith("http") && !File.Exists(fullPath)) {
                         fullPath = "";
                     } else {
                         if (extension.ToLower() == ".pdf") {
@@ -1429,5 +1447,45 @@ namespace PokudaSearch.Views {
             //予めカテゴリを登録する必要があるようなので、一旦保留
         }
 
+        private void FuzzySearch() {
+
+            string unlinkedIndexPath = "";
+            MultiReader multiReader = GetMultiReader(_selectedIndexList, out unlinkedIndexPath);
+            //HACK maxEdits引数の意味を調査
+            FuzzyQuery fq = new FuzzyQuery(new Term(LuceneIndexBuilder.Content, 
+                QueryParser.Escape(this.KeywordText.Text.ToLower())), 2);
+
+            BlendedTermQuery btq = (BlendedTermQuery)fq.Rewrite(multiReader);
+            BooleanQuery bq = (BooleanQuery)btq.Rewrite(multiReader);
+            java.util.List list = bq.Clauses();
+
+            for (int i = 0; i < list.size(); i++) {
+                BooleanClause bc = (BooleanClause)list.get(i);
+                //TODO キャストできない問題から
+                Term t = ((TermQuery)bc.GetQuery()).GetTerm();
+
+                AppObject.Logger.Info("もしかして：" + t.Text());
+            }
+        }
+
+        private void FuzzySuggest() {
+            //TODO ヒットしない。そもそもどういう時にヒットするのか？
+
+            string unlinkedIndexPath = "";
+            MultiReader multiReader = GetMultiReader(_selectedIndexList, out unlinkedIndexPath);
+            Dictionary dictionary = new LuceneDictionary(multiReader, "content");
+
+            var directory = new RAMDirectory();
+            var suggester = new FuzzySuggester(directory, "", AppObject.AppAnalyzer);
+            suggester.Build(dictionary);
+
+            //var suggester = new FreeTextSuggester(AppObject.AppAnalyzer);
+
+            var resultList = suggester.Lookup(this.KeywordText.Text.ToLower(), false, 10);
+            for (int i = 0; i < resultList.size(); i++) {
+                var lr = resultList.get(i);
+                AppObject.Logger.Info("もしかして：" + lr.ToString());
+            }
+        }
     }
 }
