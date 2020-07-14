@@ -1,4 +1,5 @@
-﻿using FlexLucene.Analysis;
+﻿using com.healthmarketscience.jackcess;
+using FlexLucene.Analysis;
 using FlexLucene.Analysis.Ja;
 using FlexLucene.Analysis.Ja.Dict;
 using FlexLucene.Document;
@@ -7,6 +8,7 @@ using FlexLucene.Store;
 using FxCommonLib.FTSIndexer;
 using FxCommonLib.Utils;
 using java.nio.file;
+using java.text;
 using org.apache.tika.metadata;
 using org.apache.tika.parser;
 using org.apache.tika.sax;
@@ -34,6 +36,8 @@ namespace PokudaSearch.IndexUtil {
         }
 
         #region Constants
+
+
         /// <summary>テキスト抽出器モード</summary>
         public enum TextExtractModes : int {
             Tika = 0,
@@ -139,6 +143,7 @@ namespace PokudaSearch.IndexUtil {
             set { _reservedNo = value; }
             get { return _reservedNo; }
         }
+
         #endregion Properties
 
         #region MemberVariables
@@ -149,6 +154,7 @@ namespace PokudaSearch.IndexUtil {
         private TextExtractor _txtExtractor = new TextExtractor();
         /// <summary>ハイライトフィールドタイプ</summary>
         private FieldType _hilightFieldType = new FieldType();
+        private SimpleDateFormat _sdf = new SimpleDateFormat("yyyy/MM/dd");
         #endregion MemberVariables
 
         #region Constractors
@@ -740,7 +746,12 @@ namespace PokudaSearch.IndexUtil {
 			doc.Add(new StringField(Path, wc.Url, FieldStore.YES));
 			doc.Add(new StringField(Title, wc.Title, FieldStore.YES));
 			doc.Add(new StringField(Extension, extension.ToLower(), FieldStore.YES));
-			doc.Add(new StringField(UpdateDate, wc.UpdateDate.ToString("yyyy/MM/dd HH:mm:ss"), FieldStore.YES));
+            long l = long.Parse(wc.UpdateDate.ToString("yyyyMMddHHmmss"));
+			doc.Add(new LongPoint(UpdateDate, l));
+			doc.Add(new StoredField(UpdateDate, l));
+			//doc.Add(new StringField(UpdateDate, 
+            //    DateTools.DateToString(_sdf.parse(wc.UpdateDate.ToString("yyyy/MM/dd")), DateToolsResolution.DAY), 
+            //    FieldStore.YES));
 			indexWriter.AddDocument(doc);
 
             return true;
@@ -812,8 +823,13 @@ namespace PokudaSearch.IndexUtil {
 			doc.Add(new StringField(Path, path, FieldStore.YES));
 			doc.Add(new StringField(Title, filename.ToLower(), FieldStore.YES));
 			doc.Add(new StringField(Extension, extension.ToLower(), FieldStore.YES));
-            //NOTE:Date型のFieldは存在しない
-			doc.Add(new StringField(UpdateDate, fi.LastWriteTime.ToString("yyyy/MM/dd HH:mm:ss"), FieldStore.YES));
+            //NOTE:Date型のFieldは存在しないのでlongで保持
+            long l = long.Parse(fi.LastWriteTime.ToString("yyyyMMddHHmmss"));
+			doc.Add(new LongPoint(UpdateDate, l));
+			doc.Add(new StoredField(UpdateDate, l));
+			//doc.Add(new StringField(UpdateDate, 
+            //    DateTools.DateToString(_sdf.parse(fi.LastWriteTime.ToString("yyyy/MM/dd")), DateToolsResolution.DAY), 
+            //    FieldStore.YES));
 			indexWriter.AddDocument(doc);
 
             return true;
@@ -912,6 +928,7 @@ namespace PokudaSearch.IndexUtil {
             IProgress<ProgressReport> progress) {
             return Task.Run<LuceneIndexBuilder>(() => DoWorkMulti(analyzer, rootPath, targetDir, progress));
         }
+        
 
         private BlockingCollection<RAMDirectory> _que = new BlockingCollection<RAMDirectory>(10000);
         private static LuceneIndexBuilder DoWorkMulti(

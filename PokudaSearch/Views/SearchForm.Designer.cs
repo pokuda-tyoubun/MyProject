@@ -25,15 +25,15 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchForm));
-            C1.Win.C1Tile.PanelElement panelElement1 = new C1.Win.C1Tile.PanelElement();
-            C1.Win.C1Tile.ImageElement imageElement1 = new C1.Win.C1Tile.ImageElement();
-            C1.Win.C1Tile.TextElement textElement1 = new C1.Win.C1Tile.TextElement();
-            C1.Win.C1Tile.TextElement textElement2 = new C1.Win.C1Tile.TextElement();
-            C1.Win.C1Tile.ImageElement imageElement2 = new C1.Win.C1Tile.ImageElement();
-            C1.Win.C1Tile.PanelElement panelElement2 = new C1.Win.C1Tile.PanelElement();
-            C1.Win.C1Tile.TextElement textElement3 = new C1.Win.C1Tile.TextElement();
-            C1.Win.C1Tile.PanelElement panelElement3 = new C1.Win.C1Tile.PanelElement();
-            C1.Win.C1Tile.TextElement textElement4 = new C1.Win.C1Tile.TextElement();
+            C1.Win.C1Tile.PanelElement panelElement4 = new C1.Win.C1Tile.PanelElement();
+            C1.Win.C1Tile.ImageElement imageElement3 = new C1.Win.C1Tile.ImageElement();
+            C1.Win.C1Tile.TextElement textElement5 = new C1.Win.C1Tile.TextElement();
+            C1.Win.C1Tile.TextElement textElement6 = new C1.Win.C1Tile.TextElement();
+            C1.Win.C1Tile.ImageElement imageElement4 = new C1.Win.C1Tile.ImageElement();
+            C1.Win.C1Tile.PanelElement panelElement5 = new C1.Win.C1Tile.PanelElement();
+            C1.Win.C1Tile.TextElement textElement7 = new C1.Win.C1Tile.TextElement();
+            C1.Win.C1Tile.PanelElement panelElement6 = new C1.Win.C1Tile.PanelElement();
+            C1.Win.C1Tile.TextElement textElement8 = new C1.Win.C1Tile.TextElement();
             this.label2 = new System.Windows.Forms.Label();
             this.KeywordText = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -53,6 +53,11 @@
             this.ClearFilterButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.WriteExcelButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.SuggestLabel = new System.Windows.Forms.ToolStripLabel();
+            this.Suggest1Button = new System.Windows.Forms.ToolStripButton();
+            this.Suggest2Button = new System.Windows.Forms.ToolStripButton();
+            this.Suggest3Button = new System.Windows.Forms.ToolStripButton();
             this.ResultContext = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.OpenFileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenParentMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,6 +69,7 @@
             this.BrowserPreviewPanel = new System.Windows.Forms.Panel();
             this.PreviewWarnLabel = new System.Windows.Forms.Label();
             this.ShowPreviewButton = new System.Windows.Forms.Button();
+            this.CefSharpPanel = new PokudaSearch.Controls.CefSharpPanel();
             this.RichTextBox = new System.Windows.Forms.RichTextBox();
             this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
             this.TextPreviewPanel = new System.Windows.Forms.Panel();
@@ -76,7 +82,6 @@
             this.tile2 = new C1.Win.C1Tile.Tile();
             this.tile3 = new C1.Win.C1Tile.Tile();
             this.ResultGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
-            this.TargetIndexGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
             this.TargetContext = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.SelectAllMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ReleaseAllMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,18 +92,18 @@
             this.ClearButton = new System.Windows.Forms.Button();
             this.PreviewCheck = new System.Windows.Forms.CheckBox();
             this.SearchButton = new System.Windows.Forms.Button();
-            this.PreviewSplitter = new NJFLib.Controls.CollapsibleSplitter();
             this.SearchPanel = new System.Windows.Forms.Panel();
             this.SearchSplitContainer = new System.Windows.Forms.SplitContainer();
             this.ExpandPreviewCheck = new System.Windows.Forms.CheckBox();
             this.SelectAllButton = new System.Windows.Forms.Button();
             this.ReleaseAllButton = new System.Windows.Forms.Button();
+            this.TargetIndexGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
             this.SelectLocalIndexButton = new System.Windows.Forms.Button();
             this.SelectOuterIndexButton = new System.Windows.Forms.Button();
-            this.collapsibleSplitter1 = new NJFLib.Controls.CollapsibleSplitter();
             this.PreviewCheckToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.ExpandPreviewCheckToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.CefSharpPanel = new PokudaSearch.Controls.CefSharpPanel();
+            this.PreviewSplitter = new NJFLib.Controls.CollapsibleSplitter();
+            this.collapsibleSplitter1 = new NJFLib.Controls.CollapsibleSplitter();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultNavi)).BeginInit();
@@ -109,13 +114,13 @@
             this.TextPreviewPanel.SuspendLayout();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ResultGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TargetIndexGrid)).BeginInit();
             this.TargetContext.SuspendLayout();
             this.SearchPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SearchSplitContainer)).BeginInit();
             this.SearchSplitContainer.Panel1.SuspendLayout();
             this.SearchSplitContainer.Panel2.SuspendLayout();
             this.SearchSplitContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TargetIndexGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
@@ -224,7 +229,12 @@
             this.FilterGridButton,
             this.ClearFilterButton,
             this.toolStripSeparator3,
-            this.WriteExcelButton});
+            this.WriteExcelButton,
+            this.toolStripSeparator6,
+            this.SuggestLabel,
+            this.Suggest1Button,
+            this.Suggest2Button,
+            this.Suggest3Button});
             this.ResultNavi.Location = new System.Drawing.Point(6, 4);
             this.ResultNavi.MoveFirstItem = null;
             this.ResultNavi.MoveLastItem = null;
@@ -232,7 +242,7 @@
             this.ResultNavi.MovePreviousItem = null;
             this.ResultNavi.Name = "ResultNavi";
             this.ResultNavi.PositionItem = null;
-            this.ResultNavi.Size = new System.Drawing.Size(398, 25);
+            this.ResultNavi.Size = new System.Drawing.Size(674, 25);
             this.ResultNavi.TabIndex = 8;
             this.ResultNavi.Text = "BindingNavigator1";
             // 
@@ -320,6 +330,53 @@
             this.WriteExcelButton.ToolTipText = "Excelに出力";
             this.WriteExcelButton.Click += new System.EventHandler(this.WriteExcelButton_Click);
             // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
+            // 
+            // SuggestLabel
+            // 
+            this.SuggestLabel.Name = "SuggestLabel";
+            this.SuggestLabel.Size = new System.Drawing.Size(65, 22);
+            this.SuggestLabel.Text = "もしかして：";
+            // 
+            // Suggest1Button
+            // 
+            this.Suggest1Button.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.Suggest1Button.Font = new System.Drawing.Font("Meiryo UI", 9F, System.Drawing.FontStyle.Underline);
+            this.Suggest1Button.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.Suggest1Button.Image = ((System.Drawing.Image)(resources.GetObject("Suggest1Button.Image")));
+            this.Suggest1Button.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Suggest1Button.Name = "Suggest1Button";
+            this.Suggest1Button.Size = new System.Drawing.Size(70, 22);
+            this.Suggest1Button.Text = "キーワード１";
+            this.Suggest1Button.Click += new System.EventHandler(this.Suggest1Button_Click);
+            // 
+            // Suggest2Button
+            // 
+            this.Suggest2Button.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.Suggest2Button.Font = new System.Drawing.Font("Meiryo UI", 9F, System.Drawing.FontStyle.Underline);
+            this.Suggest2Button.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.Suggest2Button.Image = ((System.Drawing.Image)(resources.GetObject("Suggest2Button.Image")));
+            this.Suggest2Button.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Suggest2Button.Name = "Suggest2Button";
+            this.Suggest2Button.Size = new System.Drawing.Size(70, 22);
+            this.Suggest2Button.Text = "キーワード２";
+            this.Suggest2Button.Click += new System.EventHandler(this.Suggest2Button_Click);
+            // 
+            // Suggest3Button
+            // 
+            this.Suggest3Button.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.Suggest3Button.Font = new System.Drawing.Font("Meiryo UI", 9F, System.Drawing.FontStyle.Underline);
+            this.Suggest3Button.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.Suggest3Button.Image = ((System.Drawing.Image)(resources.GetObject("Suggest3Button.Image")));
+            this.Suggest3Button.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Suggest3Button.Name = "Suggest3Button";
+            this.Suggest3Button.Size = new System.Drawing.Size(65, 22);
+            this.Suggest3Button.Text = "キーワード3";
+            this.Suggest3Button.Click += new System.EventHandler(this.Suggest3Button_Click);
+            // 
             // ResultContext
             // 
             this.ResultContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -378,7 +435,7 @@
             this.PreviewPanel.Controls.Add(this.collapsibleSplitter3);
             this.PreviewPanel.Controls.Add(this.TextPreviewPanel);
             this.PreviewPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.PreviewPanel.Location = new System.Drawing.Point(840, 0);
+            this.PreviewPanel.Location = new System.Drawing.Point(976, 0);
             this.PreviewPanel.Name = "PreviewPanel";
             this.PreviewPanel.Size = new System.Drawing.Size(419, 659);
             this.PreviewPanel.TabIndex = 116;
@@ -415,6 +472,15 @@
             this.ShowPreviewButton.Text = "表示する(&P)";
             this.ShowPreviewButton.UseVisualStyleBackColor = true;
             this.ShowPreviewButton.Click += new System.EventHandler(this.ShowPreviewButton_Click);
+            // 
+            // CefSharpPanel
+            // 
+            this.CefSharpPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.CefSharpPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CefSharpPanel.Location = new System.Drawing.Point(0, 0);
+            this.CefSharpPanel.Name = "CefSharpPanel";
+            this.CefSharpPanel.Size = new System.Drawing.Size(419, 497);
+            this.CefSharpPanel.TabIndex = 4;
             // 
             // RichTextBox
             // 
@@ -468,7 +534,7 @@
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(279, 0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(553, 659);
+            this.MainPanel.Size = new System.Drawing.Size(689, 659);
             this.MainPanel.TabIndex = 118;
             // 
             // ResultTile
@@ -478,13 +544,13 @@
             // 
             // 
             // 
-            panelElement1.Alignment = System.Drawing.ContentAlignment.BottomLeft;
-            panelElement1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            panelElement1.Children.Add(imageElement1);
-            panelElement1.Children.Add(textElement1);
-            panelElement1.Margin = new System.Windows.Forms.Padding(10, 6, 10, 6);
-            this.ResultTile.DefaultTemplate.Elements.Add(panelElement1);
-            this.ResultTile.DefaultTemplate.Elements.Add(textElement2);
+            panelElement4.Alignment = System.Drawing.ContentAlignment.BottomLeft;
+            panelElement4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            panelElement4.Children.Add(imageElement3);
+            panelElement4.Children.Add(textElement5);
+            panelElement4.Margin = new System.Windows.Forms.Padding(10, 6, 10, 6);
+            this.ResultTile.DefaultTemplate.Elements.Add(panelElement4);
+            this.ResultTile.DefaultTemplate.Elements.Add(textElement6);
             this.ResultTile.Groups.Add(this.group1);
             this.ResultTile.Location = new System.Drawing.Point(95, 360);
             this.ResultTile.Name = "ResultTile";
@@ -514,25 +580,25 @@
             // tempDoc
             // 
             this.tempDoc.Description = "テンプレート １";
-            panelElement2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            textElement3.BackColorSelector = C1.Win.C1Tile.BackColorSelector.Unbound;
-            textElement3.ForeColor = System.Drawing.Color.Black;
-            textElement3.ForeColorSelector = C1.Win.C1Tile.ForeColorSelector.Unbound;
-            textElement3.SingleLine = true;
-            panelElement2.Children.Add(textElement3);
-            panelElement2.Dock = System.Windows.Forms.DockStyle.Top;
-            panelElement2.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            panelElement3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            textElement4.BackColorSelector = C1.Win.C1Tile.BackColorSelector.Unbound;
-            textElement4.ForeColor = System.Drawing.Color.Black;
-            textElement4.ForeColorSelector = C1.Win.C1Tile.ForeColorSelector.Unbound;
-            textElement4.TextSelector = C1.Win.C1Tile.TextSelector.Text1;
-            panelElement3.Children.Add(textElement4);
-            panelElement3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            panelElement3.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.tempDoc.Elements.Add(imageElement2);
-            this.tempDoc.Elements.Add(panelElement2);
-            this.tempDoc.Elements.Add(panelElement3);
+            panelElement5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            textElement7.BackColorSelector = C1.Win.C1Tile.BackColorSelector.Unbound;
+            textElement7.ForeColor = System.Drawing.Color.Black;
+            textElement7.ForeColorSelector = C1.Win.C1Tile.ForeColorSelector.Unbound;
+            textElement7.SingleLine = true;
+            panelElement5.Children.Add(textElement7);
+            panelElement5.Dock = System.Windows.Forms.DockStyle.Top;
+            panelElement5.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            panelElement6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            textElement8.BackColorSelector = C1.Win.C1Tile.BackColorSelector.Unbound;
+            textElement8.ForeColor = System.Drawing.Color.Black;
+            textElement8.ForeColorSelector = C1.Win.C1Tile.ForeColorSelector.Unbound;
+            textElement8.TextSelector = C1.Win.C1Tile.TextSelector.Text1;
+            panelElement6.Children.Add(textElement8);
+            panelElement6.Dock = System.Windows.Forms.DockStyle.Bottom;
+            panelElement6.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.tempDoc.Elements.Add(imageElement4);
+            this.tempDoc.Elements.Add(panelElement5);
+            this.tempDoc.Elements.Add(panelElement6);
             this.tempDoc.Name = "tempDoc";
             // 
             // tile2
@@ -575,7 +641,7 @@
             this.ResultGrid.Rows.DefaultSize = 18;
             this.ResultGrid.SelectionMode = C1.Win.C1FlexGrid.SelectionModeEnum.ListBox;
             this.ResultGrid.ShowErrors = true;
-            this.ResultGrid.Size = new System.Drawing.Size(551, 627);
+            this.ResultGrid.Size = new System.Drawing.Size(687, 627);
             this.ResultGrid.StyleInfo = resources.GetString("ResultGrid.StyleInfo");
             this.ResultGrid.TabIndex = 9;
             this.ResultGrid.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2010Blue;
@@ -584,38 +650,6 @@
             this.ResultGrid.OwnerDrawCell += new C1.Win.C1FlexGrid.OwnerDrawCellEventHandler(this.ResultGrid_OwnerDrawCell);
             this.ResultGrid.DoubleClick += new System.EventHandler(this.ResultGrid_DoubleClick);
             this.ResultGrid.Leave += new System.EventHandler(this.ResultGrid_Leave);
-            // 
-            // TargetIndexGrid
-            // 
-            this.TargetIndexGrid.AfterErrorInfo = ((System.Collections.Generic.Dictionary<string, string>)(resources.GetObject("TargetIndexGrid.AfterErrorInfo")));
-            this.TargetIndexGrid.AllowFiltering = true;
-            this.TargetIndexGrid.AllowResizing = C1.Win.C1FlexGrid.AllowResizingEnum.Both;
-            this.TargetIndexGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TargetIndexGrid.AutoClipboard = true;
-            this.TargetIndexGrid.CellButtonDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.HashSet<string>>)(resources.GetObject("TargetIndexGrid.CellButtonDic")));
-            this.TargetIndexGrid.ColumnInfo = "10,1,0,0,0,90,Columns:";
-            this.TargetIndexGrid.ContextMenuStrip = this.TargetContext;
-            this.TargetIndexGrid.DrawMode = C1.Win.C1FlexGrid.DrawModeEnum.OwnerDraw;
-            this.TargetIndexGrid.EnableReadOnlyColor = false;
-            this.TargetIndexGrid.EnableUpdateCellStyle = false;
-            this.TargetIndexGrid.Font = new System.Drawing.Font("MS UI Gothic", 9F);
-            this.TargetIndexGrid.GridName = null;
-            this.TargetIndexGrid.IsCol1SelectCheck = false;
-            this.TargetIndexGrid.IsEnterRight = false;
-            this.TargetIndexGrid.Location = new System.Drawing.Point(4, 55);
-            this.TargetIndexGrid.Name = "TargetIndexGrid";
-            this.TargetIndexGrid.PulldownDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, string>>)(resources.GetObject("TargetIndexGrid.PulldownDic")));
-            this.TargetIndexGrid.Rows.Count = 2;
-            this.TargetIndexGrid.Rows.DefaultSize = 18;
-            this.TargetIndexGrid.ShowErrors = true;
-            this.TargetIndexGrid.Size = new System.Drawing.Size(263, 408);
-            this.TargetIndexGrid.StyleInfo = resources.GetString("TargetIndexGrid.StyleInfo");
-            this.TargetIndexGrid.TabIndex = 7;
-            this.TargetIndexGrid.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2010Blue;
-            this.TargetIndexGrid.WindowsName = null;
-            this.TargetIndexGrid.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TargetIndexGrid_MouseMove);
             // 
             // TargetContext
             // 
@@ -704,22 +738,6 @@
             this.SearchButton.UseVisualStyleBackColor = true;
             this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
-            // PreviewSplitter
-            // 
-            this.PreviewSplitter.AnimationDelay = 20;
-            this.PreviewSplitter.AnimationStep = 20;
-            this.PreviewSplitter.BorderStyle3D = System.Windows.Forms.Border3DStyle.RaisedOuter;
-            this.PreviewSplitter.ControlToHide = this.PreviewPanel;
-            this.PreviewSplitter.Dock = System.Windows.Forms.DockStyle.Right;
-            this.PreviewSplitter.ExpandParentForm = false;
-            this.PreviewSplitter.Location = new System.Drawing.Point(832, 0);
-            this.PreviewSplitter.Name = "PreviewSplitter";
-            this.PreviewSplitter.Size = new System.Drawing.Size(8, 659);
-            this.PreviewSplitter.TabIndex = 123;
-            this.PreviewSplitter.TabStop = false;
-            this.PreviewSplitter.UseAnimations = false;
-            this.PreviewSplitter.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
-            // 
             // SearchPanel
             // 
             this.SearchPanel.Controls.Add(this.SearchSplitContainer);
@@ -796,6 +814,38 @@
             this.ReleaseAllButton.UseVisualStyleBackColor = true;
             this.ReleaseAllButton.Click += new System.EventHandler(this.ReleaseAllButton_Click);
             // 
+            // TargetIndexGrid
+            // 
+            this.TargetIndexGrid.AfterErrorInfo = ((System.Collections.Generic.Dictionary<string, string>)(resources.GetObject("TargetIndexGrid.AfterErrorInfo")));
+            this.TargetIndexGrid.AllowFiltering = true;
+            this.TargetIndexGrid.AllowResizing = C1.Win.C1FlexGrid.AllowResizingEnum.Both;
+            this.TargetIndexGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TargetIndexGrid.AutoClipboard = true;
+            this.TargetIndexGrid.CellButtonDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.HashSet<string>>)(resources.GetObject("TargetIndexGrid.CellButtonDic")));
+            this.TargetIndexGrid.ColumnInfo = "10,1,0,0,0,90,Columns:";
+            this.TargetIndexGrid.ContextMenuStrip = this.TargetContext;
+            this.TargetIndexGrid.DrawMode = C1.Win.C1FlexGrid.DrawModeEnum.OwnerDraw;
+            this.TargetIndexGrid.EnableReadOnlyColor = false;
+            this.TargetIndexGrid.EnableUpdateCellStyle = false;
+            this.TargetIndexGrid.Font = new System.Drawing.Font("MS UI Gothic", 9F);
+            this.TargetIndexGrid.GridName = null;
+            this.TargetIndexGrid.IsCol1SelectCheck = false;
+            this.TargetIndexGrid.IsEnterRight = false;
+            this.TargetIndexGrid.Location = new System.Drawing.Point(4, 55);
+            this.TargetIndexGrid.Name = "TargetIndexGrid";
+            this.TargetIndexGrid.PulldownDic = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, string>>)(resources.GetObject("TargetIndexGrid.PulldownDic")));
+            this.TargetIndexGrid.Rows.Count = 2;
+            this.TargetIndexGrid.Rows.DefaultSize = 18;
+            this.TargetIndexGrid.ShowErrors = true;
+            this.TargetIndexGrid.Size = new System.Drawing.Size(263, 408);
+            this.TargetIndexGrid.StyleInfo = resources.GetString("TargetIndexGrid.StyleInfo");
+            this.TargetIndexGrid.TabIndex = 7;
+            this.TargetIndexGrid.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2010Blue;
+            this.TargetIndexGrid.WindowsName = null;
+            this.TargetIndexGrid.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TargetIndexGrid_MouseMove);
+            // 
             // SelectLocalIndexButton
             // 
             this.SelectLocalIndexButton.Image = global::PokudaSearch.Properties.Resources.LocalDrive16;
@@ -822,6 +872,22 @@
             this.SelectOuterIndexButton.UseVisualStyleBackColor = true;
             this.SelectOuterIndexButton.Click += new System.EventHandler(this.SelectOuterIndexButton_Click);
             // 
+            // PreviewSplitter
+            // 
+            this.PreviewSplitter.AnimationDelay = 20;
+            this.PreviewSplitter.AnimationStep = 20;
+            this.PreviewSplitter.BorderStyle3D = System.Windows.Forms.Border3DStyle.RaisedOuter;
+            this.PreviewSplitter.ControlToHide = this.PreviewPanel;
+            this.PreviewSplitter.Dock = System.Windows.Forms.DockStyle.Right;
+            this.PreviewSplitter.ExpandParentForm = false;
+            this.PreviewSplitter.Location = new System.Drawing.Point(968, 0);
+            this.PreviewSplitter.Name = "PreviewSplitter";
+            this.PreviewSplitter.Size = new System.Drawing.Size(8, 659);
+            this.PreviewSplitter.TabIndex = 123;
+            this.PreviewSplitter.TabStop = false;
+            this.PreviewSplitter.UseAnimations = false;
+            this.PreviewSplitter.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
+            // 
             // collapsibleSplitter1
             // 
             this.collapsibleSplitter1.AnimationDelay = 20;
@@ -837,20 +903,11 @@
             this.collapsibleSplitter1.UseAnimations = false;
             this.collapsibleSplitter1.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
             // 
-            // CefSharpPanel
-            // 
-            this.CefSharpPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.CefSharpPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CefSharpPanel.Location = new System.Drawing.Point(0, 0);
-            this.CefSharpPanel.Name = "CefSharpPanel";
-            this.CefSharpPanel.Size = new System.Drawing.Size(419, 497);
-            this.CefSharpPanel.TabIndex = 4;
-            // 
             // SearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1259, 659);
+            this.ClientSize = new System.Drawing.Size(1395, 659);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.PreviewSplitter);
             this.Controls.Add(this.PreviewPanel);
@@ -877,7 +934,6 @@
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ResultGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TargetIndexGrid)).EndInit();
             this.TargetContext.ResumeLayout(false);
             this.SearchPanel.ResumeLayout(false);
             this.SearchSplitContainer.Panel1.ResumeLayout(false);
@@ -885,6 +941,7 @@
             this.SearchSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SearchSplitContainer)).EndInit();
             this.SearchSplitContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.TargetIndexGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -956,5 +1013,10 @@
         private System.Windows.Forms.SplitContainer SearchSplitContainer;
         public System.Windows.Forms.ToolStripMenuItem DiffMenu;
         private Controls.CefSharpPanel CefSharpPanel;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripLabel SuggestLabel;
+        private System.Windows.Forms.ToolStripButton Suggest1Button;
+        private System.Windows.Forms.ToolStripButton Suggest2Button;
+        private System.Windows.Forms.ToolStripButton Suggest3Button;
     }
 }

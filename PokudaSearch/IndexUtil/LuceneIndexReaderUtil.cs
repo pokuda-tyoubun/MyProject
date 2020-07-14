@@ -32,9 +32,10 @@ namespace PokudaSearch.IndexUtil {
                     var docInfo = new DocInfo();
                     docInfo.Id = i;
                     docInfo.Path = doc.GetField(LuceneIndexBuilder.Path).StringValue();
-                    docInfo.UpdateDate = DateTime.Parse(doc.GetField(LuceneIndexBuilder.UpdateDate).StringValue());
+                    docInfo.UpdateDate = DateTime.FromBinary(long.Parse(doc.GetField(LuceneIndexBuilder.UpdateDate).StringValue()));
+                    //docInfo.UpdateDate = DateTime.FromBinary(long.Parse(doc.GetBinaryValue(LuceneIndexBuilder.UpdateDate).ToString()));
                     docInfo.Exists = false;
-
+                    
                     if (!dic.ContainsKey(docInfo.Path)) {
                         dic.Add(docInfo.Path, docInfo);
                     }

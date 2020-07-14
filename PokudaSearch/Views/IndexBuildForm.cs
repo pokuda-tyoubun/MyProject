@@ -461,7 +461,7 @@ namespace PokudaSearch.Views {
                 param.Add(new SQLiteParameter("@作成完了", DBNull.Value));
                 param.Add(new SQLiteParameter("@モード", EnumUtil.GetLabel(LuceneIndexBuilder.CreateMode)));
                 param.Add(new SQLiteParameter("@パス", LuceneIndexBuilder.IndexedPath));
-                param.Add(new SQLiteParameter("@作成時間(分)", LuceneIndexBuilder.CreateTime.TotalMinutes));
+                param.Add(new SQLiteParameter("@作成時間(分)", "0"));
                 param.Add(new SQLiteParameter("@対象ファイル数", LuceneIndexBuilder.TargetCount));
                 param.Add(new SQLiteParameter("@インデックス済み", LuceneIndexBuilder.IndexedCount));
                 param.Add(new SQLiteParameter("@インデックス対象外", LuceneIndexBuilder.SkippedCount));
@@ -513,6 +513,9 @@ namespace PokudaSearch.Views {
                         UpdateActiveIndex(aiParam);
                         LoadActiveIndex(AppObject.ConnectString, this.ActiveIndexGrid);
                         LoadActiveIndex(AppObject.ConnectString, SearchForm.TargetIndexGridControl, appendCheckBox: true);
+
+                        MainFrameForm.SearchForm.CheckedLocalIndex(Properties.Settings.Default.LocalIndexChecked);
+                        MainFrameForm.SearchForm.CheckedOuterIndex(Properties.Settings.Default.OuterIndexChecked);
 
                         this.LogViewerText.Text = "完了";
                     } else {
@@ -943,7 +946,8 @@ namespace PokudaSearch.Views {
         private void WebClawringButton_Click(object sender, EventArgs e) {
             //string targetUrl = "http://078134995:Ais5vs2004@192.168.13.67/docs/html/kitei/index.htm";
             //string targetUrl = "http://078134995:Ais5vs2004@192.168.13.67/docs/html/kitei/3-2%20%E8%BE%9E%E4%BB%A4%E8%A6%8F%E7%A8%8B/3-2jirei.htm";
-            string targetUrl = "https://pokuda-tyoubun.blogspot.com/";
+            //string targetUrl = "https://pokuda-tyoubun.blogspot.com/";
+            string targetUrl = "http://dobon.net";
             var browserPanel = MainFrameForm.SearchForm.BrowserPanel;
             MainFrameForm.SearchForm.Controls.Remove(browserPanel);
             WebBrowserForm wbf = new WebBrowserForm(targetUrl, browserPanel, this);

@@ -91,6 +91,14 @@ namespace PokudaSearch {
                 }
             }
         }
+        public void SetMorpheme(string[] morphemeArray) {
+            var sb = new StringBuilder("形態素：");
+            foreach (string val in morphemeArray) {
+                sb.Append(val);
+                sb.Append(" ");
+            }
+            this.MorphemeLabel.Text = sb.ToString();
+        }
 
         /// <summary>
         /// ファイル検索画面表示

@@ -25,8 +25,9 @@
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFrameForm));
             this.MainStatusStrip = new System.Windows.Forms.StatusStrip();
-            this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.MorphemeLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.MainRibbon = new C1.Win.C1Ribbon.C1Ribbon();
             this.ribbonApplicationMenu1 = new C1.Win.C1Ribbon.RibbonApplicationMenu();
             this.ribbonBottomToolBar1 = new C1.Win.C1Ribbon.RibbonBottomToolBar();
@@ -55,24 +56,39 @@
             // MainStatusStrip
             // 
             this.MainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ProgressBar,
             this.StatusLabel,
-            this.ProgressBar});
+            this.MorphemeLabel});
             this.MainStatusStrip.Location = new System.Drawing.Point(0, 834);
             this.MainStatusStrip.Name = "MainStatusStrip";
             this.MainStatusStrip.Size = new System.Drawing.Size(1284, 27);
             this.MainStatusStrip.TabIndex = 4;
             this.MainStatusStrip.Text = "statusStrip1";
             // 
-            // StatusLabel
-            // 
-            this.StatusLabel.Name = "StatusLabel";
-            this.StatusLabel.Size = new System.Drawing.Size(52, 22);
-            this.StatusLabel.Text = "ステータス";
-            // 
             // ProgressBar
             // 
             this.ProgressBar.Name = "ProgressBar";
             this.ProgressBar.Size = new System.Drawing.Size(100, 21);
+            // 
+            // StatusLabel
+            // 
+            this.StatusLabel.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.StatusLabel.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
+            this.StatusLabel.Name = "StatusLabel";
+            this.StatusLabel.Size = new System.Drawing.Size(66, 22);
+            this.StatusLabel.Text = "コマンド待ち";
+            // 
+            // MorphemeLabel
+            // 
+            this.MorphemeLabel.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.MorphemeLabel.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
+            this.MorphemeLabel.Name = "MorphemeLabel";
+            this.MorphemeLabel.Size = new System.Drawing.Size(59, 22);
+            this.MorphemeLabel.Text = "形態素：";
             // 
             // MainRibbon
             // 
@@ -269,5 +285,6 @@
         private C1.Win.C1Ribbon.RibbonGroup TagGroup;
         private C1.Win.C1Ribbon.RibbonButton TagEditFormButton;
         private C1.Win.C1Ribbon.RibbonButton VerifyLicenseButton;
+        private System.Windows.Forms.ToolStripStatusLabel MorphemeLabel;
     }
 }

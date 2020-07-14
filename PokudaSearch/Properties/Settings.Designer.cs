@@ -62,12 +62,12 @@ namespace PokudaSearch.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("200")]
-        public int MaxSeachResultNum {
+        public int MaxSearchResultNum {
             get {
-                return ((int)(this["MaxSeachResultNum"]));
+                return ((int)(this["MaxSearchResultNum"]));
             }
             set {
-                this["MaxSeachResultNum"] = value;
+                this["MaxSearchResultNum"] = value;
             }
         }
         
@@ -128,6 +128,30 @@ namespace PokudaSearch.Properties {
             }
             set {
                 this["OuterIndexChecked"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowSuggestion {
+            get {
+                return ((bool)(this["ShowSuggestion"]));
+            }
+            set {
+                this["ShowSuggestion"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int MaxMoreLikeThisResultNum {
+            get {
+                return ((int)(this["MaxMoreLikeThisResultNum"]));
+            }
+            set {
+                this["MaxMoreLikeThisResultNum"] = value;
             }
         }
     }

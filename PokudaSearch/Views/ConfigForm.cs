@@ -21,6 +21,8 @@ namespace PokudaSearch.Views {
 
         /// <summary>検索結果数の有効範囲</summary>
         private ValueInterval _searchResltRange = new ValueInterval(10, 2000, true, true);
+        /// <summary>類似結果数の有効範囲</summary>
+        private ValueInterval _moreLikeThisResultRange = new ValueInterval(10, 100, true, true);
         /// <summary>最大ファイルサイズの有効範囲</summary>
         private ValueInterval _fileSizeLimitRange = new ValueInterval(100, 2000, true, true);
         /// <summary>最大使用メモリサイズの有効範囲</summary>
@@ -37,10 +39,16 @@ namespace PokudaSearch.Views {
 
         private void ConfigForm_Load(object sender, EventArgs e) {
             //最大検索結果数
-            this.MaxSeachResultNum.PostValidation.Intervals.Add(_searchResltRange);
+            this.MaxSearchResultNum.PostValidation.Intervals.Add(_searchResltRange);
             this.MaxSearchResultLabel.Text = "検索結果最大件数（" + 
                 _searchResltRange.MinValue.ToString() + "～" + _searchResltRange.MaxValue.ToString() + "）";
-            this.MaxSeachResultNum.Value = Properties.Settings.Default.MaxSeachResultNum;
+            this.MaxSearchResultNum.Value = Properties.Settings.Default.MaxSearchResultNum;
+
+            //最大類似検索結果数
+            this.MaxMoreLikeThisResultNum.PostValidation.Intervals.Add(_moreLikeThisResultRange);
+            this.MaxMoreLikeThisResultLabel.Text = "類似検索結果最大件数（" + 
+                _moreLikeThisResultRange.MinValue.ToString() + "～" + _moreLikeThisResultRange.MaxValue.ToString() + "）";
+            this.MaxMoreLikeThisResultNum.Value = Properties.Settings.Default.MaxMoreLikeThisResultNum;
 
             //最大ファイルサイズ
             this.FileSizeLimitNum.PostValidation.Intervals.Add(_fileSizeLimitRange);
@@ -60,6 +68,9 @@ namespace PokudaSearch.Views {
             //デフォルト対象インデックス
             this.LocalIndexCheck.Checked = Properties.Settings.Default.LocalIndexChecked;
             this.OuterIndexCheck.Checked = Properties.Settings.Default.OuterIndexChecked;
+
+            //もしかしてキーワード
+            this.ShowSuggestionCheck.Checked = Properties.Settings.Default.ShowSuggestion;
         }
 
         /// <summary>
@@ -78,8 +89,12 @@ namespace PokudaSearch.Views {
             }
 
             //最大検索結果数
-            MainFrameForm.SearchForm.MaxSeachResultNum = int.Parse(this.MaxSeachResultNum.Text);
-            Properties.Settings.Default.MaxSeachResultNum = int.Parse(this.MaxSeachResultNum.Text);
+            MainFrameForm.SearchForm.MaxSearchResultNum = int.Parse(this.MaxSearchResultNum.Text);
+            Properties.Settings.Default.MaxSearchResultNum = int.Parse(this.MaxSearchResultNum.Text);
+
+            //最大類似検索結果数
+            MainFrameForm.SearchForm.MaxMoreLikeThisResultNum = int.Parse(this.MaxMoreLikeThisResultNum.Text);
+            Properties.Settings.Default.MaxMoreLikeThisResultNum = int.Parse(this.MaxMoreLikeThisResultNum.Text);
 
             //最大ファイルサイズ
             Properties.Settings.Default.FileSizeLimit = int.Parse(this.FileSizeLimitNum.Text);
@@ -93,6 +108,9 @@ namespace PokudaSearch.Views {
             Properties.Settings.Default.LocalIndexChecked = this.LocalIndexCheck.Checked;
             //外部インデックス
             Properties.Settings.Default.OuterIndexChecked = this.OuterIndexCheck.Checked;
+
+            //「もしかしてキーワード」表示
+            Properties.Settings.Default.ShowSuggestion = this.ShowSuggestionCheck.Checked;
 
             Properties.Settings.Default.Save();
 
@@ -138,10 +156,6 @@ namespace PokudaSearch.Views {
  
             // オブジェクトを破棄する
             ofDialog.Dispose();
-        }
-
-        private void MainPanel_Paint(object sender, PaintEventArgs e) {
-
         }
     }
 }

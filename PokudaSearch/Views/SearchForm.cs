@@ -7,6 +7,8 @@ using CefSharp.WinForms;
 using com.drew.metadata;
 using FlexLucene.Analysis;
 using FlexLucene.Analysis.Ja;
+using FlexLucene.Analysis.Standard;
+using FlexLucene.Analysis.Tokenattributes;
 using FlexLucene.Document;
 using FlexLucene.Facet;
 using FlexLucene.Facet.Taxonomy.Directory;
@@ -73,7 +75,9 @@ namespace PokudaSearch.Views {
 
         #region Properties
         /// <summary>最大検索結果数</summary>
-        public int MaxSeachResultNum = 0;
+        public int MaxSearchResultNum = 0;
+        /// <summary>最大類似検索結果数</summary>
+        public int MaxMoreLikeThisResultNum = 0;
 
         /// <summary>ナレッジ管理画面</summary>
         private static FlexGridEx _targetIndexGrid = null;
@@ -124,6 +128,13 @@ namespace PokudaSearch.Views {
 
             //チェックボックスとモードを固定
             this.TargetIndexGrid.Cols.Frozen = (int)IndexBuildForm.ActiveIndexColIdx.CreateMode + 2;
+
+            this.MaxMoreLikeThisResultNum = Properties.Settings.Default.MaxMoreLikeThisResultNum;
+
+            this.SuggestLabel.Visible = false;
+            this.Suggest1Button.Visible = false;
+            this.Suggest2Button.Visible = false;
+            this.Suggest3Button.Visible = false;
 #if DEBUG
 #else
             this.TileViewButton.Visible = false;
@@ -142,7 +153,7 @@ namespace PokudaSearch.Views {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SearchForm_Load(object sender, EventArgs e) {
-            MaxSeachResultNum = Properties.Settings.Default.MaxSeachResultNum;
+            MaxSearchResultNum = Properties.Settings.Default.MaxSearchResultNum;
             PreviewCheckToolTip.SetToolTip(PreviewCheck, "プレビュー表示(Ctrl + P)");
             ExpandPreviewCheckToolTip.SetToolTip(ExpandPreviewCheck, "プレビュー拡大(Ctrl + Shift + P)");
 
@@ -338,7 +349,7 @@ namespace PokudaSearch.Views {
 
                 this.ResultGrid.Redraw = false;
 
-                TopDocs docs = idxSearcher.Search(q, 10);
+                TopDocs docs = idxSearcher.Search(q, this.MaxMoreLikeThisResultNum);
                 Highlighter hi = CreateHilighter(q);
 
                 this.ResultGrid.Rows.Count = RowHeaderCount + docs.ScoreDocs.Length;
@@ -620,9 +631,6 @@ namespace PokudaSearch.Views {
             this.TargetIndexGrid.CopyEx();
         }
         private void ListViewButton_Click(object sender, EventArgs e) {
-
-            //FuzzySearch();
-            FuzzySuggest();
         }
 
         private void TileViewButton_Click(object sender, EventArgs e) {
@@ -755,7 +763,7 @@ namespace PokudaSearch.Views {
             this.ResultGrid.Cols.Count = Enum.GetValues(typeof(ColIndex)).Length + 1;
 
             this.ResultGrid[0, (int)ColIndex.FileIcon] = EnumUtil.GetLabel(ColIndex.FileIcon);
-            this.ResultGrid.Cols[(int)ColIndex.FileIcon].Width = 20;
+            this.ResultGrid.Cols[(int)ColIndex.FileIcon].Width = 30;
             this.ResultGrid.Cols[(int)ColIndex.FileIcon].ImageAlign = ImageAlignEnum.CenterCenter;
             this.ResultGrid[0, (int)ColIndex.FileName] = EnumUtil.GetLabel(ColIndex.FileName);
             this.ResultGrid.Cols[(int)ColIndex.FileName].Width = 200;
@@ -767,6 +775,7 @@ namespace PokudaSearch.Views {
             this.ResultGrid.Cols[(int)ColIndex.UpdateDate].Width = 100;
             this.ResultGrid[0, (int)ColIndex.Score] = EnumUtil.GetLabel(ColIndex.Score);
             this.ResultGrid.Cols[(int)ColIndex.Score].Width = 80;
+            this.ResultGrid.Cols[(int)ColIndex.Score].Format = "0.0000000";
             this.ResultGrid[0, (int)ColIndex.DocId] = EnumUtil.GetLabel(ColIndex.DocId);
             this.ResultGrid.Cols[(int)ColIndex.DocId].Width = 40;
             this.ResultGrid[0, (int)ColIndex.Hilight] = EnumUtil.GetLabel(ColIndex.Hilight);
@@ -849,8 +858,11 @@ namespace PokudaSearch.Views {
         /// 検索
         /// </summary>
         private void Search() {
+            AppObject.Frame.SetMorpheme(new string[] { "" });
 
-            if (this.KeywordText.Text == "") {
+            string keyword = this.KeywordText.Text.Trim();
+
+            if (keyword == "") {
                 MessageBox.Show(AppObject.GetMsg(AppObject.Msg.MSG_INPUT_KEYWORD),
                     AppObject.GetMsg(AppObject.Msg.TITLE_INFO), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -876,22 +888,38 @@ namespace PokudaSearch.Views {
 
             var allQuery = new BooleanQueryBuilder();
             var contentBqb = new BooleanQueryBuilder();
-            //QueryParser titleQp = new QueryParser("Title", AppObject.AppAnalyzer);
-            //Query titleQuery = titleQp.Parse("*" + this.KeywordText.Text + "*"); //最初の文字にWildCardは適用されないようだ。
-            Query titleQuery = new WildcardQuery(new Term(LuceneIndexBuilder.Title, "*" + QueryParser.Escape(this.KeywordText.Text.ToLower()) + "*"));
-            contentBqb.Add(titleQuery, BooleanClauseOccur.SHOULD);
+            //ファイル名
+            Query titleQuery = new WildcardQuery(new Term(LuceneIndexBuilder.Title, "*" + QueryParser.Escape(keyword.ToLower()) + "*"));
+            contentBqb.Add(titleQuery, BooleanClauseOccur.SHOULD); //OR
+            //コンテント
             QueryParser contentQp = new QueryParser(LuceneIndexBuilder.Content, AppObject.AppAnalyzer);
-            Query contentQuery = contentQp.Parse(QueryParser.Escape(this.KeywordText.Text));
-            contentBqb.Add(contentQuery, BooleanClauseOccur.SHOULD);
-            allQuery.Add(contentBqb.Build(), BooleanClauseOccur.MUST);
+            Query contentQuery = contentQp.Parse(QueryParser.Escape(keyword));
+            contentBqb.Add(contentQuery, BooleanClauseOccur.SHOULD); //OR
+            allQuery.Add(contentBqb.Build(), BooleanClauseOccur.MUST); //AND
+            //拡張子
             if (this.ExtensionText.Text != "") {
-                var extBqb = new BooleanQueryBuilder();
                 Query extensionQuery = new WildcardQuery(new Term(LuceneIndexBuilder.Extension,
                     "*" + this.ExtensionText.Text.ToLower() + "*"));
-                allQuery.Add(extensionQuery, BooleanClauseOccur.MUST);
+                allQuery.Add(extensionQuery, BooleanClauseOccur.MUST); //AND
+            }
+            //日付
+            if (this.UpdateDate1.Text != "" || this.UpdateDate2.Text != "") {
+                long toDate = long.Parse(DateTime.MinValue.ToString("yyyyMMddHHmmss"));
+                long fromDate = long.Parse(DateTime.MaxValue.ToString("yyyyMMddHHmmss"));
+
+                if (this.UpdateDate1.Text != "") {
+                    toDate = long.Parse(DateTime.Parse(this.UpdateDate1.Text).ToString("yyyyMMddHHmmss"));
+                }
+                if (this.UpdateDate2.Text != "") {
+                    fromDate = long.Parse(DateTime.Parse(this.UpdateDate2.Text).ToString("yyyyMMddHHmmss"));
+                }
+                Query dateRangeQuery = LongPoint.NewRangeQuery(LuceneIndexBuilder.UpdateDate, toDate, fromDate);
+                //Query dateRangeQuery = LegacyNumericRangeQuery.NewLongRange(LuceneIndexBuilder.UpdateDate, 
+                //    new java.lang.Long(toDate.ToString()), new java.lang.Long(fromDate.ToString()), true, true);
+                allQuery.Add(dateRangeQuery, BooleanClauseOccur.FILTER); //AND (スコアリングには関与しない)
             }
 
-            TopDocs docs = idxSearcher.Search(allQuery.Build(), MaxSeachResultNum);
+            TopDocs docs = idxSearcher.Search(allQuery.Build(), MaxSearchResultNum);
 
             //HACK DataTableに格納してLinqで絞り込む？
             
@@ -945,14 +973,19 @@ namespace PokudaSearch.Views {
 
                     // Highlighterで検索キーワード周辺の文字列(フラグメント)を取得
                     // TokenStream が必要なので取得
-                    TokenStream stream = TokenSources.GetAnyTokenStream(multiReader,
-                            doc.Doc, LuceneIndexBuilder.Content, AppObject.AppAnalyzer);
-                    string[] str = hi.GetBestFragments(stream, thisDoc.Get(LuceneIndexBuilder.Content), 5);
-                    this.ResultGrid[row, (int)ColIndex.Hilight] = string.Join(",", str);
+                    using (TokenStream stream = TokenSources.GetAnyTokenStream(multiReader,
+                            doc.Doc, LuceneIndexBuilder.Content, AppObject.AppAnalyzer)) {
+                        string[] str = hi.GetBestFragments(stream, thisDoc.Get(LuceneIndexBuilder.Content), 5);
+                        this.ResultGrid[row, (int)ColIndex.Hilight] = string.Join(",", str);
+                    }
 
                     row++;
                 }
                 SetHtmlLabel();
+                ShowToken(keyword);
+                if (Properties.Settings.Default.ShowSuggestion) {
+                    ShowFuzzySuggest(multiReader, keyword);
+                }
             } finally {
                 multiReader.Close();
                 this.ResultGrid.Redraw = true;
@@ -1447,45 +1480,91 @@ namespace PokudaSearch.Views {
             //予めカテゴリを登録する必要があるようなので、一旦保留
         }
 
-        private void FuzzySearch() {
+        private void ShowFuzzySuggest(MultiReader multiReader, string keyword) {
+            this.SuggestLabel.Visible = false;
+            this.Suggest1Button.Visible = false;
+            this.Suggest2Button.Visible = false;
+            this.Suggest3Button.Visible = false;
+            this.Suggest1Button.Text = "";
+            this.Suggest2Button.Text = "";
+            this.Suggest3Button.Text = "";
 
-            string unlinkedIndexPath = "";
-            MultiReader multiReader = GetMultiReader(_selectedIndexList, out unlinkedIndexPath);
-            //HACK maxEdits引数の意味を調査
-            FuzzyQuery fq = new FuzzyQuery(new Term(LuceneIndexBuilder.Content, 
-                QueryParser.Escape(this.KeywordText.Text.ToLower())), 2);
+            Dictionary dictionary = new LuceneDictionary(multiReader, LuceneIndexBuilder.Content);
+            var directory = new RAMDirectory();
+            var suggester = new FuzzySuggester(directory, "", AppObject.AppAnalyzer);
+            //var suggester = new FuzzySuggester(directory, "", new StandardAnalyzer());
+            //var suggester = new FreeTextSuggester(AppObject.AppAnalyzer, AppObject.AppAnalyzer, 3);
+            suggester.Build(dictionary);
 
-            BlendedTermQuery btq = (BlendedTermQuery)fq.Rewrite(multiReader);
-            BooleanQuery bq = (BooleanQuery)btq.Rewrite(multiReader);
-            java.util.List list = bq.Clauses();
-
-            for (int i = 0; i < list.size(); i++) {
-                BooleanClause bc = (BooleanClause)list.get(i);
-                //TODO キャストできない問題から
-                Term t = ((TermQuery)bc.GetQuery()).GetTerm();
-
-                AppObject.Logger.Info("もしかして：" + t.Text());
+            //最大3候補を表示
+            var resultList = suggester.Lookup(keyword.ToLower(), false, 3);
+            int cnt = 0;
+            for (int i = 0; i < resultList.size(); i++) {
+                var lr = (FlexLucene.Search.Suggest.LookupLookupResult)resultList.get(i);
+                string token = lr.Key.toString();
+                if (keyword.ToLower() != token.ToLower()) {
+                    cnt++;
+                    this.SuggestLabel.Visible = true;
+                    if (cnt == 1) {
+                        this.Suggest1Button.Visible = true;
+                        this.Suggest1Button.Text = token;
+                    } else if (cnt == 2) {
+                        this.Suggest2Button.Visible = true;
+                        this.Suggest2Button.Text = token;
+                    } else {
+                        this.Suggest3Button.Visible = true;
+                        this.Suggest3Button.Text = token;
+                    }
+                }
             }
         }
 
-        private void FuzzySuggest() {
-            //TODO ヒットしない。そもそもどういう時にヒットするのか？
+        private void Suggest1Button_Click(object sender, EventArgs e) {
+            this.ClearButton.PerformClick();
+            this.KeywordText.Text = this.Suggest1Button.Text;
+            this.SearchButton.PerformClick();
+        }
 
-            string unlinkedIndexPath = "";
-            MultiReader multiReader = GetMultiReader(_selectedIndexList, out unlinkedIndexPath);
-            Dictionary dictionary = new LuceneDictionary(multiReader, "content");
+        private void Suggest2Button_Click(object sender, EventArgs e) {
+            this.ClearButton.PerformClick();
+            this.KeywordText.Text = this.Suggest2Button.Text;
+            this.SearchButton.PerformClick();
+        }
 
-            var directory = new RAMDirectory();
-            var suggester = new FuzzySuggester(directory, "", AppObject.AppAnalyzer);
-            suggester.Build(dictionary);
+        private void Suggest3Button_Click(object sender, EventArgs e) {
+            this.ClearButton.PerformClick();
+            this.KeywordText.Text = this.Suggest3Button.Text;
+            this.SearchButton.PerformClick();
+        }
 
-            //var suggester = new FreeTextSuggester(AppObject.AppAnalyzer);
 
-            var resultList = suggester.Lookup(this.KeywordText.Text.ToLower(), false, 10);
-            for (int i = 0; i < resultList.size(); i++) {
-                var lr = resultList.get(i);
-                AppObject.Logger.Info("もしかして：" + lr.ToString());
+        private void ShowToken(string keyword) {
+            var retList = new List<string>();
+            var sr = new java.io.StringReader(keyword);
+            var stream = AppObject.AppAnalyzer.TokenStream(" ", sr);
+
+            try {
+                java.lang.Class ct = java.lang.Class.forName(typeof(CharTermAttribute).AssemblyQualifiedName);
+                var charTerm = stream.AddAttribute(ct);
+
+                //java.lang.Class ta = java.lang.Class.forName(typeof(TypeAttribute).AssemblyQualifiedName);
+                //var t = stream.AddAttribute(ta);
+
+                //java.lang.Class oa = java.lang.Class.forName(typeof(OffsetAttribute).AssemblyQualifiedName);
+                //var o = stream.AddAttribute(oa);
+
+                stream.Reset();
+                while (stream.IncrementToken()) {
+                    //AppObject.Logger.Info(charTerm.ToString());
+                    //AppObject.Logger.Info(t.ToString());
+                    //AppObject.Logger.Info(o.ToString());
+                    retList.Add(charTerm.ToString());
+                }
+            } finally {
+                stream.Close();
             }
+
+            AppObject.Frame.SetMorpheme(retList.ToArray());
         }
     }
 }
