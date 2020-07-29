@@ -49,6 +49,16 @@ namespace PokudaSearch.Controls {
         }
         #endregion Constractors
 
+        public void FindNext() {
+            _chromeBrowser.Find(identifier: 1, searchText: "稟議", forward: true, matchCase: false, findNext: true);
+        }
+        public void FindPrevious() {
+            _chromeBrowser.Find(identifier: 1, searchText: "稟議", forward: false, matchCase: false, findNext: true);
+        }
+        public void StopFinding() {
+            _chromeBrowser.StopFinding(true);
+        }
+
         public void ResetCompletionSource() {
             _completionSource = null;
         }

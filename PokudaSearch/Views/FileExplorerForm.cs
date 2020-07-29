@@ -113,6 +113,8 @@ namespace PokudaSearch.Views {
         private void ChangePath(ExplorerBrowser eb, ToolStripComboBox tcb) {
             try {
                 eb.Navigate(ShellFileSystemFolder.FromFolderPath(tcb.Text));
+            } catch (DirectoryNotFoundException) {
+                //スルーする
             } catch (COMException) {
                 MessageBox.Show(AppObject.GetMsg(AppObject.Msg.ERR_INVALID_PATH), 
                     AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);

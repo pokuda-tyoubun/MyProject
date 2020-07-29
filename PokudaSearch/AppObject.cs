@@ -224,6 +224,8 @@ namespace PokudaSearch {
             ERR_UNLINKED_INDEX,
             [EnumLabel("ライセンスキーを認証できませんでした。\nライセンスキーをご確認のうえ、再度入力してください。")]
             ERR_LICENSE_CANNOT_VERIFIED,
+            [EnumLabel("バージョン 1.1.0.0 以上で作成された外部インデックスを指定して下さい。")]
+            ERR_DIFFERENT_VERSION,
         }
         #endregion Message
 

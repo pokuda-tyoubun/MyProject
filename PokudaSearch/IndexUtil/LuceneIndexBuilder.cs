@@ -811,6 +811,23 @@ namespace PokudaSearch.IndexUtil {
                 //Markdown形式
                 string content = ReadToString(path);
                 doc.Add(new Field(Content, content, _hilightFieldType));
+            } else if (extension.ToLower() == ".txt") {
+                //TXTファイル
+                var sjis = Encoding.GetEncoding("Shift_JIS");
+                if (FileUtil.GetTextEncoding(path) == sjis) {
+                    string content = "";
+                    using (var reader = new StreamReader(path, sjis)) {
+                        content = reader.ReadToEnd();
+                    }
+                    doc.Add(new Field(Content, content, _hilightFieldType));
+                } else {
+                    if (_txtExtractMode == TextExtractModes.Tika) {
+                        var content = _txtExtractor.Extract(path);
+                        doc.Add(new Field(Content, content.Text, _hilightFieldType));
+                    } else {
+                        doc.Add(new Field(Content, IFilterParser.Parse(path), _hilightFieldType));
+                    }
+                }
             } else {
                 if (_txtExtractMode == TextExtractModes.Tika) {
                     var content = _txtExtractor.Extract(path);

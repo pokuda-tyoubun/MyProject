@@ -751,6 +751,9 @@ namespace PokudaSearch.Views {
             DeleteActiveIndex(path);
             LoadActiveIndex(AppObject.ConnectString, this.ActiveIndexGrid);
             LoadActiveIndex(AppObject.ConnectString, SearchForm.TargetIndexGridControl, appendCheckBox:true);
+
+            MainFrameForm.SearchForm.CheckedLocalIndex(Properties.Settings.Default.LocalIndexChecked);
+            MainFrameForm.SearchForm.CheckedOuterIndex(Properties.Settings.Default.OuterIndexChecked);
         }
 
         /// <summary>
@@ -826,6 +829,13 @@ namespace PokudaSearch.Views {
                     AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            //バージョン番号の確認(1.0.0.0だけ互換なし)
+            FileVersionInfo remoteVer = FileVersionInfo.GetVersionInfo(new DirectoryInfo(dbPath).Parent.Parent.FullName + @"\PokudaSearch.exe");
+            if (remoteVer.FileVersion == "1.0.0.0") {
+                MessageBox.Show(AppObject.GetMsg(AppObject.Msg.ERR_DIFFERENT_VERSION),
+                    AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             var dbFile = new FileInfo(dbPath);
             var oif = new OuterIndexForm(dbFile);
@@ -861,6 +871,9 @@ namespace PokudaSearch.Views {
                 UpdateActiveIndex(param);
                 LoadActiveIndex(AppObject.ConnectString, this.ActiveIndexGrid);
                 LoadActiveIndex(AppObject.ConnectString, SearchForm.TargetIndexGridControl, appendCheckBox:true);
+
+                MainFrameForm.SearchForm.CheckedLocalIndex(Properties.Settings.Default.LocalIndexChecked);
+                MainFrameForm.SearchForm.CheckedOuterIndex(Properties.Settings.Default.OuterIndexChecked);
             } finally {
                 oif.Dispose();
             }
@@ -937,6 +950,9 @@ namespace PokudaSearch.Views {
                 UpdateActiveIndex(param, orgLocalPath);
                 LoadActiveIndex(AppObject.ConnectString, this.ActiveIndexGrid);
                 LoadActiveIndex(AppObject.ConnectString, SearchForm.TargetIndexGridControl, appendCheckBox:true);
+
+                MainFrameForm.SearchForm.CheckedLocalIndex(Properties.Settings.Default.LocalIndexChecked);
+                MainFrameForm.SearchForm.CheckedOuterIndex(Properties.Settings.Default.OuterIndexChecked);
             } finally {
                 ipf.Dispose();
             }

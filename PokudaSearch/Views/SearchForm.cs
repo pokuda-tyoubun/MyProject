@@ -549,21 +549,18 @@ namespace PokudaSearch.Views {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SearchForm_KeyDown(object sender, KeyEventArgs e) {
-            if (e.KeyCode == Keys.F && e.Control == true) {
+            if (e.KeyCode == Keys.F && e.Control == true && e.Alt == false && e.Shift == false) {
+                this.KeywordText.Focus();
+                //グリッドにフォーカスが当たっている場合、2回呼び出す必要がある。
                 this.KeywordText.Focus();
                 e.SuppressKeyPress = true;
                 return;
             }
-            if (e.KeyCode == Keys.F && e.Control == true) {
-                this.SearchGridText.Focus();
-                e.SuppressKeyPress = true;
-                return;
-            }
-            if (e.KeyCode == Keys.P && e.Control == true && e.Shift == true) {
+            if (e.KeyCode == Keys.P && e.Control == true && e.Alt == false  && e.Shift == true) {
                 this.ExpandPreviewCheck.Checked = !this.ExpandPreviewCheck.Checked;
                 return;
             }
-            if (e.KeyCode == Keys.P && e.Control == true) {
+            if (e.KeyCode == Keys.P && e.Control == true && e.Alt == false && e.Shift == false) {
                 this.PreviewCheck.Checked = !this.PreviewCheck.Checked;
                 return;
             }
@@ -631,6 +628,16 @@ namespace PokudaSearch.Views {
             this.TargetIndexGrid.CopyEx();
         }
         private void ListViewButton_Click(object sender, EventArgs e) {
+            //
+            this.BrowserPanel.FindNext();
+            System.Threading.Thread.Sleep(3000);
+            this.BrowserPanel.FindNext();
+            System.Threading.Thread.Sleep(3000);
+            this.BrowserPanel.FindNext();
+            System.Threading.Thread.Sleep(3000);
+            this.BrowserPanel.FindPrevious();
+            System.Threading.Thread.Sleep(3000);
+            this.BrowserPanel.StopFinding();
         }
 
         private void TileViewButton_Click(object sender, EventArgs e) {
