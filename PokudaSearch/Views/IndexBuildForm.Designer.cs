@@ -40,6 +40,7 @@
             this.Log4NetTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.WebClawringButton = new System.Windows.Forms.Button();
             this.AddOuterIndexButton = new System.Windows.Forms.Button();
             this.StopButton = new System.Windows.Forms.Button();
             this.TargetDirText = new FxCommonLib.Controls.FilePathTextBox(this.components);
@@ -56,7 +57,6 @@
             this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
             this.HistoryPanel = new System.Windows.Forms.Panel();
             this.collapsibleSplitter1 = new NJFLib.Controls.CollapsibleSplitter();
-            this.WebClawringButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.IndexHistoryContext.SuspendLayout();
             this.BottomPanel.SuspendLayout();
@@ -229,6 +229,16 @@
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(929, 270);
             this.MainPanel.TabIndex = 0;
+            // 
+            // WebClawringButton
+            // 
+            this.WebClawringButton.Location = new System.Drawing.Point(815, 6);
+            this.WebClawringButton.Name = "WebClawringButton";
+            this.WebClawringButton.Size = new System.Drawing.Size(102, 22);
+            this.WebClawringButton.TabIndex = 10;
+            this.WebClawringButton.Text = "Webインデックス";
+            this.WebClawringButton.UseVisualStyleBackColor = true;
+            this.WebClawringButton.Click += new System.EventHandler(this.WebClawringButton_Click);
             // 
             // AddOuterIndexButton
             // 
@@ -416,16 +426,6 @@
             this.collapsibleSplitter1.UseAnimations = false;
             this.collapsibleSplitter1.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
             // 
-            // WebClawringButton
-            // 
-            this.WebClawringButton.Location = new System.Drawing.Point(815, 6);
-            this.WebClawringButton.Name = "WebClawringButton";
-            this.WebClawringButton.Size = new System.Drawing.Size(102, 22);
-            this.WebClawringButton.TabIndex = 10;
-            this.WebClawringButton.Text = "Webインデックス";
-            this.WebClawringButton.UseVisualStyleBackColor = true;
-            this.WebClawringButton.Click += new System.EventHandler(this.WebClawringButton_Click);
-            // 
             // IndexBuildForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -442,6 +442,7 @@
             this.Text = "インデックス作成";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.IndexBuildForm_FormClosed);
             this.Load += new System.EventHandler(this.IndexBuildForm_Load);
+            this.Shown += new System.EventHandler(this.IndexBuildForm_Shown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.IndexHistoryContext.ResumeLayout(false);

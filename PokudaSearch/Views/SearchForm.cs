@@ -28,6 +28,7 @@ using java.nio.file;
 using Microsoft.WindowsAPICodePack.Shell;
 using PokudaSearch.IndexUtil;
 using PokudaSearch.WebDriver;
+using PokudaSearch.Win32API;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -306,7 +307,7 @@ namespace PokudaSearch.Views {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SearchForm_FormClosed(object sender, FormClosedEventArgs e) {
-            Cef.Shutdown();
+            this.BrowserPanel.CefShutdown();
             MainFrameForm.SearchForm = null;
         }
         /// <summary>
@@ -446,10 +447,13 @@ namespace PokudaSearch.Views {
                 if (extension.ToLower() == ".pdf") {
                     //そのままブラウザに表示
                 } else if (extension.ToLower() == ".xlsx" ||
+                           extension.ToLower() == ".xlsm" ||
+                           extension.ToLower() == ".xlsb" ||
                            extension.ToLower() == ".xls") {
                     string tmpPath = SaveXlsToHTML(fullPath);
                     fullPath = tmpPath;
-                } else if (extension.ToLower() == ".pptx") {
+                } else if (extension.ToLower() == ".pptx" ||
+                           extension.ToLower() == ".pptm") {
                     string tmpPath = SavePptToPDF(fullPath, over2007: true);
                     fullPath = tmpPath;
                 } else if (extension.ToLower() == ".ppt") {
@@ -511,12 +515,34 @@ namespace PokudaSearch.Views {
         /// <param name="e"></param>
         private void PreviewCheck_CheckedChanged(object sender, EventArgs e) {
             if (this.PreviewCheck.Checked) {
+                this.ExpandPreviewCheck.Checked = false;
+            }
+            SetPriviewWidth();
+        }
+        private void ExpandPreviewCheck_CheckedChanged(object sender, EventArgs e) {
+            if (this.ExpandPreviewCheck.Checked) {
+                this.PreviewCheck.Checked = false;
+            }
+            SetPriviewWidth();
+        }
+        private void SetPriviewWidth() {
+            if (this.PreviewCheck.Checked) {
+                this.PreviewPanel.Width = 420;
+                this.BrowserPreviewPanel.Height = (int)(this.Height * 0.8);
                 if (this.PreviewSplitter.IsCollapsed) {
                     this.PreviewSplitter.PerformClick();
                 }
             } else {
-                if (!this.PreviewSplitter.IsCollapsed) {
-                    this.PreviewSplitter.PerformClick();
+                if (this.ExpandPreviewCheck.Checked) {
+                    this.PreviewPanel.Width = (int)(this.Width * 0.9);
+                    this.BrowserPreviewPanel.Height = (int)(this.Height * 0.8);
+                    if (this.PreviewSplitter.IsCollapsed) {
+                        this.PreviewSplitter.PerformClick();
+                    }
+                } else {
+                    if (!this.PreviewSplitter.IsCollapsed) {
+                        this.PreviewSplitter.PerformClick();
+                    }
                 }
             }
         }
@@ -700,15 +726,6 @@ namespace PokudaSearch.Views {
             }
         }
 
-        private void ExpandPreviewCheck_CheckedChanged(object sender, EventArgs e) {
-            if (this.ExpandPreviewCheck.Checked) {
-                this.PreviewPanel.Width = (int)(this.Width * 0.9);
-                this.BrowserPreviewPanel.Height = (int)(this.Height * 0.8);
-            } else {
-                this.PreviewPanel.Width = 420;
-                this.BrowserPreviewPanel.Height = (int)(this.Height * 0.8);
-            }
-        }
 
         private void SelectLocalIndexButton_Click(object sender, EventArgs e) {
             foreach (Row r in this.TargetIndexGrid.Rows) {
@@ -787,6 +804,8 @@ namespace PokudaSearch.Views {
             this.ResultGrid.Cols[(int)ColIndex.DocId].Width = 40;
             this.ResultGrid[0, (int)ColIndex.Hilight] = EnumUtil.GetLabel(ColIndex.Hilight);
             this.ResultGrid.Cols[(int)ColIndex.Hilight].Width = 600;
+
+            this.ResultGrid.Cols.Frozen = (int)ColIndex.FileName;
         }
 
         /// <summary>
@@ -1096,6 +1115,8 @@ namespace PokudaSearch.Views {
                         if (extension.ToLower() == ".pdf") {
                             //そのままブラウザに表示
                         } else if (extension.ToLower() == ".xlsx" ||
+                                   extension.ToLower() == ".xlsm" ||
+                                   extension.ToLower() == ".xlsb" ||
                                    extension.ToLower() == ".xls") {
 
                             this.PreviewWarnLabel.Visible = true;
@@ -1106,8 +1127,8 @@ namespace PokudaSearch.Views {
                             this.RichTextBox.Text = LuceneIndexBuilder.ReadToString(fullPath);
                             this.CefSharpPanel.Visible = false;
                             return;
-                        } else if (extension.ToLower() == ".pptx") {
-
+                        } else if (extension.ToLower() == ".pptx" ||
+                                   extension.ToLower() == ".pptm") {
                             this.PreviewWarnLabel.Visible = true;
                             this.ShowPreviewButton.Visible = true;
                             string tmpPath = SaveToThumbnailBitmap(fullPath);
@@ -1572,6 +1593,18 @@ namespace PokudaSearch.Views {
             }
 
             AppObject.Frame.SetMorpheme(retList.ToArray());
+        }
+
+        /// <summary>
+        /// ファイルのプロパティダイアログを表示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowPropertiesMenu_Click(object sender, EventArgs e) {
+            string path = StringUtil.NullToBlank(this.ResultGrid[this.ResultGrid.Selection.TopRow, (int)ColIndex.FullPath]);
+            if (File.Exists(path)) {
+                Shell32.SHObjectProperties(IntPtr.Zero, (uint)Shell32.SHOP.SHOP_FILEPATH, path, string.Empty);
+            }
         }
     }
 }

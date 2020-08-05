@@ -390,6 +390,7 @@
     </Compile>
     <Compile Include="WebDriver\MP4WebDriver.cs" />
     <Compile Include="WebDriver\WebClawringDriver.cs" />
+    <Compile Include="Win32API\Shell32.cs" />
     <EmbeddedResource Include="Controls\CefSharpPanel.resx">
       <DependentUpon>CefSharpPanel.cs</DependentUpon>
     </EmbeddedResource>

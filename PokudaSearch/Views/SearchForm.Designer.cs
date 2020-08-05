@@ -25,15 +25,15 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchForm));
-            C1.Win.C1Tile.PanelElement panelElement4 = new C1.Win.C1Tile.PanelElement();
-            C1.Win.C1Tile.ImageElement imageElement3 = new C1.Win.C1Tile.ImageElement();
-            C1.Win.C1Tile.TextElement textElement5 = new C1.Win.C1Tile.TextElement();
-            C1.Win.C1Tile.TextElement textElement6 = new C1.Win.C1Tile.TextElement();
-            C1.Win.C1Tile.ImageElement imageElement4 = new C1.Win.C1Tile.ImageElement();
-            C1.Win.C1Tile.PanelElement panelElement5 = new C1.Win.C1Tile.PanelElement();
-            C1.Win.C1Tile.TextElement textElement7 = new C1.Win.C1Tile.TextElement();
-            C1.Win.C1Tile.PanelElement panelElement6 = new C1.Win.C1Tile.PanelElement();
-            C1.Win.C1Tile.TextElement textElement8 = new C1.Win.C1Tile.TextElement();
+            C1.Win.C1Tile.PanelElement panelElement1 = new C1.Win.C1Tile.PanelElement();
+            C1.Win.C1Tile.ImageElement imageElement1 = new C1.Win.C1Tile.ImageElement();
+            C1.Win.C1Tile.TextElement textElement1 = new C1.Win.C1Tile.TextElement();
+            C1.Win.C1Tile.TextElement textElement2 = new C1.Win.C1Tile.TextElement();
+            C1.Win.C1Tile.ImageElement imageElement2 = new C1.Win.C1Tile.ImageElement();
+            C1.Win.C1Tile.PanelElement panelElement2 = new C1.Win.C1Tile.PanelElement();
+            C1.Win.C1Tile.TextElement textElement3 = new C1.Win.C1Tile.TextElement();
+            C1.Win.C1Tile.PanelElement panelElement3 = new C1.Win.C1Tile.PanelElement();
+            C1.Win.C1Tile.TextElement textElement4 = new C1.Win.C1Tile.TextElement();
             this.label2 = new System.Windows.Forms.Label();
             this.KeywordText = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -104,6 +104,8 @@
             this.ExpandPreviewCheckToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.PreviewSplitter = new NJFLib.Controls.CollapsibleSplitter();
             this.collapsibleSplitter1 = new NJFLib.Controls.CollapsibleSplitter();
+            this.ShowPropertiesMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultNavi)).BeginInit();
@@ -385,47 +387,49 @@
             this.toolStripMenuItem2,
             this.CopyMenu,
             this.MoreLikeThisMenu,
-            this.DiffMenu});
+            this.DiffMenu,
+            this.toolStripSeparator7,
+            this.ShowPropertiesMenu});
             this.ResultContext.Name = "ResultContext";
-            this.ResultContext.Size = new System.Drawing.Size(176, 120);
+            this.ResultContext.Size = new System.Drawing.Size(181, 170);
             // 
             // OpenFileMenu
             // 
             this.OpenFileMenu.Name = "OpenFileMenu";
-            this.OpenFileMenu.Size = new System.Drawing.Size(175, 22);
+            this.OpenFileMenu.Size = new System.Drawing.Size(180, 22);
             this.OpenFileMenu.Text = "ファイルを開く(&O)";
             this.OpenFileMenu.Click += new System.EventHandler(this.OpenFileMenu_Click);
             // 
             // OpenParentMenu
             // 
             this.OpenParentMenu.Name = "OpenParentMenu";
-            this.OpenParentMenu.Size = new System.Drawing.Size(175, 22);
+            this.OpenParentMenu.Size = new System.Drawing.Size(180, 22);
             this.OpenParentMenu.Text = "親フォルダを開く(&P)";
             this.OpenParentMenu.Click += new System.EventHandler(this.OpenParentMenu_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(172, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
             // 
             // CopyMenu
             // 
             this.CopyMenu.Name = "CopyMenu";
-            this.CopyMenu.Size = new System.Drawing.Size(175, 22);
+            this.CopyMenu.Size = new System.Drawing.Size(180, 22);
             this.CopyMenu.Text = "コピー(&C) Ctrl+C";
             this.CopyMenu.Click += new System.EventHandler(this.CopyMenu_Click);
             // 
             // MoreLikeThisMenu
             // 
             this.MoreLikeThisMenu.Name = "MoreLikeThisMenu";
-            this.MoreLikeThisMenu.Size = new System.Drawing.Size(175, 22);
+            this.MoreLikeThisMenu.Size = new System.Drawing.Size(180, 22);
             this.MoreLikeThisMenu.Text = "類似文書を検索(&M)";
             this.MoreLikeThisMenu.Click += new System.EventHandler(this.MoreLikeThisMenu_Click);
             // 
             // DiffMenu
             // 
             this.DiffMenu.Name = "DiffMenu";
-            this.DiffMenu.Size = new System.Drawing.Size(175, 22);
+            this.DiffMenu.Size = new System.Drawing.Size(180, 22);
             this.DiffMenu.Text = "差分(&D)";
             this.DiffMenu.Click += new System.EventHandler(this.DiffMenu_Click);
             // 
@@ -544,13 +548,13 @@
             // 
             // 
             // 
-            panelElement4.Alignment = System.Drawing.ContentAlignment.BottomLeft;
-            panelElement4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            panelElement4.Children.Add(imageElement3);
-            panelElement4.Children.Add(textElement5);
-            panelElement4.Margin = new System.Windows.Forms.Padding(10, 6, 10, 6);
-            this.ResultTile.DefaultTemplate.Elements.Add(panelElement4);
-            this.ResultTile.DefaultTemplate.Elements.Add(textElement6);
+            panelElement1.Alignment = System.Drawing.ContentAlignment.BottomLeft;
+            panelElement1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            panelElement1.Children.Add(imageElement1);
+            panelElement1.Children.Add(textElement1);
+            panelElement1.Margin = new System.Windows.Forms.Padding(10, 6, 10, 6);
+            this.ResultTile.DefaultTemplate.Elements.Add(panelElement1);
+            this.ResultTile.DefaultTemplate.Elements.Add(textElement2);
             this.ResultTile.Groups.Add(this.group1);
             this.ResultTile.Location = new System.Drawing.Point(95, 360);
             this.ResultTile.Name = "ResultTile";
@@ -580,25 +584,25 @@
             // tempDoc
             // 
             this.tempDoc.Description = "テンプレート １";
-            panelElement5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            textElement7.BackColorSelector = C1.Win.C1Tile.BackColorSelector.Unbound;
-            textElement7.ForeColor = System.Drawing.Color.Black;
-            textElement7.ForeColorSelector = C1.Win.C1Tile.ForeColorSelector.Unbound;
-            textElement7.SingleLine = true;
-            panelElement5.Children.Add(textElement7);
-            panelElement5.Dock = System.Windows.Forms.DockStyle.Top;
-            panelElement5.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            panelElement6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            textElement8.BackColorSelector = C1.Win.C1Tile.BackColorSelector.Unbound;
-            textElement8.ForeColor = System.Drawing.Color.Black;
-            textElement8.ForeColorSelector = C1.Win.C1Tile.ForeColorSelector.Unbound;
-            textElement8.TextSelector = C1.Win.C1Tile.TextSelector.Text1;
-            panelElement6.Children.Add(textElement8);
-            panelElement6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            panelElement6.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.tempDoc.Elements.Add(imageElement4);
-            this.tempDoc.Elements.Add(panelElement5);
-            this.tempDoc.Elements.Add(panelElement6);
+            panelElement2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            textElement3.BackColorSelector = C1.Win.C1Tile.BackColorSelector.Unbound;
+            textElement3.ForeColor = System.Drawing.Color.Black;
+            textElement3.ForeColorSelector = C1.Win.C1Tile.ForeColorSelector.Unbound;
+            textElement3.SingleLine = true;
+            panelElement2.Children.Add(textElement3);
+            panelElement2.Dock = System.Windows.Forms.DockStyle.Top;
+            panelElement2.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            panelElement3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            textElement4.BackColorSelector = C1.Win.C1Tile.BackColorSelector.Unbound;
+            textElement4.ForeColor = System.Drawing.Color.Black;
+            textElement4.ForeColorSelector = C1.Win.C1Tile.ForeColorSelector.Unbound;
+            textElement4.TextSelector = C1.Win.C1Tile.TextSelector.Text1;
+            panelElement3.Children.Add(textElement4);
+            panelElement3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            panelElement3.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.tempDoc.Elements.Add(imageElement2);
+            this.tempDoc.Elements.Add(panelElement2);
+            this.tempDoc.Elements.Add(panelElement3);
             this.tempDoc.Name = "tempDoc";
             // 
             // tile2
@@ -903,6 +907,18 @@
             this.collapsibleSplitter1.UseAnimations = false;
             this.collapsibleSplitter1.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
             // 
+            // ShowPropertiesMenu
+            // 
+            this.ShowPropertiesMenu.Name = "ShowPropertiesMenu";
+            this.ShowPropertiesMenu.Size = new System.Drawing.Size(180, 22);
+            this.ShowPropertiesMenu.Text = "プロパティ(&R)";
+            this.ShowPropertiesMenu.Click += new System.EventHandler(this.ShowPropertiesMenu_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(177, 6);
+            // 
             // SearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1018,5 +1034,7 @@
         private System.Windows.Forms.ToolStripButton Suggest1Button;
         private System.Windows.Forms.ToolStripButton Suggest2Button;
         private System.Windows.Forms.ToolStripButton Suggest3Button;
+        private System.Windows.Forms.ToolStripMenuItem ShowPropertiesMenu;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
     }
 }

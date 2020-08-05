@@ -22,6 +22,8 @@ namespace PokudaSearch {
         public static FileExplorerForm FileExplorerForm;
         /// <summary>検索画面</summary>
         public static SearchForm SearchForm;
+        /// <summary>インデックス管理</summary>
+        public static IndexBuildForm IndexBuildForm;
 
         /// <summary>SandBox用</summary>
         public static TestForm TestForm;
@@ -40,7 +42,6 @@ namespace PokudaSearch {
             //ライセンス認証
 #if DEBUG
 # else
-            this.FileExplorerFormButton.Visible = false;
             this.TagGroup.Visible = false;
             this.AnalyzeGroup.Visible = false;
             this.SandBoxGroup.Visible = false;
@@ -120,8 +121,15 @@ namespace PokudaSearch {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void IndexBuildFormButton_Click(object sender, EventArgs e) {
-            var ibf = new IndexBuildForm();
-            ibf.ShowDialog();
+            //var ibf = new IndexBuildForm();
+            //ibf.ShowDialog();
+
+            if (IndexBuildForm == null) {
+                IndexBuildForm = new IndexBuildForm();
+                LoadForm(IndexBuildForm);
+            } else {
+                IndexBuildForm.Activate();
+            }
         }
 
         /// <summary>
@@ -129,11 +137,14 @@ namespace PokudaSearch {
         /// </summary>
         public void LoadForms() {
             try {
+                //NOTE:SearchFormをロードしておかないとSearchFormButtonクリック時に
+                //     NullReferenceExceptionが発生する。
                 //ファイル検索画面
-                //FileExplorerForm = new FileExplorerForm();
-                //LoadForm(FileExplorerForm);
                 SearchForm = new SearchForm();
                 LoadForm(SearchForm);
+                //ファイルエクスプローラー画面
+                FileExplorerForm = new FileExplorerForm();
+                LoadForm(FileExplorerForm);
             } finally {
             }
         }

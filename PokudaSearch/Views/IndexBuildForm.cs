@@ -15,6 +15,7 @@ using FxCommonLib.Controls;
 using FxCommonLib.Log4NetAppender;
 using log4net.Appender;
 using static PokudaSearch.IndexUtil.LuceneIndexBuilder;
+using FlexLucene.Store;
 
 namespace PokudaSearch.Views {
     public partial class IndexBuildForm : Form {
@@ -86,6 +87,11 @@ namespace PokudaSearch.Views {
         }
         #endregion Properties
 
+        #region MemberVariables
+        private string _targetDir = null;
+        private RAMDirectory _ram = null;
+        #endregion MemberVariables
+
         #region Constractors
         /// <summary>
         /// コンストラクタ
@@ -100,6 +106,11 @@ namespace PokudaSearch.Views {
 #else
             this.WebClawringButton.Visible = false;
 #endif
+
+        }
+        public IndexBuildForm(string targetDir, RAMDirectory ram) : this() {
+            _targetDir = targetDir;
+            _ram = ram;
         }
 
 #endregion Constractors
@@ -490,7 +501,7 @@ namespace PokudaSearch.Views {
                     var historyTbl = LoadHistory();
 
                     //t_active_indexの更新-----------------------
-                    if (LuceneIndexBuilder.TargetCount > 0) {
+                    if (LuceneIndexBuilder.TargetCount > 0 && LuceneIndexBuilder.CreateMode != CreateModes.OnDemand) {
                         var aiParam = new List<SQLiteParameter>();
                         var row = historyTbl.Rows[0];
                         string storePath = StringUtil.NullToBlank(LuceneIndexBuilder.IndexStorePath);
@@ -672,6 +683,35 @@ namespace PokudaSearch.Views {
                 AppObject.Frame.SetStatusMsg(AppObject.GetMsg(AppObject.Msg.ACT_END), false, sw);
             }
         }
+        private void CreateRAMIndex(string targetDir, RAMDirectory ram) {
+            LuceneIndexBuilder.TextExtractModes mode = LuceneIndexBuilder.TextExtractModes.Tika;
+            if (this.IFilterRadio.Checked) {
+                mode = LuceneIndexBuilder.TextExtractModes.IFilter;
+            }
+
+            this.CreateIndexButton.Enabled = false;
+            this.AddOuterIndexButton.Enabled = false;
+            this.UpdateIndexButton.Enabled = false;
+            this.StopButton.Enabled = true;
+
+            Stopwatch sw = new Stopwatch();
+            AppObject.Frame.SetStatusMsg(AppObject.GetMsg(AppObject.Msg.ACT_PROCESSING), true, sw);
+            try {
+                this.ProgressBar.Style = ProgressBarStyle.Marquee;
+                this.LogViewerText.Text = "対象ファイルカウント中...";
+                var progress = new Progress<ProgressReport>(SetProgressValue);
+
+                LuceneIndexBuilder.ReservedNo = GetReservedNo();
+                LuceneIndexBuilder.CreateRAMIndexBySingleThread(
+                    targetDir,
+                    progress,
+                    mode,
+                    ram);
+
+            } finally {
+                AppObject.Frame.SetStatusMsg(AppObject.GetMsg(AppObject.Msg.ACT_END), false, sw);
+            }
+        }
         private void CreateWebIndex(string targetUrl, Dictionary<string, WebContents> targetDic) {
             LuceneIndexBuilder.TextExtractModes mode = LuceneIndexBuilder.TextExtractModes.Tika;
             if (this.IFilterRadio.Checked) {
@@ -743,7 +783,7 @@ namespace PokudaSearch.Views {
             string createMode = StringUtil.NullToBlank(this.ActiveIndexGrid[this.ActiveIndexGrid.Selection.TopRow, (int)ActiveIndexColIdx.CreateMode + 1]);
             if (createMode != EnumUtil.GetLabel(LuceneIndexBuilder.CreateModes.OuterReference)) {
                 //インデックスディレクトリを物理的に削除
-                if (Directory.Exists(indexedPath)) {
+                if (System.IO.Directory.Exists(indexedPath)) {
                     FileUtil.DeleteDirectory(new DirectoryInfo(indexedPath));
                 }
             }
@@ -818,7 +858,7 @@ namespace PokudaSearch.Views {
 
             string dbPath = this.TargetDirText.Text;
             dbPath = StringUtil.RemoveLastChar(dbPath, '\\');
-            if (!Directory.Exists(dbPath)) {
+            if (!System.IO.Directory.Exists(dbPath)) {
                 MessageBox.Show(AppObject.GetMsg(AppObject.Msg.ERR_DIR_NOT_FOUND), 
                     AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -976,6 +1016,13 @@ namespace PokudaSearch.Views {
             wbf.Dispose();
 
             CreateWebIndex(targetUrl, targetDic);
+        }
+
+        private void IndexBuildForm_Shown(object sender, EventArgs e) {
+            if (_targetDir != null) {
+                //オンデマンドインデックスを作成
+                CreateRAMIndex(_targetDir, _ram);
+            }
         }
     }
 }

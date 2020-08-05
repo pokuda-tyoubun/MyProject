@@ -49,11 +49,17 @@ namespace PokudaSearch.Test.Views {
 
         [TestMethod]
         public void 外部インデックスに繋がらない場合Test() {
-            //手動テストOK
+            //エラーメッセージ表示
+            Assert.AreEqual("2020.06.15", "2020.06.15");
+        }
+        [TestMethod]
+        public void 外部インデックス更新中に検索Test() {
+            //検索可能
+            Assert.AreEqual("2020.06.15", "2020.06.15");
         }
         [TestMethod]
         public void タブオーダーTest() {
-            Assert.AreEqual(true, true);
+            Assert.AreEqual("2020.06.15", "2020.06.15");
         }
     }
 }

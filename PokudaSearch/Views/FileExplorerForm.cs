@@ -1,11 +1,14 @@
-﻿using FxCommonLib.Consts;
+﻿using FlexLucene.Store;
+using FxCommonLib.Consts;
 using Microsoft.WindowsAPICodePack.Controls;
 using Microsoft.WindowsAPICodePack.Controls.WindowsForms;
 using Microsoft.WindowsAPICodePack.Shell;
+using PokudaSearch.IndexUtil;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -75,7 +78,7 @@ namespace PokudaSearch.Views {
             }
             if ((e.Modifiers & Keys.Alt) == Keys.Alt && e.KeyCode == Keys.Up) {
                 string path = this.MainExplorer.NavigationLog.CurrentLocation.ParsingName;
-                var parent = Directory.GetParent(path);
+                var parent = System.IO.Directory.GetParent(path);
                 this.MainExplorer.Navigate(ShellObject.FromParsingName(parent.FullName));
                 return;
             }
@@ -129,6 +132,51 @@ namespace PokudaSearch.Views {
 
         private void FileExplorerForm_FormClosed(object sender, FormClosedEventArgs e) {
             MainFrameForm.FileExplorerForm = null;
+        }
+
+        private void ForwardButton_Click(object sender, EventArgs e) {
+            this.MainExplorer.NavigateLogLocation(NavigationLogDirection.Forward);
+        }
+
+        private void BackwardSubButton_Click(object sender, EventArgs e) {
+            this.SubExplorer.NavigateLogLocation(NavigationLogDirection.Backward);
+        }
+
+        private void ForwardSubButton_Click(object sender, EventArgs e) {
+            this.SubExplorer.NavigateLogLocation(NavigationLogDirection.Forward);
+        }
+
+        private void MainToolStrip_SizeChanged(object sender, EventArgs e) {
+            this.MainPathCombo.Width = (int)Math.Floor(this.MainToolStrip.Width * 0.9);
+        }
+
+        private void MainExplorer_HelpRequested(object sender, HelpEventArgs hlpevent) {
+            Process.Start(Properties.Settings.Default.HelpUrl);
+        }
+
+        private void SubExplorer_HelpRequested(object sender, HelpEventArgs hlpevent) {
+            Process.Start(Properties.Settings.Default.HelpUrl);
+        }
+
+        private void OnDemandSearchButton_Click(object sender, EventArgs e) {
+            if (this.MainExplorer.SelectedItems.Count > 0) {
+                string path = this.MainExplorer.SelectedItems[0].GetDisplayName(DisplayNameType.FileSystemPath);
+                if (System.IO.Directory.Exists(path)) {
+                    var ram = new RAMDirectory();
+                    //オンデマンドインデックス作成
+                    var ibf = new IndexBuildForm(path, ram);
+                    ibf.ShowDialog();
+
+                    //オンデマンド検索
+
+                    ram = null;
+                    GC.Collect();
+                }
+            }
+        }
+
+        private void CreateIndexButton_Click(object sender, EventArgs e) {
+
         }
     }
 }
