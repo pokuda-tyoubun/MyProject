@@ -49,9 +49,7 @@ namespace PokudaSearch.IndexUtil {
             [EnumLabel("更新")]
             Update,
             [EnumLabel("外部参照")]
-            OuterReference,
-            [EnumLabel("即時検索")]
-            OnDemand
+            OuterReference
         }
         #region IndexField
         public const string Path = "Path";
@@ -71,8 +69,6 @@ namespace PokudaSearch.IndexUtil {
         public const string BuildDirName = @"\Build";
         /// <summary>マルチスレッド化にするファイル数の閾値</summary>
         private const int SplitBorder = 1;
-        /// <summary>オンデマンド検索のファイル数上限</summary>
-        private const int OnDemandMaxFileCount = 1000;
         #endregion Constants
 
         #region Properties
@@ -201,24 +197,6 @@ namespace PokudaSearch.IndexUtil {
             } finally {
             }
         }
-        public async static void CreateRAMIndexBySingleThread(
-            string targetDir,
-            IProgress<ProgressReport> progress,
-            TextExtractModes txtExtractMode,
-            RAMDirectory ram) {
-
-            DoStop = false;
-            try {
-                _txtExtractMode = txtExtractMode;
-
-                var worker = await CreateRAMIndexAsync(targetDir, progress, ram);
-
-                AppObject.Logger.Info("インデックス構築完了");
-            } catch (Exception e) {
-                AppObject.Logger.Error(e.StackTrace);
-            } finally {
-            }
-        }
         public async static void CreateWebIndexBySingleThread(
             string rootPath,
             string targetUrl,
@@ -279,12 +257,6 @@ namespace PokudaSearch.IndexUtil {
             IProgress<ProgressReport> progress,
             string orgIndexStorePath) {
             return Task.Run<LuceneIndexBuilder>(() => CreateSingle(rootPath, targetDir, progress, orgIndexStorePath));
-        }
-        private static Task<LuceneIndexBuilder> CreateRAMIndexAsync(
-            string targetDir,
-            IProgress<ProgressReport> progress,
-            RAMDirectory ram) {
-            return Task.Run<LuceneIndexBuilder>(() => CreateOnDemandIndex(targetDir, progress, ram));
         }
         /// <summary>
         /// Webインデックス作成
@@ -359,38 +331,6 @@ namespace PokudaSearch.IndexUtil {
             fieldType.SetStoreTermVectors(true);
             fieldType.SetStoreTermVectorPositions(true);
             fieldType.SetStoreTermVectorOffsets(true);
-        }
-
-        private static LuceneIndexBuilder CreateOnDemandIndex(
-            string targetDir,
-            IProgress<ProgressReport> progress,
-            RAMDirectory ram) {
-
-            //カウントを初期化
-            _targetCount = 0;
-            _indexedCount = 0;
-            _skippedCount = 0;
-            _totalBytes = 0;
-
-            var targetFileList = FileUtil.GetAllFileInfo(targetDir);
-            _targetCount = targetFileList.Count;
-            _indexedPath = targetDir;
-            _indexStorePath = "NONE";
-            if (_targetCount > OnDemandMaxFileCount) {
-                return null;
-            }
-            _createMode = CreateModes.OnDemand;
-
-            var instance = new LuceneIndexBuilder();
-            var options = new ParallelOptions() { MaxDegreeOfParallelism = 1 };
-            Parallel.Invoke(options,
-                () => instance.CreateRAMIndex(
-                    targetFileList,
-                    progress,
-                    "IndexingThread1",
-                    ram));
-
-            return instance;
         }
 
         /// <summary>
@@ -731,100 +671,6 @@ namespace PokudaSearch.IndexUtil {
                     Status = ProgressReport.ProgressStatus.Finished
                 });
                 indexBuildDir.Close();
-            }
-        }
-        internal void CreateRAMIndex(
-            List<FileInfo> targetFileList,
-            IProgress<ProgressReport> progress,
-            string threadName,
-            RAMDirectory ram) {
-
-            IndexWriterConfig config = new IndexWriterConfig(AppObject.AppAnalyzer);
-            IndexWriter indexWriter = null;
-
-            try {
-                int bufferSize = Properties.Settings.Default.BufferSizeLimit;
-                config.SetRAMBufferSizeMB(bufferSize); //オンデマンド時は、512MB
-                indexWriter = new IndexWriter(ram, config);
-
-                //開始時刻を記録
-                _startTime = DateTime.Now;
-                _indexedCount = 0;
-                _skippedCount = 0;
-                progress.Report(new ProgressReport() {
-                    Percent = 0,
-                    ProgressCount = FinishedCount,
-                    TargetCount = _targetCount,
-                    Status = ProgressReport.ProgressStatus.Start
-                });
-                //NOTE すぐにログ出力すると、フリーズ現象が発生する。
-                Thread.Sleep(1000);
-                AppObject.Logger.Info(threadName + "Indexing start.");
-                foreach (FileInfo fi in targetFileList) {
-                    Thread.Sleep(10);
-                    if (DoStop) {
-                        //中断
-                        AppObject.Logger.Info("Stop command executed.");
-                        indexWriter.Rollback();
-                        return;
-                    }
-                    //Officeのテンポラリファイルは無視。
-                    if (fi.Name.StartsWith("~")) {
-                        continue;
-                    }
-
-                    try {
-                        if (AddDocument(fi.FullName, indexWriter, threadName, docDic:null)) {
-                            //インデックス作成ファイル表示
-                            AppObject.Logger.Info(threadName + ":" + fi.FullName);
-                            Interlocked.Increment(ref _indexedCount);
-                            Interlocked.Exchange(ref _totalBytes, _totalBytes + fi.Length);
-                        } 
-                    } catch (IOException ioe) {
-                        AppObject.Logger.Error(ioe.StackTrace);
-                        Interlocked.Increment(ref _skippedCount);
-                        AppObject.Logger.Info(threadName + ":" + "Skipped: " + fi.FullName);
-                        GC.Collect();
-                    } catch (Exception e) {
-                        //インデックスが作成できなかったファイルを表示
-                        AppObject.Logger.Warn(e.Message);
-                        Interlocked.Increment(ref _skippedCount);
-                        AppObject.Logger.Info(threadName + ":" + "Skipped: " + fi.FullName);
-                        GC.Collect();
-                        if (e.Message.IndexOf("IndexWriter is closed") >= 0) {
-                            AppObject.Logger.Warn(e.GetBaseException().ToString());
-                            throw new AlreadyClosedException("Index file capacity over. Please divide index directory.");
-                        }
-                    }
-                    //進捗度更新を呼び出し。
-                    progress.Report(new ProgressReport() {
-                        Percent = GetPercentage(),
-                        ProgressCount = FinishedCount,
-                        TargetCount = _targetCount,
-                        Status = ProgressReport.ProgressStatus.Processing
-                    });
-                }
-                indexWriter.Commit();
-                AppObject.Logger.Info(threadName + "：完了");
-            } catch (Exception e) {
-                AppObject.Logger.Error(e.Message);
-                if (indexWriter != null) {
-                    indexWriter.Rollback();
-                }
-                throw e;
-            } finally {
-                if (indexWriter != null && indexWriter.IsOpen()) {
-                    //クローズ時にIndexファイルがフラッシュされる
-                    indexWriter.Close();
-                }
-                //完了時刻を記録
-                _endTime = DateTime.Now;
-                progress.Report(new ProgressReport() {
-                    Percent = GetPercentage(),
-                    ProgressCount = FinishedCount,
-                    TargetCount = _targetCount,
-                    Status = ProgressReport.ProgressStatus.Finished
-                });
             }
         }
         /// <summary>

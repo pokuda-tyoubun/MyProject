@@ -85,11 +85,13 @@ namespace PokudaSearch.Views {
         public DataTable ActiveIndex {
             get { return _activeIndex; }
         }
+        public bool DoStop { 
+            get { return LuceneIndexBuilder.DoStop; }
+        }
         #endregion Properties
 
         #region MemberVariables
         private string _targetDir = null;
-        private RAMDirectory _ram = null;
         #endregion MemberVariables
 
         #region Constractors
@@ -108,9 +110,8 @@ namespace PokudaSearch.Views {
 #endif
 
         }
-        public IndexBuildForm(string targetDir, RAMDirectory ram) : this() {
+        public IndexBuildForm(string targetDir) : this() {
             _targetDir = targetDir;
-            _ram = ram;
         }
 
 #endregion Constractors
@@ -501,7 +502,7 @@ namespace PokudaSearch.Views {
                     var historyTbl = LoadHistory();
 
                     //t_active_indexの更新-----------------------
-                    if (LuceneIndexBuilder.TargetCount > 0 && LuceneIndexBuilder.CreateMode != CreateModes.OnDemand) {
+                    if (LuceneIndexBuilder.TargetCount > 0) {
                         var aiParam = new List<SQLiteParameter>();
                         var row = historyTbl.Rows[0];
                         string storePath = StringUtil.NullToBlank(LuceneIndexBuilder.IndexStorePath);
@@ -683,35 +684,6 @@ namespace PokudaSearch.Views {
                 AppObject.Frame.SetStatusMsg(AppObject.GetMsg(AppObject.Msg.ACT_END), false, sw);
             }
         }
-        private void CreateRAMIndex(string targetDir, RAMDirectory ram) {
-            LuceneIndexBuilder.TextExtractModes mode = LuceneIndexBuilder.TextExtractModes.Tika;
-            if (this.IFilterRadio.Checked) {
-                mode = LuceneIndexBuilder.TextExtractModes.IFilter;
-            }
-
-            this.CreateIndexButton.Enabled = false;
-            this.AddOuterIndexButton.Enabled = false;
-            this.UpdateIndexButton.Enabled = false;
-            this.StopButton.Enabled = true;
-
-            Stopwatch sw = new Stopwatch();
-            AppObject.Frame.SetStatusMsg(AppObject.GetMsg(AppObject.Msg.ACT_PROCESSING), true, sw);
-            try {
-                this.ProgressBar.Style = ProgressBarStyle.Marquee;
-                this.LogViewerText.Text = "対象ファイルカウント中...";
-                var progress = new Progress<ProgressReport>(SetProgressValue);
-
-                LuceneIndexBuilder.ReservedNo = GetReservedNo();
-                LuceneIndexBuilder.CreateRAMIndexBySingleThread(
-                    targetDir,
-                    progress,
-                    mode,
-                    ram);
-
-            } finally {
-                AppObject.Frame.SetStatusMsg(AppObject.GetMsg(AppObject.Msg.ACT_END), false, sw);
-            }
-        }
         private void CreateWebIndex(string targetUrl, Dictionary<string, WebContents> targetDic) {
             LuceneIndexBuilder.TextExtractModes mode = LuceneIndexBuilder.TextExtractModes.Tika;
             if (this.IFilterRadio.Checked) {
@@ -830,7 +802,7 @@ namespace PokudaSearch.Views {
 
         private void StopButton_Click(object sender, EventArgs e) {
             var result = MessageBox.Show(AppObject.GetMsg(AppObject.Msg.MSG_DO_STOP), 
-                AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                AppObject.GetMsg(AppObject.Msg.TITLE_QUESTION), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes) {
                 LuceneIndexBuilder.DoStop = true;
                 TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
@@ -1004,7 +976,7 @@ namespace PokudaSearch.Views {
             //string targetUrl = "http://078134995:Ais5vs2004@192.168.13.67/docs/html/kitei/3-2%20%E8%BE%9E%E4%BB%A4%E8%A6%8F%E7%A8%8B/3-2jirei.htm";
             //string targetUrl = "https://pokuda-tyoubun.blogspot.com/";
             string targetUrl = "http://dobon.net";
-            var browserPanel = MainFrameForm.SearchForm.BrowserPanel;
+            var browserPanel = AppObject.CefSharpPanel;
             MainFrameForm.SearchForm.Controls.Remove(browserPanel);
             WebBrowserForm wbf = new WebBrowserForm(targetUrl, browserPanel, this);
             wbf.ShowDialog();
@@ -1019,9 +991,9 @@ namespace PokudaSearch.Views {
         }
 
         private void IndexBuildForm_Shown(object sender, EventArgs e) {
-            if (_targetDir != null) {
-                //オンデマンドインデックスを作成
-                CreateRAMIndex(_targetDir, _ram);
+            if (StringUtil.NullToBlank(_targetDir) != "") {
+                this.TargetDirText.Text = _targetDir;
+                this.UpdateIndexButton.PerformClick();
             }
         }
     }

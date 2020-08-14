@@ -11,14 +11,64 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FxCommonLib.Utils;
+using System.Threading;
+using System.Diagnostics;
+using System.Runtime.Remoting.Channels.Ipc;
+using System.Runtime.Remoting.Channels;
+using PokudaSearch.Win32API;
+using PokudaSearch.IPC;
+using System.Runtime.Remoting;
 
 namespace PokudaSearch {
     static class Program {
+
+        private static IpcServerChannel _serverChannel = null;
+        private static IPCShareInfo _shareInfo = null;
+
+
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
         /// </summary>
         [STAThread]
         static void Main() {
+
+            //デスクトップをデフォルトとする。
+            string defaultPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            string[] args = System.Environment.GetCommandLineArgs();
+            if (args.Length > 2) {
+                string option = args[1].ToLower();
+                string tmpPath = StringUtil.NullToBlank(args[2]);
+                if (option == "/f") {
+                    if (Directory.Exists(tmpPath)) {
+                        //引数のパスでファイラを起動
+                        defaultPath = tmpPath;
+                    }
+                } else if (option == "/sf") {
+                    //既にプロセスが存在するか？
+                    var processArray = Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName);
+                    if (processArray.Length > 1) {
+                        //すでに起動している場合は、パスを渡して終了。
+
+                        //プロセス間通信
+                        var clientChannel = new IpcClientChannel();
+                        ChannelServices.RegisterChannel(clientChannel, true);
+
+                        var url = "ipc://PokudaSearchIPC/path";
+                        IPCShareInfo shareInfo = (IPCShareInfo)Activator.GetObject(typeof(IPCShareInfo), url);
+                        User32.SetForegroundWindow(Process.GetProcessById(shareInfo.ProcessId).MainWindowHandle);
+                        shareInfo.SendInfo(tmpPath);
+
+                        return;
+                    } else {
+                        if (Directory.Exists(tmpPath)) {
+                            //引数のパスでファイラを起動
+                            defaultPath = tmpPath;
+                        }
+                    }
+                }
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -26,16 +76,44 @@ namespace PokudaSearch {
             AppDomain.CurrentDomain.AssemblyResolve += Resolver;
 
             //起動時に初期処理
-            Initialize();
-            AppObject.Frame = new MainFrameForm();
+            InitializeAnalyzer();
+            RunIPCServer();
 
+            AppObject.DefaultPath = defaultPath;
+            AppObject.BootMode = AppObject.BootModes.Filer;
+
+            AppObject.Frame = new MainFrameForm();
             Application.Run(AppObject.Frame);
         }
 
+        private static void RunIPCServer() {
+            const string ChannelName = "PokudaSearchIPC";
+            try {
+                //チャンネルが存在しない場合は起動
+                _serverChannel = new IpcServerChannel(ChannelName);
+                ChannelServices.RegisterChannel(_serverChannel, true);
+                AppObject.Logger.Info(_serverChannel.GetChannelUri());
+
+                //イベントを登録
+                _shareInfo = new IPCShareInfo();
+                _shareInfo.ProcessId = Process.GetCurrentProcess().Id;
+                _shareInfo.OnSend += new IPCShareInfo.CallEventHandler(ShareInfo_OnSend);
+                RemotingServices.Marshal(_shareInfo, "path", typeof(IPCShareInfo));
+            } catch {
+                //スルー
+            }
+        }
+
+        public static void ShareInfo_OnSend(IPCShareInfo.IPCShareInfoEventArg e) {
+            string path = e.Path;
+            //対象パスをエクスプローラで表示
+            MainFrameForm.FileExplorerForm.LoadMainExplorer(path);
+        }
+
         /// <summary>
-        /// 初期処理
+        /// 日本語アナライザ初期化処理
         /// </summary>
-        private static void Initialize() {
+        private static void InitializeAnalyzer() {
 
             string sqliteDataSource = Directory.GetParent(Application.ExecutablePath).FullName + 
                                             Properties.Settings.Default.SQLITE_DATA_SOURCE;

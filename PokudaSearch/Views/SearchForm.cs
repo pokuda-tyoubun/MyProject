@@ -86,13 +86,9 @@ namespace PokudaSearch.Views {
             set { _targetIndexGrid = value; }
             get { return _targetIndexGrid; }
         }
-        public Controls.CefSharpPanel BrowserPanel {
-            get { return this.CefSharpPanel; }
-        }
         public Panel BrowserPreviewPanelControl {
             get { return this.BrowserPreviewPanel; }
         }
-
         #endregion Properties
 
         #region MemberVariables
@@ -121,6 +117,13 @@ namespace PokudaSearch.Views {
         /// </summary>
         public SearchForm() {
             InitializeComponent();
+
+            //CefSharpPanel追加
+            this.BrowserPreviewPanel.Controls.Add(AppObject.CefSharpPanel);
+            AppObject.CefSharpPanel.Dock = DockStyle.Fill;
+            AppObject.CefSharpPanel.BringToFront();
+            this.PreviewWarnLabel.BringToFront();
+            this.ShowPreviewButton.BringToFront();
 
             CreateHeader();
 
@@ -290,7 +293,7 @@ namespace PokudaSearch.Views {
             int selectedRow = this.ResultGrid.Selection.TopRow;
 
             //NOTE Loading時に再表示するとCOMエラーになるのを回避
-            if (this.CefSharpPanel.Browser.IsLoading) {
+            if (AppObject.CefSharpPanel.Browser.IsLoading) {
                 _selectedStack.Push(selectedRow);
             } else {
                 if (_selectedStack.Count > 0) {
@@ -307,8 +310,16 @@ namespace PokudaSearch.Views {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SearchForm_FormClosed(object sender, FormClosedEventArgs e) {
-            this.BrowserPanel.CefShutdown();
-            MainFrameForm.SearchForm = null;
+        }
+        private void SearchForm_FormClosing(object sender, FormClosingEventArgs e) {
+            if (e.CloseReason == CloseReason.MdiFormClosing) {
+                //MDIの親が閉じられようとしている。
+                //終了する。
+            } else if (e.CloseReason == CloseReason.UserClosing) {
+                //閉じない
+                e.Cancel = true;
+                this.Hide();
+            }
         }
         /// <summary>
         /// グリッドフィルタのKeyPress時
@@ -464,7 +475,7 @@ namespace PokudaSearch.Views {
                     string tmpPath = SaveDocToPDF(fullPath);
                     fullPath = tmpPath;
                 }
-                this.CefSharpPanel.Browser.Load(fullPath);
+                AppObject.CefSharpPanel.Browser.Load(fullPath);
 
             } finally {
                 this.Cursor = Cursors.Default;
@@ -566,6 +577,7 @@ namespace PokudaSearch.Views {
             this.ExtensionText.Text = "";
             this.UpdateDate1.Value = "";
             this.UpdateDate2.Value = "";
+            this.PathText.Text = "";
 
             this.KeywordText.Focus();
         }
@@ -575,18 +587,25 @@ namespace PokudaSearch.Views {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SearchForm_KeyDown(object sender, KeyEventArgs e) {
-            if (e.KeyCode == Keys.F && e.Control == true && e.Alt == false && e.Shift == false) {
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.E) {
+                //Ctrl + E ファイルエクスプローラーへ遷移
+                AppObject.Frame.FileExplorerFormButtonPerformClick();
+            }
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.F) {
+                //Ctrl + F キーワードにフォーカスを移す
                 this.KeywordText.Focus();
                 //グリッドにフォーカスが当たっている場合、2回呼び出す必要がある。
                 this.KeywordText.Focus();
                 e.SuppressKeyPress = true;
                 return;
             }
-            if (e.KeyCode == Keys.P && e.Control == true && e.Alt == false  && e.Shift == true) {
+            if (e.Modifiers == (Keys.Control | Keys.Shift) && e.KeyCode == Keys.P) {
+                //Ctrl + Shift + P 拡張プレビューの表示非表示
                 this.ExpandPreviewCheck.Checked = !this.ExpandPreviewCheck.Checked;
                 return;
             }
-            if (e.KeyCode == Keys.P && e.Control == true && e.Alt == false && e.Shift == false) {
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.P) {
+                //Ctrl + P 標準幅プレビューの表示非表示
                 this.PreviewCheck.Checked = !this.PreviewCheck.Checked;
                 return;
             }
@@ -655,15 +674,15 @@ namespace PokudaSearch.Views {
         }
         private void ListViewButton_Click(object sender, EventArgs e) {
             //
-            this.BrowserPanel.FindNext();
+            AppObject.CefSharpPanel.FindNext();
             System.Threading.Thread.Sleep(3000);
-            this.BrowserPanel.FindNext();
+            AppObject.CefSharpPanel.FindNext();
             System.Threading.Thread.Sleep(3000);
-            this.BrowserPanel.FindNext();
+            AppObject.CefSharpPanel.FindNext();
             System.Threading.Thread.Sleep(3000);
-            this.BrowserPanel.FindPrevious();
+            AppObject.CefSharpPanel.FindPrevious();
             System.Threading.Thread.Sleep(3000);
-            this.BrowserPanel.StopFinding();
+            AppObject.CefSharpPanel.StopFinding();
         }
 
         private void TileViewButton_Click(object sender, EventArgs e) {
@@ -926,7 +945,7 @@ namespace PokudaSearch.Views {
             if (this.ExtensionText.Text != "") {
                 Query extensionQuery = new WildcardQuery(new Term(LuceneIndexBuilder.Extension,
                     "*" + this.ExtensionText.Text.ToLower() + "*"));
-                allQuery.Add(extensionQuery, BooleanClauseOccur.MUST); //AND
+                allQuery.Add(extensionQuery, BooleanClauseOccur.FILTER); //AND (スコアリングには関与しない)
             }
             //日付
             if (this.UpdateDate1.Text != "" || this.UpdateDate2.Text != "") {
@@ -943,6 +962,12 @@ namespace PokudaSearch.Views {
                 //Query dateRangeQuery = LegacyNumericRangeQuery.NewLongRange(LuceneIndexBuilder.UpdateDate, 
                 //    new java.lang.Long(toDate.ToString()), new java.lang.Long(fromDate.ToString()), true, true);
                 allQuery.Add(dateRangeQuery, BooleanClauseOccur.FILTER); //AND (スコアリングには関与しない)
+            }
+            //パス
+            if (this.PathText.Text != "") {
+                Query pathQuery = new WildcardQuery(new Term(LuceneIndexBuilder.Path,
+                    "*" + QueryParser.Escape(PathText.Text) + "*"));
+                allQuery.Add(pathQuery, BooleanClauseOccur.FILTER);
             }
 
             TopDocs docs = idxSearcher.Search(allQuery.Build(), MaxSearchResultNum);
@@ -1105,7 +1130,7 @@ namespace PokudaSearch.Views {
                 this.PreviewLabel.Text = val;
 
                 if (this.PreviewCheck.Checked) {
-                    this.CefSharpPanel.Visible = true;
+                    AppObject.CefSharpPanel.Visible = true;
                     string extension = StringUtil.NullToBlank(this.ResultGrid.Rows[selectedRow][(int)ColIndex.Extension]);
                     string fullPath = StringUtil.NullToBlank(this.ResultGrid.Rows[selectedRow][(int)ColIndex.FullPath]);
 
@@ -1125,7 +1150,7 @@ namespace PokudaSearch.Views {
                             fullPath = tmpPath;
                         } else if (extension.ToLower() == ".csv") {
                             this.RichTextBox.Text = LuceneIndexBuilder.ReadToString(fullPath);
-                            this.CefSharpPanel.Visible = false;
+                            AppObject.CefSharpPanel.Visible = false;
                             return;
                         } else if (extension.ToLower() == ".pptx" ||
                                    extension.ToLower() == ".pptm") {
@@ -1150,9 +1175,9 @@ namespace PokudaSearch.Views {
                     }
                     if (fullPath == "") {
                         //TODO プレビュー不可を表示
-                        this.CefSharpPanel.Browser.Load("about:blank");
+                        AppObject.CefSharpPanel.Browser.Load("about:blank");
                     } else {
-                        this.CefSharpPanel.Browser.Load(fullPath);
+                        AppObject.CefSharpPanel.Browser.Load(fullPath);
                         //NOTE : Load後、何故かResultGridからFocusが外れてPageDown／Upが効かなくなるので
                         //       強制的にResultGridにフォーカスを戻す。
                         _returnFocus = true;
@@ -1505,9 +1530,14 @@ namespace PokudaSearch.Views {
             //Top10カテゴリを表示
             FacetsCollector.Search(idxSearcher, new MatchAllDocsQuery(), 10, fc);
 
-            //予めカテゴリを登録する必要があるようなので、一旦保留
+            //TODO 予めカテゴリを登録する必要があるようなので、一旦保留
         }
 
+        /// <summary>
+        /// もしかしてキーワード表示
+        /// </summary>
+        /// <param name="multiReader"></param>
+        /// <param name="keyword"></param>
         private void ShowFuzzySuggest(MultiReader multiReader, string keyword) {
             this.SuggestLabel.Visible = false;
             this.Suggest1Button.Visible = false;
@@ -1547,18 +1577,33 @@ namespace PokudaSearch.Views {
             }
         }
 
+        /// <summary>
+        /// もしかしてキーワード１をクリック
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Suggest1Button_Click(object sender, EventArgs e) {
             this.ClearButton.PerformClick();
             this.KeywordText.Text = this.Suggest1Button.Text;
             this.SearchButton.PerformClick();
         }
 
+        /// <summary>
+        /// もしかしてキーワード２をクリック
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Suggest2Button_Click(object sender, EventArgs e) {
             this.ClearButton.PerformClick();
             this.KeywordText.Text = this.Suggest2Button.Text;
             this.SearchButton.PerformClick();
         }
 
+        /// <summary>
+        /// もしかしてキーワード３をクリック
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Suggest3Button_Click(object sender, EventArgs e) {
             this.ClearButton.PerformClick();
             this.KeywordText.Text = this.Suggest3Button.Text;
@@ -1605,6 +1650,33 @@ namespace PokudaSearch.Views {
             if (File.Exists(path)) {
                 Shell32.SHObjectProperties(IntPtr.Zero, (uint)Shell32.SHOP.SHOP_FILEPATH, path, string.Empty);
             }
+        }
+
+        public void SetPathFilterText(string targetPath) {
+            this.PathText.Text = targetPath;
+
+            for (int i = 1; i < this.TargetIndexGrid.Rows.Count; i++) {
+                Row r = this.TargetIndexGrid.Rows[i];
+                string indexedPath = StringUtil.NullToBlank(r[(int)IndexBuildForm.ActiveIndexColIdx.IndexedPath + 2]);
+                if (indexedPath.Contains(targetPath)) {
+                    r[TargetCheckCol] = true;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 検索対象インデックスに含まれているパスか？
+        /// </summary>
+        /// <returns></returns>
+        public bool IsContainTargetIndex(string targetPath) {
+            for (int i = 1; i < this.TargetIndexGrid.Rows.Count; i++) {
+                Row r = this.TargetIndexGrid.Rows[i];
+                string indexedPath = StringUtil.NullToBlank(r[(int)IndexBuildForm.ActiveIndexColIdx.IndexedPath + 2]);
+                if (targetPath.Contains(indexedPath)) {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

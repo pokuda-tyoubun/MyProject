@@ -14,6 +14,7 @@ using PokudaSearch.SandBox;
 using System.Data.SQLite;
 using FxCommonLib.Utils;
 using java.awt;
+using com.sun.tools.javac;
 
 namespace PokudaSearch {
     public partial class MainFrameForm : Form {
@@ -111,6 +112,8 @@ namespace PokudaSearch {
                 SearchForm = new SearchForm();
                 LoadForm(SearchForm);
             } else {
+                FileExplorerForm.Hide();
+                SearchForm.Show();
                 SearchForm.Activate();
             }
         }
@@ -121,15 +124,8 @@ namespace PokudaSearch {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void IndexBuildFormButton_Click(object sender, EventArgs e) {
-            //var ibf = new IndexBuildForm();
-            //ibf.ShowDialog();
-
-            if (IndexBuildForm == null) {
-                IndexBuildForm = new IndexBuildForm();
-                LoadForm(IndexBuildForm);
-            } else {
-                IndexBuildForm.Activate();
-            }
+            var ibf = new IndexBuildForm();
+            ibf.ShowDialog();
         }
 
         /// <summary>
@@ -137,11 +133,11 @@ namespace PokudaSearch {
         /// </summary>
         public void LoadForms() {
             try {
-                //NOTE:SearchFormをロードしておかないとSearchFormButtonクリック時に
-                //     NullReferenceExceptionが発生する。
-                //ファイル検索画面
-                SearchForm = new SearchForm();
-                LoadForm(SearchForm);
+                //検索画面
+                //SearchForm = new SearchForm();
+                //LoadForm(SearchForm);
+                //IndexBuildForm = new IndexBuildForm();
+                //LoadForm(IndexBuildForm);
                 //ファイルエクスプローラー画面
                 FileExplorerForm = new FileExplorerForm();
                 LoadForm(FileExplorerForm);
@@ -155,8 +151,27 @@ namespace PokudaSearch {
 
         private void LoadForm(Form frm) {
             frm.MdiParent = this;
+            //NOTE:FileExplorerを一度Normalにしてから他のウィンドウを表示しないとShow()時にNullReferenceExceptionが発生
+            if (FileExplorerForm != null) {
+                FileExplorerForm.WindowState = FormWindowState.Normal;
+            }
             frm.WindowState = FormWindowState.Maximized;
             frm.Show();
+        }
+        /// <summary>
+        /// ファイルエクスプローラー画面表示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FileExplorerFormButton_Click(object sender, EventArgs e) {
+            if (FileExplorerForm == null) {
+                FileExplorerForm = new FileExplorerForm();
+                LoadForm(FileExplorerForm);
+            } else {
+                FileExplorerForm.ReLoadFileBlowser();
+                FileExplorerForm.Show();
+                FileExplorerForm.Activate();
+            }
         }
 
         private void SandBoxGroup_DialogLauncherClick(object sender, EventArgs e) {
@@ -172,19 +187,6 @@ namespace PokudaSearch {
             }
         }
 
-        /// <summary>
-        /// ファイルエクスプローラー画面表示
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FileExplorerFormButton_Click(object sender, EventArgs e) {
-            if (FileExplorerForm == null) {
-                FileExplorerForm = new FileExplorerForm();
-                LoadForm(FileExplorerForm);
-            } else {
-                FileExplorerForm.Activate();
-            }
-        }
 
         /// <summary>
         /// ヘルプサイト表示
@@ -334,11 +336,21 @@ namespace PokudaSearch {
                 this.VerifyLicenseButton.Enabled = false;
                 this.VerifyLicenseButton.Text = "ライセンス認証済み";
             }
-            this.Text = "Pokuda Search Pro Ver." + AppObject.GetVersion() + trialPeriod;
+            //this.Text = "Pokuda Search Pro Ver." + AppObject.GetVersion() + trialPeriod;
+            this.Text = "Ver." + AppObject.GetVersion() + trialPeriod;
         }
 
         private void ribbonButton1_Click(object sender, EventArgs e) {
 
+        }
+
+        private void MainFrameForm_FormClosing(object sender, FormClosingEventArgs e) {
+        }
+        public void SearchFormButtonPerformClick() {
+            this.SearchFormButton_Click(null, null);
+        }
+        public void FileExplorerFormButtonPerformClick() {
+            this.FileExplorerFormButton_Click(null, null);
         }
     }
 }

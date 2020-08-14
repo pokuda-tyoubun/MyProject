@@ -65,11 +65,12 @@
             this.CopyMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.MoreLikeThisMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.DiffMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.ShowPropertiesMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.PreviewPanel = new System.Windows.Forms.Panel();
             this.BrowserPreviewPanel = new System.Windows.Forms.Panel();
             this.PreviewWarnLabel = new System.Windows.Forms.Label();
             this.ShowPreviewButton = new System.Windows.Forms.Button();
-            this.CefSharpPanel = new PokudaSearch.Controls.CefSharpPanel();
             this.RichTextBox = new System.Windows.Forms.RichTextBox();
             this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
             this.TextPreviewPanel = new System.Windows.Forms.Panel();
@@ -104,8 +105,8 @@
             this.ExpandPreviewCheckToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.PreviewSplitter = new NJFLib.Controls.CollapsibleSplitter();
             this.collapsibleSplitter1 = new NJFLib.Controls.CollapsibleSplitter();
-            this.ShowPropertiesMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.PathText = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultNavi)).BeginInit();
@@ -391,47 +392,59 @@
             this.toolStripSeparator7,
             this.ShowPropertiesMenu});
             this.ResultContext.Name = "ResultContext";
-            this.ResultContext.Size = new System.Drawing.Size(181, 170);
+            this.ResultContext.Size = new System.Drawing.Size(176, 148);
             // 
             // OpenFileMenu
             // 
             this.OpenFileMenu.Name = "OpenFileMenu";
-            this.OpenFileMenu.Size = new System.Drawing.Size(180, 22);
+            this.OpenFileMenu.Size = new System.Drawing.Size(175, 22);
             this.OpenFileMenu.Text = "ファイルを開く(&O)";
             this.OpenFileMenu.Click += new System.EventHandler(this.OpenFileMenu_Click);
             // 
             // OpenParentMenu
             // 
             this.OpenParentMenu.Name = "OpenParentMenu";
-            this.OpenParentMenu.Size = new System.Drawing.Size(180, 22);
+            this.OpenParentMenu.Size = new System.Drawing.Size(175, 22);
             this.OpenParentMenu.Text = "親フォルダを開く(&P)";
             this.OpenParentMenu.Click += new System.EventHandler(this.OpenParentMenu_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(172, 6);
             // 
             // CopyMenu
             // 
             this.CopyMenu.Name = "CopyMenu";
-            this.CopyMenu.Size = new System.Drawing.Size(180, 22);
+            this.CopyMenu.Size = new System.Drawing.Size(175, 22);
             this.CopyMenu.Text = "コピー(&C) Ctrl+C";
             this.CopyMenu.Click += new System.EventHandler(this.CopyMenu_Click);
             // 
             // MoreLikeThisMenu
             // 
             this.MoreLikeThisMenu.Name = "MoreLikeThisMenu";
-            this.MoreLikeThisMenu.Size = new System.Drawing.Size(180, 22);
+            this.MoreLikeThisMenu.Size = new System.Drawing.Size(175, 22);
             this.MoreLikeThisMenu.Text = "類似文書を検索(&M)";
             this.MoreLikeThisMenu.Click += new System.EventHandler(this.MoreLikeThisMenu_Click);
             // 
             // DiffMenu
             // 
             this.DiffMenu.Name = "DiffMenu";
-            this.DiffMenu.Size = new System.Drawing.Size(180, 22);
+            this.DiffMenu.Size = new System.Drawing.Size(175, 22);
             this.DiffMenu.Text = "差分(&D)";
             this.DiffMenu.Click += new System.EventHandler(this.DiffMenu_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(172, 6);
+            // 
+            // ShowPropertiesMenu
+            // 
+            this.ShowPropertiesMenu.Name = "ShowPropertiesMenu";
+            this.ShowPropertiesMenu.Size = new System.Drawing.Size(175, 22);
+            this.ShowPropertiesMenu.Text = "プロパティ(&R)";
+            this.ShowPropertiesMenu.Click += new System.EventHandler(this.ShowPropertiesMenu_Click);
             // 
             // PreviewPanel
             // 
@@ -448,7 +461,6 @@
             // 
             this.BrowserPreviewPanel.Controls.Add(this.PreviewWarnLabel);
             this.BrowserPreviewPanel.Controls.Add(this.ShowPreviewButton);
-            this.BrowserPreviewPanel.Controls.Add(this.CefSharpPanel);
             this.BrowserPreviewPanel.Controls.Add(this.RichTextBox);
             this.BrowserPreviewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BrowserPreviewPanel.Location = new System.Drawing.Point(0, 162);
@@ -476,15 +488,6 @@
             this.ShowPreviewButton.Text = "表示する(&P)";
             this.ShowPreviewButton.UseVisualStyleBackColor = true;
             this.ShowPreviewButton.Click += new System.EventHandler(this.ShowPreviewButton_Click);
-            // 
-            // CefSharpPanel
-            // 
-            this.CefSharpPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.CefSharpPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CefSharpPanel.Location = new System.Drawing.Point(0, 0);
-            this.CefSharpPanel.Name = "CefSharpPanel";
-            this.CefSharpPanel.Size = new System.Drawing.Size(419, 497);
-            this.CefSharpPanel.TabIndex = 4;
             // 
             // RichTextBox
             // 
@@ -709,7 +712,7 @@
             // 
             this.ClearButton.Image = global::PokudaSearch.Properties.Resources.EditClear24;
             this.ClearButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ClearButton.Location = new System.Drawing.Point(128, 97);
+            this.ClearButton.Location = new System.Drawing.Point(128, 124);
             this.ClearButton.Name = "ClearButton";
             this.ClearButton.Size = new System.Drawing.Size(120, 40);
             this.ClearButton.TabIndex = 5;
@@ -723,7 +726,7 @@
             this.PreviewCheck.Checked = true;
             this.PreviewCheck.CheckState = System.Windows.Forms.CheckState.Checked;
             this.PreviewCheck.Image = ((System.Drawing.Image)(resources.GetObject("PreviewCheck.Image")));
-            this.PreviewCheck.Location = new System.Drawing.Point(5, 141);
+            this.PreviewCheck.Location = new System.Drawing.Point(5, 168);
             this.PreviewCheck.Name = "PreviewCheck";
             this.PreviewCheck.Size = new System.Drawing.Size(58, 38);
             this.PreviewCheck.TabIndex = 6;
@@ -734,7 +737,7 @@
             // 
             this.SearchButton.Image = global::PokudaSearch.Properties.Resources.Search24;
             this.SearchButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.SearchButton.Location = new System.Drawing.Point(5, 97);
+            this.SearchButton.Location = new System.Drawing.Point(5, 124);
             this.SearchButton.Name = "SearchButton";
             this.SearchButton.Size = new System.Drawing.Size(120, 40);
             this.SearchButton.TabIndex = 4;
@@ -761,6 +764,8 @@
             // 
             // SearchSplitContainer.Panel1
             // 
+            this.SearchSplitContainer.Panel1.Controls.Add(this.PathText);
+            this.SearchSplitContainer.Panel1.Controls.Add(this.label5);
             this.SearchSplitContainer.Panel1.Controls.Add(this.label2);
             this.SearchSplitContainer.Panel1.Controls.Add(this.ExtensionText);
             this.SearchSplitContainer.Panel1.Controls.Add(this.label1);
@@ -782,7 +787,7 @@
             this.SearchSplitContainer.Panel2.Controls.Add(this.SelectLocalIndexButton);
             this.SearchSplitContainer.Panel2.Controls.Add(this.SelectOuterIndexButton);
             this.SearchSplitContainer.Size = new System.Drawing.Size(271, 659);
-            this.SearchSplitContainer.SplitterDistance = 187;
+            this.SearchSplitContainer.SplitterDistance = 212;
             this.SearchSplitContainer.TabIndex = 121;
             // 
             // ExpandPreviewCheck
@@ -791,7 +796,7 @@
             this.ExpandPreviewCheck.Checked = true;
             this.ExpandPreviewCheck.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ExpandPreviewCheck.Image = ((System.Drawing.Image)(resources.GetObject("ExpandPreviewCheck.Image")));
-            this.ExpandPreviewCheck.Location = new System.Drawing.Point(66, 141);
+            this.ExpandPreviewCheck.Location = new System.Drawing.Point(66, 168);
             this.ExpandPreviewCheck.Name = "ExpandPreviewCheck";
             this.ExpandPreviewCheck.Size = new System.Drawing.Size(58, 38);
             this.ExpandPreviewCheck.TabIndex = 116;
@@ -843,7 +848,7 @@
             this.TargetIndexGrid.Rows.Count = 2;
             this.TargetIndexGrid.Rows.DefaultSize = 18;
             this.TargetIndexGrid.ShowErrors = true;
-            this.TargetIndexGrid.Size = new System.Drawing.Size(263, 408);
+            this.TargetIndexGrid.Size = new System.Drawing.Size(263, 383);
             this.TargetIndexGrid.StyleInfo = resources.GetString("TargetIndexGrid.StyleInfo");
             this.TargetIndexGrid.TabIndex = 7;
             this.TargetIndexGrid.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2010Blue;
@@ -907,17 +912,23 @@
             this.collapsibleSplitter1.UseAnimations = false;
             this.collapsibleSplitter1.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
             // 
-            // ShowPropertiesMenu
+            // PathText
             // 
-            this.ShowPropertiesMenu.Name = "ShowPropertiesMenu";
-            this.ShowPropertiesMenu.Size = new System.Drawing.Size(180, 22);
-            this.ShowPropertiesMenu.Text = "プロパティ(&R)";
-            this.ShowPropertiesMenu.Click += new System.EventHandler(this.ShowPropertiesMenu_Click);
+            this.PathText.Location = new System.Drawing.Point(75, 97);
+            this.PathText.Name = "PathText";
+            this.PathText.Size = new System.Drawing.Size(186, 19);
+            this.PathText.TabIndex = 117;
             // 
-            // toolStripSeparator7
+            // label5
             // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(177, 6);
+            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label5.Location = new System.Drawing.Point(5, 97);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(66, 20);
+            this.label5.TabIndex = 118;
+            this.label5.Text = "パス";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // SearchForm
             // 
@@ -933,6 +944,7 @@
             this.KeyPreview = true;
             this.Name = "SearchForm";
             this.Text = "ファイル検索";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SearchForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SearchForm_FormClosed);
             this.Load += new System.EventHandler(this.SearchForm_Load);
             this.Shown += new System.EventHandler(this.SearchForm_Shown);
@@ -1028,7 +1040,6 @@
         private System.Windows.Forms.ToolTip ExpandPreviewCheckToolTip;
         private System.Windows.Forms.SplitContainer SearchSplitContainer;
         public System.Windows.Forms.ToolStripMenuItem DiffMenu;
-        private Controls.CefSharpPanel CefSharpPanel;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripLabel SuggestLabel;
         private System.Windows.Forms.ToolStripButton Suggest1Button;
@@ -1036,5 +1047,7 @@
         private System.Windows.Forms.ToolStripButton Suggest3Button;
         private System.Windows.Forms.ToolStripMenuItem ShowPropertiesMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        internal System.Windows.Forms.TextBox PathText;
+        private System.Windows.Forms.Label label5;
     }
 }

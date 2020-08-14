@@ -63,6 +63,16 @@ namespace PokudaSearch.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
+        internal static System.Drawing.Bitmap backward_nav {
+            get {
+                object obj = ResourceManager.GetObject("backward_nav", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
         internal static System.Drawing.Bitmap EditClear24 {
             get {
                 object obj = ResourceManager.GetObject("EditClear24", resourceCulture);
@@ -96,6 +106,16 @@ namespace PokudaSearch.Properties {
         internal static System.Drawing.Bitmap File16 {
             get {
                 object obj = ResourceManager.GetObject("File16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap forward_nav {
+            get {
+                object obj = ResourceManager.GetObject("forward_nav", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -166,6 +186,16 @@ namespace PokudaSearch.Properties {
         internal static System.Drawing.Bitmap Search24 {
             get {
                 object obj = ResourceManager.GetObject("Search24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap upward_nav {
+            get {
+                object obj = ResourceManager.GetObject("upward_nav", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

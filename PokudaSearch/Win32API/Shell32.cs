@@ -18,5 +18,10 @@ namespace PokudaSearch.Win32API {
             SHOP_FILEPATH = 0x2,
             SHOP_VOLUMEGUID = 0x4
         }
+
+        [DllImport("Shell32.dll", CharSet=CharSet.Unicode)]
+        public static extern int SHGetKnownFolderPath(
+            [MarshalAs(UnmanagedType.LPStruct)] Guid rfid, uint dwFlags, IntPtr hToken, out string pszPath);
+
     }
 }

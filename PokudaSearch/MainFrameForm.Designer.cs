@@ -249,6 +249,7 @@
             this.IsMdiContainer = true;
             this.Name = "MainFrameForm";
             this.Text = "PokudaSearch";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainFrameForm_FormClosing);
             this.Load += new System.EventHandler(this.MainFrameForm_Load);
             this.Shown += new System.EventHandler(this.MainFrameForm_Shown);
             this.MainStatusStrip.ResumeLayout(false);
@@ -272,7 +273,6 @@
         private C1.Win.C1Ribbon.RibbonTab MainTab;
         private C1.Win.C1Ribbon.RibbonGroup FullTextSearchGroup;
         private C1.Win.C1Ribbon.RibbonTopToolBar ribbonTopToolBar1;
-        private C1.Win.C1Ribbon.RibbonButton SearchFormButton;
         private C1.Win.C1Ribbon.RibbonButton IndexBuildFormButton;
         private C1.Win.C1Ribbon.RibbonGroup SandBoxGroup;
         private C1.Win.C1Ribbon.RibbonButton TestFormButton;
@@ -286,5 +286,6 @@
         private C1.Win.C1Ribbon.RibbonButton TagEditFormButton;
         private C1.Win.C1Ribbon.RibbonButton VerifyLicenseButton;
         private System.Windows.Forms.ToolStripStatusLabel MorphemeLabel;
+        private C1.Win.C1Ribbon.RibbonButton SearchFormButton;
     }
 }

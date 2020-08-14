@@ -20,6 +20,11 @@ namespace PokudaSearch.IndexUtil {
     public class LuceneIndexReaderUtil {
 
 
+        /// <summary>
+        /// Luceneインデックスに登録されているドキュメントの辞書を作成
+        /// </summary>
+        /// <param name="idxDir"></param>
+        /// <returns></returns>
         public Dictionary<string, DocInfo> CreateDocumentDic(FSDirectory idxDir) {
             Dictionary<string, DocInfo> dic = new Dictionary<string, DocInfo>();
             IndexReader ir = DirectoryReader.Open(idxDir);

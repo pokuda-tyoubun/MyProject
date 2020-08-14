@@ -26,41 +26,32 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FileExplorerForm));
             this.MainExplorer = new Microsoft.WindowsAPICodePack.Controls.WindowsForms.ExplorerBrowser();
             this.MainPanel = new System.Windows.Forms.Panel();
-            this.MainToolStrip = new System.Windows.Forms.ToolStrip();
-            this.BackwardButton = new System.Windows.Forms.ToolStripButton();
-            this.ForwardButton = new System.Windows.Forms.ToolStripButton();
-            this.MainPathCombo = new System.Windows.Forms.ToolStripComboBox();
             this.RightPanel = new System.Windows.Forms.Panel();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.splitter2 = new System.Windows.Forms.Splitter();
             this.RightMainPanel = new System.Windows.Forms.Panel();
             this.SubExplorer = new Microsoft.WindowsAPICodePack.Controls.WindowsForms.ExplorerBrowser();
+            this.splitter2 = new System.Windows.Forms.Splitter();
             this.RightTopPanel = new System.Windows.Forms.Panel();
-            this.SubToolStrip = new System.Windows.Forms.ToolStrip();
-            this.BackwardSubButton = new System.Windows.Forms.ToolStripButton();
-            this.ForwardSubButton = new System.Windows.Forms.ToolStripButton();
-            this.SubPathCombo = new System.Windows.Forms.ToolStripComboBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.OnDemandSearchButton = new System.Windows.Forms.Button();
+            this.UpwardSubExplorerButton = new System.Windows.Forms.Button();
+            this.ForwardSubExplorerButton = new System.Windows.Forms.Button();
+            this.BackwardSubExplorerButton = new System.Windows.Forms.Button();
+            this.SubExplorerPathCombo = new System.Windows.Forms.ComboBox();
             this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
             this.MainTopPanel = new System.Windows.Forms.Panel();
+            this.UpwardMainExplorerButton = new System.Windows.Forms.Button();
+            this.ForwardMainExplorerButton = new System.Windows.Forms.Button();
+            this.BackwardMainExplorerButton = new System.Windows.Forms.Button();
+            this.MainExplorerPathCombo = new System.Windows.Forms.ComboBox();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.CreateIndexButton = new System.Windows.Forms.Button();
             this.MainPanel.SuspendLayout();
-            this.MainToolStrip.SuspendLayout();
             this.RightPanel.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             this.RightMainPanel.SuspendLayout();
             this.RightTopPanel.SuspendLayout();
-            this.SubToolStrip.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             this.MainTopPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainExplorer
             // 
+            this.MainExplorer.BackColor = System.Drawing.Color.Transparent;
             this.MainExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainExplorer.Location = new System.Drawing.Point(0, 0);
             this.MainExplorer.Name = "MainExplorer";
@@ -81,97 +72,25 @@
             this.MainPanel.Size = new System.Drawing.Size(579, 579);
             this.MainPanel.TabIndex = 2;
             // 
-            // MainToolStrip
-            // 
-            this.MainToolStrip.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.BackwardButton,
-            this.ForwardButton,
-            this.MainPathCombo});
-            this.MainToolStrip.Location = new System.Drawing.Point(0, 0);
-            this.MainToolStrip.Name = "MainToolStrip";
-            this.MainToolStrip.Size = new System.Drawing.Size(579, 30);
-            this.MainToolStrip.TabIndex = 2;
-            this.MainToolStrip.Text = "toolStrip1";
-            this.MainToolStrip.SizeChanged += new System.EventHandler(this.MainToolStrip_SizeChanged);
-            // 
-            // BackwardButton
-            // 
-            this.BackwardButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.BackwardButton.Image = ((System.Drawing.Image)(resources.GetObject("BackwardButton.Image")));
-            this.BackwardButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.BackwardButton.Name = "BackwardButton";
-            this.BackwardButton.Size = new System.Drawing.Size(23, 27);
-            this.BackwardButton.Text = "toolStripButton1";
-            this.BackwardButton.Click += new System.EventHandler(this.BackwardButton_Click);
-            // 
-            // ForwardButton
-            // 
-            this.ForwardButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ForwardButton.Image = ((System.Drawing.Image)(resources.GetObject("ForwardButton.Image")));
-            this.ForwardButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ForwardButton.Name = "ForwardButton";
-            this.ForwardButton.Size = new System.Drawing.Size(23, 27);
-            this.ForwardButton.Text = "toolStripButton1";
-            this.ForwardButton.Click += new System.EventHandler(this.ForwardButton_Click);
-            // 
-            // MainPathCombo
-            // 
-            this.MainPathCombo.AutoSize = false;
-            this.MainPathCombo.Name = "MainPathCombo";
-            this.MainPathCombo.Size = new System.Drawing.Size(300, 23);
-            this.MainPathCombo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainPathCombo_KeyDown);
-            // 
             // RightPanel
             // 
-            this.RightPanel.Controls.Add(this.tabControl1);
+            this.RightPanel.Controls.Add(this.RightMainPanel);
+            this.RightPanel.Controls.Add(this.splitter2);
+            this.RightPanel.Controls.Add(this.RightTopPanel);
             this.RightPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.RightPanel.Location = new System.Drawing.Point(587, 0);
             this.RightPanel.Name = "RightPanel";
             this.RightPanel.Size = new System.Drawing.Size(436, 612);
             this.RightPanel.TabIndex = 3;
             // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(436, 612);
-            this.tabControl1.TabIndex = 4;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.splitter2);
-            this.tabPage1.Controls.Add(this.RightMainPanel);
-            this.tabPage1.Controls.Add(this.RightTopPanel);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(428, 586);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "SubExplorer";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // splitter2
-            // 
-            this.splitter2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter2.Location = new System.Drawing.Point(3, 33);
-            this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(422, 3);
-            this.splitter2.TabIndex = 122;
-            this.splitter2.TabStop = false;
-            // 
             // RightMainPanel
             // 
             this.RightMainPanel.Controls.Add(this.SubExplorer);
             this.RightMainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RightMainPanel.Location = new System.Drawing.Point(3, 33);
+            this.RightMainPanel.Location = new System.Drawing.Point(0, 33);
             this.RightMainPanel.Name = "RightMainPanel";
-            this.RightMainPanel.Size = new System.Drawing.Size(422, 550);
-            this.RightMainPanel.TabIndex = 122;
+            this.RightMainPanel.Size = new System.Drawing.Size(436, 579);
+            this.RightMainPanel.TabIndex = 124;
             // 
             // SubExplorer
             // 
@@ -179,81 +98,73 @@
             this.SubExplorer.Location = new System.Drawing.Point(0, 0);
             this.SubExplorer.Name = "SubExplorer";
             this.SubExplorer.PropertyBagName = "Microsoft.WindowsAPICodePack.Controls.WindowsForms.ExplorerBrowser";
-            this.SubExplorer.Size = new System.Drawing.Size(422, 550);
+            this.SubExplorer.Size = new System.Drawing.Size(436, 579);
             this.SubExplorer.TabIndex = 0;
-            this.SubExplorer.NavigationComplete += new System.EventHandler<Microsoft.WindowsAPICodePack.Controls.NavigationCompleteEventArgs>(this.SubExplorer_NavigationComplete);
-            this.SubExplorer.HelpRequested += new System.Windows.Forms.HelpEventHandler(this.SubExplorer_HelpRequested);
+            this.SubExplorer.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SubExplorer_KeyDown);
+            this.SubExplorer.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.SubExplorer_PreviewKeyDown);
+            // 
+            // splitter2
+            // 
+            this.splitter2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitter2.Location = new System.Drawing.Point(0, 30);
+            this.splitter2.Name = "splitter2";
+            this.splitter2.Size = new System.Drawing.Size(436, 3);
+            this.splitter2.TabIndex = 123;
+            this.splitter2.TabStop = false;
             // 
             // RightTopPanel
             // 
-            this.RightTopPanel.Controls.Add(this.SubToolStrip);
+            this.RightTopPanel.Controls.Add(this.UpwardSubExplorerButton);
+            this.RightTopPanel.Controls.Add(this.ForwardSubExplorerButton);
+            this.RightTopPanel.Controls.Add(this.BackwardSubExplorerButton);
+            this.RightTopPanel.Controls.Add(this.SubExplorerPathCombo);
             this.RightTopPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.RightTopPanel.Location = new System.Drawing.Point(3, 3);
+            this.RightTopPanel.Location = new System.Drawing.Point(0, 0);
             this.RightTopPanel.Name = "RightTopPanel";
-            this.RightTopPanel.Size = new System.Drawing.Size(422, 30);
-            this.RightTopPanel.TabIndex = 4;
+            this.RightTopPanel.Size = new System.Drawing.Size(436, 30);
+            this.RightTopPanel.TabIndex = 5;
+            this.RightTopPanel.SizeChanged += new System.EventHandler(this.RightTopPanel_SizeChanged);
             // 
-            // SubToolStrip
+            // UpwardSubExplorerButton
             // 
-            this.SubToolStrip.AutoSize = false;
-            this.SubToolStrip.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SubToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.BackwardSubButton,
-            this.ForwardSubButton,
-            this.SubPathCombo});
-            this.SubToolStrip.Location = new System.Drawing.Point(0, 0);
-            this.SubToolStrip.Name = "SubToolStrip";
-            this.SubToolStrip.Size = new System.Drawing.Size(422, 30);
-            this.SubToolStrip.TabIndex = 3;
-            this.SubToolStrip.Text = "toolStrip2";
+            this.UpwardSubExplorerButton.Image = global::PokudaSearch.Properties.Resources.upward_nav;
+            this.UpwardSubExplorerButton.Location = new System.Drawing.Point(45, 1);
+            this.UpwardSubExplorerButton.Name = "UpwardSubExplorerButton";
+            this.UpwardSubExplorerButton.Size = new System.Drawing.Size(23, 27);
+            this.UpwardSubExplorerButton.TabIndex = 7;
+            this.UpwardSubExplorerButton.UseVisualStyleBackColor = true;
+            this.UpwardSubExplorerButton.Click += new System.EventHandler(this.UpwardSubExplorerButton_Click);
             // 
-            // BackwardSubButton
+            // ForwardSubExplorerButton
             // 
-            this.BackwardSubButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.BackwardSubButton.Image = ((System.Drawing.Image)(resources.GetObject("BackwardSubButton.Image")));
-            this.BackwardSubButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.BackwardSubButton.Name = "BackwardSubButton";
-            this.BackwardSubButton.Size = new System.Drawing.Size(23, 27);
-            this.BackwardSubButton.Text = "toolStripButton1";
-            this.BackwardSubButton.Click += new System.EventHandler(this.BackwardSubButton_Click);
+            this.ForwardSubExplorerButton.Image = global::PokudaSearch.Properties.Resources.forward_nav;
+            this.ForwardSubExplorerButton.Location = new System.Drawing.Point(23, 1);
+            this.ForwardSubExplorerButton.Name = "ForwardSubExplorerButton";
+            this.ForwardSubExplorerButton.Size = new System.Drawing.Size(23, 27);
+            this.ForwardSubExplorerButton.TabIndex = 2;
+            this.ForwardSubExplorerButton.UseVisualStyleBackColor = true;
+            this.ForwardSubExplorerButton.Click += new System.EventHandler(this.ForwardSubExplorerButton_Click);
             // 
-            // ForwardSubButton
+            // BackwardSubExplorerButton
             // 
-            this.ForwardSubButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ForwardSubButton.Image = ((System.Drawing.Image)(resources.GetObject("ForwardSubButton.Image")));
-            this.ForwardSubButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ForwardSubButton.Name = "ForwardSubButton";
-            this.ForwardSubButton.Size = new System.Drawing.Size(23, 27);
-            this.ForwardSubButton.Text = "toolStripButton1";
-            this.ForwardSubButton.Click += new System.EventHandler(this.ForwardSubButton_Click);
+            this.BackwardSubExplorerButton.Image = global::PokudaSearch.Properties.Resources.backward_nav;
+            this.BackwardSubExplorerButton.Location = new System.Drawing.Point(1, 1);
+            this.BackwardSubExplorerButton.Name = "BackwardSubExplorerButton";
+            this.BackwardSubExplorerButton.Size = new System.Drawing.Size(23, 27);
+            this.BackwardSubExplorerButton.TabIndex = 1;
+            this.BackwardSubExplorerButton.UseVisualStyleBackColor = true;
+            this.BackwardSubExplorerButton.Click += new System.EventHandler(this.BackwardSubExplorerButton_Click);
             // 
-            // SubPathCombo
+            // SubExplorerPathCombo
             // 
-            this.SubPathCombo.Name = "SubPathCombo";
-            this.SubPathCombo.Size = new System.Drawing.Size(300, 30);
-            this.SubPathCombo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SubPathCombo_KeyDown);
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.CreateIndexButton);
-            this.tabPage2.Controls.Add(this.OnDemandSearchButton);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(428, 586);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "オンデマンド検索";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // OnDemandSearchButton
-            // 
-            this.OnDemandSearchButton.Location = new System.Drawing.Point(17, 11);
-            this.OnDemandSearchButton.Name = "OnDemandSearchButton";
-            this.OnDemandSearchButton.Size = new System.Drawing.Size(109, 25);
-            this.OnDemandSearchButton.TabIndex = 0;
-            this.OnDemandSearchButton.Text = "オンデマンド検索";
-            this.OnDemandSearchButton.UseVisualStyleBackColor = true;
-            this.OnDemandSearchButton.Click += new System.EventHandler(this.OnDemandSearchButton_Click);
+            this.SubExplorerPathCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.SubExplorerPathCombo.FormattingEnabled = true;
+            this.SubExplorerPathCombo.Location = new System.Drawing.Point(70, 5);
+            this.SubExplorerPathCombo.Name = "SubExplorerPathCombo";
+            this.SubExplorerPathCombo.Size = new System.Drawing.Size(362, 20);
+            this.SubExplorerPathCombo.TabIndex = 0;
+            this.SubExplorerPathCombo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SubExplorerPathCombo_KeyDown);
             // 
             // collapsibleSplitter3
             // 
@@ -273,12 +184,56 @@
             // 
             // MainTopPanel
             // 
-            this.MainTopPanel.Controls.Add(this.MainToolStrip);
+            this.MainTopPanel.Controls.Add(this.UpwardMainExplorerButton);
+            this.MainTopPanel.Controls.Add(this.ForwardMainExplorerButton);
+            this.MainTopPanel.Controls.Add(this.BackwardMainExplorerButton);
+            this.MainTopPanel.Controls.Add(this.MainExplorerPathCombo);
             this.MainTopPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.MainTopPanel.Location = new System.Drawing.Point(0, 0);
             this.MainTopPanel.Name = "MainTopPanel";
             this.MainTopPanel.Size = new System.Drawing.Size(579, 30);
             this.MainTopPanel.TabIndex = 119;
+            // 
+            // UpwardMainExplorerButton
+            // 
+            this.UpwardMainExplorerButton.Image = global::PokudaSearch.Properties.Resources.upward_nav;
+            this.UpwardMainExplorerButton.Location = new System.Drawing.Point(46, 2);
+            this.UpwardMainExplorerButton.Name = "UpwardMainExplorerButton";
+            this.UpwardMainExplorerButton.Size = new System.Drawing.Size(23, 27);
+            this.UpwardMainExplorerButton.TabIndex = 6;
+            this.UpwardMainExplorerButton.UseVisualStyleBackColor = true;
+            this.UpwardMainExplorerButton.Click += new System.EventHandler(this.UpwardMainExplorerButton_Click);
+            // 
+            // ForwardMainExplorerButton
+            // 
+            this.ForwardMainExplorerButton.Image = global::PokudaSearch.Properties.Resources.forward_nav;
+            this.ForwardMainExplorerButton.Location = new System.Drawing.Point(24, 2);
+            this.ForwardMainExplorerButton.Name = "ForwardMainExplorerButton";
+            this.ForwardMainExplorerButton.Size = new System.Drawing.Size(23, 27);
+            this.ForwardMainExplorerButton.TabIndex = 5;
+            this.ForwardMainExplorerButton.UseVisualStyleBackColor = true;
+            this.ForwardMainExplorerButton.Click += new System.EventHandler(this.ForwardMainExplorerButton_Click);
+            // 
+            // BackwardMainExplorerButton
+            // 
+            this.BackwardMainExplorerButton.Image = global::PokudaSearch.Properties.Resources.backward_nav;
+            this.BackwardMainExplorerButton.Location = new System.Drawing.Point(2, 2);
+            this.BackwardMainExplorerButton.Name = "BackwardMainExplorerButton";
+            this.BackwardMainExplorerButton.Size = new System.Drawing.Size(23, 27);
+            this.BackwardMainExplorerButton.TabIndex = 4;
+            this.BackwardMainExplorerButton.UseVisualStyleBackColor = true;
+            this.BackwardMainExplorerButton.Click += new System.EventHandler(this.BackwardMainExplorerButton_Click);
+            // 
+            // MainExplorerPathCombo
+            // 
+            this.MainExplorerPathCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.MainExplorerPathCombo.FormattingEnabled = true;
+            this.MainExplorerPathCombo.Location = new System.Drawing.Point(71, 6);
+            this.MainExplorerPathCombo.Name = "MainExplorerPathCombo";
+            this.MainExplorerPathCombo.Size = new System.Drawing.Size(504, 20);
+            this.MainExplorerPathCombo.TabIndex = 3;
+            this.MainExplorerPathCombo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainExplorerPathCombo_KeyDown);
             // 
             // splitter1
             // 
@@ -288,16 +243,6 @@
             this.splitter1.Size = new System.Drawing.Size(579, 3);
             this.splitter1.TabIndex = 120;
             this.splitter1.TabStop = false;
-            // 
-            // CreateIndexButton
-            // 
-            this.CreateIndexButton.Location = new System.Drawing.Point(17, 55);
-            this.CreateIndexButton.Name = "CreateIndexButton";
-            this.CreateIndexButton.Size = new System.Drawing.Size(109, 25);
-            this.CreateIndexButton.TabIndex = 1;
-            this.CreateIndexButton.Text = "インデックス作成";
-            this.CreateIndexButton.UseVisualStyleBackColor = true;
-            this.CreateIndexButton.Click += new System.EventHandler(this.CreateIndexButton_Click);
             // 
             // FileExplorerForm
             // 
@@ -310,23 +255,17 @@
             this.Controls.Add(this.collapsibleSplitter3);
             this.Controls.Add(this.RightPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "FileExplorerForm";
-            this.Text = "エクスプローラ";
+            this.Text = "エクスプローラー";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FileExplorerForm_FormClosed);
             this.Shown += new System.EventHandler(this.FileExplorerForm_Shown);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FileExplorerForm_KeyDown);
             this.MainPanel.ResumeLayout(false);
-            this.MainToolStrip.ResumeLayout(false);
-            this.MainToolStrip.PerformLayout();
             this.RightPanel.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
             this.RightMainPanel.ResumeLayout(false);
             this.RightTopPanel.ResumeLayout(false);
-            this.SubToolStrip.ResumeLayout(false);
-            this.SubToolStrip.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
             this.MainTopPanel.ResumeLayout(false);
-            this.MainTopPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -337,24 +276,19 @@
         private System.Windows.Forms.Panel MainPanel;
         private System.Windows.Forms.Panel RightPanel;
         private NJFLib.Controls.CollapsibleSplitter collapsibleSplitter3;
-        private Microsoft.WindowsAPICodePack.Controls.WindowsForms.ExplorerBrowser SubExplorer;
-        private System.Windows.Forms.ToolStrip MainToolStrip;
-        private System.Windows.Forms.ToolStripButton BackwardButton;
-        private System.Windows.Forms.ToolStripComboBox MainPathCombo;
-        private System.Windows.Forms.ToolStrip SubToolStrip;
-        private System.Windows.Forms.ToolStripButton BackwardSubButton;
-        private System.Windows.Forms.ToolStripComboBox SubPathCombo;
-        private System.Windows.Forms.ToolStripButton ForwardButton;
-        private System.Windows.Forms.ToolStripButton ForwardSubButton;
         private System.Windows.Forms.Panel MainTopPanel;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Panel RightMainPanel;
-        private System.Windows.Forms.Panel RightTopPanel;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private Microsoft.WindowsAPICodePack.Controls.WindowsForms.ExplorerBrowser SubExplorer;
         private System.Windows.Forms.Splitter splitter2;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button OnDemandSearchButton;
-        private System.Windows.Forms.Button CreateIndexButton;
+        private System.Windows.Forms.Panel RightTopPanel;
+        private System.Windows.Forms.ComboBox SubExplorerPathCombo;
+        private System.Windows.Forms.Button BackwardSubExplorerButton;
+        private System.Windows.Forms.Button ForwardSubExplorerButton;
+        private System.Windows.Forms.Button ForwardMainExplorerButton;
+        private System.Windows.Forms.Button BackwardMainExplorerButton;
+        private System.Windows.Forms.ComboBox MainExplorerPathCombo;
+        private System.Windows.Forms.Button UpwardMainExplorerButton;
+        private System.Windows.Forms.Button UpwardSubExplorerButton;
     }
 }

@@ -245,6 +245,7 @@
       <HintPath>packages\System.Data.SQLite.Core.1.0.110.0\lib\net45\System.Data.SQLite.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -293,6 +294,7 @@
     <Compile Include="IndexUtil\LuceneIndexBuilder.cs" />
     <Compile Include="IndexUtil\LuceneIndexReaderUtil.cs" />
     <Compile Include="IndexUtil\ProgressReport.cs" />
+    <Compile Include="IPC\IPCShareInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -390,6 +392,7 @@
     </Compile>
     <Compile Include="WebDriver\MP4WebDriver.cs" />
     <Compile Include="WebDriver\WebClawringDriver.cs" />
+    <Compile Include="Win32API\User32.cs" />
     <Compile Include="Win32API\Shell32.cs" />
     <EmbeddedResource Include="Controls\CefSharpPanel.resx">
       <DependentUpon>CefSharpPanel.cs</DependentUpon>
@@ -505,6 +508,9 @@
     <None Include="Resources\NetworkDrive16.bmp" />
     <None Include="Resources\LocalDrive16.bmp" />
     <None Include="Resources\WebPage16.bmp" />
+    <None Include="Resources\backward_nav.png" />
+    <None Include="Resources\forward_nav.png" />
+    <None Include="Resources\upward_nav.png" />
     <Content Include="UserDictionary.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

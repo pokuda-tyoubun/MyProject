@@ -117,57 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="MainToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="BackwardButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEqSURBVDhPYxicYHc9j82uepFPe5tFH0KFiAcgzXuaxT6+
-        f7jz/8463v9QYeLAtmqgzQ1iH9892Pn///93/7dXk2DAtnIemx3lQM33IZpBeFez2M+tlbz/0fH2avG7
-        2yq5naFaGRg2ATWvLRP7+Pbetv///70iiJ+en/59K9AQsOb1JVwGIM1vbq/6///XbaLxhlKo99YV8dhs
-        LpH8/Onh+v//v50lGq8r5kGEz5o8nuCNJRKfP91d9P//x30E8eOLPX9Wlwi8gGqHgBVAQ9aXiH/+dHPa
-        //9vga4B4i1lCl9X5fH8R8drCjk/rsznDodqRYAV2TzB64CGfLwx5f//N2v/r8hBciaxYCnQkDVFEEOW
-        ZZFhAAgsyuAJXpLI+3dRlsBbqNCgBQwMAO8xOfKaeWhkAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="ForwardButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEdSURBVDhPYxj8YG+z6MO9LaJvd9TzaECFSAM763j/v7i6
-        9P/2FvH3ZBmyvZr3////7/6/uAI0pBFoSCUWQ7ZWcIdvqxN4sbWS9z863tUs9hNkAAg/vww0pEH8/SZ0
-        Q9aWcX18em3rn///Xv0nhJ9dWvR/azmaIRtKgc78dZto/PT8jP9bgIasLeOUARuwrpjn//9vZ4nGb64v
-        +L+2iu/LxkI+FbABa/P5vn+6u+j//4/7COLXl6b8X1vG92VVHo8NWDMIrMzjzl8NNAQo+B8dbylT+Pr/
-        7fr/IPz6fOf/taW8qJoJgRU5QO+9Wfv/9dn2/2uygZqzSNAMAsuyeP6/Ampelcn7ZSmpmkFgUZbA28XJ
-        fD+WppGhmQ6AgQEAI4039HAg7J8AAAAASUVORK5CYII=
-</value>
-  </data>
-  <metadata name="SubToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>127, 17</value>
-  </metadata>
-  <data name="BackwardSubButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEqSURBVDhPYxicYHc9j82uepFPe5tFH0KFiAcgzXuaxT6+
-        f7jz/8463v9QYeLAtmqgzQ1iH9892Pn///93/7dXk2DAtnIemx3lQM33IZpBeFez2M+tlbz/0fH2avG7
-        2yq5naFaGRg2ATWvLRP7+Pbetv///70iiJ+en/59K9AQsOb1JVwGIM1vbq/6///XbaLxhlKo99YV8dhs
-        LpH8/Onh+v//v50lGq8r5kGEz5o8nuCNJRKfP91d9P//x30E8eOLPX9Wlwi8gGqHgBVAQ9aXiH/+dHPa
-        //9vga4B4i1lCl9X5fH8R8drCjk/rsznDodqRYAV2TzB64CGfLwx5f//N2v/r8hBciaxYCnQkDVFEEOW
-        ZZFhAAgsyuAJXpLI+3dRlsBbqNCgBQwMAO8xOfKaeWhkAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="ForwardSubButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEcSURBVDhPYxj8YG+z6MO9LaJvd9TzaECFSAM763j/v7i6
-        9P/2FvH3ZBmyvZr3////7/6/uAI0pBFoSCUWQ7ZWcIdvqxN4sbWS9z863tUs+hNkAAg/vww0pEH8/SZ0
-        Q9aWcX58cnXrn///Xv0nhJ9dWvR/azmaIRtKgc78dZto/PT8jP9bgIYALZYBG7CumOf//29nicZvri/4
-        v7aK98vGQj4VsAFr8/m+f7q76P//j/sI4teXpvxfW8b7ZVUejw1YMwiszOPOXw00BCj4Hx1vKVX4+v/t
-        +v8g/Pp85/+1pTyomgmBFTlA771Z+//12fb/a7KAmrNI0AwCy7J4/r8Cal6VwfNlKamaQWBRlsDbxUl8
-        P5amkaGZDoCBAQAO0Dfn7TPJ/wAAAABJRU5ErkJggg==
-</value>
-  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAgIAAAAEAIAAoCAEAFgAAACgAAACAAAAAAAEAAAEAIAAAAAAAAAABAA47AAAOOwAAAAAAAAAA

@@ -3,6 +3,7 @@ using FlexLucene.Analysis.Ja;
 using FxCommonLib.Models;
 using FxCommonLib.Utils;
 using log4net;
+using PokudaSearch.Controls;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -26,9 +27,9 @@ namespace PokudaSearch {
 
         //HACK UI高度化----------------------------------------------
         //HACK*ファイルエクスプローラの実装
-            //HACK Viキーバインド化--------------------------------------------------
-            //HACK "/yakyu"で"野球"にフォーカスを当てれるようにする。+"n"で次の野球にできる?
-            //HACK or "/"でCtrl+Fにする
+        //HACK Viキーバインド化--------------------------------------------------
+        //HACK "/yakyu"で"野球"にフォーカスを当てれるようにする。+"n"で次の野球にできる?
+        //HACK or "/"でCtrl+Fにする
         //HACK コンテキストメニューにGitが表示されないが参考になるかも
         //HACK https://www.codeproject.com/Articles/14707/Dual-Pane-File-Manager
         //HACK CodeProjectでは、以下が参考になりそう（コンテキストメニューのGitが表示されていないが）
@@ -123,9 +124,12 @@ namespace PokudaSearch {
         //DONE C\Tempでインデックスを作成してもキーワードが引っ掛からないのは何故か
         //     →hilightFieldType指定が誤っているようだ
 
+        #region Constants
         public const int TrialPeriod = 30;
         public const string LicenseKey = "POKUDA-879B4C51-8B48-4EB6-AB0D-4A89AD1DA5D2";
+        #endregion Constants
 
+        #region Properties
         /// <summary>ロガー</summary>
         private static ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public static ILog Logger {
@@ -135,6 +139,9 @@ namespace PokudaSearch {
         public static bool AlreadyLoadedLogviewer = false;
         public static bool IsTrial = true;
         public static int RemainingDays = 0;
+
+        public static string DefaultPath = "";
+        public static BootModes BootMode = BootModes.Filer;
 
         /// <summary>PokudaSearch.dbへの接続文字列</summary>
         public static string ConnectString { get; set; }
@@ -158,11 +165,34 @@ namespace PokudaSearch {
         public static MultiLangUtil MLUtil {
             get { return _mlu; }
         }
+        /// <summary>フィルターヘルパ</summary>
+        private static FilterHelper _filterHelper = new FilterHelper();
+        public static FilterHelper FilterHelper {
+            get { return _filterHelper; }
+        }
+        private static CefSharpPanel _cefSharpPanel = new CefSharpPanel();
+        public static CefSharpPanel CefSharpPanel {
+            get { return _cefSharpPanel; }
+        }
+        #endregion Properties
+
+        /// <summary>
+        /// 起動モード
+        /// </summary>
+        public enum BootModes : int {
+            //ファイラを起動
+            Filer = 0,
+            //ファイラを起動（多重起動しない）
+            SingletonFiler,
+            //インデックス更新モード
+            UpdateIndex,
+        }
+
+        #region Message
         public static string GetMsg(Msg msgId) {
             string key = EnumUtil.GetName(msgId);
             return _mlu.GetMsg(key);
         }
-        #region Message
         public enum Msg : int {
             [EnumLabel("抽出中...")]
             ACT_EXTRACT = 0,
@@ -176,6 +206,8 @@ namespace PokudaSearch {
             ACT_RESET_FILTER,
             [EnumLabel("")]
             ACT_END,
+            [EnumLabel("質問")]
+            TITLE_QUESTION,
             [EnumLabel("情報")]
             TITLE_INFO,
             [EnumLabel("警告")]
@@ -190,6 +222,8 @@ namespace PokudaSearch {
             MSG_COLORING_BACKCOLOR,
             [EnumLabel("処理を中断しますか？")]
             MSG_DO_STOP,
+            [EnumLabel("インデックスが作成されていません。今すぐインデックスを作成しますか？")]
+            MSG_DO_CREATE_INDEX,
             [EnumLabel("インデックス対象が0件でした。")]
             MSG_INDEXED_COUNT_ZERO,
             [EnumLabel("キーワードを入力して下さい。")]
@@ -229,11 +263,6 @@ namespace PokudaSearch {
         }
         #endregion Message
 
-        /// <summary>フィルターヘルパ</summary>
-        private static FilterHelper _filterHelper = new FilterHelper();
-        public static FilterHelper FilterHelper {
-            get { return _filterHelper; }
-        }
 
         public static string GetVersion() {
             Assembly asm = Assembly.GetEntryAssembly();
