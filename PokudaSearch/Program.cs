@@ -19,6 +19,7 @@ using System.Runtime.Remoting.Channels;
 using PokudaSearch.Win32API;
 using PokudaSearch.IPC;
 using System.Runtime.Remoting;
+using System.Windows.Threading;
 
 namespace PokudaSearch {
     static class Program {
@@ -105,9 +106,16 @@ namespace PokudaSearch {
         }
 
         public static void ShareInfo_OnSend(IPCShareInfo.IPCShareInfoEventArg e) {
-            string path = e.Path;
+            //if (MainFrameForm.SearchForm != null) {
+            //    MainFrameForm.SearchForm.WindowState = FormWindowState.Normal;
+            //}
+            AppObject.Logger.Error("debug:100");
             //対象パスをエクスプローラで表示
+            string path = e.Path;
+            AppObject.Frame.FileExplorerFormButtonPerformClick();
+            AppObject.Logger.Error("debug:200");
             MainFrameForm.FileExplorerForm.LoadMainExplorer(path);
+            AppObject.Logger.Error("debug:300");
         }
 
         /// <summary>

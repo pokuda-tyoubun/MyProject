@@ -67,6 +67,7 @@
             this.DiffMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.ShowPropertiesMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenParentByExplorerMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.PreviewPanel = new System.Windows.Forms.Panel();
             this.BrowserPreviewPanel = new System.Windows.Forms.Panel();
             this.PreviewWarnLabel = new System.Windows.Forms.Label();
@@ -95,6 +96,8 @@
             this.SearchButton = new System.Windows.Forms.Button();
             this.SearchPanel = new System.Windows.Forms.Panel();
             this.SearchSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.PathText = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.ExpandPreviewCheck = new System.Windows.Forms.CheckBox();
             this.SelectAllButton = new System.Windows.Forms.Button();
             this.ReleaseAllButton = new System.Windows.Forms.Button();
@@ -105,8 +108,6 @@
             this.ExpandPreviewCheckToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.PreviewSplitter = new NJFLib.Controls.CollapsibleSplitter();
             this.collapsibleSplitter1 = new NJFLib.Controls.CollapsibleSplitter();
-            this.PathText = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateDate1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultNavi)).BeginInit();
@@ -385,6 +386,7 @@
             this.ResultContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.OpenFileMenu,
             this.OpenParentMenu,
+            this.OpenParentByExplorerMenu,
             this.toolStripMenuItem2,
             this.CopyMenu,
             this.MoreLikeThisMenu,
@@ -392,59 +394,66 @@
             this.toolStripSeparator7,
             this.ShowPropertiesMenu});
             this.ResultContext.Name = "ResultContext";
-            this.ResultContext.Size = new System.Drawing.Size(176, 148);
+            this.ResultContext.Size = new System.Drawing.Size(224, 192);
             // 
             // OpenFileMenu
             // 
             this.OpenFileMenu.Name = "OpenFileMenu";
-            this.OpenFileMenu.Size = new System.Drawing.Size(175, 22);
+            this.OpenFileMenu.Size = new System.Drawing.Size(223, 22);
             this.OpenFileMenu.Text = "ファイルを開く(&O)";
             this.OpenFileMenu.Click += new System.EventHandler(this.OpenFileMenu_Click);
             // 
             // OpenParentMenu
             // 
             this.OpenParentMenu.Name = "OpenParentMenu";
-            this.OpenParentMenu.Size = new System.Drawing.Size(175, 22);
+            this.OpenParentMenu.Size = new System.Drawing.Size(223, 22);
             this.OpenParentMenu.Text = "親フォルダを開く(&P)";
             this.OpenParentMenu.Click += new System.EventHandler(this.OpenParentMenu_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(172, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(220, 6);
             // 
             // CopyMenu
             // 
             this.CopyMenu.Name = "CopyMenu";
-            this.CopyMenu.Size = new System.Drawing.Size(175, 22);
+            this.CopyMenu.Size = new System.Drawing.Size(223, 22);
             this.CopyMenu.Text = "コピー(&C) Ctrl+C";
             this.CopyMenu.Click += new System.EventHandler(this.CopyMenu_Click);
             // 
             // MoreLikeThisMenu
             // 
             this.MoreLikeThisMenu.Name = "MoreLikeThisMenu";
-            this.MoreLikeThisMenu.Size = new System.Drawing.Size(175, 22);
+            this.MoreLikeThisMenu.Size = new System.Drawing.Size(223, 22);
             this.MoreLikeThisMenu.Text = "類似文書を検索(&M)";
             this.MoreLikeThisMenu.Click += new System.EventHandler(this.MoreLikeThisMenu_Click);
             // 
             // DiffMenu
             // 
             this.DiffMenu.Name = "DiffMenu";
-            this.DiffMenu.Size = new System.Drawing.Size(175, 22);
+            this.DiffMenu.Size = new System.Drawing.Size(223, 22);
             this.DiffMenu.Text = "差分(&D)";
             this.DiffMenu.Click += new System.EventHandler(this.DiffMenu_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(172, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(220, 6);
             // 
             // ShowPropertiesMenu
             // 
             this.ShowPropertiesMenu.Name = "ShowPropertiesMenu";
-            this.ShowPropertiesMenu.Size = new System.Drawing.Size(175, 22);
+            this.ShowPropertiesMenu.Size = new System.Drawing.Size(223, 22);
             this.ShowPropertiesMenu.Text = "プロパティ(&R)";
             this.ShowPropertiesMenu.Click += new System.EventHandler(this.ShowPropertiesMenu_Click);
+            // 
+            // OpenParentByExplorerMenu
+            // 
+            this.OpenParentByExplorerMenu.Name = "OpenParentByExplorerMenu";
+            this.OpenParentByExplorerMenu.Size = new System.Drawing.Size(223, 22);
+            this.OpenParentByExplorerMenu.Text = "Explorerで親フォルダを開く(&P)";
+            this.OpenParentByExplorerMenu.Click += new System.EventHandler(this.OpenParentByExplorerMenu_Click);
             // 
             // PreviewPanel
             // 
@@ -790,6 +799,24 @@
             this.SearchSplitContainer.SplitterDistance = 212;
             this.SearchSplitContainer.TabIndex = 121;
             // 
+            // PathText
+            // 
+            this.PathText.Location = new System.Drawing.Point(75, 97);
+            this.PathText.Name = "PathText";
+            this.PathText.Size = new System.Drawing.Size(186, 19);
+            this.PathText.TabIndex = 117;
+            // 
+            // label5
+            // 
+            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label5.Location = new System.Drawing.Point(5, 97);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(66, 20);
+            this.label5.TabIndex = 118;
+            this.label5.Text = "パス";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // ExpandPreviewCheck
             // 
             this.ExpandPreviewCheck.Appearance = System.Windows.Forms.Appearance.Button;
@@ -912,24 +939,6 @@
             this.collapsibleSplitter1.UseAnimations = false;
             this.collapsibleSplitter1.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
             // 
-            // PathText
-            // 
-            this.PathText.Location = new System.Drawing.Point(75, 97);
-            this.PathText.Name = "PathText";
-            this.PathText.Size = new System.Drawing.Size(186, 19);
-            this.PathText.TabIndex = 117;
-            // 
-            // label5
-            // 
-            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label5.Location = new System.Drawing.Point(5, 97);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(66, 20);
-            this.label5.TabIndex = 118;
-            this.label5.Text = "パス";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // SearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -944,6 +953,7 @@
             this.KeyPreview = true;
             this.Name = "SearchForm";
             this.Text = "ファイル検索";
+            this.Activated += new System.EventHandler(this.SearchForm_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SearchForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SearchForm_FormClosed);
             this.Load += new System.EventHandler(this.SearchForm_Load);
@@ -1049,5 +1059,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         internal System.Windows.Forms.TextBox PathText;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ToolStripMenuItem OpenParentByExplorerMenu;
     }
 }

@@ -1,0 +1,1417 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class BaseSearchConditionControl
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class BaseSearchConditionControl
+   ">
+    <meta name="generator" content="docfx 2.33.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="FxCommonLib.Controls.BaseSearchConditionControl">
+  
+  
+  <h1 id="FxCommonLib_Controls_BaseSearchConditionControl" data-uid="FxCommonLib.Controls.BaseSearchConditionControl" class="text-break">Class BaseSearchConditionControl
+  </h1>
+  <div class="markdown level0 summary"><p>検索条件コントロール
+(※abstractクラスのためデザイナは利用できない)</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">BaseSearchConditionControl</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="FxCommonLib.Controls.html">FxCommonLib.Controls</a></h6>
+  <h6><strong>Assembly</strong>: FxCommonLib.dll</h6>
+  <h5 id="FxCommonLib_Controls_BaseSearchConditionControl_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class BaseSearchConditionControl : UserControl</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl__ctor_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.#ctor*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl__ctor_FxCommonLib_Utils_MultiLangUtil_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.#ctor(FxCommonLib.Utils.MultiLangUtil)">BaseSearchConditionControl(MultiLangUtil)</h4>
+  <div class="markdown level1 summary"><p>コンストラクタ</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BaseSearchConditionControl(MultiLangUtil multilangutil)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.MultiLangUtil.html">MultiLangUtil</a></td>
+        <td><span class="parametername">multilangutil</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  
+  
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl__ctlSize" data-uid="FxCommonLib.Controls.BaseSearchConditionControl._ctlSize">_ctlSize</h4>
+  <div class="markdown level1 summary"><p>標準コントロールサイズ</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected static Size _ctlSize</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Size</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl__dispOrderSize" data-uid="FxCommonLib.Controls.BaseSearchConditionControl._dispOrderSize">_dispOrderSize</h4>
+  <div class="markdown level1 summary"><p>表示順コントロールサイズ</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected static Size _dispOrderSize</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Size</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl__initCondition" data-uid="FxCommonLib.Controls.BaseSearchConditionControl._initCondition">_initCondition</h4>
+  <div class="markdown level1 summary"><p>初期設定値</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected DataSet _initCondition</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DataSet</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl__labelSize" data-uid="FxCommonLib.Controls.BaseSearchConditionControl._labelSize">_labelSize</h4>
+  <div class="markdown level1 summary"><p>ラベルサイズ</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected static Size _labelSize</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Size</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl__moreWideCtlSize" data-uid="FxCommonLib.Controls.BaseSearchConditionControl._moreWideCtlSize">_moreWideCtlSize</h4>
+  <div class="markdown level1 summary"><p>モアワイドコントロールサイズ</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected static Size _moreWideCtlSize</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Size</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl__visibleSize" data-uid="FxCommonLib.Controls.BaseSearchConditionControl._visibleSize">_visibleSize</h4>
+  <div class="markdown level1 summary"><p>表示チェックボックスサイズ</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected static Size _visibleSize</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Size</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl__waveSize" data-uid="FxCommonLib.Controls.BaseSearchConditionControl._waveSize">_waveSize</h4>
+  <div class="markdown level1 summary"><p>～文字サイズ</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected static Size _waveSize</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Size</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl__wideCtlSize" data-uid="FxCommonLib.Controls.BaseSearchConditionControl._wideCtlSize">_wideCtlSize</h4>
+  <div class="markdown level1 summary"><p>ワイドコントロールサイズ</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected static Size _wideCtlSize</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Size</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_ControlNameLeft" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.ControlNameLeft">ControlNameLeft</h4>
+  <div class="markdown level1 summary"><p>コントロール名ラベルの左位置</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected const int ControlNameLeft = 95</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_DispOrderLeft" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.DispOrderLeft">DispOrderLeft</h4>
+  <div class="markdown level1 summary"><p>表示順入力コントロールの左位置</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected const int DispOrderLeft = 5</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_InputLeft" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.InputLeft">InputLeft</h4>
+  <div class="markdown level1 summary"><p>入力エリアの左位置</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected const int InputLeft = 170</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_LabelLeft" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.LabelLeft">LabelLeft</h4>
+  <div class="markdown level1 summary"><p>ラベルの左位置</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected const int LabelLeft = 5</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_RowHeight" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.RowHeight">RowHeight</h4>
+  <div class="markdown level1 summary"><p>高さ</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected const int RowHeight = 25</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_Value1Left" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.Value1Left">Value1Left</h4>
+  <div class="markdown level1 summary"><p>入力コントロール1の左位置</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected const int Value1Left = 260</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_Value2Left" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.Value2Left">Value2Left</h4>
+  <div class="markdown level1 summary"><p>入力コントロール2の左位置</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected const int Value2Left = 415</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_VisibleCheckLeft" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.VisibleCheckLeft">VisibleCheckLeft</h4>
+  <div class="markdown level1 summary"><p>表示チェックボックスの左位置</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected const int VisibleCheckLeft = 60</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_WaveLeft" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.WaveLeft">WaveLeft</h4>
+  <div class="markdown level1 summary"><p>～文字の左位置</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected const int WaveLeft = 325</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_ConfigMode_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.ConfigMode*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_ConfigMode" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.ConfigMode">ConfigMode</h4>
+  <div class="markdown level1 summary"><p>設定モード</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ConfigMode { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_GetMainPanel_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.GetMainPanel*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_GetMainPanel" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.GetMainPanel">GetMainPanel</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Panel GetMainPanel { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Panel</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_GridName_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.GridName*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_GridName" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.GridName">GridName</h4>
+  <div class="markdown level1 summary"><p>Grid名</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GridName { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_MultiLangUtil_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.MultiLangUtil*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_MultiLangUtil" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.MultiLangUtil">MultiLangUtil</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected MultiLangUtil MultiLangUtil { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.MultiLangUtil.html">MultiLangUtil</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_ShowInitData_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.ShowInitData*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_ShowInitData" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.ShowInitData">ShowInitData</h4>
+  <div class="markdown level1 summary"><p>初期表示するかどうか</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ShowInitData { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_WindowName_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.WindowName*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_WindowName" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.WindowName">WindowName</h4>
+  <div class="markdown level1 summary"><p>Window名</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string WindowName { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_ClearCondition_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.ClearCondition*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_ClearCondition" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.ClearCondition">ClearCondition()</h4>
+  <div class="markdown level1 summary"><p>検索条件クリア(表示されている条件のみクリア)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearCondition()</code></pre>
+  </div>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_Dispose_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.Dispose*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_Dispose_System_Boolean_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.Dispose(System.Boolean)">Dispose(Boolean)</h4>
+  <div class="markdown level1 summary"><p>使用中のリソースをすべてクリーンアップします。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Dispose(bool disposing)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">disposing</span></td>
+        <td><p>マネージ リソースが破棄される場合 true、破棄されない場合は false です。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_GetSearchCondition_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.GetSearchCondition*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_GetSearchCondition" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.GetSearchCondition">GetSearchCondition()</h4>
+  <div class="markdown level1 summary"><p>検索条件初期設定情報を取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected abstract DataSet GetSearchCondition()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DataSet</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_GetSearchParam_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.GetSearchParam*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_GetSearchParam" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.GetSearchParam">GetSearchParam()</h4>
+  <div class="markdown level1 summary"><p>入力された検索条件をDataSetとして取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract DataSet GetSearchParam()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DataSet</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_LoadControl_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.LoadControl*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_LoadControl" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.LoadControl">LoadControl()</h4>
+  <div class="markdown level1 summary"><p>コントロール配置</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void LoadControl()</code></pre>
+  </div>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_LoadControl_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.LoadControl*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_LoadControl_System_Boolean_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.LoadControl(System.Boolean)">LoadControl(Boolean)</h4>
+  <div class="markdown level1 summary"><p>コントロール配置</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract void LoadControl(bool useShowInitDataMode)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">useShowInitDataMode</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_SetConfCtlTypeDateRange_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.SetConfCtlTypeDateRange*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_SetConfCtlTypeDateRange_System_Int32_System_Int32_System_Int32_System_Int32_DataRow_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.SetConfCtlTypeDateRange(System.Int32,System.Int32,System.Int32,System.Int32,DataRow)">SetConfCtlTypeDateRange(Int32, Int32, Int32, Int32, DataRow)</h4>
+  <div class="markdown level1 summary"><p>日付(自至)コントロール設定</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected int SetConfCtlTypeDateRange(int lo, int vo, int wo, int itemY, DataRow r)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">lo</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">vo</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">wo</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">itemY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">DataRow</span></td>
+        <td><span class="parametername">r</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_SetConfCtlTypeTimeRange_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.SetConfCtlTypeTimeRange*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_SetConfCtlTypeTimeRange_System_Int32_System_Int32_System_Int32_System_Int32_DataRow_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.SetConfCtlTypeTimeRange(System.Int32,System.Int32,System.Int32,System.Int32,DataRow)">SetConfCtlTypeTimeRange(Int32, Int32, Int32, Int32, DataRow)</h4>
+  <div class="markdown level1 summary"><p>時間(自至)コントロール設定</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected int SetConfCtlTypeTimeRange(int lo, int vo, int wo, int itemY, DataRow r)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">lo</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">vo</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">wo</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">itemY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">DataRow</span></td>
+        <td><span class="parametername">r</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_SetConfigControl_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.SetConfigControl*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_SetConfigControl" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.SetConfigControl">SetConfigControl()</h4>
+  <div class="markdown level1 summary"><p>設定変更用コントロール配置</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected abstract void SetConfigControl()</code></pre>
+  </div>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_SetControl_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.SetControl*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_SetControl" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.SetControl">SetControl()</h4>
+  <div class="markdown level1 summary"><p>コントロール配置</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract void SetControl()</code></pre>
+  </div>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_SetCtlTypeDate_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.SetCtlTypeDate*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_SetCtlTypeDate_System_Int32_System_Int32_DataRow_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.SetCtlTypeDate(System.Int32,System.Int32,DataRow)">SetCtlTypeDate(Int32, Int32, DataRow)</h4>
+  <div class="markdown level1 summary"><p>日付を設定</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void SetCtlTypeDate(int lo, int itemY, DataRow r)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">lo</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">itemY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">DataRow</span></td>
+        <td><span class="parametername">r</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_SetCtlTypeDateRange_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.SetCtlTypeDateRange*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_SetCtlTypeDateRange_System_Int32_System_Int32_System_Int32_System_Int32_DataRow_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.SetCtlTypeDateRange(System.Int32,System.Int32,System.Int32,System.Int32,DataRow)">SetCtlTypeDateRange(Int32, Int32, Int32, Int32, DataRow)</h4>
+  <div class="markdown level1 summary"><p>日付範囲指定を設定</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected int SetCtlTypeDateRange(int lo, int vo, int wo, int itemY, DataRow r)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">lo</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">vo</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">wo</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">itemY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">DataRow</span></td>
+        <td><span class="parametername">r</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_SetCtlTypeNumericRange_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.SetCtlTypeNumericRange*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_SetCtlTypeNumericRange_System_Int32_System_Int32_System_Int32_System_Int32_DataRow_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.SetCtlTypeNumericRange(System.Int32,System.Int32,System.Int32,System.Int32,DataRow)">SetCtlTypeNumericRange(Int32, Int32, Int32, Int32, DataRow)</h4>
+  <div class="markdown level1 summary"><p>数値範囲指定を設定</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected int SetCtlTypeNumericRange(int lo, int vo, int wo, int itemY, DataRow r)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">lo</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">vo</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">wo</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">itemY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">DataRow</span></td>
+        <td><span class="parametername">r</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_SetCtlTypePulldownlist_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.SetCtlTypePulldownlist*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_SetCtlTypePulldownlist_System_Int32_System_Int32_System_Int32_DataRow_DataSet_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.SetCtlTypePulldownlist(System.Int32,System.Int32,System.Int32,DataRow,DataSet)">SetCtlTypePulldownlist(Int32, Int32, Int32, DataRow, DataSet)</h4>
+  <div class="markdown level1 summary"><p>プルダウンを設定</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void SetCtlTypePulldownlist(int lo, int vo, int itemY, DataRow r, DataSet ds)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">lo</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">vo</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">itemY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">DataRow</span></td>
+        <td><span class="parametername">r</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">DataSet</span></td>
+        <td><span class="parametername">ds</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_SetCtlTypeString_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.SetCtlTypeString*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_SetCtlTypeString_System_Int32_System_Int32_System_Int32_DataRow_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.SetCtlTypeString(System.Int32,System.Int32,System.Int32,DataRow)">SetCtlTypeString(Int32, Int32, Int32, DataRow)</h4>
+  <div class="markdown level1 summary"><p>テキストボックスを設定</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void SetCtlTypeString(int lo, int vo, int itemY, DataRow r)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">lo</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">vo</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">itemY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">DataRow</span></td>
+        <td><span class="parametername">r</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_SetCtlTypeTimeRange_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.SetCtlTypeTimeRange*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_SetCtlTypeTimeRange_System_Int32_System_Int32_System_Int32_System_Int32_DataRow_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.SetCtlTypeTimeRange(System.Int32,System.Int32,System.Int32,System.Int32,DataRow)">SetCtlTypeTimeRange(Int32, Int32, Int32, Int32, DataRow)</h4>
+  <div class="markdown level1 summary"><p>時間範囲指定を設定</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected int SetCtlTypeTimeRange(int lo, int vo, int wo, int itemY, DataRow r)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">lo</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">vo</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">wo</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">itemY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">DataRow</span></td>
+        <td><span class="parametername">r</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_SetLabel_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.SetLabel*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_SetLabel_System_Int32_System_Int32_Size_BorderStyle_System_String_System_String_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.SetLabel(System.Int32,System.Int32,Size,BorderStyle,System.String,System.String)">SetLabel(Int32, Int32, Size, BorderStyle, String, String)</h4>
+  <div class="markdown level1 summary"><p>ラベル設定</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void SetLabel(int itemX, int itemY, Size s, BorderStyle bs, string ctlName, string text)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">itemX</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">itemY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Size</span></td>
+        <td><span class="parametername">s</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">BorderStyle</span></td>
+        <td><span class="parametername">bs</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">ctlName</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">text</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Controls_BaseSearchConditionControl_ValidateVisibleFlg_" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.ValidateVisibleFlg*"></a>
+  <h4 id="FxCommonLib_Controls_BaseSearchConditionControl_ValidateVisibleFlg" data-uid="FxCommonLib.Controls.BaseSearchConditionControl.ValidateVisibleFlg">ValidateVisibleFlg()</h4>
+  <div class="markdown level1 summary"><p>初期値を設定している場合、表示フラグをONにしているか検証する。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ValidateVisibleFlg()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

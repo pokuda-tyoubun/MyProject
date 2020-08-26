@@ -1,4 +1,5 @@
-﻿using System;
+﻿using org.omg.CORBA;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,11 @@ namespace PokudaSearch.IPC {
             if (OnSend != null) {
                 OnSend(new IPCShareInfoEventArg(path));
             }
+        }
+
+        public override object InitializeLifetimeService() {
+            //IPC通信のタイムアウトを無制限にする
+            return null;
         }
 
         public class IPCShareInfoEventArg : EventArgs {

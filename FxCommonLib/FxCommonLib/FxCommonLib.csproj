@@ -1,0 +1,482 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AFF59E76-11CF-4170-A307-5A287716CA50}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FxCommonLib</RootNamespace>
+    <AssemblyName>FxCommonLib</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>15a70432</NuGetPackageImportStamp>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\..\ecoLLaboMES\src\FxService\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>5</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>MathNet.Numerics.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'NKTDebug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\NKTDebug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'NKTRelease|AnyCPU'">
+    <OutputPath>bin\NKTRelease\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'NTNDebug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\NTNDebug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'NTNRelease|AnyCPU'">
+    <OutputPath>bin\NTNRelease\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
+  <ItemGroup>
+    <Reference Include="C1.C1Zip.4">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="C1.Win.4">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="C1.Win.BarCode.4">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="C1.Win.C1FlexGrid.4">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="C1.Win.C1Input.4">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="C1.Win.C1SuperTooltip.4">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="ExcelDataReader">
+      <HintPath>..\packages\ExcelDataReader.3.4.0\lib\net45\ExcelDataReader.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet">
+      <HintPath>..\packages\ExcelDataReader.DataSet.3.4.0\lib\net45\ExcelDataReader.DataSet.dll</HintPath>
+    </Reference>
+    <Reference Include="Hnx8.ReadJEnc, Version=1.3.1.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReadJEnc.1.3.1.2\lib\net45\Hnx8.ReadJEnc.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\log4net-1.2.11\net-cp\4.0\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="LumenWorks.Framework.IO, Version=3.8.0.0, Culture=neutral, PublicKeyToken=5ad3ea2f85776344, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\LumenWorks\LumenWorks.Framework.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>..\packages\MathNet.Numerics.3.13.1\lib\net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\ecoLLaboMES\src\CCCStdAddIn\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.110.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.110.0\lib\net45\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseForm\BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaseForm\BaseForm.Designer.cs">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BaseForm\BaseColConfDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaseForm\BaseColConfDialog.Designer.cs">
+      <DependentUpon>BaseColConfDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BaseReportWriter\BaseReportWriter.cs" />
+    <Compile Include="BaseValidator\BaseValidator.cs" />
+    <Compile Include="Consts\CommonConsts.cs" />
+    <Compile Include="Consts\IM\IMConsts.cs" />
+    <Compile Include="Controls\BaseCodeSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BaseCodeSelector.Designer.cs">
+      <DependentUpon>BaseCodeSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BaseSearchConditionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BaseSearchConditionControl.Designer.cs">
+      <DependentUpon>BaseSearchConditionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CollapsibleSplitter.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DateEditDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\DateEditDialog.Designer.cs">
+      <DependentUpon>DateEditDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DateInitConfControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\FilePathTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\FlexGridEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\FlexGridEx.Designer.cs">
+      <DependentUpon>FlexGridEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FxGanttBar.cs" />
+    <Compile Include="Controls\FxGanttRow.cs" />
+    <Compile Include="Controls\FxGanttView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ICodeTextBoxEx.cs" />
+    <Compile Include="Controls\NumberOfRowsInputDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\NumberOfRowsInputDialog.Designer.cs">
+      <DependentUpon>NumberOfRowsInputDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NumericEditEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\NumericEditEx.Designer.cs">
+      <DependentUpon>NumericEditEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ProgressDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\ProgressDialog.Designer.cs">
+      <DependentUpon>ProgressDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SearchBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SearchBox.Designer.cs">
+      <DependentUpon>SearchBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CodeTextBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\CodeTextBoxEx.Designer.cs">
+      <DependentUpon>CodeTextBoxEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TextBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\TextBoxEx.Designer.cs">
+      <DependentUpon>TextBoxEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Consts\MES\MESConsts.cs" />
+    <Compile Include="Exceptions\MaxRowsException.cs" />
+    <Compile Include="Extensions\DataRowExtensions.cs" />
+    <Compile Include="Extensions\DcitionaryExtensions.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Log4NetAppender\MSTeamsAppender.cs" />
+    <Compile Include="Log4NetAppender\TextBoxAppenderEx.cs" />
+    <Compile Include="Models\BaseUser.cs" />
+    <Compile Include="Models\ColumnInfo.cs" />
+    <Compile Include="Models\ColumnConfig.cs" />
+    <Compile Include="Models\DateTimeRange.cs" />
+    <Compile Include="Models\AdjustExcelAutoShapeModel.cs" />
+    <Compile Include="Models\MES\ByUser\NKT\NKTMaterialSelectModel.cs" />
+    <Compile Include="Models\MES\BaseMaterilSelectModel.cs" />
+    <Compile Include="Models\ServiceSide\CommonConfModel.cs" />
+    <Compile Include="Models\DataDictionaryModel.cs" />
+    <Compile Include="Models\ErrorMessage.cs" />
+    <Compile Include="Models\FilterHelper.cs" />
+    <Compile Include="Models\IM\IMUser.cs" />
+    <Compile Include="Models\ServiceSide\GridConfigModel.cs" />
+    <Compile Include="Models\ServiceSide\MessageModel.cs" />
+    <Compile Include="Models\MES\Client.cs" />
+    <Compile Include="Models\ServiceSide\SearchConditionModel.cs" />
+    <Compile Include="Models\ServiceSide\SystemCodeModel.cs" />
+    <Compile Include="Models\ValuePair.cs" />
+    <Compile Include="Models\ResourceNode.cs" />
+    <Compile Include="Models\WFM\Employee.cs" />
+    <Compile Include="Models\ServiceSide\WindowStateModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SQLSrc\m_common_conf.Designer.cs">
+      <DependentUpon>m_common_conf.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="SQLSrc\m_data_dictionary.Designer.cs">
+      <DependentUpon>m_data_dictionary.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="SQLSrc\m_message.Designer.cs">
+      <DependentUpon>m_message.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="SQLSrc\m_system_code.Designer.cs">
+      <DependentUpon>m_system_code.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="SQLSrc\t_grid_config.Designer.cs">
+      <DependentUpon>t_grid_config.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="SQLSrc\t_search_condition.Designer.cs">
+      <DependentUpon>t_search_condition.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="SQLSrc\t_window_state.Designer.cs">
+      <DependentUpon>t_window_state.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="TaskScheduler\ISchedule.cs" />
+    <Compile Include="FTSIndexer\FilterConsts.cs" />
+    <Compile Include="FTSIndexer\IFilterParser.cs" />
+    <Compile Include="Utils\AsyncLockUtil.cs" />
+    <Compile Include="Utils\AzureUtil.cs" />
+    <Compile Include="Utils\BitmapUtil.cs" />
+    <Compile Include="Utils\ColorUtil.cs" />
+    <Compile Include="Utils\ColumnConfigUtil.cs" />
+    <Compile Include="Utils\ComboUtil.cs" />
+    <Compile Include="Utils\COMUtil.cs" />
+    <Compile Include="Utils\CSVUtil.cs" />
+    <Compile Include="Utils\DataSetUtil.cs" />
+    <Compile Include="Utils\DateTimeUtil.cs" />
+    <Compile Include="Utils\DeepCopyUtil.cs" />
+    <Compile Include="Utils\DesignModeUtil.cs" />
+    <Compile Include="Utils\ExcelReadUtil.cs" />
+    <Compile Include="Utils\ExchangeUtil.cs" />
+    <Compile Include="Utils\PublicWebApiUtil.cs" />
+    <Compile Include="Utils\MoneyUtil.cs" />
+    <Compile Include="Utils\RegAsmUtil.cs" />
+    <Compile Include="Utils\SQLiteDBUtil.cs" />
+    <Compile Include="Utils\WordUtil.cs" />
+    <Compile Include="Utils\PowerPointUtil.cs" />
+    <Compile Include="Utils\ExcelUtil.cs" />
+    <Compile Include="Utils\ExpandObjectUtil.cs" />
+    <Compile Include="Utils\FileUtil.cs" />
+    <Compile Include="Utils\EnumUtil.cs" />
+    <Compile Include="Utils\GenerationBackupUtil.cs" />
+    <Compile Include="Utils\GoogleCalendarApiUtil.cs" />
+    <Compile Include="Utils\GoogleMapsApiUtil.cs" />
+    <Compile Include="Utils\MailUtil.cs" />
+    <Compile Include="Utils\MathUtil.cs" />
+    <Compile Include="Utils\MSTeamsUtil.cs" />
+    <Compile Include="Utils\OrderedDictionary.cs" />
+    <Compile Include="Utils\RegexUtil.cs" />
+    <Compile Include="Utils\StdGenUtil.cs" />
+    <Compile Include="Utils\XMLUtil.cs" />
+    <Compile Include="Utils\MultiLangUtil.cs" />
+    <Compile Include="Utils\SQLDBUtil.cs" />
+    <Compile Include="Utils\StringUtil.cs" />
+    <Compile Include="Utils\TreeViewUtil.cs" />
+    <Compile Include="Utils\Tree\TreeElement.cs" />
+    <Compile Include="Utils\Tree\TreeElementCollection.cs" />
+    <Compile Include="Utils\Tree\TreeElementKind.cs" />
+    <Compile Include="Utils\Tree\TreeElementVisitor.cs" />
+    <Compile Include="Utils\ValidateUtil.cs" />
+    <Compile Include="Consts\WFM\WFMConsts.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MathNet.Numerics.snk" />
+    <None Include="packages.config" />
+    <None Include="Resources\ArrowUp24.bmp" />
+    <None Include="Resources\ArrowDown24.bmp" />
+    <Content Include="Lib\Barcode\BarcodeLib.dll" />
+    <Content Include="Lib\log4net-1.2.11\net-cp\4.0\log4net.dll" />
+    <Content Include="Lib\LuceneNet\Lucene.Net.dll" />
+    <Content Include="Lib\LuceneNet\ReadMe.txt" />
+    <Content Include="Lib\LumenWorks\LumenWorks.Framework.IO.dll" />
+    <Content Include="Lib\LumenWorks\LumenWorks.Framework.IO.XML">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="BaseForm\BaseForm.resx">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BaseForm\BaseColConfDialog.resx">
+      <DependentUpon>BaseColConfDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\BaseCodeSelector.resx">
+      <DependentUpon>BaseCodeSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\BaseSearchConditionControl.resx">
+      <DependentUpon>BaseSearchConditionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DateEditDialog.resx">
+      <DependentUpon>DateEditDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DateInitConfControl.resx">
+      <DependentUpon>DateInitConfControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\FilePathTextBox.resx">
+      <DependentUpon>FilePathTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\FlexGridEx.resx">
+      <DependentUpon>FlexGridEx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\FxGanttView.resx">
+      <DependentUpon>FxGanttView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\NumberOfRowsInputDialog.resx">
+      <DependentUpon>NumberOfRowsInputDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ProgressDialog.resx">
+      <DependentUpon>ProgressDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SearchBox.resx">
+      <DependentUpon>SearchBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CodeTextBoxEx.resx">
+      <DependentUpon>CodeTextBoxEx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TextBoxEx.resx">
+      <DependentUpon>TextBoxEx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SQLSrc\m_common_conf.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>m_common_conf.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SQLSrc</CustomToolNamespace>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SQLSrc\m_data_dictionary.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>m_data_dictionary.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SQLSrc</CustomToolNamespace>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SQLSrc\m_message.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>m_message.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SQLSrc</CustomToolNamespace>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SQLSrc\m_system_code.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>m_system_code.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SQLSrc</CustomToolNamespace>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SQLSrc\t_grid_config.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>t_grid_config.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SQLSrc</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SQLSrc\t_search_condition.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>t_search_condition.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SQLSrc</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SQLSrc\t_window_state.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>t_window_state.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CustomToolNamespace>SQLSrc</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>このプロジェクトが参照している NuGet パッケージが、このコンピューター上で見つかりません。パッケージをダウンロードするには、NuGet パッケージの復元を有効化してください。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。不足しているファイルは {0} です。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,4 +1,6 @@
 ﻿using CefSharp.WinForms.Internals;
+using com.sun.corba.se.pept.transport;
+using com.sun.org.apache.xerces.@internal.util;
 using FlexLucene.Store;
 using FxCommonLib.Consts;
 using Microsoft.WindowsAPICodePack.Controls;
@@ -32,9 +34,9 @@ namespace PokudaSearch.Views {
         //NOTE:「コントロールパネル」など、CLSID表示になるページがあり、そのページの再表示方法が不明なので、
         //      Back->Forwardで暫定対応する。そのためのForwardフラグ
         /// <summary>MainExplorerにFoward処理を行うかどうか</summary>
-        private bool _doForwardMain = false;
+        //private bool _doForwardMain = false;
         /// <summary>SubExplorerにFoward処理を行うかどうか</summary>
-        private bool _doForwardSub = false;
+        //private bool _doForwardSub = false;
         #endregion MemberVariables
 
         #region Constractors
@@ -71,9 +73,7 @@ namespace PokudaSearch.Views {
         private void SubExplorer_KeyDown(object sender, KeyEventArgs e) {
 
         }
-        //HACK 左側のペインの十字キーが反応しない。
 
-        private string _command = "";
         /// <summary>
         /// NOTE:KeyDownイベントはハンドリングできない。(イベントが発火しない)
         /// </summary>
@@ -110,6 +110,18 @@ namespace PokudaSearch.Views {
                 this.MainExplorer.NavigateLogLocation(NavigationLogDirection.Backward);
                 return;
             }
+            if (e.KeyCode == Keys.BrowserBack) {
+                this.MainExplorer.NavigateLogLocation(NavigationLogDirection.Backward);
+                return;
+            }
+            if (e.KeyCode == Keys.BrowserForward) {
+                this.MainExplorer.NavigateLogLocation(NavigationLogDirection.Forward);
+                return;
+            }
+            if (e.KeyCode == Keys.Back) {
+                this.MainExplorer.NavigateLogLocation(NavigationLogDirection.Backward);
+                return;
+            }
             if ((e.Modifiers & Keys.Alt) == Keys.Alt && e.KeyCode == Keys.Right) {
                 this.MainExplorer.NavigateLogLocation(NavigationLogDirection.Forward);
                 return;
@@ -139,6 +151,18 @@ namespace PokudaSearch.Views {
                 this.SubExplorer.NavigateLogLocation(NavigationLogDirection.Backward);
                 return;
             }
+            if (e.KeyCode == Keys.BrowserBack) {
+                this.SubExplorer.NavigateLogLocation(NavigationLogDirection.Backward);
+                return;
+            }
+            if (e.KeyCode == Keys.BrowserForward) {
+                this.SubExplorer.NavigateLogLocation(NavigationLogDirection.Forward);
+                return;
+            }
+            if (e.KeyCode == Keys.Back) {
+                this.SubExplorer.NavigateLogLocation(NavigationLogDirection.Backward);
+                return;
+            }
             if ((e.Modifiers & Keys.Alt) == Keys.Alt && e.KeyCode == Keys.Right) {
                 this.SubExplorer.NavigateLogLocation(NavigationLogDirection.Forward);
                 return;
@@ -156,57 +180,63 @@ namespace PokudaSearch.Views {
                 ShowSearchForm();
             }
         }
-
-        private void MainExplorer_NavigationComplete(object sender, NavigationCompleteEventArgs e) {
-            if (System.IO.Directory.Exists(e.NewLocation.ParsingName)) {
-                this.MainExplorerPathCombo.Text = e.NewLocation.ParsingName;
-            } else {
-                this.MainExplorerPathCombo.Text = e.NewLocation.Name;
+        private void FileExplorerForm_KeyDown(object sender, KeyEventArgs e) {
+            if ((e.Modifiers & Keys.Control) == Keys.Control && e.KeyCode == Keys.W) {
+                this.SubExplorer.Focus();
             }
-            this.Text = e.NewLocation.Name;
-            if (_doForwardMain) {
-                this.MainExplorer.NavigateLogLocation(NavigationLogDirection.Forward);
-                _doForwardMain = false;
+            if ((e.Modifiers & Keys.Control) == Keys.Control && e.KeyCode == Keys.E) {
+                ShowSearchForm();
+            }
+            if ((e.Modifiers & Keys.Control) == Keys.Control && e.KeyCode == Keys.F) {
+                ShowSearchFormWithTargetDir();
             }
         }
-        private void SubExplorer_NavigationComplete(object sender, NavigationCompleteEventArgs e) {
-            if (System.IO.Directory.Exists(e.NewLocation.ParsingName)) {
-                this.SubExplorerPathCombo.Text = e.NewLocation.ParsingName;
+
+        private void MainExplorer_NavigationComplete(object sender, NavigationCompleteEventArgs e) {
+            var so = e.NewLocation;
+            if (so.IsFileSystemObject) {
+                this.MainExplorerCombo.Text = e.NewLocation.ParsingName;
+                this.MainExplorerCombo.Items.Insert(this.MainExplorerCombo.Items.Count, so.ParsingName);
             } else {
-                this.SubExplorerPathCombo.Text = e.NewLocation.Name;
+                this.MainExplorerCombo.Text = e.NewLocation.Name;
+                this.MainExplorerCombo.Items.Insert(this.MainExplorerCombo.Items.Count, so.Name);
             }
-            if (_doForwardSub) {
-                this.SubExplorer.NavigateLogLocation(NavigationLogDirection.Forward);
-                _doForwardSub = false;
+            this.Text = e.NewLocation.Name;
+        }
+        private void SubExplorer_NavigationComplete(object sender, NavigationCompleteEventArgs e) {
+            var so = e.NewLocation;
+            if (so.IsFileSystemObject) {
+                this.SubExplorerCombo.Text = e.NewLocation.ParsingName;
+                this.SubExplorerCombo.Items.Insert(this.SubExplorerCombo.Items.Count, so.ParsingName);
+            } else {
+                this.SubExplorerCombo.Text = e.NewLocation.Name;
+                this.SubExplorerCombo.Items.Insert(this.SubExplorerCombo.Items.Count, so.Name);
             }
         }
         public void LoadMainExplorer(string path) {
-            //AppObject.Frame.Activate();
-            //User32.SetForegroundWindow(Process.GetCurrentProcess().MainWindowHandle);
-            AppObject.Frame.FileExplorerFormButtonPerformClick();
+            string prePath = this.MainExplorerCombo.Text;
             LoadPath(this.MainExplorer, path);
+            LoadPath(this.SubExplorer, prePath);
         }
 
         public void ReLoadFileBlowser() {
-                LoadPath(this.MainExplorer, this.MainExplorerPathCombo.Text);
-                LoadPath(this.SubExplorer, this.SubExplorerPathCombo.Text);
+            this.MainExplorer.Navigate(this.MainExplorer.NavigationLog.Locations.Last());
+            this.SubExplorer.Navigate(this.SubExplorer.NavigationLog.Locations.Last());
         }
         private void LoadPath(ExplorerBrowser eb, string path) {
             try {
                 if (System.IO.Directory.Exists(path)) {
                     eb.Navigate(ShellFileSystemFolder.FromFolderPath(path));
                 } else {
-                    eb.NavigateLogLocation(NavigationLogDirection.Backward);
-                    if (eb.Name == this.MainExplorer.Name) {
-                        _doForwardMain = true;
-                    } else {
-                        _doForwardSub = true;
-                    }
+                    //スルー
                 }
             } catch (COMException) {
                 MessageBox.Show(AppObject.GetMsg(AppObject.Msg.ERR_INVALID_PATH), 
                     AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private void LoadPath(ExplorerBrowser eb, ShellObject so) {
+            eb.Navigate(so);
         }
 
         private void FileExplorerForm_FormClosed(object sender, FormClosedEventArgs e) {
@@ -243,23 +273,12 @@ namespace PokudaSearch.Views {
         }
 
 
-        private void FileExplorerForm_KeyDown(object sender, KeyEventArgs e) {
-            if ((e.Modifiers & Keys.Control) == Keys.Control && e.KeyCode == Keys.W) {
-                this.SubExplorer.Focus();
-            }
-            if ((e.Modifiers & Keys.Control) == Keys.Control && e.KeyCode == Keys.E) {
-                ShowSearchForm();
-            }
-            if ((e.Modifiers & Keys.Control) == Keys.Control && e.KeyCode == Keys.F) {
-                ShowSearchFormWithTargetDir();
-            }
-        }
 
         private void ShowSearchForm() {
             AppObject.Frame.SearchFormButtonPerformClick();
         }
         private void ShowSearchFormWithTargetDir() {
-            string targetDir = this.MainExplorerPathCombo.Text;
+            string targetDir = this.MainExplorerCombo.Text;
             //既にインデックス化されているかどうか
             if (!MainFrameForm.SearchForm.IsContainTargetIndex(targetDir)) {
                 var result = MessageBox.Show(AppObject.GetMsg(AppObject.Msg.MSG_DO_CREATE_INDEX), 
@@ -324,16 +343,93 @@ namespace PokudaSearch.Views {
             }
         }
 
-        private void MainExplorerPathCombo_KeyDown(object sender, KeyEventArgs e) {
-            if (e.KeyCode == Keys.Enter) {
-                LoadPath(this.MainExplorer, this.MainExplorerPathCombo.Text);
+        private void OpenExploereButton_Click(object sender, EventArgs e) {
+            //ShellObject so = ShellObject.FromParsingName("::{031E4825-7B94-4DC3-B131-E946B44C8DD5}\\Git.library-ms");
+            //this.MainExplorer.Navigate(so);
+
+            SetHistory();
+        }
+
+        private void SetHistory() {
+            this.MainExplorerCombo.Items.Clear();
+            foreach (var shellObject in this.MainExplorer.NavigationLog.Locations) {
+                if (shellObject.IsFileSystemObject) {
+                    this.MainExplorerCombo.Items.Insert(this.MainExplorerCombo.Items.Count, shellObject.ParsingName);
+                } else {
+                    this.MainExplorerCombo.Items.Insert(this.MainExplorerCombo.Items.Count, shellObject.Name);
+                }
             }
         }
 
-        private void SubExplorerPathCombo_KeyDown(object sender, KeyEventArgs e) {
-            if (e.KeyCode == Keys.Enter) {
-                LoadPath(this.SubExplorer, this.SubExplorerPathCombo.Text);
+        private void MainExplorer_LocationChanged(object sender, EventArgs e) {
+            var so = this.MainExplorer.NavigationLog.Locations.Last();
+            if (so.IsFileSystemObject) {
+                this.MainExplorerCombo.Items.Insert(this.MainExplorerCombo.Items.Count, so.ParsingName);
+            } else {
+                this.MainExplorerCombo.Items.Insert(this.MainExplorerCombo.Items.Count, so.Name);
             }
+        }
+
+        private void FileExplorerForm_MouseDown(object sender, MouseEventArgs e) {
+            if (e.Button == MouseButtons.Middle) {
+                Debug.Print("MouseButtons.Middle");
+            }
+        }
+
+        /// <summary>
+        /// NOTE:発火しない。
+        /// </summary>
+        private void MainExplorer_MouseClick(object sender, MouseEventArgs e) {
+            if (e.Button == MouseButtons.Middle) {
+                Debug.Print("MouseButtons.Middle");
+            }
+        }
+
+        /// <summary>
+        /// NOTE:発火しない。
+        /// </summary>
+        private void MainExplorer_MouseUp(object sender, MouseEventArgs e) {
+            if (e.Button == MouseButtons.Middle) {
+                Debug.Print("MouseButtons.Middle");
+            }
+        }
+        /// <summary>
+        /// NOTE:発火しない。
+        /// </summary>
+        private void MainExplorer_MouseDown(object sender, MouseEventArgs e) {
+            if (e.Button == MouseButtons.Middle) {
+                Debug.Print("MouseButtons.Middle");
+            }
+        }
+
+        private void MainExplorer_Click(object sender, EventArgs e) {
+            Debug.Print("MouseButtons.Middle");
+        }
+
+        private void FileExplorerForm_Load(object sender, EventArgs e) {
+        }
+
+        private void MainExplorerCombo_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter) {
+                LoadPath(this.MainExplorer, this.MainExplorerCombo.Text);
+            }
+        }
+
+        private void MainExplorerCombo_SelectedItemChanged(object sender, EventArgs e) {
+            int idx = this.MainExplorerCombo.SelectedIndex;
+            var so = this.MainExplorer.NavigationLog.Locations.ToArray()[idx];
+            this.MainExplorer.Navigate(so);
+        }
+
+        private void SubExplorerCombo_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter) {
+                LoadPath(this.SubExplorer, this.SubExplorerCombo.Text);
+            }
+        }
+        private void SubExplorerCombo_SelectedItemChanged(object sender, EventArgs e) {
+            int idx = this.SubExplorerCombo.SelectedIndex;
+            var so = this.SubExplorer.NavigationLog.Locations.ToArray()[idx];
+            this.SubExplorer.Navigate(so);
         }
     }
 }

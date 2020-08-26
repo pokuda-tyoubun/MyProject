@@ -26,6 +26,8 @@ namespace PokudaSearch.Views {
 
         public TagEditForm() {
             InitializeComponent();
+
+            this.TargetPathText.Text = @"C:\Users\078134995\Videos\ssni-681.mp4";
         }
 
         private void MainPanel_Paint(object sender, PaintEventArgs e) {
@@ -140,9 +142,9 @@ namespace PokudaSearch.Views {
             }
         }
 
-        private void GetInfoButton_Click(object sender, EventArgs e) {
+        private async void GetInfoButton_Click(object sender, EventArgs e) {
             var mp4wd = new MP4WebDriver();
-            TagInfo ti = mp4wd.GetTagInfoFromFanza(new FileInfo(this.TargetPathText.Text));
+            TagInfo ti = await mp4wd.GetTagInfoFromFanza(new FileInfo(this.TargetPathText.Text));
 
             this.TitleText.Text = ti.Title;
             this.ArtistText.Text = ti.Performers;
@@ -165,6 +167,14 @@ namespace PokudaSearch.Views {
         private void MainPanel_DragDrop(object sender, DragEventArgs e) {
            string[] fileName = (string[]) e.Data.GetData(DataFormats.FileDrop, false);
             this.TargetPathText.Text = fileName[0];
+        }
+
+        private async void ConfirmAgeButton_Click(object sender, EventArgs e) {
+            //AppObject.CefSharpPanel.LoadAsync("https://www.dmm.co.jp/mono/dvd/");
+
+            AppObject.CefSharpPanel.LoadAsync("https://pokuda-tyoubun.blogspot.com/");
+            string val = await AppObject.CefSharpPanel.GetTextContentByXpath("//*[@class='title']");
+            Debug.Print(val);
         }
     }
 }

@@ -1,0 +1,832 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class FileUtil
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class FileUtil
+   ">
+    <meta name="generator" content="docfx 2.33.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="FxCommonLib.Utils.FileUtil">
+  
+  
+  <h1 id="FxCommonLib_Utils_FileUtil" data-uid="FxCommonLib.Utils.FileUtil" class="text-break">Class FileUtil
+  </h1>
+  <div class="markdown level0 summary"><p>File操作ユーティリティ</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">FileUtil</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="FxCommonLib.Utils.html">FxCommonLib.Utils</a></h6>
+  <h6><strong>Assembly</strong>: FxCommonLib.dll</h6>
+  <h5 id="FxCommonLib_Utils_FileUtil_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class FileUtil</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="FxCommonLib_Utils_FileUtil_AddFullControleRule_" data-uid="FxCommonLib.Utils.FileUtil.AddFullControleRule*"></a>
+  <h4 id="FxCommonLib_Utils_FileUtil_AddFullControleRule_System_String_" data-uid="FxCommonLib.Utils.FileUtil.AddFullControleRule(System.String)">AddFullControleRule(String)</h4>
+  <div class="markdown level1 summary"><p>Everyoneフルコントロール権限を付与</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void AddFullControleRule(string filePath)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">filePath</span></td>
+        <td><p>処理対象パス</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_FileUtil_AppendFileNameSuffix_" data-uid="FxCommonLib.Utils.FileUtil.AppendFileNameSuffix*"></a>
+  <h4 id="FxCommonLib_Utils_FileUtil_AppendFileNameSuffix_System_IO_FileInfo_System_String_" data-uid="FxCommonLib.Utils.FileUtil.AppendFileNameSuffix(System.IO.FileInfo,System.String)">AppendFileNameSuffix(FileInfo, String)</h4>
+  <div class="markdown level1 summary"><p>ファイル名にSuffixを追加</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string AppendFileNameSuffix(FileInfo orgFileInfo, string suffix)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.IO.FileInfo</span></td>
+        <td><span class="parametername">orgFileInfo</span></td>
+        <td><p>処理対象ファイル</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">suffix</span></td>
+        <td><p>付与したいSuffix</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>Suffix追加済みファイル名</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_FileUtil_CompareDirectory_" data-uid="FxCommonLib.Utils.FileUtil.CompareDirectory*"></a>
+  <h4 id="FxCommonLib_Utils_FileUtil_CompareDirectory_System_String_System_String_" data-uid="FxCommonLib.Utils.FileUtil.CompareDirectory(System.String,System.String)">CompareDirectory(String, String)</h4>
+  <div class="markdown level1 summary"><p>ディレクトリ構造が同じか比較</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool CompareDirectory(string dir1, string dir2)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">dir1</span></td>
+        <td><p>対象ディレクトリ1</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">dir2</span></td>
+        <td><p>対象ディレクトリ2</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>true:同じ／false:異なる</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_FileUtil_CopyDirectory_" data-uid="FxCommonLib.Utils.FileUtil.CopyDirectory*"></a>
+  <h4 id="FxCommonLib_Utils_FileUtil_CopyDirectory_System_String_System_String_" data-uid="FxCommonLib.Utils.FileUtil.CopyDirectory(System.String,System.String)">CopyDirectory(String, String)</h4>
+  <div class="markdown level1 summary"><p>ディレクトリ構造を再帰的にコピー</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void CopyDirectory(string sourceDirName, string destDirName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">sourceDirName</span></td>
+        <td><p>コピー元ディレクトリ</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">destDirName</span></td>
+        <td><p>コピー先ディレクトリ</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_FileUtil_DeleteDirectory_" data-uid="FxCommonLib.Utils.FileUtil.DeleteDirectory*"></a>
+  <h4 id="FxCommonLib_Utils_FileUtil_DeleteDirectory_System_IO_DirectoryInfo_" data-uid="FxCommonLib.Utils.FileUtil.DeleteDirectory(System.IO.DirectoryInfo)">DeleteDirectory(DirectoryInfo)</h4>
+  <div class="markdown level1 summary"><p>再帰的にディレクトリを削除</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void DeleteDirectory(DirectoryInfo dirInfo)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.IO.DirectoryInfo</span></td>
+        <td><span class="parametername">dirInfo</span></td>
+        <td><p>処理対象ディレクトリ</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_FileUtil_DeleteDirectory_" data-uid="FxCommonLib.Utils.FileUtil.DeleteDirectory*"></a>
+  <h4 id="FxCommonLib_Utils_FileUtil_DeleteDirectory_System_String_" data-uid="FxCommonLib.Utils.FileUtil.DeleteDirectory(System.String)">DeleteDirectory(String)</h4>
+  <div class="markdown level1 summary"><p>再帰的にディレクトリを削除</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void DeleteDirectory(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>処理対象パス</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_FileUtil_DeleteDirectoryExceptOwn_" data-uid="FxCommonLib.Utils.FileUtil.DeleteDirectoryExceptOwn*"></a>
+  <h4 id="FxCommonLib_Utils_FileUtil_DeleteDirectoryExceptOwn_System_String_" data-uid="FxCommonLib.Utils.FileUtil.DeleteDirectoryExceptOwn(System.String)">DeleteDirectoryExceptOwn(String)</h4>
+  <div class="markdown level1 summary"><p>再帰的にディレクトリを削除(指定したディレクトリは残す)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void DeleteDirectoryExceptOwn(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>処理対象パス</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_FileUtil_DeleteFile_" data-uid="FxCommonLib.Utils.FileUtil.DeleteFile*"></a>
+  <h4 id="FxCommonLib_Utils_FileUtil_DeleteFile_System_String_" data-uid="FxCommonLib.Utils.FileUtil.DeleteFile(System.String)">DeleteFile(String)</h4>
+  <div class="markdown level1 summary"><p>ファイル強制削除
+HACK 引数で強制削除を選択できるようにする。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void DeleteFile(string filePath)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">filePath</span></td>
+        <td><p>処理対象パス</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_FileUtil_DeleteOldestFile_" data-uid="FxCommonLib.Utils.FileUtil.DeleteOldestFile*"></a>
+  <h4 id="FxCommonLib_Utils_FileUtil_DeleteOldestFile_System_IO_DirectoryInfo_System_Int32_" data-uid="FxCommonLib.Utils.FileUtil.DeleteOldestFile(System.IO.DirectoryInfo,System.Int32)">DeleteOldestFile(DirectoryInfo, Int32)</h4>
+  <div class="markdown level1 summary"><p>引数で指定したファイル数分を残して古いファイルから順に削除</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void DeleteOldestFile(DirectoryInfo dir, int remainingCount)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.IO.DirectoryInfo</span></td>
+        <td><span class="parametername">dir</span></td>
+        <td><p>処理対象ディレクトリ</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">remainingCount</span></td>
+        <td><p>残すファイル数</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_FileUtil_DeleteOldFile_" data-uid="FxCommonLib.Utils.FileUtil.DeleteOldFile*"></a>
+  <h4 id="FxCommonLib_Utils_FileUtil_DeleteOldFile_System_IO_DirectoryInfo_System_DateTime_" data-uid="FxCommonLib.Utils.FileUtil.DeleteOldFile(System.IO.DirectoryInfo,System.DateTime)">DeleteOldFile(DirectoryInfo, DateTime)</h4>
+  <div class="markdown level1 summary"><p>引数で指定した日付より古いファイルを削除</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void DeleteOldFile(DirectoryInfo dir, DateTime borderDate)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.IO.DirectoryInfo</span></td>
+        <td><span class="parametername">dir</span></td>
+        <td><p>処理対象ディレクトリ</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.DateTime</span></td>
+        <td><span class="parametername">borderDate</span></td>
+        <td><p>閾となる日付</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_FileUtil_GetFileSystemAccessRuleDic_" data-uid="FxCommonLib.Utils.FileUtil.GetFileSystemAccessRuleDic*"></a>
+  <h4 id="FxCommonLib_Utils_FileUtil_GetFileSystemAccessRuleDic_System_String_" data-uid="FxCommonLib.Utils.FileUtil.GetFileSystemAccessRuleDic(System.String)">GetFileSystemAccessRuleDic(String)</h4>
+  <div class="markdown level1 summary"><p>ファイルアクセスルールを辞書として取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Dictionary&lt;string, FileSystemRights&gt; GetFileSystemAccessRuleDic(string filePath)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">filePath</span></td>
+        <td><p>処理対象パス</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Security.AccessControl.FileSystemRights</span>&gt;</td>
+        <td><p>ファイルアクセスルール辞書</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_FileUtil_GetSelectedDirectory_" data-uid="FxCommonLib.Utils.FileUtil.GetSelectedDirectory*"></a>
+  <h4 id="FxCommonLib_Utils_FileUtil_GetSelectedDirectory_System_String_System_Environment_SpecialFolder_System_String_System_Boolean_" data-uid="FxCommonLib.Utils.FileUtil.GetSelectedDirectory(System.String,System.Environment.SpecialFolder,System.String,System.Boolean)">GetSelectedDirectory(String, Environment.SpecialFolder, String, Boolean)</h4>
+  <div class="markdown level1 summary"><p>ディレクトリ選択ダイアログから選択したパスを取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string GetSelectedDirectory(string titleMsg, Environment.SpecialFolder rootFolder, string selectedPath, bool showNewFolderButton)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">titleMsg</span></td>
+        <td><p>ダイアログのタイトル</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Environment.SpecialFolder</span></td>
+        <td><span class="parametername">rootFolder</span></td>
+        <td><p>ルートフォルダ</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">selectedPath</span></td>
+        <td><p>初期選択フォルダ</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">showNewFolderButton</span></td>
+        <td><p>ユーザーが新しいフォルダを作成できる</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>選択したディレクトリパス</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_FileUtil_GetSelectedDirectory_" data-uid="FxCommonLib.Utils.FileUtil.GetSelectedDirectory*"></a>
+  <h4 id="FxCommonLib_Utils_FileUtil_GetSelectedDirectory_System_String_System_String_" data-uid="FxCommonLib.Utils.FileUtil.GetSelectedDirectory(System.String,System.String)">GetSelectedDirectory(String, String)</h4>
+  <div class="markdown level1 summary"><p>ディレクトリ選択ダイアログから選択したパスを取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string GetSelectedDirectory(string titleMsg, string selectedPath)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">titleMsg</span></td>
+        <td><p>ダイアログのタイトル</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">selectedPath</span></td>
+        <td><p>初期選択フォルダ</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>選択したディレクトリパス</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_FileUtil_GetSizeString_" data-uid="FxCommonLib.Utils.FileUtil.GetSizeString*"></a>
+  <h4 id="FxCommonLib_Utils_FileUtil_GetSizeString_System_String_" data-uid="FxCommonLib.Utils.FileUtil.GetSizeString(System.String)">GetSizeString(String)</h4>
+  <div class="markdown level1 summary"><p>ファイルサイズ用文字列に変換します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string GetSizeString(string byteSize)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">byteSize</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>KB,MB単位に変換された文字列</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_FileUtil_IsDirectory_" data-uid="FxCommonLib.Utils.FileUtil.IsDirectory*"></a>
+  <h4 id="FxCommonLib_Utils_FileUtil_IsDirectory_System_String_" data-uid="FxCommonLib.Utils.FileUtil.IsDirectory(System.String)">IsDirectory(String)</h4>
+  <div class="markdown level1 summary"><p>フォルダかどうか判定</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsDirectory(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>処理対象パス</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>true:ディレクトリ／false:ファイル</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_FileUtil_IsFileLocked_" data-uid="FxCommonLib.Utils.FileUtil.IsFileLocked*"></a>
+  <h4 id="FxCommonLib_Utils_FileUtil_IsFileLocked_System_String_" data-uid="FxCommonLib.Utils.FileUtil.IsFileLocked(System.String)">IsFileLocked(String)</h4>
+  <div class="markdown level1 summary"><p>ファイルが開かれてロックされているかどうか</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsFileLocked(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>ファイルへのパス</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>true:ロックされている／false:されていない</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_FileUtil_SetUploadFile_" data-uid="FxCommonLib.Utils.FileUtil.SetUploadFile*"></a>
+  <h4 id="FxCommonLib_Utils_FileUtil_SetUploadFile_System_String_TextBox_" data-uid="FxCommonLib.Utils.FileUtil.SetUploadFile(System.String,TextBox)">SetUploadFile(String, TextBox)</h4>
+  <div class="markdown level1 summary"><p>ファイルアップロード選択ダイアログを表示</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetUploadFile(string titleMsg, TextBox tb)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">titleMsg</span></td>
+        <td><p>ダイアログのタイトル</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">TextBox</span></td>
+        <td><span class="parametername">tb</span></td>
+        <td><p>パスをセットするTextBox</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

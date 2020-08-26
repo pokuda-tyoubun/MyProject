@@ -1,0 +1,1665 @@
+{
+  "homepages": [],
+  "source_base_path": "C:/Workspace/Repo/Git/FxCommon/src/FxCommonLib/FxCommonLib.Docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "SQNQkowcQdGHp8Rtx+DkgA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "6qFrpJ1SYM5PmtKixxOSqw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "xVlQaX7Tk85omoiWv3O+Ag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "CR3gt53WJ/3R3v0qXZ3AfQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FSReportUtility.Utils.RegexUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FSReportUtility.Utils.RegexUtil.html",
+          "hash": "bI1tNfGvPpO9pL3GM029/Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FSReportUtility.Utils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FSReportUtility.Utils.html",
+          "hash": "IND8U2IRifORma7DH5KF8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.BaseForm.BaseColConfDialog.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.BaseForm.BaseColConfDialog.html",
+          "hash": "GJ79fZXOAcGlMDeNfoc7Lw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.BaseForm.BaseForm.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.BaseForm.BaseForm.html",
+          "hash": "DVuhy+xZNrPkkJZVA9zfGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.BaseForm.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.BaseForm.html",
+          "hash": "Ia7GxRsSEOmxm6cRxAEunQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.BaseValidator.BaseValidator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.BaseValidator.BaseValidator.html",
+          "hash": "qXqo96jso6v2D/WNtm+rIw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.BaseValidator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.BaseValidator.html",
+          "hash": "glE3u3bJT7gbOiBmp8CVKA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.CommonConsts.UpdateType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.CommonConsts.UpdateType.html",
+          "hash": "mKLuiY8OLkPoav3K6IguFA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.CommonConsts.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.CommonConsts.html",
+          "hash": "DPN/CIRcPPEmZZNvjk3O5g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.IM.IMConsts.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.IM.IMConsts.html",
+          "hash": "4zo9gwKt1NJ+Ff9G8fmR+w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.IM.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.IM.html",
+          "hash": "QhP67R0yaKUEEwf0VUhFHQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.MES.MESConsts.NoteEditType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.MES.MESConsts.NoteEditType.html",
+          "hash": "JcwXGiy2UztYttzCHhgZfA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.MES.MESConsts.Panel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.MES.MESConsts.Panel.html",
+          "hash": "KIH11W5aZyMbkVaSGuQBag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.MES.MESConsts.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.MES.MESConsts.html",
+          "hash": "tjskodACP4yZP1wZNv62Ig=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.MES.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.MES.html",
+          "hash": "OMi66XcvSDnGBd7PqtPWhg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.WFM.WFMConsts.ConditionSpan.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.WFM.WFMConsts.ConditionSpan.html",
+          "hash": "K5gdMLtaXwiFRqcLFxuxAA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.WFM.WFMConsts.ConstrRuleCd.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.WFM.WFMConsts.ConstrRuleCd.html",
+          "hash": "h1GNVvjwdyzB41Z0fKx0MQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.WFM.WFMConsts.ConstrType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.WFM.WFMConsts.ConstrType.html",
+          "hash": "qDnjX0vSjaW/qiTKMHu9wg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.WFM.WFMConsts.DailyResultDetailItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.WFM.WFMConsts.DailyResultDetailItem.html",
+          "hash": "uKijdW1HykE012iy8pIccg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.WFM.WFMConsts.DateCategory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.WFM.WFMConsts.DateCategory.html",
+          "hash": "6e72l7Wq/c0xQ6vT6hLrLQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.WFM.WFMConsts.EmpConstrCondition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.WFM.WFMConsts.EmpConstrCondition.html",
+          "hash": "khXW6wmQaViiCYxmtjIxNQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.WFM.WFMConsts.GraphType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.WFM.WFMConsts.GraphType.html",
+          "hash": "Hhs/Hnw2P3W1eiQGB0c5qg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.WFM.WFMConsts.HorizontalAxisType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.WFM.WFMConsts.HorizontalAxisType.html",
+          "hash": "3MshcHanY8zB+4eA7B50nA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.WFM.WFMConsts.OptimizeStates.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.WFM.WFMConsts.OptimizeStates.html",
+          "hash": "GR/qw2Gees4T/gk3LsAN6w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.WFM.WFMConsts.PlanResultDetailItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.WFM.WFMConsts.PlanResultDetailItem.html",
+          "hash": "Q7fiKOlFlVwGAkpwVXjZVg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.WFM.WFMConsts.ShiftSelectDialogMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.WFM.WFMConsts.ShiftSelectDialogMode.html",
+          "hash": "VrKtJAVD5uVLfgbKG24UeQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.WFM.WFMConsts.SolverType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.WFM.WFMConsts.SolverType.html",
+          "hash": "vsKlijmjdIRLa8iGENuFpg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.WFM.WFMConsts.VerticalAxisType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.WFM.WFMConsts.VerticalAxisType.html",
+          "hash": "DT42yg5rglLlHCx72WoDkg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.WFM.WFMConsts.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.WFM.WFMConsts.html",
+          "hash": "xxMLpqYP4b2F1zOBYhAIvQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.WFM.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.WFM.html",
+          "hash": "UFejMTJIlyfUBBrvRUlcMA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Consts.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Consts.html",
+          "hash": "QVYuRZdBIWh89+9XhNahZw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Controls.BaseSearchConditionControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Controls.BaseSearchConditionControl.html",
+          "hash": "YVJzSbarQNSXjCfc1iEglw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Controls.DateEditDialog.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Controls.DateEditDialog.html",
+          "hash": "9+ZuIYhg3Xm+BufoCPIBQg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Controls.DateInitConfControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Controls.DateInitConfControl.html",
+          "hash": "u9aXT7MfVD2atBwGsVtFZw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Controls.FilePathTextBox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Controls.FilePathTextBox.html",
+          "hash": "hmkjnTUe2dMW6yVDwMhr2Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Controls.FlexGridEx.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Controls.FlexGridEx.html",
+          "hash": "AQ3Pprm5QNp5O1uiG0RXpA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Controls.FxGanttBar.PartTypes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Controls.FxGanttBar.PartTypes.html",
+          "hash": "WgL3U4xPGX/VCpd2xYPwNg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Controls.FxGanttBar.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Controls.FxGanttBar.html",
+          "hash": "Gp/Bj/gEDvkXQN3w3dGDWw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Controls.FxGanttRow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Controls.FxGanttRow.html",
+          "hash": "AhWdZDH8tNcrzrdleM8vkA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Controls.FxGanttView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Controls.FxGanttView.html",
+          "hash": "cIrX52qmjDrsJODxVFWRZw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Controls.NumberOfRowsInputDialog.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Controls.NumberOfRowsInputDialog.html",
+          "hash": "QqkmilSt90YztwIcPR2aPw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Controls.ProgressDialog.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Controls.ProgressDialog.html",
+          "hash": "yr5nI1C1cAhQOXyVOBbTEw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Controls.SearchBox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Controls.SearchBox.html",
+          "hash": "2/KEtawfKkEDKjZv1X5mSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Controls.TextBoxEx.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Controls.TextBoxEx.html",
+          "hash": "/021tlJ82rK+E9WjL5yD2Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Controls.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Controls.html",
+          "hash": "iE1FN9TNU33JiEIPPz/MSw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Exceptions.MaxRowsException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Exceptions.MaxRowsException.html",
+          "hash": "56GI2jy4CvBaEQrsP4r6gg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Exceptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Exceptions.html",
+          "hash": "7c2k4A9vZtXL5k+cYH/Kww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Log4NetAppender.MSTeamsAppender.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Log4NetAppender.MSTeamsAppender.html",
+          "hash": "mxSr8P6VXtiZlMGaxiX8Vg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Log4NetAppender.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Log4NetAppender.html",
+          "hash": "XVPShiATBD8jC/NIZxnpZw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.BaseUser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.BaseUser.html",
+          "hash": "hMBHKEggqP1f28VvKDy1lw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.ColumnConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.ColumnConfig.html",
+          "hash": "OsK+fiHWf+kpTOggChj30A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.ColumnInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.ColumnInfo.html",
+          "hash": "8svbA/HgFOUNUs4w0Lqv2A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.DataDictionaryModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.DataDictionaryModel.html",
+          "hash": "+4T+8QEoDvOBkf6Mv6ScxA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.DateTimeRange.IntersectionType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.DateTimeRange.IntersectionType.html",
+          "hash": "pSbnRUC4UqUExTklTyWY1Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.DateTimeRange.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.DateTimeRange.html",
+          "hash": "Ks969hZ7cwp7M6mOR6vHpg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.ErrorMessage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.ErrorMessage.html",
+          "hash": "+C3QNppcMZBtYAdK/iRjGw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.FilterHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.FilterHelper.html",
+          "hash": "a9P9EQVb0G4aNrRCgy+r5w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.IM.IMUser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.IM.IMUser.html",
+          "hash": "pqcJIpnVcEnlQbSr4ZuebA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.IM.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.IM.html",
+          "hash": "7aDGrA8uJIz+iwikxKAVLw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.MES.Client.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.MES.Client.html",
+          "hash": "iWEudP1HyC8/6skjasEetw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.MES.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.MES.html",
+          "hash": "IZJJG2QTQ2m17Uyz1YTGXA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.ResourceNode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.ResourceNode.html",
+          "hash": "VwMq/QxXYZohMyokM/F7dg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.ServiceSide.CommonConfModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.ServiceSide.CommonConfModel.html",
+          "hash": "w+jQpuCDLONa6XqM88uPvQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.ServiceSide.GridConfigModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.ServiceSide.GridConfigModel.html",
+          "hash": "qgT0FjF8TFoAv7urM+SgTA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.ServiceSide.MessageModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.ServiceSide.MessageModel.html",
+          "hash": "yIltdpjLN2m3mkhApkGZLw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.ServiceSide.SearchConditionModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.ServiceSide.SearchConditionModel.html",
+          "hash": "lMDFNpxvIqnmtBwJ8cbvaw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.ServiceSide.SystemCodeModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.ServiceSide.SystemCodeModel.html",
+          "hash": "YYAbONSwOW9d9SqG0Yy9Pg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.ServiceSide.WindowStateModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.ServiceSide.WindowStateModel.html",
+          "hash": "/Fhc4j9u7ndmEUAcj7OM8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.ServiceSide.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.ServiceSide.html",
+          "hash": "kIzbu3qeFow1Rj8aBEvuCw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.ValuePair.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.ValuePair.html",
+          "hash": "HTVN106oAMvPm9Ie56DIkA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.WFM.Employee.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.WFM.Employee.html",
+          "hash": "84dOyDREcQrEG8A5MBzHFg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.WFM.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.WFM.html",
+          "hash": "nhDv+yesuH6QYZb4ermLQA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Models.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Models.html",
+          "hash": "1stPZ4UwS2b9aTfKVnlzMw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.TaskScheduler.ISchedule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.TaskScheduler.ISchedule.html",
+          "hash": "LZLCeSbGY9Y+WVRxHw/DXA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.TaskScheduler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.TaskScheduler.html",
+          "hash": "S91t9fKOdiV+m4xqM1SZ2Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.AsyncLockUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.AsyncLockUtil.html",
+          "hash": "xZtto+HE2IMW8QYzJUe35g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.AzureUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.AzureUtil.html",
+          "hash": "1kWiVzIG9n6dRspp63VjMA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.BitmapUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.BitmapUtil.html",
+          "hash": "5iFagpqpt4osgA9rwLuwIQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.COMUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.COMUtil.html",
+          "hash": "3FMiU06hSkAPCNWOXZy27g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.CSVUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.CSVUtil.html",
+          "hash": "nMhI/IlOCeqJEmgrB1KRgA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.ColorUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.ColorUtil.html",
+          "hash": "ToppdvJjSbFZ/K74f+pdTA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.ColumnConfigUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.ColumnConfigUtil.html",
+          "hash": "hcY394aRjrFZEWaggBaxLw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.ComboUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.ComboUtil.html",
+          "hash": "ilEhVnFy4oKkJe/PsrAAFw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.DataSetUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.DataSetUtil.html",
+          "hash": "r/frKYxs9PAyVx4jEvnugQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.DateTimeUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.DateTimeUtil.html",
+          "hash": "0Is57DsuJF97H/qAMUviqg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.DeepCopyUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.DeepCopyUtil.html",
+          "hash": "aJGTyQ3Uo0ITJiXpTUh+BQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.DesignModeUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.DesignModeUtil.html",
+          "hash": "rop9sIw9njPV69zQTW425g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.EnumLabel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.EnumLabel.html",
+          "hash": "pmPxNGB3/87Z/ro5zw9AzA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.EnumUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.EnumUtil.html",
+          "hash": "61CB3cji17D+NJ3Md6BekA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.ExcelReadUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.ExcelReadUtil.html",
+          "hash": "eJxcGtOBK2V+M/d+epc0kg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.ExcelUtil.MsoTriState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.ExcelUtil.MsoTriState.html",
+          "hash": "ZHN4HpQv0AoQq41llScgfw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.ExcelUtil.XlDirection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.ExcelUtil.XlDirection.html",
+          "hash": "ZvJg+nrdm2cNfNZrjTSLlg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.ExcelUtil.XlFileFormat.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.ExcelUtil.XlFileFormat.html",
+          "hash": "xGdHdHDUioeYyL2cf9f2Ww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.ExcelUtil.XlLineStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.ExcelUtil.XlLineStyle.html",
+          "hash": "rxuqSwetclivNy8wd31+/w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.ExcelUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.ExcelUtil.html",
+          "hash": "sMLnaXH3TavhlQDglb8Vgg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.ExpandObjectUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.ExpandObjectUtil.html",
+          "hash": "jheXxhaKNhiEuO2Ydom4KA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.FileUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.FileUtil.html",
+          "hash": "k5/bZWpHKORLlLd7FP11TQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.GenerationBackupUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.GenerationBackupUtil.html",
+          "hash": "sZgRT/Tl68iV8qTMPK2V4w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.GoogleCalendarApiUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.GoogleCalendarApiUtil.html",
+          "hash": "R7kdsXBAhk/Wp+g0yGpjog=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.IOrderedDictionary-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.IOrderedDictionary-2.html",
+          "hash": "XORGVYDOJ7fUnxme2PrEKw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.MSTeamsUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.MSTeamsUtil.html",
+          "hash": "Kh3StDNsutwcRmVw3pSW1g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.MailUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.MailUtil.html",
+          "hash": "JhJXxEr554R7wv5/lAQVFQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.MathUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.MathUtil.html",
+          "hash": "rNzZ/+UJXPcZDrqvd/GDPA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.MultiLangUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.MultiLangUtil.html",
+          "hash": "GrWAVI5FuQrvv75SSuNhmA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.OrderedDictionary-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.OrderedDictionary-2.html",
+          "hash": "KTiupzHJcgd70wvzph/80g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.SQLDBUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.SQLDBUtil.html",
+          "hash": "4+JHtQtm6+Mw9MAbw/VKwg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.StdGenUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.StdGenUtil.html",
+          "hash": "rm0Fx0bTXMWt8AG6eimeNw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.StringUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.StringUtil.html",
+          "hash": "/V4QxkKJlFJX7QXB4d8Z0A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.Tree.TreeElement.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.Tree.TreeElement.html",
+          "hash": "rpv8qCzmNULD2mSEB2Jxlg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.Tree.TreeElementCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.Tree.TreeElementCollection.html",
+          "hash": "YNqI0EjW6jL4c0Z3iT8b1A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.Tree.TreeElementKind.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.Tree.TreeElementKind.html",
+          "hash": "TEM6n8krKoMdl/Q8koMBug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.Tree.TreeElementVisitor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.Tree.TreeElementVisitor.html",
+          "hash": "HbLYiS2UAE0aPRoSN9K+IA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.Tree.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.Tree.html",
+          "hash": "sWjQP4w2mgMrRH2TGB9Hpw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.TreeViewUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.TreeViewUtil.html",
+          "hash": "2uhQPb3TkRB8J906T8GC1A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.ValidateUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.ValidateUtil.html",
+          "hash": "OwFmSipKaaIUirkOxGcxgQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.XMLUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.XMLUtil.html",
+          "hash": "dtdqXTW/YNDL3yg/+1vXsQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/FxCommonLib.Utils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FxCommonLib.Utils.html",
+          "hash": "EpIscx1lYsr9x48onvCLAA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/NJFLib.Controls.CollapsibleSplitter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NJFLib.Controls.CollapsibleSplitter.html",
+          "hash": "Lxheoj1VInMlaTCjwhd/KQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/NJFLib.Controls.SplitterState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NJFLib.Controls.SplitterState.html",
+          "hash": "n1U2EEuHM5KGcCiEgfPSBw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/NJFLib.Controls.VisualStyles.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NJFLib.Controls.VisualStyles.html",
+          "hash": "pLqT0308dlHA9ImVjol5Jg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/NJFLib.Controls.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/NJFLib.Controls.html",
+          "hash": "asal/vc+j1u26qfayPMvzA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/SQLSrc.m_common_conf.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SQLSrc.m_common_conf.html",
+          "hash": "X5P/S2UcbC18Q2F2GgDdrA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/SQLSrc.m_data_dictionary.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SQLSrc.m_data_dictionary.html",
+          "hash": "EhofBxsuMvr+GCF890VwpA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/SQLSrc.m_message.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SQLSrc.m_message.html",
+          "hash": "w1Y1ifc6GnlfExc/mRLvPw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/SQLSrc.m_system_code.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SQLSrc.m_system_code.html",
+          "hash": "9bHRXwVHBce/kavymHUj3A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/SQLSrc.t_grid_config.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SQLSrc.t_grid_config.html",
+          "hash": "/iCeKaeprfvZwS+hFevCOg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/SQLSrc.t_search_condition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SQLSrc.t_search_condition.html",
+          "hash": "oBds+kOTWRhndfcpejThlw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/SQLSrc.t_window_state.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SQLSrc.t_window_state.html",
+          "hash": "zWJ6lyqYlHEZF0q99klTUQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/SQLSrc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SQLSrc.html",
+          "hash": "clzJWYeCmjsCLAp2Z07iNQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "obj/api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "ib68DiT3J6wpbtWUG9cfXw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "frPdeW5hGroGiyexwMQIhg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Disable incremental build by force rebuild option.",
+        "incrementalPhase": "build"
+      },
+      "processors": {
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build"
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build"
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: it's disabled.",
+        "incrementalPhase": "postProcessing"
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

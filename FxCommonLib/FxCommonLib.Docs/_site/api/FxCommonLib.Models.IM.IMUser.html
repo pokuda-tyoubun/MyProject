@@ -1,0 +1,527 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class IMUser
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class IMUser
+   ">
+    <meta name="generator" content="docfx 2.33.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="FxCommonLib.Models.IM.IMUser">
+  
+  
+  <h1 id="FxCommonLib_Models_IM_IMUser" data-uid="FxCommonLib.Models.IM.IMUser" class="text-break">Class IMUser
+  </h1>
+  <div class="markdown level0 summary"><p>m_user
+(Userは予約語なのでIMUserとした)</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="FxCommonLib.Models.BaseUser.html">BaseUser</a></div>
+    <div class="level2"><span class="xref">IMUser</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="FxCommonLib.Models.BaseUser.html#FxCommonLib_Models_BaseUser_AuthorityCd">BaseUser.AuthorityCd</a>
+    </div>
+    <div>
+      <a class="xref" href="FxCommonLib.Models.BaseUser.html#FxCommonLib_Models_BaseUser_Password">BaseUser.Password</a>
+    </div>
+    <div>
+      <a class="xref" href="FxCommonLib.Models.BaseUser.html#FxCommonLib_Models_BaseUser_LastLoginDate">BaseUser.LastLoginDate</a>
+    </div>
+    <div>
+      <a class="xref" href="FxCommonLib.Models.BaseUser.html#FxCommonLib_Models_BaseUser_PasswordUpdateId">BaseUser.PasswordUpdateId</a>
+    </div>
+    <div>
+      <a class="xref" href="FxCommonLib.Models.BaseUser.html#FxCommonLib_Models_BaseUser_PasswordUpdateDate">BaseUser.PasswordUpdateDate</a>
+    </div>
+    <div>
+      <a class="xref" href="FxCommonLib.Models.BaseUser.html#FxCommonLib_Models_BaseUser_LastAccessDate">BaseUser.LastAccessDate</a>
+    </div>
+    <div>
+      <a class="xref" href="FxCommonLib.Models.BaseUser.html#FxCommonLib_Models_BaseUser_SessionId">BaseUser.SessionId</a>
+    </div>
+    <div>
+      <a class="xref" href="FxCommonLib.Models.BaseUser.html#FxCommonLib_Models_BaseUser_AdminMenuLock">BaseUser.AdminMenuLock</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="FxCommonLib.Models.IM.html">FxCommonLib.Models.IM</a></h6>
+  <h6><strong>Assembly</strong>: FxCommonLib.dll</h6>
+  <h5 id="FxCommonLib_Models_IM_IMUser_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class IMUser : BaseUser</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="FxCommonLib_Models_IM_IMUser__ctor_" data-uid="FxCommonLib.Models.IM.IMUser.#ctor*"></a>
+  <h4 id="FxCommonLib_Models_IM_IMUser__ctor" data-uid="FxCommonLib.Models.IM.IMUser.#ctor">IMUser()</h4>
+  <div class="markdown level1 summary"><p>コンストラクタ</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IMUser()</code></pre>
+  </div>
+  
+  
+  <a id="FxCommonLib_Models_IM_IMUser__ctor_" data-uid="FxCommonLib.Models.IM.IMUser.#ctor*"></a>
+  <h4 id="FxCommonLib_Models_IM_IMUser__ctor_DataSet_" data-uid="FxCommonLib.Models.IM.IMUser.#ctor(DataSet)">IMUser(DataSet)</h4>
+  <div class="markdown level1 summary"><p>コンストラクタ</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IMUser(DataSet ds)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DataSet</span></td>
+        <td><span class="parametername">ds</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="FxCommonLib_Models_IM_IMUser_AuthorityCode_" data-uid="FxCommonLib.Models.IM.IMUser.AuthorityCode*"></a>
+  <h4 id="FxCommonLib_Models_IM_IMUser_AuthorityCode" data-uid="FxCommonLib.Models.IM.IMUser.AuthorityCode">AuthorityCode</h4>
+  <div class="markdown level1 summary"><p>権限コード</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string AuthorityCode { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Models_IM_IMUser_LoginId_" data-uid="FxCommonLib.Models.IM.IMUser.LoginId*"></a>
+  <h4 id="FxCommonLib_Models_IM_IMUser_LoginId" data-uid="FxCommonLib.Models.IM.IMUser.LoginId">LoginId</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string LoginId { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="FxCommonLib.Models.BaseUser.html#FxCommonLib_Models_BaseUser_LoginId">BaseUser.LoginId</a></div>
+  
+  
+  <a id="FxCommonLib_Models_IM_IMUser_LoginName_" data-uid="FxCommonLib.Models.IM.IMUser.LoginName*"></a>
+  <h4 id="FxCommonLib_Models_IM_IMUser_LoginName" data-uid="FxCommonLib.Models.IM.IMUser.LoginName">LoginName</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string LoginName { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="FxCommonLib.Models.BaseUser.html#FxCommonLib_Models_BaseUser_LoginName">BaseUser.LoginName</a></div>
+  
+  
+  <a id="FxCommonLib_Models_IM_IMUser_Note_" data-uid="FxCommonLib.Models.IM.IMUser.Note*"></a>
+  <h4 id="FxCommonLib_Models_IM_IMUser_Note" data-uid="FxCommonLib.Models.IM.IMUser.Note">Note</h4>
+  <div class="markdown level1 summary"><p>備考</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Note { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Models_IM_IMUser_UserId_" data-uid="FxCommonLib.Models.IM.IMUser.UserId*"></a>
+  <h4 id="FxCommonLib_Models_IM_IMUser_UserId" data-uid="FxCommonLib.Models.IM.IMUser.UserId">UserId</h4>
+  <div class="markdown level1 summary"><p>ユーザID</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string UserId { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Models_IM_IMUser_UserKana_" data-uid="FxCommonLib.Models.IM.IMUser.UserKana*"></a>
+  <h4 id="FxCommonLib_Models_IM_IMUser_UserKana" data-uid="FxCommonLib.Models.IM.IMUser.UserKana">UserKana</h4>
+  <div class="markdown level1 summary"><p>カナ</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string UserKana { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Models_IM_IMUser_UserName_" data-uid="FxCommonLib.Models.IM.IMUser.UserName*"></a>
+  <h4 id="FxCommonLib_Models_IM_IMUser_UserName" data-uid="FxCommonLib.Models.IM.IMUser.UserName">UserName</h4>
+  <div class="markdown level1 summary"><p>ユーザ名</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string UserName { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="FxCommonLib_Models_IM_IMUser_AppendDataRow_" data-uid="FxCommonLib.Models.IM.IMUser.AppendDataRow*"></a>
+  <h4 id="FxCommonLib_Models_IM_IMUser_AppendDataRow_DataTable_" data-uid="FxCommonLib.Models.IM.IMUser.AppendDataRow(DataTable)">AppendDataRow(DataTable)</h4>
+  <div class="markdown level1 summary"><p>DataRowとして追加</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AppendDataRow(DataTable dt)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DataTable</span></td>
+        <td><span class="parametername">dt</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Models_IM_IMUser_CreateBlankTable_" data-uid="FxCommonLib.Models.IM.IMUser.CreateBlankTable*"></a>
+  <h4 id="FxCommonLib_Models_IM_IMUser_CreateBlankTable" data-uid="FxCommonLib.Models.IM.IMUser.CreateBlankTable">CreateBlankTable()</h4>
+  <div class="markdown level1 summary"><p>ブランクテーブル作成</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static DataTable CreateBlankTable()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DataTable</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Models_IM_IMUser_GetLoginInfoString_" data-uid="FxCommonLib.Models.IM.IMUser.GetLoginInfoString*"></a>
+  <h4 id="FxCommonLib_Models_IM_IMUser_GetLoginInfoString_FxCommonLib_Utils_MultiLangUtil_" data-uid="FxCommonLib.Models.IM.IMUser.GetLoginInfoString(FxCommonLib.Utils.MultiLangUtil)">GetLoginInfoString(MultiLangUtil)</h4>
+  <div class="markdown level1 summary"><p>ステータスバーのログイン情報文字列</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetLoginInfoString(MultiLangUtil mlu)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.MultiLangUtil.html">MultiLangUtil</a></td>
+        <td><span class="parametername">mlu</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Models_IM_IMUser_ToDataSet_" data-uid="FxCommonLib.Models.IM.IMUser.ToDataSet*"></a>
+  <h4 id="FxCommonLib_Models_IM_IMUser_ToDataSet" data-uid="FxCommonLib.Models.IM.IMUser.ToDataSet">ToDataSet()</h4>
+  <div class="markdown level1 summary"><p>データセットに変換</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DataSet ToDataSet()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DataSet</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

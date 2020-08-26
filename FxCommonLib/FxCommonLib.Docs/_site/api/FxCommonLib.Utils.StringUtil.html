@@ -1,0 +1,1657 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class StringUtil
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class StringUtil
+   ">
+    <meta name="generator" content="docfx 2.33.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="FxCommonLib.Utils.StringUtil">
+  
+  
+  <h1 id="FxCommonLib_Utils_StringUtil" data-uid="FxCommonLib.Utils.StringUtil" class="text-break">Class StringUtil
+  </h1>
+  <div class="markdown level0 summary"><p>文字列操作ユーティリティ</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">StringUtil</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="FxCommonLib.Utils.html">FxCommonLib.Utils</a></h6>
+  <h6><strong>Assembly</strong>: FxCommonLib.dll</h6>
+  <h5 id="FxCommonLib_Utils_StringUtil_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class StringUtil</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_BlankToDBNull_" data-uid="FxCommonLib.Utils.StringUtil.BlankToDBNull*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_BlankToDBNull_System_Object_" data-uid="FxCommonLib.Utils.StringUtil.BlankToDBNull(System.Object)">BlankToDBNull(Object)</h4>
+  <div class="markdown level1 summary"><p>&quot;&quot;であればDBNullに変換する。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static object BlankToDBNull(object value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>変換前オブジェクト</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><p>変換後文字列</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_BlankToNull_" data-uid="FxCommonLib.Utils.StringUtil.BlankToNull*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_BlankToNull_System_Object_" data-uid="FxCommonLib.Utils.StringUtil.BlankToNull(System.Object)">BlankToNull(Object)</h4>
+  <div class="markdown level1 summary"><p>&quot;&quot;であればNullに変換する。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static object BlankToNull(object value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>変換前オブジェクト</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><p>変換後文字列</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_ConvListTo2DArray_" data-uid="FxCommonLib.Utils.StringUtil.ConvListTo2DArray*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_ConvListTo2DArray_System_Collections_Generic_List_System_String____" data-uid="FxCommonLib.Utils.StringUtil.ConvListTo2DArray(System.Collections.Generic.List{System.String[]})">ConvListTo2DArray(List&lt;String[]&gt;)</h4>
+  <div class="markdown level1 summary"><p>文字列配列リストを2次元配列に変換</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string[, ] ConvListTo2DArray(List&lt;string[]&gt; l)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">System.String</span>[]&gt;</td>
+        <td><span class="parametername">l</span></td>
+        <td><p>文字列配列リスト</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span>[,]</td>
+        <td><p>2次元配列</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_ConvNarrowLCase_" data-uid="FxCommonLib.Utils.StringUtil.ConvNarrowLCase*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_ConvNarrowLCase_System_Object_" data-uid="FxCommonLib.Utils.StringUtil.ConvNarrowLCase(System.Object)">ConvNarrowLCase(Object)</h4>
+  <div class="markdown level1 summary"><p>半角、小文字に変換</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ConvNarrowLCase(object value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_ConvNarrowUCase_" data-uid="FxCommonLib.Utils.StringUtil.ConvNarrowUCase*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_ConvNarrowUCase_System_Object_" data-uid="FxCommonLib.Utils.StringUtil.ConvNarrowUCase(System.Object)">ConvNarrowUCase(Object)</h4>
+  <div class="markdown level1 summary"><p>半角大文字に変換</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ConvNarrowUCase(object value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_ConvSQLServerNewLine_" data-uid="FxCommonLib.Utils.StringUtil.ConvSQLServerNewLine*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_ConvSQLServerNewLine_System_String_" data-uid="FxCommonLib.Utils.StringUtil.ConvSQLServerNewLine(System.String)">ConvSQLServerNewLine(String)</h4>
+  <div class="markdown level1 summary"><p>SQLServerのDML用に改行文字を変換する。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ConvSQLServerNewLine(string val)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">val</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_ConvWide_" data-uid="FxCommonLib.Utils.StringUtil.ConvWide*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_ConvWide_System_Object_" data-uid="FxCommonLib.Utils.StringUtil.ConvWide(System.Object)">ConvWide(Object)</h4>
+  <div class="markdown level1 summary"><p>全角文字に変換</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ConvWide(object value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_CountChar_" data-uid="FxCommonLib.Utils.StringUtil.CountChar*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_CountChar_System_String_System_Char_" data-uid="FxCommonLib.Utils.StringUtil.CountChar(System.String,System.Char)">CountChar(String, Char)</h4>
+  <div class="markdown level1 summary"><p>sourceからtarget文字の出現数をカウントする。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int CountChar(string val, char target)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">val</span></td>
+        <td><p>処理対象文字列</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Char</span></td>
+        <td><span class="parametername">target</span></td>
+        <td><p>カウント文字</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>出現数</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_CountString_" data-uid="FxCommonLib.Utils.StringUtil.CountString*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_CountString_System_String_System_String_" data-uid="FxCommonLib.Utils.StringUtil.CountString(System.String,System.String)">CountString(String, String)</h4>
+  <div class="markdown level1 summary"><p>指定された文字列内にある文字列が幾つあるか数える</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int CountString(string strInput, string strFind)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">strInput</span></td>
+        <td><p>strFindが幾つあるか数える文字列</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">strFind</span></td>
+        <td><p>数える文字列</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>strInput内にstrFindが幾つあったか</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_ExtractBetweenChar_" data-uid="FxCommonLib.Utils.StringUtil.ExtractBetweenChar*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_ExtractBetweenChar_System_String_System_Char_System_Char_" data-uid="FxCommonLib.Utils.StringUtil.ExtractBetweenChar(System.String,System.Char,System.Char)">ExtractBetweenChar(String, Char, Char)</h4>
+  <div class="markdown level1 summary"><p>特定の文字の間の文字を抽出する。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ExtractBetweenChar(string val, char start, char end)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">val</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Char</span></td>
+        <td><span class="parametername">start</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Char</span></td>
+        <td><span class="parametername">end</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_Indent_" data-uid="FxCommonLib.Utils.StringUtil.Indent*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_Indent_System_Int32_System_String_" data-uid="FxCommonLib.Utils.StringUtil.Indent(System.Int32,System.String)">Indent(Int32, String)</h4>
+  <div class="markdown level1 summary"><p>インデント設定</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string Indent(int depth, string indentStr)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">depth</span></td>
+        <td><p>インデントの深さ</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">indentStr</span></td>
+        <td><p>インデント文字</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_MultiValToDic_" data-uid="FxCommonLib.Utils.StringUtil.MultiValToDic*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_MultiValToDic_System_String_ILog_" data-uid="FxCommonLib.Utils.StringUtil.MultiValToDic(System.String,ILog)">MultiValToDic(String, ILog)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Dictionary&lt;string, string&gt; MultiValToDic(string multiVal, ILog logger = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">multiVal</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">ILog</span></td>
+        <td><span class="parametername">logger</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_MultiValToTable_" data-uid="FxCommonLib.Utils.StringUtil.MultiValToTable*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_MultiValToTable_System_String_" data-uid="FxCommonLib.Utils.StringUtil.MultiValToTable(System.String)">MultiValToTable(String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static DataTable MultiValToTable(string multiVal)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">multiVal</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DataTable</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_MultiValToTotal_" data-uid="FxCommonLib.Utils.StringUtil.MultiValToTotal*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_MultiValToTotal_System_String_" data-uid="FxCommonLib.Utils.StringUtil.MultiValToTotal(System.String)">MultiValToTotal(String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string MultiValToTotal(string multiVal)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">multiVal</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_NullBlankToZero_" data-uid="FxCommonLib.Utils.StringUtil.NullBlankToZero*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_NullBlankToZero_System_Object_" data-uid="FxCommonLib.Utils.StringUtil.NullBlankToZero(System.Object)">NullBlankToZero(Object)</h4>
+  <div class="markdown level1 summary"><p>Nullまたは&quot;&quot;であれば、&quot;0&quot;に変換する。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string NullBlankToZero(object value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_NullDBNullToBlank_" data-uid="FxCommonLib.Utils.StringUtil.NullDBNullToBlank*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_NullDBNullToBlank_System_Object_" data-uid="FxCommonLib.Utils.StringUtil.NullDBNullToBlank(System.Object)">NullDBNullToBlank(Object)</h4>
+  <div class="markdown level1 summary"><p>NullまたはDBNullであれば&quot;&quot;に変換する。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string NullDBNullToBlank(object value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_NullDBNullToZero_" data-uid="FxCommonLib.Utils.StringUtil.NullDBNullToZero*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_NullDBNullToZero_System_Object_" data-uid="FxCommonLib.Utils.StringUtil.NullDBNullToZero(System.Object)">NullDBNullToZero(Object)</h4>
+  <div class="markdown level1 summary"><p>NullまたはDBNullであれば&quot;0&quot;に変換する。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string NullDBNullToZero(object value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_NullOrBlankReplace_" data-uid="FxCommonLib.Utils.StringUtil.NullOrBlankReplace*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_NullOrBlankReplace_System_Object_System_String_" data-uid="FxCommonLib.Utils.StringUtil.NullOrBlankReplace(System.Object,System.String)">NullOrBlankReplace(Object, String)</h4>
+  <div class="markdown level1 summary"><p>Nullまたは&quot;&quot;であれば、任意の文字列に変換する。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string NullOrBlankReplace(object value, string replace)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">replace</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_NullReplace_" data-uid="FxCommonLib.Utils.StringUtil.NullReplace*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_NullReplace_System_Object_System_String_System_Boolean_" data-uid="FxCommonLib.Utils.StringUtil.NullReplace(System.Object,System.String,System.Boolean)">NullReplace(Object, String, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Nullであれば任意の文字列に変える</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string NullReplace(object value, string replace, bool doTrimEnd = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">replace</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">doTrimEnd</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_NullToBlank_" data-uid="FxCommonLib.Utils.StringUtil.NullToBlank*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_NullToBlank_System_Object_System_Boolean_" data-uid="FxCommonLib.Utils.StringUtil.NullToBlank(System.Object,System.Boolean)">NullToBlank(Object, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Nullであれば&quot;&quot;に変換する。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string NullToBlank(object value, bool doTrimEnd = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>変換前オブジェクト</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">doTrimEnd</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>変換後文字列</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="FxCommonLib_Utils_StringUtil_NullToBlank_System_Object_System_Boolean__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><a class="xref" href="FxCommonLib.Utils.StringUtil.html#FxCommonLib_Utils_StringUtil_NullReplace_System_Object_System_String_System_Boolean_">NullReplace(Object, String, Boolean)</a></div>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_NullToZero_" data-uid="FxCommonLib.Utils.StringUtil.NullToZero*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_NullToZero_System_Object_" data-uid="FxCommonLib.Utils.StringUtil.NullToZero(System.Object)">NullToZero(Object)</h4>
+  <div class="markdown level1 summary"><p>Nullであれば&quot;0&quot;に変換する。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string NullToZero(object value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_ParseBool_" data-uid="FxCommonLib.Utils.StringUtil.ParseBool*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_ParseBool_System_Object_" data-uid="FxCommonLib.Utils.StringUtil.ParseBool(System.Object)">ParseBool(Object)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool ParseBool(object val)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">val</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_ParseBool_" data-uid="FxCommonLib.Utils.StringUtil.ParseBool*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_ParseBool_System_String_" data-uid="FxCommonLib.Utils.StringUtil.ParseBool(System.String)">ParseBool(String)</h4>
+  <div class="markdown level1 summary"><p>文字列をBoolean値に読み替える。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool ParseBool(string val)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">val</span></td>
+        <td><p>処理対象文字</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>true/false</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_RemoveBetweenChar_" data-uid="FxCommonLib.Utils.StringUtil.RemoveBetweenChar*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_RemoveBetweenChar_System_String_System_Char_System_Char_" data-uid="FxCommonLib.Utils.StringUtil.RemoveBetweenChar(System.String,System.Char,System.Char)">RemoveBetweenChar(String, Char, Char)</h4>
+  <div class="markdown level1 summary"><p>特定の文字の間の文字を削除する。
+(特定文字も含む)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string RemoveBetweenChar(string val, char start, char end)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">val</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Char</span></td>
+        <td><span class="parametername">start</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Char</span></td>
+        <td><span class="parametername">end</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_RemoveChars_" data-uid="FxCommonLib.Utils.StringUtil.RemoveChars*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_RemoveChars_System_String_System_Char___" data-uid="FxCommonLib.Utils.StringUtil.RemoveChars(System.String,System.Char[])">RemoveChars(String, Char[])</h4>
+  <div class="markdown level1 summary"><p>引数の文字をsから除去</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string RemoveChars(string s, char[] characters)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">s</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Char</span>[]</td>
+        <td><span class="parametername">characters</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_ReplaceByForwardCount_" data-uid="FxCommonLib.Utils.StringUtil.ReplaceByForwardCount*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_ReplaceByForwardCount_System_String_System_String_System_String_System_Int32_" data-uid="FxCommonLib.Utils.StringUtil.ReplaceByForwardCount(System.String,System.String,System.String,System.Int32)">ReplaceByForwardCount(String, String, String, Int32)</h4>
+  <div class="markdown level1 summary"><p>指定した文字列内の指定した文字列を別の文字列に置換する。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ReplaceByForwardCount(string input, string oldValue, string newValue, int count)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">input</span></td>
+        <td><p>置換する文字列のある文字列。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">oldValue</span></td>
+        <td><p>検索文字列。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">newValue</span></td>
+        <td><p>置換文字列。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">count</span></td>
+        <td><p>置換する回数。負の数が指定されたときは、すべて置換する。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>置換された結果の文字列。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_ReplaceByForwardCount_" data-uid="FxCommonLib.Utils.StringUtil.ReplaceByForwardCount*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_ReplaceByForwardCount_System_String_System_String_System_String_System_Int32_System_Boolean_" data-uid="FxCommonLib.Utils.StringUtil.ReplaceByForwardCount(System.String,System.String,System.String,System.Int32,System.Boolean)">ReplaceByForwardCount(String, String, String, Int32, Boolean)</h4>
+  <div class="markdown level1 summary"><p>指定した文字列内の指定した文字列を別の文字列に置換する。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ReplaceByForwardCount(string input, string oldValue, string newValue, int count, bool ignoreCase)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">input</span></td>
+        <td><p>置換する文字列のある文字列。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">oldValue</span></td>
+        <td><p>検索文字列。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">newValue</span></td>
+        <td><p>置換文字列。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">count</span></td>
+        <td><p>置換する回数。負の数が指定されたときは、すべて置換する。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">ignoreCase</span></td>
+        <td><p>大文字と小文字を区別しない時はTrue。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>置換された結果の文字列。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_ReplaceByForwardCount_" data-uid="FxCommonLib.Utils.StringUtil.ReplaceByForwardCount*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_ReplaceByForwardCount_System_String_System_String_System_String_System_Int32_System_Globalization_CompareInfo_System_Globalization_CompareOptions_" data-uid="FxCommonLib.Utils.StringUtil.ReplaceByForwardCount(System.String,System.String,System.String,System.Int32,System.Globalization.CompareInfo,System.Globalization.CompareOptions)">ReplaceByForwardCount(String, String, String, Int32, CompareInfo, CompareOptions)</h4>
+  <div class="markdown level1 summary"><p>指定した文字列内の指定した文字列を別の文字列に置換する。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ReplaceByForwardCount(string input, string oldValue, string newValue, int count, CompareInfo compInfo, CompareOptions compOptions)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">input</span></td>
+        <td><p>置換する文字列のある文字列。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">oldValue</span></td>
+        <td><p>検索文字列。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">newValue</span></td>
+        <td><p>置換文字列。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">count</span></td>
+        <td><p>置換する回数。負の数が指定されたときは、すべて置換する。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Globalization.CompareInfo</span></td>
+        <td><span class="parametername">compInfo</span></td>
+        <td><p>文字列の検索に使用するCompareInfo。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Globalization.CompareOptions</span></td>
+        <td><span class="parametername">compOptions</span></td>
+        <td><p>文字列の検索に使用するCompareOptions。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>置換された結果の文字列。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_SplitByRow_" data-uid="FxCommonLib.Utils.StringUtil.SplitByRow*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_SplitByRow_System_String_System_Int32_" data-uid="FxCommonLib.Utils.StringUtil.SplitByRow(System.String,System.Int32)">SplitByRow(String, Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string SplitByRow(string src, int start)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">src</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">start</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_SplitByRow_" data-uid="FxCommonLib.Utils.StringUtil.SplitByRow*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_SplitByRow_System_String_System_Int32_System_Int32_" data-uid="FxCommonLib.Utils.StringUtil.SplitByRow(System.String,System.Int32,System.Int32)">SplitByRow(String, Int32, Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string SplitByRow(string src, int start, int end)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">src</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">start</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">end</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_StringUtil_TrimCrLf_" data-uid="FxCommonLib.Utils.StringUtil.TrimCrLf*"></a>
+  <h4 id="FxCommonLib_Utils_StringUtil_TrimCrLf_System_String_" data-uid="FxCommonLib.Utils.StringUtil.TrimCrLf(System.String)">TrimCrLf(String)</h4>
+  <div class="markdown level1 summary"><p>末尾の改行コードを削除</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string TrimCrLf(string val)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">val</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

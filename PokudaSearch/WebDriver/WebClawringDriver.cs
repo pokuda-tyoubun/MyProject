@@ -1,7 +1,5 @@
 ﻿using CefSharp;
 using CefSharp.WinForms;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using PokudaSearch.Controls;
 using System;
 using System.Collections.Generic;

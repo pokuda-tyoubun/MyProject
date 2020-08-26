@@ -1,0 +1,728 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class TreeElementVisitor
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class TreeElementVisitor
+   ">
+    <meta name="generator" content="docfx 2.33.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor">
+  
+  
+  <h1 id="FxCommonLib_Utils_Tree_TreeElementVisitor" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor" class="text-break">Class TreeElementVisitor
+  </h1>
+  <div class="markdown level0 summary"><p>TreeElement の階層内の要素間を移動し操作する機能を提供します。</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">TreeElementVisitor</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="FxCommonLib.Utils.Tree.html">FxCommonLib.Utils.Tree</a></h6>
+  <h6><strong>Assembly</strong>: FxCommonLib.dll</h6>
+  <h5 id="FxCommonLib_Utils_Tree_TreeElementVisitor_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class TreeElementVisitor</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor__ctor_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.#ctor*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor__ctor_FxCommonLib_Utils_Tree_TreeElement_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.#ctor(FxCommonLib.Utils.Tree.TreeElement)">TreeElementVisitor(TreeElement)</h4>
+  <div class="markdown level1 summary"><p>TreeElementVisitor の新しいインスタンスを TreeElement で初期化します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TreeElementVisitor(TreeElement aSourceElement)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.Tree.TreeElement.html">TreeElement</a></td>
+        <td><span class="parametername">aSourceElement</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>aSourceElement が null です。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_CurrentElement_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.CurrentElement*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_CurrentElement" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.CurrentElement">CurrentElement</h4>
+  <div class="markdown level1 summary"><p>現在の位置に存在する要素を取得します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TreeElement CurrentElement { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.Tree.TreeElement.html">TreeElement</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_Depth_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.Depth*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_Depth" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.Depth">Depth</h4>
+  <div class="markdown level1 summary"><p>現在の深さを表す 0 から始まる数を取得します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Depth { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_HasChild_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.HasChild*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_HasChild" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.HasChild">HasChild</h4>
+  <div class="markdown level1 summary"><p>現在の要素に子要素が存在するかどうかを示す値を取得します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasChild { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_HasNext_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.HasNext*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_HasNext" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.HasNext">HasNext</h4>
+  <div class="markdown level1 summary"><p>次の要素が存在するかどうかを示す値を取得します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasNext { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_HasNextSibling_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.HasNextSibling*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_HasNextSibling" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.HasNextSibling">HasNextSibling</h4>
+  <div class="markdown level1 summary"><p>同じ階層に次の要素が存在するかどうかを示す値を取得します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasNextSibling { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_HasPrevious_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.HasPrevious*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_HasPrevious" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.HasPrevious">HasPrevious</h4>
+  <div class="markdown level1 summary"><p>前の要素が存在するかどうかを示す値を取得します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasPrevious { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_HasPreviousSibling_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.HasPreviousSibling*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_HasPreviousSibling" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.HasPreviousSibling">HasPreviousSibling</h4>
+  <div class="markdown level1 summary"><p>同じ階層に前の要素が存在するかどうかを示す値を取得します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasPreviousSibling { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_Index_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.Index*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_Index" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.Index">Index</h4>
+  <div class="markdown level1 summary"><p>現在の要素の位置を表す 0 からはじまるインデックスを取得します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Index { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_IsTop_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.IsTop*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_IsTop" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.IsTop">IsTop</h4>
+  <div class="markdown level1 summary"><p>現在の要素がトップ要素かどうかを示す値を取得まします。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsTop { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_ParentElement_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.ParentElement*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_ParentElement" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.ParentElement">ParentElement</h4>
+  <div class="markdown level1 summary"><p>親要素をを取得します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TreeElement ParentElement { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.Tree.TreeElement.html">TreeElement</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_TopElement_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.TopElement*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_TopElement" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.TopElement">TopElement</h4>
+  <div class="markdown level1 summary"><p>トップ階層の要素を取得します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TreeElement TopElement { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.Tree.TreeElement.html">TreeElement</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_Value_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.Value*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_Value" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.Value">Value</h4>
+  <div class="markdown level1 summary"><p>現在の位置に存在する要素の値を取得または設定します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object Value { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_Move_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.Move*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_Move_System_Int32_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.Move(System.Int32)">Move(Int32)</h4>
+  <div class="markdown level1 summary"><p>指定した回数分、前後の要素へ移動します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Move(int aCount)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">aCount</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_MoveNext_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.MoveNext*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_MoveNext" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.MoveNext">MoveNext()</h4>
+  <div class="markdown level1 summary"><p>次の要素へ移動します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MoveNext()</code></pre>
+  </div>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_MoveNext_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.MoveNext*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_MoveNext_System_Int32_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.MoveNext(System.Int32)">MoveNext(Int32)</h4>
+  <div class="markdown level1 summary"><p>指定した回数分次の要素へ移動します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MoveNext(int aCount)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">aCount</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_MoveNextSibling_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.MoveNextSibling*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_MoveNextSibling" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.MoveNextSibling">MoveNextSibling()</h4>
+  <div class="markdown level1 summary"><p>同じ階層に存在する次の要素へ移動します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MoveNextSibling()</code></pre>
+  </div>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_MovePrevious_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.MovePrevious*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_MovePrevious" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.MovePrevious">MovePrevious()</h4>
+  <div class="markdown level1 summary"><p>前の要素へ移動します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MovePrevious()</code></pre>
+  </div>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_MovePrevious_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.MovePrevious*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_MovePrevious_System_Int32_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.MovePrevious(System.Int32)">MovePrevious(Int32)</h4>
+  <div class="markdown level1 summary"><p>指定した回数分前の要素へ移動します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MovePrevious(int aCount)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">aCount</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_MovePreviousSibling_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.MovePreviousSibling*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_MovePreviousSibling" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.MovePreviousSibling">MovePreviousSibling()</h4>
+  <div class="markdown level1 summary"><p>同じ階層に存在する前の要素へ移動します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MovePreviousSibling()</code></pre>
+  </div>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_MoveTo_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.MoveTo*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_MoveTo_FxCommonLib_Utils_Tree_TreeElement_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.MoveTo(FxCommonLib.Utils.Tree.TreeElement)">MoveTo(TreeElement)</h4>
+  <div class="markdown level1 summary"><p>指定した TreeElment へ移動します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MoveTo(TreeElement anElement)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.Tree.TreeElement.html">TreeElement</a></td>
+        <td><span class="parametername">anElement</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_MoveToLastChild_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.MoveToLastChild*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_MoveToLastChild" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.MoveToLastChild">MoveToLastChild()</h4>
+  <div class="markdown level1 summary"><p>現在の要素の一番最後の位置に存在する子要素へ移動します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MoveToLastChild()</code></pre>
+  </div>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_MoveToTop_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.MoveToTop*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_MoveToTop" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.MoveToTop">MoveToTop()</h4>
+  <div class="markdown level1 summary"><p>トップ要素へ移動します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MoveToTop()</code></pre>
+  </div>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_MoveUp_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.MoveUp*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_MoveUp" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.MoveUp">MoveUp()</h4>
+  <div class="markdown level1 summary"><p>現在の要素の親要素へ移動します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MoveUp()</code></pre>
+  </div>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementVisitor_MoveUp_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.MoveUp*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementVisitor_MoveUp_System_Int32_" data-uid="FxCommonLib.Utils.Tree.TreeElementVisitor.MoveUp(System.Int32)">MoveUp(Int32)</h4>
+  <div class="markdown level1 summary"><p>指定した回数分上の階層へ移動します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MoveUp(int aCount)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">aCount</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

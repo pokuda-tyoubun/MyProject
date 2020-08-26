@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FxCommonLib", "FxCommonLib\FxCommonLib.csproj", "{AFF59E76-11CF-4170-A307-5A287716CA50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FxCommonLib.Tests", "FxCommonLib.Tests\FxCommonLib.Tests.csproj", "{CEC60399-BD74-4386-A9A2-094254E86646}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FxCommonLib.Docs", "FxCommonLib.Docs\FxCommonLib.Docs.csproj", "{748C0484-77F1-4356-BEAF-76459190E147}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{638EE4D5-D682-4EA4-9193-4B086DD77E59}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.pdb = .nuget\NuGet.pdb
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AFF59E76-11CF-4170-A307-5A287716CA50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFF59E76-11CF-4170-A307-5A287716CA50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFF59E76-11CF-4170-A307-5A287716CA50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFF59E76-11CF-4170-A307-5A287716CA50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEC60399-BD74-4386-A9A2-094254E86646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEC60399-BD74-4386-A9A2-094254E86646}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEC60399-BD74-4386-A9A2-094254E86646}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEC60399-BD74-4386-A9A2-094254E86646}.Release|Any CPU.Build.0 = Release|Any CPU
+		{748C0484-77F1-4356-BEAF-76459190E147}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{748C0484-77F1-4356-BEAF-76459190E147}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{748C0484-77F1-4356-BEAF-76459190E147}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{748C0484-77F1-4356-BEAF-76459190E147}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

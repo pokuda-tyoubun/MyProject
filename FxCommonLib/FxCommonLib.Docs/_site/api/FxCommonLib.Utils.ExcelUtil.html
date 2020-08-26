@@ -1,0 +1,3062 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class ExcelUtil
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class ExcelUtil
+   ">
+    <meta name="generator" content="docfx 2.33.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="FxCommonLib.Utils.ExcelUtil">
+  
+  
+  <h1 id="FxCommonLib_Utils_ExcelUtil" data-uid="FxCommonLib.Utils.ExcelUtil" class="text-break">Class ExcelUtil
+  </h1>
+  <div class="markdown level0 summary"><p>Excelユーティリティ
+参考
+<a href="https://zenmai.wordpress.com/2011/06/24/excel%E3%81%AE%E5%8F%82%E7%85%A7%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%9B%E3%81%9A%E3%81%ABexcel%E3%82%92%E4%BD%BF%E3%81%86c/">https://zenmai.wordpress.com/2011/06/24/excel%E3%81%AE%E5%8F%82%E7%85%A7%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%9B%E3%81%9A%E3%81%ABexcel%E3%82%92%E4%BD%BF%E3%81%86c/</a></p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">ExcelUtil</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="FxCommonLib.Utils.html">FxCommonLib.Utils</a></h6>
+  <h6><strong>Assembly</strong>: FxCommonLib.dll</h6>
+  <h5 id="FxCommonLib_Utils_ExcelUtil_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ExcelUtil</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_AddPicture_" data-uid="FxCommonLib.Utils.ExcelUtil.AddPicture*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_AddPicture_System_Object_System_String_System_Object_System_Single_System_Single_" data-uid="FxCommonLib.Utils.ExcelUtil.AddPicture(System.Object,System.String,System.Object,System.Single,System.Single)">AddPicture(Object, String, Object, Single, Single)</h4>
+  <div class="markdown level1 summary"><p>AddPictureメソッド</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddPicture(object shapes, string imgPath, object range, float width, float height)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">shapes</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">imgPath</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">range</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">width</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">height</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_AddWorkbooks_" data-uid="FxCommonLib.Utils.ExcelUtil.AddWorkbooks*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_AddWorkbooks_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.AddWorkbooks(System.Object)">AddWorkbooks(Object)</h4>
+  <div class="markdown level1 summary"><p>Workbooks追加</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object AddWorkbooks(object books)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">books</span></td>
+        <td><p>Workbooks</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><p>Workbook</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_AutoFilter_" data-uid="FxCommonLib.Utils.ExcelUtil.AutoFilter*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_AutoFilter_System_Object_System_String_" data-uid="FxCommonLib.Utils.ExcelUtil.AutoFilter(System.Object,System.String)">AutoFilter(Object, String)</h4>
+  <div class="markdown level1 summary"><p>AutoFilterメソッド</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AutoFilter(object sheet, string address)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">address</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_CellActivate_" data-uid="FxCommonLib.Utils.ExcelUtil.CellActivate*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_CellActivate_System_Object_System_Int32_System_Int32_" data-uid="FxCommonLib.Utils.ExcelUtil.CellActivate(System.Object,System.Int32,System.Int32)">CellActivate(Object, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Cell.Activateメソッド</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CellActivate(object sheet, int rowIdx, int colIdx)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">rowIdx</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">colIdx</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_CellSelect_" data-uid="FxCommonLib.Utils.ExcelUtil.CellSelect*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_CellSelect_System_Object_System_Int32_System_Int32_" data-uid="FxCommonLib.Utils.ExcelUtil.CellSelect(System.Object,System.Int32,System.Int32)">CellSelect(Object, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Cell.Selectメソッド</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CellSelect(object sheet, int rowIdx, int colIdx)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">rowIdx</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">colIdx</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_Close_" data-uid="FxCommonLib.Utils.ExcelUtil.Close*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_Close_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.Close(System.Object)">Close(Object)</h4>
+  <div class="markdown level1 summary"><p>Closeメソッド</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Close(object book)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">book</span></td>
+        <td><p>Workbook</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_Close_" data-uid="FxCommonLib.Utils.ExcelUtil.Close*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_Close_System_Object_System_Boolean_" data-uid="FxCommonLib.Utils.ExcelUtil.Close(System.Object,System.Boolean)">Close(Object, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Closeメソッド</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Close(object book, bool saveChanges)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">book</span></td>
+        <td><p>Workbook</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">saveChanges</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_CopySelection_" data-uid="FxCommonLib.Utils.ExcelUtil.CopySelection*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_CopySelection_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.CopySelection(System.Object)">CopySelection(Object)</h4>
+  <div class="markdown level1 summary"><p>Selection.Copyメソッド</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CopySelection(object xlApp)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">xlApp</span></td>
+        <td><p>Application</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_CopySheet_" data-uid="FxCommonLib.Utils.ExcelUtil.CopySheet*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_CopySheet_System_Object_System_Object_System_Boolean_" data-uid="FxCommonLib.Utils.ExcelUtil.CopySheet(System.Object,System.Object,System.Boolean)">CopySheet(Object, Object, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Worksheetコピー</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CopySheet(object orgSheet, object destSheet, bool isBefore)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">orgSheet</span></td>
+        <td><p>コピー元Worksheet</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">destSheet</span></td>
+        <td><p>コピー先Worksheet</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isBefore</span></td>
+        <td><p>挿入位置</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_DeleteSheet_" data-uid="FxCommonLib.Utils.ExcelUtil.DeleteSheet*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_DeleteSheet_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.DeleteSheet(System.Object)">DeleteSheet(Object)</h4>
+  <div class="markdown level1 summary"><p>シート削除</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DeleteSheet(object sheet)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td><p>Worksheet</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_DeleteUnnecessarySheet_" data-uid="FxCommonLib.Utils.ExcelUtil.DeleteUnnecessarySheet*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_DeleteUnnecessarySheet_System_Object_System_Object_System_String_" data-uid="FxCommonLib.Utils.ExcelUtil.DeleteUnnecessarySheet(System.Object,System.Object,System.String)">DeleteUnnecessarySheet(Object, Object, String)</h4>
+  <div class="markdown level1 summary"><p>不要シートを削除(判定アドレスがブランクであれば削除)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DeleteUnnecessarySheet(object xlApp, object book, string judgeAddress)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">xlApp</span></td>
+        <td><p>Application</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">book</span></td>
+        <td><p>Workbook</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">judgeAddress</span></td>
+        <td><p>判定アドレス</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_ExtractToExcel_" data-uid="FxCommonLib.Utils.ExcelUtil.ExtractToExcel*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_ExtractToExcel_C1FlexGrid_BackgroundWorker_FxCommonLib_Utils_MultiLangUtil_System_Boolean_System_Int32_" data-uid="FxCommonLib.Utils.ExcelUtil.ExtractToExcel(C1FlexGrid,BackgroundWorker,FxCommonLib.Utils.MultiLangUtil,System.Boolean,System.Int32)">ExtractToExcel(C1FlexGrid, BackgroundWorker, MultiLangUtil, Boolean, Int32)</h4>
+  <div class="markdown level1 summary"><p>C1FlexGrid上に表示されているデータをExcelに出力</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ExtractToExcel(C1FlexGrid grid, BackgroundWorker bw, MultiLangUtil mlu, bool isAddedColor = false, int rowHeaderIdx = 1)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">C1FlexGrid</span></td>
+        <td><span class="parametername">grid</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">BackgroundWorker</span></td>
+        <td><span class="parametername">bw</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.MultiLangUtil.html">MultiLangUtil</a></td>
+        <td><span class="parametername">mlu</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isAddedColor</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">rowHeaderIdx</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_GetAddress_" data-uid="FxCommonLib.Utils.ExcelUtil.GetAddress*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_GetAddress_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.GetAddress(System.Object)">GetAddress(Object)</h4>
+  <div class="markdown level1 summary"><p>Addressプロパティを取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetAddress(object range)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">range</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_GetCells_" data-uid="FxCommonLib.Utils.ExcelUtil.GetCells*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_GetCells_System_Object_System_Int32_System_Int32_" data-uid="FxCommonLib.Utils.ExcelUtil.GetCells(System.Object,System.Int32,System.Int32)">GetCells(Object, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Cellsプロパティを取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object GetCells(object sheet, int rowIdx, int colIdx)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">rowIdx</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">colIdx</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_GetCellValue_" data-uid="FxCommonLib.Utils.ExcelUtil.GetCellValue*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_GetCellValue_System_Object_System_Int32_System_Int32_" data-uid="FxCommonLib.Utils.ExcelUtil.GetCellValue(System.Object,System.Int32,System.Int32)">GetCellValue(Object, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Cell.Valueプロパティ取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetCellValue(object sheet, int rowIdx, int colIdx)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td><p>Worksheet</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">rowIdx</span></td>
+        <td><p>行インデックス</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">colIdx</span></td>
+        <td><p>列インデックス</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>値</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_GetCellValue_" data-uid="FxCommonLib.Utils.ExcelUtil.GetCellValue*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_GetCellValue_System_Object_System_String_" data-uid="FxCommonLib.Utils.ExcelUtil.GetCellValue(System.Object,System.String)">GetCellValue(Object, String)</h4>
+  <div class="markdown level1 summary"><p>Cell.Valueプロパティ取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetCellValue(object sheet, string address)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td><p>Worksheet</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">address</span></td>
+        <td><p>アドレス</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>値</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_GetDefaultSaveFormat_" data-uid="FxCommonLib.Utils.ExcelUtil.GetDefaultSaveFormat*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_GetDefaultSaveFormat_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.GetDefaultSaveFormat(System.Object)">GetDefaultSaveFormat(Object)</h4>
+  <div class="markdown level1 summary"><p>DefaultSaveFormatプロパティ取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GetDefaultSaveFormat(object app)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">app</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_GetEndColIndex_" data-uid="FxCommonLib.Utils.ExcelUtil.GetEndColIndex*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_GetEndColIndex_System_Object_System_Int32_System_Int32_" data-uid="FxCommonLib.Utils.ExcelUtil.GetEndColIndex(System.Object,System.Int32,System.Int32)">GetEndColIndex(Object, Int32, Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GetEndColIndex(object sheet, int row, int col)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">row</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">col</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_GetEndRowIndex_" data-uid="FxCommonLib.Utils.ExcelUtil.GetEndRowIndex*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_GetEndRowIndex_System_Object_System_Int32_System_Int32_" data-uid="FxCommonLib.Utils.ExcelUtil.GetEndRowIndex(System.Object,System.Int32,System.Int32)">GetEndRowIndex(Object, Int32, Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GetEndRowIndex(object sheet, int row, int col)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">row</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">col</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_GetRange_" data-uid="FxCommonLib.Utils.ExcelUtil.GetRange*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_GetRange_System_Object_System_Object_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.GetRange(System.Object,System.Object,System.Object)">GetRange(Object, Object, Object)</h4>
+  <div class="markdown level1 summary"><p>Rangeプロパティ取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object GetRange(object sheet, object cell1, object cell2)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">cell1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">cell2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_GetRange_" data-uid="FxCommonLib.Utils.ExcelUtil.GetRange*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_GetRange_System_Object_System_String_" data-uid="FxCommonLib.Utils.ExcelUtil.GetRange(System.Object,System.String)">GetRange(Object, String)</h4>
+  <div class="markdown level1 summary"><p>Rangeプロパティ取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object GetRange(object sheet, string address)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">address</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_GetRangeLeft_" data-uid="FxCommonLib.Utils.ExcelUtil.GetRangeLeft*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_GetRangeLeft_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.GetRangeLeft(System.Object)">GetRangeLeft(Object)</h4>
+  <div class="markdown level1 summary"><p>Range.Leftプロパティ取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float GetRangeLeft(object range)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">range</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_GetRangeValue_" data-uid="FxCommonLib.Utils.ExcelUtil.GetRangeValue*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_GetRangeValue_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.GetRangeValue(System.Object)">GetRangeValue(Object)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string[, ] GetRangeValue(object range)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">range</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span>[,]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_GetRangeValue_" data-uid="FxCommonLib.Utils.ExcelUtil.GetRangeValue*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_GetRangeValue_System_Object_System_Int32_System_Int32_System_Int32_System_Int32_" data-uid="FxCommonLib.Utils.ExcelUtil.GetRangeValue(System.Object,System.Int32,System.Int32,System.Int32,System.Int32)">GetRangeValue(Object, Int32, Int32, Int32, Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object[, ] GetRangeValue(object sheet, int topRow, int leftCol, int bottomRow, int rightCol)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">topRow</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">leftCol</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">bottomRow</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">rightCol</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span>[,]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_GetRangeWidth_" data-uid="FxCommonLib.Utils.ExcelUtil.GetRangeWidth*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_GetRangeWidth_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.GetRangeWidth(System.Object)">GetRangeWidth(Object)</h4>
+  <div class="markdown level1 summary"><p>Range.Widthプロパティ取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float GetRangeWidth(object range)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">range</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_GetSelection_" data-uid="FxCommonLib.Utils.ExcelUtil.GetSelection*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_GetSelection_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.GetSelection(System.Object)">GetSelection(Object)</h4>
+  <div class="markdown level1 summary"><p>Selectionプロパティ取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object GetSelection(object xlApp)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">xlApp</span></td>
+        <td><p>Application</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><p>Range</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_GetShapes_" data-uid="FxCommonLib.Utils.ExcelUtil.GetShapes*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_GetShapes_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.GetShapes(System.Object)">GetShapes(Object)</h4>
+  <div class="markdown level1 summary"><p>Shapesプロパティ取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object GetShapes(object sheet)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_GetShapes_" data-uid="FxCommonLib.Utils.ExcelUtil.GetShapes*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_GetShapes_System_Object_System_Int32_" data-uid="FxCommonLib.Utils.ExcelUtil.GetShapes(System.Object,System.Int32)">GetShapes(Object, Int32)</h4>
+  <div class="markdown level1 summary"><p>Shapesプロパティ取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object GetShapes(object sheet, int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">index</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_GetSheetCount_" data-uid="FxCommonLib.Utils.ExcelUtil.GetSheetCount*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_GetSheetCount_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.GetSheetCount(System.Object)">GetSheetCount(Object)</h4>
+  <div class="markdown level1 summary"><p>Sheets.Countプロパティ取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GetSheetCount(object sheets)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheets</span></td>
+        <td><p>Worksheets</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>シート数</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_GetSheetName_" data-uid="FxCommonLib.Utils.ExcelUtil.GetSheetName*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_GetSheetName_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.GetSheetName(System.Object)">GetSheetName(Object)</h4>
+  <div class="markdown level1 summary"><p>Sheet.Nameプロパティ取得 /// </p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetSheetName(object sheet)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td><p>Worksheet</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>シート名</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_GetSheets_" data-uid="FxCommonLib.Utils.ExcelUtil.GetSheets*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_GetSheets_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.GetSheets(System.Object)">GetSheets(Object)</h4>
+  <div class="markdown level1 summary"><p>Sheetsプロパティ取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object GetSheets(object book)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">book</span></td>
+        <td><p>Workbook</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><p>Worksheets</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_GetSheets_" data-uid="FxCommonLib.Utils.ExcelUtil.GetSheets*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_GetSheets_System_Object_System_Int32_" data-uid="FxCommonLib.Utils.ExcelUtil.GetSheets(System.Object,System.Int32)">GetSheets(Object, Int32)</h4>
+  <div class="markdown level1 summary"><p>Sheetsプロパティ取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object GetSheets(object book, int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">book</span></td>
+        <td><p>Workbook</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>インデックス</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><p>Worksheet</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_GetSheets_" data-uid="FxCommonLib.Utils.ExcelUtil.GetSheets*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_GetSheets_System_Object_System_String_" data-uid="FxCommonLib.Utils.ExcelUtil.GetSheets(System.Object,System.String)">GetSheets(Object, String)</h4>
+  <div class="markdown level1 summary"><p>Sheetsプロパティ取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object GetSheets(object book, string sheetName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">book</span></td>
+        <td><p>Workbook</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">sheetName</span></td>
+        <td><p>シート名</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><p>Worksheet</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_GetVersion_" data-uid="FxCommonLib.Utils.ExcelUtil.GetVersion*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_GetVersion_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.GetVersion(System.Object)">GetVersion(Object)</h4>
+  <div class="markdown level1 summary"><p>Versionプロパティ取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public decimal GetVersion(object app)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">app</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Decimal</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_GetWorkbooks_" data-uid="FxCommonLib.Utils.ExcelUtil.GetWorkbooks*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_GetWorkbooks_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.GetWorkbooks(System.Object)">GetWorkbooks(Object)</h4>
+  <div class="markdown level1 summary"><p>Workbooksプロパティ取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object GetWorkbooks(object xlApp)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">xlApp</span></td>
+        <td><p>Application.Workbooks</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><p>Workbooks</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_Group_" data-uid="FxCommonLib.Utils.ExcelUtil.Group*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_Group_System_Object_System_Int32_System_Int32_" data-uid="FxCommonLib.Utils.ExcelUtil.Group(System.Object,System.Int32,System.Int32)">Group(Object, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Rows.Groupメソッド</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Group(object sheet, int top, int bottom)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td><p>Worksheet</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">top</span></td>
+        <td><p>最上行</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">bottom</span></td>
+        <td><p>最下行</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_InsertSelection_" data-uid="FxCommonLib.Utils.ExcelUtil.InsertSelection*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_InsertSelection_System_Object_FxCommonLib_Utils_ExcelUtil_XlDirection_" data-uid="FxCommonLib.Utils.ExcelUtil.InsertSelection(System.Object,FxCommonLib.Utils.ExcelUtil.XlDirection)">InsertSelection(Object, ExcelUtil.XlDirection)</h4>
+  <div class="markdown level1 summary"><p>Selection.Insertメソッド</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void InsertSelection(object xlApp, ExcelUtil.XlDirection direction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">xlApp</span></td>
+        <td><p>Application</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.ExcelUtil.XlDirection.html">ExcelUtil.XlDirection</a></td>
+        <td><span class="parametername">direction</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_MoveSelectionShape_" data-uid="FxCommonLib.Utils.ExcelUtil.MoveSelectionShape*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_MoveSelectionShape_System_Object_System_Double_System_Double_" data-uid="FxCommonLib.Utils.ExcelUtil.MoveSelectionShape(System.Object,System.Double,System.Double)">MoveSelectionShape(Object, Double, Double)</h4>
+  <div class="markdown level1 summary"><p>選択シェイプ移動</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MoveSelectionShape(object xlApp, double offsetX, double offsetY)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">xlApp</span></td>
+        <td><p>Application</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">offsetX</span></td>
+        <td><p>X座標の移動距離</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">offsetY</span></td>
+        <td><p>Y座標の移動距離</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_Open_" data-uid="FxCommonLib.Utils.ExcelUtil.Open*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_Open_System_Object_System_String_" data-uid="FxCommonLib.Utils.ExcelUtil.Open(System.Object,System.String)">Open(Object, String)</h4>
+  <div class="markdown level1 summary"><p>Excelファイルを開く</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object Open(object books, string xlsFilePath)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">books</span></td>
+        <td><p>Workbooks</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">xlsFilePath</span></td>
+        <td><p>Excelファイルへのパス</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><p>Workbook</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_Paste_" data-uid="FxCommonLib.Utils.ExcelUtil.Paste*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_Paste_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.Paste(System.Object)">Paste(Object)</h4>
+  <div class="markdown level1 summary"><p>Pasteメソッド</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Paste(object sheet)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td><p>Worksheet</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_PrintOut_" data-uid="FxCommonLib.Utils.ExcelUtil.PrintOut*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_PrintOut_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.PrintOut(System.Object)">PrintOut(Object)</h4>
+  <div class="markdown level1 summary"><p>PrintOutメソッド</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void PrintOut(object sheet)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td><p>Worksheet</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_PrintOut_" data-uid="FxCommonLib.Utils.ExcelUtil.PrintOut*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_PrintOut_System_Object_System_String_" data-uid="FxCommonLib.Utils.ExcelUtil.PrintOut(System.Object,System.String)">PrintOut(Object, String)</h4>
+  <div class="markdown level1 summary"><p>PrintOutメソッド</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void PrintOut(object sheet, string activePrinter)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td><p>Worksheet</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">activePrinter</span></td>
+        <td><p>プリンタ名指定</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_Quit_" data-uid="FxCommonLib.Utils.ExcelUtil.Quit*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_Quit_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.Quit(System.Object)">Quit(Object)</h4>
+  <div class="markdown level1 summary"><p>Quitメソッド</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Quit(object app)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">app</span></td>
+        <td><p>Application</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_RangeColumnWidth_" data-uid="FxCommonLib.Utils.ExcelUtil.RangeColumnWidth*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_RangeColumnWidth_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.RangeColumnWidth(System.Object)">RangeColumnWidth(Object)</h4>
+  <div class="markdown level1 summary"><p>Range.ColumnWidthプロパティ取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float RangeColumnWidth(object range)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">range</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_RangeHeight_" data-uid="FxCommonLib.Utils.ExcelUtil.RangeHeight*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_RangeHeight_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.RangeHeight(System.Object)">RangeHeight(Object)</h4>
+  <div class="markdown level1 summary"><p>Range.Heightプロパティ取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float RangeHeight(object range)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">range</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_RangeMerge_" data-uid="FxCommonLib.Utils.ExcelUtil.RangeMerge*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_RangeMerge_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.RangeMerge(System.Object)">RangeMerge(Object)</h4>
+  <div class="markdown level1 summary"><p>指定した範囲のセルを結合する</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RangeMerge(object range)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">range</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_RangeRight_" data-uid="FxCommonLib.Utils.ExcelUtil.RangeRight*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_RangeRight_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.RangeRight(System.Object)">RangeRight(Object)</h4>
+  <div class="markdown level1 summary"><p>Range.Rightプロパティ取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float RangeRight(object range)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">range</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_RangeRowHeight_" data-uid="FxCommonLib.Utils.ExcelUtil.RangeRowHeight*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_RangeRowHeight_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.RangeRowHeight(System.Object)">RangeRowHeight(Object)</h4>
+  <div class="markdown level1 summary"><p>Range.RowHeightプロパティ取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float RangeRowHeight(object range)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">range</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_RangeSelect_" data-uid="FxCommonLib.Utils.ExcelUtil.RangeSelect*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_RangeSelect_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.RangeSelect(System.Object)">RangeSelect(Object)</h4>
+  <div class="markdown level1 summary"><p>Range.Selectメソッド</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RangeSelect(object range)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">range</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_RangeTop_" data-uid="FxCommonLib.Utils.ExcelUtil.RangeTop*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_RangeTop_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.RangeTop(System.Object)">RangeTop(Object)</h4>
+  <div class="markdown level1 summary"><p>Range.Topプロパティ取得</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float RangeTop(object range)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">range</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_ReplaceSheetNameNGWord_" data-uid="FxCommonLib.Utils.ExcelUtil.ReplaceSheetNameNGWord*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_ReplaceSheetNameNGWord_System_String_" data-uid="FxCommonLib.Utils.ExcelUtil.ReplaceSheetNameNGWord(System.String)">ReplaceSheetNameNGWord(String)</h4>
+  <div class="markdown level1 summary"><p>シート名禁則文字を変換</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ReplaceSheetNameNGWord(string value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_Save_" data-uid="FxCommonLib.Utils.ExcelUtil.Save*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_Save_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.Save(System.Object)">Save(Object)</h4>
+  <div class="markdown level1 summary"><p>Saveメソッド</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Save(object book)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">book</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_SaveAs_" data-uid="FxCommonLib.Utils.ExcelUtil.SaveAs*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_SaveAs_System_Object_System_String_" data-uid="FxCommonLib.Utils.ExcelUtil.SaveAs(System.Object,System.String)">SaveAs(Object, String)</h4>
+  <div class="markdown level1 summary"><p>SaveAsメソッド</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SaveAs(object book, string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">book</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">path</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_SaveAs_" data-uid="FxCommonLib.Utils.ExcelUtil.SaveAs*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_SaveAs_System_Object_System_String_FxCommonLib_Utils_ExcelUtil_XlFileFormat_" data-uid="FxCommonLib.Utils.ExcelUtil.SaveAs(System.Object,System.String,FxCommonLib.Utils.ExcelUtil.XlFileFormat)">SaveAs(Object, String, ExcelUtil.XlFileFormat)</h4>
+  <div class="markdown level1 summary"><p>SaveAsメソッド</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SaveAs(object book, string path, ExcelUtil.XlFileFormat fileFormat)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">book</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">path</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.ExcelUtil.XlFileFormat.html">ExcelUtil.XlFileFormat</a></td>
+        <td><span class="parametername">fileFormat</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_SelectRows_" data-uid="FxCommonLib.Utils.ExcelUtil.SelectRows*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_SelectRows_System_Object_System_Int32_System_Int32_" data-uid="FxCommonLib.Utils.ExcelUtil.SelectRows(System.Object,System.Int32,System.Int32)">SelectRows(Object, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Rows.Selectメソッド</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SelectRows(object sheet, int top, int bottom)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td><p>Worksheet</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">top</span></td>
+        <td><p>最上行</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">bottom</span></td>
+        <td><p>最下行</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_SetCellValue_" data-uid="FxCommonLib.Utils.ExcelUtil.SetCellValue*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_SetCellValue_System_Object_System_Int32_System_Int32_System_String_" data-uid="FxCommonLib.Utils.ExcelUtil.SetCellValue(System.Object,System.Int32,System.Int32,System.String)">SetCellValue(Object, Int32, Int32, String)</h4>
+  <div class="markdown level1 summary"><p>Cell.Value設定</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetCellValue(object sheet, int rowIdx, int colIdx, string value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td><p>Worksheet</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">rowIdx</span></td>
+        <td><p>行インデックス</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">colIdx</span></td>
+        <td><p>列インデックス</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_SetCellValue_" data-uid="FxCommonLib.Utils.ExcelUtil.SetCellValue*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_SetCellValue_System_Object_System_String_System_String_" data-uid="FxCommonLib.Utils.ExcelUtil.SetCellValue(System.Object,System.String,System.String)">SetCellValue(Object, String, String)</h4>
+  <div class="markdown level1 summary"><p>Cell.Valueプロパティ設定</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetCellValue(object sheet, string address, string value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td><p>Worksheet</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">address</span></td>
+        <td><p>アドレス</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>値</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_SetCutCopyMode_" data-uid="FxCommonLib.Utils.ExcelUtil.SetCutCopyMode*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_SetCutCopyMode_System_Object_System_Boolean_" data-uid="FxCommonLib.Utils.ExcelUtil.SetCutCopyMode(System.Object,System.Boolean)">SetCutCopyMode(Object, Boolean)</h4>
+  <div class="markdown level1 summary"><p>CutCopyModeプロパティ設定</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetCutCopyMode(object xlApp, bool value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">xlApp</span></td>
+        <td><p>Application</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_SetDefaultSaveFormat_" data-uid="FxCommonLib.Utils.ExcelUtil.SetDefaultSaveFormat*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_SetDefaultSaveFormat_System_Object_System_Int32_" data-uid="FxCommonLib.Utils.ExcelUtil.SetDefaultSaveFormat(System.Object,System.Int32)">SetDefaultSaveFormat(Object, Int32)</h4>
+  <div class="markdown level1 summary"><p>DefaultSaveFormatプロパティ設定</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetDefaultSaveFormat(object app, int format)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">app</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">format</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_SetDisplayAlerts_" data-uid="FxCommonLib.Utils.ExcelUtil.SetDisplayAlerts*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_SetDisplayAlerts_System_Object_System_Boolean_" data-uid="FxCommonLib.Utils.ExcelUtil.SetDisplayAlerts(System.Object,System.Boolean)">SetDisplayAlerts(Object, Boolean)</h4>
+  <div class="markdown level1 summary"><p>DisplayAlertsプロパティ設定</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetDisplayAlerts(object xlApp, bool value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">xlApp</span></td>
+        <td><p>Application</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>true/false</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_SetFreezePanes_" data-uid="FxCommonLib.Utils.ExcelUtil.SetFreezePanes*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_SetFreezePanes_System_Object_System_Object_System_Boolean_System_Int32_System_Int32_" data-uid="FxCommonLib.Utils.ExcelUtil.SetFreezePanes(System.Object,System.Object,System.Boolean,System.Int32,System.Int32)">SetFreezePanes(Object, Object, Boolean, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>FreezePanesプロパティ設定</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetFreezePanes(object app, object sheet, bool value, int rowIdx, int colIdx)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">app</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">rowIdx</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">colIdx</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_SetFreezePanes_" data-uid="FxCommonLib.Utils.ExcelUtil.SetFreezePanes*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_SetFreezePanes_System_Object_System_Object_System_String_System_Boolean_" data-uid="FxCommonLib.Utils.ExcelUtil.SetFreezePanes(System.Object,System.Object,System.String,System.Boolean)">SetFreezePanes(Object, Object, String, Boolean)</h4>
+  <div class="markdown level1 summary"><p>FreezePanesプロパティ設定</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetFreezePanes(object app, object sheet, string address, bool value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">app</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">address</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_SetInteriorColor_" data-uid="FxCommonLib.Utils.ExcelUtil.SetInteriorColor*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_SetInteriorColor_System_Object_System_Object_Color_" data-uid="FxCommonLib.Utils.ExcelUtil.SetInteriorColor(System.Object,System.Object,Color)">SetInteriorColor(Object, Object, Color)</h4>
+  <div class="markdown level1 summary"><p>セル背景色設定（Color）</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetInteriorColor(object sheet, object range, Color color)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">range</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_SetInteriorColorIndex_" data-uid="FxCommonLib.Utils.ExcelUtil.SetInteriorColorIndex*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_SetInteriorColorIndex_System_Object_System_Int32_System_Int32_System_Int32_System_Int32_System_Int32_" data-uid="FxCommonLib.Utils.ExcelUtil.SetInteriorColorIndex(System.Object,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">SetInteriorColorIndex(Object, Int32, Int32, Int32, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>セル背景色設定（ColorIndex）</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetInteriorColorIndex(object sheet, int r1, int c1, int r2, int c2, int colorIndex)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">r1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">c1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">r2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">c2</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">colorIndex</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_SetInteriorColorIndex_" data-uid="FxCommonLib.Utils.ExcelUtil.SetInteriorColorIndex*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_SetInteriorColorIndex_System_Object_System_String_System_Int32_" data-uid="FxCommonLib.Utils.ExcelUtil.SetInteriorColorIndex(System.Object,System.String,System.Int32)">SetInteriorColorIndex(Object, String, Int32)</h4>
+  <div class="markdown level1 summary"><p>セル背景色設定（ColorIndex）</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetInteriorColorIndex(object sheet, string address, int colorIndex)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">address</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">colorIndex</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_SetLineStyle_" data-uid="FxCommonLib.Utils.ExcelUtil.SetLineStyle*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_SetLineStyle_System_Object_FxCommonLib_Utils_ExcelUtil_XlLineStyle_" data-uid="FxCommonLib.Utils.ExcelUtil.SetLineStyle(System.Object,FxCommonLib.Utils.ExcelUtil.XlLineStyle)">SetLineStyle(Object, ExcelUtil.XlLineStyle)</h4>
+  <div class="markdown level1 summary"><p>Borders.LinStyle設定</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetLineStyle(object range, ExcelUtil.XlLineStyle style)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">range</span></td>
+        <td><p>Range</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.ExcelUtil.XlLineStyle.html">ExcelUtil.XlLineStyle</a></td>
+        <td><span class="parametername">style</span></td>
+        <td><p>罫線の種類</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_SetRangeValue_" data-uid="FxCommonLib.Utils.ExcelUtil.SetRangeValue*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_SetRangeValue_System_Object_System_String_0__0___" data-uid="FxCommonLib.Utils.ExcelUtil.SetRangeValue(System.Object,System.String[0:,0:])">SetRangeValue(Object, String[,])</h4>
+  <div class="markdown level1 summary"><p>Range.Valueプロパティ設定(高速に貼り付けられる)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetRangeValue(object range, string[, ] array)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">range</span></td>
+        <td><p>Range</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span>[,]</td>
+        <td><span class="parametername">array</span></td>
+        <td><p>設定値の２次元配列</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_SetScreenUpdating_" data-uid="FxCommonLib.Utils.ExcelUtil.SetScreenUpdating*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_SetScreenUpdating_System_Object_System_Boolean_" data-uid="FxCommonLib.Utils.ExcelUtil.SetScreenUpdating(System.Object,System.Boolean)">SetScreenUpdating(Object, Boolean)</h4>
+  <div class="markdown level1 summary"><p>ScreenUpdatingプロパティ設定</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetScreenUpdating(object app, bool value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">app</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_SetSheetName_" data-uid="FxCommonLib.Utils.ExcelUtil.SetSheetName*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_SetSheetName_System_Object_System_String_" data-uid="FxCommonLib.Utils.ExcelUtil.SetSheetName(System.Object,System.String)">SetSheetName(Object, String)</h4>
+  <div class="markdown level1 summary"><p>Sheet.Nameプロパティ設定</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetSheetName(object sheet, string name)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td><p>Worksheet</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td><p>シート名</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_SetVisible_" data-uid="FxCommonLib.Utils.ExcelUtil.SetVisible*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_SetVisible_System_Object_System_Boolean_" data-uid="FxCommonLib.Utils.ExcelUtil.SetVisible(System.Object,System.Boolean)">SetVisible(Object, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Visibleプロパティ設定</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetVisible(object xlApp, bool value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">xlApp</span></td>
+        <td><p>Application.Visible</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">value</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_ExcelUtil_SheetActivate_" data-uid="FxCommonLib.Utils.ExcelUtil.SheetActivate*"></a>
+  <h4 id="FxCommonLib_Utils_ExcelUtil_SheetActivate_System_Object_" data-uid="FxCommonLib.Utils.ExcelUtil.SheetActivate(System.Object)">SheetActivate(Object)</h4>
+  <div class="markdown level1 summary"><p>SheetActivateメソッド</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SheetActivate(object sheet)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">sheet</span></td>
+        <td><p>Worksheet</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

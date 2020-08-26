@@ -1,0 +1,840 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class SQLDBUtil
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class SQLDBUtil
+   ">
+    <meta name="generator" content="docfx 2.33.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="FxCommonLib.Utils.SQLDBUtil">
+  
+  
+  <h1 id="FxCommonLib_Utils_SQLDBUtil" data-uid="FxCommonLib.Utils.SQLDBUtil" class="text-break">Class SQLDBUtil
+  </h1>
+  <div class="markdown level0 summary"><p>SQLServer接続(ADO.Net)ユーティリティ</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">SQLDBUtil</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.IDisposable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="FxCommonLib.Utils.html">FxCommonLib.Utils</a></h6>
+  <h6><strong>Assembly</strong>: FxCommonLib.dll</h6>
+  <h5 id="FxCommonLib_Utils_SQLDBUtil_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class SQLDBUtil : IDisposable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="FxCommonLib_Utils_SQLDBUtil__ctor_" data-uid="FxCommonLib.Utils.SQLDBUtil.#ctor*"></a>
+  <h4 id="FxCommonLib_Utils_SQLDBUtil__ctor_ILog_" data-uid="FxCommonLib.Utils.SQLDBUtil.#ctor(ILog)">SQLDBUtil(ILog)</h4>
+  <div class="markdown level1 summary"><p>コンストラクタ</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SQLDBUtil(ILog logger)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ILog</span></td>
+        <td><span class="parametername">logger</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  
+  
+  <h4 id="FxCommonLib_Utils_SQLDBUtil_NullViolation" data-uid="FxCommonLib.Utils.SQLDBUtil.NullViolation">NullViolation</h4>
+  <div class="markdown level1 summary"><p>NotNull制約違反</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int NullViolation = 515</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="FxCommonLib_Utils_SQLDBUtil_PkeyViolation" data-uid="FxCommonLib.Utils.SQLDBUtil.PkeyViolation">PkeyViolation</h4>
+  <div class="markdown level1 summary"><p>主キー制約違反</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int PkeyViolation = 2627</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="FxCommonLib_Utils_SQLDBUtil_Connection_" data-uid="FxCommonLib.Utils.SQLDBUtil.Connection*"></a>
+  <h4 id="FxCommonLib_Utils_SQLDBUtil_Connection" data-uid="FxCommonLib.Utils.SQLDBUtil.Connection">Connection</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SqlConnection Connection { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">SqlConnection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_SQLDBUtil_SqlCommand_" data-uid="FxCommonLib.Utils.SQLDBUtil.SqlCommand*"></a>
+  <h4 id="FxCommonLib_Utils_SQLDBUtil_SqlCommand" data-uid="FxCommonLib.Utils.SQLDBUtil.SqlCommand">SqlCommand</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SqlCommand SqlCommand { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">SqlCommand</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_SQLDBUtil_SqlDataAdapter_" data-uid="FxCommonLib.Utils.SQLDBUtil.SqlDataAdapter*"></a>
+  <h4 id="FxCommonLib_Utils_SQLDBUtil_SqlDataAdapter" data-uid="FxCommonLib.Utils.SQLDBUtil.SqlDataAdapter">SqlDataAdapter</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SqlDataAdapter SqlDataAdapter { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">SqlDataAdapter</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_SQLDBUtil_Transaction_" data-uid="FxCommonLib.Utils.SQLDBUtil.Transaction*"></a>
+  <h4 id="FxCommonLib_Utils_SQLDBUtil_Transaction" data-uid="FxCommonLib.Utils.SQLDBUtil.Transaction">Transaction</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SqlTransaction Transaction { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">SqlTransaction</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="FxCommonLib_Utils_SQLDBUtil_AppendTopLimit_" data-uid="FxCommonLib.Utils.SQLDBUtil.AppendTopLimit*"></a>
+  <h4 id="FxCommonLib_Utils_SQLDBUtil_AppendTopLimit_System_String_System_Int32_" data-uid="FxCommonLib.Utils.SQLDBUtil.AppendTopLimit(System.String,System.Int32)">AppendTopLimit(String, Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string AppendTopLimit(string sql, int limit)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">sql</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">limit</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_SQLDBUtil_BeginTransaction_" data-uid="FxCommonLib.Utils.SQLDBUtil.BeginTransaction*"></a>
+  <h4 id="FxCommonLib_Utils_SQLDBUtil_BeginTransaction" data-uid="FxCommonLib.Utils.SQLDBUtil.BeginTransaction">BeginTransaction()</h4>
+  <div class="markdown level1 summary"><p>トランザクション開始</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void BeginTransaction()</code></pre>
+  </div>
+  
+  
+  <a id="FxCommonLib_Utils_SQLDBUtil_BuildUpdateCommand_" data-uid="FxCommonLib.Utils.SQLDBUtil.BuildUpdateCommand*"></a>
+  <h4 id="FxCommonLib_Utils_SQLDBUtil_BuildUpdateCommand" data-uid="FxCommonLib.Utils.SQLDBUtil.BuildUpdateCommand">BuildUpdateCommand()</h4>
+  <div class="markdown level1 summary"><p>DataAdapterのUpdateComandを自動生成</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void BuildUpdateCommand()</code></pre>
+  </div>
+  
+  
+  <a id="FxCommonLib_Utils_SQLDBUtil_Close_" data-uid="FxCommonLib.Utils.SQLDBUtil.Close*"></a>
+  <h4 id="FxCommonLib_Utils_SQLDBUtil_Close" data-uid="FxCommonLib.Utils.SQLDBUtil.Close">Close()</h4>
+  <div class="markdown level1 summary"><p>接続解除</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Close()</code></pre>
+  </div>
+  
+  
+  <a id="FxCommonLib_Utils_SQLDBUtil_Commit_" data-uid="FxCommonLib.Utils.SQLDBUtil.Commit*"></a>
+  <h4 id="FxCommonLib_Utils_SQLDBUtil_Commit" data-uid="FxCommonLib.Utils.SQLDBUtil.Commit">Commit()</h4>
+  <div class="markdown level1 summary"><p>コミット</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Commit()</code></pre>
+  </div>
+  
+  
+  <a id="FxCommonLib_Utils_SQLDBUtil_Dispose_" data-uid="FxCommonLib.Utils.SQLDBUtil.Dispose*"></a>
+  <h4 id="FxCommonLib_Utils_SQLDBUtil_Dispose" data-uid="FxCommonLib.Utils.SQLDBUtil.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"><p>Dispose処理</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+  
+  
+  <a id="FxCommonLib_Utils_SQLDBUtil_Dispose_" data-uid="FxCommonLib.Utils.SQLDBUtil.Dispose*"></a>
+  <h4 id="FxCommonLib_Utils_SQLDBUtil_Dispose_System_Boolean_" data-uid="FxCommonLib.Utils.SQLDBUtil.Dispose(System.Boolean)">Dispose(Boolean)</h4>
+  <div class="markdown level1 summary"><p>Dispose処理</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void Dispose(bool disposing)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">disposing</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_SQLDBUtil_EscapeSqlChar_" data-uid="FxCommonLib.Utils.SQLDBUtil.EscapeSqlChar*"></a>
+  <h4 id="FxCommonLib_Utils_SQLDBUtil_EscapeSqlChar_System_String_" data-uid="FxCommonLib.Utils.SQLDBUtil.EscapeSqlChar(System.String)">EscapeSqlChar(String)</h4>
+  <div class="markdown level1 summary"><p>SQL特殊文字をエスケープ</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string EscapeSqlChar(string val)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">val</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_SQLDBUtil_ExecSelect_" data-uid="FxCommonLib.Utils.SQLDBUtil.ExecSelect*"></a>
+  <h4 id="FxCommonLib_Utils_SQLDBUtil_ExecSelect_System_String_SqlParameter___System_Int32_System_String_System_Int32_" data-uid="FxCommonLib.Utils.SQLDBUtil.ExecSelect(System.String,SqlParameter[],System.Int32,System.String,System.Int32)">ExecSelect(String, SqlParameter[], Int32, String, Int32)</h4>
+  <div class="markdown level1 summary"><p>SELECT文実行</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DataSet ExecSelect(string sql, SqlParameter[] param = null, int maxRow = 0, string maxErrMsg = &quot;&quot;, int timeout = 60)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">sql</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">SqlParameter</span>[]</td>
+        <td><span class="parametername">param</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">maxRow</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">maxErrMsg</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">timeout</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DataSet</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_SQLDBUtil_ExecuteNonQuery_" data-uid="FxCommonLib.Utils.SQLDBUtil.ExecuteNonQuery*"></a>
+  <h4 id="FxCommonLib_Utils_SQLDBUtil_ExecuteNonQuery_System_String_SqlParameter___CommandType_System_Int32_" data-uid="FxCommonLib.Utils.SQLDBUtil.ExecuteNonQuery(System.String,SqlParameter[],CommandType,System.Int32)">ExecuteNonQuery(String, SqlParameter[], CommandType, Int32)</h4>
+  <div class="markdown level1 summary"><p>DataSet を使用せずに、UPDATE、INSERT、または DELETE ステートメントを実行。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int ExecuteNonQuery(string sql, SqlParameter[] param, CommandType cmdType = null, int timeout = 60)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">sql</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">SqlParameter</span>[]</td>
+        <td><span class="parametername">param</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">CommandType</span></td>
+        <td><span class="parametername">cmdType</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">timeout</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_SQLDBUtil_ExecuteReader_" data-uid="FxCommonLib.Utils.SQLDBUtil.ExecuteReader*"></a>
+  <h4 id="FxCommonLib_Utils_SQLDBUtil_ExecuteReader_System_String_SqlParameter___CommandType_System_Int32_" data-uid="FxCommonLib.Utils.SQLDBUtil.ExecuteReader(System.String,SqlParameter[],CommandType,System.Int32)">ExecuteReader(String, SqlParameter[], CommandType, Int32)</h4>
+  <div class="markdown level1 summary"><p>読取専用クエリを実行</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SqlDataReader ExecuteReader(string sql, SqlParameter[] param, CommandType cmdType = null, int timeout = 60)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">sql</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">SqlParameter</span>[]</td>
+        <td><span class="parametername">param</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">CommandType</span></td>
+        <td><span class="parametername">cmdType</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">timeout</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">SqlDataReader</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_SQLDBUtil_Finalize_" data-uid="FxCommonLib.Utils.SQLDBUtil.Finalize*"></a>
+  <h4 id="FxCommonLib_Utils_SQLDBUtil_Finalize" data-uid="FxCommonLib.Utils.SQLDBUtil.Finalize">Finalize()</h4>
+  <div class="markdown level1 summary"><p>デストラクタ</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void Finalize()</code></pre>
+  </div>
+  
+  
+  <a id="FxCommonLib_Utils_SQLDBUtil_Open_" data-uid="FxCommonLib.Utils.SQLDBUtil.Open*"></a>
+  <h4 id="FxCommonLib_Utils_SQLDBUtil_Open_System_String_" data-uid="FxCommonLib.Utils.SQLDBUtil.Open(System.String)">Open(String)</h4>
+  <div class="markdown level1 summary"><p>接続</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Open(string connectString)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">connectString</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="FxCommonLib_Utils_SQLDBUtil_Open_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>ODP.Netはデフォルトでコネクションプールが有効になっている。
+なので、使用前でOpenし、使用後にCloseする方がよい。</p>
+</div>
+  
+  
+  <a id="FxCommonLib_Utils_SQLDBUtil_ParamToString_" data-uid="FxCommonLib.Utils.SQLDBUtil.ParamToString*"></a>
+  <h4 id="FxCommonLib_Utils_SQLDBUtil_ParamToString_SqlParameter___" data-uid="FxCommonLib.Utils.SQLDBUtil.ParamToString(SqlParameter[])">ParamToString(SqlParameter[])</h4>
+  <div class="markdown level1 summary"><p>パラメータの値を文字列に変換</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string ParamToString(SqlParameter[] param)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">SqlParameter</span>[]</td>
+        <td><span class="parametername">param</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_SQLDBUtil_ParamToWhere_" data-uid="FxCommonLib.Utils.SQLDBUtil.ParamToWhere*"></a>
+  <h4 id="FxCommonLib_Utils_SQLDBUtil_ParamToWhere_DataTable_System_String_" data-uid="FxCommonLib.Utils.SQLDBUtil.ParamToWhere(DataTable,System.String)">ParamToWhere(DataTable, String)</h4>
+  <div class="markdown level1 summary"><p>Where句生成</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ParamToWhere(DataTable dt, string prefix = &quot;&quot;)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DataTable</span></td>
+        <td><span class="parametername">dt</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">prefix</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_SQLDBUtil_Rollback_" data-uid="FxCommonLib.Utils.SQLDBUtil.Rollback*"></a>
+  <h4 id="FxCommonLib_Utils_SQLDBUtil_Rollback" data-uid="FxCommonLib.Utils.SQLDBUtil.Rollback">Rollback()</h4>
+  <div class="markdown level1 summary"><p>ロールバック</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Rollback()</code></pre>
+  </div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.IDisposable</span>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,8 +1,7 @@
 ﻿using FxCommonLib.Consts;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -20,146 +19,173 @@ namespace PokudaSearch.WebDriver {
     }
 
     public class MP4WebDriver {
-        private IWebDriver _webDriver = new ChromeDriver();
 
         public MP4WebDriver() {
         }
+        //public TagInfo GetTagInfoFromFanza2(FileInfo file) {
+        //    _webDriver.Url = "https://www.dmm.co.jp/mono/dvd/";
+        //    TagInfo info = new TagInfo();
 
-        public TagInfo GetTagInfoFromFanza(FileInfo file) {
-            _webDriver.Url = "https://www.dmm.co.jp/mono/dvd/";
+        //    try {
+        //        string fileName = file.Name.Replace(file.Extension, "");
+
+        //        var keywordElem = _webDriver.FindElement(By.XPath("//*[@id='searchstr']"));
+        //        keywordElem.Clear();
+        //        keywordElem.SendKeys(fileName);
+        //        var submit = _webDriver.FindElement(By.XPath("//*[@id='frmSearch']/fieldset/div/div[2]/input"));
+        //        submit.Click();
+        //        Thread.Sleep(1000);
+
+        //        try {
+        //            var resultListElem = _webDriver.FindElements(By.XPath("//*[@id='list']/li[1]/div/p[2]/a"));
+        //            foreach (var element in resultListElem.AsEnumerable()) {
+        //                element.Click();
+
+        //                //情報を取得
+        //                var title = _webDriver.FindElement(By.XPath("//*[@id='title']"));
+        //                info.Title = title.Text;
+        //                var performer = _webDriver.FindElement(By.XPath("//*[@id='performer']/a"));
+        //                info.Performers = performer.Text;
+
+        //                //ジャンル
+        //                try {
+        //                    var genreList = _webDriver.FindElements(By.XPath("//td[text()='ジャンル：']/../td[2]/a"));
+        //                    foreach (var genre in genreList.AsEnumerable()) {
+        //                        info.Genres += genre.Text + " ";
+        //                    }
+        //                } catch (NoSuchElementException) {
+        //                    //何もしない
+        //                }
+
+        //                //イメージ
+        //                try {
+        //                    var imageDiv = _webDriver.FindElement(By.XPath("//*[@id='sample-video']"));
+        //                    var image = imageDiv.FindElement(By.XPath("div/a/img"));
+        //                    info.ImageUrl = image.GetAttribute("src");
+        //                } catch (NoSuchElementException) {
+        //                    //何もしない
+        //                }
+
+        //                //コメント
+        //                try {
+        //                    var commentDiv = _webDriver.FindElement(By.XPath("//*[@id='mu']/div/table/tbody/tr/td[1]/div[2]"));
+        //                    var comment = commentDiv.FindElement(By.XPath("div/p"));
+        //                    info.Comment = comment.Text.Split('\n')[0];
+        //                } catch (NoSuchElementException) {
+        //                    //何もしない
+        //                }
+
+        //                break;
+        //            }
+
+        //            return info;
+        //        } catch (NoSuchElementException) {
+        //            MessageBox.Show(AppObject.GetMsg(AppObject.Msg.ERR_CANNOT_GET_INFO), 
+        //                AppObject.GetMsg(AppObject.Msg.TITLE_WARN), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //            return info;
+        //        }
+        //    } finally {
+        //        _webDriver.Close();
+        //        _webDriver.Quit();
+        //    }
+
+        //}
+        //public async Task<TagInfo> GetTagInfoFromFanza3(FileInfo file) {
+            //var app = new WindowsAppFriend(Process.GetCurrentProcess());
+            //
+            //_appObject = app..Type("AppObject");
+            //var driver = new CefSharpDriver((AppVar)AppObject.CefSharpPanel.Browser);
+            //driver.Url = "https://www.dmm.co.jp/mono/dvd/";
+        //}
+
+        public async Task<TagInfo> GetTagInfoFromFanza(FileInfo file) {
+            string url = "https://www.dmm.co.jp/mono/dvd/";
+
             TagInfo info = new TagInfo();
 
             try {
+                await AppObject.CefSharpPanel.LoadPageAsync(url);
+
+                //年齢確認(以下では失敗する場合が多いので手動で認証)
+                //string test = await AppObject.CefSharpPanel.GetTextContentByClassName("ageCheck__linkText");
+                //await AppObject.CefSharpPanel.AnchorClickByClassName("ageCheck__link ageCheck__link--r18");
+                //var list = await AppObject.CefSharpPanel.GetLinks();
+                //await AppObject.CefSharpPanel.LoadPageAsync(list[1]);
+
+                //キーワードセット
                 string fileName = file.Name.Replace(file.Extension, "");
-
-                var keywordElem = _webDriver.FindElement(By.XPath("//*[@id='searchstr']"));
-                keywordElem.Clear();
-                keywordElem.SendKeys(fileName);
-                var submit = _webDriver.FindElement(By.XPath("//*[@id='frmSearch']/fieldset/div/div[2]/input"));
-                submit.Click();
+                await AppObject.CefSharpPanel.SetInputValueById("naviapi-search-text", fileName);
                 Thread.Sleep(1000);
+                //検索
+                await AppObject.CefSharpPanel.ClickById("naviapi-search-submit");
+                Thread.Sleep(3000);
 
-                try {
-                    var resultListElem = _webDriver.FindElements(By.XPath("//*[@id='list']/li[1]/div/p[2]/a"));
-                    foreach (var element in resultListElem.AsEnumerable()) {
-                        element.Click();
+                //検索結果
+                //await AppObject.CefSharpPanel.ClickByXPath("//*[@id=\'list\']/li[1]/div/p[2]/a");
+                var searchList = await AppObject.CefSharpPanel.GetLinks();
+                string tmpUrl = searchList.Where(x => x.Contains("ord=1")).First();
+                await AppObject.CefSharpPanel.LoadPageAsync(tmpUrl);
+                Thread.Sleep(3000);
 
-                        //情報を取得
-                        var title = _webDriver.FindElement(By.XPath("//*[@id='title']"));
-                        info.Title = title.Text;
-                        var performer = _webDriver.FindElement(By.XPath("//*[@id='performer']/a"));
-                        info.Performers = performer.Text;
-
-                        //ジャンル
-                        try {
-                            var genreList = _webDriver.FindElements(By.XPath("//td[text()='ジャンル：']/../td[2]/a"));
-                            foreach (var genre in genreList.AsEnumerable()) {
-                                info.Genres += genre.Text + " ";
-                            }
-                        } catch (NoSuchElementException) {
-                            //何もしない
-                        }
-
-                        //イメージ
-                        try {
-                            var imageDiv = _webDriver.FindElement(By.XPath("//*[@id='sample-video']"));
-                            var image = imageDiv.FindElement(By.XPath("div/a/img"));
-                            info.ImageUrl = image.GetAttribute("src");
-                        } catch (NoSuchElementException) {
-                            //何もしない
-                        }
-
-                        //コメント
-                        try {
-                            var commentDiv = _webDriver.FindElement(By.XPath("//*[@id='mu']/div/table/tbody/tr/td[1]/div[2]"));
-                            var comment = commentDiv.FindElement(By.XPath("div/p"));
-                            info.Comment = comment.Text.Split('\n')[0];
-                        } catch (NoSuchElementException) {
-                            //何もしない
-                        }
-
-                        break;
-                    }
-
-                    return info;
-                } catch (NoSuchElementException) {
-                    MessageBox.Show(AppObject.GetMsg(AppObject.Msg.ERR_CANNOT_GET_INFO), 
-                        AppObject.GetMsg(AppObject.Msg.TITLE_WARN), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return info;
+                //タイトルを取得
+                //var title = await AppObject.CefSharpPanel.GetTextContentById("title");
+                var title = await AppObject.CefSharpPanel.GetTextContentById("//*[@id='title']/");
+                info.Title = title;
+                //演者
+                var performer = await AppObject.CefSharpPanel.GetTextContentById("performer");
+                info.Performers = performer;
+                //ジャンル
+                var genreList = await AppObject.CefSharpPanel.GetTextContentsByXPath("//td[text()=\'ジャンル：\']/../td[2]/a");
+                foreach (string tmp in genreList) {
+                    info.Genres += tmp + " ";
                 }
+
+                //try {
+                //    var resultListElem = _webDriver.FindElements(By.XPath("//*[@id='list']/li[1]/div/p[2]/a"));
+                //    foreach (var element in resultListElem.AsEnumerable()) {
+                //        element.Click();
+
+                //        //情報を取得
+                //        var title = _webDriver.FindElement(By.XPath("//*[@id='title']"));
+                //        info.Title = title.Text;
+                //        var performer = _webDriver.FindElement(By.XPath("//*[@id='performer']/a"));
+                //        info.Performers = performer.Text;
+
+                //        //ジャンル
+                //        try {
+                //            var genreList = _webDriver.FindElements(By.XPath("//td[text()='ジャンル：']/../td[2]/a"));
+                //            foreach (var genre in genreList.AsEnumerable()) {
+                //                info.Genres += genre.Text + " ";
+                //            }
+                //        } catch (NoSuchElementException) {
+                //            //何もしない
+                //        }
+
+                //        //イメージ
+                //        try {
+                //            var imageDiv = _webDriver.FindElement(By.XPath("//*[@id='sample-video']"));
+                //            var image = imageDiv.FindElement(By.XPath("div/a/img"));
+                //            info.ImageUrl = image.GetAttribute("src");
+                //        } catch (NoSuchElementException) {
+                //            //何もしない
+                //        }
+
+                //        //コメント
+                //        try {
+                //            var commentDiv = _webDriver.FindElement(By.XPath("//*[@id='mu']/div/table/tbody/tr/td[1]/div[2]"));
+                //            var comment = commentDiv.FindElement(By.XPath("div/p"));
+                //            info.Comment = comment.Text.Split('\n')[0];
+                //        } catch (NoSuchElementException) {
+                //            //何もしない
+                //        }
+
+                //        break;
+                //    }
+
             } finally {
-                _webDriver.Close();
-                _webDriver.Quit();
+
             }
-
-        }
-        public TagInfo GetTagInfoFromFanzaOld(FileInfo file) {
-            _webDriver.Url = "https://www.dmm.co.jp/mono/dvd/";
-            TagInfo info = new TagInfo();
-
-            try {
-                string fileName = file.Name.Replace(file.Extension, "");
-
-                var keywordElem = _webDriver.FindElement(By.XPath("//*[@id='searchstr']"));
-                keywordElem.Clear();
-                keywordElem.SendKeys(fileName);
-                var submit = _webDriver.FindElement(By.XPath("//*[@id='frmSearch']/fieldset/div/div[2]/input"));
-                submit.Click();
-                Thread.Sleep(1000);
-
-                try {
-                    var resultListElem = _webDriver.FindElements(By.XPath("//*[@id='list']/li[1]/div/p[2]/a"));
-                    foreach (var element in resultListElem.AsEnumerable()) {
-                        element.Click();
-
-                        //情報を取得
-                        var title = _webDriver.FindElement(By.XPath("//*[@id='title']"));
-                        info.Title = title.Text;
-                        var performer = _webDriver.FindElement(By.XPath("//*[@id='performer']/a"));
-                        info.Performers = performer.Text;
-
-                        //ジャンル
-                        try {
-                            var genreList = _webDriver.FindElements(By.XPath("//td[text()='ジャンル：']/../td[2]/a"));
-                            foreach (var genre in genreList.AsEnumerable()) {
-                                info.Genres += genre.Text + " ";
-                            }
-                        } catch (NoSuchElementException) {
-                            //何もしない
-                        }
-
-                        //イメージ
-                        try {
-                            var imageDiv = _webDriver.FindElement(By.XPath("//*[@id='sample-video']"));
-                            var image = imageDiv.FindElement(By.XPath("div/a/img"));
-                            info.ImageUrl = image.GetAttribute("src");
-                        } catch (NoSuchElementException) {
-                            //何もしない
-                        }
-
-                        //コメント
-                        try {
-                            var commentDiv = _webDriver.FindElement(By.XPath("//*[@id='mu']/div/table/tbody/tr/td[1]/div[2]"));
-                            var comment = commentDiv.FindElement(By.XPath("div/p"));
-                            info.Comment = comment.Text.Split('\n')[0];
-                        } catch (NoSuchElementException) {
-                            //何もしない
-                        }
-
-                        break;
-                    }
-
-                    return info;
-                } catch (NoSuchElementException) {
-                    MessageBox.Show(AppObject.GetMsg(AppObject.Msg.ERR_CANNOT_GET_INFO), 
-                        AppObject.GetMsg(AppObject.Msg.TITLE_WARN), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return info;
-                }
-            } finally {
-                _webDriver.Close();
-                _webDriver.Quit();
-            }
-
+            return info;
         }
 
     }

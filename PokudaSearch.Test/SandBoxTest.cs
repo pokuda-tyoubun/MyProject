@@ -23,10 +23,42 @@ using com.rometools.rome.feed.atom;
 using Hnx8.ReadJEnc;
 using javax.xml.crypto;
 using org.apache.fontbox.encoding;
+using PokudaSearch.Win32API;
+using org.quartz;
+using FxCommonLib.Utils;
+using PokudaSearch.WebDriver;
 
 namespace PokudaSearch.Test {
     [TestClass]
     public class SandBoxTest {
+        [TestMethod]
+        public void WebApiTest() {
+            var api = new DMMWebAPIUtil();
+
+            var list = api.GetItemList("test");
+        }
+        [TestMethod]
+        public void ExcelWasteNameTest() {
+            string root = @"C:\Workspace\Repo\Git\ecoLLaboMES\doc";
+            //Excelファイルを探す
+            var fileList = FileUtil.GetAllFileInfo(root);
+            foreach (FileInfo fi in fileList) {
+                if (fi.Extension.ToLower() == ".xls" || fi.Extension.ToLower() == ".xlsx") {
+
+                }
+            }
+        }
+        [TestMethod]
+        public void SHGetKnownFolderPathTest() {
+            string path;
+
+            //ダウンロードフォルダ
+            //Guid id = new Guid("374DE290-123F-4565-9164-39C4925E467B");
+            //ライブラリ
+            Guid id = new Guid("031E4825-7B94-4DC3-B131-E946B44C8DD5");
+            int result = Shell32.SHGetKnownFolderPath(id, 0, IntPtr.Zero, out path);
+            Debug.Print(path);
+        }
         [TestMethod]
         public void DetectingEncodeTest() {
             var path = @"C:\Workspace\Repo\Git\MyProject\PokudaSearch.Test\TestData\TestDocs\細則.txt";

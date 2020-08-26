@@ -16,9 +16,8 @@ using System.Threading;
 namespace PokudaSearch.Controls {
     public partial class CefSharpPanel : UserControl {
 
-        #region MemberVariables
-        #endregion MemberVariables
 
+        #region Properties
         private bool _loadComplete = false;
         public bool LoadComplete {
             get {
@@ -37,7 +36,12 @@ namespace PokudaSearch.Controls {
                 return _chromeBrowser;
             }
         }
+        public Control FocusBackControl = null;
+        #endregion Properties
+
+        #region MemberVariables
         private TaskCompletionSource<bool> _completionSource = null;
+        #endregion MemberVariables
 
         #region Constractors
         public CefSharpPanel() {
@@ -124,7 +128,6 @@ namespace PokudaSearch.Controls {
                     }
                 }
             }));
-
         }
         #endregion EventHandlers
 
@@ -143,6 +146,11 @@ namespace PokudaSearch.Controls {
             } else {
                 this.ProgressBar.Style = ProgressBarStyle.Blocks;
                 this.ProgressBar.Value = 0;
+                if (this.FocusBackControl == null) {
+                    this.Parent.Focus();
+                } else {
+                    this.FocusBackControl.Focus();
+                }
             }
         }
 
@@ -174,6 +182,170 @@ namespace PokudaSearch.Controls {
             var list = await GetLinks();
             return list.Count;
         }
+
+        public Task<bool> SetInputValueById(string id, string value) {
+            var completionSource = new TaskCompletionSource<bool>();
+            string script = "document.getElementById('" + id + "').value=" + '\'' + value + '\'';
+            Dispatcher.CurrentDispatcher.BeginInvoke((Action)(async () => {
+                await _chromeBrowser.EvaluateScriptAsync(script).ContinueWith(x => {
+                    var response = x.Result;
+                    if (response.Success && response.Result != null) {
+                        completionSource.SetResult(true);
+                    } else {
+                        completionSource.SetResult(false);
+                    }
+
+                });
+            }));
+            Task<bool> task = completionSource.Task;
+            return task;
+        }
+        public Task<bool> ClickById(string id) {
+            var completionSource = new TaskCompletionSource<bool>();
+            string script = "document.getElementById('" + id + "').click();";
+            Dispatcher.CurrentDispatcher.BeginInvoke((Action)(async () => {
+                await _chromeBrowser.EvaluateScriptAsync(script).ContinueWith(x => {
+                    var response = x.Result;
+                    if (response.Success && response.Result != null) {
+                        completionSource.SetResult(true);
+                    } else {
+                        completionSource.SetResult(false);
+                    }
+
+                });
+            }));
+            Task<bool> task = completionSource.Task;
+            return task;
+        }
+        public Task<string> GetTextContentByXpath(string xpath) {
+            var completionSource = new TaskCompletionSource<string>();
+            string script = @"document.evaluate(""" + xpath + @""", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null).snapshotItem(0).textContent;";
+            Dispatcher.CurrentDispatcher.BeginInvoke((Action)(async () => {
+                await _chromeBrowser.EvaluateScriptAsync(script).ContinueWith(x => {
+                    var response = x.Result;
+                    if (response.Success && response.Result != null) {
+                        var text = (string)response.Result;
+                        completionSource.SetResult(text);
+                    } else {
+                        completionSource.SetResult("");
+                    }
+
+                });
+            }));
+            Task<string> task = completionSource.Task;
+            return task;
+        }
+        public Task<string> GetTextContentByClassName(string className) {
+            var completionSource = new TaskCompletionSource<string>();
+            string script = "document.getElementsByClassName('" + className + "')[0].textContent;";
+            Dispatcher.CurrentDispatcher.BeginInvoke((Action)(async () => {
+                await _chromeBrowser.EvaluateScriptAsync(script).ContinueWith(x => {
+                    var response = x.Result;
+                    if (response.Success && response.Result != null) {
+                        var text = (string)response.Result;
+                        completionSource.SetResult(text);
+                    } else {
+                        completionSource.SetResult("");
+                    }
+
+                });
+            }));
+            Task<string> task = completionSource.Task;
+            return task;
+        }
+        public Task<string> GetTextContentById(string id) {
+            var completionSource = new TaskCompletionSource<string>();
+            string script = "document.getElementById('" + id + "').textContent;";
+            Dispatcher.CurrentDispatcher.BeginInvoke((Action)(async () => {
+                await _chromeBrowser.EvaluateScriptAsync(script).ContinueWith(x => {
+                    var response = x.Result;
+                    if (response.Success && response.Result != null) {
+                        var text = (string)response.Result;
+                        completionSource.SetResult(text);
+                    } else {
+                        completionSource.SetResult("");
+                    }
+
+                });
+            }));
+            Task<string> task = completionSource.Task;
+            return task;
+        }
+        public Task<bool> AnchorClickByClassName(string className) {
+            var completionSource = new TaskCompletionSource<bool>();
+            string script =
+            //@"function triggerEvent(element, event) {
+            //   if (document.createEvent) {
+            //       // IE以外
+            //       var evt = document.createEvent('HTMLEvents');
+            //       evt.initEvent(event, true, true ); // event type, bubbling, cancelable
+            //       return element.dispatchEvent(evt);
+            //   }
+            //}
+            //var a = document.getElementsByClassName('ageCheck__link ageCheck__link--r18')[0];
+            //triggerEvent(a,  
+            //@"var a = document.getElementsByClassName('" + className + @"')[0];
+            @"var a = document.getElementsByClassName('ageCheck__link ageCheck__link--r18')[0];
+              a.click();";
+
+            Dispatcher.CurrentDispatcher.BeginInvoke((Action)(async () => {
+                await _chromeBrowser.EvaluateScriptAsync(script).ContinueWith(x => {
+                    Thread.Sleep(3000);
+                    var response = x.Result;
+                    if (response.Success && response.Result != null) {
+                        completionSource.SetResult(true);
+                    } else {
+                        completionSource.SetResult(false);
+                    }
+
+                });
+            }));
+            Task<bool> task = completionSource.Task;
+            return task;
+        }
+        public Task<bool> ClickByXPath(string xpath) {
+            var completionSource = new TaskCompletionSource<bool>();
+            string script = "document.evaluate(('" + xpath + "', document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null).snapshotItem(0).click();";
+            Dispatcher.CurrentDispatcher.BeginInvoke((Action)(async () => {
+                await _chromeBrowser.EvaluateScriptAsync(script).ContinueWith(x => {
+                    var response = x.Result;
+                    if (response.Success && response.Result != null) {
+                        completionSource.SetResult(true);
+                    } else {
+                        completionSource.SetResult(false);
+                    }
+
+                });
+            }));
+            Task<bool> task = completionSource.Task;
+            return task;
+        }
+        public Task<List<string>> GetTextContentsByXPath(string xpath) {
+            var ret = new List<string>();
+            var completionSource = new TaskCompletionSource<List<string>>();
+            string script = @"(function() {
+           	    				   var txtArray = new Array();
+                                   var elms = document.evaluate(""//td[text()='ジャンル：']/../td[2]/a"", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+           	    				   for (var i = 0; i < elms.snapshotLength; i++) {
+           	    						txtArray[i] = String(elms.snapshotItem(i).textContent);
+           	    				   }
+           	    				   return txtArray;
+            				})();";
+            Dispatcher.CurrentDispatcher.BeginInvoke((Action)(async () => {
+                await _chromeBrowser.EvaluateScriptAsync(script).ContinueWith(x => {
+                    var response = x.Result;
+                    if (response.Success && response.Result != null) {
+                        var list = (List<object>)response.Result;
+                        foreach (string tmp in list) {
+                            ret.Add(tmp);
+                        }
+                    }
+                });
+            }));
+            Task<List<string>> task = completionSource.Task;
+            return task;
+        }
+
         public Task<List<string>> GetLinks() {
             var ret = new List<string>();
             var completionSource = new TaskCompletionSource<List<string>>();

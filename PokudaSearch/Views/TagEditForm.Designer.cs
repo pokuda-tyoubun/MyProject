@@ -26,33 +26,35 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TagEditForm));
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.PackagePicture = new System.Windows.Forms.PictureBox();
+            this.GetInfoButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.ImagePathText = new FxCommonLib.Controls.FilePathTextBox(this.components);
             this.ImageRefButton = new System.Windows.Forms.Button();
-            this.CommentText = new FxCommonLib.Controls.FilePathTextBox(this.components);
             this.label5 = new System.Windows.Forms.Label();
-            this.LylicsText = new FxCommonLib.Controls.FilePathTextBox(this.components);
             this.label4 = new System.Windows.Forms.Label();
-            this.GenresText = new FxCommonLib.Controls.FilePathTextBox(this.components);
             this.label2 = new System.Windows.Forms.Label();
-            this.ArtistText = new FxCommonLib.Controls.FilePathTextBox(this.components);
             this.label1 = new System.Windows.Forms.Label();
-            this.TitleText = new FxCommonLib.Controls.FilePathTextBox(this.components);
             this.label3 = new System.Windows.Forms.Label();
-            this.TargetPathText = new FxCommonLib.Controls.FilePathTextBox(this.components);
             this.RefButton = new System.Windows.Forms.Button();
             this.CancelButton1 = new System.Windows.Forms.Button();
             this.ApplyButton = new System.Windows.Forms.Button();
             this.CauseLabel = new System.Windows.Forms.Label();
             this.TitleLabel = new System.Windows.Forms.Label();
-            this.GetInfoButton = new System.Windows.Forms.Button();
-            this.PackagePicture = new System.Windows.Forms.PictureBox();
+            this.ImagePathText = new FxCommonLib.Controls.FilePathTextBox(this.components);
+            this.CommentText = new FxCommonLib.Controls.FilePathTextBox(this.components);
+            this.LylicsText = new FxCommonLib.Controls.FilePathTextBox(this.components);
+            this.GenresText = new FxCommonLib.Controls.FilePathTextBox(this.components);
+            this.ArtistText = new FxCommonLib.Controls.FilePathTextBox(this.components);
+            this.TitleText = new FxCommonLib.Controls.FilePathTextBox(this.components);
+            this.TargetPathText = new FxCommonLib.Controls.FilePathTextBox(this.components);
+            this.ConfirmAgeButton = new System.Windows.Forms.Button();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PackagePicture)).BeginInit();
             this.SuspendLayout();
             // 
             // MainPanel
             // 
+            this.MainPanel.Controls.Add(this.ConfirmAgeButton);
             this.MainPanel.Controls.Add(this.PackagePicture);
             this.MainPanel.Controls.Add(this.GetInfoButton);
             this.MainPanel.Controls.Add(this.label6);
@@ -83,6 +85,26 @@
             this.MainPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainPanel_DragEnter);
             this.MainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.MainPanel_Paint);
             // 
+            // PackagePicture
+            // 
+            this.PackagePicture.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PackagePicture.Location = new System.Drawing.Point(93, 389);
+            this.PackagePicture.Name = "PackagePicture";
+            this.PackagePicture.Size = new System.Drawing.Size(145, 112);
+            this.PackagePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.PackagePicture.TabIndex = 28;
+            this.PackagePicture.TabStop = false;
+            // 
+            // GetInfoButton
+            // 
+            this.GetInfoButton.Location = new System.Drawing.Point(242, 471);
+            this.GetInfoButton.Name = "GetInfoButton";
+            this.GetInfoButton.Size = new System.Drawing.Size(88, 28);
+            this.GetInfoButton.TabIndex = 27;
+            this.GetInfoButton.Text = "Webから取得";
+            this.GetInfoButton.UseVisualStyleBackColor = true;
+            this.GetInfoButton.Click += new System.EventHandler(this.GetInfoButton_Click);
+            // 
             // label6
             // 
             this.label6.BackColor = System.Drawing.SystemColors.Control;
@@ -96,14 +118,6 @@
             this.label6.Text = "画像ファイル";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // ImagePathText
-            // 
-            this.ImagePathText.AllowDrop = true;
-            this.ImagePathText.Location = new System.Drawing.Point(92, 366);
-            this.ImagePathText.Name = "ImagePathText";
-            this.ImagePathText.Size = new System.Drawing.Size(404, 19);
-            this.ImagePathText.TabIndex = 25;
-            // 
             // ImageRefButton
             // 
             this.ImageRefButton.Location = new System.Drawing.Point(500, 364);
@@ -112,16 +126,6 @@
             this.ImageRefButton.TabIndex = 26;
             this.ImageRefButton.Text = "参照...";
             this.ImageRefButton.UseVisualStyleBackColor = true;
-            // 
-            // CommentText
-            // 
-            this.CommentText.AllowDrop = true;
-            this.CommentText.Location = new System.Drawing.Point(92, 262);
-            this.CommentText.Multiline = true;
-            this.CommentText.Name = "CommentText";
-            this.CommentText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.CommentText.Size = new System.Drawing.Size(464, 101);
-            this.CommentText.TabIndex = 23;
             // 
             // label5
             // 
@@ -136,16 +140,6 @@
             this.label5.Text = "コメント";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // LylicsText
-            // 
-            this.LylicsText.AllowDrop = true;
-            this.LylicsText.Location = new System.Drawing.Point(92, 158);
-            this.LylicsText.Multiline = true;
-            this.LylicsText.Name = "LylicsText";
-            this.LylicsText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.LylicsText.Size = new System.Drawing.Size(464, 101);
-            this.LylicsText.TabIndex = 21;
-            // 
             // label4
             // 
             this.label4.BackColor = System.Drawing.SystemColors.Control;
@@ -158,14 +152,6 @@
             this.label4.TabIndex = 20;
             this.label4.Text = "歌詞";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // GenresText
-            // 
-            this.GenresText.AllowDrop = true;
-            this.GenresText.Location = new System.Drawing.Point(92, 136);
-            this.GenresText.Name = "GenresText";
-            this.GenresText.Size = new System.Drawing.Size(183, 19);
-            this.GenresText.TabIndex = 19;
             // 
             // label2
             // 
@@ -180,14 +166,6 @@
             this.label2.Text = "ジャンル";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // ArtistText
-            // 
-            this.ArtistText.AllowDrop = true;
-            this.ArtistText.Location = new System.Drawing.Point(92, 115);
-            this.ArtistText.Name = "ArtistText";
-            this.ArtistText.Size = new System.Drawing.Size(183, 19);
-            this.ArtistText.TabIndex = 17;
-            // 
             // label1
             // 
             this.label1.BackColor = System.Drawing.SystemColors.Control;
@@ -201,14 +179,6 @@
             this.label1.Text = "アーティスト";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // TitleText
-            // 
-            this.TitleText.AllowDrop = true;
-            this.TitleText.Location = new System.Drawing.Point(92, 94);
-            this.TitleText.Name = "TitleText";
-            this.TitleText.Size = new System.Drawing.Size(183, 19);
-            this.TitleText.TabIndex = 15;
-            // 
             // label3
             // 
             this.label3.BackColor = System.Drawing.SystemColors.Control;
@@ -221,15 +191,6 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "対象ファイル";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // TargetPathText
-            // 
-            this.TargetPathText.AllowDrop = true;
-            this.TargetPathText.Location = new System.Drawing.Point(93, 8);
-            this.TargetPathText.Name = "TargetPathText";
-            this.TargetPathText.Size = new System.Drawing.Size(404, 19);
-            this.TargetPathText.TabIndex = 4;
-            this.TargetPathText.Leave += new System.EventHandler(this.TargetPathText_Leave);
             // 
             // RefButton
             // 
@@ -287,25 +248,76 @@
             this.TitleLabel.Text = "タイトル";
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // GetInfoButton
+            // ImagePathText
             // 
-            this.GetInfoButton.Location = new System.Drawing.Point(242, 471);
-            this.GetInfoButton.Name = "GetInfoButton";
-            this.GetInfoButton.Size = new System.Drawing.Size(88, 28);
-            this.GetInfoButton.TabIndex = 27;
-            this.GetInfoButton.Text = "Webから取得";
-            this.GetInfoButton.UseVisualStyleBackColor = true;
-            this.GetInfoButton.Click += new System.EventHandler(this.GetInfoButton_Click);
+            this.ImagePathText.AllowDrop = true;
+            this.ImagePathText.Location = new System.Drawing.Point(92, 366);
+            this.ImagePathText.Name = "ImagePathText";
+            this.ImagePathText.Size = new System.Drawing.Size(404, 19);
+            this.ImagePathText.TabIndex = 25;
             // 
-            // PackagePicture
+            // CommentText
             // 
-            this.PackagePicture.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PackagePicture.Location = new System.Drawing.Point(93, 389);
-            this.PackagePicture.Name = "PackagePicture";
-            this.PackagePicture.Size = new System.Drawing.Size(145, 112);
-            this.PackagePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.PackagePicture.TabIndex = 28;
-            this.PackagePicture.TabStop = false;
+            this.CommentText.AllowDrop = true;
+            this.CommentText.Location = new System.Drawing.Point(92, 262);
+            this.CommentText.Multiline = true;
+            this.CommentText.Name = "CommentText";
+            this.CommentText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.CommentText.Size = new System.Drawing.Size(464, 101);
+            this.CommentText.TabIndex = 23;
+            // 
+            // LylicsText
+            // 
+            this.LylicsText.AllowDrop = true;
+            this.LylicsText.Location = new System.Drawing.Point(92, 158);
+            this.LylicsText.Multiline = true;
+            this.LylicsText.Name = "LylicsText";
+            this.LylicsText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.LylicsText.Size = new System.Drawing.Size(464, 101);
+            this.LylicsText.TabIndex = 21;
+            // 
+            // GenresText
+            // 
+            this.GenresText.AllowDrop = true;
+            this.GenresText.Location = new System.Drawing.Point(92, 136);
+            this.GenresText.Name = "GenresText";
+            this.GenresText.Size = new System.Drawing.Size(183, 19);
+            this.GenresText.TabIndex = 19;
+            // 
+            // ArtistText
+            // 
+            this.ArtistText.AllowDrop = true;
+            this.ArtistText.Location = new System.Drawing.Point(92, 115);
+            this.ArtistText.Name = "ArtistText";
+            this.ArtistText.Size = new System.Drawing.Size(183, 19);
+            this.ArtistText.TabIndex = 17;
+            // 
+            // TitleText
+            // 
+            this.TitleText.AllowDrop = true;
+            this.TitleText.Location = new System.Drawing.Point(92, 94);
+            this.TitleText.Name = "TitleText";
+            this.TitleText.Size = new System.Drawing.Size(183, 19);
+            this.TitleText.TabIndex = 15;
+            // 
+            // TargetPathText
+            // 
+            this.TargetPathText.AllowDrop = true;
+            this.TargetPathText.Location = new System.Drawing.Point(93, 8);
+            this.TargetPathText.Name = "TargetPathText";
+            this.TargetPathText.Size = new System.Drawing.Size(404, 19);
+            this.TargetPathText.TabIndex = 4;
+            this.TargetPathText.Leave += new System.EventHandler(this.TargetPathText_Leave);
+            // 
+            // ConfirmAgeButton
+            // 
+            this.ConfirmAgeButton.Location = new System.Drawing.Point(242, 420);
+            this.ConfirmAgeButton.Name = "ConfirmAgeButton";
+            this.ConfirmAgeButton.Size = new System.Drawing.Size(88, 28);
+            this.ConfirmAgeButton.TabIndex = 29;
+            this.ConfirmAgeButton.Text = "年齢認証";
+            this.ConfirmAgeButton.UseVisualStyleBackColor = true;
+            this.ConfirmAgeButton.Click += new System.EventHandler(this.ConfirmAgeButton_Click);
             // 
             // TagEditForm
             // 
@@ -347,5 +359,6 @@
         private System.Windows.Forms.Button ImageRefButton;
         private System.Windows.Forms.Button GetInfoButton;
         private System.Windows.Forms.PictureBox PackagePicture;
+        private System.Windows.Forms.Button ConfirmAgeButton;
     }
 }

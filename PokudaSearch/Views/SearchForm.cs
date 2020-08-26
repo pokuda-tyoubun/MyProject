@@ -40,6 +40,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Threading;
@@ -92,7 +93,6 @@ namespace PokudaSearch.Views {
         #endregion Properties
 
         #region MemberVariables
-        private bool _returnFocus = false;
         /// <summary>ビットマップユーティリティ</summary>
         private BitmapUtil _bu = new BitmapUtil();
         /// <summary>C1SuperLabelのリスト(高速化のためキャッシュする)</summary>
@@ -232,7 +232,10 @@ namespace PokudaSearch.Views {
                 return;
             }
             string path = StringUtil.NullToBlank(this.ResultGrid[this.ResultGrid.Selection.TopRow, (int)ColIndex.FullPath]);
-            Process.Start(System.IO.Directory.GetParent(path).FullName);
+            AppObject.Frame.FileExplorerFormButtonPerformClick();
+            //NOTE:一旦待たないと、対象フォルダが表示されない。
+            Thread.Sleep(500);
+            MainFrameForm.FileExplorerForm.LoadMainExplorer(System.IO.Directory.GetParent(path).FullName);
         }
         /// <summary>
         /// ファイルを開くメニュークリック
@@ -587,11 +590,12 @@ namespace PokudaSearch.Views {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SearchForm_KeyDown(object sender, KeyEventArgs e) {
-            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.E) {
+            if ((e.Modifiers & Keys.Control) == Keys.Control && e.KeyCode == Keys.E) {
                 //Ctrl + E ファイルエクスプローラーへ遷移
                 AppObject.Frame.FileExplorerFormButtonPerformClick();
+                return;
             }
-            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.F) {
+            if ((e.Modifiers & Keys.Control) == Keys.Control && e.KeyCode == Keys.F) {
                 //Ctrl + F キーワードにフォーカスを移す
                 this.KeywordText.Focus();
                 //グリッドにフォーカスが当たっている場合、2回呼び出す必要がある。
@@ -604,7 +608,7 @@ namespace PokudaSearch.Views {
                 this.ExpandPreviewCheck.Checked = !this.ExpandPreviewCheck.Checked;
                 return;
             }
-            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.P) {
+            if ((e.Modifiers & Keys.Control) == Keys.Control && e.KeyCode == Keys.P) {
                 //Ctrl + P 標準幅プレビューの表示非表示
                 this.PreviewCheck.Checked = !this.PreviewCheck.Checked;
                 return;
@@ -1180,7 +1184,7 @@ namespace PokudaSearch.Views {
                         AppObject.CefSharpPanel.Browser.Load(fullPath);
                         //NOTE : Load後、何故かResultGridからFocusが外れてPageDown／Upが効かなくなるので
                         //       強制的にResultGridにフォーカスを戻す。
-                        _returnFocus = true;
+                        AppObject.CefSharpPanel.FocusBackControl = this.ResultGrid;
                     }
                 }
             }
@@ -1490,12 +1494,6 @@ namespace PokudaSearch.Views {
         #endregion PrivateMethods
 
         private void ResultGrid_Leave(object sender, EventArgs e) {
-            if (_returnFocus) {
-                //NOTE : Load後、何故かResultGridからFocusが外れてPageDown／Upが効かなくなるので
-                //       強制的にResultGridにフォーカスを戻す。
-                this.ResultGrid.Focus();
-                _returnFocus = false;
-            }
         }
 
         public void CheckedLocalIndex(bool isChecked) {
@@ -1677,6 +1675,17 @@ namespace PokudaSearch.Views {
                 }
             }
             return false;
+        }
+
+        private void SearchForm_Activated(object sender, EventArgs e) {
+        }
+
+        private void OpenParentByExplorerMenu_Click(object sender, EventArgs e) {
+            if (this.ResultGrid.Selection.TopRow < this.ResultGrid.Rows.Fixed) {
+                return;
+            }
+            string path = StringUtil.NullToBlank(this.ResultGrid[this.ResultGrid.Selection.TopRow, (int)ColIndex.FullPath]);
+            Process.Start(System.IO.Directory.GetParent(path).FullName);
         }
     }
 }

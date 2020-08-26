@@ -31,22 +31,25 @@
             this.SubExplorer = new Microsoft.WindowsAPICodePack.Controls.WindowsForms.ExplorerBrowser();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.RightTopPanel = new System.Windows.Forms.Panel();
+            this.SubExplorerCombo = new C1.Win.C1Input.C1ComboBox();
             this.UpwardSubExplorerButton = new System.Windows.Forms.Button();
             this.ForwardSubExplorerButton = new System.Windows.Forms.Button();
             this.BackwardSubExplorerButton = new System.Windows.Forms.Button();
-            this.SubExplorerPathCombo = new System.Windows.Forms.ComboBox();
-            this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
             this.MainTopPanel = new System.Windows.Forms.Panel();
+            this.MainExplorerCombo = new C1.Win.C1Input.C1ComboBox();
+            this.OpenExploereButton = new System.Windows.Forms.Button();
             this.UpwardMainExplorerButton = new System.Windows.Forms.Button();
             this.ForwardMainExplorerButton = new System.Windows.Forms.Button();
             this.BackwardMainExplorerButton = new System.Windows.Forms.Button();
-            this.MainExplorerPathCombo = new System.Windows.Forms.ComboBox();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.collapsibleSplitter3 = new NJFLib.Controls.CollapsibleSplitter();
             this.MainPanel.SuspendLayout();
             this.RightPanel.SuspendLayout();
             this.RightMainPanel.SuspendLayout();
             this.RightTopPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SubExplorerCombo)).BeginInit();
             this.MainTopPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MainExplorerCombo)).BeginInit();
             this.SuspendLayout();
             // 
             // MainExplorer
@@ -58,9 +61,14 @@
             this.MainExplorer.PropertyBagName = "Microsoft.WindowsAPICodePack.Controls.WindowsForms.ExplorerBrowser";
             this.MainExplorer.Size = new System.Drawing.Size(579, 579);
             this.MainExplorer.TabIndex = 1;
+            this.MainExplorer.TabStop = false;
             this.MainExplorer.NavigationComplete += new System.EventHandler<Microsoft.WindowsAPICodePack.Controls.NavigationCompleteEventArgs>(this.MainExplorer_NavigationComplete);
+            this.MainExplorer.LocationChanged += new System.EventHandler(this.MainExplorer_LocationChanged);
+            this.MainExplorer.Click += new System.EventHandler(this.MainExplorer_Click);
             this.MainExplorer.HelpRequested += new System.Windows.Forms.HelpEventHandler(this.MainExplorer_HelpRequested);
             this.MainExplorer.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainExplorer_KeyDown);
+            this.MainExplorer.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MainExplorer_MouseClick);
+            this.MainExplorer.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MainExplorer_MouseUp);
             this.MainExplorer.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.MainExplorer_PreviewKeyDown);
             // 
             // MainPanel
@@ -100,6 +108,8 @@
             this.SubExplorer.PropertyBagName = "Microsoft.WindowsAPICodePack.Controls.WindowsForms.ExplorerBrowser";
             this.SubExplorer.Size = new System.Drawing.Size(436, 579);
             this.SubExplorer.TabIndex = 0;
+            this.SubExplorer.TabStop = false;
+            this.SubExplorer.NavigationComplete += new System.EventHandler<Microsoft.WindowsAPICodePack.Controls.NavigationCompleteEventArgs>(this.SubExplorer_NavigationComplete);
             this.SubExplorer.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SubExplorer_KeyDown);
             this.SubExplorer.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.SubExplorer_PreviewKeyDown);
             // 
@@ -114,16 +124,36 @@
             // 
             // RightTopPanel
             // 
+            this.RightTopPanel.Controls.Add(this.SubExplorerCombo);
             this.RightTopPanel.Controls.Add(this.UpwardSubExplorerButton);
             this.RightTopPanel.Controls.Add(this.ForwardSubExplorerButton);
             this.RightTopPanel.Controls.Add(this.BackwardSubExplorerButton);
-            this.RightTopPanel.Controls.Add(this.SubExplorerPathCombo);
             this.RightTopPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.RightTopPanel.Location = new System.Drawing.Point(0, 0);
             this.RightTopPanel.Name = "RightTopPanel";
             this.RightTopPanel.Size = new System.Drawing.Size(436, 30);
             this.RightTopPanel.TabIndex = 5;
             this.RightTopPanel.SizeChanged += new System.EventHandler(this.RightTopPanel_SizeChanged);
+            // 
+            // SubExplorerCombo
+            // 
+            this.SubExplorerCombo.AllowSpinLoop = false;
+            this.SubExplorerCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.SubExplorerCombo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.SubExplorerCombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.SubExplorerCombo.AutoSuggestMode = C1.Win.C1Input.AutoSuggestMode.Contains;
+            this.SubExplorerCombo.GapHeight = 0;
+            this.SubExplorerCombo.ImagePadding = new System.Windows.Forms.Padding(0);
+            this.SubExplorerCombo.ItemsDisplayMember = "";
+            this.SubExplorerCombo.ItemsValueMember = "";
+            this.SubExplorerCombo.Location = new System.Drawing.Point(69, 5);
+            this.SubExplorerCombo.Name = "SubExplorerCombo";
+            this.SubExplorerCombo.Size = new System.Drawing.Size(363, 17);
+            this.SubExplorerCombo.TabIndex = 9;
+            this.SubExplorerCombo.Tag = null;
+            this.SubExplorerCombo.SelectedItemChanged += new System.EventHandler(this.SubExplorerCombo_SelectedItemChanged);
+            this.SubExplorerCombo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SubExplorerCombo_KeyDown);
             // 
             // UpwardSubExplorerButton
             // 
@@ -155,44 +185,48 @@
             this.BackwardSubExplorerButton.UseVisualStyleBackColor = true;
             this.BackwardSubExplorerButton.Click += new System.EventHandler(this.BackwardSubExplorerButton_Click);
             // 
-            // SubExplorerPathCombo
-            // 
-            this.SubExplorerPathCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.SubExplorerPathCombo.FormattingEnabled = true;
-            this.SubExplorerPathCombo.Location = new System.Drawing.Point(70, 5);
-            this.SubExplorerPathCombo.Name = "SubExplorerPathCombo";
-            this.SubExplorerPathCombo.Size = new System.Drawing.Size(362, 20);
-            this.SubExplorerPathCombo.TabIndex = 0;
-            this.SubExplorerPathCombo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SubExplorerPathCombo_KeyDown);
-            // 
-            // collapsibleSplitter3
-            // 
-            this.collapsibleSplitter3.AnimationDelay = 20;
-            this.collapsibleSplitter3.AnimationStep = 20;
-            this.collapsibleSplitter3.BorderStyle3D = System.Windows.Forms.Border3DStyle.RaisedOuter;
-            this.collapsibleSplitter3.ControlToHide = this.RightPanel;
-            this.collapsibleSplitter3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.collapsibleSplitter3.ExpandParentForm = false;
-            this.collapsibleSplitter3.Location = new System.Drawing.Point(579, 0);
-            this.collapsibleSplitter3.Name = "collapsibleSplitter3";
-            this.collapsibleSplitter3.Size = new System.Drawing.Size(8, 612);
-            this.collapsibleSplitter3.TabIndex = 118;
-            this.collapsibleSplitter3.TabStop = false;
-            this.collapsibleSplitter3.UseAnimations = false;
-            this.collapsibleSplitter3.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
-            // 
             // MainTopPanel
             // 
+            this.MainTopPanel.Controls.Add(this.MainExplorerCombo);
+            this.MainTopPanel.Controls.Add(this.OpenExploereButton);
             this.MainTopPanel.Controls.Add(this.UpwardMainExplorerButton);
             this.MainTopPanel.Controls.Add(this.ForwardMainExplorerButton);
             this.MainTopPanel.Controls.Add(this.BackwardMainExplorerButton);
-            this.MainTopPanel.Controls.Add(this.MainExplorerPathCombo);
             this.MainTopPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.MainTopPanel.Location = new System.Drawing.Point(0, 0);
             this.MainTopPanel.Name = "MainTopPanel";
             this.MainTopPanel.Size = new System.Drawing.Size(579, 30);
             this.MainTopPanel.TabIndex = 119;
+            // 
+            // MainExplorerCombo
+            // 
+            this.MainExplorerCombo.AllowSpinLoop = false;
+            this.MainExplorerCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.MainExplorerCombo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.MainExplorerCombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.MainExplorerCombo.AutoSuggestMode = C1.Win.C1Input.AutoSuggestMode.Contains;
+            this.MainExplorerCombo.GapHeight = 0;
+            this.MainExplorerCombo.ImagePadding = new System.Windows.Forms.Padding(0);
+            this.MainExplorerCombo.ItemsDisplayMember = "";
+            this.MainExplorerCombo.ItemsValueMember = "";
+            this.MainExplorerCombo.Location = new System.Drawing.Point(93, 7);
+            this.MainExplorerCombo.Name = "MainExplorerCombo";
+            this.MainExplorerCombo.Size = new System.Drawing.Size(482, 17);
+            this.MainExplorerCombo.TabIndex = 8;
+            this.MainExplorerCombo.Tag = null;
+            this.MainExplorerCombo.SelectedItemChanged += new System.EventHandler(this.MainExplorerCombo_SelectedItemChanged);
+            this.MainExplorerCombo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainExplorerCombo_KeyDown);
+            // 
+            // OpenExploereButton
+            // 
+            this.OpenExploereButton.Image = global::PokudaSearch.Properties.Resources.explorer16;
+            this.OpenExploereButton.Location = new System.Drawing.Point(68, 2);
+            this.OpenExploereButton.Name = "OpenExploereButton";
+            this.OpenExploereButton.Size = new System.Drawing.Size(23, 27);
+            this.OpenExploereButton.TabIndex = 7;
+            this.OpenExploereButton.UseVisualStyleBackColor = true;
+            this.OpenExploereButton.Click += new System.EventHandler(this.OpenExploereButton_Click);
             // 
             // UpwardMainExplorerButton
             // 
@@ -224,17 +258,6 @@
             this.BackwardMainExplorerButton.UseVisualStyleBackColor = true;
             this.BackwardMainExplorerButton.Click += new System.EventHandler(this.BackwardMainExplorerButton_Click);
             // 
-            // MainExplorerPathCombo
-            // 
-            this.MainExplorerPathCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.MainExplorerPathCombo.FormattingEnabled = true;
-            this.MainExplorerPathCombo.Location = new System.Drawing.Point(71, 6);
-            this.MainExplorerPathCombo.Name = "MainExplorerPathCombo";
-            this.MainExplorerPathCombo.Size = new System.Drawing.Size(504, 20);
-            this.MainExplorerPathCombo.TabIndex = 3;
-            this.MainExplorerPathCombo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainExplorerPathCombo_KeyDown);
-            // 
             // splitter1
             // 
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -243,6 +266,22 @@
             this.splitter1.Size = new System.Drawing.Size(579, 3);
             this.splitter1.TabIndex = 120;
             this.splitter1.TabStop = false;
+            // 
+            // collapsibleSplitter3
+            // 
+            this.collapsibleSplitter3.AnimationDelay = 20;
+            this.collapsibleSplitter3.AnimationStep = 20;
+            this.collapsibleSplitter3.BorderStyle3D = System.Windows.Forms.Border3DStyle.RaisedOuter;
+            this.collapsibleSplitter3.ControlToHide = this.RightPanel;
+            this.collapsibleSplitter3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.collapsibleSplitter3.ExpandParentForm = false;
+            this.collapsibleSplitter3.Location = new System.Drawing.Point(579, 0);
+            this.collapsibleSplitter3.Name = "collapsibleSplitter3";
+            this.collapsibleSplitter3.Size = new System.Drawing.Size(8, 612);
+            this.collapsibleSplitter3.TabIndex = 118;
+            this.collapsibleSplitter3.TabStop = false;
+            this.collapsibleSplitter3.UseAnimations = false;
+            this.collapsibleSplitter3.VisualStyle = NJFLib.Controls.VisualStyles.DoubleDots;
             // 
             // FileExplorerForm
             // 
@@ -257,15 +296,18 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "FileExplorerForm";
-            this.Text = "エクスプローラー";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FileExplorerForm_FormClosed);
+            this.Load += new System.EventHandler(this.FileExplorerForm_Load);
             this.Shown += new System.EventHandler(this.FileExplorerForm_Shown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FileExplorerForm_KeyDown);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FileExplorerForm_MouseDown);
             this.MainPanel.ResumeLayout(false);
             this.RightPanel.ResumeLayout(false);
             this.RightMainPanel.ResumeLayout(false);
             this.RightTopPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SubExplorerCombo)).EndInit();
             this.MainTopPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.MainExplorerCombo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -282,13 +324,14 @@
         private Microsoft.WindowsAPICodePack.Controls.WindowsForms.ExplorerBrowser SubExplorer;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.Panel RightTopPanel;
-        private System.Windows.Forms.ComboBox SubExplorerPathCombo;
         private System.Windows.Forms.Button BackwardSubExplorerButton;
         private System.Windows.Forms.Button ForwardSubExplorerButton;
         private System.Windows.Forms.Button ForwardMainExplorerButton;
         private System.Windows.Forms.Button BackwardMainExplorerButton;
-        private System.Windows.Forms.ComboBox MainExplorerPathCombo;
         private System.Windows.Forms.Button UpwardMainExplorerButton;
         private System.Windows.Forms.Button UpwardSubExplorerButton;
+        private System.Windows.Forms.Button OpenExploereButton;
+        private C1.Win.C1Input.C1ComboBox MainExplorerCombo;
+        private C1.Win.C1Input.C1ComboBox SubExplorerCombo;
     }
 }

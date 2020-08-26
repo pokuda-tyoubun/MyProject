@@ -1,0 +1,1233 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class TreeElementCollection
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class TreeElementCollection
+   ">
+    <meta name="generator" content="docfx 2.33.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection">
+  
+  
+  <h1 id="FxCommonLib_Utils_Tree_TreeElementCollection" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection" class="text-break">Class TreeElementCollection
+  </h1>
+  <div class="markdown level0 summary"><p>必要に応じてサイズが動的に増加する TreeElement 型を管理するコレクションを提供します。</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">TreeElementCollection</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.ICloneable</span></div>
+    <div><span class="xref">System.Collections.ICollection</span></div>
+    <div><span class="xref">System.Collections.IEnumerable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="FxCommonLib.Utils.Tree.html">FxCommonLib.Utils.Tree</a></h6>
+  <h6><strong>Assembly</strong>: FxCommonLib.dll</h6>
+  <h5 id="FxCommonLib_Utils_Tree_TreeElementCollection_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class TreeElementCollection : ICloneable, ICollection, IEnumerable</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_BottomItem_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.BottomItem*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_BottomItem" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.BottomItem">BottomItem</h4>
+  <div class="markdown level1 summary"><p>コレクションの一番下に存在している TreeElement を取得します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TreeElement BottomItem { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.Tree.TreeElement.html">TreeElement</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_Capacity_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.Capacity*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_Capacity" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.Capacity">Capacity</h4>
+  <div class="markdown level1 summary"><p>TreeElementCollection に格納できる要素の数を取得または設定します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Capacity { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_Count_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.Count*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_Count" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.Count">Count</h4>
+  <div class="markdown level1 summary"><p>TreeElementCollection に実際に格納されている要素の数を取得します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Count { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_HasItem_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.HasItem*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_HasItem" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.HasItem">HasItem</h4>
+  <div class="markdown level1 summary"><p>TreeElementCollections のコレクション内に要素が存在するかどうかを示す値を取得します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasItem { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_IsFixedSize_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.IsFixedSize*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_IsFixedSize" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.IsFixedSize">IsFixedSize</h4>
+  <div class="markdown level1 summary"><p>TreeElementCollection が固定サイズの場合は true 。それ以外の場合は false 。
+既定値は false です。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsFixedSize { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_IsReadOnly_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.IsReadOnly*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_IsReadOnly" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.IsReadOnly">IsReadOnly</h4>
+  <div class="markdown level1 summary"><p>TreeElementCollection が読み取り専用の場合は true 。それ以外の場合は false 。
+既定値は false です。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsReadOnly { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_IsSynchronized_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.IsSynchronized*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_IsSynchronized" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.IsSynchronized">IsSynchronized</h4>
+  <div class="markdown level1 summary"><p>TreeElementCollections へのアクセスが
+同期されている (スレッド セーフである) 場合は true 。それ以外の場合は false 。
+既定値は false です。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsSynchronized { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_Item_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.Item*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_Item_System_Int32_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.Item(System.Int32)">Item[Int32]</h4>
+  <div class="markdown level1 summary"><p>指定したインデックスにある TreeElement を取得または設定します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TreeElement this[int anIndex] { get; }</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">anIndex</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.Tree.TreeElement.html">TreeElement</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_Item_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.Item*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_Item_System_String_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.Item(System.String)">Item[String]</h4>
+  <div class="markdown level1 summary"><p>コレクション内からはじめに見つかった、
+指定した名前を持つ TreeElement を取得します。
+見つからなければ null を返します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TreeElement this[string anElementName] { get; }</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">anElementName</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.Tree.TreeElement.html">TreeElement</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_SyncRoot_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.SyncRoot*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_SyncRoot" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.SyncRoot">SyncRoot</h4>
+  <div class="markdown level1 summary"><p>TreeElementCollection へのアクセスを同期するための使用できるオブジェクトを取得します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object SyncRoot { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_TopItem_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.TopItem*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_TopItem" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.TopItem">TopItem</h4>
+  <div class="markdown level1 summary"><p>コレクションの一番上に存在している TreeElement を取得します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TreeElement TopItem { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.Tree.TreeElement.html">TreeElement</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_Clear_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.Clear*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_Clear" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.Clear">Clear()</h4>
+  <div class="markdown level1 summary"><p>TreeElementCollections から全ての要素を削除します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Clear()</code></pre>
+  </div>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_Clone_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.Clone*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_Clone" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.Clone">Clone()</h4>
+  <div class="markdown level1 summary"><p>TreeElementCollection のディープコピーを作成します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object Clone()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_CopyTo_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.CopyTo*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_CopyTo_System_Array_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.CopyTo(System.Array)">CopyTo(Array)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CopyTo(Array anArray)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Array</span></td>
+        <td><span class="parametername">anArray</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_CopyTo_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.CopyTo*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_CopyTo_System_Array_System_Int32_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.CopyTo(System.Array,System.Int32)">CopyTo(Array, Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CopyTo(Array anArray, int anArrayIndex)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Array</span></td>
+        <td><span class="parametername">anArray</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">anArrayIndex</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_CopyTo_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.CopyTo*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_CopyTo_System_Int32_System_Array_System_Int32_System_Int32_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.CopyTo(System.Int32,System.Array,System.Int32,System.Int32)">CopyTo(Int32, Array, Int32, Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CopyTo(int anIndex, Array anArray, int anArrayIndex, int aCount)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">anIndex</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Array</span></td>
+        <td><span class="parametername">anArray</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">anArrayIndex</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">aCount</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_GetEnumerator_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.GetEnumerator*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_GetEnumerator" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.GetEnumerator">GetEnumerator()</h4>
+  <div class="markdown level1 summary"><p>コレクションを反復処理できる列挙子を返します。 </p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerator GetEnumerator()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.IEnumerator</span></td>
+        <td><p>コレクションを反復処理するために使用できる IEnumerator。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_GetRange_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.GetRange*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_GetRange_System_Int32_System_Int32_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.GetRange(System.Int32,System.Int32)">GetRange(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>元の TreeElementCollections 内の要素のサブセットを表す TreeElementCollections を返します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TreeElementCollection GetRange(int anIndex, int aCount)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">anIndex</span></td>
+        <td><p>範囲が開始する位置の、0から始まる TreeElementCollection のインデックス番号。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">aCount</span></td>
+        <td><p>範囲内の要素の数。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.Tree.TreeElementCollection.html">TreeElementCollection</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_IndexOf_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.IndexOf*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_IndexOf_FxCommonLib_Utils_Tree_TreeElement_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.IndexOf(FxCommonLib.Utils.Tree.TreeElement)">IndexOf(TreeElement)</h4>
+  <div class="markdown level1 summary"><p>指定した TreeElement を検索し、 TreeElementCollections 全体内で最初に見つかった位置の 
+0 から始まるインデックスを返します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int IndexOf(TreeElement anItem)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.Tree.TreeElement.html">TreeElement</a></td>
+        <td><span class="parametername">anItem</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_IndexOf_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.IndexOf*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_IndexOf_FxCommonLib_Utils_Tree_TreeElement_System_Int32_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.IndexOf(FxCommonLib.Utils.Tree.TreeElement,System.Int32)">IndexOf(TreeElement, Int32)</h4>
+  <div class="markdown level1 summary"><p>指定した TreeElement を検索し、指定したインデックスから最後の要素までの
+TreeElementCollections のセクション内で最初に出現する位置の 
+0 から始まるインデックス番号を返します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int IndexOf(TreeElement anItem, int aStartIndex)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.Tree.TreeElement.html">TreeElement</a></td>
+        <td><span class="parametername">anItem</span></td>
+        <td><p>TreeElementCollections 内で検索される TreeElement 。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">aStartIndex</span></td>
+        <td><p>検索の開始位置を示す 0 から始まるインデックス。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>aStartIndex から最後の要素までの TreeElementCollection のセクション内で
+anItem が見つかった場合は、最初に見つかった位置の 0 から始まるインデックス番号。
+それ以外の場合は -1 。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_IndexOf_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.IndexOf*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_IndexOf_FxCommonLib_Utils_Tree_TreeElement_System_Int32_System_Int32_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.IndexOf(FxCommonLib.Utils.Tree.TreeElement,System.Int32,System.Int32)">IndexOf(TreeElement, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>指定した TreeElement を検索し、指定したインデックスから始まって
+指定した数の要素を格納する TreeElementCollection のセクション内で最初に出現する位置の 
+0 から始まるインデックス番号を返します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int IndexOf(TreeElement anItem, int aStartIndex, int aCount)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.Tree.TreeElement.html">TreeElement</a></td>
+        <td><span class="parametername">anItem</span></td>
+        <td><p>TreeElementCollections 内で検索される TreeElement 。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">aStartIndex</span></td>
+        <td><p>検索の開始位置を示す 0 から始まるインデックス。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">aCount</span></td>
+        <td><p>検索対象の範囲内にある要素の数。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>aStartIndex から始まって aCount 個の要素を格納する TreeElementCollection のセクション内で 
+value が見つかった場合は、最初に見つかった位置の 0 から始まるインデックス番号。
+それ以外の場合は -1 。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_IsContains_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.IsContains*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_IsContains_FxCommonLib_Utils_Tree_TreeElement_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.IsContains(FxCommonLib.Utils.Tree.TreeElement)">IsContains(TreeElement)</h4>
+  <div class="markdown level1 summary"><p>ある要素が TreeElementCollection 内にあるかどうか判断します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsContains(TreeElement anItem)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.Tree.TreeElement.html">TreeElement</a></td>
+        <td><span class="parametername">anItem</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_LastIndexOf_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.LastIndexOf*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_LastIndexOf_FxCommonLib_Utils_Tree_TreeElement_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.LastIndexOf(FxCommonLib.Utils.Tree.TreeElement)">LastIndexOf(TreeElement)</h4>
+  <div class="markdown level1 summary"><p>TreeElementCollection 内またはその一部にある値のうち、
+最後に出現する値の、0 から始まるインデックス番号を返します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int LastIndexOf(TreeElement anItem)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.Tree.TreeElement.html">TreeElement</a></td>
+        <td><span class="parametername">anItem</span></td>
+        <td><p>TreeElementCollection 内で検索される TreeElement 。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_LastIndexOf_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.LastIndexOf*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_LastIndexOf_FxCommonLib_Utils_Tree_TreeElement_System_Int32_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.LastIndexOf(FxCommonLib.Utils.Tree.TreeElement,System.Int32)">LastIndexOf(TreeElement, Int32)</h4>
+  <div class="markdown level1 summary"><p>指定した TreeElement を検索し、最初の要素から、指定したインデックスまでの 
+TreeElementCollectionst のセクション内で最後に出現する位置の 
+0 から始まるインデックス番号を返します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int LastIndexOf(TreeElement anItem, int aStartIndex)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.Tree.TreeElement.html">TreeElement</a></td>
+        <td><span class="parametername">anItem</span></td>
+        <td><p>TreeElementCollections 内で検索される TreeElement 。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">aStartIndex</span></td>
+        <td><p>後方検索の開始位置を示す 0 から始まるインデックス。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_LastIndexOf_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.LastIndexOf*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_LastIndexOf_FxCommonLib_Utils_Tree_TreeElement_System_Int32_System_Int32_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.LastIndexOf(FxCommonLib.Utils.Tree.TreeElement,System.Int32,System.Int32)">LastIndexOf(TreeElement, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>指定した TreeElement を検索して、指定した数の要素を格納し、
+指定したインデックスの位置で終了する TreeElementCollections のセクション内で
+最初に出現する位置の 0 から始まるインデックス番号を返します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int LastIndexOf(TreeElement anItem, int aStartIndex, int aCount)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="FxCommonLib.Utils.Tree.TreeElement.html">TreeElement</a></td>
+        <td><span class="parametername">anItem</span></td>
+        <td><p>TreeElementCollections 内で検索される TreeElement 。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">aStartIndex</span></td>
+        <td><p>後方検索の開始位置を示す 0 から始まるインデックス。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">aCount</span></td>
+        <td><p>検索対象の範囲内にある要素の数。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_Reverse_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.Reverse*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_Reverse" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.Reverse">Reverse()</h4>
+  <div class="markdown level1 summary"><p>TreeElementCollections 内およびその一部の要素の順序を反転させます。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Reverse()</code></pre>
+  </div>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_Reverse_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.Reverse*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_Reverse_System_Int32_System_Int32_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.Reverse(System.Int32,System.Int32)">Reverse(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>指定した範囲の要素の順序を反転させます。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Reverse(int anIndex, int aCount)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">anIndex</span></td>
+        <td><p>反転させる範囲の開始位置を示す 0 から始まるインデックス。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">aCount</span></td>
+        <td><p>反転させる範囲内にある要素の数。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_Sort_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.Sort*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_Sort" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.Sort">Sort()</h4>
+  <div class="markdown level1 summary"><p>各要素の IComparable 実装を使用して、TreeElementCollections 全体内の要素を並べ替えます。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Sort()</code></pre>
+  </div>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_Sort_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.Sort*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_Sort_System_Collections_IComparer_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.Sort(System.Collections.IComparer)">Sort(IComparer)</h4>
+  <div class="markdown level1 summary"><p>指定した比較演算子を使用して、TreeElementCollection 全体内の要素を並べ替えます。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Sort(IComparer aComparer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.IComparer</span></td>
+        <td><span class="parametername">aComparer</span></td>
+        <td><p>要素を比較する場合に使用する IComparer 実装。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_Sort_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.Sort*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_Sort_System_Int32_System_Int32_System_Collections_IComparer_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.Sort(System.Int32,System.Int32,System.Collections.IComparer)">Sort(Int32, Int32, IComparer)</h4>
+  <div class="markdown level1 summary"><p>指定した比較演算子を使用して、TreeElementCollection のセクション内の要素を並べ替えます。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Sort(int anIndex, int aCount, IComparer aComparer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">anIndex</span></td>
+        <td><p>並べ替える範囲の開始位置を示す 0 から始まるインデックス。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">aCount</span></td>
+        <td><p>並べ替える範囲の長さ。</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.IComparer</span></td>
+        <td><span class="parametername">aComparer</span></td>
+        <td><p>要素を比較する場合に使用する IComparer 実装。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_ToArray_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.ToArray*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_ToArray" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.ToArray">ToArray()</h4>
+  <div class="markdown level1 summary"><p>TreeElementCollection の要素を
+新しい配列にコピーします。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object[] ToArray()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_Tree_TreeElementCollection_TrimToSize_" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.TrimToSize*"></a>
+  <h4 id="FxCommonLib_Utils_Tree_TreeElementCollection_TrimToSize" data-uid="FxCommonLib.Utils.Tree.TreeElementCollection.TrimToSize">TrimToSize()</h4>
+  <div class="markdown level1 summary"><p>容量を TreeElementCollections 内にある実際の要素数に設定します。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void TrimToSize()</code></pre>
+  </div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.ICloneable</span>
+  </div>
+  <div>
+      <span class="xref">System.Collections.ICollection</span>
+  </div>
+  <div>
+      <span class="xref">System.Collections.IEnumerable</span>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

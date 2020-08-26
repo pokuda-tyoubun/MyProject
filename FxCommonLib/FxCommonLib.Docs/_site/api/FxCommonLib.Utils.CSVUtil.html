@@ -1,0 +1,688 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class CSVUtil
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class CSVUtil
+   ">
+    <meta name="generator" content="docfx 2.33.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="FxCommonLib.Utils.CSVUtil">
+  
+  
+  <h1 id="FxCommonLib_Utils_CSVUtil" data-uid="FxCommonLib.Utils.CSVUtil" class="text-break">Class CSVUtil
+  </h1>
+  <div class="markdown level0 summary"><p>CSVユーティリティ
+<seealso cref="!:LumenWorks.Framework.IO.Csv"></seealso></p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">CSVUtil</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="FxCommonLib.Utils.html">FxCommonLib.Utils</a></h6>
+  <h6><strong>Assembly</strong>: FxCommonLib.dll</h6>
+  <h5 id="FxCommonLib_Utils_CSVUtil_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class CSVUtil</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="FxCommonLib_Utils_CSVUtil_CsvTo2DList_" data-uid="FxCommonLib.Utils.CSVUtil.CsvTo2DList*"></a>
+  <h4 id="FxCommonLib_Utils_CSVUtil_CsvTo2DList_System_String_" data-uid="FxCommonLib.Utils.CSVUtil.CsvTo2DList(System.String)">CsvTo2DList(String)</h4>
+  <div class="markdown level1 summary"><p>CSVをArrayListに変換</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;List&lt;string&gt;&gt; CsvTo2DList(string csvText)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">csvText</span></td>
+        <td><p>CSVの内容が入ったString</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">System.String</span>&gt;&gt;</td>
+        <td><p>変換結果のArrayList</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_CSVUtil_ReadCsv_" data-uid="FxCommonLib.Utils.CSVUtil.ReadCsv*"></a>
+  <h4 id="FxCommonLib_Utils_CSVUtil_ReadCsv_System_String_System_String_" data-uid="FxCommonLib.Utils.CSVUtil.ReadCsv(System.String,System.String)">ReadCsv(String, String)</h4>
+  <div class="markdown level1 summary"><p>CSVファイル読み込み
+※要素は全トリムされます。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DataTable ReadCsv(string csvPath, string tableName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">csvPath</span></td>
+        <td><p>CSVファイルへのパス</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">tableName</span></td>
+        <td><p>戻り値にセットするテーブル名</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DataTable</span></td>
+        <td><p>CSVデータをDataTableとして返す。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_CSVUtil_ReadCsv_" data-uid="FxCommonLib.Utils.CSVUtil.ReadCsv*"></a>
+  <h4 id="FxCommonLib_Utils_CSVUtil_ReadCsv_System_String_System_String_System_Char_" data-uid="FxCommonLib.Utils.CSVUtil.ReadCsv(System.String,System.String,System.Char)">ReadCsv(String, String, Char)</h4>
+  <div class="markdown level1 summary"><p>CSVファイル読み込み
+※要素は全トリムされます。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DataTable ReadCsv(string csvPath, string tableName, char delimiter)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">csvPath</span></td>
+        <td><p>CSVファイルへのパス</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">tableName</span></td>
+        <td><p>戻り値にセットするテーブル名</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Char</span></td>
+        <td><span class="parametername">delimiter</span></td>
+        <td><p>区切り文字</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DataTable</span></td>
+        <td><p>CSVデータをDataTableとして返す。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_CSVUtil_ReadCsv_" data-uid="FxCommonLib.Utils.CSVUtil.ReadCsv*"></a>
+  <h4 id="FxCommonLib_Utils_CSVUtil_ReadCsv_System_String_System_String_System_Char_System_Text_Encoding_" data-uid="FxCommonLib.Utils.CSVUtil.ReadCsv(System.String,System.String,System.Char,System.Text.Encoding)">ReadCsv(String, String, Char, Encoding)</h4>
+  <div class="markdown level1 summary"><p>CSVファイル読み込み
+・要素は全トリムされます。
+・ファイルオープン時でも読み込みます。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DataTable ReadCsv(string csvPath, string tableName, char delimiter, Encoding enc)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">csvPath</span></td>
+        <td><p>CSVファイルへのパス</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">tableName</span></td>
+        <td><p>戻り値にセットするテーブル名</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Char</span></td>
+        <td><span class="parametername">delimiter</span></td>
+        <td><p>区切り文字</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Text.Encoding</span></td>
+        <td><span class="parametername">enc</span></td>
+        <td><p>文字エンコード</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DataTable</span></td>
+        <td><p>CSVデータをDataTableとして返す。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_CSVUtil_ReadCsv_" data-uid="FxCommonLib.Utils.CSVUtil.ReadCsv*"></a>
+  <h4 id="FxCommonLib_Utils_CSVUtil_ReadCsv_System_String_System_String_System_Char_System_Text_Encoding_System_Boolean_" data-uid="FxCommonLib.Utils.CSVUtil.ReadCsv(System.String,System.String,System.Char,System.Text.Encoding,System.Boolean)">ReadCsv(String, String, Char, Encoding, Boolean)</h4>
+  <div class="markdown level1 summary"><p>CSVファイル読み込み
+・要素は全トリムされます。
+・ファイルオープン時でも読み込みます。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DataTable ReadCsv(string csvPath, string tableName, char delimiter, Encoding enc, bool existsHeader)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">csvPath</span></td>
+        <td><p>CSVファイルへのパス</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">tableName</span></td>
+        <td><p>戻り値にセットするテーブル名</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Char</span></td>
+        <td><span class="parametername">delimiter</span></td>
+        <td><p>区切り文字</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Text.Encoding</span></td>
+        <td><span class="parametername">enc</span></td>
+        <td><p>文字エンコード</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">existsHeader</span></td>
+        <td><p>ヘッダ行が存在するか</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DataTable</span></td>
+        <td><p>CSVデータをDataTableとして返す。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_CSVUtil_ReadCsvByJet_" data-uid="FxCommonLib.Utils.CSVUtil.ReadCsvByJet*"></a>
+  <h4 id="FxCommonLib_Utils_CSVUtil_ReadCsvByJet_System_String_System_String_" data-uid="FxCommonLib.Utils.CSVUtil.ReadCsvByJet(System.String,System.String)">ReadCsvByJet(String, String)</h4>
+  <div class="markdown level1 summary"><p>CSVファイル読み込み
+※要素はトリムされない。
+※型を指定するにはSchema.iniを定義する必要がある。
+HACK Schema.iniが効いていない？</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DataTable ReadCsvByJet(string csvPath, string tableName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">csvPath</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">tableName</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DataTable</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_CSVUtil_ReadCsvWithoutTrim_" data-uid="FxCommonLib.Utils.CSVUtil.ReadCsvWithoutTrim*"></a>
+  <h4 id="FxCommonLib_Utils_CSVUtil_ReadCsvWithoutTrim_System_String_System_String_" data-uid="FxCommonLib.Utils.CSVUtil.ReadCsvWithoutTrim(System.String,System.String)">ReadCsvWithoutTrim(String, String)</h4>
+  <div class="markdown level1 summary"><p>CSVファイル読み込み</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DataTable ReadCsvWithoutTrim(string csvPath, string tableName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">csvPath</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">tableName</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DataTable</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_CSVUtil_ReadStringCsv_" data-uid="FxCommonLib.Utils.CSVUtil.ReadStringCsv*"></a>
+  <h4 id="FxCommonLib_Utils_CSVUtil_ReadStringCsv_System_String_System_String_System_Char_" data-uid="FxCommonLib.Utils.CSVUtil.ReadStringCsv(System.String,System.String,System.Char)">ReadStringCsv(String, String, Char)</h4>
+  <div class="markdown level1 summary"><p>CSV文字列読み込み
+※要素は全トリムされます。</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DataTable ReadStringCsv(string val, string tableName, char delimiter)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">val</span></td>
+        <td><p>CSV文字列</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">tableName</span></td>
+        <td><p>戻り値にセットするテーブル名</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Char</span></td>
+        <td><span class="parametername">delimiter</span></td>
+        <td><p>区切り文字</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DataTable</span></td>
+        <td><p>CSVデータをDataTableとして返す。</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_CSVUtil_WriteCsv_" data-uid="FxCommonLib.Utils.CSVUtil.WriteCsv*"></a>
+  <h4 id="FxCommonLib_Utils_CSVUtil_WriteCsv_DataTable_System_String_System_Boolean_" data-uid="FxCommonLib.Utils.CSVUtil.WriteCsv(DataTable,System.String,System.Boolean)">WriteCsv(DataTable, String, Boolean)</h4>
+  <div class="markdown level1 summary"><p>CSVファイルに出力(CP932)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void WriteCsv(DataTable dt, string csvPath, bool writeHeader)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DataTable</span></td>
+        <td><span class="parametername">dt</span></td>
+        <td><p>CSVファイルに出力するデータ</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">csvPath</span></td>
+        <td><p>出力先のパス</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">writeHeader</span></td>
+        <td><p>ヘッダを出力するかどうか</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="FxCommonLib_Utils_CSVUtil_WriteCsv_" data-uid="FxCommonLib.Utils.CSVUtil.WriteCsv*"></a>
+  <h4 id="FxCommonLib_Utils_CSVUtil_WriteCsv_DataTable_System_String_System_Boolean_System_Text_Encoding_" data-uid="FxCommonLib.Utils.CSVUtil.WriteCsv(DataTable,System.String,System.Boolean,System.Text.Encoding)">WriteCsv(DataTable, String, Boolean, Encoding)</h4>
+  <div class="markdown level1 summary"><p>CSVファイルに出力</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void WriteCsv(DataTable dt, string csvPath, bool writeHeader, Encoding enc)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">DataTable</span></td>
+        <td><span class="parametername">dt</span></td>
+        <td><p>CSVファイルに出力するデータ</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">csvPath</span></td>
+        <td><p>出力先のパス</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">writeHeader</span></td>
+        <td><p>ヘッダを出力するかどうか</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Text.Encoding</span></td>
+        <td><span class="parametername">enc</span></td>
+        <td><p>文字エンコーディング</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

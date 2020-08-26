@@ -270,9 +270,6 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>True</Private>
     </Reference>
-    <Reference Include="WebDriver, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Selenium.WebDriver.3.141.0\lib\net45\WebDriver.dll</HintPath>
-    </Reference>
     <Reference Include="WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\WindowsBase.4.6.1055.0\lib\WindowsBase.dll</HintPath>
     </Reference>
@@ -390,6 +387,7 @@
     <Compile Include="Views\SearchForm.Designer.cs">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="WebDriver\DMMWebAPIUtil.cs" />
     <Compile Include="WebDriver\MP4WebDriver.cs" />
     <Compile Include="WebDriver\WebClawringDriver.cs" />
     <Compile Include="Win32API\User32.cs" />
@@ -511,6 +509,7 @@
     <None Include="Resources\backward_nav.png" />
     <None Include="Resources\forward_nav.png" />
     <None Include="Resources\upward_nav.png" />
+    <None Include="Resources\explorer16.png" />
     <Content Include="UserDictionary.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

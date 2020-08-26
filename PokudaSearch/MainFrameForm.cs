@@ -15,6 +15,7 @@ using System.Data.SQLite;
 using FxCommonLib.Utils;
 using java.awt;
 using com.sun.tools.javac;
+using System.Threading;
 
 namespace PokudaSearch {
     public partial class MainFrameForm : Form {
@@ -112,10 +113,9 @@ namespace PokudaSearch {
                 SearchForm = new SearchForm();
                 LoadForm(SearchForm);
             } else {
-                FileExplorerForm.Hide();
-                SearchForm.Show();
                 SearchForm.Activate();
             }
+            AppObject.CefSharpPanel.FocusBackControl = SearchForm.KeywordText;
         }
 
         /// <summary>
@@ -136,8 +136,6 @@ namespace PokudaSearch {
                 //検索画面
                 //SearchForm = new SearchForm();
                 //LoadForm(SearchForm);
-                //IndexBuildForm = new IndexBuildForm();
-                //LoadForm(IndexBuildForm);
                 //ファイルエクスプローラー画面
                 FileExplorerForm = new FileExplorerForm();
                 LoadForm(FileExplorerForm);
@@ -168,8 +166,7 @@ namespace PokudaSearch {
                 FileExplorerForm = new FileExplorerForm();
                 LoadForm(FileExplorerForm);
             } else {
-                FileExplorerForm.ReLoadFileBlowser();
-                FileExplorerForm.Show();
+                //FileExplorerForm.ReLoadFileBlowser();
                 FileExplorerForm.Activate();
             }
         }
