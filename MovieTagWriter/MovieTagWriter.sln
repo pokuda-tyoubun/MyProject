@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.74
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieTagWriter", "MovieTagWriter.csproj", "{9820F193-426A-4802-8B3B-2D8B2DF4BC99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FxCommonLib", "..\FxCommonLib\FxCommonLib\FxCommonLib.csproj", "{AFF59E76-11CF-4170-A307-5A287716CA50}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		NKTDebug|Any CPU = NKTDebug|Any CPU
+		NKTRelease|Any CPU = NKTRelease|Any CPU
+		NTNDebug|Any CPU = NTNDebug|Any CPU
+		NTNRelease|Any CPU = NTNRelease|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9820F193-426A-4802-8B3B-2D8B2DF4BC99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9820F193-426A-4802-8B3B-2D8B2DF4BC99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9820F193-426A-4802-8B3B-2D8B2DF4BC99}.NKTDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9820F193-426A-4802-8B3B-2D8B2DF4BC99}.NKTDebug|Any CPU.Build.0 = Debug|Any CPU
+		{9820F193-426A-4802-8B3B-2D8B2DF4BC99}.NKTRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{9820F193-426A-4802-8B3B-2D8B2DF4BC99}.NKTRelease|Any CPU.Build.0 = Release|Any CPU
+		{9820F193-426A-4802-8B3B-2D8B2DF4BC99}.NTNDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9820F193-426A-4802-8B3B-2D8B2DF4BC99}.NTNDebug|Any CPU.Build.0 = Debug|Any CPU
+		{9820F193-426A-4802-8B3B-2D8B2DF4BC99}.NTNRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{9820F193-426A-4802-8B3B-2D8B2DF4BC99}.NTNRelease|Any CPU.Build.0 = Release|Any CPU
+		{9820F193-426A-4802-8B3B-2D8B2DF4BC99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9820F193-426A-4802-8B3B-2D8B2DF4BC99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFF59E76-11CF-4170-A307-5A287716CA50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFF59E76-11CF-4170-A307-5A287716CA50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFF59E76-11CF-4170-A307-5A287716CA50}.NKTDebug|Any CPU.ActiveCfg = NKTDebug|Any CPU
+		{AFF59E76-11CF-4170-A307-5A287716CA50}.NKTDebug|Any CPU.Build.0 = NKTDebug|Any CPU
+		{AFF59E76-11CF-4170-A307-5A287716CA50}.NKTRelease|Any CPU.ActiveCfg = NKTRelease|Any CPU
+		{AFF59E76-11CF-4170-A307-5A287716CA50}.NKTRelease|Any CPU.Build.0 = NKTRelease|Any CPU
+		{AFF59E76-11CF-4170-A307-5A287716CA50}.NTNDebug|Any CPU.ActiveCfg = NTNDebug|Any CPU
+		{AFF59E76-11CF-4170-A307-5A287716CA50}.NTNDebug|Any CPU.Build.0 = NTNDebug|Any CPU
+		{AFF59E76-11CF-4170-A307-5A287716CA50}.NTNRelease|Any CPU.ActiveCfg = NTNRelease|Any CPU
+		{AFF59E76-11CF-4170-A307-5A287716CA50}.NTNRelease|Any CPU.Build.0 = NTNRelease|Any CPU
+		{AFF59E76-11CF-4170-A307-5A287716CA50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFF59E76-11CF-4170-A307-5A287716CA50}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6A187A6C-0108-4B44-8C3C-34C5A6796191}
+	EndGlobalSection
+EndGlobal
