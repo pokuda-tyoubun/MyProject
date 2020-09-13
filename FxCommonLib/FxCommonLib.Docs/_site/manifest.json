@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "C:/Workspace/Repo/Git/FxCommon/src/FxCommonLib/FxCommonLib.Docs",
+  "source_base_path": "C:/Workspace/Repo/Git/MyProject/FxCommonLib/FxCommonLib.Docs",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "SQNQkowcQdGHp8Rtx+DkgA=="
+          "hash": "ZLbnVrBx6xamXFKHSrQpmA=="
         }
       },
       "is_incremental": false,
@@ -21,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "6qFrpJ1SYM5PmtKixxOSqw=="
+          "hash": "emjgFIqtDKk97ouGeCCLEg=="
         }
       },
       "is_incremental": false,
@@ -45,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "CR3gt53WJ/3R3v0qXZ3AfQ=="
+          "hash": "cKm/BQORgaRrqoZ9vOcAqQ=="
         }
       },
       "is_incremental": false,
@@ -1632,11 +1632,11 @@
         "incrementalPhase": "build"
       },
       "processors": {
-        "ManagedReferenceDocumentProcessor": {
+        "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build"
         },
-        "ConceptualDocumentProcessor": {
+        "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build"
         },

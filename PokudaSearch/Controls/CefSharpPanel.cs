@@ -217,7 +217,7 @@ namespace PokudaSearch.Controls {
             Task<bool> task = completionSource.Task;
             return task;
         }
-        public Task<string> GetTextContentByXpath(string xpath) {
+        public Task<string> GetTextContentByXPath(string xpath) {
             var completionSource = new TaskCompletionSource<string>();
             string script = @"document.evaluate(""" + xpath + @""", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null).snapshotItem(0).textContent;";
             Dispatcher.CurrentDispatcher.BeginInvoke((Action)(async () => {

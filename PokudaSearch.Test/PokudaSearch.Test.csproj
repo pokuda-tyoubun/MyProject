@@ -257,7 +257,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\FxCommon\src\FxCommonLib\FxCommonLib\FxCommonLib.csproj">
+    <ProjectReference Include="..\FxCommonLib\FxCommonLib\FxCommonLib.csproj">
       <Project>{aff59e76-11cf-4170-a307-5a287716ca50}</Project>
       <Name>FxCommonLib</Name>
     </ProjectReference>

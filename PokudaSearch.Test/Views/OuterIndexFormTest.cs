@@ -25,7 +25,6 @@ namespace PokudaSearch.Test.Views {
     public class OuterIndexFormTest : TestBase<OuterIndexFormTest> {
 
         IndexBuildFormDriver _indexBuildForm;
-        OuterIndexFormDriver _outerIndexForm;
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext c) {

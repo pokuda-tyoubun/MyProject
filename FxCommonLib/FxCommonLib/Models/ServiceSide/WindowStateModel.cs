@@ -1,6 +1,5 @@
 ﻿using FxCommonLib;
 using FxCommonLib.Consts;
-using FxCommonLib.Consts.IM;
 using FxCommonLib.Utils;
 using log4net;
 using System;

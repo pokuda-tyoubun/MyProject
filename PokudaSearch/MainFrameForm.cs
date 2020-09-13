@@ -26,6 +26,8 @@ namespace PokudaSearch {
         public static SearchForm SearchForm;
         /// <summary>インデックス管理</summary>
         public static IndexBuildForm IndexBuildForm;
+        /// <summary>タグ付け</summary>
+        public static TagWriterForm TagWriterForm;
 
         /// <summary>SandBox用</summary>
         public static TestForm TestForm;
@@ -348,6 +350,15 @@ namespace PokudaSearch {
         }
         public void FileExplorerFormButtonPerformClick() {
             this.FileExplorerFormButton_Click(null, null);
+        }
+
+        private void TagWriterFormButton_Click(object sender, EventArgs e) {
+            if (TagWriterForm == null) {
+                TagWriterForm = new TagWriterForm();
+                LoadForm(TagWriterForm);
+            } else {
+                TagWriterForm.Activate();
+            }
         }
     }
 }

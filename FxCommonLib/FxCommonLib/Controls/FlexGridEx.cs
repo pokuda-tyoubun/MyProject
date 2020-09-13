@@ -2,10 +2,8 @@
 using C1.Win.C1Input;
 using FxCommonLib.Consts;
 using FxCommonLib.Consts.MES;
-using FxCommonLib.Consts.WFM;
 using FxCommonLib.Models;
 using FxCommonLib.Models.MES;
-using FxCommonLib.Models.WFM;
 using FxCommonLib.Utils;
 using LumenWorks.Framework.IO.Csv;
 using System;
@@ -1197,43 +1195,6 @@ namespace FxCommonLib.Controls {
             this.Cols.Frozen = _ccu.ColConf.LeftFixedCount;
 
             this.ShowButtons = ShowButtonsEnum.Always;
-        }
-
-        /// <summary>
-        /// 追加・更新・削除リクエストを投げたユーザ情報を送信するためのテーブルを作成
-        /// </summary>
-        /// <param name="e"></param>
-        public DataTable GetRequestTable(BaseUser loginUser) {
-            DataTable ret = new DataTable();
-            ret.TableName = CommonConsts.UpdateType.RequestInfo.ToString();
-
-            if (loginUser.GetType() == typeof(Client)) {
-                ret.Columns.Add(MESConsts.client_id, Type.GetType("System.String"));
-                ret.Columns.Add(MESConsts.client_name, Type.GetType("System.String"));
-            } else if (loginUser.GetType() == typeof(Employee)) {
-                ret.Columns.Add(WFMConsts.employee_id, Type.GetType("System.String"));
-                ret.Columns.Add(WFMConsts.employee_name, Type.GetType("System.String"));
-            } else {
-                ret.Columns.Add(MESConsts.client_id, Type.GetType("System.String"));
-                ret.Columns.Add(MESConsts.client_name, Type.GetType("System.String"));
-            }
-
-
-            DataRow dr = ret.NewRow();
-            if (loginUser.GetType() == typeof(Client)) {
-                dr[MESConsts.client_id] = ((Client)loginUser).Id;
-                dr[MESConsts.client_name] = ((Client)loginUser).ClientName;
-            } else if (loginUser.GetType() == typeof(Employee)) {
-                dr[WFMConsts.employee_id] = ((Employee)loginUser).EmployeeId;
-                dr[WFMConsts.employee_name] = ((Employee)loginUser).EmployeeName;
-            } else {
-                dr[MESConsts.client_id] = ((Client)loginUser).Id;
-                dr[MESConsts.client_name] = ((Client)loginUser).ClientName;
-            }
-            ret.Rows.Add(dr);
-            ret.AcceptChanges();
-
-            return ret;
         }
 
         /// <summary>

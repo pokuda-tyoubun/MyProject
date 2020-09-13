@@ -12,6 +12,17 @@ namespace FxCommonLib.Utils {
     /// <remarks></remarks>
     public class StringUtil {
 
+        // Base64エンコード
+        public static string Base64Encode(string str, Encoding enc) {
+            byte[] data = enc.GetBytes(str);
+            return Convert.ToBase64String(data);
+        }
+
+        // Base64デコード
+        public static string Base64Decode(string str, Encoding enc) {
+            byte[] data = Convert.FromBase64String(str);
+            return enc.GetString(data);
+        }
         /// <summary>
         /// 0埋めを削除する
         /// </summary>

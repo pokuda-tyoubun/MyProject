@@ -26,34 +26,42 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TagEditForm));
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.ConfirmAgeButton = new System.Windows.Forms.Button();
             this.PackagePicture = new System.Windows.Forms.PictureBox();
             this.GetInfoButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.ImagePathText = new FxCommonLib.Controls.FilePathTextBox(this.components);
             this.ImageRefButton = new System.Windows.Forms.Button();
+            this.CommentText = new FxCommonLib.Controls.FilePathTextBox(this.components);
             this.label5 = new System.Windows.Forms.Label();
+            this.LylicsText = new FxCommonLib.Controls.FilePathTextBox(this.components);
             this.label4 = new System.Windows.Forms.Label();
+            this.GenresText = new FxCommonLib.Controls.FilePathTextBox(this.components);
             this.label2 = new System.Windows.Forms.Label();
+            this.ArtistText = new FxCommonLib.Controls.FilePathTextBox(this.components);
             this.label1 = new System.Windows.Forms.Label();
+            this.TitleText = new FxCommonLib.Controls.FilePathTextBox(this.components);
             this.label3 = new System.Windows.Forms.Label();
+            this.TargetPathText = new FxCommonLib.Controls.FilePathTextBox(this.components);
             this.RefButton = new System.Windows.Forms.Button();
             this.CancelButton1 = new System.Windows.Forms.Button();
             this.ApplyButton = new System.Windows.Forms.Button();
             this.CauseLabel = new System.Windows.Forms.Label();
             this.TitleLabel = new System.Windows.Forms.Label();
-            this.ImagePathText = new FxCommonLib.Controls.FilePathTextBox(this.components);
-            this.CommentText = new FxCommonLib.Controls.FilePathTextBox(this.components);
-            this.LylicsText = new FxCommonLib.Controls.FilePathTextBox(this.components);
-            this.GenresText = new FxCommonLib.Controls.FilePathTextBox(this.components);
-            this.ArtistText = new FxCommonLib.Controls.FilePathTextBox(this.components);
-            this.TitleText = new FxCommonLib.Controls.FilePathTextBox(this.components);
-            this.TargetPathText = new FxCommonLib.Controls.FilePathTextBox(this.components);
-            this.ConfirmAgeButton = new System.Windows.Forms.Button();
+            this.MakerText = new FxCommonLib.Controls.FilePathTextBox(this.components);
+            this.label7 = new System.Windows.Forms.Label();
+            this.DirectorText = new FxCommonLib.Controls.FilePathTextBox(this.components);
+            this.label8 = new System.Windows.Forms.Label();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PackagePicture)).BeginInit();
             this.SuspendLayout();
             // 
             // MainPanel
             // 
+            this.MainPanel.Controls.Add(this.DirectorText);
+            this.MainPanel.Controls.Add(this.label8);
+            this.MainPanel.Controls.Add(this.MakerText);
+            this.MainPanel.Controls.Add(this.label7);
             this.MainPanel.Controls.Add(this.ConfirmAgeButton);
             this.MainPanel.Controls.Add(this.PackagePicture);
             this.MainPanel.Controls.Add(this.GetInfoButton);
@@ -79,16 +87,26 @@
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(0, 0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(580, 504);
+            this.MainPanel.Size = new System.Drawing.Size(580, 563);
             this.MainPanel.TabIndex = 0;
             this.MainPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainPanel_DragDrop);
             this.MainPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainPanel_DragEnter);
             this.MainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.MainPanel_Paint);
             // 
+            // ConfirmAgeButton
+            // 
+            this.ConfirmAgeButton.Location = new System.Drawing.Point(242, 474);
+            this.ConfirmAgeButton.Name = "ConfirmAgeButton";
+            this.ConfirmAgeButton.Size = new System.Drawing.Size(88, 28);
+            this.ConfirmAgeButton.TabIndex = 29;
+            this.ConfirmAgeButton.Text = "年齢認証";
+            this.ConfirmAgeButton.UseVisualStyleBackColor = true;
+            this.ConfirmAgeButton.Click += new System.EventHandler(this.ConfirmAgeButton_Click);
+            // 
             // PackagePicture
             // 
             this.PackagePicture.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PackagePicture.Location = new System.Drawing.Point(93, 389);
+            this.PackagePicture.Location = new System.Drawing.Point(93, 443);
             this.PackagePicture.Name = "PackagePicture";
             this.PackagePicture.Size = new System.Drawing.Size(145, 112);
             this.PackagePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -97,7 +115,7 @@
             // 
             // GetInfoButton
             // 
-            this.GetInfoButton.Location = new System.Drawing.Point(242, 471);
+            this.GetInfoButton.Location = new System.Drawing.Point(242, 525);
             this.GetInfoButton.Name = "GetInfoButton";
             this.GetInfoButton.Size = new System.Drawing.Size(88, 28);
             this.GetInfoButton.TabIndex = 27;
@@ -111,21 +129,39 @@
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label6.Font = new System.Drawing.Font("MS UI Gothic", 9F);
             this.label6.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label6.Location = new System.Drawing.Point(5, 366);
+            this.label6.Location = new System.Drawing.Point(5, 420);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(82, 19);
             this.label6.TabIndex = 24;
             this.label6.Text = "画像ファイル";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // ImagePathText
+            // 
+            this.ImagePathText.AllowDrop = true;
+            this.ImagePathText.Location = new System.Drawing.Point(92, 420);
+            this.ImagePathText.Name = "ImagePathText";
+            this.ImagePathText.Size = new System.Drawing.Size(404, 19);
+            this.ImagePathText.TabIndex = 25;
+            // 
             // ImageRefButton
             // 
-            this.ImageRefButton.Location = new System.Drawing.Point(500, 364);
+            this.ImageRefButton.Location = new System.Drawing.Point(500, 418);
             this.ImageRefButton.Name = "ImageRefButton";
             this.ImageRefButton.Size = new System.Drawing.Size(65, 22);
             this.ImageRefButton.TabIndex = 26;
             this.ImageRefButton.Text = "参照...";
             this.ImageRefButton.UseVisualStyleBackColor = true;
+            // 
+            // CommentText
+            // 
+            this.CommentText.AllowDrop = true;
+            this.CommentText.Location = new System.Drawing.Point(92, 316);
+            this.CommentText.Multiline = true;
+            this.CommentText.Name = "CommentText";
+            this.CommentText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.CommentText.Size = new System.Drawing.Size(464, 101);
+            this.CommentText.TabIndex = 23;
             // 
             // label5
             // 
@@ -133,12 +169,22 @@
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label5.Font = new System.Drawing.Font("MS UI Gothic", 9F);
             this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label5.Location = new System.Drawing.Point(5, 262);
+            this.label5.Location = new System.Drawing.Point(5, 316);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(82, 17);
             this.label5.TabIndex = 22;
             this.label5.Text = "コメント";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // LylicsText
+            // 
+            this.LylicsText.AllowDrop = true;
+            this.LylicsText.Location = new System.Drawing.Point(92, 212);
+            this.LylicsText.Multiline = true;
+            this.LylicsText.Name = "LylicsText";
+            this.LylicsText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.LylicsText.Size = new System.Drawing.Size(464, 101);
+            this.LylicsText.TabIndex = 21;
             // 
             // label4
             // 
@@ -146,12 +192,20 @@
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label4.Font = new System.Drawing.Font("MS UI Gothic", 9F);
             this.label4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label4.Location = new System.Drawing.Point(5, 158);
+            this.label4.Location = new System.Drawing.Point(5, 212);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(82, 17);
             this.label4.TabIndex = 20;
             this.label4.Text = "歌詞";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // GenresText
+            // 
+            this.GenresText.AllowDrop = true;
+            this.GenresText.Location = new System.Drawing.Point(92, 144);
+            this.GenresText.Name = "GenresText";
+            this.GenresText.Size = new System.Drawing.Size(183, 19);
+            this.GenresText.TabIndex = 19;
             // 
             // label2
             // 
@@ -159,12 +213,20 @@
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label2.Font = new System.Drawing.Font("MS UI Gothic", 9F);
             this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label2.Location = new System.Drawing.Point(6, 137);
+            this.label2.Location = new System.Drawing.Point(6, 145);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 17);
             this.label2.TabIndex = 18;
             this.label2.Text = "ジャンル";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // ArtistText
+            // 
+            this.ArtistText.AllowDrop = true;
+            this.ArtistText.Location = new System.Drawing.Point(92, 123);
+            this.ArtistText.Name = "ArtistText";
+            this.ArtistText.Size = new System.Drawing.Size(183, 19);
+            this.ArtistText.TabIndex = 17;
             // 
             // label1
             // 
@@ -172,12 +234,20 @@
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 9F);
             this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(6, 116);
+            this.label1.Location = new System.Drawing.Point(6, 124);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(82, 17);
             this.label1.TabIndex = 16;
             this.label1.Text = "アーティスト";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // TitleText
+            // 
+            this.TitleText.AllowDrop = true;
+            this.TitleText.Location = new System.Drawing.Point(92, 102);
+            this.TitleText.Name = "TitleText";
+            this.TitleText.Size = new System.Drawing.Size(183, 19);
+            this.TitleText.TabIndex = 15;
             // 
             // label3
             // 
@@ -192,6 +262,15 @@
             this.label3.Text = "対象ファイル";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // TargetPathText
+            // 
+            this.TargetPathText.AllowDrop = true;
+            this.TargetPathText.Location = new System.Drawing.Point(93, 8);
+            this.TargetPathText.Name = "TargetPathText";
+            this.TargetPathText.Size = new System.Drawing.Size(404, 19);
+            this.TargetPathText.TabIndex = 4;
+            this.TargetPathText.Leave += new System.EventHandler(this.TargetPathText_Leave);
+            // 
             // RefButton
             // 
             this.RefButton.Location = new System.Drawing.Point(501, 6);
@@ -204,7 +283,7 @@
             // 
             // CancelButton1
             // 
-            this.CancelButton1.Location = new System.Drawing.Point(486, 471);
+            this.CancelButton1.Location = new System.Drawing.Point(486, 525);
             this.CancelButton1.Name = "CancelButton1";
             this.CancelButton1.Size = new System.Drawing.Size(88, 28);
             this.CancelButton1.TabIndex = 14;
@@ -214,7 +293,7 @@
             // 
             // ApplyButton
             // 
-            this.ApplyButton.Location = new System.Drawing.Point(392, 471);
+            this.ApplyButton.Location = new System.Drawing.Point(392, 525);
             this.ApplyButton.Name = "ApplyButton";
             this.ApplyButton.Size = new System.Drawing.Size(88, 28);
             this.ApplyButton.TabIndex = 13;
@@ -228,7 +307,7 @@
             this.CauseLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.CauseLabel.Font = new System.Drawing.Font("MS UI Gothic", 12F);
             this.CauseLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.CauseLabel.Location = new System.Drawing.Point(6, 68);
+            this.CauseLabel.Location = new System.Drawing.Point(6, 76);
             this.CauseLabel.Name = "CauseLabel";
             this.CauseLabel.Size = new System.Drawing.Size(119, 23);
             this.CauseLabel.TabIndex = 6;
@@ -241,89 +320,60 @@
             this.TitleLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TitleLabel.Font = new System.Drawing.Font("MS UI Gothic", 9F);
             this.TitleLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.TitleLabel.Location = new System.Drawing.Point(6, 95);
+            this.TitleLabel.Location = new System.Drawing.Point(6, 103);
             this.TitleLabel.Name = "TitleLabel";
             this.TitleLabel.Size = new System.Drawing.Size(82, 17);
             this.TitleLabel.TabIndex = 7;
             this.TitleLabel.Text = "タイトル";
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // ImagePathText
+            // MakerText
             // 
-            this.ImagePathText.AllowDrop = true;
-            this.ImagePathText.Location = new System.Drawing.Point(92, 366);
-            this.ImagePathText.Name = "ImagePathText";
-            this.ImagePathText.Size = new System.Drawing.Size(404, 19);
-            this.ImagePathText.TabIndex = 25;
+            this.MakerText.AllowDrop = true;
+            this.MakerText.Location = new System.Drawing.Point(92, 167);
+            this.MakerText.Name = "MakerText";
+            this.MakerText.Size = new System.Drawing.Size(183, 19);
+            this.MakerText.TabIndex = 31;
             // 
-            // CommentText
+            // label7
             // 
-            this.CommentText.AllowDrop = true;
-            this.CommentText.Location = new System.Drawing.Point(92, 262);
-            this.CommentText.Multiline = true;
-            this.CommentText.Name = "CommentText";
-            this.CommentText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.CommentText.Size = new System.Drawing.Size(464, 101);
-            this.CommentText.TabIndex = 23;
+            this.label7.BackColor = System.Drawing.SystemColors.Control;
+            this.label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label7.Font = new System.Drawing.Font("MS UI Gothic", 9F);
+            this.label7.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label7.Location = new System.Drawing.Point(6, 168);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(82, 17);
+            this.label7.TabIndex = 30;
+            this.label7.Text = "メーカー";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // LylicsText
+            // DirectorText
             // 
-            this.LylicsText.AllowDrop = true;
-            this.LylicsText.Location = new System.Drawing.Point(92, 158);
-            this.LylicsText.Multiline = true;
-            this.LylicsText.Name = "LylicsText";
-            this.LylicsText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.LylicsText.Size = new System.Drawing.Size(464, 101);
-            this.LylicsText.TabIndex = 21;
+            this.DirectorText.AllowDrop = true;
+            this.DirectorText.Location = new System.Drawing.Point(92, 189);
+            this.DirectorText.Name = "DirectorText";
+            this.DirectorText.Size = new System.Drawing.Size(183, 19);
+            this.DirectorText.TabIndex = 33;
             // 
-            // GenresText
+            // label8
             // 
-            this.GenresText.AllowDrop = true;
-            this.GenresText.Location = new System.Drawing.Point(92, 136);
-            this.GenresText.Name = "GenresText";
-            this.GenresText.Size = new System.Drawing.Size(183, 19);
-            this.GenresText.TabIndex = 19;
-            // 
-            // ArtistText
-            // 
-            this.ArtistText.AllowDrop = true;
-            this.ArtistText.Location = new System.Drawing.Point(92, 115);
-            this.ArtistText.Name = "ArtistText";
-            this.ArtistText.Size = new System.Drawing.Size(183, 19);
-            this.ArtistText.TabIndex = 17;
-            // 
-            // TitleText
-            // 
-            this.TitleText.AllowDrop = true;
-            this.TitleText.Location = new System.Drawing.Point(92, 94);
-            this.TitleText.Name = "TitleText";
-            this.TitleText.Size = new System.Drawing.Size(183, 19);
-            this.TitleText.TabIndex = 15;
-            // 
-            // TargetPathText
-            // 
-            this.TargetPathText.AllowDrop = true;
-            this.TargetPathText.Location = new System.Drawing.Point(93, 8);
-            this.TargetPathText.Name = "TargetPathText";
-            this.TargetPathText.Size = new System.Drawing.Size(404, 19);
-            this.TargetPathText.TabIndex = 4;
-            this.TargetPathText.Leave += new System.EventHandler(this.TargetPathText_Leave);
-            // 
-            // ConfirmAgeButton
-            // 
-            this.ConfirmAgeButton.Location = new System.Drawing.Point(242, 420);
-            this.ConfirmAgeButton.Name = "ConfirmAgeButton";
-            this.ConfirmAgeButton.Size = new System.Drawing.Size(88, 28);
-            this.ConfirmAgeButton.TabIndex = 29;
-            this.ConfirmAgeButton.Text = "年齢認証";
-            this.ConfirmAgeButton.UseVisualStyleBackColor = true;
-            this.ConfirmAgeButton.Click += new System.EventHandler(this.ConfirmAgeButton_Click);
+            this.label8.BackColor = System.Drawing.SystemColors.Control;
+            this.label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label8.Font = new System.Drawing.Font("MS UI Gothic", 9F);
+            this.label8.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label8.Location = new System.Drawing.Point(6, 190);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(82, 17);
+            this.label8.TabIndex = 32;
+            this.label8.Text = "監督";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TagEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(580, 504);
+            this.ClientSize = new System.Drawing.Size(580, 563);
             this.Controls.Add(this.MainPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TagEditForm";
@@ -360,5 +410,9 @@
         private System.Windows.Forms.Button GetInfoButton;
         private System.Windows.Forms.PictureBox PackagePicture;
         private System.Windows.Forms.Button ConfirmAgeButton;
+        private FxCommonLib.Controls.FilePathTextBox MakerText;
+        internal System.Windows.Forms.Label label7;
+        private FxCommonLib.Controls.FilePathTextBox DirectorText;
+        internal System.Windows.Forms.Label label8;
     }
 }

@@ -27,15 +27,24 @@ using PokudaSearch.Win32API;
 using org.quartz;
 using FxCommonLib.Utils;
 using PokudaSearch.WebDriver;
+using System.Text.RegularExpressions;
 
 namespace PokudaSearch.Test {
     [TestClass]
     public class SandBoxTest {
         [TestMethod]
+        public void RegexTest() {
+            string target = "ssni-681-c";
+
+            var match = Regex.Match(target, "^[a-z].*[0-9]");
+            Debug.Print(match.Value);
+        }
+        [TestMethod]
         public void WebApiTest() {
             var api = new DMMWebAPIUtil();
 
-            var list = api.GetItemList("test");
+            //var list = api.GetItemList("ssni681");
+            //var list = api.GetItemList("椎名");
         }
         [TestMethod]
         public void ExcelWasteNameTest() {

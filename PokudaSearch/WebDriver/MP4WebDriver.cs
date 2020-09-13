@@ -1,104 +1,61 @@
 ﻿using FxCommonLib.Consts;
+using FxCommonLib.Utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PokudaSearch.WebDriver {
-    public struct TagInfo {
-        public string Title;
-        public string Performers;
-        public string Genres;
-        public string Comment;
-        public string ImageUrl;
-    }
-
     public class MP4WebDriver {
 
         public MP4WebDriver() {
         }
-        //public TagInfo GetTagInfoFromFanza2(FileInfo file) {
-        //    _webDriver.Url = "https://www.dmm.co.jp/mono/dvd/";
-        //    TagInfo info = new TagInfo();
+        public TagInfo GetTagInfoFromFanza(FileInfo file) {
+            var ret = new TagInfo();
+            //string fileName = file.Name.Replace(file.Extension, "");
 
-        //    try {
-        //        string fileName = file.Name.Replace(file.Extension, "");
+            //if (fileName == "") {
+            //    return ret;
+            //}
 
-        //        var keywordElem = _webDriver.FindElement(By.XPath("//*[@id='searchstr']"));
-        //        keywordElem.Clear();
-        //        keywordElem.SendKeys(fileName);
-        //        var submit = _webDriver.FindElement(By.XPath("//*[@id='frmSearch']/fieldset/div/div[2]/input"));
-        //        submit.Click();
-        //        Thread.Sleep(1000);
+            //var util = new DMMWebAPIUtil();
+            //var list = util.GetItemList(fileName);
+            //if (list.Count > 0) {
+            //    ret = list[0];
+            //    //コメントはWebから取得
+            //    //HACK 年齢認証の問題を解消する必要がある。
+            //    //await AppObject.CefSharpPanel.LoadPageAsync(ret.pageUrl);
+            //    //var comment = await AppObject.CefSharpPanel.GetTextContentByXPath("//*[@id='mu']/div/table/tbody/tr/td[1]/div[4]/p");
+            //    //ret.Comment = comment;
+            //    ret.Comment = "監督:" + ret.Director + Environment.NewLine + "メーカー:" + ret.Maker;
+            //}
 
-        //        try {
-        //            var resultListElem = _webDriver.FindElements(By.XPath("//*[@id='list']/li[1]/div/p[2]/a"));
-        //            foreach (var element in resultListElem.AsEnumerable()) {
-        //                element.Click();
+            ////名前を最適化して再検索
+            //var match = Regex.Match(fileName, "^[a-z].*[0-9]");
+            //if (match.Value == "") {
+            //    return ret;
+            //}
+            //list = util.GetItemList(match.Value);
+            //if (list.Count > 0) {
+            //    ret = list[0];
+            //    //コメントはWebから取得
+            //    //HACK 年齢認証の問題を解消する必要がある。
+            //    //await AppObject.CefSharpPanel.LoadPageAsync(ret.pageUrl);
+            //    //var comment = await AppObject.CefSharpPanel.GetTextContentByXPath("//*[@id='mu']/div/table/tbody/tr/td[1]/div[4]/p");
+            //    //ret.Comment = comment;
+            //    ret.Comment = "監督:" + ret.Director + Environment.NewLine + "メーカー:" + ret.Maker;
+            //}
 
-        //                //情報を取得
-        //                var title = _webDriver.FindElement(By.XPath("//*[@id='title']"));
-        //                info.Title = title.Text;
-        //                var performer = _webDriver.FindElement(By.XPath("//*[@id='performer']/a"));
-        //                info.Performers = performer.Text;
+            return ret;
+        }
 
-        //                //ジャンル
-        //                try {
-        //                    var genreList = _webDriver.FindElements(By.XPath("//td[text()='ジャンル：']/../td[2]/a"));
-        //                    foreach (var genre in genreList.AsEnumerable()) {
-        //                        info.Genres += genre.Text + " ";
-        //                    }
-        //                } catch (NoSuchElementException) {
-        //                    //何もしない
-        //                }
-
-        //                //イメージ
-        //                try {
-        //                    var imageDiv = _webDriver.FindElement(By.XPath("//*[@id='sample-video']"));
-        //                    var image = imageDiv.FindElement(By.XPath("div/a/img"));
-        //                    info.ImageUrl = image.GetAttribute("src");
-        //                } catch (NoSuchElementException) {
-        //                    //何もしない
-        //                }
-
-        //                //コメント
-        //                try {
-        //                    var commentDiv = _webDriver.FindElement(By.XPath("//*[@id='mu']/div/table/tbody/tr/td[1]/div[2]"));
-        //                    var comment = commentDiv.FindElement(By.XPath("div/p"));
-        //                    info.Comment = comment.Text.Split('\n')[0];
-        //                } catch (NoSuchElementException) {
-        //                    //何もしない
-        //                }
-
-        //                break;
-        //            }
-
-        //            return info;
-        //        } catch (NoSuchElementException) {
-        //            MessageBox.Show(AppObject.GetMsg(AppObject.Msg.ERR_CANNOT_GET_INFO), 
-        //                AppObject.GetMsg(AppObject.Msg.TITLE_WARN), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //            return info;
-        //        }
-        //    } finally {
-        //        _webDriver.Close();
-        //        _webDriver.Quit();
-        //    }
-
-        //}
-        //public async Task<TagInfo> GetTagInfoFromFanza3(FileInfo file) {
-            //var app = new WindowsAppFriend(Process.GetCurrentProcess());
-            //
-            //_appObject = app..Type("AppObject");
-            //var driver = new CefSharpDriver((AppVar)AppObject.CefSharpPanel.Browser);
-            //driver.Url = "https://www.dmm.co.jp/mono/dvd/";
-        //}
-
-        public async Task<TagInfo> GetTagInfoFromFanza(FileInfo file) {
+        public async Task<TagInfo> GetTagInfoFromFanza2(FileInfo file) {
             string url = "https://www.dmm.co.jp/mono/dvd/";
 
             TagInfo info = new TagInfo();

@@ -325,8 +325,8 @@ namespace FxCommonLib.Utils {
             char[] invalidChars = System.IO.Path.GetInvalidFileNameChars();
 
             return (fileName.IndexOfAny(invalidChars) < 0);
-
         }
+
         /// <summary>
         /// ファイルアクセスルールを辞書として取得
         /// </summary>

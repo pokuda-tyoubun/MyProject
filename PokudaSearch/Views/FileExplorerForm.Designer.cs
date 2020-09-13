@@ -31,13 +31,14 @@
             this.SubExplorer = new Microsoft.WindowsAPICodePack.Controls.WindowsForms.ExplorerBrowser();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.RightTopPanel = new System.Windows.Forms.Panel();
+            this.OpenExplorerSubButton = new System.Windows.Forms.Button();
             this.SubExplorerCombo = new C1.Win.C1Input.C1ComboBox();
             this.UpwardSubExplorerButton = new System.Windows.Forms.Button();
             this.ForwardSubExplorerButton = new System.Windows.Forms.Button();
             this.BackwardSubExplorerButton = new System.Windows.Forms.Button();
             this.MainTopPanel = new System.Windows.Forms.Panel();
             this.MainExplorerCombo = new C1.Win.C1Input.C1ComboBox();
-            this.OpenExploereButton = new System.Windows.Forms.Button();
+            this.OpenExplorerButton = new System.Windows.Forms.Button();
             this.UpwardMainExplorerButton = new System.Windows.Forms.Button();
             this.ForwardMainExplorerButton = new System.Windows.Forms.Button();
             this.BackwardMainExplorerButton = new System.Windows.Forms.Button();
@@ -124,6 +125,7 @@
             // 
             // RightTopPanel
             // 
+            this.RightTopPanel.Controls.Add(this.OpenExplorerSubButton);
             this.RightTopPanel.Controls.Add(this.SubExplorerCombo);
             this.RightTopPanel.Controls.Add(this.UpwardSubExplorerButton);
             this.RightTopPanel.Controls.Add(this.ForwardSubExplorerButton);
@@ -135,6 +137,16 @@
             this.RightTopPanel.TabIndex = 5;
             this.RightTopPanel.SizeChanged += new System.EventHandler(this.RightTopPanel_SizeChanged);
             // 
+            // OpenExplorerSubButton
+            // 
+            this.OpenExplorerSubButton.Image = global::PokudaSearch.Properties.Resources.explorer16;
+            this.OpenExplorerSubButton.Location = new System.Drawing.Point(67, 1);
+            this.OpenExplorerSubButton.Name = "OpenExplorerSubButton";
+            this.OpenExplorerSubButton.Size = new System.Drawing.Size(23, 27);
+            this.OpenExplorerSubButton.TabIndex = 10;
+            this.OpenExplorerSubButton.UseVisualStyleBackColor = true;
+            this.OpenExplorerSubButton.Click += new System.EventHandler(this.OpenExplorerSubButton_Click);
+            // 
             // SubExplorerCombo
             // 
             this.SubExplorerCombo.AllowSpinLoop = false;
@@ -145,15 +157,17 @@
             this.SubExplorerCombo.AutoSuggestMode = C1.Win.C1Input.AutoSuggestMode.Contains;
             this.SubExplorerCombo.GapHeight = 0;
             this.SubExplorerCombo.ImagePadding = new System.Windows.Forms.Padding(0);
+            this.SubExplorerCombo.InitialSelection = C1.Win.C1Input.InitialSelectionEnum.CaretAtEnd;
             this.SubExplorerCombo.ItemsDisplayMember = "";
             this.SubExplorerCombo.ItemsValueMember = "";
-            this.SubExplorerCombo.Location = new System.Drawing.Point(69, 5);
+            this.SubExplorerCombo.Location = new System.Drawing.Point(93, 5);
             this.SubExplorerCombo.Name = "SubExplorerCombo";
-            this.SubExplorerCombo.Size = new System.Drawing.Size(363, 17);
+            this.SubExplorerCombo.Size = new System.Drawing.Size(336, 17);
             this.SubExplorerCombo.TabIndex = 9;
             this.SubExplorerCombo.Tag = null;
             this.SubExplorerCombo.SelectedItemChanged += new System.EventHandler(this.SubExplorerCombo_SelectedItemChanged);
             this.SubExplorerCombo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SubExplorerCombo_KeyDown);
+            this.SubExplorerCombo.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SubExplorerCombo_MouseUp);
             // 
             // UpwardSubExplorerButton
             // 
@@ -188,7 +202,7 @@
             // MainTopPanel
             // 
             this.MainTopPanel.Controls.Add(this.MainExplorerCombo);
-            this.MainTopPanel.Controls.Add(this.OpenExploereButton);
+            this.MainTopPanel.Controls.Add(this.OpenExplorerButton);
             this.MainTopPanel.Controls.Add(this.UpwardMainExplorerButton);
             this.MainTopPanel.Controls.Add(this.ForwardMainExplorerButton);
             this.MainTopPanel.Controls.Add(this.BackwardMainExplorerButton);
@@ -208,6 +222,7 @@
             this.MainExplorerCombo.AutoSuggestMode = C1.Win.C1Input.AutoSuggestMode.Contains;
             this.MainExplorerCombo.GapHeight = 0;
             this.MainExplorerCombo.ImagePadding = new System.Windows.Forms.Padding(0);
+            this.MainExplorerCombo.InitialSelection = C1.Win.C1Input.InitialSelectionEnum.CaretAtEnd;
             this.MainExplorerCombo.ItemsDisplayMember = "";
             this.MainExplorerCombo.ItemsValueMember = "";
             this.MainExplorerCombo.Location = new System.Drawing.Point(93, 7);
@@ -216,17 +231,19 @@
             this.MainExplorerCombo.TabIndex = 8;
             this.MainExplorerCombo.Tag = null;
             this.MainExplorerCombo.SelectedItemChanged += new System.EventHandler(this.MainExplorerCombo_SelectedItemChanged);
+            this.MainExplorerCombo.Enter += new System.EventHandler(this.MainExplorerCombo_Enter);
             this.MainExplorerCombo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainExplorerCombo_KeyDown);
+            this.MainExplorerCombo.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MainExplorerCombo_MouseUp);
             // 
-            // OpenExploereButton
+            // OpenExplorerButton
             // 
-            this.OpenExploereButton.Image = global::PokudaSearch.Properties.Resources.explorer16;
-            this.OpenExploereButton.Location = new System.Drawing.Point(68, 2);
-            this.OpenExploereButton.Name = "OpenExploereButton";
-            this.OpenExploereButton.Size = new System.Drawing.Size(23, 27);
-            this.OpenExploereButton.TabIndex = 7;
-            this.OpenExploereButton.UseVisualStyleBackColor = true;
-            this.OpenExploereButton.Click += new System.EventHandler(this.OpenExploereButton_Click);
+            this.OpenExplorerButton.Image = global::PokudaSearch.Properties.Resources.explorer16;
+            this.OpenExplorerButton.Location = new System.Drawing.Point(68, 2);
+            this.OpenExplorerButton.Name = "OpenExplorerButton";
+            this.OpenExplorerButton.Size = new System.Drawing.Size(23, 27);
+            this.OpenExplorerButton.TabIndex = 7;
+            this.OpenExplorerButton.UseVisualStyleBackColor = true;
+            this.OpenExplorerButton.Click += new System.EventHandler(this.OpenExplorerButton_Click);
             // 
             // UpwardMainExplorerButton
             // 
@@ -330,8 +347,9 @@
         private System.Windows.Forms.Button BackwardMainExplorerButton;
         private System.Windows.Forms.Button UpwardMainExplorerButton;
         private System.Windows.Forms.Button UpwardSubExplorerButton;
-        private System.Windows.Forms.Button OpenExploereButton;
+        private System.Windows.Forms.Button OpenExplorerButton;
         private C1.Win.C1Input.C1ComboBox MainExplorerCombo;
         private C1.Win.C1Input.C1ComboBox SubExplorerCombo;
+        private System.Windows.Forms.Button OpenExplorerSubButton;
     }
 }

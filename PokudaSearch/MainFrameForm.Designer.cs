@@ -49,6 +49,7 @@
             this.VerifyLicenseButton = new C1.Win.C1Ribbon.RibbonButton();
             this.HelpButton1 = new C1.Win.C1Ribbon.RibbonButton();
             this.ribbonTopToolBar1 = new C1.Win.C1Ribbon.RibbonTopToolBar();
+            this.TagWriterFormButton = new C1.Win.C1Ribbon.RibbonButton();
             this.MainStatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainRibbon)).BeginInit();
             this.SuspendLayout();
@@ -165,6 +166,7 @@
             // TagGroup
             // 
             this.TagGroup.Items.Add(this.TagEditFormButton);
+            this.TagGroup.Items.Add(this.TagWriterFormButton);
             this.TagGroup.Name = "TagGroup";
             this.TagGroup.Text = "タグ編集";
             // 
@@ -172,7 +174,7 @@
             // 
             this.TagEditFormButton.Name = "TagEditFormButton";
             this.TagEditFormButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("TagEditFormButton.SmallImage")));
-            this.TagEditFormButton.Text = "ボタン";
+            this.TagEditFormButton.Text = "タグ編集単体";
             this.TagEditFormButton.Click += new System.EventHandler(this.TagEditFormButton_Click);
             // 
             // AnalyzeGroup
@@ -238,6 +240,13 @@
             // 
             this.ribbonTopToolBar1.Name = "ribbonTopToolBar1";
             // 
+            // TagWriterFormButton
+            // 
+            this.TagWriterFormButton.Name = "TagWriterFormButton";
+            this.TagWriterFormButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("TagWriterFormButton.SmallImage")));
+            this.TagWriterFormButton.Text = "タグ付け";
+            this.TagWriterFormButton.Click += new System.EventHandler(this.TagWriterFormButton_Click);
+            // 
             // MainFrameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -287,5 +296,6 @@
         private C1.Win.C1Ribbon.RibbonButton VerifyLicenseButton;
         private System.Windows.Forms.ToolStripStatusLabel MorphemeLabel;
         private C1.Win.C1Ribbon.RibbonButton SearchFormButton;
+        private C1.Win.C1Ribbon.RibbonButton TagWriterFormButton;
     }
 }

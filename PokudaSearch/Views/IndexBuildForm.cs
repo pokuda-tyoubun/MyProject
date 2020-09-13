@@ -459,8 +459,6 @@ namespace PokudaSearch.Views {
             this.ProgressBar.Value = report.Percent;
             this.LogViewerText.Text = report.ProgressCount.ToString() + "/" + report.TargetCount.ToString();
 
-            //HACK isAppendMode対応
-
             //タスクバーのプログレス
             TaskbarManager.Instance.SetProgressValue(report.Percent, 100);
 

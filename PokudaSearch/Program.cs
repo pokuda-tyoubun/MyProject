@@ -16,16 +16,23 @@ using System.Threading;
 using System.Diagnostics;
 using System.Runtime.Remoting.Channels.Ipc;
 using System.Runtime.Remoting.Channels;
-using PokudaSearch.Win32API;
 using PokudaSearch.IPC;
 using System.Runtime.Remoting;
 using System.Windows.Threading;
+using FxCommonLib.Win32API;
 
 namespace PokudaSearch {
     static class Program {
 
         private static IpcServerChannel _serverChannel = null;
         private static IPCShareInfo _shareInfo = null;
+
+        /// <summary>新プロセスでファイラを起動</summary>
+        private const string FilerOption = "/f";
+        /// <summary>同一プロセスでファイラをActivate(MainExplorerに表示)</summary>
+        private const string SingleFilerOption = "/sf";
+        /// <summary>同一プロセスでファイラをActivate(SubExplorerに表示)</summary>
+        private const string SingleFilerSubOption = "/sfs";
 
 
         /// <summary>
@@ -40,12 +47,12 @@ namespace PokudaSearch {
             if (args.Length > 2) {
                 string option = args[1].ToLower();
                 string tmpPath = StringUtil.NullToBlank(args[2]);
-                if (option == "/f") {
+                if (option == FilerOption) {
                     if (Directory.Exists(tmpPath)) {
                         //引数のパスでファイラを起動
                         defaultPath = tmpPath;
                     }
-                } else if (option == "/sf") {
+                } else if (option == SingleFilerOption || option == SingleFilerSubOption) {
                     //既にプロセスが存在するか？
                     var processArray = Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName);
                     if (processArray.Length > 1) {
@@ -58,7 +65,7 @@ namespace PokudaSearch {
                         var url = "ipc://PokudaSearchIPC/path";
                         IPCShareInfo shareInfo = (IPCShareInfo)Activator.GetObject(typeof(IPCShareInfo), url);
                         User32.SetForegroundWindow(Process.GetProcessById(shareInfo.ProcessId).MainWindowHandle);
-                        shareInfo.SendInfo(tmpPath);
+                        shareInfo.SendInfo(option, tmpPath);
 
                         return;
                     } else {
@@ -109,13 +116,15 @@ namespace PokudaSearch {
             //if (MainFrameForm.SearchForm != null) {
             //    MainFrameForm.SearchForm.WindowState = FormWindowState.Normal;
             //}
-            AppObject.Logger.Error("debug:100");
             //対象パスをエクスプローラで表示
+            string option = e.Option;
             string path = e.Path;
             AppObject.Frame.FileExplorerFormButtonPerformClick();
-            AppObject.Logger.Error("debug:200");
-            MainFrameForm.FileExplorerForm.LoadMainExplorer(path);
-            AppObject.Logger.Error("debug:300");
+            if (option == SingleFilerOption) {
+                MainFrameForm.FileExplorerForm.LoadMainExplorer(path);
+            } else if (option == SingleFilerSubOption) {
+                MainFrameForm.FileExplorerForm.LoadSubExplorer(path);
+            }
         }
 
         /// <summary>

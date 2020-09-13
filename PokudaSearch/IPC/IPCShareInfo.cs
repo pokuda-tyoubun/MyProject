@@ -16,9 +16,9 @@ namespace PokudaSearch.IPC {
 
         public delegate void CallEventHandler(IPCShareInfoEventArg e);
         public event CallEventHandler OnSend;
-        public void SendInfo(string path) {
+        public void SendInfo(string option, string path) {
             if (OnSend != null) {
-                OnSend(new IPCShareInfoEventArg(path));
+                OnSend(new IPCShareInfoEventArg(option, path));
             }
         }
 
@@ -33,8 +33,14 @@ namespace PokudaSearch.IPC {
                 get { return _path; }
                 set { _path = value; }
             }
+            private string _option = "";
+            public string Option {
+                get { return _option; }
+                set { _option = value; }
+            }
 
-            public IPCShareInfoEventArg(string path) {
+            public IPCShareInfoEventArg(string option, string path) {
+                _option = option;
                 _path = path;
             }
         }

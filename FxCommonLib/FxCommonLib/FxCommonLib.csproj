@@ -157,7 +157,7 @@
     <Compile Include="BaseReportWriter\BaseReportWriter.cs" />
     <Compile Include="BaseValidator\BaseValidator.cs" />
     <Compile Include="Consts\CommonConsts.cs" />
-    <Compile Include="Consts\IM\IMConsts.cs" />
+    <Compile Include="Consts\MES\MESConsts.cs" />
     <Compile Include="Controls\BaseCodeSelector.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -233,7 +233,6 @@
     <Compile Include="Controls\TextBoxEx.Designer.cs">
       <DependentUpon>TextBoxEx.cs</DependentUpon>
     </Compile>
-    <Compile Include="Consts\MES\MESConsts.cs" />
     <Compile Include="Exceptions\MaxRowsException.cs" />
     <Compile Include="Extensions\DataRowExtensions.cs" />
     <Compile Include="Extensions\DcitionaryExtensions.cs" />
@@ -251,7 +250,6 @@
     <Compile Include="Models\DataDictionaryModel.cs" />
     <Compile Include="Models\ErrorMessage.cs" />
     <Compile Include="Models\FilterHelper.cs" />
-    <Compile Include="Models\IM\IMUser.cs" />
     <Compile Include="Models\ServiceSide\GridConfigModel.cs" />
     <Compile Include="Models\ServiceSide\MessageModel.cs" />
     <Compile Include="Models\MES\Client.cs" />
@@ -259,7 +257,6 @@
     <Compile Include="Models\ServiceSide\SystemCodeModel.cs" />
     <Compile Include="Models\ValuePair.cs" />
     <Compile Include="Models\ResourceNode.cs" />
-    <Compile Include="Models\WFM\Employee.cs" />
     <Compile Include="Models\ServiceSide\WindowStateModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -322,6 +319,7 @@
     <Compile Include="Utils\DateTimeUtil.cs" />
     <Compile Include="Utils\DeepCopyUtil.cs" />
     <Compile Include="Utils\DesignModeUtil.cs" />
+    <Compile Include="Utils\DMMWebAPIUtil.cs" />
     <Compile Include="Utils\ExcelReadUtil.cs" />
     <Compile Include="Utils\ExchangeUtil.cs" />
     <Compile Include="Utils\PublicWebApiUtil.cs" />
@@ -353,7 +351,8 @@
     <Compile Include="Utils\Tree\TreeElementKind.cs" />
     <Compile Include="Utils\Tree\TreeElementVisitor.cs" />
     <Compile Include="Utils\ValidateUtil.cs" />
-    <Compile Include="Consts\WFM\WFMConsts.cs" />
+    <Compile Include="Win32API\Shell32.cs" />
+    <Compile Include="Win32API\User32.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MathNet.Numerics.snk" />

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Net;
 
 namespace FxCommonLib.Utils {
 
@@ -36,6 +37,41 @@ namespace FxCommonLib.Utils {
 
         #endregion Constants
         #region PublicMethods
+
+
+        public Bitmap GetBitmapFromURL(string url) { 
+            int buffSize = 65536; // 一度に読み込むサイズ
+            MemoryStream imgStream = new MemoryStream();
+         
+            if (url == null || url.Trim().Length <= 0) {
+                return null;
+            }
+         
+            //----------------------------
+            // Webサーバに要求を投げる
+            //----------------------------
+            WebRequest req = WebRequest.Create(url);
+            BinaryReader reader = new BinaryReader(req.GetResponse().GetResponseStream());
+         
+            //--------------------------------------------------------
+            // Webサーバからの応答データを取得し、imgStreamに保存する
+            //--------------------------------------------------------
+            while (true) {
+                byte[] buff = new byte[buffSize];
+         
+                // 応答データの取得
+                int readBytes = reader.Read(buff, 0, buffSize);
+                if (readBytes <= 0 ) {
+                    // 最後まで取得した->ループを抜ける
+                    break;
+                }
+         
+                // バッファに追加
+                imgStream.Write( buff, 0, readBytes );
+            }
+         
+            return new Bitmap(imgStream);
+        }
 
         /// <summary>
         /// サイズ変更

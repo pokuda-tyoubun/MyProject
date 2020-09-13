@@ -317,6 +317,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>m_extensions.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\TagWriterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TagWriterForm.Designer.cs">
+      <DependentUpon>TagWriterForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\WebBrowserForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -387,11 +393,8 @@
     <Compile Include="Views\SearchForm.Designer.cs">
       <DependentUpon>SearchForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="WebDriver\DMMWebAPIUtil.cs" />
     <Compile Include="WebDriver\MP4WebDriver.cs" />
     <Compile Include="WebDriver\WebClawringDriver.cs" />
-    <Compile Include="Win32API\User32.cs" />
-    <Compile Include="Win32API\Shell32.cs" />
     <EmbeddedResource Include="Controls\CefSharpPanel.resx">
       <DependentUpon>CefSharpPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -410,6 +413,9 @@
     <EmbeddedResource Include="SQLSrc\m_extensions.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>m_extensions.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TagWriterForm.resx">
+      <DependentUpon>TagWriterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\WebBrowserForm.resx">
       <DependentUpon>WebBrowserForm.cs</DependentUpon>
@@ -475,27 +481,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Search24.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\FxCommon\src\FxCommonLib\FxCommonLib\FxCommonLib.csproj">
-      <Project>{aff59e76-11cf-4170-a307-5a287716ca50}</Project>
-      <Name>FxCommonLib</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Excel24.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Explorer24.png" />
-    <None Include="Resources\File16.bmp" />
     <Content Include="DB\DB_RESET.sql" />
     <Content Include="DB\CREATE_m_license.sql" />
     <Content Include="DB\CREATE_m_extensions.sql" />
     <Content Include="DB\CREATE_t_index_history.sql" />
     <Content Include="DB\CREATE_t_active_index.sql" />
     <Content Include="Doc\Skipされた拡張子.txt" />
-    <None Include="Resources\EditClear24.bmp" />
     <Content Include="Installer\Installer.iss" />
     <None Include="Resources\Pokuda64.ico" />
     <Content Include="Pokuda64.ico" />
@@ -510,9 +502,19 @@
     <None Include="Resources\forward_nav.png" />
     <None Include="Resources\upward_nav.png" />
     <None Include="Resources\explorer16.png" />
+    <None Include="Resources\EditClear24.bmp" />
+    <None Include="Resources\Excel24.bmp" />
+    <None Include="Resources\File16.bmp" />
+    <None Include="Resources\Search24.bmp" />
     <Content Include="UserDictionary.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FxCommonLib\FxCommonLib\FxCommonLib.csproj">
+      <Project>{aff59e76-11cf-4170-a307-5a287716ca50}</Project>
+      <Name>FxCommonLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\System.Data.SQLite.Core.1.0.110.0\build\net45\System.Data.SQLite.Core.targets" Condition="Exists('packages\System.Data.SQLite.Core.1.0.110.0\build\net45\System.Data.SQLite.Core.targets')" />
@@ -528,12 +530,10 @@
     <Error Condition="!Exists('packages\CefSharp.Common.79.1.350\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.Common.79.1.350\build\CefSharp.Common.targets'))" />
     <Error Condition="!Exists('packages\CefSharp.WinForms.79.1.350\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.WinForms.79.1.350\build\CefSharp.WinForms.props'))" />
     <Error Condition="!Exists('packages\CefSharp.WinForms.79.1.350\build\CefSharp.WinForms.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.WinForms.79.1.350\build\CefSharp.WinForms.targets'))" />
-    <Error Condition="!Exists('packages\Selenium.Chrome.WebDriver.81.0.0\build\Selenium.Chrome.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Selenium.Chrome.WebDriver.81.0.0\build\Selenium.Chrome.WebDriver.targets'))" />
   </Target>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="packages\CefSharp.Common.79.1.350\build\CefSharp.Common.targets" Condition="Exists('packages\CefSharp.Common.79.1.350\build\CefSharp.Common.targets')" />
   <Import Project="packages\CefSharp.WinForms.79.1.350\build\CefSharp.WinForms.targets" Condition="Exists('packages\CefSharp.WinForms.79.1.350\build\CefSharp.WinForms.targets')" />
-  <Import Project="packages\Selenium.Chrome.WebDriver.81.0.0\build\Selenium.Chrome.WebDriver.targets" Condition="Exists('packages\Selenium.Chrome.WebDriver.81.0.0\build\Selenium.Chrome.WebDriver.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

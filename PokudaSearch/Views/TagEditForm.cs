@@ -120,11 +120,6 @@ namespace PokudaSearch.Views {
             this.Close();
         }
 
-        /// <summary>
-        /// 差分ツール選択ボタン
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void RefButton_Click(object sender, EventArgs e) {
         }
 
@@ -142,16 +137,23 @@ namespace PokudaSearch.Views {
             }
         }
 
-        private async void GetInfoButton_Click(object sender, EventArgs e) {
-            var mp4wd = new MP4WebDriver();
-            TagInfo ti = await mp4wd.GetTagInfoFromFanza(new FileInfo(this.TargetPathText.Text));
+        private void GetInfoButton_Click(object sender, EventArgs e) {
+            this.Cursor = Cursors.WaitCursor;
+            try {
+                var mp4wd = new MP4WebDriver();
+                TagInfo ti = mp4wd.GetTagInfoFromFanza(new FileInfo(this.TargetPathText.Text));
 
-            this.TitleText.Text = ti.Title;
-            this.ArtistText.Text = ti.Performers;
-            this.GenresText.Text = ti.Genres;
-            this.CommentText.Text = ti.Comment;
-            if (StringUtil.NullToBlank(ti.ImageUrl) != "") {
-                this.PackagePicture.ImageLocation = ti.ImageUrl;
+                this.TitleText.Text = ti.Title;
+                this.ArtistText.Text = ti.Performers;
+                this.GenresText.Text = ti.Genres;
+                this.MakerText.Text = ti.Maker;
+                this.DirectorText.Text = ti.Director;
+                this.CommentText.Text = ti.Comment;
+                if (StringUtil.NullToBlank(ti.ImageUrl) != "") {
+                    this.PackagePicture.ImageLocation = ti.ImageUrl;
+                }
+            } finally {
+                this.Cursor = Cursors.Default;
             }
         }
 
@@ -173,7 +175,7 @@ namespace PokudaSearch.Views {
             //AppObject.CefSharpPanel.LoadAsync("https://www.dmm.co.jp/mono/dvd/");
 
             AppObject.CefSharpPanel.LoadAsync("https://pokuda-tyoubun.blogspot.com/");
-            string val = await AppObject.CefSharpPanel.GetTextContentByXpath("//*[@class='title']");
+            string val = await AppObject.CefSharpPanel.GetTextContentByXPath("//*[@class='title']");
             Debug.Print(val);
         }
     }

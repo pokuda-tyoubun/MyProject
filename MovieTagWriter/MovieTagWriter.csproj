@@ -87,6 +87,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Doc\機能一覧＆NOTE%28Tag%29.xlsx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -123,7 +124,9 @@
     <None Include="Resources\Tag24.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Help32.bmp" />
     <Content Include="tag-red.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

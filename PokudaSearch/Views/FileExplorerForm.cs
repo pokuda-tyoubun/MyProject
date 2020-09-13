@@ -7,7 +7,6 @@ using Microsoft.WindowsAPICodePack.Controls;
 using Microsoft.WindowsAPICodePack.Controls.WindowsForms;
 using Microsoft.WindowsAPICodePack.Shell;
 using PokudaSearch.IndexUtil;
-using PokudaSearch.Win32API;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -143,7 +142,7 @@ namespace PokudaSearch.Views {
                 ShowSearchForm();
             }
             if ((e.Modifiers & Keys.Control) == Keys.Control && e.KeyCode == Keys.F) {
-                ShowSearchFormWithTargetDir();
+                ShowSearchForm(this.MainExplorerCombo.Text);
             }
         }
         private void SubExplorer_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e) {
@@ -177,7 +176,7 @@ namespace PokudaSearch.Views {
                 //this.MainExplorer.Focus();
             }
             if ((e.Modifiers & Keys.Control) == Keys.Control && e.KeyCode == Keys.F) {
-                ShowSearchForm();
+                ShowSearchForm(this.SubExplorerCombo.Text);
             }
         }
         private void FileExplorerForm_KeyDown(object sender, KeyEventArgs e) {
@@ -188,7 +187,7 @@ namespace PokudaSearch.Views {
                 ShowSearchForm();
             }
             if ((e.Modifiers & Keys.Control) == Keys.Control && e.KeyCode == Keys.F) {
-                ShowSearchFormWithTargetDir();
+                ShowSearchForm(this.MainExplorerCombo.Text);
             }
         }
 
@@ -217,6 +216,9 @@ namespace PokudaSearch.Views {
             string prePath = this.MainExplorerCombo.Text;
             LoadPath(this.MainExplorer, path);
             LoadPath(this.SubExplorer, prePath);
+        }
+        public void LoadSubExplorer(string path) {
+            LoadPath(this.SubExplorer, path);
         }
 
         public void ReLoadFileBlowser() {
@@ -277,8 +279,8 @@ namespace PokudaSearch.Views {
         private void ShowSearchForm() {
             AppObject.Frame.SearchFormButtonPerformClick();
         }
-        private void ShowSearchFormWithTargetDir() {
-            string targetDir = this.MainExplorerCombo.Text;
+        private void ShowSearchForm(string targetDir) {
+            AppObject.Frame.SearchFormButtonPerformClick();
             //既にインデックス化されているかどうか
             if (!MainFrameForm.SearchForm.IsContainTargetIndex(targetDir)) {
                 var result = MessageBox.Show(AppObject.GetMsg(AppObject.Msg.MSG_DO_CREATE_INDEX), 
@@ -299,7 +301,6 @@ namespace PokudaSearch.Views {
 
             //検索
             MainFrameForm.SearchForm.SetPathFilterText(targetDir);
-            AppObject.Frame.SearchFormButtonPerformClick();
         }
 
         private void BackwardSubExplorerButton_Click(object sender, EventArgs e) {
@@ -341,13 +342,6 @@ namespace PokudaSearch.Views {
             if (parent != null) {
                 eb.Navigate(ShellObject.FromParsingName(parent.FullName));
             }
-        }
-
-        private void OpenExploereButton_Click(object sender, EventArgs e) {
-            //ShellObject so = ShellObject.FromParsingName("::{031E4825-7B94-4DC3-B131-E946B44C8DD5}\\Git.library-ms");
-            //this.MainExplorer.Navigate(so);
-
-            SetHistory();
         }
 
         private void SetHistory() {
@@ -430,6 +424,29 @@ namespace PokudaSearch.Views {
             int idx = this.SubExplorerCombo.SelectedIndex;
             var so = this.SubExplorer.NavigationLog.Locations.ToArray()[idx];
             this.SubExplorer.Navigate(so);
+        }
+
+        private void MainExplorerCombo_Enter(object sender, EventArgs e) {
+        }
+
+        private void MainExplorerCombo_MouseUp(object sender, MouseEventArgs e) {
+            this.MainExplorerCombo.SelectAll();
+        }
+
+        private void SubExplorerCombo_MouseUp(object sender, MouseEventArgs e) {
+            this.SubExplorerCombo.SelectAll();
+        }
+
+        private void OpenExplorerSubButton_Click(object sender, EventArgs e) {
+            Process.Start(this.SubExplorerCombo.Text);
+        }
+
+        private void OpenExplorerButton_Click(object sender, EventArgs e) {
+            Process.Start(this.MainExplorerCombo.Text);
+            //ShellObject so = ShellObject.FromParsingName("::{031E4825-7B94-4DC3-B131-E946B44C8DD5}\\Git.library-ms");
+            //this.MainExplorer.Navigate(so);
+
+            //SetHistory();
         }
     }
 }

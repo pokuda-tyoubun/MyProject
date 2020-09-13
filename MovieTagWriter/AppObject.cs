@@ -131,10 +131,5 @@ namespace MovieTagWriter {
         }
 
 
-        public static void ReportProgress(BackgroundWorker bw, int molecule, int denominator, string msg) {
-            //プログレスバー更新
-            int p = (int)(((double)molecule / (double)denominator) * 100);
-            bw.ReportProgress(p, molecule.ToString() + "/" + denominator.ToString() + " " + msg);
-        }
     }
 }
