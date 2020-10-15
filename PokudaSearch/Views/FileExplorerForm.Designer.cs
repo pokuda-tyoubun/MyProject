@@ -65,10 +65,9 @@
             this.MainExplorer.TabStop = false;
             this.MainExplorer.NavigationComplete += new System.EventHandler<Microsoft.WindowsAPICodePack.Controls.NavigationCompleteEventArgs>(this.MainExplorer_NavigationComplete);
             this.MainExplorer.LocationChanged += new System.EventHandler(this.MainExplorer_LocationChanged);
-            this.MainExplorer.Click += new System.EventHandler(this.MainExplorer_Click);
             this.MainExplorer.HelpRequested += new System.Windows.Forms.HelpEventHandler(this.MainExplorer_HelpRequested);
             this.MainExplorer.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainExplorer_KeyDown);
-            this.MainExplorer.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MainExplorer_MouseClick);
+            this.MainExplorer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainExplorer_MouseDown);
             this.MainExplorer.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MainExplorer_MouseUp);
             this.MainExplorer.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.MainExplorer_PreviewKeyDown);
             // 
@@ -135,7 +134,6 @@
             this.RightTopPanel.Name = "RightTopPanel";
             this.RightTopPanel.Size = new System.Drawing.Size(436, 30);
             this.RightTopPanel.TabIndex = 5;
-            this.RightTopPanel.SizeChanged += new System.EventHandler(this.RightTopPanel_SizeChanged);
             // 
             // OpenExplorerSubButton
             // 
@@ -311,13 +309,11 @@
             this.Controls.Add(this.collapsibleSplitter3);
             this.Controls.Add(this.RightPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.KeyPreview = true;
             this.Name = "FileExplorerForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FileExplorerForm_FormClosed);
             this.Load += new System.EventHandler(this.FileExplorerForm_Load);
             this.Shown += new System.EventHandler(this.FileExplorerForm_Shown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FileExplorerForm_KeyDown);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FileExplorerForm_MouseDown);
             this.MainPanel.ResumeLayout(false);
             this.RightPanel.ResumeLayout(false);
             this.RightMainPanel.ResumeLayout(false);

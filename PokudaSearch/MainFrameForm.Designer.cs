@@ -40,6 +40,7 @@
             this.IndexBuildFormButton = new C1.Win.C1Ribbon.RibbonButton();
             this.TagGroup = new C1.Win.C1Ribbon.RibbonGroup();
             this.TagEditFormButton = new C1.Win.C1Ribbon.RibbonButton();
+            this.TagWriterFormButton = new C1.Win.C1Ribbon.RibbonButton();
             this.AnalyzeGroup = new C1.Win.C1Ribbon.RibbonGroup();
             this.ribbonButton1 = new C1.Win.C1Ribbon.RibbonButton();
             this.SandBoxGroup = new C1.Win.C1Ribbon.RibbonGroup();
@@ -49,7 +50,6 @@
             this.VerifyLicenseButton = new C1.Win.C1Ribbon.RibbonButton();
             this.HelpButton1 = new C1.Win.C1Ribbon.RibbonButton();
             this.ribbonTopToolBar1 = new C1.Win.C1Ribbon.RibbonTopToolBar();
-            this.TagWriterFormButton = new C1.Win.C1Ribbon.RibbonButton();
             this.MainStatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainRibbon)).BeginInit();
             this.SuspendLayout();
@@ -177,6 +177,13 @@
             this.TagEditFormButton.Text = "タグ編集単体";
             this.TagEditFormButton.Click += new System.EventHandler(this.TagEditFormButton_Click);
             // 
+            // TagWriterFormButton
+            // 
+            this.TagWriterFormButton.Name = "TagWriterFormButton";
+            this.TagWriterFormButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("TagWriterFormButton.SmallImage")));
+            this.TagWriterFormButton.Text = "タグ付け";
+            this.TagWriterFormButton.Click += new System.EventHandler(this.TagWriterFormButton_Click);
+            // 
             // AnalyzeGroup
             // 
             this.AnalyzeGroup.Items.Add(this.ribbonButton1);
@@ -233,19 +240,12 @@
             this.HelpButton1.LargeImage = ((System.Drawing.Image)(resources.GetObject("HelpButton1.LargeImage")));
             this.HelpButton1.Name = "HelpButton1";
             this.HelpButton1.SmallImage = ((System.Drawing.Image)(resources.GetObject("HelpButton1.SmallImage")));
-            this.HelpButton1.Text = "ヘルプサイト";
+            this.HelpButton1.Text = "ヘルプ";
             this.HelpButton1.Click += new System.EventHandler(this.HelpButton1_Click);
             // 
             // ribbonTopToolBar1
             // 
             this.ribbonTopToolBar1.Name = "ribbonTopToolBar1";
-            // 
-            // TagWriterFormButton
-            // 
-            this.TagWriterFormButton.Name = "TagWriterFormButton";
-            this.TagWriterFormButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("TagWriterFormButton.SmallImage")));
-            this.TagWriterFormButton.Text = "タグ付け";
-            this.TagWriterFormButton.Click += new System.EventHandler(this.TagWriterFormButton_Click);
             // 
             // MainFrameForm
             // 

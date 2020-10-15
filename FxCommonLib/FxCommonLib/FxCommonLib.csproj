@@ -351,6 +351,7 @@
     <Compile Include="Utils\Tree\TreeElementKind.cs" />
     <Compile Include="Utils\Tree\TreeElementVisitor.cs" />
     <Compile Include="Utils\ValidateUtil.cs" />
+    <Compile Include="Win32API\Macros.cs" />
     <Compile Include="Win32API\Shell32.cs" />
     <Compile Include="Win32API\User32.cs" />
   </ItemGroup>

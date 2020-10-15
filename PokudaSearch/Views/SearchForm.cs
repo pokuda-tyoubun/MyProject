@@ -477,6 +477,12 @@ namespace PokudaSearch.Views {
                            extension.ToLower() == ".doc") {
                     string tmpPath = SaveDocToPDF(fullPath);
                     fullPath = tmpPath;
+                } else if (extension.ToLower() == ".mp4" ||
+                           extension.ToLower() == ".wmv" ||
+                           extension.ToLower() == ".avi" ||
+                           extension.ToLower() == ".mov" ||
+                           extension.ToLower() == ".mkv") {
+                    Process.Start(fullPath);
                 }
                 AppObject.CefSharpPanel.Browser.Load(fullPath);
 
@@ -1170,6 +1176,15 @@ namespace PokudaSearch.Views {
                         } else if (extension.ToLower() == ".docx" ||
                                    extension.ToLower() == ".doc") {
 
+                            this.PreviewWarnLabel.Visible = true;
+                            this.ShowPreviewButton.Visible = true;
+                            string tmpPath = SaveToThumbnailBitmap(fullPath);
+                            fullPath = tmpPath;
+                        } else if (extension.ToLower() == ".mp4" ||
+                                   extension.ToLower() == ".wmv" ||
+                                   extension.ToLower() == ".avi" ||
+                                   extension.ToLower() == ".mov" ||
+                                   extension.ToLower() == ".mkv") {
                             this.PreviewWarnLabel.Visible = true;
                             this.ShowPreviewButton.Visible = true;
                             string tmpPath = SaveToThumbnailBitmap(fullPath);

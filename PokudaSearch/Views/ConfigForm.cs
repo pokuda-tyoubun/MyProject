@@ -1,6 +1,7 @@
 ﻿using C1.Win.C1Input;
 using FxCommonLib.Consts;
 using FxCommonLib.Utils;
+using FxCommonLib.Win32API;
 using Microsoft.WindowsAPICodePack.Controls;
 using Microsoft.WindowsAPICodePack.Controls.WindowsForms;
 using Microsoft.WindowsAPICodePack.Shell;
@@ -8,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -156,6 +158,16 @@ namespace PokudaSearch.Views {
  
             // オブジェクトを破棄する
             ofDialog.Dispose();
+        }
+
+        //TODO デバッグ検証用　後で削除
+        protected override void WndProc(ref Message m) {
+            base.WndProc(ref m);
+
+            Debug.Print("Msg=" + m.Msg);
+            Debug.Print("WParam=" + m.WParam.ToInt32());
+            Debug.Print("LParam=" + m.LParam.ToInt32());
+            Debug.Print("--GET_XBUTTON_WPARAM=" + Macros.GET_XBUTTON_WPARAM((uint)m.WParam.ToInt32()));
         }
     }
 }

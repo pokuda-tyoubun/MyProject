@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FxCommonLib.Utils {
+    /// <summary>
+    /// タグ情報構造体
+    /// </summary>
     public struct TagInfo {
         public string ContentId;
         public string Title;
@@ -21,8 +24,18 @@ namespace FxCommonLib.Utils {
         public string Comment;
         public string ImageUrl;
         public string PageUrl;
+        public string ReleaseDate;
     }
+    /// <summary>
+    /// DMM Web API ユーティリティ
+    /// </summary>
     public class DMMWebAPIUtil {
+        /// <summary>
+        /// 商品情報リストを取得
+        /// </summary>
+        /// <param name="site"></param>
+        /// <param name="keyword"></param>
+        /// <returns></returns>
         public List<TagInfo> GetItemList(string site, string keyword) {
             List<TagInfo> ret = new List<TagInfo>();
             WebResponse response = null;
@@ -58,6 +71,12 @@ namespace FxCommonLib.Utils {
 
                         var title = tmp.SelectToken("$.title");
                         tag.Title = title.ToString();
+
+                        var date = tmp.SelectToken("$.date");
+                        var releaseDate = DateTime.Parse("1900/01/01");
+                        if (DateTime.TryParse(date.ToString(), out releaseDate)) {
+                            tag.ReleaseDate = releaseDate.ToString("yyyy/MM/dd");
+                        }
 
                         var actressTokens = tmp.SelectTokens("$.iteminfo.actress");
                         string performers = "";

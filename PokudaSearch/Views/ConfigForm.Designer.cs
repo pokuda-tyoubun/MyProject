@@ -26,6 +26,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigForm));
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.MaxMoreLikeThisResultLabel = new System.Windows.Forms.Label();
+            this.MaxMoreLikeThisResultNum = new C1.Win.C1Input.C1NumericEdit();
             this.ShowSuggestionCheck = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -46,13 +48,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.FileSizeLimitNum = new C1.Win.C1Input.C1NumericEdit();
             this.FileSizeLimitLabel = new System.Windows.Forms.Label();
-            this.MaxMoreLikeThisResultLabel = new System.Windows.Forms.Label();
-            this.MaxMoreLikeThisResultNum = new C1.Win.C1Input.C1NumericEdit();
             this.MainPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MaxMoreLikeThisResultNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MaxSearchResultNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BufferSizeLimitNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FileSizeLimitNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MaxMoreLikeThisResultNum)).BeginInit();
             this.SuspendLayout();
             // 
             // MainPanel
@@ -84,6 +84,38 @@
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(580, 338);
             this.MainPanel.TabIndex = 0;
+            // 
+            // MaxMoreLikeThisResultLabel
+            // 
+            this.MaxMoreLikeThisResultLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.MaxMoreLikeThisResultLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MaxMoreLikeThisResultLabel.Font = new System.Drawing.Font("MS UI Gothic", 9F);
+            this.MaxMoreLikeThisResultLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.MaxMoreLikeThisResultLabel.Location = new System.Drawing.Point(14, 54);
+            this.MaxMoreLikeThisResultLabel.Name = "MaxMoreLikeThisResultLabel";
+            this.MaxMoreLikeThisResultLabel.Size = new System.Drawing.Size(239, 17);
+            this.MaxMoreLikeThisResultLabel.TabIndex = 20;
+            this.MaxMoreLikeThisResultLabel.Text = "類似検索結果最大件数";
+            this.MaxMoreLikeThisResultLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // MaxMoreLikeThisResultNum
+            // 
+            this.MaxMoreLikeThisResultNum.ErrorInfo.ErrorAction = C1.Win.C1Input.ErrorActionEnum.ResetValue;
+            this.MaxMoreLikeThisResultNum.Font = new System.Drawing.Font("MS UI Gothic", 9F);
+            this.MaxMoreLikeThisResultNum.ImagePadding = new System.Windows.Forms.Padding(0);
+            this.MaxMoreLikeThisResultNum.Location = new System.Drawing.Point(257, 54);
+            this.MaxMoreLikeThisResultNum.Name = "MaxMoreLikeThisResultNum";
+            this.MaxMoreLikeThisResultNum.ShowFocusRectangle = true;
+            this.MaxMoreLikeThisResultNum.Size = new System.Drawing.Size(100, 17);
+            this.MaxMoreLikeThisResultNum.TabIndex = 21;
+            this.MaxMoreLikeThisResultNum.Tag = null;
+            this.MaxMoreLikeThisResultNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.MaxMoreLikeThisResultNum.Value = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.MaxMoreLikeThisResultNum.VisibleButtons = C1.Win.C1Input.DropDownControlButtonFlags.UpDown;
             // 
             // ShowSuggestionCheck
             // 
@@ -344,38 +376,6 @@
             this.FileSizeLimitLabel.Text = "最大ファイルサイズ";
             this.FileSizeLimitLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // MaxMoreLikeThisResultLabel
-            // 
-            this.MaxMoreLikeThisResultLabel.BackColor = System.Drawing.SystemColors.Control;
-            this.MaxMoreLikeThisResultLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.MaxMoreLikeThisResultLabel.Font = new System.Drawing.Font("MS UI Gothic", 9F);
-            this.MaxMoreLikeThisResultLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.MaxMoreLikeThisResultLabel.Location = new System.Drawing.Point(14, 54);
-            this.MaxMoreLikeThisResultLabel.Name = "MaxMoreLikeThisResultLabel";
-            this.MaxMoreLikeThisResultLabel.Size = new System.Drawing.Size(239, 17);
-            this.MaxMoreLikeThisResultLabel.TabIndex = 20;
-            this.MaxMoreLikeThisResultLabel.Text = "類似検索結果最大件数";
-            this.MaxMoreLikeThisResultLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // MaxMoreLikeThisResultNum
-            // 
-            this.MaxMoreLikeThisResultNum.ErrorInfo.ErrorAction = C1.Win.C1Input.ErrorActionEnum.ResetValue;
-            this.MaxMoreLikeThisResultNum.Font = new System.Drawing.Font("MS UI Gothic", 9F);
-            this.MaxMoreLikeThisResultNum.ImagePadding = new System.Windows.Forms.Padding(0);
-            this.MaxMoreLikeThisResultNum.Location = new System.Drawing.Point(257, 54);
-            this.MaxMoreLikeThisResultNum.Name = "MaxMoreLikeThisResultNum";
-            this.MaxMoreLikeThisResultNum.ShowFocusRectangle = true;
-            this.MaxMoreLikeThisResultNum.Size = new System.Drawing.Size(100, 17);
-            this.MaxMoreLikeThisResultNum.TabIndex = 21;
-            this.MaxMoreLikeThisResultNum.Tag = null;
-            this.MaxMoreLikeThisResultNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.MaxMoreLikeThisResultNum.Value = new decimal(new int[] {
-            200,
-            0,
-            0,
-            0});
-            this.MaxMoreLikeThisResultNum.VisibleButtons = C1.Win.C1Input.DropDownControlButtonFlags.UpDown;
-            // 
             // ConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -393,10 +393,10 @@
             this.Load += new System.EventHandler(this.ConfigForm_Load);
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MaxMoreLikeThisResultNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MaxSearchResultNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BufferSizeLimitNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FileSizeLimitNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MaxMoreLikeThisResultNum)).EndInit();
             this.ResumeLayout(false);
 
         }

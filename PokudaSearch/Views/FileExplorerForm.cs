@@ -3,6 +3,7 @@ using com.sun.corba.se.pept.transport;
 using com.sun.org.apache.xerces.@internal.util;
 using FlexLucene.Store;
 using FxCommonLib.Consts;
+using FxCommonLib.Win32API;
 using Microsoft.WindowsAPICodePack.Controls;
 using Microsoft.WindowsAPICodePack.Controls.WindowsForms;
 using Microsoft.WindowsAPICodePack.Shell;
@@ -245,27 +246,6 @@ namespace PokudaSearch.Views {
             MainFrameForm.FileExplorerForm = null;
         }
 
-        /// <summary>
-        /// MainToolStripサイズ変更
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MainToolStrip_SizeChanged(object sender, EventArgs e) {
-            //this.MainPathCombo.Width = this.MainToolStrip.Width - 80;
-        }
-        /// <summary>
-        /// SubToolStripサイズ変更
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SubToolStrip_SizeChanged(object sender, EventArgs e) {
-        }
-        private void RightTopPanel_SizeChanged(object sender, EventArgs e) {
-        }
-        private void SubToolStrip_Resize(object sender, EventArgs e) {
-            //this.SubPathCombo.Width = this.SubToolStrip.Width - 80;
-        }
-
         private void MainExplorer_HelpRequested(object sender, HelpEventArgs hlpevent) {
             Process.Start(Properties.Settings.Default.HelpUrl);
         }
@@ -319,15 +299,6 @@ namespace PokudaSearch.Views {
             this.MainExplorer.NavigateLogLocation(NavigationLogDirection.Forward);
         }
 
-        private void FileExplorerForm_Layout(object sender, LayoutEventArgs e) {
-        }
-
-        private void FileExplorerForm_Resize(object sender, EventArgs e) {
-        }
-
-        private void FileExplorerForm_SizeChanged(object sender, EventArgs e) {
-        }
-
         private void UpwardMainExplorerButton_Click(object sender, EventArgs e) {
             UpwardNavigation(this.MainExplorer);
         }
@@ -364,12 +335,6 @@ namespace PokudaSearch.Views {
             }
         }
 
-        private void FileExplorerForm_MouseDown(object sender, MouseEventArgs e) {
-            if (e.Button == MouseButtons.Middle) {
-                Debug.Print("MouseButtons.Middle");
-            }
-        }
-
         /// <summary>
         /// NOTE:発火しない。
         /// </summary>
@@ -394,10 +359,6 @@ namespace PokudaSearch.Views {
             if (e.Button == MouseButtons.Middle) {
                 Debug.Print("MouseButtons.Middle");
             }
-        }
-
-        private void MainExplorer_Click(object sender, EventArgs e) {
-            Debug.Print("MouseButtons.Middle");
         }
 
         private void FileExplorerForm_Load(object sender, EventArgs e) {
@@ -448,5 +409,41 @@ namespace PokudaSearch.Views {
 
             //SetHistory();
         }
+
+
+        //HACK ドキュメントの定義と違うのは何故？
+        //ドキュメント上
+        //public const int WM_XBUTTONDOWN = 0x020B;
+        //実際(ドキュメント上だとWM_APPCOMMAND)
+        //public const int WM_XBUTTONDOWN = 0x0319;
+
+        protected override void WndProc(ref Message m) {
+            base.WndProc(ref m);
+
+            Debug.Print("Msg=" + m.Msg);
+            Debug.Print("WParam=" + m.WParam.ToInt32());
+            Debug.Print("LParam=" + m.LParam.ToInt32());
+            Debug.Print("GET_XBUTTON_WPARAM=" + Macros.GET_XBUTTON_WPARAM((uint)m.WParam.ToInt32()));
+            //NOTE:WM_XBUTTONDOWNが何故かキャッチできず、WM_PARENTNOTIFYだと上手くいった。
+            if (m.Msg == Macros.WM_PARENTNOTIFY) {
+                if (Macros.GET_XBUTTON_WPARAM((uint)m.WParam.ToInt32()) == Macros.XBUTTONS.XBUTTON1) {
+                    if (MainExplorer.ClientRectangle.Contains(MainExplorer.PointToClient(Cursor.Position))) {
+                        this.MainExplorer.NavigateLogLocation(NavigationLogDirection.Backward);
+                    }
+                    if (SubExplorer.ClientRectangle.Contains(SubExplorer.PointToClient(Cursor.Position))) {
+                        this.SubExplorer.NavigateLogLocation(NavigationLogDirection.Backward);
+                    }
+                }
+                if (Macros.GET_XBUTTON_WPARAM((uint)m.WParam.ToInt32()) == Macros.XBUTTONS.XBUTTON2) {
+                    if (MainExplorer.ClientRectangle.Contains(MainExplorer.PointToClient(Cursor.Position))) {
+                        this.MainExplorer.NavigateLogLocation(NavigationLogDirection.Forward);
+                    }
+                    if (SubExplorer.ClientRectangle.Contains(SubExplorer.PointToClient(Cursor.Position))) {
+                        this.SubExplorer.NavigateLogLocation(NavigationLogDirection.Forward);
+                    }
+                }
+            }
+        }
+
     }
 }
