@@ -27,6 +27,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.PathText = new System.Windows.Forms.TextBox();
             this.LeftPanel = new System.Windows.Forms.Panel();
+            this.ReleaseDate = new C1.Win.C1Input.C1DateEdit();
+            this.label9 = new System.Windows.Forms.Label();
             this.FanzaCreditLabel = new System.Windows.Forms.LinkLabel();
             this.DMMCreditLabel = new System.Windows.Forms.LinkLabel();
             this.ItemLinkLabel = new System.Windows.Forms.LinkLabel();
@@ -63,9 +65,9 @@
             this.WriteExcelButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.PokudaSearchLabel = new System.Windows.Forms.LinkLabel();
             this.HelpButton = new System.Windows.Forms.Button();
             this.TargetGrid = new FxCommonLib.Controls.FlexGridEx(this.components);
-            this.ErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.TargetContext = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.OpenFileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenParentMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,15 +75,17 @@
             this.CopyMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.ShowPropertiesMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.ErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.collapsibleSplitter1 = new NJFLib.Controls.CollapsibleSplitter();
             this.LeftPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ReleaseDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PackagePicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultNavi)).BeginInit();
             this.ResultNavi.SuspendLayout();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TargetGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
             this.TargetContext.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // PathText
@@ -93,6 +97,8 @@
             // 
             // LeftPanel
             // 
+            this.LeftPanel.Controls.Add(this.ReleaseDate);
+            this.LeftPanel.Controls.Add(this.label9);
             this.LeftPanel.Controls.Add(this.FanzaCreditLabel);
             this.LeftPanel.Controls.Add(this.DMMCreditLabel);
             this.LeftPanel.Controls.Add(this.ItemLinkLabel);
@@ -123,6 +129,31 @@
             this.LeftPanel.Size = new System.Drawing.Size(257, 749);
             this.LeftPanel.TabIndex = 0;
             // 
+            // ReleaseDate
+            // 
+            this.ReleaseDate.AllowSpinLoop = false;
+            // 
+            // 
+            // 
+            this.ReleaseDate.Calendar.DayNameLength = 1;
+            this.ReleaseDate.CustomFormat = "yyyy/MM/dd";
+            this.ReleaseDate.FormatType = C1.Win.C1Input.FormatTypeEnum.CustomFormat;
+            this.ReleaseDate.ImagePadding = new System.Windows.Forms.Padding(0);
+            this.ReleaseDate.Location = new System.Drawing.Point(6, 209);
+            this.ReleaseDate.Name = "ReleaseDate";
+            this.ReleaseDate.Size = new System.Drawing.Size(172, 17);
+            this.ReleaseDate.TabIndex = 35;
+            this.ReleaseDate.Tag = null;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(4, 194);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(47, 12);
+            this.label9.TabIndex = 34;
+            this.label9.Text = "発売日：";
+            // 
             // FanzaCreditLabel
             // 
             this.FanzaCreditLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -150,7 +181,7 @@
             // ItemLinkLabel
             // 
             this.ItemLinkLabel.AutoSize = true;
-            this.ItemLinkLabel.Location = new System.Drawing.Point(5, 489);
+            this.ItemLinkLabel.Location = new System.Drawing.Point(5, 526);
             this.ItemLinkLabel.Name = "ItemLinkLabel";
             this.ItemLinkLabel.Size = new System.Drawing.Size(93, 12);
             this.ItemLinkLabel.TabIndex = 19;
@@ -195,7 +226,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(4, 343);
+            this.label7.Location = new System.Drawing.Point(4, 380);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(44, 12);
             this.label7.TabIndex = 17;
@@ -204,7 +235,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(4, 304);
+            this.label6.Location = new System.Drawing.Point(4, 341);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 12);
             this.label6.TabIndex = 15;
@@ -213,7 +244,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(5, 267);
+            this.label5.Location = new System.Drawing.Point(5, 304);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(48, 12);
             this.label5.TabIndex = 13;
@@ -222,7 +253,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(4, 232);
+            this.label4.Location = new System.Drawing.Point(4, 269);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(48, 12);
             this.label4.TabIndex = 11;
@@ -231,7 +262,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(4, 194);
+            this.label3.Location = new System.Drawing.Point(4, 231);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 12);
             this.label3.TabIndex = 9;
@@ -248,7 +279,7 @@
             // 
             // CommentText
             // 
-            this.CommentText.Location = new System.Drawing.Point(6, 358);
+            this.CommentText.Location = new System.Drawing.Point(6, 395);
             this.CommentText.Multiline = true;
             this.CommentText.Name = "CommentText";
             this.CommentText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -257,28 +288,28 @@
             // 
             // DirectorText
             // 
-            this.DirectorText.Location = new System.Drawing.Point(6, 320);
+            this.DirectorText.Location = new System.Drawing.Point(6, 357);
             this.DirectorText.Name = "DirectorText";
             this.DirectorText.Size = new System.Drawing.Size(245, 19);
             this.DirectorText.TabIndex = 16;
             // 
             // MakerText
             // 
-            this.MakerText.Location = new System.Drawing.Point(6, 282);
+            this.MakerText.Location = new System.Drawing.Point(6, 319);
             this.MakerText.Name = "MakerText";
             this.MakerText.Size = new System.Drawing.Size(245, 19);
             this.MakerText.TabIndex = 14;
             // 
             // GenresText
             // 
-            this.GenresText.Location = new System.Drawing.Point(6, 245);
+            this.GenresText.Location = new System.Drawing.Point(6, 282);
             this.GenresText.Name = "GenresText";
             this.GenresText.Size = new System.Drawing.Size(245, 19);
             this.GenresText.TabIndex = 12;
             // 
             // ArtistText
             // 
-            this.ArtistText.Location = new System.Drawing.Point(6, 210);
+            this.ArtistText.Location = new System.Drawing.Point(6, 247);
             this.ArtistText.Name = "ArtistText";
             this.ArtistText.Size = new System.Drawing.Size(245, 19);
             this.ArtistText.TabIndex = 10;
@@ -313,7 +344,7 @@
             // PackagePicture
             // 
             this.PackagePicture.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PackagePicture.Location = new System.Drawing.Point(6, 505);
+            this.PackagePicture.Location = new System.Drawing.Point(6, 542);
             this.PackagePicture.Name = "PackagePicture";
             this.PackagePicture.Size = new System.Drawing.Size(245, 170);
             this.PackagePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -462,6 +493,7 @@
             // 
             // MainPanel
             // 
+            this.MainPanel.Controls.Add(this.PokudaSearchLabel);
             this.MainPanel.Controls.Add(this.HelpButton);
             this.MainPanel.Controls.Add(this.TargetGrid);
             this.MainPanel.Controls.Add(this.ResultNavi);
@@ -470,6 +502,18 @@
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(811, 749);
             this.MainPanel.TabIndex = 128;
+            // 
+            // PokudaSearchLabel
+            // 
+            this.PokudaSearchLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.PokudaSearchLabel.AutoSize = true;
+            this.PokudaSearchLabel.Location = new System.Drawing.Point(618, 6);
+            this.PokudaSearchLabel.Name = "PokudaSearchLabel";
+            this.PokudaSearchLabel.Size = new System.Drawing.Size(156, 12);
+            this.PokudaSearchLabel.TabIndex = 20;
+            this.PokudaSearchLabel.TabStop = true;
+            this.PokudaSearchLabel.Text = "MP4タグ情報検索ツールはこちら";
+            this.PokudaSearchLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.PokudaSearchLabel_LinkClicked);
             // 
             // HelpButton
             // 
@@ -517,10 +561,6 @@
             this.TargetGrid.SelChange += new System.EventHandler(this.TargetGrid_SelChange);
             this.TargetGrid.DoubleClick += new System.EventHandler(this.TargetGrid_DoubleClick);
             // 
-            // ErrorProvider
-            // 
-            this.ErrorProvider.ContainerControl = this;
-            // 
             // TargetContext
             // 
             this.TargetContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -531,45 +571,49 @@
             this.toolStripSeparator7,
             this.ShowPropertiesMenu});
             this.TargetContext.Name = "ResultContext";
-            this.TargetContext.Size = new System.Drawing.Size(181, 126);
+            this.TargetContext.Size = new System.Drawing.Size(166, 104);
             // 
             // OpenFileMenu
             // 
             this.OpenFileMenu.Name = "OpenFileMenu";
-            this.OpenFileMenu.Size = new System.Drawing.Size(180, 22);
+            this.OpenFileMenu.Size = new System.Drawing.Size(165, 22);
             this.OpenFileMenu.Text = "ファイルを開く(&O)";
             this.OpenFileMenu.Click += new System.EventHandler(this.OpenFileMenu_Click);
             // 
             // OpenParentMenu
             // 
             this.OpenParentMenu.Name = "OpenParentMenu";
-            this.OpenParentMenu.Size = new System.Drawing.Size(180, 22);
+            this.OpenParentMenu.Size = new System.Drawing.Size(165, 22);
             this.OpenParentMenu.Text = "親フォルダを開く(&P)";
             this.OpenParentMenu.Click += new System.EventHandler(this.OpenParentMenu_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(162, 6);
             // 
             // CopyMenu
             // 
             this.CopyMenu.Name = "CopyMenu";
-            this.CopyMenu.Size = new System.Drawing.Size(180, 22);
+            this.CopyMenu.Size = new System.Drawing.Size(165, 22);
             this.CopyMenu.Text = "コピー(&C) Ctrl+C";
             this.CopyMenu.Click += new System.EventHandler(this.CopyMenu_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(162, 6);
             // 
             // ShowPropertiesMenu
             // 
             this.ShowPropertiesMenu.Name = "ShowPropertiesMenu";
-            this.ShowPropertiesMenu.Size = new System.Drawing.Size(180, 22);
+            this.ShowPropertiesMenu.Size = new System.Drawing.Size(165, 22);
             this.ShowPropertiesMenu.Text = "プロパティ(&R)";
             this.ShowPropertiesMenu.Click += new System.EventHandler(this.ShowPropertiesMenu_Click);
+            // 
+            // ErrorProvider
+            // 
+            this.ErrorProvider.ContainerControl = this;
             // 
             // collapsibleSplitter1
             // 
@@ -599,6 +643,7 @@
             this.Text = "MP4TagWriter";
             this.LeftPanel.ResumeLayout(false);
             this.LeftPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ReleaseDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PackagePicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultNavi)).EndInit();
             this.ResultNavi.ResumeLayout(false);
@@ -606,8 +651,8 @@
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TargetGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
             this.TargetContext.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -663,6 +708,9 @@
         private System.Windows.Forms.ToolStripMenuItem CopyMenu;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem ShowPropertiesMenu;
+        private System.Windows.Forms.Label label9;
+        private C1.Win.C1Input.C1DateEdit ReleaseDate;
+        private System.Windows.Forms.LinkLabel PokudaSearchLabel;
     }
 }
 

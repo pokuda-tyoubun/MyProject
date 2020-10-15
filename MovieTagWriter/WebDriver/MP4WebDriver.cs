@@ -18,7 +18,13 @@ namespace MovieTagWriter.WebDriver {
         public MP4WebDriver() {
         }
 
-
+        /// <summary>
+        /// プログレスバー更新
+        /// </summary>
+        /// <param name="bw"></param>
+        /// <param name="molecule"></param>
+        /// <param name="denominator"></param>
+        /// <param name="msg"></param>
         public void ReportProgress(BackgroundWorker bw, int molecule, int denominator, string msg) {
             //プログレスバー更新
             int p = (int)(((double)molecule / (double)denominator) * 100);
@@ -27,6 +33,12 @@ namespace MovieTagWriter.WebDriver {
             TaskbarManager.Instance.SetProgressValue(molecule, denominator);
         }
 
+        /// <summary>
+        /// タグ情報取得
+        /// </summary>
+        /// <param name="targetDir"></param>
+        /// <param name="bw"></param>
+        /// <returns></returns>
         public List<KeyValuePair<FileInfo, TagInfo>> GetTagInfo(string targetDir, BackgroundWorker bw) {
             int targetCount = 0;
             int finishedCount = 0;
@@ -38,7 +50,11 @@ namespace MovieTagWriter.WebDriver {
                 var fileList = FileUtil.GetAllFileInfo(targetDir);
                 var targetList = new List<FileInfo>();
                 foreach (var fi in fileList) {
-                    if (fi.Extension.ToLower() == ".mp4") {
+                    if (fi.Extension.ToLower() == ".mp4" ||
+                        fi.Extension.ToLower() == ".wmv" ||
+                        fi.Extension.ToLower() == ".avi" ||
+                        fi.Extension.ToLower() == ".mov" ||
+                        fi.Extension.ToLower() == ".mkv") {
                         targetList.Add(fi);
                     }
                 }
@@ -74,6 +90,11 @@ namespace MovieTagWriter.WebDriver {
             return resultList;
         }
 
+        /// <summary>
+        /// DMMからタグ情報を取得
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         public TagInfo GetTagInfoFromDMM(FileInfo file) {
             var ret = new TagInfo();
             string fileName = file.Name.Replace(file.Extension, "");

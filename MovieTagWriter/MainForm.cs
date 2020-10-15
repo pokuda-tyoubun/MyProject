@@ -22,7 +22,9 @@ namespace MovieTagWriter {
     public partial class MainForm : Form {
 
         #region Constants
+        /// <summary>行ヘッダー数</summary>
         private const int RowHeaderCount = 1;
+        /// <summary>書込みステータス</summary>
         private enum StatusEnum : int {
             [EnumLabel("未取得")]
             None = 1,
@@ -55,6 +57,8 @@ namespace MovieTagWriter {
             UpdateDate,
             [EnumLabel("タイトル")]
             Title,
+            [EnumLabel("発売日")]
+            ReleaseDate,
             [EnumLabel("アーティスト")]
             Artist,
             [EnumLabel("ジャンル")]
@@ -79,6 +83,7 @@ namespace MovieTagWriter {
         private int _selectedRow = 0;
         #endregion MemberVariables
 
+        #region Constractors
         public MainForm() {
             InitializeComponent();
 
@@ -94,6 +99,233 @@ namespace MovieTagWriter {
             this.PathText.Text = @"C:\Users\078134995";
 #endif
         }
+        #endregion Constractors
+
+        #region PublicMethods
+        public void ReportProgress(BackgroundWorker bw, int molecule, int denominator, string msg) {
+            //プログレスバー更新
+            int p = (int)(((double)molecule / (double)denominator) * 100);
+            bw.ReportProgress(p, molecule.ToString() + "/" + denominator.ToString() + " " + msg);
+
+            TaskbarManager.Instance.SetProgressValue(molecule, denominator);
+        }
+        #endregion PublicMethods
+
+        #region EventHandlers
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SearchMovieButton_Click(object sender, EventArgs e) {
+            string targetDir = StringUtil.NullToBlank(this.PathText.Text);
+            if (targetDir == "" || !new DirectoryInfo(targetDir).Exists) {
+                MessageBox.Show(AppObject.GetMsg(AppObject.Msg.ERR_DIR_NOT_FOUND),
+                    AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            this.Cursor = Cursors.WaitCursor;
+            try {
+                Search(targetDir);
+            } finally {
+                this.Cursor = Cursors.Default;
+            }
+        }
+
+        /// <summary>
+        /// タグ書込み
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void WriteTagButton_Click(object sender, EventArgs e) {
+            this.Cursor = Cursors.WaitCursor;
+
+            TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
+            ProgressDialog pd = new ProgressDialog("書込み中...", 
+                new DoWorkEventHandler(WriteTag_DoWork), this.TargetGrid);
+
+            DialogResult result;
+            try {
+                result = pd.ShowDialog(this);
+                if (result == DialogResult.Abort) {
+                    //失敗
+                    Exception ex = pd.Error;
+                    MessageBox.Show(ex.Message, AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            } finally {
+                TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
+                pd.Dispose();
+                this.Cursor = Cursors.Default;
+            }
+        }
+
+        /// <summary>
+        /// タグ書込み
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void WriteTag_DoWork(object sender, DoWorkEventArgs e) {
+            BackgroundWorker bw = (BackgroundWorker)sender;
+            var grid = (FlexGridEx)e.Argument;
+            var rowList = new List<Row>();
+
+            foreach (Row r in grid.Rows) {
+                if (r.Index >= RowHeaderCount) {
+                    if (bool.Parse(r[(int)ColIndex.TargetCheck].ToString())) {
+                        rowList.Add(r);
+                    }
+                }
+            }
+
+            int molecule = 0;
+            int denominator = rowList.Count;
+            ReportProgress(bw, molecule, denominator, "タグ情報書込み中...");
+            foreach (Row r in rowList) {
+                try {
+                    r[(int)ColIndex.Status] = EnumUtil.GetLabel(StatusEnum.Writting);
+                    //タグ付け
+                    SaveTag(r);
+                    molecule++;
+                    r[(int)ColIndex.Status] = EnumUtil.GetLabel(StatusEnum.Finished);
+                } catch (Exception ex) {
+                    r[(int)ColIndex.Status] = EnumUtil.GetLabel(StatusEnum.Failed);
+                    string fileName = StringUtil.NullToBlank(r[(int)ColIndex.FileName]);
+                    string msg = ex.Message + Environment.NewLine +
+                        "エラーが発生したため[" + fileName + "]のタグ付けをスキップします。";
+                    MessageBox.Show(msg, AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                if (bw.CancellationPending) {
+                    return;
+                }
+
+                ReportProgress(bw, molecule, denominator, "タグ情報書込み中...");
+            }
+            ReportProgress(bw, molecule, denominator, "完了");
+        }
+        /// <summary>
+        /// 参照ボタン
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RefButton_Click(object sender, EventArgs e) {
+            string selectedPath = FileUtil.GetSelectedDirectory("検索対象フォルダ選択", this.PathText.Text);
+            if (!String.IsNullOrEmpty(selectedPath)) {
+                this.PathText.Text = selectedPath;
+            }
+        }
+
+        /// <summary>
+        /// グリッドフィルタリング
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FilterGridButton_Click(object sender, EventArgs e) {
+            AppObject.FilterHelper.SetGridFilter(this.Cursor, this.TargetGrid, this.SearchGridText.Text, 
+                AppObject.GetMsg(AppObject.Msg.ACT_FILTER));
+        }
+
+        /// <summary>
+        /// フィルタリングクリア
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClearFilterButton_Click(object sender, EventArgs e) {
+            this.SearchGridText.Text = "";
+            AppObject.FilterHelper.SetGridFilter(this.Cursor, this.TargetGrid, this.SearchGridText.Text, 
+                AppObject.GetMsg(AppObject.Msg.ACT_RESET_FILTER));
+        }
+        /// <summary>
+        /// Excel抽出
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void WriteExcelButton_Click(object sender, EventArgs e) {
+            ProgressDialog pd = new ProgressDialog(AppObject.GetMsg(AppObject.Msg.ACT_EXTRACT),
+                new DoWorkEventHandler(Extract2Excel_DoWork), 0);
+
+            DialogResult result;
+            this.Cursor = Cursors.WaitCursor;
+            try {
+                result = pd.ShowDialog(this);
+                if (result == DialogResult.Abort) {
+                    //失敗
+                    Exception ex = pd.Error;
+                    MessageBox.Show(ex.Message, AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            } finally {
+                pd.Dispose();
+                this.Cursor = Cursors.Default;
+            }
+        }
+        /// <summary>
+        /// Excel抽出
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Extract2Excel_DoWork(object sender, DoWorkEventArgs e) {
+            BackgroundWorker bw = (BackgroundWorker)sender;
+            ExcelUtil eu = new ExcelUtil();
+            eu.ExtractToExcel(this.TargetGrid, bw, AppObject.MLUtil);
+        }
+        /// <summary>
+        /// 適用ボタンクリック
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ApplyButton_Click(object sender, EventArgs e) {
+            this.TargetGrid[_selectedRow, (int)ColIndex.Title] = this.TitleText.Text;
+            this.TargetGrid[_selectedRow, (int)ColIndex.ReleaseDate] = this.ReleaseDate.Text;
+            this.TargetGrid[_selectedRow, (int)ColIndex.Artist] = this.ArtistText.Text;
+            this.TargetGrid[_selectedRow, (int)ColIndex.Genres] = this.GenresText.Text;
+            this.TargetGrid[_selectedRow, (int)ColIndex.Maker] = this.MakerText.Text;
+            this.TargetGrid[_selectedRow, (int)ColIndex.Director] = this.DirectorText.Text;
+            this.TargetGrid[_selectedRow, (int)ColIndex.Comment] = this.CommentText.Text;
+        }
+        /// <summary>
+        /// タイトルの必須チェック
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TitleText_Validated(object sender, EventArgs e) {
+            if (this.TitleText.Text == "") {
+                ErrorProvider.SetError(this.TitleText, "タイトルは必須です。");
+            } else {
+                ErrorProvider.Clear();
+            }
+        }
+
+        /// <summary>
+        /// 製品紹介ページリンクをクリック
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ItemLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            string url = StringUtil.NullToBlank(this.TargetGrid[_selectedRow, (int)ColIndex.PageUrl]);
+            Process.Start(url);
+        }
+        /// <summary>
+        /// ヘルプボタンクリック
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HelpButton_Click(object sender, EventArgs e) {
+            Process.Start("https://erogrammer.wordpress.com/mp4tagwriter/");
+        }
+        private void DMMCreditLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            Process.Start("https://affiliate.dmm.com/api/");
+        }
+        private void FanzaCreditLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            Process.Start("https://affiliate.dmm.com/api/");
+        }
+        #endregion EventHandlers
+
+        #region PrivateMethods
+        /// <summary>
+        /// 動画ファイル検索＆タグ情報取得
+        /// </summary>
+        /// <param name="targetDir"></param>
         private void Search(string targetDir) {
             this.Cursor = Cursors.WaitCursor;
 
@@ -115,6 +347,11 @@ namespace MovieTagWriter {
             }
 
         }
+        /// <summary>
+        /// 動画ファイル検索＆タグ情報取得
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SearchTarget_DoWork(object sender, DoWorkEventArgs e) {
             BackgroundWorker bw = (BackgroundWorker)sender;
             var targetDir = (string)e.Argument;
@@ -162,6 +399,7 @@ namespace MovieTagWriter {
                     this.TargetGrid[i, (int)ColIndex.UpdateDate] = fi.LastWriteTime;
                     //タグ情報
                     this.TargetGrid[i, (int)ColIndex.Title] = StringUtil.NullToBlank(ti.Title);
+                    this.TargetGrid[i, (int)ColIndex.ReleaseDate] = StringUtil.NullToBlank(ti.ReleaseDate);
                     this.TargetGrid[i, (int)ColIndex.Artist] = StringUtil.NullToBlank(ti.Performers);
                     this.TargetGrid[i, (int)ColIndex.Genres] = StringUtil.NullToBlank(ti.Genres);
                     this.TargetGrid[i, (int)ColIndex.Maker] = StringUtil.NullToBlank(ti.Maker);
@@ -180,89 +418,9 @@ namespace MovieTagWriter {
             }));
         }
 
-        private void SearchMovieButton_Click(object sender, EventArgs e) {
-            string targetDir = StringUtil.NullToBlank(this.PathText.Text);
-            if (targetDir == "" || !new DirectoryInfo(targetDir).Exists) {
-                MessageBox.Show(AppObject.GetMsg(AppObject.Msg.ERR_DIR_NOT_FOUND),
-                    AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            this.Cursor = Cursors.WaitCursor;
-            try {
-                Search(targetDir);
-            } finally {
-                this.Cursor = Cursors.Default;
-            }
-        }
-
-        private void WriteTagButton_Click(object sender, EventArgs e) {
-            this.Cursor = Cursors.WaitCursor;
-
-            ProgressDialog pd = new ProgressDialog("書込み中...", 
-                new DoWorkEventHandler(WriteTag_DoWork), this.TargetGrid);
-
-            DialogResult result;
-            try {
-                result = pd.ShowDialog(this);
-                if (result == DialogResult.Abort) {
-                    //失敗
-                    Exception ex = pd.Error;
-                    MessageBox.Show(ex.Message, AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            } finally {
-                TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
-                pd.Dispose();
-                this.Cursor = Cursors.Default;
-            }
-        }
-
-        private void WriteTag_DoWork(object sender, DoWorkEventArgs e) {
-            BackgroundWorker bw = (BackgroundWorker)sender;
-            var grid = (FlexGridEx)e.Argument;
-            var rowList = new List<Row>();
-
-            foreach (Row r in grid.Rows) {
-                if (r.Index >= RowHeaderCount) {
-                    if (bool.Parse(r[(int)ColIndex.TargetCheck].ToString())) {
-                        rowList.Add(r);
-                    }
-                }
-            }
-
-            int molecule = 0;
-            int denominator = rowList.Count;
-            ReportProgress(bw, molecule, denominator, "タグ情報書込み中...");
-            foreach (Row r in rowList) {
-                try {
-                    r[(int)ColIndex.Status] = EnumUtil.GetLabel(StatusEnum.Writting);
-                    //タグ付け
-                    SaveTag(r);
-                    molecule++;
-                    r[(int)ColIndex.Status] = EnumUtil.GetLabel(StatusEnum.Finished);
-                } catch (Exception ex) {
-                    r[(int)ColIndex.Status] = EnumUtil.GetLabel(StatusEnum.Failed);
-                    string fileName = StringUtil.NullToBlank(r[(int)ColIndex.FileName]);
-                    string msg = ex.Message + Environment.NewLine +
-                        "エラーが発生したため[" + fileName + "]のタグ付けをスキップします。";
-                    MessageBox.Show(msg, AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                if (bw.CancellationPending) {
-                    return;
-                }
-
-                ReportProgress(bw, molecule, denominator, "タグ情報書込み中...");
-            }
-            ReportProgress(bw, molecule, denominator, "完了");
-        }
-        public void ReportProgress(BackgroundWorker bw, int molecule, int denominator, string msg) {
-            //プログレスバー更新
-            int p = (int)(((double)molecule / (double)denominator) * 100);
-            bw.ReportProgress(p, molecule.ToString() + "/" + denominator.ToString() + " " + msg);
-
-            TaskbarManager.Instance.SetProgressValue(molecule, denominator);
-        }
+        /// <summary>
+        /// TargetGridのヘッダ行作成
+        /// </summary>
         private void CreateHeader() {
             //データクリア
             this.TargetGrid.Rows.Count = RowHeaderCount;
@@ -294,6 +452,9 @@ namespace MovieTagWriter {
             this.TargetGrid[0, (int)ColIndex.Title] = EnumUtil.GetLabel(ColIndex.Title);
             this.TargetGrid.Cols[(int)ColIndex.Title].Width = 80;
             this.TargetGrid.Cols[(int)ColIndex.Title].AllowEditing = false;
+            this.TargetGrid[0, (int)ColIndex.ReleaseDate] = EnumUtil.GetLabel(ColIndex.ReleaseDate);
+            this.TargetGrid.Cols[(int)ColIndex.ReleaseDate].Width = 80;
+            this.TargetGrid.Cols[(int)ColIndex.ReleaseDate].AllowEditing = false;
             this.TargetGrid[0, (int)ColIndex.Artist] = EnumUtil.GetLabel(ColIndex.Artist);
             this.TargetGrid.Cols[(int)ColIndex.Artist].Width = 40;
             this.TargetGrid.Cols[(int)ColIndex.Artist].AllowEditing = false;
@@ -321,81 +482,51 @@ namespace MovieTagWriter {
 
             this.TargetGrid.Cols.Frozen = (int)ColIndex.FileName;
         }
+        /// <summary>
+        /// タグ書込み
+        /// </summary>
+        /// <param name="row"></param>
         private void SaveTag(Row row) {
             string path = StringUtil.NullToBlank(row[(int)ColIndex.FullPath]);
-            var tagFile = TagLib.File.Create(path);
+            string extension = StringUtil.NullToBlank(row[(int)ColIndex.Extension]);
             string title =  StringUtil.NullToBlank(row[(int)ColIndex.Title]);
-            tagFile.Tag.Title = title;
-            tagFile.Tag.Performers =  new string[] { StringUtil.NullToBlank(row[(int)ColIndex.Artist]) };
-            tagFile.Tag.Genres =  new string[] { StringUtil.NullToBlank(row[(int)ColIndex.Genres]) };
-            tagFile.Tag.Comment =  StringUtil.NullToBlank(row[(int)ColIndex.Comment]);
-            //画像
-            Image img = this.TargetGrid.GetCellImage(row.Index, (int)ColIndex.Image);
-            var ic = new System.Drawing.ImageConverter();
-            var ba = (byte[])ic.ConvertTo(img, typeof(byte[]));
-            var byteVector = new TagLib.ByteVector(ba);
-            var pic = new TagLib.Picture(byteVector);
-            pic.Type = TagLib.PictureType.FrontCover;
-            pic.Description = "Cover";
-            pic.MimeType = System.Net.Mime.MediaTypeNames.Image.Jpeg;
-            tagFile.Tag.Pictures = new TagLib.IPicture[] { pic };
-            tagFile.Save();
-
+            uint year = 0;
+            DateTime releaseDate = DateTime.Parse("1900/1/1");
+            string date =  StringUtil.NullToBlank(row[(int)ColIndex.ReleaseDate]);
+            if (DateTime.TryParse(date, out releaseDate)) {
+                year = (uint)releaseDate.Year;
+            }
+            if (extension.ToLower() == ".mp4") {
+                //MP4のみ記入
+                var tagFile = TagLib.File.Create(path);
+                tagFile.Tag.Title = title;
+                tagFile.Tag.Year = year;
+                tagFile.Tag.Performers =  new string[] { StringUtil.NullToBlank(row[(int)ColIndex.Artist]) };
+                tagFile.Tag.Genres =  new string[] { StringUtil.NullToBlank(row[(int)ColIndex.Genres]) };
+                tagFile.Tag.Comment =  StringUtil.NullToBlank(row[(int)ColIndex.Comment]);
+                //画像
+                Image img = this.TargetGrid.GetCellImage(row.Index, (int)ColIndex.Image);
+                var ic = new System.Drawing.ImageConverter();
+                var ba = (byte[])ic.ConvertTo(img, typeof(byte[]));
+                var byteVector = new TagLib.ByteVector(ba);
+                var pic = new TagLib.Picture(byteVector);
+                pic.Type = TagLib.PictureType.FrontCover;
+                pic.Description = "Cover";
+                pic.MimeType = System.Net.Mime.MediaTypeNames.Image.Jpeg;
+                tagFile.Tag.Pictures = new TagLib.IPicture[] { pic };
+                tagFile.Save();
+            }
             //リネーム
             var f = new FileInfo(path);
-            f.MoveTo(f.DirectoryName + @"\" + StringUtil.ReplaceWindowsFileNGWord2Wide(title) + ".mp4"); 
+            f.MoveTo(f.DirectoryName + @"\" + StringUtil.ReplaceWindowsFileNGWord2Wide(title) + extension.ToLower()); 
         }
+        #endregion PrivateMethods
 
-        private void RefButton_Click(object sender, EventArgs e) {
-            string selectedPath = FileUtil.GetSelectedDirectory("検索対象フォルダ選択", this.PathText.Text);
-            if (!String.IsNullOrEmpty(selectedPath)) {
-                this.PathText.Text = selectedPath;
-            }
-        }
-
-        private void BreakButton_Click(object sender, EventArgs e) {
-        }
-
-        private void FilterGridButton_Click(object sender, EventArgs e) {
-            AppObject.FilterHelper.SetGridFilter(this.Cursor, this.TargetGrid, this.SearchGridText.Text, 
-                AppObject.GetMsg(AppObject.Msg.ACT_FILTER));
-        }
-
-        private void ClearFilterButton_Click(object sender, EventArgs e) {
-            this.SearchGridText.Text = "";
-            AppObject.FilterHelper.SetGridFilter(this.Cursor, this.TargetGrid, this.SearchGridText.Text, 
-                AppObject.GetMsg(AppObject.Msg.ACT_RESET_FILTER));
-        }
-
-        private void WriteExcelButton_Click(object sender, EventArgs e) {
-            ProgressDialog pd = new ProgressDialog(AppObject.GetMsg(AppObject.Msg.ACT_EXTRACT),
-                new DoWorkEventHandler(Extract2Excel_DoWork), 0);
-
-            DialogResult result;
-            this.Cursor = Cursors.WaitCursor;
-            try {
-                result = pd.ShowDialog(this);
-                if (result == DialogResult.Abort) {
-                    //失敗
-                    Exception ex = pd.Error;
-                    MessageBox.Show(ex.Message, AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            } finally {
-                pd.Dispose();
-                this.Cursor = Cursors.Default;
-            }
-        }
         /// <summary>
-        /// Excel抽出
+        /// TargetGridの選択行変更
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Extract2Excel_DoWork(object sender, DoWorkEventArgs e) {
-            BackgroundWorker bw = (BackgroundWorker)sender;
-            ExcelUtil eu = new ExcelUtil();
-            eu.ExtractToExcel(this.TargetGrid, bw, AppObject.MLUtil);
-        }
-
         private void TargetGrid_SelChange(object sender, EventArgs e) {
             if (this.TargetGrid.Selection.TopRow < this.TargetGrid.Rows.Fixed) {
                 return;
@@ -406,6 +537,8 @@ namespace MovieTagWriter {
                 _selectedRow = row.Index;
                 //選択行のタグ情報を左側の入力域に表示
                 this.TitleText.Text = title;
+                string releaseDate = StringUtil.NullToBlank(row[(int)ColIndex.ReleaseDate]);
+                this.ReleaseDate.Text = releaseDate;
                 string artist = StringUtil.NullToBlank(row[(int)ColIndex.Artist]);
                 this.ArtistText.Text = artist;
                 string genres = StringUtil.NullToBlank(row[(int)ColIndex.Genres]);
@@ -435,40 +568,11 @@ namespace MovieTagWriter {
             }
         }
 
-        private void ApplyButton_Click(object sender, EventArgs e) {
-            this.TargetGrid[_selectedRow, (int)ColIndex.Title] = this.TitleText.Text;
-            this.TargetGrid[_selectedRow, (int)ColIndex.Artist] = this.ArtistText.Text;
-            this.TargetGrid[_selectedRow, (int)ColIndex.Genres] = this.GenresText.Text;
-            this.TargetGrid[_selectedRow, (int)ColIndex.Maker] = this.MakerText.Text;
-            this.TargetGrid[_selectedRow, (int)ColIndex.Director] = this.DirectorText.Text;
-            this.TargetGrid[_selectedRow, (int)ColIndex.Comment] = this.CommentText.Text;
-        }
-
-        private void TitleText_Validated(object sender, EventArgs e) {
-            if (this.TitleText.Text == "") {
-                ErrorProvider.SetError(this.TitleText, "タイトルは必須です。");
-            } else {
-                ErrorProvider.Clear();
-            }
-        }
-
-        private void ItemLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
-            string url = StringUtil.NullToBlank(this.TargetGrid[_selectedRow, (int)ColIndex.PageUrl]);
-            Process.Start(url);
-        }
-
-        private void HelpButton_Click(object sender, EventArgs e) {
-            Process.Start("https://erogrammer.wordpress.com/mp4tagwriter/");
-        }
-
-        private void DMMCreditLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
-            Process.Start("https://affiliate.dmm.com/api/");
-        }
-
-        private void FanzaCreditLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
-            Process.Start("https://affiliate.dmm.com/api/");
-        }
-
+        /// <summary>
+        /// 全選択
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectAllButton_Click(object sender, EventArgs e) {
             foreach (Row r in this.TargetGrid.Rows) {
                 if (r.Index >= RowHeaderCount) {
@@ -479,6 +583,11 @@ namespace MovieTagWriter {
             }
         }
 
+        /// <summary>
+        /// 全解除
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ReleaseAllButton_Click(object sender, EventArgs e) {
             foreach (Row r in this.TargetGrid.Rows) {
                 if (r.Index >= RowHeaderCount) {
@@ -577,5 +686,9 @@ namespace MovieTagWriter {
             }
         }
         #endregion PrivateMethods
+
+        private void PokudaSearchLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            Process.Start("https://pokuda-tyoubun.blogspot.com/p/pokuda-search-pro.html");
+        }
     }
 }
