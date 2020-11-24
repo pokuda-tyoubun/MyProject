@@ -131,6 +131,8 @@ namespace PokudaSearch {
             ERR_DIR_NOT_FOUND,
             [EnumLabel("ライセンスキーが認証されました。ご購入ありがとうございました。")]
             MSG_LICENSE_VERIFIED,
+            [EnumLabel("入力したキーワードが多くの語句に含まれるため検索精度が低い可能性があります。")]
+            WARN_TOO_MANY_CLAUSE,
             [EnumLabel("ファイルが存在しません。")]
             ERR_FILE_NOT_FOUND,
             [EnumLabel("{0}ファイルが存在しません。")]

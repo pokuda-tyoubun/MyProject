@@ -34,7 +34,6 @@ namespace PokudaSearch {
         /// <summary>同一プロセスでファイラをActivate(SubExplorerに表示)</summary>
         private const string SingleFilerSubOption = "/sfs";
 
-
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
         /// </summary>
@@ -85,13 +84,39 @@ namespace PokudaSearch {
 
             //起動時に初期処理
             InitializeAnalyzer();
-            RunIPCServer();
+            if (Properties.Settings.Default.RunIPC) {
+                RunIPCServer();
+            }
+
+            Microsoft.Win32.SystemEvents.PowerModeChanged += 
+                      new Microsoft.Win32.PowerModeChangedEventHandler(SystemEvents_PowerModeChanged);
 
             AppObject.DefaultPath = defaultPath;
             AppObject.BootMode = AppObject.BootModes.Filer;
 
             AppObject.Frame = new MainFrameForm();
             Application.Run(AppObject.Frame);
+        }
+
+        private static void SystemEvents_PowerModeChanged(object sender, Microsoft.Win32.PowerModeChangedEventArgs e) {
+            switch (e.Mode) {
+                case Microsoft.Win32.PowerModes.Suspend:
+                    //IPC停止
+                    if (_serverChannel != null) {
+                        AppObject.Logger.Warn("IPC停止");
+                        _serverChannel.StopListening(null);
+                        _serverChannel = null;
+                        System.GC.Collect();
+                    }
+                    break;
+                case Microsoft.Win32.PowerModes.Resume:
+                    //IPC再開
+                    if (_serverChannel == null) {
+                        AppObject.Logger.Warn("IPC再開");
+                        RunIPCServer();
+                    }
+                    break;
+            }
         }
 
         private static void RunIPCServer() {

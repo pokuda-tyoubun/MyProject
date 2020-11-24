@@ -27,6 +27,7 @@
             this.MainStatusStrip = new System.Windows.Forms.StatusStrip();
             this.ProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.SubIndexedLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.MorphemeLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.MainRibbon = new C1.Win.C1Ribbon.C1Ribbon();
             this.ribbonApplicationMenu1 = new C1.Win.C1Ribbon.RibbonApplicationMenu();
@@ -38,9 +39,6 @@
             this.FileExplorerFormButton = new C1.Win.C1Ribbon.RibbonButton();
             this.SearchFormButton = new C1.Win.C1Ribbon.RibbonButton();
             this.IndexBuildFormButton = new C1.Win.C1Ribbon.RibbonButton();
-            this.TagGroup = new C1.Win.C1Ribbon.RibbonGroup();
-            this.TagEditFormButton = new C1.Win.C1Ribbon.RibbonButton();
-            this.TagWriterFormButton = new C1.Win.C1Ribbon.RibbonButton();
             this.AnalyzeGroup = new C1.Win.C1Ribbon.RibbonGroup();
             this.ribbonButton1 = new C1.Win.C1Ribbon.RibbonButton();
             this.SandBoxGroup = new C1.Win.C1Ribbon.RibbonGroup();
@@ -50,6 +48,7 @@
             this.VerifyLicenseButton = new C1.Win.C1Ribbon.RibbonButton();
             this.HelpButton1 = new C1.Win.C1Ribbon.RibbonButton();
             this.ribbonTopToolBar1 = new C1.Win.C1Ribbon.RibbonTopToolBar();
+            this.IndexedLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.MainStatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainRibbon)).BeginInit();
             this.SuspendLayout();
@@ -59,6 +58,8 @@
             this.MainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ProgressBar,
             this.StatusLabel,
+            this.IndexedLabel,
+            this.SubIndexedLabel,
             this.MorphemeLabel});
             this.MainStatusStrip.Location = new System.Drawing.Point(0, 834);
             this.MainStatusStrip.Name = "MainStatusStrip";
@@ -80,6 +81,16 @@
             this.StatusLabel.Name = "StatusLabel";
             this.StatusLabel.Size = new System.Drawing.Size(66, 22);
             this.StatusLabel.Text = "コマンド待ち";
+            // 
+            // SubIndexedLabel
+            // 
+            this.SubIndexedLabel.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.SubIndexedLabel.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
+            this.SubIndexedLabel.Name = "SubIndexedLabel";
+            this.SubIndexedLabel.Size = new System.Drawing.Size(93, 22);
+            this.SubIndexedLabel.Text = "SubExplorer：";
             // 
             // MorphemeLabel
             // 
@@ -103,7 +114,7 @@
             this.MainRibbon.Size = new System.Drawing.Size(1284, 153);
             this.MainRibbon.Tabs.Add(this.MainTab);
             this.MainRibbon.TopToolBarHolder = this.ribbonTopToolBar1;
-            this.MainRibbon.VisualStyle = C1.Win.C1Ribbon.VisualStyle.Office2010Black;
+            this.MainRibbon.VisualStyle = C1.Win.C1Ribbon.VisualStyle.Office2010Silver;
             // 
             // ribbonApplicationMenu1
             // 
@@ -124,7 +135,6 @@
             // MainTab
             // 
             this.MainTab.Groups.Add(this.FullTextSearchGroup);
-            this.MainTab.Groups.Add(this.TagGroup);
             this.MainTab.Groups.Add(this.AnalyzeGroup);
             this.MainTab.Groups.Add(this.SandBoxGroup);
             this.MainTab.Groups.Add(this.HelpGroup);
@@ -162,27 +172,6 @@
             this.IndexBuildFormButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("IndexBuildFormButton.SmallImage")));
             this.IndexBuildFormButton.Text = "インデックス管理";
             this.IndexBuildFormButton.Click += new System.EventHandler(this.IndexBuildFormButton_Click);
-            // 
-            // TagGroup
-            // 
-            this.TagGroup.Items.Add(this.TagEditFormButton);
-            this.TagGroup.Items.Add(this.TagWriterFormButton);
-            this.TagGroup.Name = "TagGroup";
-            this.TagGroup.Text = "タグ編集";
-            // 
-            // TagEditFormButton
-            // 
-            this.TagEditFormButton.Name = "TagEditFormButton";
-            this.TagEditFormButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("TagEditFormButton.SmallImage")));
-            this.TagEditFormButton.Text = "タグ編集単体";
-            this.TagEditFormButton.Click += new System.EventHandler(this.TagEditFormButton_Click);
-            // 
-            // TagWriterFormButton
-            // 
-            this.TagWriterFormButton.Name = "TagWriterFormButton";
-            this.TagWriterFormButton.SmallImage = ((System.Drawing.Image)(resources.GetObject("TagWriterFormButton.SmallImage")));
-            this.TagWriterFormButton.Text = "タグ付け";
-            this.TagWriterFormButton.Click += new System.EventHandler(this.TagWriterFormButton_Click);
             // 
             // AnalyzeGroup
             // 
@@ -247,6 +236,16 @@
             // 
             this.ribbonTopToolBar1.Name = "ribbonTopToolBar1";
             // 
+            // IndexedLabel
+            // 
+            this.IndexedLabel.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.IndexedLabel.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
+            this.IndexedLabel.Name = "IndexedLabel";
+            this.IndexedLabel.Size = new System.Drawing.Size(98, 22);
+            this.IndexedLabel.Text = "MainExplorer：";
+            // 
             // MainFrameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -290,12 +289,11 @@
         private C1.Win.C1Ribbon.RibbonButton ribbonButton1;
         private C1.Win.C1Ribbon.RibbonGroup HelpGroup;
         private C1.Win.C1Ribbon.RibbonButton HelpButton1;
-        private C1.Win.C1Ribbon.RibbonButton ConfigButton;
-        private C1.Win.C1Ribbon.RibbonGroup TagGroup;
-        private C1.Win.C1Ribbon.RibbonButton TagEditFormButton;
         private C1.Win.C1Ribbon.RibbonButton VerifyLicenseButton;
         private System.Windows.Forms.ToolStripStatusLabel MorphemeLabel;
         private C1.Win.C1Ribbon.RibbonButton SearchFormButton;
-        private C1.Win.C1Ribbon.RibbonButton TagWriterFormButton;
+        public C1.Win.C1Ribbon.RibbonButton ConfigButton;
+        private System.Windows.Forms.ToolStripStatusLabel SubIndexedLabel;
+        private System.Windows.Forms.ToolStripStatusLabel IndexedLabel;
     }
 }

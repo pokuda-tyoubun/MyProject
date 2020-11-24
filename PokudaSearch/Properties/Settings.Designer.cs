@@ -154,5 +154,17 @@ namespace PokudaSearch.Properties {
                 this["MaxMoreLikeThisResultNum"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RunIPC {
+            get {
+                return ((bool)(this["RunIPC"]));
+            }
+            set {
+                this["RunIPC"] = value;
+            }
+        }
     }
 }

@@ -311,6 +311,7 @@ namespace PokudaSearch.Views {
 
             return dt;
         }
+
         /// <summary>
         /// 有効Indexを表示
         /// </summary>
@@ -522,10 +523,13 @@ namespace PokudaSearch.Views {
                         aiParam.Add(new SQLiteParameter("@作成完了", row[EnumUtil.GetLabel(IndexHistoryColIdx.EndTime)]));
                         UpdateActiveIndex(aiParam);
                         LoadActiveIndex(AppObject.ConnectString, this.ActiveIndexGrid);
-                        LoadActiveIndex(AppObject.ConnectString, SearchForm.TargetIndexGridControl, appendCheckBox: true);
 
-                        MainFrameForm.SearchForm.CheckedLocalIndex(Properties.Settings.Default.LocalIndexChecked);
-                        MainFrameForm.SearchForm.CheckedOuterIndex(Properties.Settings.Default.OuterIndexChecked);
+                        if (MainFrameForm.SearchForm != null) {
+                            LoadActiveIndex(AppObject.ConnectString, SearchForm.TargetIndexGridControl, appendCheckBox: true);
+
+                            MainFrameForm.SearchForm.CheckedLocalIndex(Properties.Settings.Default.LocalIndexChecked);
+                            MainFrameForm.SearchForm.CheckedOuterIndex(Properties.Settings.Default.OuterIndexChecked);
+                        }
 
                         this.LogViewerText.Text = "完了";
                     } else {
@@ -664,6 +668,7 @@ namespace PokudaSearch.Views {
             this.StopButton.Enabled = true;
 
             Stopwatch sw = new Stopwatch();
+            AppObject.Frame.ConfigButton.Enabled = false;
             AppObject.Frame.SetStatusMsg(AppObject.GetMsg(AppObject.Msg.ACT_PROCESSING), true, sw);
             try {
                 this.ProgressBar.Style = ProgressBarStyle.Marquee;
@@ -680,6 +685,7 @@ namespace PokudaSearch.Views {
 
             } finally {
                 AppObject.Frame.SetStatusMsg(AppObject.GetMsg(AppObject.Msg.ACT_END), false, sw);
+                AppObject.Frame.ConfigButton.Enabled = true;
             }
         }
         private void CreateWebIndex(string targetUrl, Dictionary<string, WebContents> targetDic) {
@@ -721,7 +727,7 @@ namespace PokudaSearch.Views {
         /// <param name="e"></param>
         private void UpdateIndexButton_Click(object sender, EventArgs e) {
             string targetDir = (this.TargetDirText.Text);
-            if (!new DirectoryInfo(targetDir).Exists) {
+            if (targetDir == "" || !new DirectoryInfo(targetDir).Exists) {
                 MessageBox.Show(AppObject.GetMsg(AppObject.Msg.ERR_DIR_NOT_FOUND),
                     AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -760,10 +766,12 @@ namespace PokudaSearch.Views {
             //有効インデックステーブルから削除
             DeleteActiveIndex(path);
             LoadActiveIndex(AppObject.ConnectString, this.ActiveIndexGrid);
-            LoadActiveIndex(AppObject.ConnectString, SearchForm.TargetIndexGridControl, appendCheckBox:true);
 
-            MainFrameForm.SearchForm.CheckedLocalIndex(Properties.Settings.Default.LocalIndexChecked);
-            MainFrameForm.SearchForm.CheckedOuterIndex(Properties.Settings.Default.OuterIndexChecked);
+            if (MainFrameForm.SearchForm != null) {
+                LoadActiveIndex(AppObject.ConnectString, SearchForm.TargetIndexGridControl, appendCheckBox: true);
+                MainFrameForm.SearchForm.CheckedLocalIndex(Properties.Settings.Default.LocalIndexChecked);
+                MainFrameForm.SearchForm.CheckedOuterIndex(Properties.Settings.Default.OuterIndexChecked);
+            }
         }
 
         /// <summary>
@@ -880,10 +888,12 @@ namespace PokudaSearch.Views {
                 param.Add(new SQLiteParameter("@作成完了", DateTime.Now));
                 UpdateActiveIndex(param);
                 LoadActiveIndex(AppObject.ConnectString, this.ActiveIndexGrid);
-                LoadActiveIndex(AppObject.ConnectString, SearchForm.TargetIndexGridControl, appendCheckBox:true);
 
-                MainFrameForm.SearchForm.CheckedLocalIndex(Properties.Settings.Default.LocalIndexChecked);
-                MainFrameForm.SearchForm.CheckedOuterIndex(Properties.Settings.Default.OuterIndexChecked);
+                if (MainFrameForm.SearchForm != null) {
+                    LoadActiveIndex(AppObject.ConnectString, SearchForm.TargetIndexGridControl, appendCheckBox: true);
+                    MainFrameForm.SearchForm.CheckedLocalIndex(Properties.Settings.Default.LocalIndexChecked);
+                    MainFrameForm.SearchForm.CheckedOuterIndex(Properties.Settings.Default.OuterIndexChecked);
+                }
             } finally {
                 oif.Dispose();
             }
@@ -959,10 +969,12 @@ namespace PokudaSearch.Views {
                 param.Add(new SQLiteParameter("@作成完了", DateTime.Now));
                 UpdateActiveIndex(param, orgLocalPath);
                 LoadActiveIndex(AppObject.ConnectString, this.ActiveIndexGrid);
-                LoadActiveIndex(AppObject.ConnectString, SearchForm.TargetIndexGridControl, appendCheckBox:true);
 
-                MainFrameForm.SearchForm.CheckedLocalIndex(Properties.Settings.Default.LocalIndexChecked);
-                MainFrameForm.SearchForm.CheckedOuterIndex(Properties.Settings.Default.OuterIndexChecked);
+                if (MainFrameForm.SearchForm != null) {
+                    LoadActiveIndex(AppObject.ConnectString, SearchForm.TargetIndexGridControl, appendCheckBox: true);
+                    MainFrameForm.SearchForm.CheckedLocalIndex(Properties.Settings.Default.LocalIndexChecked);
+                    MainFrameForm.SearchForm.CheckedOuterIndex(Properties.Settings.Default.OuterIndexChecked);
+                }
             } finally {
                 ipf.Dispose();
             }

@@ -20,22 +20,26 @@ using System.Threading;
 namespace PokudaSearch {
     public partial class MainFrameForm : Form {
 
+        #region Properties
         /// <summary>ファイルエクスプローラ画面</summary>
         public static FileExplorerForm FileExplorerForm;
         /// <summary>検索画面</summary>
         public static SearchForm SearchForm;
         /// <summary>インデックス管理</summary>
         public static IndexBuildForm IndexBuildForm;
-        /// <summary>タグ付け</summary>
-        public static TagWriterForm TagWriterForm;
 
         /// <summary>SandBox用</summary>
         public static TestForm TestForm;
+
+        #endregion Properties
+
 
         #region MemberVariables
         /// <summary>ロックオブジェクト</summary>
         private static Object _lockObj = new Object();
         #endregion MemberVariables
+
+
 
         /// <summary>
         /// コンストラクタ
@@ -46,7 +50,6 @@ namespace PokudaSearch {
             //ライセンス認証
 #if DEBUG
 # else
-            this.TagGroup.Visible = false;
             this.AnalyzeGroup.Visible = false;
             this.SandBoxGroup.Visible = false;
 #endif
@@ -59,7 +62,6 @@ namespace PokudaSearch {
         /// <param name="e"></param>
         private void MainFrameForm_Load(object sender, EventArgs e) {
             VerifyLicense();
-
         }
 
         private void MainFrameForm_Shown(object sender, EventArgs e) {
@@ -104,6 +106,12 @@ namespace PokudaSearch {
             }
             this.MorphemeLabel.Text = sb.ToString();
         }
+        public void SetIndexedLabel(string msg) {
+            this.IndexedLabel.Text = "MainExplorer" + msg;
+        }
+        public void SetSubIndexedLabel(string msg) {
+            this.SubIndexedLabel.Text = "SubExplorer" + msg;
+        }
 
         /// <summary>
         /// ファイル検索画面表示
@@ -111,10 +119,15 @@ namespace PokudaSearch {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SearchFormButton_Click(object sender, EventArgs e) {
+            ShowSearchForm();
+        }
+
+        public void ShowSearchForm() {
             if (SearchForm == null) {
                 SearchForm = new SearchForm();
                 LoadForm(SearchForm);
             } else {
+                SearchForm.Visible = true;
                 SearchForm.Activate();
             }
             AppObject.CefSharpPanel.FocusBackControl = SearchForm.KeywordText;
@@ -126,8 +139,15 @@ namespace PokudaSearch {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void IndexBuildFormButton_Click(object sender, EventArgs e) {
-            var ibf = new IndexBuildForm();
-            ibf.ShowDialog();
+            //var ibf = new IndexBuildForm();
+            //ibf.ShowDialog();
+
+            if (IndexBuildForm == null) {
+                IndexBuildForm = new IndexBuildForm();
+                LoadForm(IndexBuildForm);
+            } else {
+                IndexBuildForm.Activate();
+            }
         }
 
         /// <summary>
@@ -207,8 +227,6 @@ namespace PokudaSearch {
         }
 
         private void TagEditFormButton_Click(object sender, EventArgs e) {
-            var tf = new TagEditForm();
-            tf.ShowDialog();
         }
 
         private void VerifyLicense() {
@@ -345,20 +363,11 @@ namespace PokudaSearch {
 
         private void MainFrameForm_FormClosing(object sender, FormClosingEventArgs e) {
         }
-        public void SearchFormButtonPerformClick() {
-            this.SearchFormButton_Click(null, null);
-        }
         public void FileExplorerFormButtonPerformClick() {
             this.FileExplorerFormButton_Click(null, null);
         }
 
         private void TagWriterFormButton_Click(object sender, EventArgs e) {
-            if (TagWriterForm == null) {
-                TagWriterForm = new TagWriterForm();
-                LoadForm(TagWriterForm);
-            } else {
-                TagWriterForm.Activate();
-            }
         }
     }
 }

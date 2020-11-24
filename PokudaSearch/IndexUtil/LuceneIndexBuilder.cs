@@ -190,7 +190,6 @@ namespace PokudaSearch.IndexUtil {
                 _txtExtractMode = txtExtractMode;
 
                 var worker = await CreateIndexAsync(rootPath, targetDir, progress, orgIndexStorePath);
-
                 AppObject.Logger.Info("インデックス構築完了");
             } catch (Exception e) {
                 AppObject.Logger.Error(e.StackTrace);

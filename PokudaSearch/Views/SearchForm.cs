@@ -158,8 +158,6 @@ namespace PokudaSearch.Views {
         /// <param name="e"></param>
         private void SearchForm_Load(object sender, EventArgs e) {
             MaxSearchResultNum = Properties.Settings.Default.MaxSearchResultNum;
-            PreviewCheckToolTip.SetToolTip(PreviewCheck, "プレビュー表示(Ctrl + P)");
-            ExpandPreviewCheckToolTip.SetToolTip(ExpandPreviewCheck, "プレビュー拡大(Ctrl + Shift + P)");
 
             //差分ツールメニューの活性設定
             if (StringUtil.NullToBlank(Properties.Settings.Default.DiffExe) == "") {
@@ -601,7 +599,7 @@ namespace PokudaSearch.Views {
                 AppObject.Frame.FileExplorerFormButtonPerformClick();
                 return;
             }
-            if ((e.Modifiers & Keys.Control) == Keys.Control && e.KeyCode == Keys.F) {
+            if ((e.Modifiers & Keys.Control) == Keys.Control && e.KeyCode == Keys.K) {
                 //Ctrl + F キーワードにフォーカスを移す
                 this.KeywordText.Focus();
                 //グリッドにフォーカスが当たっている場合、2回呼び出す必要がある。
@@ -918,8 +916,8 @@ namespace PokudaSearch.Views {
             string keyword = this.KeywordText.Text.Trim();
 
             if (keyword == "") {
-                MessageBox.Show(AppObject.GetMsg(AppObject.Msg.MSG_INPUT_KEYWORD),
-                    AppObject.GetMsg(AppObject.Msg.TITLE_INFO), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show(AppObject.GetMsg(AppObject.Msg.MSG_INPUT_KEYWORD),
+                //    AppObject.GetMsg(AppObject.Msg.TITLE_INFO), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -932,61 +930,62 @@ namespace PokudaSearch.Views {
             }
 
             string unlinkedIndexPath = "";
-            MultiReader multiReader = GetMultiReader(_selectedIndexList, out unlinkedIndexPath);
-            if (unlinkedIndexPath != "") {
-                //検索中断
-                MessageBox.Show(string.Format(AppObject.GetMsg(AppObject.Msg.ERR_UNLINKED_INDEX), unlinkedIndexPath),
-                    AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            IndexSearcher idxSearcher = new IndexSearcher(multiReader);
-
-            var allQuery = new BooleanQueryBuilder();
-            var contentBqb = new BooleanQueryBuilder();
-            //ファイル名
-            Query titleQuery = new WildcardQuery(new Term(LuceneIndexBuilder.Title, "*" + QueryParser.Escape(keyword.ToLower()) + "*"));
-            contentBqb.Add(titleQuery, BooleanClauseOccur.SHOULD); //OR
-            //コンテント
-            QueryParser contentQp = new QueryParser(LuceneIndexBuilder.Content, AppObject.AppAnalyzer);
-            Query contentQuery = contentQp.Parse(QueryParser.Escape(keyword));
-            contentBqb.Add(contentQuery, BooleanClauseOccur.SHOULD); //OR
-            allQuery.Add(contentBqb.Build(), BooleanClauseOccur.MUST); //AND
-            //拡張子
-            if (this.ExtensionText.Text != "") {
-                Query extensionQuery = new WildcardQuery(new Term(LuceneIndexBuilder.Extension,
-                    "*" + this.ExtensionText.Text.ToLower() + "*"));
-                allQuery.Add(extensionQuery, BooleanClauseOccur.FILTER); //AND (スコアリングには関与しない)
-            }
-            //日付
-            if (this.UpdateDate1.Text != "" || this.UpdateDate2.Text != "") {
-                long toDate = long.Parse(DateTime.MinValue.ToString("yyyyMMddHHmmss"));
-                long fromDate = long.Parse(DateTime.MaxValue.ToString("yyyyMMddHHmmss"));
-
-                if (this.UpdateDate1.Text != "") {
-                    toDate = long.Parse(DateTime.Parse(this.UpdateDate1.Text).ToString("yyyyMMddHHmmss"));
-                }
-                if (this.UpdateDate2.Text != "") {
-                    fromDate = long.Parse(DateTime.Parse(this.UpdateDate2.Text).ToString("yyyyMMddHHmmss"));
-                }
-                Query dateRangeQuery = LongPoint.NewRangeQuery(LuceneIndexBuilder.UpdateDate, toDate, fromDate);
-                //Query dateRangeQuery = LegacyNumericRangeQuery.NewLongRange(LuceneIndexBuilder.UpdateDate, 
-                //    new java.lang.Long(toDate.ToString()), new java.lang.Long(fromDate.ToString()), true, true);
-                allQuery.Add(dateRangeQuery, BooleanClauseOccur.FILTER); //AND (スコアリングには関与しない)
-            }
-            //パス
-            if (this.PathText.Text != "") {
-                Query pathQuery = new WildcardQuery(new Term(LuceneIndexBuilder.Path,
-                    "*" + QueryParser.Escape(PathText.Text) + "*"));
-                allQuery.Add(pathQuery, BooleanClauseOccur.FILTER);
-            }
-
-            TopDocs docs = idxSearcher.Search(allQuery.Build(), MaxSearchResultNum);
-
-            //HACK DataTableに格納してLinqで絞り込む？
-            
-            Highlighter hi = CreateHilighter(contentBqb.Build());
-
+            MultiReader multiReader = null;
             try {
+                multiReader = GetMultiReader(_selectedIndexList, out unlinkedIndexPath);
+                if (unlinkedIndexPath != "") {
+                    //検索中断
+                    MessageBox.Show(string.Format(AppObject.GetMsg(AppObject.Msg.ERR_UNLINKED_INDEX), unlinkedIndexPath),
+                        AppObject.GetMsg(AppObject.Msg.TITLE_ERROR), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                IndexSearcher idxSearcher = new IndexSearcher(multiReader);
+
+                var allQuery = new BooleanQueryBuilder();
+                var contentBqb = new BooleanQueryBuilder();
+                //ファイル名
+                Query titleQuery = new WildcardQuery(new Term(LuceneIndexBuilder.Title, "*" + QueryParser.Escape(keyword.ToLower()) + "*"));
+                contentBqb.Add(titleQuery, BooleanClauseOccur.SHOULD); //OR
+                //コンテント
+                QueryParser contentQp = new QueryParser(LuceneIndexBuilder.Content, AppObject.AppAnalyzer);
+                Query contentQuery = contentQp.Parse(QueryParser.Escape(keyword));
+                contentBqb.Add(contentQuery, BooleanClauseOccur.SHOULD); //OR
+                allQuery.Add(contentBqb.Build(), BooleanClauseOccur.MUST); //AND
+                //拡張子
+                if (this.ExtensionText.Text != "") {
+                    Query extensionQuery = new WildcardQuery(new Term(LuceneIndexBuilder.Extension,
+                        "*" + this.ExtensionText.Text.ToLower() + "*"));
+                    allQuery.Add(extensionQuery, BooleanClauseOccur.FILTER); //AND (スコアリングには関与しない)
+                }
+                //日付
+                if (this.UpdateDate1.Text != "" || this.UpdateDate2.Text != "") {
+                    long toDate = long.Parse(DateTime.MinValue.ToString("yyyyMMddHHmmss"));
+                    long fromDate = long.Parse(DateTime.MaxValue.ToString("yyyyMMddHHmmss"));
+
+                    if (this.UpdateDate1.Text != "") {
+                        toDate = long.Parse(DateTime.Parse(this.UpdateDate1.Text).ToString("yyyyMMddHHmmss"));
+                    }
+                    if (this.UpdateDate2.Text != "") {
+                        fromDate = long.Parse(DateTime.Parse(this.UpdateDate2.Text).ToString("yyyyMMddHHmmss"));
+                    }
+                    Query dateRangeQuery = LongPoint.NewRangeQuery(LuceneIndexBuilder.UpdateDate, toDate, fromDate);
+                    //Query dateRangeQuery = LegacyNumericRangeQuery.NewLongRange(LuceneIndexBuilder.UpdateDate, 
+                    //    new java.lang.Long(toDate.ToString()), new java.lang.Long(fromDate.ToString()), true, true);
+                    allQuery.Add(dateRangeQuery, BooleanClauseOccur.FILTER); //AND (スコアリングには関与しない)
+                }
+                //パス
+                if (this.PathText.Text != "") {
+                    Query pathQuery = new WildcardQuery(new Term(LuceneIndexBuilder.Path,
+                        "*" + QueryParser.Escape(PathText.Text) + "*"));
+                    allQuery.Add(pathQuery, BooleanClauseOccur.FILTER);
+                }
+
+                TopDocs docs = idxSearcher.Search(allQuery.Build(), MaxSearchResultNum);
+
+                //HACK DataTableに格納してLinqで絞り込む？
+                
+                Highlighter hi = CreateHilighter(contentBqb.Build());
+
                 this.ResultGrid.Rows.Count = RowHeaderCount;
                 _htmlLabelList.Clear();
                 this.ResultGrid.Redraw = false;
@@ -1047,6 +1046,9 @@ namespace PokudaSearch.Views {
                 if (Properties.Settings.Default.ShowSuggestion) {
                     ShowFuzzySuggest(multiReader, keyword);
                 }
+            } catch (BooleanQueryTooManyClauses) {
+                MessageBox.Show(AppObject.GetMsg(AppObject.Msg.WARN_TOO_MANY_CLAUSE),
+                    AppObject.GetMsg(AppObject.Msg.TITLE_WARN), MessageBoxButtons.OK, MessageBoxIcon.Warning);
             } finally {
                 multiReader.Close();
                 this.ResultGrid.Redraw = true;

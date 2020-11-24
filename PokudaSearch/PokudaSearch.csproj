@@ -231,9 +231,6 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>True</Private>
     </Reference>
-    <Reference Include="policy.2.0.taglib-sharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL">
-      <HintPath>packages\taglib.2.1.0.0\lib\policy.2.0.taglib-sharp.dll</HintPath>
-    </Reference>
     <Reference Include="PowerPointApi, Version=1.7.3.0, Culture=neutral, PublicKeyToken=2aedeb5ce89d4005, processorArchitecture=MSIL">
       <HintPath>packages\NetOffice.PowerPoint.1.7.4.4\lib\net45\PowerPointApi.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -254,9 +251,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="taglib-sharp, Version=2.1.0.0, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL">
-      <HintPath>packages\taglib.2.1.0.0\lib\taglib-sharp.dll</HintPath>
-    </Reference>
     <Reference Include="TikaOnDotNet, Version=1.17.1.0, Culture=neutral, PublicKeyToken=fd70f0f601f583f3, processorArchitecture=MSIL">
       <HintPath>packages\TikaOnDotnet.TextExtractor.1.17.1\lib\TikaOnDotNet.dll</HintPath>
       <Private>True</Private>
@@ -317,12 +311,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>m_extensions.resx</DependentUpon>
     </Compile>
-    <Compile Include="Views\TagWriterForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\TagWriterForm.Designer.cs">
-      <DependentUpon>TagWriterForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\WebBrowserForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -346,12 +334,6 @@
     </Compile>
     <Compile Include="Views\InteractionPathForm.Designer.cs">
       <DependentUpon>InteractionPathForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TagEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\TagEditForm.Designer.cs">
-      <DependentUpon>TagEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ConfigForm.cs">
       <SubType>Form</SubType>
@@ -414,9 +396,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>m_extensions.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\TagWriterForm.resx">
-      <DependentUpon>TagWriterForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Views\WebBrowserForm.resx">
       <DependentUpon>WebBrowserForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -428,9 +407,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\InteractionPathForm.resx">
       <DependentUpon>InteractionPathForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\TagEditForm.resx">
-      <DependentUpon>TagEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ConfigForm.resx">
       <DependentUpon>ConfigForm.cs</DependentUpon>
@@ -501,11 +477,13 @@
     <None Include="Resources\backward_nav.png" />
     <None Include="Resources\forward_nav.png" />
     <None Include="Resources\upward_nav.png" />
-    <None Include="Resources\explorer16.png" />
     <None Include="Resources\EditClear24.bmp" />
     <None Include="Resources\Excel24.bmp" />
     <None Include="Resources\File16.bmp" />
     <None Include="Resources\Search24.bmp" />
+    <None Include="Resources\explorer16.png" />
+    <None Include="Resources\Search16.bmp" />
+    <None Include="Resources\Refresh16.bmp" />
     <Content Include="UserDictionary.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
