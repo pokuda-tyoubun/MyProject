@@ -26,9 +26,6 @@ using System.Windows.Forms;
 namespace PokudaSearch.Views {
     public partial class FileExplorerForm : Form {
 
-        //HACK*以下を参考い一通り実装する。
-        //https://github.com/aybe/Windows-API-Code-Pack-1.1/blob/master/source/Samples/ExplorerBrowser/CS/WinForms/ExplorerBrowserTestForm.cs
-
         #region Constants
         private const int MaxHistoryCount = 20;
         #endregion Constants
@@ -117,6 +114,7 @@ namespace PokudaSearch.Views {
             this.SubExplorer.Refresh();
         }
         /// <summary>
+        /// MainExplorerのPreviewKeyDown
         /// NOTE:KeyDownイベントはハンドリングできない。(イベントが発火しない)
         /// </summary>
         /// <param name="sender"></param>
@@ -195,6 +193,12 @@ namespace PokudaSearch.Views {
                 ShowSearchForm();
             }
         }
+        /// <summary>
+        /// SubExplorerのPreviewKeyDown
+        /// NOTE:KeyDownイベントはハンドリングできない。(イベントが発火しない)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SubExplorer_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e) {
             if ((e.Modifiers & Keys.Alt) == Keys.Alt && e.KeyCode == Keys.Left) {
                 this.SubExplorer.NavigateLogLocation(NavigationLogDirection.Backward);
@@ -240,6 +244,11 @@ namespace PokudaSearch.Views {
                 ShowSearchForm();
             }
         }
+        /// <summary>
+        /// FileExplorerFormのKeyDown
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FileExplorerForm_KeyDown(object sender, KeyEventArgs e) {
             if ((e.Modifiers & Keys.Control) == Keys.Control && e.KeyCode == Keys.W) {
                 this.SubExplorer.Select();
@@ -252,6 +261,11 @@ namespace PokudaSearch.Views {
             }
         }
 
+        /// <summary>
+        /// インデックス済みかどうか判定
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         private bool IsContainActiveIndex(string path) {
             bool ret = false;
             foreach (DataRow dr in _activeIndex.Rows) {
@@ -264,25 +278,36 @@ namespace PokudaSearch.Views {
             return ret;
         }
 
+        /// <summary>
+        /// Main側をインデックス済みとしてステータス表示する。
+        /// </summary>
         private void SetIndexedStatus() {
             this.SearchButton.BackColor = SystemColors.Control;
             AppObject.Frame.SetIndexedLabel("インデックス済み"); 
         }
+        /// <summary>
+        /// Main側をインデックス未作成としてステータス表示する。
+        /// </summary>
         private void SetUnindexedStatus() {
             //this.SearchButton.BackColor = Color.LightCoral;
             this.SearchButton.BackColor = Color.LightSteelBlue;
             AppObject.Frame.SetIndexedLabel("インデックス未作成"); 
         }
+        /// <summary>
+        /// Sub側をインデックス済みとしてステータス表示する。
+        /// </summary>
         private void SetSubIndexedStatus() {
             this.SearchSubButton.BackColor = SystemColors.Control;
             AppObject.Frame.SetSubIndexedLabel("インデックス済み"); 
         }
+        /// <summary>
+        /// Sub側をインデックス未作成としてステータス表示する。
+        /// </summary>
         private void SetSubUnindexedStatus() {
             //this.SearchSubButton.BackColor = Color.LightCoral;
             this.SearchSubButton.BackColor = Color.LightSteelBlue;
             AppObject.Frame.SetSubIndexedLabel("インデックス未作成"); 
         }
-
         private void MainExplorer_NavigationComplete(object sender, NavigationCompleteEventArgs e) {
             SetUniqueHistoryCombo(this.MainExplorerCombo, e.NewLocation);
 
@@ -319,6 +344,9 @@ namespace PokudaSearch.Views {
             }
         }
         public void LoadMainExplorer(string path) {
+            LoadPath(this.MainExplorer, path);
+        }
+        public void LoadMainToSubExplorer(string path) {
             string prePath = this.MainExplorerCombo.Text;
             LoadPath(this.MainExplorer, path);
             LoadPath(this.SubExplorer, prePath);
@@ -327,10 +355,6 @@ namespace PokudaSearch.Views {
             LoadPath(this.SubExplorer, path);
         }
 
-        public void ReLoadFileBlowser() {
-            this.MainExplorer.Navigate(this.MainExplorer.NavigationLog.Locations.Last());
-            this.SubExplorer.Navigate(this.SubExplorer.NavigationLog.Locations.Last());
-        }
         private void LoadPath(ExplorerBrowser eb, string path) {
             try {
                 if (System.IO.Directory.Exists(path)) {
@@ -345,6 +369,10 @@ namespace PokudaSearch.Views {
         }
         private void LoadPath(ExplorerBrowser eb, ShellObject so) {
             eb.Navigate(so);
+        }
+        public void ReLoadFileBlowser() {
+            this.MainExplorer.Navigate(this.MainExplorer.NavigationLog.Locations.Last());
+            this.SubExplorer.Navigate(this.SubExplorer.NavigationLog.Locations.Last());
         }
 
         private void FileExplorerForm_FormClosed(object sender, FormClosedEventArgs e) {
@@ -440,17 +468,6 @@ namespace PokudaSearch.Views {
             }
         }
 
-        //private void SetHistory(C1ComboBox combo, ExplorerBrowser eb) {
-        //    combo.Items.Clear();
-        //    foreach (var shellObject in eb.NavigationLog.Locations) {
-        //        if (shellObject.IsFileSystemObject) {
-        //            combo.Items.Insert(0, shellObject.ParsingName);
-        //        } else {
-        //            combo.Items.Insert(0, shellObject.Name);
-        //        }
-        //    }
-        //}
-
         private void MainExplorer_LocationChanged(object sender, EventArgs e) {
             //var so = this.MainExplorer.NavigationLog.Locations.Last();
             //if (so.IsFileSystemObject) {
@@ -496,7 +513,13 @@ namespace PokudaSearch.Views {
 
         private void MainExplorerCombo_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Enter) {
-                LoadPath(this.MainExplorer, this.MainExplorerCombo.Text);
+                string path = this.MainExplorerCombo.Text;
+                var so = GetShellObject(this.MainExplorer, path);
+                if (so == null) {
+                    LoadPath(this.MainExplorer, path);
+                } else {
+                    this.MainExplorer.Navigate(so);
+                }
             }
         }
 
@@ -528,11 +551,17 @@ namespace PokudaSearch.Views {
 
         private void SubExplorerCombo_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Enter) {
-                LoadPath(this.SubExplorer, this.SubExplorerCombo.Text);
+                string path = this.SubExplorerCombo.Text;
+                var so = GetShellObject(this.SubExplorer, path);
+                if (so == null) {
+                    LoadPath(this.SubExplorer, path);
+                } else {
+                    this.SubExplorer.Navigate(so);
+                }
             }
         }
         private void SubExplorerCombo_SelectedItemChanged(object sender, EventArgs e) {
-            string path = this.SubExplorerCombo.SelectedItem.ToString();
+            string path = this.SubExplorerCombo.Text;
             var so = GetShellObject(this.SubExplorer, path);
             this.SubExplorer.Navigate(so);
         }
@@ -548,12 +577,12 @@ namespace PokudaSearch.Views {
         }
 
         private void OpenExplorerButton_Click(object sender, EventArgs e) {
-            string path = this.MainExplorerCombo.Items[0].ToString();
+            string path = this.MainExplorerCombo.Text;
             var so = GetShellObject(this.MainExplorer, path);
             Process.Start(so.ParsingName);
         }
         private void OpenExplorerSubButton_Click(object sender, EventArgs e) {
-            string path = this.SubExplorerCombo.Items[0].ToString();
+            string path = this.SubExplorerCombo.Text;
             var so = GetShellObject(this.SubExplorer, path);
             Process.Start(so.ParsingName);
         }

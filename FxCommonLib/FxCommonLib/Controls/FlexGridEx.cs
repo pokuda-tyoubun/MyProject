@@ -449,17 +449,17 @@ namespace FxCommonLib.Controls {
                         decimal val = 0;
                         if (decimal.TryParse(StringUtil.NullToZero(this[e.Row, e.Col]), out val)) {
 
-                            if (!MoneyUtil.InRange(val)) {
-                                e.ErrorText = _outOfBoundErrMsg;
-                                if (!this.BeforeErrorInfo.ContainsKey(key)) {
-                                    this.BeforeErrorInfo.Add(key, e);
-                                }
-                            } else {
-                                //エラー情報から削除
-                                if (_beforeErrorInfo.ContainsKey(key)) {
-                                    _beforeErrorInfo.Remove(key);
-                                }
-                            }
+                            //if (!MoneyUtil.InRange(val)) {
+                            //    e.ErrorText = _outOfBoundErrMsg;
+                            //    if (!this.BeforeErrorInfo.ContainsKey(key)) {
+                            //        this.BeforeErrorInfo.Add(key, e);
+                            //    }
+                            //} else {
+                            //    //エラー情報から削除
+                            //    if (_beforeErrorInfo.ContainsKey(key)) {
+                            //        _beforeErrorInfo.Remove(key);
+                            //    }
+                            //}
                             return;
                         }
                     }

@@ -29,8 +29,10 @@ namespace PokudaSearch {
 
         /// <summary>新プロセスでファイラを起動</summary>
         private const string FilerOption = "/f";
-        /// <summary>同一プロセスでファイラをActivate(MainExplorerに表示)</summary>
+        /// <summary>同一プロセスでファイラをActivate(MainExplorerに表示、MainのパスはSubへ)</summary>
         private const string SingleFilerOption = "/sf";
+        /// <summary>同一プロセスでファイラをActivate(MainExplorerに表示)</summary>
+        private const string SingleFilerMainOption = "/sfm";
         /// <summary>同一プロセスでファイラをActivate(SubExplorerに表示)</summary>
         private const string SingleFilerSubOption = "/sfs";
 
@@ -51,7 +53,9 @@ namespace PokudaSearch {
                         //引数のパスでファイラを起動
                         defaultPath = tmpPath;
                     }
-                } else if (option == SingleFilerOption || option == SingleFilerSubOption) {
+                } else if (option == SingleFilerOption || 
+                           option == SingleFilerMainOption ||
+                           option == SingleFilerSubOption) {
                     //既にプロセスが存在するか？
                     var processArray = Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName);
                     if (processArray.Length > 1) {
@@ -146,6 +150,8 @@ namespace PokudaSearch {
             string path = e.Path;
             AppObject.Frame.FileExplorerFormButtonPerformClick();
             if (option == SingleFilerOption) {
+                MainFrameForm.FileExplorerForm.LoadMainToSubExplorer(path);
+            } else if (option == SingleFilerMainOption) {
                 MainFrameForm.FileExplorerForm.LoadMainExplorer(path);
             } else if (option == SingleFilerSubOption) {
                 MainFrameForm.FileExplorerForm.LoadSubExplorer(path);

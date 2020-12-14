@@ -81,13 +81,7 @@
   <PropertyGroup />
   <PropertyGroup />
   <ItemGroup>
-    <Reference Include="C1.C1Zip.4">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
     <Reference Include="C1.Win.4">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
-    <Reference Include="C1.Win.BarCode.4">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="C1.Win.C1FlexGrid.4">
@@ -115,9 +109,6 @@
     <Reference Include="LumenWorks.Framework.IO, Version=3.8.0.0, Culture=neutral, PublicKeyToken=5ad3ea2f85776344, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Lib\LumenWorks\LumenWorks.Framework.IO.dll</HintPath>
-    </Reference>
-    <Reference Include="MathNet.Numerics">
-      <HintPath>..\packages\MathNet.Numerics.3.13.1\lib\net40\MathNet.Numerics.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -323,7 +314,6 @@
     <Compile Include="Utils\ExcelReadUtil.cs" />
     <Compile Include="Utils\ExchangeUtil.cs" />
     <Compile Include="Utils\PublicWebApiUtil.cs" />
-    <Compile Include="Utils\MoneyUtil.cs" />
     <Compile Include="Utils\RegAsmUtil.cs" />
     <Compile Include="Utils\SQLiteDBUtil.cs" />
     <Compile Include="Utils\WordUtil.cs" />
@@ -332,11 +322,9 @@
     <Compile Include="Utils\ExpandObjectUtil.cs" />
     <Compile Include="Utils\FileUtil.cs" />
     <Compile Include="Utils\EnumUtil.cs" />
-    <Compile Include="Utils\GenerationBackupUtil.cs" />
     <Compile Include="Utils\GoogleCalendarApiUtil.cs" />
     <Compile Include="Utils\GoogleMapsApiUtil.cs" />
     <Compile Include="Utils\MailUtil.cs" />
-    <Compile Include="Utils\MathUtil.cs" />
     <Compile Include="Utils\MSTeamsUtil.cs" />
     <Compile Include="Utils\OrderedDictionary.cs" />
     <Compile Include="Utils\RegexUtil.cs" />

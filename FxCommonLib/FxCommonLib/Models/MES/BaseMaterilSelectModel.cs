@@ -1,7 +1,6 @@
 ﻿using FxCommonLib;
 using FxCommonLib.Consts.MES;
 using FxCommonLib.Utils;
-using MathNet.Numerics.Statistics;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
