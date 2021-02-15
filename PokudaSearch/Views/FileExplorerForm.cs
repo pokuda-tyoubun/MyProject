@@ -309,7 +309,7 @@ namespace PokudaSearch.Views {
             AppObject.Frame.SetSubIndexedLabel("インデックス未作成"); 
         }
         private void MainExplorer_NavigationComplete(object sender, NavigationCompleteEventArgs e) {
-            SetUniqueHistoryCombo(this.MainExplorerCombo, e.NewLocation);
+            SetUniqueHistoryCombo(this.MainExplorerCombo, e.NewLocation, _mainHistoryDic);
 
             var so = e.NewLocation;
             if (so.IsFileSystemObject) {
@@ -327,15 +327,15 @@ namespace PokudaSearch.Views {
             }
         }
         private void SubExplorer_NavigationComplete(object sender, NavigationCompleteEventArgs e) {
-            SetUniqueHistoryCombo(this.SubExplorerCombo, e.NewLocation);
+            SetUniqueHistoryCombo(this.SubExplorerCombo, e.NewLocation, _subHistoryDic);
 
             var so = e.NewLocation;
             if (so.IsFileSystemObject) {
                 this.SubExplorerCombo.Text = e.NewLocation.ParsingName;
-                this.SubExplorerCombo.Items.Insert(this.SubExplorerCombo.Items.Count, so.ParsingName);
+                this.Text = e.NewLocation.ParsingName;
             } else {
                 this.SubExplorerCombo.Text = e.NewLocation.Name;
-                this.SubExplorerCombo.Items.Insert(this.SubExplorerCombo.Items.Count, so.Name);
+                this.Text = e.NewLocation.Name;
             }
             if (IsContainActiveIndex(e.NewLocation.ParsingName)) {
                 SetSubIndexedStatus();
@@ -450,21 +450,31 @@ namespace PokudaSearch.Views {
             }
         }
 
-        private void SetUniqueHistoryCombo(C1ComboBox combo, ShellObject newSo) {
+        private void SetUniqueHistoryCombo(C1ComboBox combo, ShellObject newSo, Dictionary<string, ShellObject> historyDic) {
             string newPath = "";
             if (newSo.IsFileSystemObject) {
                 newPath = newSo.ParsingName;
             } else {
                 newPath = newSo.Name;
             }
-            foreach (string path in combo.Items) {
-                if (newPath == path) {
-                    return;
+
+            if (historyDic.ContainsKey(newPath)) {
+                //既に登録されている場合、順序入替
+                for (int i = 0; i < combo.Items.Count; i++) {
+                    if (combo.Items[i].ToString() == newPath) {
+                        combo.Items.Remove(combo.Items[i]);
+                    }
                 }
-            }
-            combo.Items.Insert(0, newPath);
-            if (combo.Items.Count > MaxHistoryCount) {
-                combo.Items.RemoveAt(combo.Items.Count - 1);
+                combo.Items.Insert(0, newPath);
+            } else {
+                historyDic.Add(newPath, newSo);
+                //先頭に追加
+                combo.Items.Insert(0, newPath);
+                if (combo.Items.Count > MaxHistoryCount) {
+                    //最大数を超えれば末尾を削除
+                    combo.Items.RemoveAt(combo.Items.Count - 1);
+                    historyDic.Remove(combo.Items[combo.Items.Count - 1].ToString());
+                }
             }
         }
 
@@ -511,10 +521,39 @@ namespace PokudaSearch.Views {
             _activeIndex = IndexBuildForm.SelectActiveIndex(AppObject.ConnectString);
         }
 
+
+        //private ShellObject GetShellObject(ExplorerBrowser explorer, string path) {
+        //    ShellObject ret = null;
+        //    foreach (var so in explorer.NavigationLog.Locations) {
+        //        string name = "";
+        //        if (so.IsFileSystemObject) {
+        //            name = so.ParsingName;
+        //        } else {
+        //            name = so.Name;
+        //        }
+
+        //        if (name == path) {
+        //            ret = so;
+        //            break;
+        //        }
+        //    }
+        //    return ret;
+        //} 
+        private ShellObject GetShellObject(Dictionary<string, ShellObject> historyDic, string path) {
+            if (historyDic.ContainsKey(path)) {
+                return historyDic[path];
+            }
+
+            return null;
+        }
+
+        private Dictionary<string, ShellObject> _mainHistoryDic = new Dictionary<string, ShellObject>();
+        private Dictionary<string, ShellObject> _subHistoryDic = new Dictionary<string, ShellObject>();
+
         private void MainExplorerCombo_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Enter) {
                 string path = this.MainExplorerCombo.Text;
-                var so = GetShellObject(this.MainExplorer, path);
+                var so = GetShellObject(_mainHistoryDic, path);
                 if (so == null) {
                     LoadPath(this.MainExplorer, path);
                 } else {
@@ -522,37 +561,18 @@ namespace PokudaSearch.Views {
                 }
             }
         }
-
-        private ShellObject GetShellObject(ExplorerBrowser explorer, string path) {
-            ShellObject ret = null;
-            foreach (var so in explorer.NavigationLog.Locations) {
-                string name = "";
-                if (so.IsFileSystemObject) {
-                    name = so.ParsingName;
-                } else {
-                    name = so.Name;
-                }
-
-                if (name == path) {
-                    ret = so;
-                    break;
-                }
-            }
-            return ret;
-        } 
-
         private void MainExplorerCombo_SelectedItemChanged(object sender, EventArgs e) {
             //NOTE 何故かインデックスが常に-1で返ってくるので、パス文字列で取得
             //int idx = this.MainExplorerCombo.SelectedIndex;
             string path = this.MainExplorerCombo.SelectedItem.ToString();
-            var so = GetShellObject(this.MainExplorer, path);
+            var so = GetShellObject(_mainHistoryDic, path);
             this.MainExplorer.Navigate(so);
         }
 
         private void SubExplorerCombo_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Enter) {
                 string path = this.SubExplorerCombo.Text;
-                var so = GetShellObject(this.SubExplorer, path);
+                var so = GetShellObject(_subHistoryDic, path);
                 if (so == null) {
                     LoadPath(this.SubExplorer, path);
                 } else {
@@ -561,8 +581,8 @@ namespace PokudaSearch.Views {
             }
         }
         private void SubExplorerCombo_SelectedItemChanged(object sender, EventArgs e) {
-            string path = this.SubExplorerCombo.Text;
-            var so = GetShellObject(this.SubExplorer, path);
+            string path = this.SubExplorerCombo.SelectedItem.ToString();
+            var so = GetShellObject(_subHistoryDic, path);
             this.SubExplorer.Navigate(so);
         }
 
@@ -578,12 +598,12 @@ namespace PokudaSearch.Views {
 
         private void OpenExplorerButton_Click(object sender, EventArgs e) {
             string path = this.MainExplorerCombo.Text;
-            var so = GetShellObject(this.MainExplorer, path);
+            var so = GetShellObject(_mainHistoryDic, path);
             Process.Start(so.ParsingName);
         }
         private void OpenExplorerSubButton_Click(object sender, EventArgs e) {
             string path = this.SubExplorerCombo.Text;
-            var so = GetShellObject(this.SubExplorer, path);
+            var so = GetShellObject(_subHistoryDic, path);
             Process.Start(so.ParsingName);
         }
 
@@ -630,6 +650,17 @@ namespace PokudaSearch.Views {
 
         private void SubExplorerCombo_DoubleClick(object sender, EventArgs e) {
             this.SubExplorerCombo.SelectAll();
+        }
+
+
+        private void MainExplorer_ItemsChanged(object sender, EventArgs e) {
+            //NOTE:ファイル削除後にフォーカスが別のコントロールに移るため、選択しなおすようにした。
+            this.MainExplorer.Select();
+        }
+
+        private void SubExplorer_ItemsChanged(object sender, EventArgs e) {
+            //NOTE:ファイル削除後にフォーカスが別のコントロールに移るため、選択しなおすようにした。
+            this.SubExplorer.Select();
         }
     }
 }

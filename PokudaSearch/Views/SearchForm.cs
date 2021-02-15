@@ -1050,7 +1050,9 @@ namespace PokudaSearch.Views {
                 MessageBox.Show(AppObject.GetMsg(AppObject.Msg.WARN_TOO_MANY_CLAUSE),
                     AppObject.GetMsg(AppObject.Msg.TITLE_WARN), MessageBoxButtons.OK, MessageBoxIcon.Warning);
             } finally {
-                multiReader.Close();
+                if (multiReader != null) {
+                    multiReader.Close();
+                }
                 this.ResultGrid.Redraw = true;
             }
         }

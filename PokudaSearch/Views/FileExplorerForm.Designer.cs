@@ -69,6 +69,7 @@
             this.MainExplorer.Size = new System.Drawing.Size(579, 579);
             this.MainExplorer.TabIndex = 1;
             this.MainExplorer.TabStop = false;
+            this.MainExplorer.ItemsChanged += new System.EventHandler(this.MainExplorer_ItemsChanged);
             this.MainExplorer.NavigationComplete += new System.EventHandler<Microsoft.WindowsAPICodePack.Controls.NavigationCompleteEventArgs>(this.MainExplorer_NavigationComplete);
             this.MainExplorer.LocationChanged += new System.EventHandler(this.MainExplorer_LocationChanged);
             this.MainExplorer.HelpRequested += new System.Windows.Forms.HelpEventHandler(this.MainExplorer_HelpRequested);
@@ -115,6 +116,7 @@
             this.SubExplorer.Size = new System.Drawing.Size(436, 579);
             this.SubExplorer.TabIndex = 0;
             this.SubExplorer.TabStop = false;
+            this.SubExplorer.ItemsChanged += new System.EventHandler(this.SubExplorer_ItemsChanged);
             this.SubExplorer.NavigationComplete += new System.EventHandler<Microsoft.WindowsAPICodePack.Controls.NavigationCompleteEventArgs>(this.SubExplorer_NavigationComplete);
             this.SubExplorer.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SubExplorer_KeyDown);
             this.SubExplorer.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.SubExplorer_PreviewKeyDown);
@@ -289,6 +291,7 @@
             this.MainExplorerCombo.Name = "MainExplorerCombo";
             this.MainExplorerCombo.Size = new System.Drawing.Size(436, 17);
             this.MainExplorerCombo.TabIndex = 8;
+            this.MainExplorerCombo.TabStop = false;
             this.MainExplorerCombo.Tag = null;
             this.MainExplorerCombo.SelectedItemChanged += new System.EventHandler(this.MainExplorerCombo_SelectedItemChanged);
             this.MainExplorerCombo.DoubleClick += new System.EventHandler(this.MainExplorerCombo_DoubleClick);

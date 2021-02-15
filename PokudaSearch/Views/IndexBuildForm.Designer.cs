@@ -113,7 +113,6 @@
             // IFilterRadio
             // 
             this.IFilterRadio.AutoSize = true;
-            this.IFilterRadio.Enabled = false;
             this.IFilterRadio.Location = new System.Drawing.Point(110, 17);
             this.IFilterRadio.Name = "IFilterRadio";
             this.IFilterRadio.Size = new System.Drawing.Size(53, 16);
